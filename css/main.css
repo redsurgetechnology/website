@@ -1,0 +1,78 @@
+:root {
+    /* Brand Red */
+    --primary: #d90700;
+
+    /* Softened red for hover states, backgrounds */
+    --primaryLight: #ff4d4d;
+    /* ~20% tint of --primary */
+
+    /* New secondary accent (teal-blue) */
+    --secondary: #00D2D9;
+
+    /* Lighter tint of the secondary for highlights, cards */
+    --secondaryLight: #66E5E8;
+    /* ~40% tint of --secondary */
+
+    /* Dark header/nav text */
+    --headerColor: #1a1a1a;
+
+    /* Main body text (dark slate-blue) */
+    --bodyTextColor: #4e4b66;
+
+    /* Off-white for text on dark backgrounds */
+    --bodyTextColorWhite: #fafbfc;
+
+    /* 13px - 16px */
+    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+    /* 31px - 49px */
+    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
+    --bodyFontSize: 1rem;
+    /* 60px - 100px top and bottom */
+    --sectionPadding: clamp(3.75rem, 7.82vw, 4.25rem) 1rem;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+    /* prevents padding from affecting height and width */
+    box-sizing: border-box;
+}
+
+.cs-topper {
+    font-size: var(--topperFontSize);
+    line-height: 1.2em;
+    text-transform: uppercase;
+    text-align: inherit;
+    letter-spacing: .1em;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.cs-title {
+    font-size: var(--headerFontSize);
+    font-weight: 900;
+    line-height: 1.2em;
+    text-align: inherit;
+    max-width: 43.75rem;
+    margin: 0 0 1rem 0;
+    color: var(--headerColor);
+    position: relative;
+}
+
+.cs-text {
+    font-size: var(--bodyFontSize);
+    line-height: 1.5em;
+    text-align: inherit;
+    width: 100%;
+    max-width: 40.625rem;
+    margin: 0;
+    color: var(--bodyTextColor);
+}
