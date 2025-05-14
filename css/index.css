@@ -962,7 +962,10 @@
         color: var(--headerColor);
         position: relative;
         width: 100%;
-        margin: 20px 0;
+    }
+
+    #hero-408 .cs-title span {
+        display: block;
     }
 
     #hero-408 .cs-subtext {
