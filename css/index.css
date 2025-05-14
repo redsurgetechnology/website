@@ -1010,6 +1010,11 @@
         z-index: 1;
         /* prevents padding from adding to the width */
         box-sizing: border-box;
+        border: 2px solid var(--primary);
+    }
+
+    #hero-408 .cs-button-solid:hover {
+        border: 2px solid #000;
     }
 
     #hero-408 .cs-button-solid:before {
@@ -1027,7 +1032,8 @@
     }
 
     #hero-408 .cs-button-solid:hover:before {
-        width: 100%;
+        width: 102%;
+        margin-left: -1px;
     }
 
     #hero-408 .cs-button-transparent {
