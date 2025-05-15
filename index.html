@@ -606,38 +606,6 @@
 
     <!-- JavaScript -->
     <script src="./js/main.js"></script>
-    <!-- Brevo Integration -->
-    <script>
-        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
-
-            const email = document.getElementById('cs-email-1185').value;
-
-            const data = {
-                email: email,
-                listIds: [11],
-                updateEnabled: true
-            };
-
-            try {
-                const response = await fetch('/.netlify/functions/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    alert("Thanks for subscribing!");
-                } else {
-                    const errorData = await response.json();
-                    alert("Error: " + errorData.message);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert("An error occurred.");
-            }
-        });
-    </script>
 
 </body>
 
