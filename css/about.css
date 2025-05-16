@@ -1553,7 +1553,7 @@
         text-align: center;
         margin: 0;
         margin-bottom: 0.75rem;
-        color: #7d799c;
+        color: var(--bodyTextColor);
     }
 
     #meet-team-221 .cs-social {
