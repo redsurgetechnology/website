@@ -202,16 +202,16 @@
         </div>
         <!--Background Image-->
         <picture class="cs-background">
-            <!-- Mobile -->
-            <source media="(max-width: 600px)" srcset="./images/banner_bg-360w.webp" type="image/webp">
-            <!-- Tablet -->
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="./images/banner_bg-720w.webp"
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="./images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="./images/banner_bg_red-720w.webp"
                 type="image/webp">
-            <!-- Desktop -->
-            <source media="(min-width: 1025px)" srcset="./images/banner_bg-1280w.webp" type="image/webp">
-            <!-- Fallback -->
-            <img decoding="async" src="./images/banner_bg-1280w.webp" alt="security banner background" width="1280"
-                height="320" aria-hidden="true">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="./images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" loading="lazy" src="./images/banner_bg_red-1280w.webp"
+                alt="red technology banner background" width="1280" height="320" aria-hidden="true">
         </picture>
     </div>
 
