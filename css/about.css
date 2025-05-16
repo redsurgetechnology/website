@@ -623,7 +623,7 @@
         content: '';
         width: 100vw;
         height: 100%;
-        background: #f7f7f7;
+        background: #f5f5f5;
         opacity: 1;
         position: absolute;
         display: block;
@@ -1306,5 +1306,338 @@
         background: linear-gradient(90.01deg,
                 rgba(0, 0, 0, 0.9) 16.86%,
                 rgba(0, 0, 0, 0) 100%);
+    }
+}
+
+/*-- -------------------------- -->
+<---          Services          -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #services-596 {
+        padding: var(--sectionPadding);
+        overflow: hidden;
+    }
+
+    #services-596 .cs-container {
+        width: 100%;
+        max-width: 80rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+    }
+
+    #services-596 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+    }
+
+    #services-596 .cs-card-group {
+        width: 100%;
+        margin: 0;
+        /* 36px - 80px top & bottom */
+        /* 24px - 88px right & left */
+        padding: clamp(2.25rem, 6vw, 5rem) clamp(1.5rem, 6.4vw, 5.5rem);
+        background-color: #fff;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+        /* prevents padding and border from affecting height and width */
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        /* 32px - 64px */
+        row-gap: clamp(2rem, 7vw, 4rem);
+    }
+
+    #services-596 .cs-item {
+        text-align: left;
+        list-style: none;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    #services-596 .cs-h3 {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 3vw, 1.5625rem);
+        line-height: 1.2em;
+        font-weight: 700;
+        margin: 0;
+        color: var(--headerColor);
+    }
+
+    #services-596 .cs-item-text {
+        /* 14px - 16px */
+        font-size: clamp(0.875rem, 3vw, 1rem);
+        line-height: 1.5em;
+        font-weight: 400;
+        margin: 0;
+        color: var(--bodyTextColor);
+    }
+}
+
+/* In-between - 550px */
+@media only screen and (min-width: 34.375rem) {
+    #services-596 .cs-card-group {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        /* 48px - 64px */
+        row-gap: clamp(3rem, 6vw, 4rem);
+    }
+
+    #services-596 .cs-item {
+        width: 47%;
+    }
+}
+
+/* Desktop 1024px */
+@media only screen and (min-width: 64rem) {
+    #services-596 .cs-item {
+        width: 31%;
+    }
+}
+
+/*-- -------------------------- -->
+<---       Meet The Team        -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #meet-team-221 {
+        /* centers the button */
+        text-align: center;
+        padding: var(--sectionPadding);
+        background: #f5f5f5;
+    }
+
+    #meet-team-221 .cs-container {
+        width: 100%;
+        /* changes to 1280px at tablet */
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+
+    #meet-team-221 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+    }
+
+    #meet-team-221 .cs-topper {
+        font-size: var(--topperFontSize);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: inherit;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+
+    #meet-team-221 .cs-title {
+        font-size: var(--headerFontSize);
+        font-weight: 900;
+        line-height: 1.2em;
+        text-align: inherit;
+        max-width: 43.75rem;
+        margin: 0 0 1rem 0;
+        color: var(--headerColor);
+        position: relative;
+    }
+
+    #meet-team-221 .cs-text {
+        font-size: var(--bodyFontSize);
+        line-height: 1.5em;
+        text-align: inherit;
+        width: 100%;
+        max-width: 40.625rem;
+        margin: 0;
+        color: var(--bodyTextColor);
+    }
+
+    #meet-team-221 .cs-picture {
+        /* 160px - 220px */
+        width: clamp(10rem, 20vw, 13.75rem);
+        height: clamp(10rem, 20vw, 13.75rem);
+        margin-bottom: 1rem;
+        border-radius: 50%;
+        display: block;
+        position: relative;
+        /* clips the corners off the image tag */
+        overflow: hidden;
+    }
+
+    #meet-team-221 .cs-picture img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        /* Makes image behave like a background image */
+        object-fit: cover;
+        transition: transform 0.7s;
+    }
+
+    #meet-team-221 .cs-card-group {
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    #meet-team-221 .cs-item {
+        list-style: none;
+        /* Changes on tablet */
+        width: 100%;
+        max-width: 21.25rem;
+        /* 16px - 20px */
+        padding: clamp(1rem, 2vw, 1.25rem);
+        padding-bottom: 1.25rem;
+        background: var(--bodyTextColorWhite);
+        border-radius: 0.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+    }
+
+    #meet-team-221 .cs-item:hover .cs-picture img {
+        transform: scale(1.1);
+    }
+
+    #meet-team-221 .cs-name {
+        font-size: 1.25rem;
+        line-height: 1.2em;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: var(--headerColor);
+        display: block;
+    }
+
+    #meet-team-221 .cs-job-title {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        color: var(--primary);
+        display: block;
+    }
+
+    #meet-team-221 .cs-item-text {
+        font-size: 1rem;
+        line-height: 1.5em;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 0.75rem;
+        color: #7d799c;
+    }
+
+    #meet-team-221 .cs-social {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    #meet-team-221 .cs-link {
+        /* 28px - 32px */
+        width: clamp(1.75rem, 3vw, 2rem);
+        /* 28px - 32px */
+        height: clamp(1.75rem, 3vw, 2rem);
+        /* After making the a tag into a box, we center the image inside of it */
+        border-radius: 0.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* creates the 3D space for the 3D effect when spinning */
+        transform-style: preserve-3d;
+        perspective: 700px;
+    }
+
+    #meet-team-221 .cs-link:hover .cs-icon {
+        transform: translateY(-0.3125rem) rotateY(360deg);
+    }
+
+    #meet-team-221 .cs-icon {
+        width: 0.875rem;
+        height: auto;
+        transition: transform 0.7s;
+    }
+
+    #meet-team-221 .cs-button-solid {
+        font-size: 1rem;
+        /* 46px - 56px */
+        line-height: clamp(2.875rem, 5.5vw, 3.5rem);
+        text-decoration: none;
+        font-weight: 700;
+        text-align: center;
+        margin: 0;
+        color: #fff;
+        min-width: 9.375rem;
+        padding: 0 1.5rem;
+        background-color: var(--primary);
+        border-radius: 0.25rem;
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        /* prevents padding from adding to the width */
+        box-sizing: border-box;
+    }
+
+    #meet-team-221 .cs-button-solid:before {
+        content: "";
+        position: absolute;
+        height: 100%;
+        width: 0%;
+        background: #000;
+        opacity: 1;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        border-radius: 0.25rem;
+        transition: width 0.3s;
+    }
+
+    #meet-team-221 .cs-button-solid:hover:before {
+        width: 100%;
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #meet-team-221 .cs-container {
+        max-width: 80em;
+    }
+
+    #meet-team-221 .cs-card-group {
+        flex-direction: row;
+    }
+
+    #meet-team-221 .cs-item {
+        width: 31%;
     }
 }
