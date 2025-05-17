@@ -1641,3 +1641,258 @@
         width: 31%;
     }
 }
+
+/*-- -------------------------- -->
+<---           Quote            -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #quote-560 {
+        padding: var(--sectionPadding);
+        background-color: var(--primary);
+    }
+
+    #quote-560 .cs-container {
+        width: 100%;
+        max-width: 80rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+
+    #quote-560 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: center;
+        /* 16px - 20px */
+        gap: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    #quote-560 .cs-topper:before {
+        /* yellow line */
+        content: "";
+        width: 3.125rem;
+        height: 2px;
+        background: var(--secondary);
+        opacity: 1;
+        display: block;
+    }
+
+    #quote-560 .cs-quote {
+        /* 31px - 49px */
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+        line-height: 1.5em;
+        font-weight: 900;
+        margin: 0;
+        color: var(--bodyTextColorWhite);
+    }
+
+    #quote-560 .cs-name {
+        /* 16px - 20px */
+        font-size: clamp(0.9rem, 1.7vw, 1rem);
+        line-height: 1.2em;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0;
+        color: #f5f5f5;
+        display: block;
+        letter-spacing: 0.01em;
+        font-style: italic;
+    }
+}
+
+/*-- -------------------------- -->
+<---        Why Choose          -->
+<--- -------------------------- -*/
+
+/* Mobile - 360px */
+@media only screen and (min-width: 0rem) {
+    #why-choose-289 {
+        text-align: center;
+        padding: var(--sectionPadding);
+    }
+
+    #why-choose-289 .cs-container {
+        width: 100%;
+        /* changes to 1280px on tablet */
+        max-width: 34.375rem;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* 48px - 64px */
+        gap: clamp(3rem, 6vw, 4rem);
+    }
+
+    #why-choose-289 .cs-content {
+        /* set text align to left if content needs to be left aligned */
+        text-align: left;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        /* centers content horizontally, set to flex-start to left align */
+        align-items: flex-start;
+    }
+
+    #why-choose-289 .cs-topper {
+        font-size: var(--topperFontSize);
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-align: inherit;
+        letter-spacing: 0.1em;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 0.25rem;
+        display: block;
+    }
+
+    #why-choose-289 .cs-title {
+        font-size: var(--headerFontSize);
+        font-weight: 900;
+        line-height: 1.2em;
+        text-align: inherit;
+        max-width: 43.75rem;
+        margin: 0 0 1rem 0;
+        color: var(--headerColor);
+        position: relative;
+    }
+
+    #why-choose-289 .cs-text {
+        font-size: var(--bodyFontSize);
+        line-height: 1.5em;
+        text-align: inherit;
+        width: 100%;
+        max-width: 40.625rem;
+        margin: 0;
+        color: var(--bodyTextColor);
+    }
+
+    #why-choose-289 .cs-text {
+        max-width: 32.625rem;
+    }
+
+    #why-choose-289 .cs-card-group {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #why-choose-289 .cs-item {
+        list-style: none;
+        text-align: left;
+        width: 100%;
+        padding: 2rem;
+        background-color: #f7f7f7;
+        border-radius: 1rem;
+        /* prevents padding from adding to height and width */
+        box-sizing: border-box;
+        transition: background-color 0.3s;
+    }
+
+    #why-choose-289 .cs-item:hover {
+        background-color: var(--primary);
+    }
+
+    #why-choose-289 .cs-item:hover .dark-icon {
+        display: none;
+    }
+
+    #why-choose-289 .cs-item .white-icon {
+        display: none;
+    }
+
+    #why-choose-289 .cs-item:hover .white-icon {
+        display: block;
+    }
+
+    #why-choose-289 .cs-item .dark-icon {
+        display: block;
+    }
+
+    #why-choose-289 .cs-item:hover .cs-icon {
+        filter: grayscale(1) brightness(200%);
+    }
+
+    #why-choose-289 .cs-item:hover .cs-h3 {
+        color: var(--bodyTextColorWhite);
+    }
+
+    #why-choose-289 .cs-item:hover .cs-item-text {
+        color: var(--bodyTextColorWhite);
+    }
+
+    #why-choose-289 .cs-icon {
+        width: auto;
+        height: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+    }
+
+    #why-choose-289 .cs-h3 {
+        /* 20px - 25px */
+        font-size: clamp(1.25rem, 2.5vw, 1.5625rem);
+        line-height: 1.2em;
+        margin: 0;
+        margin-bottom: 1rem;
+        color: var(--headerColor);
+        transition: color 0.3s;
+    }
+
+    #why-choose-289 .cs-item-text {
+        font-size: 1rem;
+        line-height: 1.5em;
+        margin: 0;
+        color: var(--bodyTextColor);
+        transition: color 0.3s;
+    }
+}
+
+/* Tablet - 768px */
+@media only screen and (min-width: 48rem) {
+    #why-choose-289 .cs-container {
+        max-width: 80rem;
+    }
+
+    #why-choose-289 .cs-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        gap: 4rem;
+    }
+
+    #why-choose-289 .cs-flex {
+        width: 50%;
+    }
+
+    #why-choose-289 .cs-title {
+        margin: 0;
+    }
+
+    #why-choose-289 .cs-card-group {
+        justify-content: space-between;
+        /* makes sure every box "stretches" to be the same height as the tallest box */
+        align-items: stretch;
+        flex-direction: row;
+        /* 16px - 20px */
+        gap: clamp(1rem, 1.5vw, 1.25rem);
+    }
+
+    #why-choose-289 .cs-item {
+        width: auto;
+        /* 16px - 32px */
+        padding: 2rem clamp(1rem, 2.1vw, 2rem);
+    }
+}
