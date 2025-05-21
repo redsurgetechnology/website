@@ -204,7 +204,107 @@
         </picture>
     </div>
 
+    <!-- Contact -->
+    <section id="cs-contact-490">
+        <div class="cs-container">
+            <!-- Contact Info -->
+            <div class="cs-content">
+                <span class="cs-topper">Contact Us</span>
+                <h2 class="cs-title">Get in Touch with Us</h2>
+                <p class="cs-text">
+                    Whether you’re launching a new website or refreshing an existing one, our team in Central New Jersey
+                    is ready to help. Drop us a line at (732) 474‑6841, email info@redsurgetechnology.com, or use the
+                    form and let’s start building your online success today!
+                </p>
 
+                <!--Address-->
+                <span class="cs-header">Address</span>
+                <a href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                    class="cs-link" target="_blank">
+                    Monmouth County, <br>Wall Township, NJ 07753
+                </a>
+                <!--Email-->
+                <span class="cs-header">Email</span>
+                <a href="mailto:info@redsurgetechnology.com" class="cs-link">info@redsurgetechnology.com</a>
+                <!--Phone-->
+                <span class="cs-header">Phone</span>
+                <a href="tel:+17324746841" class="cs-link">(732) 474-6841</a>
+
+                <!--Social Buttons-->
+                <div class="cs-social">
+                    <a class="cs-social-link" aria-label="visit google profile" href="https://g.co/kgs/FXZu7f2"
+                        target="_blank">
+                        <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                            src="./images/google_contact.svg" alt="google" width="11" height="11">
+                    </a>
+                    <a class="cs-social-link" aria-label="visit linkedin profile"
+                        href="https://www.linkedin.com/company/red-surge-technology/" target="_blank">
+                        <img class="cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                            src="./images/linkedin_contact.svg" alt="linkedin" width="11" height="11">
+                    </a>
+                    <a class="cs-social-link" aria-label="visit facebook profile"
+                        href="https://www.facebook.com/redsurgetech" target="_blank">
+                        <img class=" cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                            src="./images/facebook_contact.svg" alt="facebook" width="6" height="11">
+                    </a>
+                    <a class="cs-social-link" aria-label="visit instagram profile"
+                        href="https://www.instagram.com/redsurgetechnology/" target="_blank">
+                        <img class=" cs-social-img" aria-hidden="true" loading="lazy" decoding="async"
+                            src="./images/instagram_contact.svg" alt="instagram" width="11" height="11">
+                    </a>
+                </div>
+            </div>
+
+
+
+            <!--Form web3forms.com linked to info@redsurgetechnology.com -->
+            <form action="https://api.web3forms.com/submit" id="cs-form-490" name="Contact Form" method="POST">
+                <!-- REQUIRED: Your Access key here. Don't worry this can be public -->
+                <input type="hidden" name="access_key" value="0af2f487-2434-4782-83b6-ac01adc8e37c">
+
+                <!-- Optional: Subject an be prefilled using type="hidden"
+                     or type="text" for normal user submitted input -->
+                <input type="hidden" name="subject" value="New Submission - Red Surge Technology Website Contact Form">
+
+                <!-- Optional: From Name you want to see in the email
+                     Default is "Notifications". you can overwrite here -->
+                <input type="hidden" name="from_name" value="Red Surge Technology Website">
+
+                <!-- Optional: Custom Redirection or Thank you Page
+                     Make sure you add full URL including https:// -->
+                <input type="hidden" name="redirect" value="https://redsurgetechnology.com/thank-you">
+
+                <!-- Optional: But Recommended: To Prevent SPAM Submission.
+                     Make sure its hidden by default -->
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <label class="cs-label">
+                    Name
+                    <input class="cs-input" required type="text" id="name-490" name="name" placeholder="John/Jane Doe">
+                </label>
+                <label class="cs-label">
+                    Email
+                    <input class="cs-input" required type="text" id="email-490" name="email"
+                        placeholder="name@company.com">
+                </label>
+                <label class="cs-label">
+                    Phone
+                    <input class="cs-input" required type="text" id="phone-490" name="phone"
+                        placeholder="(206) 987-6543">
+                </label>
+                <label class="cs-label-message">
+                    Message
+                    <textarea class="cs-input" required name="Message" id="message-490"
+                        placeholder="Hello, I’m interested in..."></textarea>
+                </label>
+
+                <!-- hCaptcha: Recommended for Advanced Spam Protection. -->
+                <div class="h-captcha" data-captcha="true" style="padding: 20px 0px;"></div>
+
+                <button class="cs-button-solid" type="submit">Contact Us</button>
+            </form>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer id="cs-footer-1185">
@@ -341,6 +441,9 @@
             }
         });
     </script>
+    <!-- Web3Forms -->
+    <!-- Required only if you are using hCaptcha or Advanced File Upload. -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 
 </body>
 
