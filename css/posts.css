@@ -1326,6 +1326,8 @@ html {
         overflow: hidden;
         position: relative;
         z-index: 1;
+        max-width: 80rem;
+        margin: 0 auto;
     }
 
     #content-page-714 .cs-container {
@@ -1350,11 +1352,12 @@ html {
         align-items: flex-start;
     }
 
-    #content-page-714 .cs-content .img-container {
+    #content-page-714 .main-img-container {
         margin-bottom: 1.5rem;
+        width: 100%;
     }
 
-    #content-page-714 .cs-content img {
+    #content-page-714 .main-img-container img {
         width: 100%;
         height: auto;
         margin: 1rem 0;
