@@ -97,15 +97,8 @@
     }
     </script>
 
-    <!-- Google Analytics - Run on mouse move or scroll (who cares about bounce rate)-->
+    <!-- Google Analytics - Run on mouse move or scroll (who cares about bounce rate)
     <script>
-        /**
-         * Scottsweb.dev
-         * Load google analytics after a user interaction (scroll or mousemovement).
-         * This method may not gather all analytics such as bounces, but it will remove 
-         * google analytics from the pagespeed score
-         */
-
         let analytics_loaded = false;
         let analytics_script_id = 'G-99T44PPPPV';
 
@@ -127,7 +120,7 @@
             window.addEventListener('scroll', swd_load_analytics);
             window.addEventListener('mousemove', swd_load_analytics);
         });
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -605,6 +598,16 @@
                 alert("An error occurred.");
             }
         });
+    </script>
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-99T44PPPPV');
     </script>
 
 </body>
