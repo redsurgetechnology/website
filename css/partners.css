@@ -1308,3 +1308,37 @@
                 rgba(0, 0, 0, 0) 100%);
     }
 }
+
+#partners-section {
+    width: 100%;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: var(--sectionPadding);
+    overflow: hidden;
+}
+
+#partners-section .three-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#partners-section .three-container div {
+    width: calc(100%/3);
+    padding: 1rem;
+}
+
+#partners-section .three-container div img {
+    width: 100%;
+    object-fit: contain;
+}
+
+@media only screen and (max-width: 767px) {
+    #partners-section .three-container {
+        flex-direction: column;
+    }
+
+    #partners-section .three-container div {
+        width: 100%;
+    }
+}
