@@ -2,6 +2,12 @@
 <html lang="en-US">
 
 <head>
+    <!-- Preload all google analytics to help page speed -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -232,8 +238,8 @@
             <div class="cs-logo-group">
                 <a aria-label="go back to home" class="cs-logo" href="/index.html">
                     <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
-                        src="./images/new_redsurgetech_logo_white.webp" alt="red surge technology white logo" width="197"
-                        height="71">
+                        src="./images/new_redsurgetech_logo_white.webp" alt="red surge technology white logo"
+                        width="197" height="71">
                 </a>
                 <p class="cs-text">
                     A professional website design and development company working with small businesses around the world
@@ -350,13 +356,34 @@
 
     <!-- Google Analytics -->
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-99T44PPPPV');
+    </script> -->
+    <script>
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGA);
+        } else {
+            window.addEventListener('load', loadGA);
+        }
+
+        function loadGA() {
+            const ga = document.createElement('script');
+            ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV';
+            ga.async = true;
+            document.head.appendChild(ga);
+
+            ga.onload = () => {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-99T44PPPPV');
+            };
+        }
     </script>
 
 </body>
