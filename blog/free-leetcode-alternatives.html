@@ -8,8 +8,7 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
-    <!-- PRELOAD LCP HERO IMAGE -->
-    <link rel="preload" as="image" fetchpriority="high"
+    <link rel="preload" as="image"
         href="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp"
         imagesrcset=" /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-480w.webp 480w, /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-720w.webp 720w, /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp 1280w "
         imagesizes="(max-width: 600px) 480px, (max-width: 1024px) 720px, 1280px" type="image/webp">
@@ -62,13 +61,15 @@
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#d90700">
 
-    <!-- Critical CSS -->
-    <link rel="stylesheet" href="../css/posts-critical.css">
     <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/posts.css">
+
+    <!-- <link rel="stylesheet" href="../css/posts-critical.css">
     <link rel="preload" href="../css/main.css" type="text / css" as="style"
         onload="this.onload = null; this.rel = 'stylesheet' ; " />
     <link rel="preload" href="../css/posts.css" type="text / css" as="style"
-        onload="this.onload = null; this.rel = 'stylesheet' ; " />
+        onload="this.onload = null; this.rel = 'stylesheet' ; " /> -->
 
     <!-- JSON-LD: WebSite Schema -->
     <script type="application/ld+json">
@@ -210,18 +211,16 @@
         </div>
         <!--Background Image-->
         <picture class="cs-background">
-            <source media="(max-width: 600px)" srcset="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-480w.webp 480w,
-            /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-720w.webp 720w"
-                sizes="(max-width: 600px) 480px" type="image/webp">
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-720w.webp 720w,
-            /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp 1280w"
-                sizes="(max-width: 1024px) 720px" type="image/webp">
-            <source media="(min-width: 1025px)"
-                srcset="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp 1280w"
-                sizes="1280px" type="image/webp">
-            <img fetchpriority="high" decoding="sync"
-                src="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp"
-                alt="7 Free Leetcode Alternatives – Red Surge Technology" width="1280" height="720" aria-hidden="true">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
         </picture>
     </div>
 
@@ -242,7 +241,7 @@
                     srcset="../images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp"
                     type="image/webp">
                 <!-- Fallback image -->
-                <img decoding="async"
+                <img fetchpriority="high" decoding="sync"
                     src="../images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp"
                     alt="7 Free Leetcode Alternatives - Red Surge Technology" width="1280" height="720"
                     aria-hidden="true">
@@ -648,6 +647,7 @@
                 width="1280" height="586">
         </picture>
     </footer>
+
 
     <!-- JavaScript -->
     <script src="../js/main.js"></script>
