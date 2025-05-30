@@ -8,6 +8,12 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google-analytics.com">
 
+    <!-- PRELOAD LCP HERO IMAGE -->
+    <link rel="preload" as="image"
+        href="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp"
+        imagesrcset=" /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-480w.webp 480w, /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-720w.webp 720w, /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp 1280w "
+        imagesizes="(max-width: 600px) 480px, (max-width: 1024px) 720px, 1280px" type="image/webp">
+
     <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -200,17 +206,19 @@
         </div>
         <!--Background Image-->
         <picture class="cs-background">
-            <!-- Mobile (small phones) -->
-            <source media="(max-width: 600px)" srcset="../images/banner_bg_red-360w.webp" type="image/webp">
-            <!-- Tablet and small desktop -->
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/banner_bg_red-720w.webp"
-                type="image/webp">
-            <!-- Large desktop -->
-            <source media="(min-width: 1025px)" srcset="../images/banner_bg_red-1280w.webp" type="image/webp">
-            <!-- Fallback image -->
-            <img decoding="async" src="../images/banner_bg_red-1280w.webp" alt="red technology banner background"
-                width="1280" height="320" aria-hidden="true">
+            <source media="(max-width: 600px)" srcset="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-480w.webp 480w,
+            /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-720w.webp 720w"
+                sizes="(max-width: 600px) 480px" type="image/webp">
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-720w.webp 720w,
+            /images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp 1280w"
+                sizes="(max-width: 1024px) 720px" type="image/webp">
+            <source media="(min-width: 1025px)"
+                srcset="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp 1280w"
+                sizes="1280px" type="image/webp">
+            <img decoding="async" src="/images/blog/free-leetcode-alternatives/7-Free-Leetcode-Alternatives-1280w.webp"
+                alt="7 Free Leetcode Alternatives – Red Surge Technology" width="1280" height="720" aria-hidden="true">
         </picture>
+
     </div>
 
     <!-- Content -->
