@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>Laravel Guards Explained: Multi-Auth, API Security & Best Practices</title>
+    <meta name="description"
+        content="Learn everything about Laravel guards: how they work, how to configure them for multi-auth setups, protect routes, avoid common pitfalls, and secure APIs effectively.">
+    <meta name="author" content="Red Surge Technology">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/understanding-laravel-guards">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/understanding-laravel-guards">
+    <meta property="og:title" content="Laravel Guards Explained: Multi-Auth, API Security & Best Practices">
+    <meta property="og:description"
+        content="Master Laravel authentication guards with this in-depth guide. Discover how to set up multiple guards, secure routes, and avoid common mistakes in modern Laravel apps.">
+    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Red Surge Technology">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/understanding-laravel-guards">
+    <meta name="twitter:title" content="Laravel Guards Explained: Multi-Auth, API Security & Best Practices">
+    <meta name="twitter:description"
+        content="Learn how Laravel guards empower flexible authentication. Step-by-step examples for web, admin, and API guard setup—plus real-world multi-tenant tips.">
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#d90700">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/posts.css">
+
+    <!-- JSON-LD: WebSite Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://redsurgetechnology.com/",
+        "name": "Red Surge Technology Blog"
+    }
+    </script>
+
+    <!-- JSON-LD: BlogPosting Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Laravel Guards Explained: Multi-Auth, API Security & Best Practices",
+        "description": "Master Laravel authentication guards with this in-depth guide. Discover how to set up multiple guards, secure routes, and avoid common mistakes in modern Laravel apps.",
+        "url": "https://redsurgetechnology.com/blog/understanding-laravel-guards",
+        "author": {
+            "@type": "Organization",
+            "name": "Red Surge Technology"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Red Surge Technology",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://redsurgetechnology.com/images/logo_black.png"
+            }
+        },
+        "datePublished": "2025-05-22",
+        "dateModified": "2025-05-22",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://redsurgetechnology.com/blog/understanding-laravel-guards"
+        },
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/og-image.jpg",
+            "width": 1200,
+            "height": 630
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="cs-navigation">
+        <div class="cs-top-bar">
+            <div class="cs-top-container">
+                <div class="cs-top-contact">
+                    <a href="tel:7324746841" class="cs-top-link">
+                        <img class="cs-link-icon" src="../images/phone-grey.svg" alt="grey phone icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Call us: (732) 474-6841
+                    </a>
+                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+                        <img class="cs-link-icon" src="../images/email-grey.svg" alt="grey email icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Email us: info@redsurgetechnology.com
+                    </a>
+                </div>
+                <div class="cs-top-social">
+                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
+                        target="_blank" aria-label="LinkedIn">
+                        <img class="cs-social-icon" src="../images/linkedin-grey.svg" alt="grey linkedin icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
+                        aria-label="Instagram">
+                        <img class="cs-social-icon" src="../images/insta-grey.svg" alt="grey instagram icon" width="12"
+                            height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
+                        aria-label="Facebook">
+                        <img class="cs-social-icon" src="../images/face-grey.svg" alt="grey facebook icon" width="12"
+                            height="12" aria-hidden="true" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!--Nav Logo-->
+            <a href="../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true"
+                    decoding="async">
+            </a>
+            <!--Navigation List-->
+            <nav class="cs-nav" role="navigation">
+                <!--Mobile Nav Toggle-->
+                <button class="cs-toggle" aria-label="mobile menu toggle">
+                    <div class="cs-box" aria-hidden="true">
+                        <span class="cs-line cs-line1" aria-hidden="true"></span>
+                        <span class="cs-line cs-line2" aria-hidden="true"></span>
+                        <span class="cs-line cs-line3" aria-hidden="true"></span>
+                    </div>
+                </button>
+                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                <div class="cs-ul-wrapper">
+                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                        <li class="cs-li">
+                            <a href="../index.html" class="cs-li-link">
+                                Home
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../about.html" class="cs-li-link">
+                                About
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../portfolio.html" class="cs-li-link">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../blog.html" class="cs-li-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../contact.html" class="cs-li-link">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+        <div class="cs-container">
+            <h1 class="cs-int-title">Laravel Guards Explained: Multi-Auth, API Security & Best Practices</h1>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
+        </picture>
+    </div>
+
+    <!-- Content -->
+    <section id="content-page-714">
+        <div class="main-img-container">
+            <picture>
+                <!-- Mobile (small phones) -->
+                <source media="(max-width: 600px)"
+                    srcset="../images/blog/understanding-laravel-guards/understanding-laravel-guards_720w.webp"
+                    type="image/webp">
+                <!-- Tablet and small desktop -->
+                <source media="(min-width: 601px) and (max-width: 1024px)"
+                    srcset="../images/blog/understanding-laravel-guards/understanding-laravel-guards_720w.webp"
+                    type="image/webp">
+                <!-- Large desktop -->
+                <source media="(min-width: 1025px)"
+                    srcset="../images/blog/understanding-laravel-guards/understanding-laravel-guards_1280w.webp"
+                    type="image/webp">
+                <!-- Fallback image -->
+                <img fetchpriority="high" decoding="sync"
+                    src="../images/blog/understanding-laravel-guards/understanding-laravel-guards_1280w.webp"
+                    alt="Laravel Guards Explained - Multi-Auth, API Security & Best Practices - Red Surge Technology"
+                    width="1280" height="720" aria-hidden="true">
+            </picture>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">Getting to Know Laravel’s
+                        Authentication Foundations</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">So, What Exactly Is a Laravel
+                        Guard?</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Meet the Main Guard Types in
+                        Laravel</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Tweaking config/auth.php the
+                        Right Way</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Putting Guards to Work:
+                        Controllers & Middleware</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Handling Multiple User Types
+                        Like a Pro</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Watch Out for These Common Guard
+                        Missteps</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Real-World Example: Guards in a
+                        Multi-Tenant App</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;">Conclusion</a></li>
+            </ul>
+
+            <p>You know that moment when you’re midway through building a Laravel app and suddenly realize—uh oh—you’ve
+                tangled all your authentication logic into a knotted mess? Picture Sarah, a developer who spent two late
+                nights wrestling with sessions, tokens, and user roles until her code cried “uncle.” She thought she had
+                a simple “users” table and a handful of routes, but before she knew it, there were admins bumping into
+                customers, API tokens mysteriously vanishing, and more redirect loops than she could shake a stick at.
+                That’s when she stumbled across Laravel Guards and—honestly—it was like discovering the secret sauce.
+            </p>
+
+            <p>Here’s the thing: Laravel Guards aren’t just some arcane checkbox in <code>config/auth.php</code>.
+                They’re the slice of pie that keeps your application’s doors locked the right way, whether you’ve got an
+                admin dashboard, a mobile API, or a multi-tenant setup. By the time you finish reading, you’ll not only
+                know what these guards do, but you’ll also see how to configure them so cleanly that your future self
+                will thank you—no more late-night confusion, pinky promise. Oh, and if you’ve been <a
+                    href="https://www.keyideasinfotech.com/blog/10-ways-to-enhance-your-php-development-skills/"
+                    target="_blank">itching to sharpen
+                    your PHP skills</a>, I’ve got a list of seven LeetCode alternatives waiting at the end. Let’s get
+                started,
+                shall we?</p>
+
+            <h2 id="h2-1">Getting to Know Laravel’s Authentication Foundations</h2>
+
+            <h3>Fresh Eyes on Laravel’s Default Auth Flow</h3>
+            <p>If you’ve ever run <code>php artisan make:auth</code> (or in newer Laravel versions, spun up Jetstream or
+                Breeze), you’ve seen Laravel’s built-in authentication scaffolding do its thing: register, login,
+                logout, password resets—the whole nine yards. Under the hood, there’s <code>Auth::attempt()</code>, the
+                session driver, and an Eloquent user provider tied to your <code>users</code> table. It feels
+                magical—enter your credentials, and Laravel hands you a session cookie that keeps you logged in. That’s
+                fine when you only have one user type, but what happens when your app needs an admin area, a separate
+                vendor dashboard, or a public API with its own token mechanics?</p>
+
+            <h3>So, Where Do Guards Fit In?</h3>
+            <p>Let’s be real: without guards, you start customizing your middleware, fiddling with
+                <code>Auth::user()</code>, and before you know it, someone’s accidentally referencing the wrong model,
+                or you’re sending password resets to the wrong table. Guards are that next layer. Think of them as
+                gatekeepers that say, “Hey—I’m the guard for admins,” or “I’m the guard for API requests,” each with its
+                own rules for checking who’s allowed in. They work in tandem with providers (which define <em>where</em>
+                your users live) and drivers (which define <em>how</em> Laravel should authenticate them). In short,
+                guards keep your various authentication paths from stepping on each other’s toes.
+            </p>
+
+            <h2 id="h2-2">So, What Exactly Is a Laravel Guard?</h2>
+
+            <h3>A Plain-English Guard Definition</h3>
+            <p>At its simplest, a Laravel Guard is a class (often built-in) that manages how users are authenticated for
+                each request. When you call something like <code>Auth::guard('admin')->user()</code>, you’re asking
+                Laravel, “Hey, guard named ‘admin’, show me the logged-in admin user if there is one.” Without
+                specifying a guard, Laravel defaults to whatever guard you set in <code>auth.defaults.guard</code>
+                (usually <code>web</code>).</p>
+
+            <h3>What Does a Guard Actually Do?</h3>
+            <p>Guards have three main responsibilities:</p>
+            <ul>
+                <li><strong>User Retrieval</strong>: Given a session ID or token, the guard consults a provider (e.g.,
+                    your <code>users</code> or <code>admins</code> model) and returns the matching user instance.</li>
+                <li><strong>Credential Validation</strong>: When someone logs in, the guard checks the provided
+                    credentials—like email &amp; password or an API token—using whatever hashing or token logic you’ve
+                    set up.</li>
+                <li><strong>Request Checking</strong>: When middleware like <code>auth:guardName</code> kicks in, the
+                    guard decides whether the current request is authenticated. If not, you get redirected or receive a
+                    401.</li>
+            </ul>
+            <p>If it helps, imagine a guard like a Hall Monitor in a school: they check IDs (providers), verify
+                attendance (drivers), and decide who gets into the principal’s office (request checks).</p>
+
+            <h3>How Guards, Providers, and Drivers All Get Along</h3>
+            <p><strong>Provider</strong> = where your user records live (Eloquent model, database table, etc.).<br>
+                <strong>Driver</strong> = how the guard actually checks credentials (session, token, Passport,
+                etc.).<br>
+                <strong>Guard</strong> = pairs a driver with a provider.
+            </p>
+
+            <p>In <code>config/auth.php</code>, you’ll see something like:</p>
+            <pre><code>'guards' =&gt; [
+    'web' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'users',
+    ],
+    'api' =&gt; [
+        'driver'   =&gt; 'token',
+        'provider' =&gt; 'users',
+        'hash'     =&gt; false,
+    ],
+],
+'providers' =&gt; [
+    'users' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\User::class,
+    ],
+],</code></pre>
+            <p>When a request hits a route with <code>auth:api</code>, Laravel’s API guard (using token driver) looks at
+                the header, checks <code>api_token</code> in the <code>users</code> table (via the <code>users</code>
+                provider). Boom—user authenticated or not.</p>
+
+            <h2 id="h2-3">Meet the Main Guard Types in Laravel</h2>
+
+            <h3>The “Web” Guard: Sessions &amp; Cookies, Old School but Dependable</h3>
+            <p>By default, Laravel sets up a <code>web</code> guard that uses the <code>session</code> driver and the
+                <code>users</code> provider. This is your classic session-based auth: user logs in, Laravel tucks their
+                user ID into the session, and a cookie keeps them logged in until they log out or the session expires.
+                It’s what you want for traditional server-rendered apps. The middleware group named <code>web</code>
+                (which adds session start, CSRF, etc.) works hand-in-hand with this guard.
+            </p>
+
+            <p><strong>Heads-Up</strong>: If you ever log in under the <code>web</code> guard, calling
+                <code>Auth::user()</code> anywhere (views, controllers, Blade templates) gives you that logged-in “User”
+                instance. But if you have another guard—say, <code>admin</code>—<code>Auth::user()</code> might return
+                <code>null</code> unless <code>admin</code> is your default guard.
+            </p>
+
+            <h3>Token Guards &amp; Passport &amp; Sanctum: Making APIs Feel More Modern</h3>
+            <p>For API routes, Laravel ships with a simple <code>token</code> driver that checks a user’s
+                <code>api_token</code> column. That’s fine for quick, small-scale stuff, but you might hit a wall if you
+                need token scopes, refresh tokens, or OAuth2 features. That’s where Laravel Passport struts in: it spins
+                up a full OAuth2 server within your app, complete with client IDs, secret keys, and token scopes—fancy
+                stuff.
+            </p>
+
+            <p>Then there’s Laravel Sanctum, which some folks prefer for single-page apps (SPAs) or mobile backends.
+                It’s more lightweight than Passport, lets you issue multiple tokens per user, and even includes the
+                option to use session-based cookies for SPA auth. If you’re building a React-or-Vue front end that calls
+                a Laravel API, Sanctum often feels more straightforward than Passport.</p>
+
+            <h3>Custom Guards: Because Sometimes Off-the-Shelf Just Won’t Cut It</h3>
+            <p>What if your app needs to talk to an LDAP server or an external SSO? You can roll your own guard. The
+                basic steps:</p>
+            <ol>
+                <li><strong>Create a Guard class</strong> implementing <code>Illuminate\Contracts\Auth\Guard</code>.
+                </li>
+                <li>In your <code>AuthServiceProvider</code>, call
+                    <code>Auth::extend('customDriverName', function($app, $name, array $config) { … });</code>.
+                </li>
+                <li>Add it to <code>config/auth.php</code> under <code>'driver' =&gt; 'customDriverName'</code>.</li>
+            </ol>
+            <p>I once built a guard for a client who had a legacy Oracle DB of users (hey, it happens). Our custom guard
+                fetched credentials from the Oracle table, validated them, then returned a Laravel user instance. It
+                sounds complicated, but once you get the hang of Laravel’s guard contract, it’s surprisingly
+                straightforward (and kinda fun, if you’re into that sort of thing).</p>
+
+            <h2 id="h2-4">Tweaking <code>config/auth.php</code> the Right Way</h2>
+
+            <h3>Breaking Down the <code>guards</code> Array, One Key at a Time</h3>
+            <p>If you peek into <code>config/auth.php</code>, you’ll find something like this by default:</p>
+            <pre><code>'guards' =&gt; [
+    'web' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'users',
+    ],
+    'api' =&gt; [
+        'driver'   =&gt; 'token',
+        'provider' =&gt; 'users',
+        'hash'     =&gt; false,
+    ],
+],</code></pre>
+            <p>- <strong>Key Name</strong> (<code>web</code>, <code>api</code>) = the guard’s identifier. When you write
+                <code>Auth::guard('api')</code>, Laravel looks for this configuration.<br>
+                - <strong>driver</strong> (<code>session</code>, <code>token</code>, <code>passport</code>,
+                <code>sanctum</code>, or your custom driver) = how to authenticate.<br>
+                - <strong>provider</strong> (<code>users</code>, <code>admins</code>) = which user source to query.<br>
+                - <strong>hash</strong> (only for <code>token</code> driver) = tells Laravel if stored tokens are
+                hashed. If <code>true</code>, Laravel runs <code>Hash::check($plainToken, $hashedTokenInDb)</code>.
+            </p>
+
+            <h3>Registering Multiple Guards for a Real Multi-Auth Set-Up</h3>
+            <p>Often you end up with more than “just users.” Maybe you have admins, vendors, writers—whatever. You can
+                extend that default <code>guards</code> array to something like:</p>
+            <pre><code>'guards' =&gt; [
+    'web' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'users',
+    ],
+    'admin' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'admins',
+    ],
+    'vendor' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'vendors',
+    ],
+    'api' =&gt; [
+        'driver'   =&gt; 'passport',
+        'provider' =&gt; 'users',
+    ],
+],</code></pre>
+            <p>Then you add providers:</p>
+            <pre><code>'providers' =&gt; [
+    'users' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\User::class,
+    ],
+    'admins' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\Admin::class,
+    ],
+    'vendors' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\Vendor::class,
+    ],
+],</code></pre>
+            <p>Now you can do <code>Auth::guard('admin')->attempt($credentials)</code> or
+                <code>Auth::guard('vendor')->user()</code>, and Laravel knows exactly where and how to check.
+            </p>
+
+            <p><strong>Naming Tips</strong>:<br>
+                - Keep keys descriptive but concise—<code>admin</code>, <code>vendor</code>, <code>customer</code>—so
+                you don’t end up scratching your head later.<br>
+                - Match your provider names to your models: if your model is <code>Vendor</code>, the provider key
+                <code>vendors</code> makes sense.<br>
+                - Be consistent: don’t mix singular and plural arbitrarily, or you’ll forget which one you used.
+            </p>
+
+            <h3>Driver Choices: When to Stick with Session vs. Switch to Token or Passport</h3>
+            <p>- <strong>Use <code>session</code> driver</strong> for any classic web interface: admin dashboards, user
+                portals—anything that relies on cookies and state.<br>
+                - <strong>Use <code>token</code> driver</strong> for very small APIs where you just run
+                <code>php artisan make:migration add_api_token_to_users_table</code>, generate a random string, and call
+                it a day.<br>
+                - <strong>Use Passport</strong> when you need OAuth2 features—like issuing access &amp; refresh tokens,
+                scoping, third-party logins, etc.<br>
+                - <strong>Use Sanctum</strong> if you want the best of both worlds: session cookies for SPAs and simple
+                token issuance for mobile apps.
+            </p>
+
+            <p><strong>Heads-Up</strong>: If you pick <code>passport</code> or <code>sanctum</code>, be sure to follow
+                their respective installation guides—there are extra steps like migrations, service providers, and
+                publishing config files.</p>
+
+            <h2 id="h2-5">Putting Guards to Work: Controllers &amp; Middleware</h2>
+
+            <h3>Securing Routes with <code>auth:guardName</code> Middleware</h3>
+            <p>One of the slickest things about Laravel is how easy it is to slap middleware on route groups. Suppose
+                you have an admin dashboard—just wrap it in <code>auth:admin</code> like so:</p>
+            <pre><code>Route::prefix('admin')
+     -&gt;middleware(['auth:admin'])
+     -&gt;group(function () {
+         Route::get('/dashboard', [AdminController::class, 'dashboard']);
+         // …more admin routes
+     });</code></pre>
+            <p>Laravel says, “Alright, guard ‘admin’, check if you’ve got a logged-in user. If not, toss ’em back to the
+                admin login.” No more copy-pasting guard checks inside each controller method; middleware does it all at
+                once.</p>
+
+            <p>You can even pass multiple guards, like <code>['auth:admin,web']</code>, which means “Let either the
+                admin or the regular user in.” But be careful—if you do that, you need to know which guard gave the OK,
+                or you might end up with an unexpected model in <code>Auth::user()</code>.</p>
+
+            <h3>Checking Guards Programmatically in Controllers</h3>
+            <p>Sometimes you need fine-grained control inside your controller. Maybe you want to fetch the vendor object
+                if they’re logged in, or redirect them somewhere else. Easy:</p>
+            <pre><code>public function showVendorDashboard()
+{
+    if (Auth::guard('vendor')->check()) {
+        $vendor = Auth::guard('vendor')->user();
+        return view('vendor.dashboard', compact('vendor'));
+    }
+    return redirect()->route('vendor.login');
+}</code></pre>
+            <p>Notice that if you just used <code>Auth::user()</code>, you might grab the <code>web</code> user instead
+                of the <code>vendor</code>. Controllers—especially in multi-auth—should specify the guard each time,
+                unless you set the middleware to ensure the right guard is in place.</p>
+
+            <h3>Making a Middleware to Switch Guards on the Fly</h3>
+            <p>Imagine a login form where you pick your “role” via a dropdown: admin, vendor, or customer. You could
+                write a custom middleware called <code>DynamicGuard</code> that looks at
+                <code>$request->input('role')</code> and runs <code>Auth::shouldUse($role)</code>. Here’s a rough
+                sketch:
+            </p>
+            <pre><code>namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Support\Facades\Auth;
+
+class DynamicGuard
+{
+    public function handle($request, Closure $next)
+    {
+        $role = $request->input('role'); // e.g., 'admin' or 'vendor'
+        if (in_array($role, ['admin', 'vendor', 'web'])) {
+            Auth::shouldUse($role);
+        }
+        return $next($request);
+    }
+}</code></pre>
+            <p>Then register it in <code>Kernel.php</code> and slap it on your login route:</p>
+            <pre><code>Route::post('/login', [AuthController::class, 'login'])
+     -&gt;middleware('dynamic.guard');</code></pre>
+            <p>Now, when users submit <code>role=admin</code>, Laravel switches the default guard to <code>admin</code>
+                for that request. Neat, right? It feels almost magical—like your app adapts on the fly.</p>
+
+            <h2 id="h2-6">Handling Multiple User Types Like a Pro</h2>
+
+            <h3>Designing Multi-Auth: Admins vs. Users vs. Vendors</h3>
+            <p>Let’s paint a picture: you’re building a platform that sells courses. You have instructors (they create
+                courses), students (they enroll), and site admins (they manage everything behind the scenes). If you
+                shoehorn them all into the same <code>users</code> table with a <code>role</code> column, you’ll end up
+                writing a mess of <code>if ($user-&gt;role === 'instructor')</code> inside your controllers and views.
+                Instead, you can create three tables—<code>instructors</code>, <code>students</code>,
+                <code>admins</code>—each with its own Eloquent model (<code>Instructor</code>, <code>Student</code>,
+                <code>Admin</code>) and its own guard. That way, when an instructor logs in, it’s always clear you’re
+                calling <code>Auth::guard('instructor')->user()</code>, and never accidentally pulling a student record.
+            </p>
+
+            <h3>Avoiding Session Overlap: Guard Isolation in Action</h3>
+            <p>Let’s say an instructor and a student happen to use the same browser on a shared computer (it happens!).
+                If you log in as an instructor under the <code>instructor</code> guard, Laravel will set the session key
+                under something like <code>login_instructors_1234_cookie</code>. If the student later logs in under the
+                <code>student</code> guard, they get a separate session cookie. Neither one stomps on the other because
+                guards isolate those cookie names and session keys.
+            </p>
+
+            <p><strong>Heads-Up</strong>: If you ever customize <code>session.cookie</code> in
+                <code>config/session.php</code>, make sure you don’t accidentally unify cookie names across
+                guards—otherwise you negate the whole point of guard isolation.
+            </p>
+
+            <h3>Password Reset &amp; Email Verification—One Size Won’t Fit All</h3>
+            <p>Password resets can be a bit of a headache if you’ve got multiple user types. In
+                <code>config/auth.php</code>, you’ll see something like:
+            </p>
+            <pre><code>'passwords' =&gt; [
+    'users' =&gt; [
+        'provider' =&gt; 'users',
+        'table'    =&gt; 'password_resets',
+        'expire'   =&gt; 60,
+    ],
+],</code></pre>
+            <p>If you need resets for admins, extend it:</p>
+            <pre><code>'passwords' =&gt; [
+    'users' =&gt; [
+        'provider' =&gt; 'users',
+        'table'    =&gt; 'password_resets',
+        'expire'   =&gt; 60,
+    ],
+    'admins' =&gt; [
+        'provider' =&gt; 'admins',
+        'table'    =&gt; 'admin_password_resets',
+        'expire'   =&gt; 30,
+    ],
+],</code></pre>
+            <p>Then in your <code>AdminForgotPasswordController</code>, call
+                <code>Password::broker('admins')->sendResetLink($request->only('email'));</code> and show them a view
+                that points to <code>/admin/password/reset</code>. For email verification, you can publish the
+                <code>VerificationController</code> and tweak it to specify <code>-&gt;guard('admin')</code> so that the
+                signed-URL logic sends the right tokens to the right users. Push these details aside at your own
+                peril—forgotten providers/ brokers are a classic source of confusion.
+            </p>
+
+            <h2 id="h2-7">Watch Out for These Common Guard Missteps</h2>
+
+            <h3>Pitfall #1: Missing Guard Entry in <code>config/auth.php</code></h3>
+            <p>Let me tell you about the time I spent two hours scratching my head because Laravel threw “Auth guard
+                [manager] is not defined.” I had written <code>auth:manager</code> in my route, but I never added the
+                <code>manager</code> guard in <code>config/auth.php</code>. Rookie mistake. The solution was simple—add:
+            </p>
+            <pre><code>'guards' =&gt; [
+    'manager' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'managers',
+    ],
+    // ... existing guards
+],</code></pre>
+            <p>Always double-check that the guard key in your middleware or <code>Auth::guard('manager')</code> call
+                lines up exactly with the guard you registered.</p>
+
+            <h3>Pitfall #2: Using <code>Auth::user()</code> When You Meant <code>Auth::guard('admin')->user()</code>
+            </h3>
+            <p>In a multi-guard setup, <code>Auth::user()</code> can be a trap. By default, it’s shorthand for
+                <code>Auth::guard('web')->user()</code> (or whatever your default guard is). So if you had someone log
+                in as an admin under <code>Auth::guard('admin')</code>, calling <code>Auth::user()</code> in your Blade
+                view would return <code>null</code>. You might then try to check <code>$user-&gt;name</code> and slam
+                head-first into a “trying to get property of non-object” fatal error. Instead, either call
+                <code>Auth::guard('admin')->user()</code> explicitly or—if you’re sure middleware has already forced the
+                right guard—use <code>auth()-&gt;user()</code> but ensure the default guard is set appropriately before
+                that request.
+            </p>
+
+            <h3>Pitfall #3: Token Guard Hashing Hiccups</h3>
+            <p>When you use the <code>token</code> driver for API authentication, you have to decide whether your
+                <code>api_token</code> should be stored plain-text or hashed. If you set <code>'hash' =&gt; true</code>
+                in <code>config/auth.php</code> for your <code>api</code> guard, Laravel expects the
+                <code>api_token</code> column to contain a hashed token (<code>Hash::make($token)</code>). When you call
+                <code>Auth::guard('api')->user()</code>, Laravel runs
+                <code>Hash::check($providedToken, $hashedTokenInDb)</code>. If you don’t hash and you set
+                <code>'hash' =&gt; true</code>, it simply won’t match. Conversely, if you store plain tokens but leave
+                <code>'hash' =&gt; false</code>, your code might inadvertently accept partial matches or be vulnerable.
+                My rule of thumb: if your tokens are truly secret, hash them; otherwise, stick with
+                <code>hash =&gt; false</code> but be mindful of security implications.
+            </p>
+
+            <h3>Pitfall #4: Accidentally Changing the Default Guard</h3>
+            <p>In <code>config/auth.php</code>, you’ll see:</p>
+            <pre><code>'defaults' =&gt; [
+    'guard'     =&gt; 'web',
+    'passwords' =&gt; 'users',
+],</code></pre>
+            <p>If someone on your team thought it would be clever to switch the default to <code>admin</code> because
+                “most pages are for admins,” you’ll break every user login that relies on <code>web</code>. Suddenly,
+                <code>Auth::attempt($credentials)</code> logs someone into <code>admin</code> guard, and your
+                <code>/home</code> route is looking for a <code>web</code> user and can’t find one—redirection loops
+                ensue, tickets fly around, and productivity drops. Always think twice before changing that default; if
+                you need to use <code>admin</code> everywhere, consider explicitly referring to <code>auth:admin</code>
+                instead.
+            </p>
+
+            <h2 id="h2-8">Real-World Example: Guards in a Multi-Tenant App</h2>
+
+            <h3>Picture This: A SaaS with Multiple Layers of Users</h3>
+            <p>Meet BrightCourses, a made-up platform that sells customizable educational portals to companies. There
+                are three main user roles:</p>
+            <ul>
+                <li><strong>Super Admin</strong>: The folks who run BrightCourses itself—managing subscriptions,
+                    overseeing all tenants.</li>
+                <li><strong>Tenant Admin</strong>: Each subscribing company has its own admin who sets up courses,
+                    invites instructors, and monitors student progress.</li>
+                <li><strong>End User (Student)</strong>: The people who log in to consume course content—video lectures,
+                    quizzes, etc.</li>
+            </ul>
+            <p>Without separate guards, all these roles would end up mashed into one table or one guard, and you’d
+                quickly run into “I logged in as a student, but the system says I’m an admin” errors. Let’s see how to
+                architect this cleanly.</p>
+
+            <h3>Designing Tables &amp; Eloquent Models—Story-Style Explanation</h3>
+            <p>When I worked on a similar project, we started with a whiteboard session (coffee cups strewn everywhere,
+                half-empty notebooks). We decided on three tables: <code>super_admins</code>,
+                <code>tenant_admins</code>, <code>users</code> (for students). Each table had <code>id</code>,
+                <code>name</code>, <code>email</code>, <code>password</code>, and—for tenant admins and users—a
+                <code>tenant_id</code> to link them to a company. We also added an <code>api_token</code> field to
+                <code>users</code> so students could access the mobile app via tokens.
+            </p>
+
+            <p>On the Eloquent side, we created three models:</p>
+            <pre><code>namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class SuperAdmin extends Authenticatable
+{
+    protected $guard = 'superadmin';
+    protected $fillable = ['name', 'email', 'password'];
+}
+
+class TenantAdmin extends Authenticatable
+{
+    protected $guard = 'tenantadmin';
+    protected $fillable = ['name', 'email', 'password', 'tenant_id'];
+}
+
+class User extends Authenticatable
+{
+    protected $guard = 'web';
+    protected $fillable = ['name', 'email', 'password', 'tenant_id', 'api_token'];
+}</code></pre>
+            <p>We knew right away these guards would help us keep sessions apart: a super admin’s session should never
+                be confused with a tenant admin or a student.</p>
+
+            <h3>Configuring <code>config/auth.php</code> for Multi-Tenant Flow</h3>
+            <p>Our <code>config/auth.php</code> ended up looking like this:</p>
+            <pre><code>'defaults' =&gt; [
+    'guard'     =&gt; 'web',
+    'passwords' =&gt; 'users',
+],
+
+'guards' =&gt; [
+    'superadmin' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'superadmins',
+    ],
+    'tenantadmin' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'tenantadmins',
+    ],
+    'web' =&gt; [
+        'driver'   =&gt; 'session',
+        'provider' =&gt; 'users',
+    ],
+    'api' =&gt; [
+        'driver'   =&gt; 'passport',
+        'provider' =&gt; 'users',
+    ],
+],
+
+'providers' =&gt; [
+    'superadmins' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\SuperAdmin::class,
+    ],
+    'tenantadmins' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\TenantAdmin::class,
+    ],
+    'users' =&gt; [
+        'driver' =&gt; 'eloquent',
+        'model'  =&gt; App\Models\User::class,
+    ],
+],
+
+'passwords' =&gt; [
+    'users' =&gt; [
+        'provider' =&gt; 'users',
+        'table'    =&gt; 'password_resets',
+        'expire'   =&gt; 60,
+    ],
+    'tenantadmins' =&gt; [
+        'provider' =&gt; 'tenantadmins',
+        'table'    =&gt; 'tenant_admin_password_resets',
+        'expire'   =&gt; 30,
+    ],
+    'superadmins' =&gt; [
+        'provider' =&gt; 'superadmins',
+        'table'    =&gt; 'superadmin_password_resets',
+        'expire'   =&gt; 30,
+    ],
+],</code></pre>
+            <p>Notice how each guard has its matching provider. The <code>api</code> guard points to Passport so that
+                students can use tokens in the mobile app. Because the default guard is <code>web</code>, any time we
+                call <code>Auth::user()</code> in a student-facing route, it will use the <code>users</code>
+                provider—exactly what we want.</p>
+
+            <h3>Middleware &amp; Route Groups: Wiring Up Access Control</h3>
+            <p>For super admins, we created a route file <code>routes/superadmin.php</code> and added this group:</p>
+            <pre><code>Route::prefix('superadmin')
+     -&gt;name('superadmin.')
+     -&gt;middleware(['auth:superadmin', 'verified'])
+     -&gt;group(function () {
+         Route::get('/dashboard', [SuperAdminController::class, 'dashboard']);
+         // …more superadmin routes
+     });</code></pre>
+            <p>Similarly for tenant admins, in <code>routes/tenantadmin.php</code>:</p>
+            <pre><code>Route::prefix('tenantadmin')
+     -&gt;name('tenantadmin.')
+     -&gt;middleware(['auth:tenantadmin', 'verified', 'bind.tenant'])
+     -&gt;group(function () {
+         Route::get('/dashboard', [TenantAdminController::class, 'dashboard']);
+         // …more tenant admin routes
+     });</code></pre>
+            <p>We also added a <code>bind.tenant</code> middleware that checked if the <code>tenant_id</code> in the
+                session matched the <code>tenant_id</code> in the URL—for an extra layer of sanity.</p>
+
+            <p>For students (end users), our <code>web.php</code> looked like:</p>
+            <pre><code>Route::middleware('auth:web')
+     -&gt;group(function () {
+         Route::get('/courses', [CourseController::class, 'index']);
+         // …more student routes
+     });</code></pre>
+            <p>If anyone tried to sneak into <code>/tenantadmin/dashboard</code> without being logged in as a tenant
+                admin, Laravel redirected them to <code>/tenantadmin/login</code>. No confusion, no fuss.</p>
+
+            <h3>Blade Views: Showing the Right Navbar for the Right Guard</h3>
+            <p>In <code>resources/views/layouts/app.blade.php</code>, we included logic at the top to conditionally show
+                navbars:</p>
+            <pre><code>@if (Auth::guard('superadmin')->check())
+    @include('partials.nav-superadmin')
+@elseif (Auth::guard('tenantadmin')->check())
+    @include('partials.nav-tenantadmin')
+@elseif (Auth::guard('web')->check())
+    @include('partials.nav-user')
+@else
+    @include('partials.nav-guest')
+@endif</code></pre>
+            <p>That way, super admins saw menus for user analytics, subscription metrics, and global settings. Tenant
+                admins saw course-creation links, “invite student” buttons, and a list of instructors. Students got a
+                streamlined menu: “My Courses,” “Profile,” “Logout.” If you tried to peek under the wrong navbar, you
+                simply didn’t see the links in the first place—self-documenting UI, basically.</p>
+
+            <h3>Putting It to the Test</h3>
+            <p>We wrote PHPUnit feature tests like so:</p>
+            <pre><code>public function test_tenant_admin_cannot_access_superadmin_dashboard()
+{
+    $tenantAdmin = TenantAdmin::factory()->create();
+    $this->actingAs($tenantAdmin, 'tenantadmin')
+         -&gt;get('/superadmin/dashboard')
+         -&gt;assertRedirect('/superadmin/login');
+}
+
+public function test_student_cannot_access_tenantadmin_routes()
+{
+    $student = User::factory()->create();
+    $this->actingAs($student, 'web')
+         -&gt;get('/tenantadmin/dashboard')
+         -&gt;assertRedirect('/tenantadmin/login');
+}
+
+public function test_superadmin_can_access_superadmin_dashboard()
+{
+    $superadmin = SuperAdmin::factory()->create();
+    $this->actingAs($superadmin, 'superadmin')
+         -&gt;get('/superadmin/dashboard')
+         -&gt;assertStatus(200);
+}</code></pre>
+            <p>Once these passed, we knew our guard logic was bulletproof. If a new developer joined the team and asked,
+                “So how do I let the vendor see a different page?” we could point them to
+                <code>Auth::guard('vendor')</code> and they’d immediately grasp the pattern.
+            </p>
+
+            <h2 id="h2-9">Conclusion</h2>
+            <p>Stepping back from all the code and config, here’s the bottom line: Laravel Guards give you the power to
+                say, “This is how an admin logs in; that is how a user logs in; and this is how the API authenticates
+                requests.” When you set up guards thoughtfully—defining clear providers, choosing the right drivers,
+                isolating sessions, and testing your logic—you’ll sleep a whole lot better. No random redirect loops. No
+                mysterious null pointers. Just robust, maintainable authentication that scales with your application’s
+                needs.</p>
+
+            <p>So, what’s next? Take a moment this week to review your <code>config/auth.php</code>. Is there a guard
+                you’re not using? Is there an edge case you haven’t tested? Maybe whip up a little proof-of-concept
+                where you add a <code>vendor</code> guard and see how easy it is to secure a new set of routes. While
+                you’re at it, pick one of those LeetCode alternatives—say, Codewars—and solve a PHP kata or two. Before
+                you know it, you’ll be breezing through guard configurations and writing elegant Eloquent queries like
+                it’s second nature.</p>
+
+            <p>You’ve got the tools, you’ve got the code snippets, and you’ve got a map of the pitfalls to avoid. Now go
+                lock down your application—confidently, clearly, and with a bit of swagger. Because once you’ve mastered
+                Laravel Guards, you’ll look at authentication like a seasoned pro (and—trust me—you’ll sleep better
+                knowing your gates are firmly closed).</p>
+
+            <p>If you enjoyed this article, check out our latest post on <a href="./free-leetcode-alternatives.html">7
+                    of the best free LeetCode alternatives</a>. As always, if you have any questions or comments, feel
+                free to <a href="../contact.html">contact us</a>.</p>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../images/footer-v.svg"
+            alt="logo" width="1920" height="163">
+        <!-- Subscribe Form -->
+        <div id="cta-1185">
+            <div class="cs-content">
+                <h2 class="cs-title">Stay in the Loop</h2>
+                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
+                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!-- Logo Group -->
+            <div class="cs-logo-group">
+                <a aria-label="go back to home" class="cs-logo" href="../index.html">
+                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        width="197" height="71">
+                </a>
+                <p class="cs-text">
+                    A professional website design and development company working with small businesses around the world
+                    to create a strong presence on the web.
+                </p>
+            </div>
+            <!-- Links -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Quick Links</span>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../about.html">About</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../portfolio.html">Portfolio</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../contact.html">Contact</a>
+                </li>
+            </ul>
+            <!-- Contact Info -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Contact</span>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
+                    </a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-email"
+                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-address"
+                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener">
+                        Monmouth County<br> Wall Township, NJ 07753
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <div>
+                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
+                        Technology</a></p>
+            </div>
+            <div>
+                <a href="../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <span>|</span>
+                <a href="../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+            </div>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile -->
+            <source media="(max-width: 600px)" srcset="../images/footer_bg-360w.webp" type="image/webp">
+            <!-- Tablet -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/footer_bg-720w.webp"
+                type="image/webp">
+            <!-- Desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/footer_bg-1280w.webp" type="image/webp">
+            <!-- Fallback -->
+            <img loading="lazy" decoding="async" src="../images/footer_bg-1280w.webp" alt="code being edited"
+                width="1280" height="586">
+        </picture>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/posts.js"></script>
+    <!-- Brevo Integration -->
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('cs-email-1185').value;
+
+            const data = {
+                email: email,
+                listIds: [11],
+                updateEnabled: true
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("Thanks for subscribing!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred.");
+            }
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-99T44PPPPV');
+    </script> -->
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const ga = document.createElement('script');
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV';
+                ga.async = true;
+                document.head.appendChild(ga);
+
+                ga.onload = () => {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-99T44PPPPV');
+                };
+            }, 2000); // delay 2s after load
+        });
+    </script>
+
+
+</body>
+
+</html>
