@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>WAI-ARIA Authoring Practices: Build Accessible & SEO-Friendly Web Components</title>
+    <meta name="description"
+        content="Master WAI-ARIA authoring practices for truly accessible, screen-reader-friendly widgets. Learn roles, states, testing tips, and handy tools to boost UX and SEO.">
+
+    <meta name="author" content="Red Surge Technology">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/wai-aria-authoring-practices">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/wai-aria-authoring-practices">
+    <meta property="og:title" content="WAI-ARIA Authoring Practices: Build Accessible & SEO-Friendly Web Components">
+    <meta property="og:description"
+        content="Learn how to implement core WAI-ARIA roles, dynamic states, and testing workflows to make your custom widgets both accessible and SEO-optimized.">
+    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Red Surge Technology">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/wai-aria-authoring-practices">
+    <meta name="twitter:title" content="WAI-ARIA Authoring Practices: Build Accessible & SEO-Friendly Web Components">
+    <meta name="twitter:description"
+        content="Step up your accessibility game with WAI-ARIA authoring practices: roles, states, testing tips, and top tool recommendations.">
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#d90700">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/posts.css">
+
+    <!-- JSON-LD: WebSite Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://redsurgetechnology.com/",
+        "name": "Red Surge Technology Blog"
+    }
+    </script>
+
+    <!-- JSON-LD: BlogPosting Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "WAI-ARIA Authoring Practices: Build Accessible & SEO-Friendly Web Components",
+        "description": "Master WAI-ARIA authoring practices for truly accessible, screen-reader-friendly widgets. Learn roles, states, testing tips, and handy tools to boost UX and SEO.",
+        "url": "https://redsurgetechnology.com/blog/wai-aria-authoring-practices",
+        "author": {
+            "@type": "Organization",
+            "name": "Red Surge Technology"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Red Surge Technology",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://redsurgetechnology.com/images/logo_black.png"
+            }
+        },
+        "datePublished": "2025-06-23",
+        "dateModified": "2025-06-23",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://redsurgetechnology.com/blog/wai-aria-authoring-practices"
+        },
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/og-image.jpg",
+            "width": 1200,
+            "height": 630
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="cs-navigation">
+        <div class="cs-top-bar">
+            <div class="cs-top-container">
+                <div class="cs-top-contact">
+                    <a href="tel:7324746841" class="cs-top-link">
+                        <img class="cs-link-icon" src="../images/phone-grey.svg" alt="grey phone icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Call us: (732) 474-6841
+                    </a>
+                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+                        <img class="cs-link-icon" src="../images/email-grey.svg" alt="grey email icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Email us: info@redsurgetechnology.com
+                    </a>
+                </div>
+                <div class="cs-top-social">
+                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
+                        target="_blank" aria-label="LinkedIn">
+                        <img class="cs-social-icon" src="../images/linkedin-grey.svg" alt="grey linkedin icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
+                        aria-label="Instagram">
+                        <img class="cs-social-icon" src="../images/insta-grey.svg" alt="grey instagram icon" width="12"
+                            height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
+                        aria-label="Facebook">
+                        <img class="cs-social-icon" src="../images/face-grey.svg" alt="grey facebook icon" width="12"
+                            height="12" aria-hidden="true" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!--Nav Logo-->
+            <a href="../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true"
+                    decoding="async">
+            </a>
+            <!--Navigation List-->
+            <nav class="cs-nav" role="navigation">
+                <!--Mobile Nav Toggle-->
+                <button class="cs-toggle" aria-label="mobile menu toggle">
+                    <div class="cs-box" aria-hidden="true">
+                        <span class="cs-line cs-line1" aria-hidden="true"></span>
+                        <span class="cs-line cs-line2" aria-hidden="true"></span>
+                        <span class="cs-line cs-line3" aria-hidden="true"></span>
+                    </div>
+                </button>
+                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                <div class="cs-ul-wrapper">
+                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                        <li class="cs-li">
+                            <a href="../index.html" class="cs-li-link">
+                                Home
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../about.html" class="cs-li-link">
+                                About
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../portfolio.html" class="cs-li-link">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../blog.html" class="cs-li-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../contact.html" class="cs-li-link">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+        <div class="cs-container">
+            <h1 class="cs-int-title">WAI-ARIA Authoring Practices</h1>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
+        </picture>
+    </div>
+
+    <!-- Content -->
+    <section id="content-page-714">
+        <div class="main-img-container">
+            <picture>
+                <!-- Mobile (≤600px) -->
+                <source media="(max-width: 600px)" srcset="
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-360w.webp 360w,
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-720w.webp 720w,
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-1280w.webp 1280w
+        " sizes="(max-width: 600px) 360px" type="image/webp">
+
+                <!-- Tablet (601px–1024px) -->
+                <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-360w.webp 360w,
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-720w.webp 720w,
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-1280w.webp 1280w
+        " sizes="(min-width: 601px) and (max-width: 1024px) 720px" type="image/webp">
+
+                <!-- Desktop (≥1025px) -->
+                <source media="(min-width: 1025px)" srcset="
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-360w.webp 360w,
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-720w.webp 720w,
+            ../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-1280w.webp 1280w
+        " sizes="1280px" type="image/webp">
+
+                <!-- Fallback -->
+                <img fetchpriority="high" decoding="sync"
+                    src="../images/blog/wai-aria-authoring-practices/wai-aria-authoring-practices-main-1280w.webp"
+                    alt="WAI-ARIA Authoring Practices - Red Surge Technology" width="1280" height="720"
+                    aria-hidden="true">
+            </picture>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">Imagine Building Blindfolded</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">Getting Cozy with WAI-ARIA
+                        Authoring Practices</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Why These Practices Matter
+                        (Beyond the Checklist)</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">The Core Roles You’ll Actually
+                        Use</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">States & Properties—Your Dynamic
+                        Sidekicks</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Oops Moments—Confessions from
+                        the ARIA Trenches</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Testing—Because Guesswork
+                        Sucks</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Your ARIA Toolbox & Lifelong
+                        Learning</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;">Wrapping Up Without the
+                        Sledgehammer</a></li>
+            </ul>
+
+            <section>
+                <h2 id="h2-1">Imagine Building Blindfolded</h2>
+                <p>Imagine you’re about to build a treehouse for your kid: you’ve got the lumber, the nails, the
+                    plans—you’re pumped. Now imagine trying to hammer each board together blindfolded. That’s a pretty
+                    good picture of what it’s like to craft a custom web widget without WAI-ARIA guidance. You know
+                    what? ARIA can feel like alphabet soup—confusing, intimidating, and just plain overwhelming. But
+                    stick with me. By the time we’re done, you won’t be fumbling around in the dark anymore; you’ll have
+                    the confidence to scaffold complex interfaces that feel just as smooth to screen-reader users as
+                    they do to sighted ones.</p>
+                <p>Here’s where we’re headed: first, we’ll settle in with exactly what WAI-ARIA authoring practices are
+                    (and just as importantly, what they aren’t). Then I’ll share why these guidelines matter on a human
+                    level—beyond ticking off a compliance checklist—and how they even send little love notes to
+                    search-engine crawlers. Next, we’ll peer under the hood at the handful of ARIA roles you’ll actually
+                    lean on, dive into the dynamic states and properties that bring your UI to life, and I’ll confess
+                    some of my own face-palm moments when I tried to “help” a bit too enthusiastically. After that,
+                    we’ll talk testing—because flying blind is no fun—and finally, I’ll show you the coolest toolkits,
+                    communities, and resources you can bookmark to keep sharpening your skills over the long haul. Ready
+                    to turn on the lights? Let’s go.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-2">Getting Cozy with WAI-ARIA Authoring Practices</h2>
+                <p>If you’ve ever cracked open the official W3C specifications, you probably felt a little like you were
+                    reading hieroglyphics. That’s totally normal. The spec lays out the formal definitions—here’s what
+                    <code>role</code> means, here’s how <code>aria-label</code> is defined, here’s the precise syntax
+                    for every little detail. It’s crucial, no question, but trying to build real interfaces straight
+                    from that can be a grind. Enter the Authoring Practices guide: think of it as your friendly
+                    mechanic’s manual. It doesn’t just list the parts; it shows you how to grease the gears and make the
+                    engine purr.
+                </p>
+                <p>Our guiding principle is “HTML first, ARIA when you need it.” Native HTML elements—like
+                    <code>&lt;button&gt;</code>, <code>&lt;input&gt;</code>, and <code>&lt;nav&gt;</code>—come packed
+                    with built-in keyboard support, focus management, and accessibility semantics. Browsers know exactly
+                    how to handle them, and screen readers sing along happily. So, if you can use a
+                    <code>&lt;button&gt;</code>, please, for everyone’s sanity, don’t reinvent the wheel with a
+                    <code>&lt;div role="button"&gt;</code>. Why? Because semantic HTML not only makes your life easier
+                    when it comes to debugging but also plays nicely with search-engine crawlers. Native elements
+                    provide a clear roadmap, so Googlebot can understand your content quickly—no ARIA detective work
+                    required.
+                </p>
+                <p>I’ll never forget my first hackathon stumble. I needed a dropdown menu for a prototype, and in my
+                    infinite wisdom, I slapped <code>role="menu"</code> on an unordered list, set up some keyboard
+                    listeners, and thought, “Nice! Done.” Then I watched in horror as VoiceOver droned “menu, menu,
+                    menu” over and over for each item. My heart sank. Turns out, I was treating ARIA like magic pixie
+                    dust, sprinkling it everywhere without thinking. ARIA isn’t a shortcut—it’s a precision instrument.
+                    When used correctly, your interface hums. When used incorrectly, you’re essentially asking assistive
+                    technologies to read a script that makes no sense.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-3">Why These Practices Matter (Beyond the Checklist)</h2>
+                <p>Accessibility isn’t just a checkbox on some developer’s sprint board. It’s about making the web
+                    usable for everyone—people who rely on screen readers, keyboard navigation, or alternative input
+                    methods. Let me tell you a quick story. Last summer, I worked on a booking platform. The design team
+                    had beautifully laid out all the dates and options, but because the developer team hadn’t applied
+                    clear landmarks and roles, my colleague Sara—who’s blind—ended up scrolling through dozens of
+                    unlabeled list items to find the check-in date. She spent nearly five minutes just trying to find
+                    the calendar widget. It was a stark reminder: when we neglect ARIA, we inadvertently put blindfolds
+                    back on our users.</p>
+                <p>Besides the moral high-ground of doing the right thing, there are real legal considerations. Under
+                    WCAG 2.2’s Success Criterion 4.1.2, every interactive element needs a recognizable name, role, and
+                    value. And if you’re developing for any U.S. federal project, Section 508 compliance is
+                    non-negotiable. But here’s the twist: better accessibility often means better SEO. When you use ARIA
+                    to clarify your page’s structure, search engines appreciate the extra context. It’s like giving
+                    Google a friendly tour guide instead of leaving it wandering a maze. And who doesn’t like a slightly
+                    higher ranking and improved user engagement metrics—like longer time on page and a lower bounce
+                    rate?</p>
+            </section>
+
+            <section>
+                <h2 id="h2-4">The Core Roles You’ll Actually Use</h2>
+                <p>Let’s trim the fat and talk about the handful of ARIA roles you’ll find yourself reaching for again
+                    and again. First up: landmarks—your webpage’s “hallways and doorways,” if you will. Roles like
+                    <code>banner</code>, <code>navigation</code>, <code>main</code>, and <code>complementary</code> help
+                    assistive-tech users get a bird’s-eye view of the page. Imagine adding a simple skip-link that zips
+                    straight to the <code>&lt;main&gt;</code> region; suddenly, instead of crawling through header
+                    links, a user can jump right where the action is.
+                </p>
+                <p>Next, think of widgets as your “light switches and thermostats.” These include <code>button</code>,
+                    <code>checkbox</code>, <code>slider</code>, and <code>tablist</code>. Suppose you’re crafting a
+                    custom toggle switch. You’d assign <code>role="switch"</code>, manage <code>aria-checked</code> to
+                    reflect on/off states, and ensure it’s focusable. A screen reader will then announce “Switch, on” or
+                    “Switch, off” just as naturally as it does for native controls.
+                </p>
+                <p>Finally, structural roles like <code>region</code> and <code>dialog</code> act as rooms or
+                    enclosures. If you spin up a modal dialog, you’ll label it with <code>role="dialog"</code>, trap
+                    keyboard focus inside so users can’t tab out into the rest of the page accidentally, and restore
+                    focus to the triggering element once it closes. These building blocks, when used thoughtfully, let
+                    you construct interfaces that feel native even when you invent entirely new components.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-5">States &amp; Properties—Your Dynamic Sidekicks</h2>
+                <p>If roles are the nouns of ARIA, states and properties are the verbs and adjectives—they tell
+                    assistive tech what’s happening and how each piece feels. Imagine a collapsible FAQ section. You’d
+                    use <code>aria-expanded</code> on each question header, toggling from <code>"false"</code> to
+                    <code>"true"</code> when the answer appears. That change lets screen readers announce “expanded” or
+                    “collapsed,” so users know what’s going on without extra exposition.
+                </p>
+                <p>Then there’s <code>aria-hidden</code>, your go-to for hiding decorative or off-screen elements.
+                    Rather than removing items from the DOM, marking them <code>aria-hidden="true"</code> ensures screen
+                    readers simply skip over them. And let’s not forget <code>aria-live</code> regions—these are the
+                    chat-bubble announcers of the ARIA world. Set <code>aria-live="polite"</code> for non-urgent
+                    updates, or <code>"assertive"</code> when you need the news blasted out immediately (but use
+                    assertive sparingly; you don’t want to interrupt other announcements mid-stream).</p>
+                <p>Here’s the catch: overusing these attributes can backfire spectacularly. If you drench your page in
+                    <code>aria-hidden="false"</code> or slap <code>aria-live="polite"</code> on every dynamic area,
+                    you’ll drown users in a tidal wave of announcements. Always ask yourself, “Does this change matter
+                    to someone who can’t see the screen?” If the answer’s no, save the ARIA for something that truly
+                    helps.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-6">Oops Moments—Confessions from the ARIA Trenches</h2>
+                <p>Oh, the stories I could tell. Like the time I thought I was doing everyone a favor by explicitly
+                    labeling every <code>&lt;button&gt;</code> with <code>role="button"</code>. I figured, “Surely that
+                    can’t hurt.” Spoiler alert: it hurt. VoiceOver ended up saying “button button” every time, and users
+                    were stuck in a loop of awkward redundancy. Not my finest hour.</p>
+                <p>Some of the most common slip-ups include missing labels on icon-only buttons (no label equals no
+                    clue), and accidentally overriding built-in semantics—like putting <code>role="slider"</code> on an
+                    <code>&lt;input type="range"&gt;</code>, which already knows it’s a slider. Then there are the
+                    dreaded keyboard traps: you hide a dropdown by applying <code>tabindex="-1"</code> to some element,
+                    forget to restore it, and suddenly users can’t tab to the next focusable control. If that isn’t a
+                    face-palm moment, I don’t know what is.
+                </p>
+                <p>Whenever you hit a snag, fire up your browser’s Accessibility panel—it’s like having X-ray vision.
+                    You can inspect the computed name, role, and value of any element in real time. Within minutes,
+                    you’ll spot missing <code>aria-label</code>s, misapplied roles, and other ARIA misadventures that
+                    sneak into your code.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-7">Testing—Because Guesswork Sucks</h2>
+                <p>You might have heard the mantra “test early, test often,” but in accessibility work, it’s more like
+                    “test obsessively.” Automated tools are a fantastic first line of defense. Integrate the <a
+                        href="https://www.deque.com/axe/" target="_blank">axe CLI</a> into your continuous-integration
+                    pipeline so you catch missing <code>aria-label</code>s and improper roles before code even merges.
+                    Lighthouse, built right into Chrome’s DevTools, will flag common ARIA blunders and give you a quick
+                    severity rating.</p>
+                <p>Yet no amount of automation replaces manual testing. Sit down with NVDA on Windows or VoiceOver on
+                    macOS and pretend you’re navigating blind. Use the rotor (Control+Option+U on VoiceOver) to jump
+                    between landmarks, or hit the T key in NVDA to cycle through buttons. It’s a bit like test-driving a
+                    car on a wet track; you’ll feel every slip and slide, every element that sounds off or stalls.</p>
+                <p>And here’s a pro tip I picked up: pair up with someone who isn’t a developer—maybe a designer or even
+                    a non-tech friend. Ask them to find the checkout button, change a filter, or fill out a form without
+                    any guidance. You’ll be amazed how much fresh perspective uncovers the stuff you’ve become blind to
+                    after staring at the code for weeks.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-8">Your ARIA Toolbox &amp; Lifelong Learning</h2>
+                <p>Accessibility is a journey, not a destination—so you’ll want some reliable travel companions. First
+                    stop: the living <a href="https://www.w3.org/TR/wai-aria-practices/" target="_blank">W3C ARIA
+                        Authoring Practices Guide</a>. It’s updated regularly and packed with interactive code samples
+                    that you can tweak and test right in your browser. If you’re using React, check out <strong>React
+                        ARIA</strong> from Adobe: its hooks like <code>useButton</code> and <code>useSlider</code>
+                    abstract away most of the ARIA boilerplate so you can focus on your component’s unique bits. Angular
+                    developers can lean on the <strong>Angular CDK</strong>, which bundles a set of accessible
+                    components—hello, <code>cdkAccordion</code> and <code>cdkDrag</code>.</p>
+                <p>For Vue fans, the <strong>Vue A11y</strong> community maintains directives and plugins that simplify
+                    applying ARIA roles and properties. When you need deeper dives, Marcy Sutton’s courses on Frontend
+                    Masters are like a masterclass in real-world accessibility. And if you ever feel stuck, drop into
+                    the <strong>A11Y Collective</strong> Slack channel—people there are generous with tips, code
+                    snippets, and troubleshooting advice.</p>
+                <p>Oh, and since it’s summer here in New York, don’t forget to sneak in a light-hearted seasonal
+                    nod—maybe a beachy-themed <code>aria-live</code> announcement for your “Deal of the Day.” A little
+                    personality never hurt, as long as it doesn’t distract from usability.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-9">Wrapping Up Without the Sledgehammer</h2>
+                <p>Remember that blindfolded treehouse builder? By now, you’re swapping that blindfold for safety
+                    goggles and a trusty level. You’ve learned to lean on semantic HTML whenever possible, sprinkle in
+                    ARIA roles and properties only where they truly add value, and test with both automated tools and
+                    real people. You even heard about my missteps—because let’s face it, we learn more from the bugs
+                    than from the specs.</p>
+                <p>So here’s your mini action plan: pick your top three widgets—maybe a custom dropdown, a modal dialog,
+                    and a slider—audit them with DevTools, add any missing labels or states, run an axe scan, and then
+                    click through them using a screen reader. Break something, fix it, and relish the aha moment.
+                    Accessibility is a craft, and every tweak you make is one more nail driven straight and true. Ready
+                    to build something truly accessible? I can’t wait to see what you create.</p>
+                <p>If you enjoyed this article, check out our latest post on a <a
+                        href="./wcag-guidelines-checklist.html">WCAG guidelines checklist</a>. As always, if you have
+                    any questions or comments, feel free to <a href="../contact.html">contact us</a>.</p>
+            </section>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../images/footer-v.svg"
+            alt="logo" width="1920" height="163">
+        <!-- Subscribe Form -->
+        <div id="cta-1185">
+            <div class="cs-content">
+                <h2 class="cs-title">Stay in the Loop</h2>
+                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
+                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!-- Logo Group -->
+            <div class="cs-logo-group">
+                <a aria-label="go back to home" class="cs-logo" href="../index.html">
+                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        width="197" height="71">
+                </a>
+                <p class="cs-text">
+                    A professional website design and development company working with small businesses around the world
+                    to create a strong presence on the web.
+                </p>
+            </div>
+            <!-- Links -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Quick Links</span>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../about.html">About</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../portfolio.html">Portfolio</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../contact.html">Contact</a>
+                </li>
+            </ul>
+            <!-- Contact Info -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Contact</span>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
+                    </a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-email"
+                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-address"
+                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener">
+                        Monmouth County<br> Wall Township, NJ 07753
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <div>
+                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
+                        Technology</a></p>
+            </div>
+            <div>
+                <a href="../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <span>|</span>
+                <a href="../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+            </div>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile -->
+            <source media="(max-width: 600px)" srcset="../images/footer_bg-360w.webp" type="image/webp">
+            <!-- Tablet -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/footer_bg-720w.webp"
+                type="image/webp">
+            <!-- Desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/footer_bg-1280w.webp" type="image/webp">
+            <!-- Fallback -->
+            <img loading="lazy" decoding="async" src="../images/footer_bg-1280w.webp" alt="code being edited"
+                width="1280" height="586">
+        </picture>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/posts.js"></script>
+    <!-- Brevo Integration -->
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('cs-email-1185').value;
+
+            const data = {
+                email: email,
+                listIds: [11],
+                updateEnabled: true
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("Thanks for subscribing!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred.");
+            }
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-99T44PPPPV');
+    </script> -->
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const ga = document.createElement('script');
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV';
+                ga.async = true;
+                document.head.appendChild(ga);
+
+                ga.onload = () => {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-99T44PPPPV');
+                };
+            }, 2000); // delay 2s after load
+        });
+    </script>
+
+
+</body>
+
+</html>
