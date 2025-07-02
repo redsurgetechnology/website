@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- Preconnect & DNS Prefetch for Performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>jQuery Document Ready: Complete Guide for Developers</title>
+    <meta name="description"
+        content="Learn everything about jQuery’s document ready event—syntax, best practices, common pitfalls, and modern alternatives to ensure your scripts run exactly when you want.">
+    <meta name="author" content="Red Surge Technology">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url"
+        content="https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide">
+    <meta property="og:title" content="jQuery Document Ready: Complete Guide for Developers">
+    <meta property="og:description"
+        content="Dive into jQuery document ready—understand its under‑the‑hood mechanics, syntax variations, and when you can skip it in modern web projects.">
+    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Red Surge Technology">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url"
+        content="https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide">
+    <meta name="twitter:title" content="jQuery Document Ready: Complete Guide for Developers">
+    <meta name="twitter:description"
+        content="Your ultimate walkthrough of jQuery’s document ready event—learn syntax, avoid common mistakes, and explore modern alternatives.">
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#d90700">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/posts.css">
+
+    <!-- JSON‑LD: WebSite Schema -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://redsurgetechnology.com/",
+    "name": "Red Surge Technology Blog",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://redsurgetechnology.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+    <!-- JSON‑LD: BlogPosting Schema -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "jQuery Document Ready: Complete Guide for Developers",
+    "description": "Learn everything about jQuery’s document ready event—syntax, best practices, common pitfalls, and modern alternatives to ensure your scripts run exactly when you want.",
+    "url": "https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide",
+    "author": {
+      "@type": "Organization",
+      "name": "Red Surge Technology"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Red Surge Technology",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://redsurgetechnology.com/images/logo_black.png"
+      }
+    },
+    "datePublished": "2025-07-02",
+    "dateModified": "2025-07-02",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide"
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://redsurgetechnology.com/images/og-image.jpg",
+      "width": 1200,
+      "height": 630
+    }
+  }
+  </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="cs-navigation">
+        <div class="cs-top-bar">
+            <div class="cs-top-container">
+                <div class="cs-top-contact">
+                    <a href="tel:7324746841" class="cs-top-link">
+                        <img class="cs-link-icon" src="../images/phone-grey.svg" alt="grey phone icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Call us: (732) 474-6841
+                    </a>
+                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+                        <img class="cs-link-icon" src="../images/email-grey.svg" alt="grey email icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Email us: info@redsurgetechnology.com
+                    </a>
+                </div>
+                <div class="cs-top-social">
+                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
+                        target="_blank" aria-label="LinkedIn">
+                        <img class="cs-social-icon" src="../images/linkedin-grey.svg" alt="grey linkedin icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
+                        aria-label="Instagram">
+                        <img class="cs-social-icon" src="../images/insta-grey.svg" alt="grey instagram icon" width="12"
+                            height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
+                        aria-label="Facebook">
+                        <img class="cs-social-icon" src="../images/face-grey.svg" alt="grey facebook icon" width="12"
+                            height="12" aria-hidden="true" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!--Nav Logo-->
+            <a href="../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true"
+                    decoding="async">
+            </a>
+            <!--Navigation List-->
+            <nav class="cs-nav" role="navigation">
+                <!--Mobile Nav Toggle-->
+                <button class="cs-toggle" aria-label="mobile menu toggle">
+                    <div class="cs-box" aria-hidden="true">
+                        <span class="cs-line cs-line1" aria-hidden="true"></span>
+                        <span class="cs-line cs-line2" aria-hidden="true"></span>
+                        <span class="cs-line cs-line3" aria-hidden="true"></span>
+                    </div>
+                </button>
+                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                <div class="cs-ul-wrapper">
+                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                        <li class="cs-li">
+                            <a href="../index.html" class="cs-li-link">
+                                Home
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../about.html" class="cs-li-link">
+                                About
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../portfolio.html" class="cs-li-link">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../blog.html" class="cs-li-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../contact.html" class="cs-li-link">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+        <div class="cs-container">
+            <h1 class="cs-int-title">jQuery Document Ready: Complete Guide for Developers</h1>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
+        </picture>
+    </div>
+
+    <!-- Content -->
+    <section id="content-page-714">
+        <div class="main-img-container">
+            <picture>
+                <!-- Mobile (≤600px) -->
+                <source media="(max-width: 600px)" srcset="
+            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-360w.webp 360w,
+            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-720w.webp 720w,
+            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp 1280w
+        " sizes="(max-width: 600px) 360px" type="image/webp">
+
+                <!-- Tablet (601px–1024px) -->
+                <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
+            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-720w.webp 720w,
+            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp 1280w
+        " sizes="(max-width: 1024px) 720px" type="image/webp">
+
+                <!-- Desktop (≥1025px) -->
+                <source media="(min-width: 1025px)"
+                    srcset="../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp"
+                    sizes="1280px" type="image/webp">
+
+                <!-- Fallback image -->
+                <img fetchpriority="high" decoding="sync"
+                    src="../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp"
+                    alt="jQuery Document Ready - Complete Guide for Developers - Red Surge Technology" width="1280"
+                    height="720" aria-hidden="true">
+            </picture>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">What’s Really Going On When You
+                        Use $(document).ready()</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">How to Use jQuery Document Ready
+                        in Your Code</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Should You Use jQuery or Native
+                        DOMContentLoaded?</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Common Pitfalls You’ll Want to
+                        Avoid</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Modern Alternatives That Work
+                        Without jQuery</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Real Examples That Actually
+                        Matter</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Quick SEO Tips While We’re
+                        Here</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Is jQuery Still Worth Using in
+                        2025?</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;">Wrapping Up</a></li>
+            </ul>
+
+            <section>
+                <p>
+                    Ever tried pouring cream into a coffee that’s still brewing? You get a messy swirl of lukewarm
+                    disappointment. Web pages behave the same way when JavaScript tries to interact with elements that
+                    haven’t fully loaded. That’s where <code>$(document).ready()</code> comes in — like a patient
+                    barista waiting until everything’s set before taking action.
+                </p>
+                <p>
+                    If you’ve ever written jQuery, you’ve almost certainly used jquery document ready
+                    at some point. It’s one of those deceptively simple helpers that, when used properly, keeps your
+                    code predictable, clean, and responsive. This article isn’t just about what it does — it’s about how
+                    to use it like a pro, avoid hidden traps, and know when you can skip it altogether.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-1">What’s Really Going On When You Use $(document).ready()</h2>
+                <p>
+                    So here’s the big idea: <code>$(document).ready()</code> waits until the browser has finished
+                    building the HTML document’s structure — that’s the DOM — but before all images, stylesheets, and
+                    other external resources finish loading. <a href="./free-leetcode-alternatives.html">In
+                        practice</a>, this means your scripts will run at just the
+                    right moment: not too early (when elements don’t exist) and not too late (which would slow
+                    everything down).
+                </p>
+                <p>
+                    Under the hood, jQuery checks if the DOM is ready using the native <code>DOMContentLoaded</code>
+                    event in modern browsers. For legacy ones — think IE6 — it falls back to polling
+                    <code>document.readyState</code> until it becomes <code>'complete'</code> or
+                    <code>'interactive'</code>. You don’t see any of that complexity though — jQuery abstracts it all
+                    for you.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-2">How to Use jQuery Document Ready in Your Code</h2>
+                <p>
+                    Let’s look at a few common ways you might write it. The most explicit form looks like this:
+                </p>
+                <pre><code>$(document).ready(function() {
+  console.log("DOM is ready!");
+});</code></pre>
+                <p>
+                    But jQuery also gives you a handy shortcut. This version is functionally identical:
+                </p>
+                <pre><code>$(function() {
+  console.log("DOM is ready (shorthand)!");
+});</code></pre>
+                <p>
+                    And here’s something a lot of folks overlook: you can pass in a named function instead of defining
+                    one inline. It’s great for clarity, debugging, and reuse.
+                </p>
+                <pre><code>function setupHeader() {
+  $('#main-header').addClass('active');
+}
+
+$(setupHeader);</code></pre>
+                <p>
+                    You can also call <code>$(document).ready()</code> multiple times throughout your code. jQuery
+                    queues them up and runs them in the order they were defined.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-3">Should You Use jQuery or Native DOMContentLoaded?</h2>
+                <p>
+                    jQuery’s <code>ready()</code> method is a wrapper around the native <code>DOMContentLoaded</code>
+                    event. If you’re not already using jQuery for other things, there’s no need to load the entire
+                    library just for this.
+                </p>
+                <p>
+                    Here’s how you’d do the same thing with vanilla JavaScript:
+                </p>
+                <pre><code>document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM fully loaded and parsed');
+});</code></pre>
+                <p>
+                    It’s simple, lightweight, and works in all modern browsers. So if you’re building something modern —
+                    especially without jQuery — this is the better choice. But if you’re already relying on jQuery for
+                    selectors, animations, or plugins, it’s completely fine to stick with
+                    <code>$(document).ready()</code>.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-4">Common Pitfalls You’ll Want to Avoid</h2>
+                <p>
+                    One of the easiest mistakes is placing your custom scripts before the jQuery library loads. If you
+                    do this, you’ll get an error saying <code>$</code> is undefined. Always make sure jQuery is loaded
+                    before your script.
+                </p>
+                <p>
+                    Another issue is initializing plugins or features that depend on external scripts, but calling them
+                    before those scripts have loaded. For example, imagine you’re trying to use a slider plugin inside a
+                    <code>$(document).ready()</code> block, but you’ve loaded the plugin asynchronously. jQuery is
+                    ready, but the plugin isn't — and you'll end up with a “function not defined” error.
+                </p>
+                <p>
+                    Also, if you’re injecting content dynamically using AJAX and trying to bind events inside your
+                    <code>ready()</code> function, it won’t work on the new content. Instead, use delegated events like
+                    this:
+                </p>
+                <pre><code>$(document).on('click', '.ajax-loaded-button', function() {
+  alert('You clicked a dynamic button!');
+});</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-5">Modern Alternatives That Work Without jQuery</h2>
+                <p>
+                    In many cases, you don’t need <code>ready()</code> at all — especially if you’re using
+                    <code>&lt;script defer&gt;</code> in your HTML. When you add <code>defer</code> to your script tag,
+                    the browser delays execution until after the DOM is fully parsed, just like <code>ready()</code>.
+                </p>
+                <pre><code>&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
+                <p>
+                    If you’re building with frameworks like React, Vue, or Svelte, you won’t use <code>ready()</code>
+                    either. Instead, you’ll use lifecycle hooks like <code>useEffect()</code>, <code>mounted()</code>,
+                    or <code>onMount()</code> to handle DOM interactions after the component renders.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-6">Real Examples That Actually Matter</h2>
+                <p>
+                    Let’s say you want to make a mobile menu toggle when someone clicks the hamburger icon. Here’s how
+                    you’d do that:
+                </p>
+                <pre><code>$(function() {
+  $('.burger').on('click', function() {
+    $('.nav').toggleClass('open');
+  });
+});</code></pre>
+                <p>
+                    Or maybe you want to initialize a slider once the DOM is ready. Assuming you’re using Slick Slider,
+                    here’s what that might look like:
+                </p>
+                <pre><code>$(function() {
+  $('.carousel').slick({
+    autoplay: true,
+    arrows: false
+  });
+});</code></pre>
+                <p>
+                    One time, I was working late trying to debug a holiday-themed landing page with falling snowflakes.
+                    Everything worked on localhost, but on staging — nothing. After way too long and too much coffee, I
+                    realized the snow plugin loaded after the init code ran. A quick tweak to delay the setup until
+                    after the plugin loaded fixed it. But man, that was a weird night.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-7">Quick SEO Tips While We’re Here</h2>
+                <p>
+                    If you're writing tutorials or documentation and want your page to rank well for keywords like
+                    jquery document ready, it helps to naturally repeat related phrases throughout your
+                    headings and paragraphs. Think terms like “jQuery ready event,” “run code after DOM is ready,” or
+                    “jQuery DOM loaded.”
+                </p>
+                <p>
+                    Internal linking also helps. For example, if you have another article on jQuery selectors or
+                    <a href="./wcag-guidelines-checklist.html">optimizing page load speed</a>, link to them with
+                    descriptive anchor text — not just “click here.” And
+                    if you’re really into SEO, consider adding FAQ schema with common questions about
+                    <code>ready()</code>.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-8">Is jQuery Still Worth Using in 2025?</h2>
+                <p>
+                    Honestly, jQuery isn’t the hot topic it once was — but it’s far from dead. It still powers tons of
+                    production sites, especially older WordPress themes and <a
+                        href="https://firstup.io/blog/what-is-an-intranet-and-is-it-still-relevant-to-your-organization/"
+                        target="_blank">enterprise intranets</a>. If your site already
+                    uses it, and it works, you’re fine.
+                </p>
+                <p>
+                    That said, new projects might benefit from going vanilla or using lightweight frameworks. The fewer
+                    dependencies, the better. But don’t rip jQuery out just because it’s trendy. Audit your code first
+                    and see what’s realistic. It’s okay to keep using jQuery in 2025 — just use it intentionally.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-9">Wrapping Up</h2>
+                <p>
+                    So there you go — everything you need to know about jquery document ready. Use it
+                    when you need to wait for the DOM to finish loading, but don’t feel tied to it in newer
+                    environments. Whether you're toggling menus, initializing sliders, or building something from
+                    scratch, the goal is always the same: make sure your code runs at the right time — not too early,
+                    not too late.
+                </p>
+                <p>
+                    And if you ever find yourself debugging in the middle of the night, staring at a blank screen while
+                    sipping cold coffee… check the load order first. Trust me.
+                </p>
+                <p>If you enjoyed this article, check out our latest post on <a
+                        href="./wai-aria-authoring-practices.html">WAI-ARIA Authoring Practices</a>. As always, if you
+                    have any questions or comments, feel free to <a href="../contact.html">contact us</a>.</p>
+            </section>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../images/footer-v.svg"
+            alt="logo" width="1920" height="163">
+        <!-- Subscribe Form -->
+        <div id="cta-1185">
+            <div class="cs-content">
+                <h2 class="cs-title">Stay in the Loop</h2>
+                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
+                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!-- Logo Group -->
+            <div class="cs-logo-group">
+                <a aria-label="go back to home" class="cs-logo" href="../index.html">
+                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        width="197" height="71">
+                </a>
+                <p class="cs-text">
+                    A professional website design and development company working with small businesses around the world
+                    to create a strong presence on the web.
+                </p>
+            </div>
+            <!-- Links -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Quick Links</span>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../about.html">About</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../portfolio.html">Portfolio</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../contact.html">Contact</a>
+                </li>
+            </ul>
+            <!-- Contact Info -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Contact</span>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
+                    </a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-email"
+                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-address"
+                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener">
+                        Monmouth County<br> Wall Township, NJ 07753
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <div>
+                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
+                        Technology</a></p>
+            </div>
+            <div>
+                <a href="../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <span>|</span>
+                <a href="../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+            </div>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile -->
+            <source media="(max-width: 600px)" srcset="../images/footer_bg-360w.webp" type="image/webp">
+            <!-- Tablet -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/footer_bg-720w.webp"
+                type="image/webp">
+            <!-- Desktop -->
+            <source media="(min-width: 1025px)" srcset="../images/footer_bg-1280w.webp" type="image/webp">
+            <!-- Fallback -->
+            <img loading="lazy" decoding="async" src="../images/footer_bg-1280w.webp" alt="code being edited"
+                width="1280" height="586">
+        </picture>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+    <script src="../js/posts.js"></script>
+    <!-- Brevo Integration -->
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('cs-email-1185').value;
+
+            const data = {
+                email: email,
+                listIds: [11],
+                updateEnabled: true
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("Thanks for subscribing!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred.");
+            }
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-99T44PPPPV');
+    </script> -->
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const ga = document.createElement('script');
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV';
+                ga.async = true;
+                document.head.appendChild(ga);
+
+                ga.onload = () => {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-99T44PPPPV');
+                };
+            }, 2000); // delay 2s after load
+        });
+    </script>
+
+
+</body>
+
+</html>
