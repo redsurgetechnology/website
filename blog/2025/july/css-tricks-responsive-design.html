@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- Preconnect & DNS Prefetch for Performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>CSS Tricks for Responsive Design: A Friendly Guide</title>
+    <meta name="description"
+        content="Discover practical CSS tricks for responsive design—Flexbox, Grid, container queries, clamp(), aspect-ratio, and CSS variables with JS tweaks. Build layouts that adapt fluidly across all devices.">
+    <meta name="author" content="Red Surge Technology">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/2025/july/css-tricks-responsive-design">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/2025/july/css-tricks-responsive-design">
+    <meta property="og:title" content="CSS Tricks for Responsive Design: A Friendly Guide">
+    <meta property="og:description"
+        content="Unlock CSS secrets for mobile-first layouts, fluid grids, container queries, and more. A comprehensive, human-friendly guide to responsive design.">
+    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Red Surge Technology">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/2025/july/css-tricks-responsive-design">
+    <meta name="twitter:title" content="CSS Tricks for Responsive Design: A Friendly Guide">
+    <meta name="twitter:description"
+        content="Learn CSS tricks for responsive design with real-world examples—Flexbox, Grid, container queries, clamp(), aspect-ratio, and CSS variables.">
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#d90700">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../../../css/main.css">
+    <link rel="stylesheet" href="../../../css/posts.css">
+
+    <!-- JSON‑LD: WebSite Schema -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://redsurgetechnology.com/",
+    "name": "Red Surge Technology Blog",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://redsurgetechnology.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+    <!-- JSON‑LD: BlogPosting Schema -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "CSS Tricks for Responsive Design: A Friendly Guide",
+    "description": "Discover practical CSS tricks for responsive design—Flexbox, Grid, container queries, clamp(), aspect-ratio, and CSS variables with JS tweaks.",
+    "url": "https://redsurgetechnology.com/blog/2025/july/css-tricks-responsive-design",
+    "author": {
+      "@type": "Organization",
+      "name": "Red Surge Technology"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Red Surge Technology",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://redsurgetechnology.com/images/logo_black.png"
+      }
+    },
+    "datePublished": "2025-07-07",
+    "dateModified": "2025-07-07",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://redsurgetechnology.com/blog/2025/july/css-tricks-responsive-design"
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://redsurgetechnology.com/images/og-image.jpg",
+      "width": 1200,
+      "height": 630
+    }
+  }
+  </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="cs-navigation">
+        <div class="cs-top-bar">
+            <div class="cs-top-container">
+                <div class="cs-top-contact">
+                    <a href="tel:7324746841" class="cs-top-link">
+                        <img class="cs-link-icon" src="../../../images/phone-grey.svg" alt="grey phone icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Call us: (732) 474-6841
+                    </a>
+                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+                        <img class="cs-link-icon" src="../../../images/email-grey.svg" alt="grey email icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Email us: info@redsurgetechnology.com
+                    </a>
+                </div>
+                <div class="cs-top-social">
+                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
+                        target="_blank" aria-label="LinkedIn">
+                        <img class="cs-social-icon" src="../../../images/linkedin-grey.svg" alt="grey linkedin icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
+                        aria-label="Instagram">
+                        <img class="cs-social-icon" src="../../../images/insta-grey.svg" alt="grey instagram icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
+                        aria-label="Facebook">
+                        <img class="cs-social-icon" src="../../../images/face-grey.svg" alt="grey facebook icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!--Nav Logo-->
+            <a href="../../../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../../../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63"
+                    aria-hidden="true" decoding="async">
+            </a>
+            <!--Navigation List-->
+            <nav class="cs-nav" role="navigation">
+                <!--Mobile Nav Toggle-->
+                <button class="cs-toggle" aria-label="mobile menu toggle">
+                    <div class="cs-box" aria-hidden="true">
+                        <span class="cs-line cs-line1" aria-hidden="true"></span>
+                        <span class="cs-line cs-line2" aria-hidden="true"></span>
+                        <span class="cs-line cs-line3" aria-hidden="true"></span>
+                    </div>
+                </button>
+                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                <div class="cs-ul-wrapper">
+                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                        <li class="cs-li">
+                            <a href="../../../index.html" class="cs-li-link">
+                                Home
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../about.html" class="cs-li-link">
+                                About
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../portfolio.html" class="cs-li-link">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../blog.html" class="cs-li-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../contact.html" class="cs-li-link">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="../../../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+        <div class="cs-container">
+            <h1 class="cs-int-title">CSS Tricks Responsive Design: A Friendly Guide You’ll Actually Enjoy</h1>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../../../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../../../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../../../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
+        </picture>
+    </div>
+
+    <!-- Content -->
+    <section id="content-page-714">
+        <div class="main-img-container">
+            <picture>
+                <!-- Mobile (≤600px) -->
+                <source media="(max-width: 600px)" srcset="
+        ../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-360w.webp 360w,
+        ../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-720w.webp 720w,
+        ../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-1280w.webp 1280w
+    " sizes="(max-width: 600px) 360px" type="image/webp">
+
+                <!-- Tablet (601px–1024px) -->
+                <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
+        ../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-720w.webp 720w,
+        ../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-1280w.webp 1280w
+    " sizes="(max-width: 1024px) 720px" type="image/webp">
+
+                <!-- Desktop (≥1025px) -->
+                <source media="(min-width: 1025px)"
+                    srcset="../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-1280w.webp"
+                    sizes="1280px" type="image/webp">
+
+                <!-- Fallback image -->
+                <img fetchpriority="high" decoding="sync"
+                    src="../../../images/blog/css-tricks-responsive-design/CSS-Tricks-Responsive-Design-1280w.webp"
+                    alt="CSS Tricks Responsive Design - A Friendly Guide You’ll Actually Enjoy - Red Surge Technology"
+                    width="1280" height="720" aria-hidden="true">
+            </picture>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">Why Responsive CSS Tricks Matter
+                        More Than Ever</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">Flexbox: Your Go‑To for
+                        Mobile‑Friendly Layouts</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Grid Magic: Fluid Columns That
+                        Just Work</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Media Queries…But Smarter</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Container Queries:
+                        Component‑Level Responsiveness</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Clamp Your Typography: Fluid
+                        Text Made Simple</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Aspect Ratios: No More Jumping
+                        Images</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">CSS Variables: Your Theme’s Best
+                        Friend</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;">Wrapping Up (Literally)</a></li>
+            </ul>
+
+            <section>
+                <h2 id="h2-1">Why Responsive CSS Tricks Matter More Than Ever</h2>
+                <p>Have you ever clicked through a site on your phone only to discover that paragraphs extend off the
+                    screen or images overlap like tangled headphones? It feels unprofessional, and frankly, it turns
+                    users away. With mobile browsing now outpacing desktop, mastering CSS tricks responsive design has
+                    become essential. You don’t need a massive framework weighing down your pages—instead, a handful of
+                    thoughtfully applied CSS techniques can transform your layouts into smooth, adaptable experiences
+                    that look great on any device. Throughout this guide, we’ll explore approachable yet powerful
+                    strategies, illustrated with real‑world stories and code samples you can copy, paste, and tweak
+                    right away.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-2">Flexbox: Your Go‑To for Mobile‑Friendly Layouts</h2>
+                <p>When Flexbox first arrived, it felt like a revelation—suddenly, aligning elements vertically or
+                    horizontally didn’t require hacks or extra wrappers. At its heart, Flexbox is a one‑axis layout
+                    system, giving you intuitive control over how items grow, shrink, and wrap within a container.</p>
+                <p>For example, imagine a gallery of image cards. Without Flexbox, you might wrestle with floats,
+                    clearfixes, or <a href="../../jquery-document-ready-complete-beginners-guide.html">JavaScript to
+                        reposition items</a> as the screen narrows. With Flexbox, it’s as simple
+                    as:</p>
+                <pre><code>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+    </code></pre>
+                <p>Here, each card will occupy at least its minimum width and then wrap onto the next line when space
+                    runs out. You can further adjust the spacing and alignment by changing
+                    <code>justify-content</code>—perhaps centering items on narrow viewports or distributing them evenly
+                    across wider screens. The result is a fluid gallery that reflows effortlessly without a single line
+                    of JavaScript.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-3">Grid Magic: Fluid Columns That Just Work</h2>
+                <p>If Flexbox feels like riding a bike, CSS Grid is akin to gliding in a self‑driving car—it handles
+                    both horizontal and vertical arrangements with ease. The real beauty of Grid emerges when you
+                    combine its definitions with responsive functions like <code>auto-fit</code> and
+                    <code>minmax()</code>.
+                </p>
+                <p>Consider this layout snippet for a series of product cards:</p>
+                <pre><code>
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+    </code></pre>
+                <p>What’s happening here is almost magical: each column will stretch to fill available space but never
+                    shrink below 220 pixels wide. As the viewport changes, Grid automatically adjusts the number of
+                    columns and their widths without any extra instructions. During last holiday season, I applied this
+                    to a gift guide page and watched it morph from a cluttered list into a polished, magazine‑style
+                    layout—effortlessly.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-4">Media Queries…But Smarter</h2>
+                <p>Traditional media queries are effective but can become unwieldy when sprinkled throughout your
+                    stylesheet. That’s where CSS variables come to the rescue. By defining breakpoints at the top of
+                    your CSS, you create a single source of truth. For instance:</p>
+                <pre><code>
+:root {
+  --bp-sm: 576px;
+  --bp-md: 768px;
+  --bp-lg: 992px;
+}
+
+@media (min-width: var(--bp-md)) {
+  .sidebar {
+    display: block;
+  }
+}
+    </code></pre>
+                <p>Once, I followed a colleague’s suggestion and set a breakpoint at 870 pixels. On her laptop it looked
+                    perfect, but on many Chromebooks, content snapped in odd ways. After switching to analytics‑backed
+                    values stored in variables, updating breakpoints became as simple as editing a handful of lines at
+                    the top—no more hunting through 500 lines of CSS to find every single media query.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-5">Container Queries: Component‑Level Responsiveness</h2>
+                <p>Media queries respond to the viewport, but container queries respond to the size of a specific
+                    wrapper or component. This paradigm shift is ideal for modern component‑driven <a
+                        href="https://www.joshwcomeau.com/react/css-in-rsc/" target="_blank">frameworks like React</a>
+                    or Vue, where elements might appear in vastly different contexts.</p>
+                <p>Imagine a product card that appears in a narrow sidebar and later in a main content feed. With
+                    container queries, you simply declare:</p>
+                <pre><code>
+.card-wrapper {
+  container-type: size;
+}
+
+@container (min-width: 300px) {
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+  }
+}
+    </code></pre>
+                <p>Each instance of the card adapts based on the width of its wrapper, not the entire browser window.
+                    Last quarter, our team built a drag‑and‑drop dashboard where widgets resized and rearranged
+                    themselves seamlessly—like digital origami—thanks to container queries. No JavaScript listeners, no
+                    extra markup, just pure CSS intelligence.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-6">Clamp Your Typography: Fluid Text Made Simple</h2>
+                <p>Gone are the days of dozens of font‑size media queries. The <code>clamp()</code> function lets you
+                    define a minimum, a preferred scaling factor, and a maximum in one line:</p>
+                <pre><code>
+h2 {
+  font-size: clamp(1.25rem, 4vw, 2rem);
+}
+    </code></pre>
+                <p>Here, headings will never dip below 1.25rem on smaller screens but won’t exceed 2rem on large
+                    displays, all while scaling smoothly in between. I find it oddly satisfying to drag the viewport
+                    slider in DevTools and watch the text ebb and flow like water—no abrupt jumps, just graceful
+                    transitions.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-7">Aspect Ratios: No More Jumping Images</h2>
+                <p>Ever scroll through a story and see a blank rectangle, only to have the page suddenly shift when the
+                    image loads? That shifting, known as cumulative layout shift (CLS), can be eliminated with the
+                    <code>aspect-ratio</code> property. Simply write:
+                </p>
+                <pre><code>
+img, video {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;
+}
+    </code></pre>
+                <p>Modern browsers will reserve the correct vertical space before the media loads, keeping your layout
+                    rock‑steady. For older browsers, a time‑tested padding hack still works wonders:</p>
+                <pre><code>
+.aspect-box {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 ratio */
+}
+
+.aspect-box > * {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+    </code></pre>
+                <p>With this fallback in place, you ensure consistency across the board—even on legacy devices.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-8">CSS Variables: Your Theme’s Best Friend</h2>
+                <p><a href="https://blog.logrocket.com/how-to-use-css-variables/" target="_blank">CSS variables</a>
+                    aren’t limited to colors or fonts; they can also feed dynamic data from JavaScript,
+                    empowering truly adaptive layouts. A popular trick solves the infamous mobile viewport height issue:
+                </p>
+                <pre><code>
+function setVh() {
+  document.documentElement.style.setProperty(
+    '--vh',
+    window.innerHeight * 0.01 + 'px'
+  );
+}
+window.addEventListener('resize', setVh);
+setVh();
+    </code></pre>
+                <p>Then, in your CSS, you can specify:</p>
+                <pre><code>
+.hero-section {
+  height: calc(var(--vh) * 100);
+}
+    </code></pre>
+                <p>This ensures your full‑screen hero always fills the viewport, regardless of browser chrome or address
+                    bar behavior on mobile. Additionally, establishing a system-wide <code>--spacing-unit: 1rem;</code>
+                    in the root and consistently using it for margins and padding enforces visual harmony across your
+                    entire site.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-9">Wrapping It Up (Literally)</h2>
+                <p>In our journey through css tricks responsive design, we’ve covered the essentials: Flexbox for
+                    straightforward axis control; Grid for two‑dimensional layouts that auto‑adjust; media queries
+                    enhanced by variables; container queries for self‑aware components; <code>clamp()</code> for fluid
+                    typography; <code>aspect-ratio</code> to prevent layout shifts; and CSS variables paired with a
+                    touch of JavaScript for dynamic viewport handling.</p>
+                <p>Before you wrap up your day, <a href="../../wcag-guidelines-checklist.html">remember to run a
+                        Lighthouse audit for performance and accessibility
+                        scores</a>, test on real devices (yes, that ancient Android phone still matters), and, if
+                    possible,
+                    check cross‑browser compatibility with tools like BrowserStack. And if you’ve discovered your own
+                    responsive CSS gem, please share it in the comments—our collective knowledge grows when we learn
+                    from one another.</p>
+                <p>Now go ahead, dive into your stylesheet (well, maybe a gentle dip), push changes to staging, and
+                    watch your site flex and flow like a well‑oiled machine. A design that adapts gracefully never
+                    breaks—and your users will notice the difference.</p>
+                <p>As always, if you have any questions or comments feel free to <a href="../../../contact.html">contact
+                        us</a>.</p>
+            </section>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../../../images/footer-v.svg"
+            alt="logo" width="1920" height="163">
+        <!-- Subscribe Form -->
+        <div id="cta-1185">
+            <div class="cs-content">
+                <h2 class="cs-title">Stay in the Loop</h2>
+                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
+                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!-- Logo Group -->
+            <div class="cs-logo-group">
+                <a aria-label="go back to home" class="cs-logo" href="../../../index.html">
+                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        width="197" height="71">
+                </a>
+                <p class="cs-text">
+                    A professional website design and development company working with small businesses around the world
+                    to create a strong presence on the web.
+                </p>
+            </div>
+            <!-- Links -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Quick Links</span>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../index.html">Home</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../about.html">About</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../portfolio.html">Portfolio</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../contact.html">Contact</a>
+                </li>
+            </ul>
+            <!-- Contact Info -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Contact</span>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
+                    </a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-email"
+                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-address"
+                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener">
+                        Monmouth County<br> Wall Township, NJ 07753
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <div>
+                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
+                        Technology</a></p>
+            </div>
+            <div>
+                <a href="../../../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <span>|</span>
+                <a href="../../../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+            </div>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile -->
+            <source media="(max-width: 600px)" srcset="../../../images/footer_bg-360w.webp" type="image/webp">
+            <!-- Tablet -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/footer_bg-720w.webp"
+                type="image/webp">
+            <!-- Desktop -->
+            <source media="(min-width: 1025px)" srcset="../../../images/footer_bg-1280w.webp" type="image/webp">
+            <!-- Fallback -->
+            <img loading="lazy" decoding="async" src="../../../images/footer_bg-1280w.webp" alt="code being edited"
+                width="1280" height="586">
+        </picture>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../../js/main.js"></script>
+    <script src="../../../js/posts.js"></script>
+    <!-- Brevo Integration -->
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('cs-email-1185').value;
+
+            const data = {
+                email: email,
+                listIds: [11],
+                updateEnabled: true
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("Thanks for subscribing!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred.");
+            }
+        });
+    </script>
+
+    <!-- Google Analytics -->
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-99T44PPPPV');
+    </script> -->
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const ga = document.createElement('script');
+                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV';
+                ga.async = true;
+                document.head.appendChild(ga);
+
+                ga.onload = () => {
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag() { dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-99T44PPPPV');
+                };
+            }, 2000); // delay 2s after load
+        });
+    </script>
+
+
+</body>
+
+</html>
