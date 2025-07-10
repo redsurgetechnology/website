@@ -56,8 +56,19 @@
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#d90700">
 
-    <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/posts.css">
+    <!-- Preload CSS (non‑blocking) -->
+    <link rel="preload" href="../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/main.css">
+    </noscript>
+
+    <link rel="preload" href="../css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../css/posts.css">
+    </noscript>
+
+    <!-- <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/posts.css"> -->
 
     <!-- JSON-LD: WebSite Schema -->
     <script type="application/ld+json">
@@ -641,8 +652,8 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js"></script>
-    <script src="../js/posts.js"></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/posts.js" defer></script>
     <!-- Brevo Integration -->
     <script>
         document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
