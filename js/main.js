@@ -27,14 +27,24 @@ function ariaExpanded() {
 // and we used these body.scroll styles to create some on scroll 
 // animations with the navbar
 
-document.addEventListener('scroll', (e) => {
-    const scroll = document.documentElement.scrollTop;
-    if (scroll >= 100) {
-        document.querySelector('body').classList.add('scroll')
-    } else {
-        document.querySelector('body').classList.remove('scroll')
+let lastScrollY = 0;
+let ticking = false;
+
+// cache body so you don’t query it every frame
+const body = document.body;
+
+window.addEventListener('scroll', () => {
+    lastScrollY = window.scrollY;     // read only
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            if (lastScrollY >= 100) body.classList.add('scroll');
+            else body.classList.remove('scroll');
+            ticking = false;
+        });
+        ticking = true;
     }
-});
+}, { passive: true });
+
 
 // mobile nav toggle code
 const dropDowns = Array.from(document.querySelectorAll('#cs-navigation .cs-dropdown'));
