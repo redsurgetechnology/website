@@ -612,35 +612,6 @@ setVh();
         });
     </script>
 
-    <!-- Google Analytics -->
-    <!-- Google tag (gtag.js) -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-99T44PPPPV');
-    </script> -->
-    <script>
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const ga = document.createElement('script');
-                ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-99T44PPPPV';
-                ga.async = true;
-                document.head.appendChild(ga);
-
-                ga.onload = () => {
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag() { dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-99T44PPPPV');
-                };
-            }, 2000); // delay 2s after load
-        });
-    </script>
-
-
 </body>
 
 </html>
