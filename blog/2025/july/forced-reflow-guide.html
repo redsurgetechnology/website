@@ -2,10 +2,9 @@
 <html lang="en-US">
 
 <head>
-<!-- Critical CSS -->
+    <!-- Critical CSS -->
     <style>:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000}#cs-navigation:before{content:'';width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%)}#cs-navigation .cs-line3{bottom:0}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li-link{font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;text-align:center;width:100%;display:block}}@media only screen and (min-width:64rem){#cs-navigation .cs-toggle{display:none}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:'';width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem,1.3vw,1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em,5.5vw,3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:'';position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}}@media only screen and (min-width:0rem){#banner-712 .cs-background{display:block;z-index:-1}#banner-712 .cs-background img{object-fit:cover}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem,6.4vw,3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{padding:var(--sectionPadding);background-color:#fff;overflow:hidden;position:relative;z-index:1;max-width:80rem;margin:0 auto}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 h2{font-weight:700;text-align:inherit;margin:2rem 0 1rem;color:var(--headerColor);font-size:2rem}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}}
 </style>
-
 
     <!-- Preconnect & DNS Prefetch for Performance -->
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
@@ -21,24 +20,23 @@
     <meta name="format-detection" content="telephone=no">
 
     <!-- Primary Meta Tags -->
-    <title>jQuery Document Ready: Complete Guide for Developers</title>
+    <title>Forced Reflow: How to Prevent Layout Thrashing for Fast Performance</title>
     <meta name="description"
-        content="Learn everything about jQuery’s document ready event—syntax, best practices, common pitfalls, and modern alternatives to ensure your scripts run exactly when you want.">
+        content="Learn what forced reflow is, why it causes jank, and how to eliminate layout thrashing in your web apps with practical code examples, modern CSS techniques, and tooling tips.">
     <meta name="author" content="Red Surge Technology">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide">
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/2025/july/forced-reflow-guide">
 
     <!-- Robots -->
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="article">
-    <meta property="og:url"
-        content="https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide">
-    <meta property="og:title" content="jQuery Document Ready: Complete Guide for Developers">
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/2025/july/forced-reflow-guide">
+    <meta property="og:title" content="Forced Reflow: How to Prevent Layout Thrashing for Fast Performance">
     <meta property="og:description"
-        content="Dive into jQuery document ready—understand its under‑the‑hood mechanics, syntax variations, and when you can skip it in modern web projects.">
+        content="Discover how to spot and stop forced reflow, reduce layout thrashing, and speed up your pages with CSS transforms, batching techniques, and DevTools profiling.">
     <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
     <meta property="og:site_name" content="Red Surge Technology">
     <meta property="og:image:width" content="1200">
@@ -46,36 +44,32 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url"
-        content="https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide">
-    <meta name="twitter:title" content="jQuery Document Ready: Complete Guide for Developers">
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/2025/july/forced-reflow-guide">
+    <meta name="twitter:title" content="Forced Reflow: How to Prevent Layout Thrashing for Fast Performance">
     <meta name="twitter:description"
-        content="Your ultimate walkthrough of jQuery’s document ready event—learn syntax, avoid common mistakes, and explore modern alternatives.">
+        content="Spot forced reflow, tame layout thrashing, and keep your web pages silky-smooth with code examples, CSS tricks, and performance tools.">
     <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
 
     <!-- Favicon & Touch Icons -->
-    <link rel="icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-    <link rel="manifest" href="../site.webmanifest">
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../site.webmanifest">
 
     <!-- Theme Color for Mobile Browsers -->
     <meta name="theme-color" content="#d90700">
 
     <!-- Preload CSS (non‑blocking) -->
-    <link rel="preload" href="../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="../../../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="../css/main.css">
+        <link rel="stylesheet" href="../../../css/main.css">
     </noscript>
 
-    <link rel="preload" href="../css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="../../../css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="../css/posts.css">
+        <link rel="stylesheet" href="../../../css/posts.css">
     </noscript>
-
-    <!-- <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/posts.css"> -->
 
     <!-- JSON‑LD: WebSite Schema -->
     <script type="application/ld+json">
@@ -97,9 +91,9 @@
   {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": "jQuery Document Ready: Complete Guide for Developers",
-    "description": "Learn everything about jQuery’s document ready event—syntax, best practices, common pitfalls, and modern alternatives to ensure your scripts run exactly when you want.",
-    "url": "https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide",
+    "headline": "Forced Reflow: How to Prevent Layout Thrashing for Fast Performance",
+    "description": "Learn what forced reflow is, why it causes jank, and how to eliminate layout thrashing in your web apps with practical code examples, modern CSS techniques, and tooling tips.",
+    "url": "https://redsurgetechnology.com/blog/2025/july/forced-reflow-guide",
     "author": {
       "@type": "Organization",
       "name": "Red Surge Technology"
@@ -112,11 +106,11 @@
         "url": "https://redsurgetechnology.com/images/logo_black.png"
       }
     },
-    "datePublished": "2025-07-02",
-    "dateModified": "2025-07-02",
+    "datePublished": "2025-07-10",
+    "dateModified": "2025-07-10",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://redsurgetechnology.com/blog/jquery-document-ready-complete-beginners-guide"
+      "@id": "https://redsurgetechnology.com/blog/2025/july/forced-reflow-guide"
     },
     "image": {
       "@type": "ImageObject",
@@ -135,12 +129,12 @@
             <div class="cs-top-container">
                 <div class="cs-top-contact">
                     <a href="tel:7324746841" class="cs-top-link">
-                        <img class="cs-link-icon" src="../images/phone-grey.svg" alt="grey phone icon" width="16"
+                        <img class="cs-link-icon" src="../../../images/phone-grey.svg" alt="grey phone icon" width="16"
                             height="16" aria-hidden="true" decoding="async">
                         Call us: (732) 474-6841
                     </a>
                     <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
-                        <img class="cs-link-icon" src="../images/email-grey.svg" alt="grey email icon" width="16"
+                        <img class="cs-link-icon" src="../../../images/email-grey.svg" alt="grey email icon" width="16"
                             height="16" aria-hidden="true" decoding="async">
                         Email us: info@redsurgetechnology.com
                     </a>
@@ -148,27 +142,27 @@
                 <div class="cs-top-social">
                     <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
                         target="_blank" aria-label="LinkedIn">
-                        <img class="cs-social-icon" src="../images/linkedin-grey.svg" alt="grey linkedin icon"
+                        <img class="cs-social-icon" src="../../../images/linkedin-grey.svg" alt="grey linkedin icon"
                             width="12" height="12" aria-hidden="true" decoding="async">
                     </a>
                     <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
                         aria-label="Instagram">
-                        <img class="cs-social-icon" src="../images/insta-grey.svg" alt="grey instagram icon" width="12"
-                            height="12" aria-hidden="true" decoding="async">
+                        <img class="cs-social-icon" src="../../../images/insta-grey.svg" alt="grey instagram icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
                     </a>
                     <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
                         aria-label="Facebook">
-                        <img class="cs-social-icon" src="../images/face-grey.svg" alt="grey facebook icon" width="12"
-                            height="12" aria-hidden="true" decoding="async">
+                        <img class="cs-social-icon" src="../../../images/face-grey.svg" alt="grey facebook icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
                     </a>
                 </div>
             </div>
         </div>
         <div class="cs-container">
             <!--Nav Logo-->
-            <a href="../index.html" class="cs-logo" aria-label="back to home">
-                <img src="../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true"
-                    decoding="async">
+            <a href="../../../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../../../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63"
+                    aria-hidden="true" decoding="async">
             </a>
             <!--Navigation List-->
             <nav class="cs-nav" role="navigation">
@@ -184,53 +178,53 @@
                 <div class="cs-ul-wrapper">
                     <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
                         <li class="cs-li">
-                            <a href="../index.html" class="cs-li-link">
+                            <a href="../../../index.html" class="cs-li-link">
                                 Home
                             </a>
                         </li>
                         <li class="cs-li">
-                            <a href="../about.html" class="cs-li-link">
+                            <a href="../../../about.html" class="cs-li-link">
                                 About
                             </a>
                         </li>
                         <li class="cs-li">
-                            <a href="../portfolio.html" class="cs-li-link">
+                            <a href="../../../portfolio.html" class="cs-li-link">
                                 Portfolio
                             </a>
                         </li>
                         <li class="cs-li">
-                            <a href="../blog.html" class="cs-li-link">
+                            <a href="../../../blog.html" class="cs-li-link">
                                 Blog
                             </a>
                         </li>
                         <li class="cs-li">
-                            <a href="../contact.html" class="cs-li-link">
+                            <a href="../../../contact.html" class="cs-li-link">
                                 Contact
                             </a>
                         </li>
                     </ul>
                 </div>
             </nav>
-            <a href="../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+            <a href="../../../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
         </div>
     </header>
 
     <!-- Banner -->
     <div id="banner-712">
         <div class="cs-container">
-            <h1 class="cs-int-title">jQuery Document Ready: Complete Guide for Developers</h1>
+            <h1 class="cs-int-title">Forced Reflow: How to Prevent Layout Thrashing for Fast Performance</h1>
         </div>
         <!--Background Image-->
         <picture class="cs-background">
             <!-- Mobile (small phones) -->
-            <source media="(max-width: 600px)" srcset="../images/banner_bg_red-360w.webp" type="image/webp">
+            <source media="(max-width: 600px)" srcset="../../../images/banner_bg_red-360w.webp" type="image/webp">
             <!-- Tablet and small desktop -->
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/banner_bg_red-720w.webp"
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/banner_bg_red-720w.webp"
                 type="image/webp">
             <!-- Large desktop -->
-            <source media="(min-width: 1025px)" srcset="../images/banner_bg_red-1280w.webp" type="image/webp">
+            <source media="(min-width: 1025px)" srcset="../../../images/banner_bg_red-1280w.webp" type="image/webp">
             <!-- Fallback image -->
-            <img decoding="async" src="../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+            <img decoding="async" src="../../../images/banner_bg_red-1280w.webp" alt="red technology banner background"
                 width="1280" height="320" aria-hidden="true">
         </picture>
     </div>
@@ -241,252 +235,206 @@
             <picture>
                 <!-- Mobile (≤600px) -->
                 <source media="(max-width: 600px)" srcset="
-            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-360w.webp 360w,
-            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-720w.webp 720w,
-            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp 1280w
-        " sizes="(max-width: 600px) 360px" type="image/webp">
+        ../../../images/blog/forced-reflow-guide/Forced-Reflow-360w.webp 360w,
+        ../../../images/blog/forced-reflow-guide/Forced-Reflow-720w.webp 720w,
+        ../../../images/blog/forced-reflow-guide/Forced-Reflow-1280w.webp 1280w
+    " sizes="(max-width: 600px) 360px" type="image/webp">
 
                 <!-- Tablet (601px–1024px) -->
                 <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
-            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-720w.webp 720w,
-            ../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp 1280w
-        " sizes="(max-width: 1024px) 720px" type="image/webp">
+        ../../../images/blog/forced-reflow-guide/Forced-Reflow-720w.webp 720w,
+        ../../../images/blog/forced-reflow-guide/Forced-Reflow-1280w.webp 1280w
+    " sizes="(max-width: 1024px) 720px" type="image/webp">
 
                 <!-- Desktop (≥1025px) -->
                 <source media="(min-width: 1025px)"
-                    srcset="../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp"
-                    sizes="1280px" type="image/webp">
+                    srcset="../../../images/blog/forced-reflow-guide/Forced-Reflow-1280w.webp" sizes="1280px"
+                    type="image/webp">
 
                 <!-- Fallback image -->
                 <img fetchpriority="high" decoding="sync"
-                    src="../images/blog/jquery-document-ready-complete-beginners-guide/jQuery-Document-Ready-1280w.webp"
-                    alt="jQuery Document Ready - Complete Guide for Developers - Red Surge Technology" width="1280"
-                    height="720" aria-hidden="true">
+                    src="../../../images/blog/forced-reflow-guide/Forced-Reflow-1280w.webp"
+                    alt="Forced Reflow - How to Prevent Layout Thrashing for Fast Performance - Red Surge Technology"
+                    width="1280" height="720" aria-hidden="true">
             </picture>
         </div>
         <div>
             <ul>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">What’s Really Going On When You
-                        Use $(document).ready()</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">How to Use jQuery Document Ready
-                        in Your Code</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Should You Use jQuery or Native
-                        DOMContentLoaded?</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Common Pitfalls You’ll Want to
-                        Avoid</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Modern Alternatives That Work
-                        Without jQuery</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Real Examples That Actually
-                        Matter</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Quick SEO Tips While We’re
-                        Here</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Is jQuery Still Worth Using in
-                        2025?</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;">Wrapping Up</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">Why Forced Reflow Feels Like
+                        Jank</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">Peek Behind the Curtain: How
+                        Browsers Draw Your Page</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">How JavaScript Habits Trip Up
+                        Layout</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Real Cost: When Reflows Hurt
+                        Speed and SEO</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Smooth Moves to Eliminate Layout
+                        Thrash</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Advanced Techniques:
+                        Virtualization and Off‑Screen Rendering</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Handy Helpers: Tools and
+                        Linters</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">A Story From the Trenches</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;">Wrap‑Up: What to Try Next</a>
+                </li>
             </ul>
 
-            <section>
-                <p>
-                    Ever tried pouring cream into a coffee that’s still brewing? You get a messy swirl of lukewarm
-                    disappointment. Web pages behave the same way when JavaScript tries to interact with elements that
-                    haven’t fully loaded. That’s where <code>$(document).ready()</code> comes in — like a patient
-                    barista waiting until everything’s set before taking action.
-                </p>
-                <p>
-                    If you’ve ever written jQuery, you’ve almost certainly used jquery document ready
-                    at some point. It’s one of those deceptively simple helpers that, when used properly, keeps your
-                    code predictable, clean, and responsive. This article isn’t just about what it does — it’s about how
-                    to use it like a pro, avoid hidden traps, and know when you can skip it altogether.
-                </p>
-            </section>
+            <h2 id="h2-1">Why Forced Reflow Feels Like Jank</h2>
+            <p>Have you ever been cruising down a page—maybe checking out summer sale items or scrolling through a
+                travel blog—when suddenly the content freezes for a split second? It’s like hitting invisible speed
+                bumps. That hiccup often comes from something called forced reflow. It sounds like tech jargon nobody
+                cares about… until you feel the lag in your own hands. When your site feels sluggish, readers get
+                restless, they click away, and all your effort vanishes into the digital void.</p>
+            <p>Now, picture yourself with an iced coffee at your desk on a warm July weekend. <a
+                    href="../../jquery-document-ready-complete-beginners-guide.html">You tweak a line of
+                    JavaScript</a>, reload your page… and voilà: buttery‑smooth scrolling returns. That small
+                victory—knowing
+                you crushed layout thrash—feels amazing, right? Let’s dive into how browsers render pages, why forced
+                reflow happens, and how to nip it in the bud so your users always enjoy a silky‑smooth experience.</p>
 
-            <section>
-                <h2 id="h2-1">What’s Really Going On When You Use $(document).ready()</h2>
-                <p>
-                    So here’s the big idea: <code>$(document).ready()</code> waits until the browser has finished
-                    building the HTML document’s structure — that’s the DOM — but before all images, stylesheets, and
-                    other external resources finish loading. <a href="./free-leetcode-alternatives.html">In
-                        practice</a>, this means your scripts will run at just the
-                    right moment: not too early (when elements don’t exist) and not too late (which would slow
-                    everything down).
-                </p>
-                <p>
-                    Under the hood, jQuery checks if the DOM is ready using the native <code>DOMContentLoaded</code>
-                    event in modern browsers. For legacy ones — think IE6 — it falls back to polling
-                    <code>document.readyState</code> until it becomes <code>'complete'</code> or
-                    <code>'interactive'</code>. You don’t see any of that complexity though — jQuery abstracts it all
-                    for you.
-                </p>
-            </section>
+            <h2 id="h2-2">Peek Behind the Curtain: How Browsers Draw Your Page</h2>
+            <p>Browsers are more like bakers following a precise recipe than magic wizards. They first parse your HTML
+                into a DOM tree—each tag becomes a node. Next, CSS files are parsed into a CSSOM where rules cascade and
+                override each other. These two trees merge into a render tree that knows which elements are visible.
+                Then comes layout (reflow), where the browser calculates exact positions and sizes for every box on the
+                page. Finally, painting and compositing apply pixels to the screen, often leveraging the GPU for extra
+                speed.</p>
+            <p>When you read an element’s size or tweak the DOM mid‑flight, the browser can’t cheat. It must repeat that
+                layout step to keep everything accurate. That’s forced reflow—a full geometry recalculation that can
+                cascade into dozens of layout operations if you’re not careful. The result? CPU strain and visible
+                stutter for your users.</p>
 
-            <section>
-                <h2 id="h2-2">How to Use jQuery Document Ready in Your Code</h2>
-                <p>
-                    Let’s look at a few common ways you might write it. The most explicit form looks like this:
-                </p>
-                <pre><code>$(document).ready(function() {
-  console.log("DOM is ready!");
+            <h2 id="h2-3">How JavaScript Habits Trip Up Layout</h2>
+            <p>Certain JavaScript patterns practically shout “layout time!” Consider this example where each iteration
+                forces a reflow:</p>
+            <pre><code>const items = document.querySelectorAll('.card');
+items.forEach(item =&gt; {
+  const height = item.offsetHeight;
+  if (height &gt; 200) {
+    item.classList.add('tall');
+  }
 });</code></pre>
-                <p>
-                    But jQuery also gives you a handy shortcut. This version is functionally identical:
-                </p>
-                <pre><code>$(function() {
-  console.log("DOM is ready (shorthand)!");
+            <p>Reading <code>offsetHeight</code> forces the browser to update the layout, then writing a class change
+                triggers another. Loop that over many items and you’ve triggered dozens of reflows in a single pass. Or
+                think about injecting HTML like this:</p>
+            <pre><code>container.innerHTML += '&lt;div class="new-card"&gt;New Content&lt;/div&gt;';</code></pre>
+            <p>Every time you set <code>innerHTML</code>, the browser tears down the old subtree, parses your string,
+                then recalculates layout for that entire part of the page. And calls to <code>getComputedStyle()</code>
+                demand fresh layout data before returning values. Use them inside animation loops, and you’ve got a
+                performance nightmare.</p>
+
+            <h2 id="h2-4">Real Cost: When Reflows Hurt Speed and SEO</h2>
+            <p>Why care about forced reflow? Because every extra layout calculation pushes back your Largest Contentful
+                Paint—the moment when the main content becomes visible. Google’s Core Web Vitals depend heavily on LCP,
+                and slow layout thrashing can tank your search rankings. On top of that, forced reflows can increase
+                First Input Delay, making your site feel unresponsive when users click or tap.</p>
+            <p>From a user’s perspective, smooth scrolling feels natural and even a bit magical. Jank feels broken.
+                Analytics show pages with stutters have higher bounce rates, lower engagement, and worse conversion
+                rates—all stemming from a few unbatched JavaScript operations.</p>
+
+            <h2 id="h2-5">Smooth Moves to Eliminate Layout Thrash</h2>
+            <p>One straightforward strategy is to separate your reads from your writes. First, gather all measurements,
+                then apply class changes or style tweaks in a second pass. For example:</p>
+            <pre><code>const heights = Array.from(items).map(item =&gt; item.offsetHeight);
+
+heights.forEach((h, i) =&gt; {
+  if (h &gt; 200) {
+    items[i].classList.add('tall');
+  }
 });</code></pre>
-                <p>
-                    And here’s something a lot of folks overlook: you can pass in a named function instead of defining
-                    one inline. It’s great for clarity, debugging, and reuse.
-                </p>
-                <pre><code>function setupHeader() {
-  $('#main-header').addClass('active');
+            <p>This approach forces layout only once during the initial <code>map</code>, then carries out style changes
+                without bouncing back to layout on each iteration. For animations, use CSS transforms and opacity
+                changes instead of top/left or width/height adjustments. A simple CSS snippet can make a big difference:
+            </p>
+            <pre><code>.card {
+  transition: transform 0.3s ease;
+}
+.card.enter {
+  transform: translateY(20px);
+}</code></pre>
+            <p>Transformations trigger paint and composite phases only—skipping the expensive layout step.</p>
+            <p>When handling scroll or resize events, throttle your callbacks so they don’t fire on every pixel change.
+                Instead of a direct listener, wrap your updates in <code>requestAnimationFrame</code>:</p>
+            <pre><code>let ticking = false;
+
+window.addEventListener('scroll', () =&gt; {
+  if (!ticking) {
+    window.requestAnimationFrame(() =&gt; {
+      updateHeader();
+      ticking = false;
+    });
+    ticking = true;
+  }
+});</code></pre>
+            <p>This pattern reduces unnecessary calls and lets the browser batch updates for a smoother experience.</p>
+
+            <h2 id="h2-6">Advanced Techniques: Virtualization and Off‑Screen Rendering</h2>
+            <p>Once you’ve mastered batching and transforms, you can explore virtualization. Libraries like <a
+                    href="https://www.scaler.com/topics/react/react-window/" target="_blank">React Window</a>
+                or <a
+                    href="https://labex.io/tutorials/javascript-implement-efficient-virtual-scrolling-with-vue-js-299948"
+                    target="_blank">Vue Virtual Scroll List</a> render only the visible slice of a long list, swapping
+                elements in and out as
+                users scroll. This dramatically cuts down on DOM nodes and layout operations, keeping pages snappy even
+                with thousands of items.</p>
+            <p>Off‑screen rendering uses CSS hints such as <code>will-change</code> and
+                <code>content-visibility: auto</code> to tell the browser which elements will animate or which subtrees
+                can be skipped until they become visible. Use these sparingly—too many layers consume memory—but in the
+                right spots they can make animations feel untouchable.
+            </p>
+
+            <h2 id="h2-7">Handy Helpers: Tools and Linters</h2>
+            <p>You don’t have to hunt layout thrash by hand. Chrome’s Performance tab lets you record sessions, filter
+                by “Layout,” and inspect red spikes where forced reflows occurred. On the static side, ESLint can flag
+                calls to <code>offsetWidth</code>, <code>scrollTop</code>, or <code>getComputedStyle</code> using a
+                <code>no-restricted-properties</code> rule. And Real‑User Monitoring tools like New Relic Browser or
+                Datadog feed you real-world data so you know if your code changes actually improved performance on
+                slower devices in the wild.
+            </p>
+
+            <h2 id="h2-8">A Story From the Trenches</h2>
+            <p>Last spring, I joined a small team building a live sports scoreboard just before the playoffs. Real‑time
+                score updates triggered a reflow every few seconds and the page stuttered like an old train. Fans
+                complained, engagement dipped, and social shares dropped right when view counts should have peaked.</p>
+            <p>DevTools revealed our update loop read the container’s width, injected new HTML, then read width
+                again—twenty reflows per update, firing every three seconds. We refactored to batch reads and writes:
+            </p>
+            <pre><code>function getMetrics() {
+  return container.getBoundingClientRect();
 }
 
-$(setupHeader);</code></pre>
-                <p>
-                    You can also call <code>$(document).ready()</code> multiple times throughout your code. jQuery
-                    queues them up and runs them in the order they were defined.
-                </p>
-            </section>
+let pendingHTML = '';
+let scheduled = false;
 
-            <section>
-                <h2 id="h2-3">Should You Use jQuery or Native DOMContentLoaded?</h2>
-                <p>
-                    jQuery’s <code>ready()</code> method is a wrapper around the native <code>DOMContentLoaded</code>
-                    event. If you’re not already using jQuery for other things, there’s no need to load the entire
-                    library just for this.
-                </p>
-                <p>
-                    Here’s how you’d do the same thing with vanilla JavaScript:
-                </p>
-                <pre><code>document.addEventListener('DOMContentLoaded', function() {
-  console.log('DOM fully loaded and parsed');
-});</code></pre>
-                <p>
-                    It’s simple, lightweight, and works in all modern browsers. So if you’re building something modern —
-                    especially without jQuery — this is the better choice. But if you’re already relying on jQuery for
-                    selectors, animations, or plugins, it’s completely fine to stick with
-                    <code>$(document).ready()</code>.
-                </p>
-            </section>
+function queueUpdate(html) {
+  pendingHTML = html;
+  if (!scheduled) {
+    scheduled = true;
+    window.requestAnimationFrame(applyUpdate);
+  }
+}
 
-            <section>
-                <h2 id="h2-4">Common Pitfalls You’ll Want to Avoid</h2>
-                <p>
-                    One of the easiest mistakes is placing your custom scripts before the jQuery library loads. If you
-                    do this, you’ll get an error saying <code>$</code> is undefined. Always make sure jQuery is loaded
-                    before your script.
-                </p>
-                <p>
-                    Another issue is initializing plugins or features that depend on external scripts, but calling them
-                    before those scripts have loaded. For example, imagine you’re trying to use a slider plugin inside a
-                    <code>$(document).ready()</code> block, but you’ve loaded the plugin asynchronously. jQuery is
-                    ready, but the plugin isn't — and you'll end up with a “function not defined” error.
-                </p>
-                <p>
-                    Also, if you’re injecting content dynamically using AJAX and trying to bind events inside your
-                    <code>ready()</code> function, it won’t work on the new content. Instead, use delegated events like
-                    this:
-                </p>
-                <pre><code>$(document).on('click', '.ajax-loaded-button', function() {
-  alert('You clicked a dynamic button!');
-});</code></pre>
-            </section>
+function applyUpdate() {
+  container.innerHTML = pendingHTML;
+  scheduled = false;
+}</code></pre>
+            <p>Swapping pixel-based adjustments for transforms eliminated that stutter. Complaints dropped by seventy
+                percent and our performance score jumped above ninety. Seeing those smooth updates return felt like
+                watching a buzzer‑beater in slow motion—pure satisfaction.</p>
 
-            <section>
-                <h2 id="h2-5">Modern Alternatives That Work Without jQuery</h2>
-                <p>
-                    In many cases, you don’t need <code>ready()</code> at all — especially if you’re using
-                    <code>&lt;script defer&gt;</code> in your HTML. When you add <code>defer</code> to your script tag,
-                    the browser delays execution until after the DOM is fully parsed, just like <code>ready()</code>.
-                </p>
-                <pre><code>&lt;script src="script.js" defer&gt;&lt;/script&gt;</code></pre>
-                <p>
-                    If you’re building with frameworks like React, Vue, or Svelte, you won’t use <code>ready()</code>
-                    either. Instead, you’ll use lifecycle hooks like <code>useEffect()</code>, <code>mounted()</code>,
-                    or <code>onMount()</code> to handle DOM interactions after the component renders.
-                </p>
-            </section>
-
-            <section>
-                <h2 id="h2-6">Real Examples That Actually Matter</h2>
-                <p>
-                    Let’s say you want to make a mobile menu toggle when someone clicks the hamburger icon. Here’s how
-                    you’d do that:
-                </p>
-                <pre><code>$(function() {
-  $('.burger').on('click', function() {
-    $('.nav').toggleClass('open');
-  });
-});</code></pre>
-                <p>
-                    Or maybe you want to initialize a slider once the DOM is ready. Assuming you’re using Slick Slider,
-                    here’s what that might look like:
-                </p>
-                <pre><code>$(function() {
-  $('.carousel').slick({
-    autoplay: true,
-    arrows: false
-  });
-});</code></pre>
-                <p>
-                    One time, I was working late trying to debug a holiday-themed landing page with falling snowflakes.
-                    Everything worked on localhost, but on staging — nothing. After way too long and too much coffee, I
-                    realized the snow plugin loaded after the init code ran. A quick tweak to delay the setup until
-                    after the plugin loaded fixed it. But man, that was a weird night.
-                </p>
-            </section>
-
-            <section>
-                <h2 id="h2-7">Quick SEO Tips While We’re Here</h2>
-                <p>
-                    If you're writing tutorials or documentation and want your page to rank well for keywords like
-                    jquery document ready, it helps to naturally repeat related phrases throughout your
-                    headings and paragraphs. Think terms like “jQuery ready event,” “<a
-                        href="../blog/2025/july/forced-reflow-guide.html">run code after DOM is ready</a>,” or
-                    “jQuery DOM loaded.”
-                </p>
-                <p>
-                    Internal linking also helps. For example, if you have another article on jQuery selectors or
-                    <a href="./wcag-guidelines-checklist.html">optimizing page load speed</a>, link to them with
-                    descriptive anchor text — not just “click here.” And
-                    if you’re really into SEO, consider adding FAQ schema with common questions about
-                    <code>ready()</code>.
-                </p>
-            </section>
-
-            <section>
-                <h2 id="h2-8">Is jQuery Still Worth Using in 2025?</h2>
-                <p>
-                    Honestly, jQuery isn’t the hot topic it once was — but it’s far from dead. It still powers tons of
-                    production sites, especially older WordPress themes and <a
-                        href="https://firstup.io/blog/what-is-an-intranet-and-is-it-still-relevant-to-your-organization/"
-                        target="_blank">enterprise intranets</a>. If your site already
-                    uses it, and it works, you’re fine.
-                </p>
-                <p>
-                    That said, new projects might benefit from going vanilla or using lightweight frameworks. The fewer
-                    dependencies, the better. But don’t rip jQuery out just because it’s trendy. Audit your code first
-                    and see what’s realistic. It’s okay to keep using jQuery in 2025 — just use it intentionally.
-                </p>
-            </section>
-
-            <section>
-                <h2 id="h2-9">Wrapping Up</h2>
-                <p>
-                    So there you go — everything you need to know about jquery document ready. Use it
-                    when you need to wait for the DOM to finish loading, but don’t feel tied to it in newer
-                    environments. Whether you're toggling menus, initializing sliders, or building something from
-                    scratch, the goal is always the same: make sure your code runs at the right time — not too early,
-                    not too late.
-                </p>
-                <p>
-                    And if you ever find yourself debugging in the middle of the night, staring at a blank screen while
-                    sipping cold coffee… check the load order first. Trust me.
-                </p>
-                <p>If you enjoyed this article, check out our latest post on <a
-                        href="./wai-aria-authoring-practices.html">WAI-ARIA Authoring Practices</a>. As always, if you
-                    have any questions or comments, feel free to <a href="../contact.html">contact us</a>.</p>
-            </section>
+            <h2 id="h2-9">Wrap‑Up: What to Try Next</h2>
+            <p>Forced reflow is simply the browser recalculating layout when you read sizes or tweak the DOM without
+                batching. Smart habits—grouping reads, using transforms, and throttling events—can rescue your pages
+                from jank. Sprinkle in virtualization or off‑screen rendering where it fits, and lean on DevTools plus
+                linting rules to keep layout thrash in check.</p>
+            <p>Next time you run a performance report, look for layout spikes. Then give your code that extra
+                polish—it’s the difference between a clunky page and one that glides. Grab another sip of iced coffee,
+                tweak your code, and enjoy the buttery‑smooth scroll you’ve earned. Your users (and Google) will thank
+                you.</p>
+            <p>If you enjoyed this article, check out our latest post on <a
+                    href="./css-tricks-responsive-design.html">CSS tricks for responsive design</a>. As always, if you
+                have any questions or comments, feel free to <a href="../../../contact.html">contact us</a>.</p>
 
         </div>
     </section>
@@ -494,7 +442,7 @@ $(setupHeader);</code></pre>
 
     <!-- Footer -->
     <footer id="cs-footer-1185">
-        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../images/footer-v.svg"
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../../../images/footer-v.svg"
             alt="logo" width="1920" height="163">
         <!-- Subscribe Form -->
         <div id="cta-1185">
@@ -510,9 +458,9 @@ $(setupHeader);</code></pre>
         <div class="cs-container">
             <!-- Logo Group -->
             <div class="cs-logo-group">
-                <a aria-label="go back to home" class="cs-logo" href="../index.html">
+                <a aria-label="go back to home" class="cs-logo" href="../../../index.html">
                     <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        src="../../../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
                         width="197" height="71">
                 </a>
                 <p class="cs-text">
@@ -526,16 +474,16 @@ $(setupHeader);</code></pre>
                     <span class="cs-header">Quick Links</span>
                 </li>
                 <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../index.html">Home</a>
+                    <a class="cs-nav-link" href="../../../index.html">Home</a>
                 </li>
                 <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../about.html">About</a>
+                    <a class="cs-nav-link" href="../../../about.html">About</a>
                 </li>
                 <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../portfolio.html">Portfolio</a>
+                    <a class="cs-nav-link" href="../../../portfolio.html">Portfolio</a>
                 </li>
                 <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../contact.html">Contact</a>
+                    <a class="cs-nav-link" href="../../../contact.html">Contact</a>
                 </li>
             </ul>
             <!-- Contact Info -->
@@ -545,19 +493,19 @@ $(setupHeader);</code></pre>
                 </li>
                 <li class="cs-nav-li">
                     <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                        src="../../../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
                     <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
                     </a>
                 </li>
                 <li class="cs-nav-li">
                     <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                        src="../../../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
                     <a class="cs-nav-link cs-email"
                         href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
                 </li>
                 <li class="cs-nav-li">
                     <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                        src="../../../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
                     <a class="cs-nav-link cs-address"
                         href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
                         target="_blank" rel="noopener">
@@ -572,29 +520,29 @@ $(setupHeader);</code></pre>
                         Technology</a></p>
             </div>
             <div>
-                <a href="../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <a href="../../../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
                 <span>|</span>
-                <a href="../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+                <a href="../../../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
             </div>
         </div>
         <!--Background Image-->
         <picture class="cs-background">
             <!-- Mobile -->
-            <source media="(max-width: 600px)" srcset="../images/footer_bg-360w.webp" type="image/webp">
+            <source media="(max-width: 600px)" srcset="../../../images/footer_bg-360w.webp" type="image/webp">
             <!-- Tablet -->
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../images/footer_bg-720w.webp"
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/footer_bg-720w.webp"
                 type="image/webp">
             <!-- Desktop -->
-            <source media="(min-width: 1025px)" srcset="../images/footer_bg-1280w.webp" type="image/webp">
+            <source media="(min-width: 1025px)" srcset="../../../images/footer_bg-1280w.webp" type="image/webp">
             <!-- Fallback -->
-            <img loading="lazy" decoding="async" src="../images/footer_bg-1280w.webp" alt="code being edited"
+            <img loading="lazy" decoding="async" src="../../../images/footer_bg-1280w.webp" alt="code being edited"
                 width="1280" height="586">
         </picture>
     </footer>
 
     <!-- JavaScript -->
-    <script src="../js/main.js" defer></script>
-    <script src="../js/posts.js" defer></script>
+    <script src="../../../js/main.js" defer></script>
+    <script src="../../../js/posts.js" defer></script>
     <!-- Brevo Integration -->
     <script>
         document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
