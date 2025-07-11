@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+
+    <!-- Preconnect & DNS Prefetch for Performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>CSS Vendor Prefixes: Your Guide to Cross‑Browser Compatibility</title>
+    <meta name="description"
+        content="Learn how to use CSS vendor prefixes like -webkit-, -moz-, -ms-, and -o- to ensure your styles look perfect across all browsers. Discover when to add prefixes, automate with Autoprefixer, and keep your CSS lean.">
+    <meta name="author" content="Red Surge Technology">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/2025/july/css-vendor-prefixes-guide">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/2025/july/css-vendor-prefixes-guide">
+    <meta property="og:title" content="CSS Vendor Prefixes: Your Guide to Cross‑Browser Compatibility">
+    <meta property="og:description"
+        content="Master CSS vendor prefixes to bridge experimental features and standardized CSS—get practical tips, code examples, and automation advice for foolproof, cross‑browser styling.">
+    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Red Surge Technology">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/2025/july/css-vendor-prefixes-guide">
+    <meta name="twitter:title" content="CSS Vendor Prefixes: Your Guide to Cross‑Browser Compatibility">
+    <meta name="twitter:description"
+        content="Discover when and how to use CSS vendor prefixes, automate with Autoprefixer, and maintain clean stylesheets for perfect cross‑browser results.">
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#d90700">
+
+    <!-- Preload CSS (non‑blocking) -->
+    <link rel="preload" href="../../../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../../css/main.css">
+    </noscript>
+
+    <link rel="preload" href="../../../css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../../css/posts.css">
+    </noscript>
+
+    <!-- JSON‑LD: WebSite Schema -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://redsurgetechnology.com/",
+    "name": "Red Surge Technology Blog",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://redsurgetechnology.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+    <!-- JSON‑LD: BlogPosting Schema -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "CSS Vendor Prefixes: Your Guide to Cross‑Browser Compatibility",
+    "description": "Learn how to use CSS vendor prefixes like -webkit-, -moz-, -ms-, and -o- to ensure your styles look perfect across all browsers. Discover when to add prefixes, automate with Autoprefixer, and keep your CSS lean.",
+    "url": "https://redsurgetechnology.com/blog/2025/july/css-vendor-prefixes-guide",
+    "author": {
+      "@type": "Organization",
+      "name": "Red Surge Technology"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Red Surge Technology",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://redsurgetechnology.com/images/logo_black.png"
+      }
+    },
+    "datePublished": "2025-07-11",
+    "dateModified": "2025-07-11",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://redsurgetechnology.com/blog/2025/july/css-vendor-prefixes-guide"
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://redsurgetechnology.com/images/og-image.jpg",
+      "width": 1200,
+      "height": 630
+    }
+  }
+  </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="cs-navigation">
+        <div class="cs-top-bar">
+            <div class="cs-top-container">
+                <div class="cs-top-contact">
+                    <a href="tel:7324746841" class="cs-top-link">
+                        <img class="cs-link-icon" src="../../../images/phone-grey.svg" alt="grey phone icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Call us: (732) 474-6841
+                    </a>
+                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+                        <img class="cs-link-icon" src="../../../images/email-grey.svg" alt="grey email icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Email us: info@redsurgetechnology.com
+                    </a>
+                </div>
+                <div class="cs-top-social">
+                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
+                        target="_blank" aria-label="LinkedIn">
+                        <img class="cs-social-icon" src="../../../images/linkedin-grey.svg" alt="grey linkedin icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
+                        aria-label="Instagram">
+                        <img class="cs-social-icon" src="../../../images/insta-grey.svg" alt="grey instagram icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
+                        aria-label="Facebook">
+                        <img class="cs-social-icon" src="../../../images/face-grey.svg" alt="grey facebook icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!--Nav Logo-->
+            <a href="../../../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../../../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63"
+                    aria-hidden="true" decoding="async">
+            </a>
+            <!--Navigation List-->
+            <nav class="cs-nav" role="navigation">
+                <!--Mobile Nav Toggle-->
+                <button class="cs-toggle" aria-label="mobile menu toggle">
+                    <div class="cs-box" aria-hidden="true">
+                        <span class="cs-line cs-line1" aria-hidden="true"></span>
+                        <span class="cs-line cs-line2" aria-hidden="true"></span>
+                        <span class="cs-line cs-line3" aria-hidden="true"></span>
+                    </div>
+                </button>
+                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                <div class="cs-ul-wrapper">
+                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                        <li class="cs-li">
+                            <a href="../../../index.html" class="cs-li-link">
+                                Home
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../about.html" class="cs-li-link">
+                                About
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../portfolio.html" class="cs-li-link">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../blog.html" class="cs-li-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../contact.html" class="cs-li-link">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="../../../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+        <div class="cs-container">
+            <h1 class="cs-int-title">CSS Vendor Prefixes: Your Guide to Cross‑Browser Compatibility</h1>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../../../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../../../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../../../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
+        </picture>
+    </div>
+
+    <!-- Content -->
+    <section id="content-page-714">
+        <div class="main-img-container">
+            <picture>
+                <!-- Mobile (≤600px) -->
+                <source media="(max-width: 600px)" srcset="
+        ../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-360w.webp 360w,
+        ../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-720w.webp 720w,
+        ../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-1280w.webp 1280w
+    " sizes="(max-width: 600px) 360px" type="image/webp">
+
+                <!-- Tablet (601px–1024px) -->
+                <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
+        ../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-720w.webp 720w,
+        ../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-1280w.webp 1280w
+    " sizes="(max-width: 1024px) 720px" type="image/webp">
+
+                <!-- Desktop (≥1025px) -->
+                <source media="(min-width: 1025px)"
+                    srcset="../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-1280w.webp"
+                    sizes="1280px" type="image/webp">
+
+                <!-- Fallback image -->
+                <img fetchpriority="high" decoding="sync"
+                    src="../../../images/blog/css-vendor-prefixes-guide/CSS-Vendor-Prefixes-1280w.webp"
+                    alt="CSS Vendor Prefixes - Your Guide to Cross‑Browser Compatibility - Red Surge Technology"
+                    width="1280" height="720" aria-hidden="true">
+            </picture>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">What People Really Mean When
+                        They Talk About Vendor Prefixes</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">How Browser Engines Sparked the
+                        Prefix Craze</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">When to Use Vendor Prefixes (and
+                        When to Skip Them)</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Writing Clean, Prefixed CSS</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Automate with Autoprefixer and
+                        PostCSS</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Pruning Old Prefixes for Leaner
+                        Stylesheets</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Watching Features Graduate from
+                        Experimental to Standard</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Wrapping It All Up</a></li>
+            </ul>
+
+            <section>
+                <p>Ever <a href="./css-tricks-responsive-design.html">wrestled with your CSS</a> and thought: “Why does
+                    this look perfect in Chrome but completely off in
+                    Firefox?”</p>
+                <p>That quiet frustration? Yeah, it’s more common than you think. One minute, your animation glides like
+                    butter in Safari, and the next, it stutters or straight-up disappears in Edge. You tweak. You
+                    refresh. You Google. Eventually, you stumble across this strange little prefix:
+                    <code>-webkit-</code>. Then
+                    <code>-moz-</code>. Then more.
+                </p>
+
+                <p>Welcome to the world of CSS vendor prefixes—where browser engines speak slightly different dialects
+                    of the same language, and developers become part-time translators.</p>
+
+                <p>Let’s break it all down in plain English: what vendor prefixes are, why they exist, how to use them
+                    properly, and when to just let tools handle the mess for you.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-1">What People Really Mean When They Talk About Vendor Prefixes</h2>
+                <p>
+                    Vendor prefixes are like browser‑specific stickers you add to your CSS to say, “Hey, support this
+                    new feature—even if it’s not finalized yet.” They look a bit odd at first:
+                </p>
+                <pre><code>.my-box {
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  transform: scale(1.2);
+}</code></pre>
+                <p>
+                    Each browser engine—WebKit, Blink, Gecko, and the retired Trident—implements experimental CSS
+                    differently. Prefixes let vendors ship features early without committing forever to a syntax that
+                    might change.
+                </p>
+                <p>
+                    <em>Late‑night project confession:</em> I once hunted for hours to fix a card‑flip animation that
+                    froze in Firefox. One missing <code>-moz-transform</code> line—and suddenly everything clicked.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-2">How Browser Engines Sparked the Prefix Craze</h2>
+                <p>
+                    When new CSS features emerged—think gradients, transitions, transforms—vendors wanted to <a
+                        href="../../wcag-guidelines-checklist.html">test them
+                        without breaking the web</a> if specs shifted. Their answer was simple: prefix the property.
+                    That way,
+                    only browsers that opted in would honor the experimental rule.
+                </p>
+                <article>
+                    <h3>The Four Main Prefixes</h3>
+                    <p>
+                        <strong>-webkit-</strong> for Chrome, Safari, and modern Opera.<br>
+                        <strong>-moz-</strong> for Firefox.<br>
+                        <strong>-ms-</strong> for Internet Explorer and early Edge.<br>
+                        <strong>-o-</strong> for legacy Opera (Presto engine).
+                    </p>
+                    <p>
+                        Today, Opera uses Blink, so <code>-o-</code> is mostly for nostalgia or supporting very old
+                        browsers.
+                    </p>
+                </article>
+            </section>
+
+            <section>
+                <h2 id="h2-3">When to Use Vendor Prefixes (and When to Skip Them)</h2>
+                <p>
+                    Prefix everything or nothing? Neither. First, check real-world data on <a href="https://caniuse.com"
+                        target="_blank" rel="noopener">caniuse.com</a>. If a property needs a prefix in more than your
+                    threshold of browsers (for example, under 90% support), then add it. Otherwise, rely on the standard
+                    version.
+                </p>
+                <pre><code>.button {
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}</code></pre>
+                <p>
+                    Use <a href="https://github.com/browserslist/browserslist" target="_blank"
+                        rel="noopener">Browserslist</a> to define your support policy—like “last 2 versions” or “> 1% of
+                    global usage”—so you’re never guessing.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-4">Writing Clean, Prefixed CSS</h2>
+                <p>
+                    The pattern is straightforward: list prefixes first, then the standard rule last. That way, if a
+                    browser recognizes the unprefixed property, it will override the prefixed one.
+                </p>
+                <pre><code>.card {
+  -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  -moz-box-shadow:    0 4px 8px rgba(0,0,0,0.1);
+  box-shadow:         0 4px 8px rgba(0,0,0,0.1);
+  -webkit-transform: rotate(5deg);
+  -moz-transform:    rotate(5deg);
+  transform:         rotate(5deg);
+}</code></pre>
+                <p>
+                    Grouping related prefixes keeps your stylesheet tidy and easier to maintain—especially when a
+                    teammate (or your future self) comes back months later.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-5">Automate with Autoprefixer and PostCSS</h2>
+                <p>
+                    Why write prefixes by hand when you can let a tool handle it? <strong>Autoprefixer</strong>, a
+                    PostCSS plugin, reads your CSS, checks your Browserslist settings, and inserts only the prefixes you
+                    need.
+                </p>
+                <pre><code>npm install postcss autoprefixer --save-dev</code></pre>
+                <pre><code>// postcss.config.js
+module.exports = {
+  plugins: [
+    require('autoprefixer')
+  ]
+};</code></pre>
+                <p>
+                    And in <code>package.json</code>:
+                </p>
+                <pre><code>"browserslist": [
+  "last 2 versions",
+  "> 1%"
+]</code></pre>
+                <p>
+                    Now, whenever you build your CSS—whether via Webpack, Gulp, or a simple CLI tool—Autoprefixer
+                    quietly sprinkles in what’s necessary. No bloat. No guesswork.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-6">Pruning Old Prefixes for Leaner Stylesheets</h2>
+                <p>
+                    Browsers move fast, and so should your cleanup routine. Use tools like <a
+                        href="https://cssstats.com" target="_blank" rel="noopener">CSS Stats</a> to scan your
+                    stylesheets for outdated or unused prefixes. If <code>-o-</code> or an old <code>-ms-</code> rule
+                    hasn’t been triggered in over a year, consider removing it.
+                </p>
+                <p>
+                    A quarterly audit keeps your codebase from becoming a museum of deprecated hacks. And if you work
+                    with others, document your prefixing policy in your team style guide or README so everyone stays
+                    aligned.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-7">Watching Features Graduate from Experimental to Standard</h2>
+                <p>
+                    CSS features start as experimental—shipped behind prefixes—then graduate through Working Draft to
+                    Recommendation. Eventually, prefixes drop off as browser support matures.
+                </p>
+                <p>
+                    Remember flexbox? Early adopters used <code>-webkit-flex</code> and <code>-ms-flexbox</code>. Today,
+                    modern browsers support <code>display: flex;</code> without a second thought. Keeping an eye on W3C
+                    specs and browser release notes helps you know exactly when to drop old prefixes.
+                </p>
+            </section>
+
+            <section>
+                <h2 id="h2-8">Wrapping It All Up</h2>
+                <p>
+                    Vendor prefixes aren’t magic, but they’re essential for bridging the gap between experimental
+                    features and rock-solid cross‑browser compatibility. Understand their purpose, automate with
+                    Autoprefixer, and keep your stylesheets lean with regular audits. That way, your animations, grids,
+                    and effects will look great everywhere—without burning hours on manual fixes.
+                </p>
+                <p>
+                    Now go forth and prefix (or automate)—your users will thank you.
+                </p>
+                <p>If you enjoyed this article, check out our latest post on <a href="./forced-reflow-guide.html">forced
+                        reflow in JavaScript</a>. As always, if you have any questions or comments, feel free to <a
+                        href="../../../contact.html">contact us</a>.</p>
+            </section>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../../../images/footer-v.svg"
+            alt="logo" width="1920" height="163">
+        <!-- Subscribe Form -->
+        <div id="cta-1185">
+            <div class="cs-content">
+                <h2 class="cs-title">Stay in the Loop</h2>
+                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
+                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!-- Logo Group -->
+            <div class="cs-logo-group">
+                <a aria-label="go back to home" class="cs-logo" href="../../../index.html">
+                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        width="197" height="71">
+                </a>
+                <p class="cs-text">
+                    A professional website design and development company working with small businesses around the world
+                    to create a strong presence on the web.
+                </p>
+            </div>
+            <!-- Links -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Quick Links</span>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../index.html">Home</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../about.html">About</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../portfolio.html">Portfolio</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../contact.html">Contact</a>
+                </li>
+            </ul>
+            <!-- Contact Info -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Contact</span>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
+                    </a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-email"
+                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-address"
+                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener">
+                        Monmouth County<br> Wall Township, NJ 07753
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <div>
+                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
+                        Technology</a></p>
+            </div>
+            <div>
+                <a href="../../../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <span>|</span>
+                <a href="../../../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+            </div>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile -->
+            <source media="(max-width: 600px)" srcset="../../../images/footer_bg-360w.webp" type="image/webp">
+            <!-- Tablet -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/footer_bg-720w.webp"
+                type="image/webp">
+            <!-- Desktop -->
+            <source media="(min-width: 1025px)" srcset="../../../images/footer_bg-1280w.webp" type="image/webp">
+            <!-- Fallback -->
+            <img loading="lazy" decoding="async" src="../../../images/footer_bg-1280w.webp" alt="code being edited"
+                width="1280" height="586">
+        </picture>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../../js/main.js" defer></script>
+    <script src="../../../js/posts.js" defer></script>
+    <!-- Brevo Integration -->
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('cs-email-1185').value;
+
+            const data = {
+                email: email,
+                listIds: [11],
+                updateEnabled: true
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("Thanks for subscribing!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
