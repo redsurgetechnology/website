@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <!-- Critical CSS -->
+
+    <!-- Preconnect & DNS Prefetch for Performance -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+
+    <!-- Meta Data -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en-US">
+    <meta name="format-detection" content="telephone=no">
+
+    <!-- Primary Meta Tags -->
+    <title>JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage</title>
+    <meta name="description"
+        content="A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations.">
+    <meta name="author" content="Red Surge Technology">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide">
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide">
+    <meta property="og:title" content="JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage">
+    <meta property="og:description"
+        content="Master JavaScript HashMaps with this in-depth guide. Learn when to use objects, Map, or custom structures for storing key-value pairs, plus performance tips and coding best practices.">
+    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+    <meta property="og:site_name" content="Red Surge Technology">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide">
+    <meta name="twitter:title" content="JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage">
+    <meta name="twitter:description"
+        content="Discover everything about JavaScript HashMaps—how to create them, use them for key-value storage, optimize for performance, and apply in real-world projects.">
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
+
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../site.webmanifest">
+
+    <!-- Theme Color for Mobile Browsers -->
+    <meta name="theme-color" content="#d90700">
+
+    <!-- Preload CSS (non‑blocking) -->
+    <link rel="preload" href="../../../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../../css/main.css">
+    </noscript>
+
+    <link rel="preload" href="../../../css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="../../../css/posts.css">
+    </noscript>
+
+    <!-- JSON-LD: WebSite Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "url": "https://redsurgetechnology.com/",
+      "name": "Red Surge Technology Blog",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://redsurgetechnology.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <!-- JSON-LD: BlogPosting Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage",
+      "description": "A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations.",
+      "url": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide",
+      "author": {
+        "@type": "Organization",
+        "name": "Red Surge Technology"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Red Surge Technology",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/logo_black.png"
+        }
+      },
+      "datePublished": "2025-08-12",
+      "dateModified": "2025-08-12",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide"
+      },
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://redsurgetechnology.com/images/og-image.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header id="cs-navigation">
+        <div class="cs-top-bar">
+            <div class="cs-top-container">
+                <div class="cs-top-contact">
+                    <a href="tel:7324746841" class="cs-top-link">
+                        <img class="cs-link-icon" src="../../../images/phone-grey.svg" alt="grey phone icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Call us: (732) 474-6841
+                    </a>
+                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+                        <img class="cs-link-icon" src="../../../images/email-grey.svg" alt="grey email icon" width="16"
+                            height="16" aria-hidden="true" decoding="async">
+                        Email us: info@redsurgetechnology.com
+                    </a>
+                </div>
+                <div class="cs-top-social">
+                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
+                        target="_blank" aria-label="LinkedIn">
+                        <img class="cs-social-icon" src="../../../images/linkedin-grey.svg" alt="grey linkedin icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
+                        aria-label="Instagram">
+                        <img class="cs-social-icon" src="../../../images/insta-grey.svg" alt="grey instagram icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
+                        aria-label="Facebook">
+                        <img class="cs-social-icon" src="../../../images/face-grey.svg" alt="grey facebook icon"
+                            width="12" height="12" aria-hidden="true" decoding="async">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!--Nav Logo-->
+            <a href="../../../index.html" class="cs-logo" aria-label="back to home">
+                <img src="../../../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63"
+                    aria-hidden="true" decoding="async">
+            </a>
+            <!--Navigation List-->
+            <nav class="cs-nav" role="navigation">
+                <!--Mobile Nav Toggle-->
+                <button class="cs-toggle" aria-label="mobile menu toggle">
+                    <div class="cs-box" aria-hidden="true">
+                        <span class="cs-line cs-line1" aria-hidden="true"></span>
+                        <span class="cs-line cs-line2" aria-hidden="true"></span>
+                        <span class="cs-line cs-line3" aria-hidden="true"></span>
+                    </div>
+                </button>
+                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+                <div class="cs-ul-wrapper">
+                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+                        <li class="cs-li">
+                            <a href="../../../index.html" class="cs-li-link">
+                                Home
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../about.html" class="cs-li-link">
+                                About
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../portfolio.html" class="cs-li-link">
+                                Portfolio
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../blog.html" class="cs-li-link">
+                                Blog
+                            </a>
+                        </li>
+                        <li class="cs-li">
+                            <a href="../../../contact.html" class="cs-li-link">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <a href="../../../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+        <div class="cs-container">
+            <h1 class="cs-int-title">JavaScript HashMap Guide: From Basics to Real-World Applications</h1>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile (small phones) -->
+            <source media="(max-width: 600px)" srcset="../../../images/banner_bg_red-360w.webp" type="image/webp">
+            <!-- Tablet and small desktop -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/banner_bg_red-720w.webp"
+                type="image/webp">
+            <!-- Large desktop -->
+            <source media="(min-width: 1025px)" srcset="../../../images/banner_bg_red-1280w.webp" type="image/webp">
+            <!-- Fallback image -->
+            <img decoding="async" src="../../../images/banner_bg_red-1280w.webp" alt="red technology banner background"
+                width="1280" height="320" aria-hidden="true">
+        </picture>
+    </div>
+
+    <!-- Content -->
+    <section id="content-page-714">
+        <div class="main-img-container">
+            <picture>
+                <!-- Mobile (≤600px) -->
+                <source media="(max-width: 600px)" srcset="
+        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-360w.webp 360w,
+        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-720w.webp 720w,
+        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp 1280w
+    " sizes="(max-width: 600px) 360px" type="image/webp">
+
+                <!-- Tablet (601px–1024px) -->
+                <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
+        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-720w.webp 720w,
+        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp 1280w
+    " sizes="(max-width: 1024px) 720px" type="image/webp">
+
+                <!-- Desktop (≥1025px) -->
+                <source media="(min-width: 1025px)"
+                    srcset="../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp" sizes="1280px"
+                    type="image/webp">
+
+                <!-- Fallback image -->
+                <img fetchpriority="high" decoding="sync"
+                    src="../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-Guide-From-Basics-to-Real-World-Applications-Red-Surge-Technology.webp"
+                    alt="JavaScript HashMap Guide - From Basics to Real-World Applications - Red Surge Technology"
+                    width="1280" height="720" aria-hidden="true">
+            </picture>
+        </div>
+        <div>
+            <ul>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">What a HashMap Really Means in
+                        JavaScript</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">Understanding the ES6 Map and
+                        Why It Feels Like a HashMap</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Starting Your First JavaScript
+                        HashMap</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Adding, Getting, and Updating
+                        Your Data</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Finding and Removing Keys</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Looping Through Your HashMap</a>
+                </li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Choosing Between a Map and an
+                        Object</a></li>
+                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Final Thoughts on Mastering
+                        JavaScript HashMaps</a></li>
+            </ul>
+
+            <section>
+                <p>If you’ve ever sat down to build something in JavaScript—maybe a little to-do list app, maybe an
+                    entire analytics dashboard—you’ve probably needed a way to store and retrieve data quickly. And not
+                    just in a “loop through an array and hope it’s there” kind of way. You wanted something faster,
+                    cleaner, and more predictable.</p>
+                <p>That’s where the idea of a <strong>HashMap</strong> comes in. In other languages like Java or C#, a
+                    HashMap is a native data structure designed for lightning-fast lookups using a unique key.
+                    JavaScript doesn’t come with a literal <code>HashMap</code> type out of the box, but it does have
+                    two powerful tools that work in the same spirit: objects and the ES6 <code>Map</code> object.</p>
+                <p>The difference between using a plain object and using a Map might seem small at first—kind of like
+                    the difference between storing notes in a messy drawer versus using a labeled filing cabinet. But
+                    once you understand the subtle distinctions, it’s hard to go back.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-1">What a HashMap Really Means in JavaScript</h2>
+                <p>A HashMap is like a phonebook in your code. You have a name (key), you have a phone number (value),
+                    and you want to jump straight to the number without flipping through every page. That’s exactly what
+                    a HashMap does—turns the key into a quick address where the value is stored.</p>
+                <p>In JavaScript, we mimic this behavior with two main structures: objects and Maps. You can think of
+                    the <code>Map</code> object as a supercharged version of an object. It doesn’t come with inherited
+                    methods from <code>Object.prototype</code>, so you don’t risk accidentally overwriting built-in
+                    properties. It also remembers the order in which you add entries—something plain objects only
+                    started doing reliably in modern engines.</p>
+                <pre><code class="language-js">// Using a Map as a HashMap
+const userPreferences = new Map();
+userPreferences.set('theme', 'dark');
+userPreferences.set('notifications', true);
+
+console.log(userPreferences.get('theme')); // "dark"
+</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-2">Understanding the ES6 Map and Why It Feels Like a HashMap</h2>
+                <p>When <a
+                        href="https://blog.stackademic.com/unlocking-modern-javascript-a-comprehensive-guide-to-ecmascript-6-features-c165f7956720"
+                        target="_blank">ECMAScript 2015 (ES6)</a> arrived, it introduced the <code>Map</code> object.
+                    This was JavaScript’s
+                    first real answer to developers who needed a true key-value store that could handle more than just
+                    strings as keys.</p>
+                <p>With <code>Map</code>, you can even use objects or DOM elements as keys without converting them to
+                    strings.</p>
+                <pre><code class="language-js">const elementMap = new Map();
+const button = document.querySelector('#submit');
+
+elementMap.set(button, { clicked: false });
+console.log(elementMap.get(button)); // { clicked: false }
+</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-3">Starting Your First JavaScript HashMap</h2>
+                <p>Creating an empty Map is straightforward:</p>
+                <pre><code class="language-js">const myMap = new Map();
+</code></pre>
+                <p>You can also initialize a Map with data:</p>
+                <pre><code class="language-js">const myMap = new Map([
+  ['name', 'Alice'],
+  ['age', 30],
+  ['role', 'Developer']
+]);
+</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-4">Adding, Getting, and Updating Your Data</h2>
+                <p>Adding or updating entries in a Map uses <code>.set(key, value)</code>:</p>
+                <pre><code class="language-js">const settings = new Map();
+settings.set('language', 'English');
+settings.set('language', 'Spanish'); // updates existing key
+</code></pre>
+                <p>Retrieving values uses <code>.get(key)</code>:</p>
+                <pre><code class="language-js">console.log(settings.get('language')); // "Spanish"
+</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-5">Finding and Removing Keys</h2>
+                <p>Check if a key exists using <code>.has(key)</code>:</p>
+                <pre><code class="language-js">if (settings.has('language')) {
+  console.log('Language setting found.');
+}
+</code></pre>
+                <p>Remove a single entry with <code>.delete(key)</code>:</p>
+                <pre><code class="language-js">settings.delete('language');
+</code></pre>
+                <p>Clear the entire Map with <code>.clear()</code>:</p>
+                <pre><code class="language-js">settings.clear();
+</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-6">Looping Through Your HashMap</h2>
+                <p>Maps are iterable, so you can loop through them directly.</p>
+                <pre><code class="language-js">// Using forEach
+settings.forEach((value, key) =&gt; {
+  console.log(`${key}: ${value}`);
+});
+
+// Using for...of with entries
+for (let [key, value] of settings.entries()) {
+  console.log(key, value);
+}
+</code></pre>
+            </section>
+
+            <section>
+                <h2 id="h2-7">Choosing Between a Map and an Object</h2>
+                <p>Objects work well for fixed string keys and lightweight storage, especially for JSON. Maps are better
+                    when keys can be any type, when insertion order matters, or when performance is important for
+                    frequent changes.</p>
+                <p>In large applications, replacing objects with Maps for certain workloads can lead to significant
+                    performance improvements.</p>
+            </section>
+
+            <section>
+                <h2 id="h2-8">Final Thoughts on Mastering JavaScript HashMaps</h2>
+                <p>Using Maps as HashMaps in JavaScript can make your code more efficient and easier to manage. The key
+                    is knowing when to choose a Map over an object. For dynamic keys, frequent updates, and guaranteed
+                    order, Maps are the clear winner. For fixed configurations or JSON structures, objects still hold
+                    their ground.</p>
+                <p>Once you start working with Maps, you might find yourself wondering how you managed without them.</p>
+                <p>If you enjoyed this article, check out our latest post on <a href="./nginx-rtmp-guide.html">Nginx
+                        RTMP guide</a>. As always, if you have any questions or comments, feel free to <a
+                        href="../../../contact.html">contact us</a>.</p>
+            </section>
+
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../../../images/footer-v.svg"
+            alt="logo" width="1920" height="163">
+        <!-- Subscribe Form -->
+        <div id="cta-1185">
+            <div class="cs-content">
+                <h2 class="cs-title">Stay in the Loop</h2>
+                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
+                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+                </form>
+            </div>
+        </div>
+        <div class="cs-container">
+            <!-- Logo Group -->
+            <div class="cs-logo-group">
+                <a aria-label="go back to home" class="cs-logo" href="../../../index.html">
+                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
+                        width="197" height="71">
+                </a>
+                <p class="cs-text">
+                    A professional website design and development company working with small businesses around the world
+                    to create a strong presence on the web.
+                </p>
+            </div>
+            <!-- Links -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Quick Links</span>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../index.html">Home</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../about.html">About</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../portfolio.html">Portfolio</a>
+                </li>
+                <li class="cs-nav-li">
+                    <a class="cs-nav-link" href="../../../contact.html">Contact</a>
+                </li>
+            </ul>
+            <!-- Contact Info -->
+            <ul class="cs-nav">
+                <li class="cs-nav-li">
+                    <span class="cs-header">Contact</span>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
+                    </a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-email"
+                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+                </li>
+                <li class="cs-nav-li">
+                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
+                        src="../../../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
+                    <a class="cs-nav-link cs-address"
+                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+                        target="_blank" rel="noopener">
+                        Monmouth County<br> Wall Township, NJ 07753
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="cs-bottom">
+            <div>
+                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
+                        Technology</a></p>
+            </div>
+            <div>
+                <a href="../../../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+                <span>|</span>
+                <a href="../../../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+            </div>
+        </div>
+        <!--Background Image-->
+        <picture class="cs-background">
+            <!-- Mobile -->
+            <source media="(max-width: 600px)" srcset="../../../images/footer_bg-360w.webp" type="image/webp">
+            <!-- Tablet -->
+            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/footer_bg-720w.webp"
+                type="image/webp">
+            <!-- Desktop -->
+            <source media="(min-width: 1025px)" srcset="../../../images/footer_bg-1280w.webp" type="image/webp">
+            <!-- Fallback -->
+            <img loading="lazy" decoding="async" src="../../../images/footer_bg-1280w.webp" alt="code being edited"
+                width="1280" height="586">
+        </picture>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../../../js/main.js" defer></script>
+    <script src="../../../js/posts.js" defer></script>
+    <!-- Brevo Integration -->
+    <script>
+        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('cs-email-1185').value;
+
+            const data = {
+                email: email,
+                listIds: [11],
+                updateEnabled: true
+            };
+
+            try {
+                const response = await fetch('/.netlify/functions/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (response.ok) {
+                    alert("Thanks for subscribing!");
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred.");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
