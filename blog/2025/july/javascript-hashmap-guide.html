@@ -1,379 +1,1093 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
-
-<head>
+  <head>
     <!-- Critical CSS -->
-     <style>:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000}#cs-navigation:before{content:'';width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%)}#cs-navigation .cs-line3{bottom:0}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li-link{font-size:clamp(1rem,2.5vw,1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;text-align:center;width:100%;display:block}}@media only screen and (min-width:64rem){#cs-navigation .cs-toggle{display:none}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:'';width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem,1.3vw,1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em,5.5vw,3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:'';position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}}@media only screen and (min-width:0rem){#banner-712 .cs-background{display:block;z-index:-1}#banner-712 .cs-background img{object-fit:cover}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem,6.4vw,3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{padding:var(--sectionPadding);background-color:#fff;overflow:hidden;position:relative;z-index:1;max-width:80rem;margin:0 auto}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}}</style>
+    <style>
+      :root {
+        --primary: #d90700;
+        --primaryLight: #ff4d4d;
+        --secondary: #00d2d9;
+        --secondaryLight: #66e5e8;
+        --headerColor: #1a1a1a;
+        --bodyTextColor: #4e4b66;
+        --bodyTextColorWhite: #fafbfc;
+        --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+        --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
+        --bodyFontSize: 1rem;
+        --sectionPadding: clamp(3.75rem, 7.82vw, 4.25rem) 1rem;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      *,
+      :after,
+      :before {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @media only screen and (max-width: 1023px) {
+        #cs-navigation .cs-line1,
+        #cs-navigation .cs-line2 {
+          animation-duration: 0.7s;
+          animation-timing-function: ease;
+          animation-fill-mode: forwards;
+          animation-direction: normal;
+        }
+        #cs-navigation {
+          width: 100%;
+          box-sizing: border-box;
+          background-color: #fff;
+          box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+          position: fixed;
+          z-index: 10000;
+        }
+        #cs-navigation:before {
+          content: "";
+          width: 100%;
+          height: 0;
+          background: rgba(0, 0, 0, 0.6);
+          -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+          position: absolute;
+          display: block;
+          top: 100%;
+          right: 0;
+          z-index: -1100;
+          opacity: 0;
+        }
+        #cs-navigation .cs-top-bar {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #cs-navigation .cs-top-container {
+          width: 100%;
+          padding: 1rem 1.5rem;
+          box-sizing: border-box;
+          background-color: #f7f7f7;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+        }
+        #cs-navigation .cs-top-contact {
+          width: auto;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: clamp(1rem, 2vw, 1.5rem);
+        }
+        #cs-navigation .cs-top-link {
+          font-size: 0.875rem;
+          line-height: 1.5em;
+          text-decoration: none;
+          margin: 0;
+          color: var(--bodyTextColor);
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 0.5rem;
+          position: relative;
+        }
+        #cs-navigation .cs-button-solid,
+        #cs-navigation .cs-top-link:nth-of-type(2) {
+          display: none;
+        }
+        #cs-navigation .cs-link-icon {
+          width: 1rem;
+          height: auto;
+          display: block;
+        }
+        #cs-navigation .cs-top-social {
+          visibility: visible;
+          opacity: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        #cs-navigation .cs-social-link {
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+        }
+        #cs-navigation .cs-social-icon {
+          width: 1.25rem;
+          height: auto;
+          display: block;
+        }
+        #cs-navigation .cs-container {
+          width: 100%;
+          padding: 1.25rem 1rem;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          position: relative;
+        }
+        #cs-navigation .cs-logo {
+          width: auto;
+          height: 2.5rem;
+          margin: 0 auto 0 0;
+          padding: 0;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          order: 1;
+          z-index: 10;
+        }
+        #cs-navigation .cs-logo img {
+          width: 175px;
+          height: 70px;
+          object-fit: contain;
+        }
+        #cs-navigation .cs-nav {
+          order: 2;
+        }
+        #cs-navigation .cs-toggle {
+          width: 2.875rem;
+          height: 2.875rem;
+          margin: 0 0 0 auto;
+          background-color: var(--primary);
+          border: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #cs-navigation .cs-box {
+          width: clamp(1.5rem, 2vw, 1.75rem);
+          height: 1rem;
+          position: relative;
+        }
+        #cs-navigation .cs-line {
+          width: 100%;
+          height: 2px;
+          border-radius: 2px;
+          background-color: #fafbfc;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        #cs-navigation .cs-line1 {
+          top: 0;
+          transform-origin: center;
+        }
+        #cs-navigation .cs-line2 {
+          top: 50%;
+          transform: translateX(-50%) translateY(-50%);
+        }
+        #cs-navigation .cs-line3 {
+          bottom: 0;
+        }
+        #cs-navigation .cs-ul-wrapper {
+          width: 100%;
+          height: auto;
+          padding-bottom: 3rem;
+          opacity: 0;
+          background-color: #fff;
+          box-shadow: inset rgba(0, 0, 0, 0.2) 0 8px 24px;
+          overflow: hidden;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          z-index: -1;
+          transform: scaleY(0);
+          transform-origin: top;
+        }
+        #cs-navigation .cs-ul {
+          margin: 0;
+          padding: 3rem 0 0;
+          width: 100%;
+          height: auto;
+          max-height: 65vh;
+          overflow: scroll;
+          display: flex;
+          justify-content: flex-start;
+          flex-direction: column;
+          align-items: center;
+          gap: 1.25rem;
+        }
+        #cs-navigation .cs-li-link {
+          font-size: clamp(1rem, 2.5vw, 1.5rem);
+          line-height: 1.2em;
+          text-decoration: none;
+          margin: 0;
+          color: var(--headerColor);
+          display: inline-block;
+          position: relative;
+        }
+        #cs-navigation .cs-li {
+          list-style: none;
+          margin-right: 0;
+          transform: translateY(-4.375rem);
+          opacity: 0;
+          text-align: center;
+          width: 100%;
+          display: block;
+        }
+      }
+      @media only screen and (min-width: 64rem) {
+        #cs-navigation .cs-toggle {
+          display: none;
+        }
+        #cs-navigation {
+          width: 100%;
+          padding: 0;
+          box-sizing: border-box;
+          background-color: #fff;
+          box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+          position: fixed;
+          z-index: 10000;
+        }
+        #cs-navigation .cs-top-bar {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #cs-navigation .cs-top-container {
+          width: 100%;
+          max-width: 80rem;
+          padding: 1rem;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 3.125rem;
+          position: relative;
+          z-index: 1;
+        }
+        #cs-navigation .cs-top-container:before {
+          content: "";
+          width: 100vw;
+          height: 100%;
+          background: #f5f5f5;
+          opacity: 1;
+          position: absolute;
+          display: block;
+          top: 0;
+          left: 50%;
+          z-index: -1;
+          transform: translateX(-50%);
+        }
+        #cs-navigation .cs-top-contact {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 1.5rem;
+        }
+        #cs-navigation .cs-top-link {
+          font-size: 0.875rem;
+          line-height: 1.5em;
+          text-decoration: none;
+          margin: 0;
+          color: var(--bodyTextColor);
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 0.5rem;
+          position: relative;
+        }
+        #cs-navigation .cs-link-icon {
+          width: 1rem;
+          height: auto;
+          display: block;
+        }
+        #cs-navigation .cs-top-social {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+        }
+        #cs-navigation .cs-social-link {
+          text-decoration: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        #cs-navigation .cs-button-solid,
+        #cs-navigation .cs-li-link {
+          text-decoration: none;
+          position: relative;
+        }
+        #cs-navigation .cs-social-icon {
+          width: 1.25rem;
+          height: auto;
+          display: block;
+        }
+        #cs-navigation .cs-container {
+          width: 100%;
+          max-width: 80rem;
+          margin: auto;
+          padding: 0 1rem;
+          box-sizing: border-box;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 1.5rem;
+          position: relative;
+        }
+        #cs-navigation .cs-logo {
+          height: clamp(2.5rem, 4vw, 2.75rem);
+          margin: 0 auto 0 0;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 100;
+        }
+        #cs-navigation .cs-logo img {
+          width: 175px;
+          height: 70px;
+          object-fit: contain;
+        }
+        #cs-navigation .cs-ul {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 3rem;
+        }
+        #cs-navigation .cs-li {
+          list-style: none;
+          padding: 1.9375rem 0;
+          flex: none;
+        }
+        #cs-navigation .cs-li-link {
+          font-size: clamp(0.875rem, 1.3vw, 1rem);
+          line-height: 1.5em;
+          margin: 0;
+          color: var(--headerColor);
+          display: block;
+        }
+        #cs-navigation .cs-button-solid {
+          font-size: 1rem;
+          line-height: clamp(2.875em, 5.5vw, 3.5em);
+          font-weight: 700;
+          text-align: center;
+          margin: 0;
+          color: #fff;
+          padding: 0 2rem;
+          background-color: var(--primary);
+          overflow: hidden;
+          display: inline-block;
+          z-index: 1;
+          box-sizing: border-box;
+        }
+        #cs-navigation .cs-button-solid:before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 0%;
+          background: #1a1a1a;
+          opacity: 1;
+          top: 0;
+          left: 0;
+          z-index: -1;
+        }
+        #cs-navigation .cs-nav-button {
+          line-height: 2.875rem;
+          margin-left: 1.5rem;
+        }
+      }
+      @media only screen and (min-width: 0rem) {
+        #banner-712 .cs-background {
+          display: block;
+          z-index: -1;
+        }
+        #banner-712 .cs-background img {
+          object-fit: cover;
+        }
+        #banner-712 {
+          padding: clamp(12.9375rem, 12vw, 14rem) 1rem 5.25rem;
+          position: relative;
+          z-index: 1;
+        }
+        #banner-712 .cs-container {
+          text-align: center;
+          width: 100%;
+          max-width: 80rem;
+          margin: auto;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        #banner-712 .cs-int-title {
+          font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
+          font-weight: 900;
+          line-height: 1.2em;
+          text-align: inherit;
+          margin: 0;
+          color: var(--bodyTextColorWhite);
+          position: relative;
+        }
+        #banner-712 .cs-background,
+        #banner-712 .cs-background img,
+        #banner-712 .cs-background:before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+        }
+        #banner-712 .cs-background:before {
+          content: "";
+          display: block;
+          background: #000;
+          opacity: 0.75;
+          z-index: 1;
+        }
+        #content-page-714 {
+          padding: var(--sectionPadding);
+          background-color: #fff;
+          overflow: hidden;
+          position: relative;
+          z-index: 1;
+          max-width: 80rem;
+          margin: 0 auto;
+        }
+        #content-page-714 .main-img-container {
+          margin-bottom: 1.5rem;
+          width: 100%;
+        }
+        #content-page-714 .main-img-container img {
+          width: 100%;
+          height: auto;
+          margin: 1rem 0;
+          display: block;
+        }
+        #content-page-714 p {
+          font-size: var(--bodyFontSize);
+          line-height: 1.5em;
+          text-align: inherit;
+          width: 100%;
+          margin: 0 0 1rem;
+          color: var(--bodyTextColor);
+        }
+        #content-page-714 ul {
+          padding-left: 1.5rem;
+          margin: 0 0 2rem;
+          color: var(--bodyTextColor);
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        #content-page-714 ul li {
+          list-style: none;
+          color: inherit;
+          position: relative;
+        }
+        #content-page-714 ul li:before {
+          content: "";
+          width: 3px;
+          height: 3px;
+          background: currentColor;
+          opacity: 1;
+          border-radius: 50%;
+          position: absolute;
+          display: block;
+          top: 0.625rem;
+          left: -0.75rem;
+        }
+      }
+      @media only screen and (min-width: 48rem) {
+        #cs-navigation .cs-top-link:nth-of-type(2) {
+          display: flex;
+        }
+        #banner-712 .cs-background:before {
+          opacity: 1;
+          background: linear-gradient(
+            90.01deg,
+            rgba(0, 0, 0, 0.85) 16.86%,
+            rgba(0, 0, 0, 0) 100%
+          );
+        }
+      }
+    </style>
 
     <!-- Preconnect & DNS Prefetch for Performance -->
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link
+      rel="preconnect"
+      href="https://www.googletagmanager.com"
+      crossorigin
+    />
+    <link
+      rel="preconnect"
+      href="https://www.google-analytics.com"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
 
     <!-- Meta Data -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Language" content="en-US">
-    <meta name="format-detection" content="telephone=no">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
 
     <!-- Primary Meta Tags -->
-    <title>JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage</title>
-    <meta name="description"
-        content="A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations.">
-    <meta name="author" content="Red Surge Technology">
+    <title>
+      JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value
+      Storage
+    </title>
+    <meta
+      name="description"
+      content="A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations."
+    />
+    <meta name="author" content="Red Surge Technology" />
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide">
+    <link
+      rel="canonical"
+      href="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide"
+    />
 
     <!-- Robots -->
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide">
-    <meta property="og:title" content="JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage">
-    <meta property="og:description"
-        content="Master JavaScript HashMaps with this in-depth guide. Learn when to use objects, Map, or custom structures for storing key-value pairs, plus performance tips and coding best practices.">
-    <meta property="og:image" content="https://redsurgetechnology.com/images/og-image.jpg">
-    <meta property="og:site_name" content="Red Surge Technology">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide"
+    />
+    <meta
+      property="og:title"
+      content="JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage"
+    />
+    <meta
+      property="og:description"
+      content="Master JavaScript HashMaps with this in-depth guide. Learn when to use objects, Map, or custom structures for storing key-value pairs, plus performance tips and coding best practices."
+    />
+    <meta
+      property="og:image"
+      content="https://redsurgetechnology.com/images/og-image.jpg"
+    />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide">
-    <meta name="twitter:title" content="JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage">
-    <meta name="twitter:description"
-        content="Discover everything about JavaScript HashMaps—how to create them, use them for key-value storage, optimize for performance, and apply in real-world projects.">
-    <meta name="twitter:image" content="https://redsurgetechnology.com/images/og-image.jpg">
-
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide"
+    />
+    <meta
+      name="twitter:title"
+      content="JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage"
+    />
+    <meta
+      name="twitter:description"
+      content="Discover everything about JavaScript HashMaps—how to create them, use them for key-value storage, optimize for performance, and apply in real-world projects."
+    />
+    <meta
+      name="twitter:image"
+      content="https://redsurgetechnology.com/images/og-image.jpg"
+    />
 
     <!-- Favicon & Touch Icons -->
-    <link rel="icon" href="../../../favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="../../../images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../../../images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../../../images/favicon-16x16.png">
-    <link rel="manifest" href="../../../site.webmanifest">
+    <link rel="icon" href="../../../favicon.ico" type="image/x-icon" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../../images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../../images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../../images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="../../../site.webmanifest" />
 
     <!-- Theme Color for Mobile Browsers -->
-    <meta name="theme-color" content="#d90700">
+    <meta name="theme-color" content="#d90700" />
 
     <!-- Preload CSS (non‑blocking) -->
-    <link rel="preload" href="../../../css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link
+      rel="preload"
+      href="../../../css/main.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
     <noscript>
-        <link rel="stylesheet" href="../../../css/main.css">
+      <link rel="stylesheet" href="../../../css/main.css" />
     </noscript>
 
-    <link rel="preload" href="../../../css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link
+      rel="preload"
+      href="../../../css/posts.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
     <noscript>
-        <link rel="stylesheet" href="../../../css/posts.css">
+      <link rel="stylesheet" href="../../../css/posts.css" />
     </noscript>
 
     <!-- JSON-LD: WebSite Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://redsurgetechnology.com/",
-      "name": "Red Surge Technology Blog",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://redsurgetechnology.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://redsurgetechnology.com/",
+        "name": "Red Surge Technology Blog",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://redsurgetechnology.com/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
       }
-    }
     </script>
 
     <!-- JSON-LD: BlogPosting Schema -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": "JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage",
-      "description": "A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations.",
-      "url": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide",
-      "author": {
-        "@type": "Organization",
-        "name": "Red Surge Technology"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Red Surge Technology",
-        "logo": {
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage",
+        "description": "A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations.",
+        "url": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide",
+        "author": {
+          "@type": "Organization",
+          "name": "Red Surge Technology"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "datePublished": "2025-08-12",
+        "dateModified": "2025-08-12",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide"
+        },
+        "image": {
           "@type": "ImageObject",
-          "url": "https://redsurgetechnology.com/images/logo_black.png"
+          "url": "https://redsurgetechnology.com/images/og-image.jpg",
+          "width": 1200,
+          "height": 630
         }
-      },
-      "datePublished": "2025-08-12",
-      "dateModified": "2025-08-12",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide"
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "https://redsurgetechnology.com/images/og-image.jpg",
-        "width": 1200,
-        "height": 630
       }
-    }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- Header -->
     <header id="cs-navigation">
-        <div class="cs-top-bar">
-            <div class="cs-top-container">
-                <div class="cs-top-contact">
-                    <a href="tel:7324746841" class="cs-top-link">
-                        <img class="cs-link-icon" src="../../../images/phone-grey.svg" alt="grey phone icon" width="16"
-                            height="16" aria-hidden="true" decoding="async">
-                        Call us: (732) 474-6841
-                    </a>
-                    <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
-                        <img class="cs-link-icon" src="../../../images/email-grey.svg" alt="grey email icon" width="16"
-                            height="16" aria-hidden="true" decoding="async">
-                        Email us: info@redsurgetechnology.com
-                    </a>
-                </div>
-                <div class="cs-top-social">
-                    <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link"
-                        target="_blank" aria-label="LinkedIn">
-                        <img class="cs-social-icon" src="../../../images/linkedin-grey.svg" alt="grey linkedin icon"
-                            width="12" height="12" aria-hidden="true" decoding="async">
-                    </a>
-                    <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank"
-                        aria-label="Instagram">
-                        <img class="cs-social-icon" src="../../../images/insta-grey.svg" alt="grey instagram icon"
-                            width="12" height="12" aria-hidden="true" decoding="async">
-                    </a>
-                    <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank"
-                        aria-label="Facebook">
-                        <img class="cs-social-icon" src="../../../images/face-grey.svg" alt="grey facebook icon"
-                            width="12" height="12" aria-hidden="true" decoding="async">
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="cs-container">
-            <!--Nav Logo-->
-            <a href="../../../index.html" class="cs-logo" aria-label="back to home">
-                <img src="../../../images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63"
-                    aria-hidden="true" decoding="async">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img
+                class="cs-link-icon"
+                src="../../../images/phone-grey.svg"
+                alt="grey phone icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                decoding="async"
+              />
+              Call us: (732) 520-3386
             </a>
-            <!--Navigation List-->
-            <nav class="cs-nav" role="navigation">
-                <!--Mobile Nav Toggle-->
-                <button class="cs-toggle" aria-label="mobile menu toggle">
-                    <div class="cs-box" aria-hidden="true">
-                        <span class="cs-line cs-line1" aria-hidden="true"></span>
-                        <span class="cs-line cs-line2" aria-hidden="true"></span>
-                        <span class="cs-line cs-line3" aria-hidden="true"></span>
-                    </div>
-                </button>
-                <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
-                <div class="cs-ul-wrapper">
-                    <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
-                        <li class="cs-li">
-                            <a href="../../../index.html" class="cs-li-link">
-                                Home
-                            </a>
-                        </li>
-                        <li class="cs-li">
-                            <a href="../../../about.html" class="cs-li-link">
-                                About
-                            </a>
-                        </li>
-                        <li class="cs-li">
-                            <a href="../../../portfolio.html" class="cs-li-link">
-                                Portfolio
-                            </a>
-                        </li>
-                        <li class="cs-li">
-                            <a href="../../../blog.html" class="cs-li-link">
-                                Blog
-                            </a>
-                        </li>
-                        <li class="cs-li">
-                            <a href="../../../contact.html" class="cs-li-link">
-                                Contact
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <a href="../../../contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img
+                class="cs-link-icon"
+                src="../../../images/email-grey.svg"
+                alt="grey email icon"
+                width="16"
+                height="16"
+                aria-hidden="true"
+                decoding="async"
+              />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a
+              href="https://www.linkedin.com/company/red-surge-technology/"
+              class="cs-social-link"
+              target="_blank"
+              aria-label="LinkedIn"
+            >
+              <img
+                class="cs-social-icon"
+                src="../../../images/linkedin-grey.svg"
+                alt="grey linkedin icon"
+                width="12"
+                height="12"
+                aria-hidden="true"
+                decoding="async"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/redsurgetechnology/"
+              class="cs-social-link"
+              target="_blank"
+              aria-label="Instagram"
+            >
+              <img
+                class="cs-social-icon"
+                src="../../../images/insta-grey.svg"
+                alt="grey instagram icon"
+                width="12"
+                height="12"
+                aria-hidden="true"
+                decoding="async"
+              />
+            </a>
+            <a
+              href="https://www.facebook.com/redsurgetech"
+              class="cs-social-link"
+              target="_blank"
+              aria-label="Facebook"
+            >
+              <img
+                class="cs-social-icon"
+                src="../../../images/face-grey.svg"
+                alt="grey facebook icon"
+                width="12"
+                height="12"
+                aria-hidden="true"
+                decoding="async"
+              />
+            </a>
+          </div>
         </div>
+      </div>
+      <div class="cs-container">
+        <!--Nav Logo-->
+        <a href="../../../index.html" class="cs-logo" aria-label="back to home">
+          <img
+            src="../../../images/new_redsurgetech_logo.svg"
+            alt="logo"
+            width="175"
+            height="63"
+            aria-hidden="true"
+            decoding="async"
+          />
+        </a>
+        <!--Navigation List-->
+        <nav class="cs-nav" role="navigation">
+          <!--Mobile Nav Toggle-->
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li">
+                <a href="../../../index.html" class="cs-li-link"> Home </a>
+              </li>
+              <li class="cs-li">
+                <a href="../../../about.html" class="cs-li-link"> About </a>
+              </li>
+              <li class="cs-li">
+                <a href="../../../portfolio.html" class="cs-li-link">
+                  Portfolio
+                </a>
+              </li>
+              <li class="cs-li">
+                <a href="../../../blog.html" class="cs-li-link"> Blog </a>
+              </li>
+              <li class="cs-li">
+                <a href="../../../contact.html" class="cs-li-link"> Contact </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <a href="../../../contact.html" class="cs-button-solid cs-nav-button"
+          >Get in Touch</a
+        >
+      </div>
     </header>
 
     <!-- Banner -->
     <div id="banner-712">
-        <div class="cs-container">
-            <h1 class="cs-int-title">JavaScript HashMap Guide: From Basics to Real-World Applications</h1>
-        </div>
-        <!--Background Image-->
-        <picture class="cs-background">
-            <!-- Mobile (small phones) -->
-            <source media="(max-width: 600px)" srcset="../../../images/banner_bg_red-360w.webp" type="image/webp">
-            <!-- Tablet and small desktop -->
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/banner_bg_red-720w.webp"
-                type="image/webp">
-            <!-- Large desktop -->
-            <source media="(min-width: 1025px)" srcset="../../../images/banner_bg_red-1280w.webp" type="image/webp">
-            <!-- Fallback image -->
-            <img decoding="async" src="../../../images/banner_bg_red-1280w.webp" alt="red technology banner background"
-                width="1280" height="320" aria-hidden="true">
-        </picture>
+      <div class="cs-container">
+        <h1 class="cs-int-title">
+          JavaScript HashMap Guide: From Basics to Real-World Applications
+        </h1>
+      </div>
+      <!--Background Image-->
+      <picture class="cs-background">
+        <!-- Mobile (small phones) -->
+        <source
+          media="(max-width: 600px)"
+          srcset="../../../images/banner_bg_red-360w.webp"
+          type="image/webp"
+        />
+        <!-- Tablet and small desktop -->
+        <source
+          media="(min-width: 601px) and (max-width: 1024px)"
+          srcset="../../../images/banner_bg_red-720w.webp"
+          type="image/webp"
+        />
+        <!-- Large desktop -->
+        <source
+          media="(min-width: 1025px)"
+          srcset="../../../images/banner_bg_red-1280w.webp"
+          type="image/webp"
+        />
+        <!-- Fallback image -->
+        <img
+          decoding="async"
+          src="../../../images/banner_bg_red-1280w.webp"
+          alt="red technology banner background"
+          width="1280"
+          height="320"
+          aria-hidden="true"
+        />
+      </picture>
     </div>
 
     <!-- Content -->
     <section id="content-page-714">
-        <div class="main-img-container">
-            <picture>
-                <!-- Mobile (≤600px) -->
-                <source media="(max-width: 600px)" srcset="
-        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-360w.webp 360w,
-        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-720w.webp 720w,
-        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp 1280w
-    " sizes="(max-width: 600px) 360px" type="image/webp">
+      <div class="main-img-container">
+        <picture>
+          <!-- Mobile (≤600px) -->
+          <source
+            media="(max-width: 600px)"
+            srcset="
+              ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-360w.webp   360w,
+              ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-720w.webp   720w,
+              ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp 1280w
+            "
+            sizes="(max-width: 600px) 360px"
+            type="image/webp"
+          />
 
-                <!-- Tablet (601px–1024px) -->
-                <source media="(min-width: 601px) and (max-width: 1024px)" srcset="
-        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-720w.webp 720w,
-        ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp 1280w
-    " sizes="(max-width: 1024px) 720px" type="image/webp">
+          <!-- Tablet (601px–1024px) -->
+          <source
+            media="(min-width: 601px) and (max-width: 1024px)"
+            srcset="
+              ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-720w.webp   720w,
+              ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp 1280w
+            "
+            sizes="(max-width: 1024px) 720px"
+            type="image/webp"
+          />
 
-                <!-- Desktop (≥1025px) -->
-                <source media="(min-width: 1025px)"
-                    srcset="../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp" sizes="1280px"
-                    type="image/webp">
+          <!-- Desktop (≥1025px) -->
+          <source
+            media="(min-width: 1025px)"
+            srcset="
+              ../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-1280w.webp
+            "
+            sizes="1280px"
+            type="image/webp"
+          />
 
-                <!-- Fallback image -->
-                <img fetchpriority="high" decoding="sync"
-                    src="../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-Guide-From-Basics-to-Real-World-Applications-Red-Surge-Technology.webp"
-                    alt="JavaScript HashMap Guide - From Basics to Real-World Applications - Red Surge Technology"
-                    width="1280" height="720" aria-hidden="true">
-            </picture>
-        </div>
-        <div>
-            <ul>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;">What a HashMap Really Means in
-                        JavaScript</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;">Understanding the ES6 Map and
-                        Why It Feels Like a HashMap</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;">Starting Your First JavaScript
-                        HashMap</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;">Adding, Getting, and Updating
-                        Your Data</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;">Finding and Removing Keys</a>
-                </li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;">Looping Through Your HashMap</a>
-                </li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;">Choosing Between a Map and an
-                        Object</a></li>
-                <li><a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;">Final Thoughts on Mastering
-                        JavaScript HashMaps</a></li>
-            </ul>
+          <!-- Fallback image -->
+          <img
+            fetchpriority="high"
+            decoding="sync"
+            src="../../../images/blog/javascript-hashmap-guide/JavaScript-HashMap-Guide-From-Basics-to-Real-World-Applications-Red-Surge-Technology.webp"
+            alt="JavaScript HashMap Guide - From Basics to Real-World Applications - Red Surge Technology"
+            width="1280"
+            height="720"
+            aria-hidden="true"
+          />
+        </picture>
+      </div>
+      <div>
+        <ul>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;"
+              >What a HashMap Really Means in JavaScript</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;"
+              >Understanding the ES6 Map and Why It Feels Like a HashMap</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;"
+              >Starting Your First JavaScript HashMap</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;"
+              >Adding, Getting, and Updating Your Data</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;"
+              >Finding and Removing Keys</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;"
+              >Looping Through Your HashMap</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;"
+              >Choosing Between a Map and an Object</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;"
+              >Final Thoughts on Mastering JavaScript HashMaps</a
+            >
+          </li>
+        </ul>
 
-            <section>
-                <p>If you’ve ever sat down to build something in JavaScript—maybe a little to-do list app, maybe an
-                    entire analytics dashboard—you’ve probably needed a way to store and retrieve data quickly. And not
-                    just in a “loop through an array and hope it’s there” kind of way. You wanted something faster,
-                    cleaner, and more predictable.</p>
-                <p>That’s where the idea of a <strong>HashMap</strong> comes in. In other languages like Java or C#, a
-                    HashMap is a native data structure designed for lightning-fast lookups using a unique key.
-                    JavaScript doesn’t come with a literal <code>HashMap</code> type out of the box, but it does have
-                    two powerful tools that work in the same spirit: objects and the ES6 <code>Map</code> object.</p>
-                <p>The difference between using a plain object and using a Map might seem small at first—kind of like
-                    the difference between storing notes in a messy drawer versus using a labeled filing cabinet. But
-                    once you understand the subtle distinctions, it’s hard to go back.</p>
-            </section>
+        <section>
+          <p>
+            If you’ve ever sat down to build something in JavaScript—maybe a
+            little to-do list app, maybe an entire analytics dashboard—you’ve
+            probably needed a way to store and retrieve data quickly. And not
+            just in a “loop through an array and hope it’s there” kind of way.
+            You wanted something faster, cleaner, and more predictable.
+          </p>
+          <p>
+            That’s where the idea of a <strong>HashMap</strong> comes in. In
+            other languages like Java or C#, a HashMap is a native data
+            structure designed for lightning-fast lookups using a unique key.
+            JavaScript doesn’t come with a literal <code>HashMap</code> type out
+            of the box, but it does have two powerful tools that work in the
+            same spirit: objects and the ES6 <code>Map</code> object.
+          </p>
+          <p>
+            The difference between using a plain object and using a Map might
+            seem small at first—kind of like the difference between storing
+            notes in a messy drawer versus using a labeled filing cabinet. But
+            once you understand the subtle distinctions, it’s hard to go back.
+          </p>
+        </section>
 
-            <section>
-                <h2 id="h2-1">What a HashMap Really Means in JavaScript</h2>
-                <p>A HashMap is like a phonebook in your code. You have a name (key), you have a phone number (value),
-                    and you want to jump straight to the number without flipping through every page. That’s exactly what
-                    a HashMap does—turns the key into a quick address where the value is stored.</p>
-                <p>In JavaScript, we mimic this behavior with two main structures: objects and Maps. You can think of
-                    the <code>Map</code> object as a supercharged version of an object. It doesn’t come with inherited
-                    methods from <code>Object.prototype</code>, so you don’t risk accidentally overwriting built-in
-                    properties. It also remembers the order in which you add entries—something plain objects only
-                    started doing reliably in modern engines.</p>
-                <pre><code class="language-js">// Using a Map as a HashMap
+        <section>
+          <h2 id="h2-1">What a HashMap Really Means in JavaScript</h2>
+          <p>
+            A HashMap is like a phonebook in your code. You have a name (key),
+            you have a phone number (value), and you want to jump straight to
+            the number without flipping through every page. That’s exactly what
+            a HashMap does—turns the key into a quick address where the value is
+            stored.
+          </p>
+          <p>
+            In JavaScript, we mimic this behavior with two main structures:
+            objects and Maps. You can think of the <code>Map</code> object as a
+            supercharged version of an object. It doesn’t come with inherited
+            methods from <code>Object.prototype</code>, so you don’t risk
+            accidentally overwriting built-in properties. It also remembers the
+            order in which you add entries—something plain objects only started
+            doing reliably in modern engines.
+          </p>
+          <pre><code class="language-js">// Using a Map as a HashMap
 const userPreferences = new Map();
 userPreferences.set('theme', 'dark');
 userPreferences.set('notifications', true);
 
 console.log(userPreferences.get('theme')); // "dark"
 </code></pre>
-            </section>
+        </section>
 
-            <section>
-                <h2 id="h2-2">Understanding the ES6 Map and Why It Feels Like a HashMap</h2>
-                <p>When <a
-                        href="https://blog.stackademic.com/unlocking-modern-javascript-a-comprehensive-guide-to-ecmascript-6-features-c165f7956720"
-                        target="_blank">ECMAScript 2015 (ES6)</a> arrived, it introduced the <code>Map</code> object.
-                    This was JavaScript’s
-                    first real answer to developers who needed a true key-value store that could handle more than just
-                    strings as keys.</p>
-                <p>With <code>Map</code>, you can even use objects or DOM elements as keys without converting them to
-                    strings.</p>
-                <pre><code class="language-js">const elementMap = new Map();
+        <section>
+          <h2 id="h2-2">
+            Understanding the ES6 Map and Why It Feels Like a HashMap
+          </h2>
+          <p>
+            When
+            <a
+              href="https://blog.stackademic.com/unlocking-modern-javascript-a-comprehensive-guide-to-ecmascript-6-features-c165f7956720"
+              target="_blank"
+              >ECMAScript 2015 (ES6)</a
+            >
+            arrived, it introduced the <code>Map</code> object. This was
+            JavaScript’s first real answer to developers who needed a true
+            key-value store that could handle more than just strings as keys.
+          </p>
+          <p>
+            With <code>Map</code>, you can even use objects or DOM elements as
+            keys without converting them to strings.
+          </p>
+          <pre><code class="language-js">const elementMap = new Map();
 const button = document.querySelector('#submit');
 
 elementMap.set(button, { clicked: false });
 console.log(elementMap.get(button)); // { clicked: false }
 </code></pre>
-            </section>
+        </section>
 
-            <section>
-                <h2 id="h2-3">Starting Your First JavaScript HashMap</h2>
-                <p>Creating an empty Map is straightforward:</p>
-                <pre><code class="language-js">const myMap = new Map();
+        <section>
+          <h2 id="h2-3">Starting Your First JavaScript HashMap</h2>
+          <p>Creating an empty Map is straightforward:</p>
+          <pre><code class="language-js">const myMap = new Map();
 </code></pre>
-                <p>You can also initialize a Map with data:</p>
-                <pre><code class="language-js">const myMap = new Map([
+          <p>You can also initialize a Map with data:</p>
+          <pre><code class="language-js">const myMap = new Map([
   ['name', 'Alice'],
   ['age', 30],
   ['role', 'Developer']
 ]);
 </code></pre>
-            </section>
+        </section>
 
-            <section>
-                <h2 id="h2-4">Adding, Getting, and Updating Your Data</h2>
-                <p>Adding or updating entries in a Map uses <code>.set(key, value)</code>:</p>
-                <pre><code class="language-js">const settings = new Map();
+        <section>
+          <h2 id="h2-4">Adding, Getting, and Updating Your Data</h2>
+          <p>
+            Adding or updating entries in a Map uses
+            <code>.set(key, value)</code>:
+          </p>
+          <pre><code class="language-js">const settings = new Map();
 settings.set('language', 'English');
 settings.set('language', 'Spanish'); // updates existing key
 </code></pre>
-                <p>Retrieving values uses <code>.get(key)</code>:</p>
-                <pre><code class="language-js">console.log(settings.get('language')); // "Spanish"
+          <p>Retrieving values uses <code>.get(key)</code>:</p>
+          <pre><code class="language-js">console.log(settings.get('language')); // "Spanish"
 </code></pre>
-            </section>
+        </section>
 
-            <section>
-                <h2 id="h2-5">Finding and Removing Keys</h2>
-                <p>Check if a key exists using <code>.has(key)</code>:</p>
-                <pre><code class="language-js">if (settings.has('language')) {
+        <section>
+          <h2 id="h2-5">Finding and Removing Keys</h2>
+          <p>Check if a key exists using <code>.has(key)</code>:</p>
+          <pre><code class="language-js">if (settings.has('language')) {
   console.log('Language setting found.');
 }
 </code></pre>
-                <p>Remove a single entry with <code>.delete(key)</code>:</p>
-                <pre><code class="language-js">settings.delete('language');
+          <p>Remove a single entry with <code>.delete(key)</code>:</p>
+          <pre><code class="language-js">settings.delete('language');
 </code></pre>
-                <p>Clear the entire Map with <code>.clear()</code>:</p>
-                <pre><code class="language-js">settings.clear();
+          <p>Clear the entire Map with <code>.clear()</code>:</p>
+          <pre><code class="language-js">settings.clear();
 </code></pre>
-            </section>
+        </section>
 
-            <section>
-                <h2 id="h2-6">Looping Through Your HashMap</h2>
-                <p>Maps are iterable, so you can loop through them directly.</p>
-                <pre><code class="language-js">// Using forEach
+        <section>
+          <h2 id="h2-6">Looping Through Your HashMap</h2>
+          <p>Maps are iterable, so you can loop through them directly.</p>
+          <pre><code class="language-js">// Using forEach
 settings.forEach((value, key) =&gt; {
   console.log(`${key}: ${value}`);
 });
@@ -383,131 +1097,235 @@ for (let [key, value] of settings.entries()) {
   console.log(key, value);
 }
 </code></pre>
-            </section>
+        </section>
 
-            <section>
-                <h2 id="h2-7">Choosing Between a Map and an Object</h2>
-                <p>Objects work well for fixed string keys and lightweight storage, especially for JSON. Maps are better
-                    when keys can be any type, when insertion order matters, or when performance is important for
-                    frequent changes.</p>
-                <p>In large applications, replacing objects with Maps for certain workloads can lead to significant
-                    performance improvements.</p>
-            </section>
+        <section>
+          <h2 id="h2-7">Choosing Between a Map and an Object</h2>
+          <p>
+            Objects work well for fixed string keys and lightweight storage,
+            especially for JSON. Maps are better when keys can be any type, when
+            insertion order matters, or when performance is important for
+            frequent changes.
+          </p>
+          <p>
+            In large applications, replacing objects with Maps for certain
+            workloads can lead to significant performance improvements.
+          </p>
+        </section>
 
-            <section>
-                <h2 id="h2-8">Final Thoughts on Mastering JavaScript HashMaps</h2>
-                <p>Using Maps as HashMaps in JavaScript can make your code more efficient and easier to manage. The key
-                    is knowing when to choose a Map over an object. For dynamic keys, frequent updates, and guaranteed
-                    order, Maps are the clear winner. For fixed configurations or JSON structures, objects still hold
-                    their ground.</p>
-                <p>Once you start working with Maps, you might find yourself wondering how you managed without them.</p>
-                <p>If you enjoyed this article, check out our latest post on <a href="./nginx-rtmp-guide.html">Nginx
-                        RTMP guide</a>. As always, if you have any questions or comments, feel free to <a
-                        href="../../../contact.html">contact us</a>.</p>
-            </section>
-
-        </div>
+        <section>
+          <h2 id="h2-8">Final Thoughts on Mastering JavaScript HashMaps</h2>
+          <p>
+            Using Maps as HashMaps in JavaScript can make your code more
+            efficient and easier to manage. The key is knowing when to choose a
+            Map over an object. For dynamic keys, frequent updates, and
+            guaranteed order, Maps are the clear winner. For fixed
+            configurations or JSON structures, objects still hold their ground.
+          </p>
+          <p>
+            Once you start working with Maps, you might find yourself wondering
+            how you managed without them.
+          </p>
+          <p>
+            If you enjoyed this article, check out our latest post on
+            <a href="./nginx-rtmp-guide.html">Nginx RTMP guide</a>. As always,
+            if you have any questions or comments, feel free to
+            <a href="../../../contact.html">contact us</a>.
+          </p>
+        </section>
+      </div>
     </section>
-
 
     <!-- Footer -->
     <footer id="cs-footer-1185">
-        <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="../../../images/footer-v.svg"
-            alt="logo" width="1920" height="163">
-        <!-- Subscribe Form -->
-        <div id="cta-1185">
-            <div class="cs-content">
-                <h2 class="cs-title">Stay in the Loop</h2>
-                <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
-                    <label for="cs-email-1185" class="visually-hidden">Email Address</label>
-                    <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address">
-                    <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
-                </form>
-            </div>
+      <img
+        class="cs-graphic"
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
+        src="../../../images/footer-v.svg"
+        alt="logo"
+        width="1920"
+        height="163"
+      />
+      <!-- Subscribe Form -->
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form
+            class="cs-form"
+            name="Contact Form"
+            method="post"
+            id="subscribe-form"
+          >
+            <label for="cs-email-1185" class="visually-hidden"
+              >Email Address</label
+            >
+            <input
+              class="cs-input"
+              type="email"
+              id="cs-email-1185"
+              name="find-us"
+              placeholder="Email Address"
+            />
+            <button class="cs-button-solid cs-submit" type="submit">
+              Subscribe Now
+            </button>
+          </form>
         </div>
-        <div class="cs-container">
-            <!-- Logo Group -->
-            <div class="cs-logo-group">
-                <a aria-label="go back to home" class="cs-logo" href="../../../index.html">
-                    <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../../../images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo"
-                        width="197" height="71">
-                </a>
-                <p class="cs-text">
-                    A professional website design and development company working with small businesses around the world
-                    to create a strong presence on the web.
-                </p>
-            </div>
-            <!-- Links -->
-            <ul class="cs-nav">
-                <li class="cs-nav-li">
-                    <span class="cs-header">Quick Links</span>
-                </li>
-                <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../../../index.html">Home</a>
-                </li>
-                <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../../../about.html">About</a>
-                </li>
-                <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../../../portfolio.html">Portfolio</a>
-                </li>
-                <li class="cs-nav-li">
-                    <a class="cs-nav-link" href="../../../contact.html">Contact</a>
-                </li>
-            </ul>
-            <!-- Contact Info -->
-            <ul class="cs-nav">
-                <li class="cs-nav-li">
-                    <span class="cs-header">Contact</span>
-                </li>
-                <li class="cs-nav-li">
-                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../../../images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24">
-                    <a class="cs-nav-link cs-phone" href="tel:+17324746841">(732) 474-6841
-                    </a>
-                </li>
-                <li class="cs-nav-li">
-                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../../../images/email-stroke-footer.svg" alt="email icon white" width="24" height="24">
-                    <a class="cs-nav-link cs-email"
-                        href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
-                </li>
-                <li class="cs-nav-li">
-                    <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async"
-                        src="../../../images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24">
-                    <a class="cs-nav-link cs-address"
-                        href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
-                        target="_blank" rel="noopener">
-                        Monmouth County<br> Wall Township, NJ 07753
-                    </a>
-                </li>
-            </ul>
+      </div>
+      <div class="cs-container">
+        <!-- Logo Group -->
+        <div class="cs-logo-group">
+          <a
+            aria-label="go back to home"
+            class="cs-logo"
+            href="../../../index.html"
+          >
+            <img
+              class="cs-logo-img"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              src="../../../images/new_redsurgetech_logo_white.svg"
+              alt="red surge technology white logo"
+              width="197"
+              height="71"
+            />
+          </a>
+          <p class="cs-text">
+            A professional website design and development company working with
+            small businesses around the world to create a strong presence on the
+            web.
+          </p>
         </div>
-        <div class="cs-bottom">
-            <div>
-                <p>© Copyright 2025 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge
-                        Technology</a></p>
-            </div>
-            <div>
-                <a href="../../../privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
-                <span>|</span>
-                <a href="../../../terms-of-use.html" class="cs-nav-link">Terms of Use</a>
-            </div>
+        <!-- Links -->
+        <ul class="cs-nav">
+          <li class="cs-nav-li">
+            <span class="cs-header">Quick Links</span>
+          </li>
+          <li class="cs-nav-li">
+            <a class="cs-nav-link" href="../../../index.html">Home</a>
+          </li>
+          <li class="cs-nav-li">
+            <a class="cs-nav-link" href="../../../about.html">About</a>
+          </li>
+          <li class="cs-nav-li">
+            <a class="cs-nav-link" href="../../../portfolio.html">Portfolio</a>
+          </li>
+          <li class="cs-nav-li">
+            <a class="cs-nav-link" href="../../../contact.html">Contact</a>
+          </li>
+        </ul>
+        <!-- Contact Info -->
+        <ul class="cs-nav">
+          <li class="cs-nav-li">
+            <span class="cs-header">Contact</span>
+          </li>
+          <li class="cs-nav-li">
+            <img
+              class="cs-icon"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              src="../../../images/phone-stroke-footer.svg"
+              alt="phone icon white"
+              width="24"
+              height="24"
+            />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386"
+              >(732) 520-3386
+            </a>
+          </li>
+          <li class="cs-nav-li">
+            <img
+              class="cs-icon"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              src="../../../images/email-stroke-footer.svg"
+              alt="email icon white"
+              width="24"
+              height="24"
+            />
+            <a
+              class="cs-nav-link cs-email"
+              href="mailto:info@redsurgetechnology.com"
+              >info@redsurgetechnology.com</a
+            >
+          </li>
+          <li class="cs-nav-li">
+            <img
+              class="cs-icon"
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              src="../../../images/pin-stroke-footer.svg"
+              alt="pin icon white"
+              width="24"
+              height="24"
+            />
+            <a
+              class="cs-nav-link cs-address"
+              href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              rel="noopener"
+            >
+              Monmouth County<br />
+              Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>
+            © Copyright 2025 &mdash;
+            <a href="https://redsurgetechnology.com/" class="cs-nav-link"
+              >Red Surge Technology</a
+            >
+          </p>
         </div>
-        <!--Background Image-->
-        <picture class="cs-background">
-            <!-- Mobile -->
-            <source media="(max-width: 600px)" srcset="../../../images/footer_bg-360w.webp" type="image/webp">
-            <!-- Tablet -->
-            <source media="(min-width: 601px) and (max-width: 1024px)" srcset="../../../images/footer_bg-720w.webp"
-                type="image/webp">
-            <!-- Desktop -->
-            <source media="(min-width: 1025px)" srcset="../../../images/footer_bg-1280w.webp" type="image/webp">
-            <!-- Fallback -->
-            <img loading="lazy" decoding="async" src="../../../images/footer_bg-1280w.webp" alt="code being edited"
-                width="1280" height="586">
-        </picture>
+        <div>
+          <a href="../../../privacy-policy.html" class="cs-nav-link"
+            >Privacy Policy</a
+          >
+          <span>|</span>
+          <a href="../../../terms-of-use.html" class="cs-nav-link"
+            >Terms of Use</a
+          >
+        </div>
+      </div>
+      <!--Background Image-->
+      <picture class="cs-background">
+        <!-- Mobile -->
+        <source
+          media="(max-width: 600px)"
+          srcset="../../../images/footer_bg-360w.webp"
+          type="image/webp"
+        />
+        <!-- Tablet -->
+        <source
+          media="(min-width: 601px) and (max-width: 1024px)"
+          srcset="../../../images/footer_bg-720w.webp"
+          type="image/webp"
+        />
+        <!-- Desktop -->
+        <source
+          media="(min-width: 1025px)"
+          srcset="../../../images/footer_bg-1280w.webp"
+          type="image/webp"
+        />
+        <!-- Fallback -->
+        <img
+          loading="lazy"
+          decoding="async"
+          src="../../../images/footer_bg-1280w.webp"
+          alt="code being edited"
+          width="1280"
+          height="586"
+        />
+      </picture>
     </footer>
 
     <!-- JavaScript -->
@@ -515,37 +1333,37 @@ for (let [key, value] of settings.entries()) {
     <script src="../../../js/posts.js" defer></script>
     <!-- Brevo Integration -->
     <script>
-        document.getElementById('subscribe-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
+      document
+        .getElementById("subscribe-form")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
 
-            const email = document.getElementById('cs-email-1185').value;
+          const email = document.getElementById("cs-email-1185").value;
 
-            const data = {
-                email: email,
-                listIds: [11],
-                updateEnabled: true
-            };
+          const data = {
+            email: email,
+            listIds: [11],
+            updateEnabled: true,
+          };
 
-            try {
-                const response = await fetch('/.netlify/functions/subscribe', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                });
+          try {
+            const response = await fetch("/.netlify/functions/subscribe", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
 
-                if (response.ok) {
-                    alert("Thanks for subscribing!");
-                } else {
-                    const errorData = await response.json();
-                    alert("Error: " + errorData.message);
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert("An error occurred.");
+            if (response.ok) {
+              alert("Thanks for subscribing!");
+            } else {
+              const errorData = await response.json();
+              alert("Error: " + errorData.message);
             }
+          } catch (error) {
+            console.error("Error:", error);
+            alert("An error occurred.");
+          }
         });
     </script>
-
-</body>
-
+  </body>
 </html>
