@@ -130,11 +130,34 @@
       }
     </script>
 
+    <!-- Breadcrumbs Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://redsurgetechnology.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Ocean County NJ Web Design",
+            "item": "https://redsurgetechnology.com/ocean-county-nj/"
+          }
+        ]
+      }
+    </script>
+
     <!-- JSON-LD: ProfessionalService Organization -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
+        "@type": "LocalBusiness",
+        "@id": "https://redsurgetechnology.com/#business",
         "name": "Red Surge Technology",
         "url": "https://redsurgetechnology.com",
         "logo": "https://redsurgetechnology.com/images/logo_black.png",
@@ -713,6 +736,11 @@
           services throughout Ocean County, including Toms River, Brick
           Township, Lakewood, Jackson Township, Stafford Township, Point
           Pleasant, and surrounding Jersey Shore communities.
+        </p>
+        <br />
+        <p class="cs-text">
+          Looking for web design outside Ocean County? Explore our
+          <a href="/">Central New Jersey web design services</a>.
         </p>
       </div>
     </section>
