@@ -1,13 +1,13 @@
-.cs-text a {
-  color: inherit; /* stays black like paragraph */
-  text-decoration: none;
-  border-bottom: 2px solid var(--primary);
-  transition: all 0.25s ease;
+#red_section {
+  padding: 40px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background: var(--primary);
 }
 
-.cs-text a:hover {
-  color: var(--primary);
-  border-bottom-color: var(--primary);
+#red_section * {
+  color: white;
 }
 
 @media only screen and (max-width: 1023px) {
