@@ -19,6 +19,13 @@
   },
   "homepage": "https://github.com/redsurgetechnology/website#readme",
   "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^17.0.4",
     "node-fetch": "^3.3.2"
+  },
+  {
+  "scripts": {
+    "build": "node scripts/build.js"
   }
+}
 }
