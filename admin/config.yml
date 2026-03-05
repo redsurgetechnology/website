@@ -17,3 +17,9 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Cover Image", name: "cover_image", widget: "image" }
       - { label: "Body", name: "body", widget: "markdown" }
+      # SEO Fields
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Overrides the post title in browser tab and Google. Keep under 60 characters." }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Shows in Google search results. Keep under 160 characters." }
+      - { label: "OG Image", name: "og_image", widget: "image", required: false, hint: "Image shown when shared on social media. Ideally 1200x630px." }
+      - { label: "Canonical URL", name: "canonical", widget: "string", required: false, hint: "Only set this if the post exists elsewhere. Leave blank normally." }
+      - { label: "No Index", name: "no_index", widget: "boolean", default: false, hint: "Turn on to hide this post from Google." }

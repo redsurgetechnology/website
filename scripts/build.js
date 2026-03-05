@@ -35,43 +35,93 @@ posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
 // ─── Generate individual post pages ───────────────────────────────────────────
 function generatePostHTML(post) {
+  const seoTitle = post.seo_title || post.title;
+  const seoDescription = post.seo_description || post.excerpt || '';
+  const ogImage = post.og_image || post.cover_image || '/images/og-image.jpg';
+  const canonical = post.canonical || `https://redsurgetechnology.com/blog/${post.slug}`;
+  const robots = post.no_index ? 'noindex, nofollow' : 'index, follow';
+  const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://redsurgetechnology.com${ogImage}`;
+
   return `<!doctype html>
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>${post.title} | Red Surge Technology</title>
-    <meta name="description" content="${post.excerpt || ''}" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>${seoTitle} | Red Surge Technology</title>
+    <meta name="description" content="${seoDescription}" />
     <meta name="author" content="Red Surge Technology" />
-    <link rel="canonical" href="https://redsurgetechnology.com/blog/${post.slug}" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="${robots}" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="${canonical}" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://redsurgetechnology.com/blog/${post.slug}" />
-    <meta property="og:title" content="${post.title}" />
-    <meta property="og:description" content="${post.excerpt || ''}" />
-    <meta property="og:image" content="https://redsurgetechnology.com${post.cover_image || '/images/og-image.jpg'}" />
-    <meta name="theme-color" content="#d90700" />
+    <meta property="og:url" content="${canonical}" />
+    <meta property="og:title" content="${seoTitle}" />
+    <meta property="og:description" content="${seoDescription}" />
+    <meta property="og:image" content="${fullOgImage}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="${canonical}" />
+    <meta name="twitter:title" content="${seoTitle}" />
+    <meta name="twitter:description" content="${seoDescription}" />
+    <meta name="twitter:image" content="${fullOgImage}" />
+
+    <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/posts.css" />
 
+    <!-- JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
-      "headline": "${post.title}",
-      "description": "${post.excerpt || ''}",
-      "url": "https://redsurgetechnology.com/blog/${post.slug}",
+      "headline": "${seoTitle}",
+      "description": "${seoDescription}",
+      "url": "${canonical}",
       "datePublished": "${post.date}",
       "dateModified": "${post.date}",
-      "author": { "@type": "Organization", "name": "Red Surge Technology" },
+      "author": {
+        "@type": "Organization",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com"
+      },
       "publisher": {
         "@type": "Organization",
         "name": "Red Surge Technology",
-        "logo": { "@type": "ImageObject", "url": "https://redsurgetechnology.com/images/logo_black.png" }
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/logo_black.png"
+        }
       },
-      "image": { "@type": "ImageObject", "url": "https://redsurgetechnology.com${post.cover_image || '/images/og-image.jpg'}" }
+      "image": {
+        "@type": "ImageObject",
+        "url": "${fullOgImage}",
+        "width": 1200,
+        "height": 630
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "${canonical}"
+      }
     }
     </script>
   </head>
