@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/build.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,5 @@
     "gray-matter": "^4.0.3",
     "marked": "^17.0.4",
     "node-fetch": "^3.3.2"
-  },
-  {
-  "scripts": {
-    "build": "node scripts/build.js"
   }
-}
 }
