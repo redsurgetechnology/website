@@ -349,10 +349,10 @@ const cardGroupsHTML = rows.map(row => {
 const blogIndexPath = './blog.html';
 let blogHTML = fs.readFileSync(blogIndexPath, 'utf8');
 
-// Replace everything between the cs-container div in #blog-1144
+// Replace only between the CMS markers, leaving hardcoded posts untouched
 blogHTML = blogHTML.replace(
-  /(<div class="cs-container">)([\s\S]*?)(<\/div>\s*<\/section>)/,
-  `$1\n${cardGroupsHTML}\n      $3`
+  /<!-- CMS_POSTS_START -->[\s\S]*?<!-- CMS_POSTS_END -->/,
+  `<!-- CMS_POSTS_START -->\n${cardGroupsHTML}\n    <!-- CMS_POSTS_END -->`
 );
 
 fs.writeFileSync(blogIndexPath, blogHTML);
