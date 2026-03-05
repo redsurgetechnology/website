@@ -30,8 +30,12 @@ files.forEach(file => {
   });
 });
 
-// Sort by date descending
-posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+// Sort: featured posts first, then by date descending
+posts.sort((a, b) => {
+  if (a.featured && !b.featured) return -1;
+  if (!a.featured && b.featured) return 1;
+  return new Date(b.date) - new Date(a.date);
+});
 
 // ─── Generate individual post pages ───────────────────────────────────────────
 function generatePostHTML(post) {
@@ -41,6 +45,11 @@ function generatePostHTML(post) {
   const canonical = post.canonical || `https://redsurgetechnology.com/blog/${post.slug}`;
   const robots = post.no_index ? 'noindex, nofollow' : 'index, follow';
   const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://redsurgetechnology.com${ogImage}`;
+  const author = post.author_name || 'Red Surge Technology';
+  const authorType = post.author_name && post.author_name !== 'Red Surge Technology' ? 'Person' : 'Organization';
+  const lastModified = post.last_modified || post.date;
+  const tags = Array.isArray(post.tags) ? post.tags.join(', ') : (post.tags || '');
+  const publishedDate = new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
 
   return `<!doctype html>
 <html lang="en-US">
@@ -54,8 +63,9 @@ function generatePostHTML(post) {
     <!-- Primary Meta Tags -->
     <title>${seoTitle} | Red Surge Technology</title>
     <meta name="description" content="${seoDescription}" />
-    <meta name="author" content="Red Surge Technology" />
+    <meta name="author" content="${author}" />
     <meta name="robots" content="${robots}" />
+    ${tags ? `<meta name="keywords" content="${tags}" />` : ''}
 
     <!-- Canonical -->
     <link rel="canonical" href="${canonical}" />
@@ -69,6 +79,10 @@ function generatePostHTML(post) {
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="${new Date(post.date).toISOString()}" />
+    <meta property="article:modified_time" content="${new Date(lastModified).toISOString()}" />
+    ${post.category ? `<meta property="article:section" content="${post.category}" />` : ''}
+    ${tags ? `<meta property="article:tag" content="${tags}" />` : ''}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -89,7 +103,7 @@ function generatePostHTML(post) {
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/posts.css" />
 
-    <!-- JSON-LD -->
+    <!-- JSON-LD BlogPosting -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -97,16 +111,19 @@ function generatePostHTML(post) {
       "headline": "${seoTitle}",
       "description": "${seoDescription}",
       "url": "${canonical}",
-      "datePublished": "${post.date}",
-      "dateModified": "${post.date}",
+      "datePublished": "${new Date(post.date).toISOString()}",
+      "dateModified": "${new Date(lastModified).toISOString()}",
+      ${tags ? `"keywords": "${tags}",` : ''}
+      ${post.category ? `"articleSection": "${post.category}",` : ''}
+      ${post.reading_time ? `"timeRequired": "PT${post.reading_time}M",` : ''}
       "author": {
-        "@type": "Organization",
-        "name": "Red Surge Technology",
-        "url": "https://redsurgetechnology.com"
+        "@type": "${authorType}",
+        "name": "${author}"
       },
       "publisher": {
         "@type": "Organization",
         "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
         "logo": {
           "@type": "ImageObject",
           "url": "https://redsurgetechnology.com/images/logo_black.png"
@@ -199,7 +216,15 @@ function generatePostHTML(post) {
         <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title}" width="1280" height="720" />
       </div>` : ''}
       <div>
-        <span class="cs-date">${new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+        <!-- Post Meta -->
+        <div class="cs-post-meta">
+          <span class="cs-date">${publishedDate}</span>
+          ${post.category ? `<span class="cs-category">${post.category}</span>` : ''}
+          ${post.reading_time ? `<span class="cs-reading-time">${post.reading_time} min read</span>` : ''}
+          ${author ? `<span class="cs-author">By ${author}</span>` : ''}
+          ${post.last_modified ? `<span class="cs-last-modified">Updated: ${new Date(post.last_modified).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>` : ''}
+        </div>
+        ${tags ? `<div class="cs-tags">${post.tags.map(tag => `<span class="cs-tag">${tag}</span>`).join('')}</div>` : ''}
         ${post.content}
       </div>
     </section>
@@ -305,7 +330,6 @@ posts.forEach(post => {
 });
 
 // ─── Generate blog index cards ─────────────────────────────────────────────────
-// Group posts into rows of 3
 function chunkArray(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
@@ -318,12 +342,16 @@ const rows = chunkArray(posts, 3);
 
 const cardGroupsHTML = rows.map(row => {
   const items = row.map(post => `
-          <li class="cs-item">
+          <li class="cs-item${post.featured ? ' cs-featured' : ''}">
             <picture class="cs-picture" aria-hidden="true">
               <img decoding="async" src="${post.cover_image || '/images/og-image.jpg'}" alt="${post.title}" width="411" height="236" />
             </picture>
             <div class="cs-flex">
-              <span class="cs-date">${new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+              <div class="cs-meta">
+                <span class="cs-date">${new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                ${post.category ? `<span class="cs-category">${post.category}</span>` : ''}
+                ${post.reading_time ? `<span class="cs-reading-time">${post.reading_time} min read</span>` : ''}
+              </div>
               <h2 class="cs-h3">${post.title}</h2>
               <p class="cs-item-text">${post.excerpt || ''}</p>
               <a href="./blog/${post.slug}.html" class="cs-link">
@@ -333,7 +361,6 @@ const cardGroupsHTML = rows.map(row => {
             </div>
           </li>`).join('');
 
-  // Pad last row with hidden items to maintain grid layout
   const padding = row.length < 3
     ? Array(3 - row.length).fill(`<li class="cs-item" style="visibility:hidden"></li>`).join('')
     : '';
@@ -349,7 +376,6 @@ const cardGroupsHTML = rows.map(row => {
 const blogIndexPath = './blog.html';
 let blogHTML = fs.readFileSync(blogIndexPath, 'utf8');
 
-// Replace only between the CMS markers, leaving hardcoded posts untouched
 blogHTML = blogHTML.replace(
   /<!-- CMS_POSTS_START -->[\s\S]*?<!-- CMS_POSTS_END -->/,
   `<!-- CMS_POSTS_START -->\n${cardGroupsHTML}\n    <!-- CMS_POSTS_END -->`
