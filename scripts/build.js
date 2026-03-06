@@ -224,7 +224,7 @@ function generatePostHTML(post) {
           ${author ? `<span class="cs-author">By ${author}</span>` : ''}
           ${post.last_modified ? `<span class="cs-last-modified">Updated: ${new Date(post.last_modified).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>` : ''}
         </div>
-        ${tags ? `<div class="cs-tags">${post.tags.map(tag => `<span class="cs-tag">${tag}</span>`).join('')}</div>` : ''}
+        ${tags ? `<div class="cs-tags">${Array.isArray(post.tags) ? post.tags.map(tag => `<span class="cs-tag">${tag}</span>`).join('') : ''}</div>` : ''}
         ${post.content}
       </div>
     </section>
@@ -320,16 +320,28 @@ function generatePostHTML(post) {
 </html>`;
 }
 
-// ─── Generate post pages ───────────────────────────────────────────────────────
+// ─── Generate post pages (skip if handcrafted HTML already exists) ─────────────
 posts.forEach(post => {
+  // Posts with a custom_url point to existing handcrafted pages — skip generating
+  if (post.custom_url) {
+    console.log(`  ⏭️  Skipping ${post.slug} (has custom_url, using existing HTML)`);
+    return;
+  }
+
+  const outPath = `./blog/${post.slug}.html`;
+
+  if (fs.existsSync(outPath)) {
+    console.log(`  ⏭️  Skipping blog/${post.slug}.html (already exists)`);
+    return;
+  }
+
   const html = generatePostHTML(post);
-  const outDir = './blog';
-  fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(`${outDir}/${post.slug}.html`, html);
+  fs.mkdirSync('./blog', { recursive: true });
+  fs.writeFileSync(outPath, html);
   console.log(`  📄 Generated blog/${post.slug}.html`);
 });
 
-// ─── Generate blog index cards ─────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 function chunkArray(arr, size) {
   const chunks = [];
   for (let i = 0; i < arr.length; i += size) {
@@ -338,10 +350,10 @@ function chunkArray(arr, size) {
   return chunks;
 }
 
-const rows = chunkArray(posts, 3);
-
-const cardGroupsHTML = rows.map(row => {
-  const items = row.map(post => `
+function generateCardHTML(post) {
+  // Use custom_url if set (existing handcrafted posts), otherwise generate path
+  const postUrl = post.custom_url || `/blog/${post.slug}.html`;
+  return `
           <li class="cs-item${post.featured ? ' cs-featured' : ''}">
             <picture class="cs-picture" aria-hidden="true">
               <img decoding="async" src="${post.cover_image || '/images/og-image.jpg'}" alt="${post.title}" width="411" height="236" />
@@ -354,33 +366,86 @@ const cardGroupsHTML = rows.map(row => {
               </div>
               <h2 class="cs-h3">${post.title}</h2>
               <p class="cs-item-text">${post.excerpt || ''}</p>
-              <a href="./blog/${post.slug}.html" class="cs-link">
+              <a href="${postUrl}" class="cs-link">
                 Read More <span class="screen-reader-text">Details</span>
-                <img class="cs-arrow" loading="lazy" decoding="async" src="./images/event-chevron.svg" alt="chevron icon" width="20" height="20" aria-hidden="true" />
+                <img class="cs-arrow" loading="lazy" decoding="async" src="/images/event-chevron.svg" alt="chevron icon" width="20" height="20" aria-hidden="true" />
               </a>
             </div>
-          </li>`).join('');
+          </li>`;
+}
 
-  const padding = row.length < 3
-    ? Array(3 - row.length).fill(`<li class="cs-item" style="visibility:hidden"></li>`).join('')
-    : '';
-
-  return `
+function generateCardGroupsHTML(pagePosts) {
+  const rows = chunkArray(pagePosts, 3);
+  return rows.map(row => {
+    const items = row.map(generateCardHTML).join('');
+    const padding = row.length < 3
+      ? Array(3 - row.length).fill(`<li class="cs-item" style="visibility:hidden"></li>`).join('')
+      : '';
+    return `
         <ul class="cs-card-group">
           ${items}
           ${padding}
         </ul>`;
-}).join('');
+  }).join('');
+}
 
-// ─── Read and update blog.html ─────────────────────────────────────────────────
-const blogIndexPath = './blog.html';
-let blogHTML = fs.readFileSync(blogIndexPath, 'utf8');
+function generatePaginationHTML(currentPage, totalPages) {
+  if (totalPages <= 1) return '';
 
-blogHTML = blogHTML.replace(
-  /<!-- CMS_POSTS_START -->[\s\S]*?<!-- CMS_POSTS_END -->/,
-  `<!-- CMS_POSTS_START -->\n${cardGroupsHTML}\n    <!-- CMS_POSTS_END -->`
-);
+  let links = '';
+  for (let i = 1; i <= totalPages; i++) {
+    const href = i === 1 ? '/blog.html' : `/blog-page-${i}.html`;
+    const active = i === currentPage ? ' cs-active' : '';
+    links += `<a href="${href}" class="cs-pagination-link${active}">${i}</a>`;
+  }
 
-fs.writeFileSync(blogIndexPath, blogHTML);
+  const prevHref = currentPage > 1
+    ? (currentPage === 2 ? '/blog.html' : `/blog-page-${currentPage - 1}.html`)
+    : null;
+  const nextHref = currentPage < totalPages
+    ? `/blog-page-${currentPage + 1}.html`
+    : null;
 
-console.log(`✅ Built ${posts.length} post(s) and updated blog.html`);
+  return `
+    <div class="cs-pagination">
+      ${prevHref ? `<a href="${prevHref}" class="cs-pagination-link cs-prev">← Prev</a>` : ''}
+      ${links}
+      ${nextHref ? `<a href="${nextHref}" class="cs-pagination-link cs-next">Next →</a>` : ''}
+    </div>`;
+}
+
+// ─── Generate paginated blog index pages ──────────────────────────────────────
+const POSTS_PER_PAGE = 9;
+const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+
+// Read blog.html once as the base template for all pages
+const blogTemplatePath = './blog.html';
+const blogTemplate = fs.readFileSync(blogTemplatePath, 'utf8');
+
+for (let page = 1; page <= totalPages; page++) {
+  const pagePosts = posts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
+  const cardGroupsHTML = generateCardGroupsHTML(pagePosts);
+  const paginationHTML = generatePaginationHTML(page, totalPages);
+  const fullHTML = `${cardGroupsHTML}\n${paginationHTML}`;
+
+  let pageHTML = blogTemplate.replace(
+    /<!-- CMS_POSTS_START -->[\s\S]*?<!-- CMS_POSTS_END -->/,
+    `<!-- CMS_POSTS_START -->\n${fullHTML}\n    <!-- CMS_POSTS_END -->`
+  );
+
+  if (page === 1) {
+    // Page 1 writes back to blog.html
+    fs.writeFileSync(blogTemplatePath, pageHTML);
+    console.log(`  📄 Updated blog.html (page 1 of ${totalPages})`);
+  } else {
+    // Subsequent pages get their own file with updated canonical
+    pageHTML = pageHTML.replace(
+      `<link rel="canonical" href="https://redsurgetechnology.com/blog" />`,
+      `<link rel="canonical" href="https://redsurgetechnology.com/blog-page-${page}" />`
+    );
+    fs.writeFileSync(`./blog-page-${page}.html`, pageHTML);
+    console.log(`  📄 Generated blog-page-${page}.html`);
+  }
+}
+
+console.log(`✅ Built ${posts.length} post(s) across ${totalPages} page(s)`);
