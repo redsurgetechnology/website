@@ -5,7 +5,7 @@ excerpt: Learn how businesses in Ocean and Monmouth County NJ can rank higher on
   Google with these practical local SEO steps — from Google Business Profile to
   local backlinks.
 cover_image: /images/blog/uploads/local-seo-guide-monnmouth-ocean-county.webp
-seo_title: Local SEO Guide for Ocean & Monmouth County NJ | Red Surge Technology
+seo_title: Local SEO Guide for Ocean & Monmouth County NJ
 seo_description: Want your NJ business to rank on Google? This local SEO guide
   for Ocean & Monmouth County covers Google Business Profile, citations, local
   content, and more.
