@@ -54,7 +54,7 @@ collections:
       - label: "Author Name [HIGH IMPACT]"
         name: "author_name"
         widget: "string"
-        default: "Red Surge Technology"
+        default: "Collin Stewart"
         required: false
         hint: "🔴 HIGH IMPACT — Google's E-E-A-T system rewards named, credible authors. Use a real person's name where possible e.g. 'John Smith'. Defaults to Red Surge Technology."
 
