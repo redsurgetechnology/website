@@ -48,8 +48,226 @@ function generatePostHTML(post) {
   const author = post.author_name || 'Red Surge Technology';
   const authorType = post.author_name && post.author_name !== 'Red Surge Technology' ? 'Person' : 'Organization';
   const lastModified = post.last_modified || post.date;
-  const tags = Array.isArray(post.tags) ? post.tags.join(', ') : (post.tags || '');
+  const tags = Array.isArray(post.tags) ? post.tags : (post.tags ? [post.tags] : []);
+  const tagsString = tags.join(', ');
   const publishedDate = new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+  const lastModifiedDate = new Date(lastModified).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+
+  // ── Rich post meta bar HTML ──────────────────────────────────────────────────
+  // Each item uses an inline SVG icon, semantic time/span elements, and
+  // microdata attributes so crawlers can read structured data directly from the DOM.
+  const metaBar = `
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="${seoTitle}" />
+          <meta itemprop="description" content="${seoDescription}" />
+          <meta itemprop="url" content="${canonical}" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="${new Date(post.date).toISOString()}">${publishedDate}</time>
+          </div>
+
+          ${post.last_modified ? `
+          <!-- Last updated -->
+          <div class="cs-meta-item cs-meta-updated" title="Last updated">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Updated: <time itemprop="dateModified" datetime="${new Date(lastModified).toISOString()}">${lastModifiedDate}</time></span>
+          </div>` : `<meta itemprop="dateModified" content="${new Date(lastModified).toISOString()}" />`}
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/${authorType}" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">${author}</span>
+          </div>
+
+          ${post.reading_time ? `
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT${post.reading_time}M" />${post.reading_time} min read</span>
+          </div>` : ''}
+
+          ${post.category ? `
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">${post.category}</span>
+          </div>` : ''}
+        </div>
+
+        <!-- Tags -->
+        ${tags.length > 0 ? `
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          ${tags.map(tag => `<span class="cs-tag" itemprop="keywords">${tag}</span>`).join('')}
+        </div>` : ''}`;
+
+  // ── Full LocalBusiness + BlogPosting combined JSON-LD ───────────────────────
+  const jsonLd = `
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "${seoTitle}",
+        "description": "${seoDescription}",
+        "url": "${canonical}",
+        "datePublished": "${new Date(post.date).toISOString()}",
+        "dateModified": "${new Date(lastModified).toISOString()}",
+        ${tagsString ? `"keywords": "${tagsString}",` : ''}
+        ${post.category ? `"articleSection": "${post.category}",` : ''}
+        ${post.reading_time ? `"timeRequired": "PT${post.reading_time}M",` : ''}
+        "author": {
+          "@type": "${authorType}",
+          "name": "${author}"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "${fullOgImage}",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "${canonical}"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "County", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "County", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>`;
+
+  // ── Breadcrumb JSON-LD ───────────────────────────────────────────────────────
+  const breadcrumbJsonLd = `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "${post.title}",
+          "item": "${canonical}"
+        }
+      ]
+    }
+    </script>`;
+
+  // ── FAQ JSON-LD (if post content contains an FAQ section) ───────────────────
+  // Looks for ## Frequently Asked Questions followed by ### Q / paragraph A pairs
+  function extractFaqJsonLd(htmlContent, rawMarkdown) {
+    const faqRegex = /#{2,3}\s+Frequently Asked Questions[\s\S]*?(?=\n#{1,2}\s|\s*$)/i;
+    const faqBlock = rawMarkdown.match(faqRegex);
+    if (!faqBlock) return '';
+    const qaPairs = [];
+    const qaRegex = /#{3,4}\s+(.+?)\n+([\s\S]+?)(?=\n#{3,4}|\s*$)/g;
+    let match;
+    while ((match = qaRegex.exec(faqBlock[0])) !== null) {
+      qaPairs.push({ q: match[1].trim(), a: match[2].trim().replace(/\n+/g, ' ') });
+    }
+    if (qaPairs.length === 0) return '';
+    return `
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        ${qaPairs.map(pair => `{
+          "@type": "Question",
+          "name": "${pair.q.replace(/"/g, '\\"')}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${pair.a.replace(/"/g, '\\"')}"
+          }
+        }`).join(',\n        ')}
+      ]
+    }
+    <\/script>`;
+  }
+
+  // ── Breadcrumb HTML (visible on page) ───────────────────────────────────────
+  const breadcrumbHTML = `
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/index.html" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog.html" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          ${post.title}
+        </li>
+      </ol>
+    </nav>`;
 
   return `<!doctype html>
 <html lang="en-US">
@@ -65,7 +283,7 @@ function generatePostHTML(post) {
     <meta name="description" content="${seoDescription}" />
     <meta name="author" content="${author}" />
     <meta name="robots" content="${robots}" />
-    ${tags ? `<meta name="keywords" content="${tags}" />` : ''}
+    ${tagsString ? `<meta name="keywords" content="${tagsString}" />` : ''}
 
     <!-- Canonical -->
     <link rel="canonical" href="${canonical}" />
@@ -82,7 +300,8 @@ function generatePostHTML(post) {
     <meta property="article:published_time" content="${new Date(post.date).toISOString()}" />
     <meta property="article:modified_time" content="${new Date(lastModified).toISOString()}" />
     ${post.category ? `<meta property="article:section" content="${post.category}" />` : ''}
-    ${tags ? `<meta property="article:tag" content="${tags}" />` : ''}
+    ${tagsString ? `<meta property="article:tag" content="${tagsString}" />` : ''}
+    ${tagsString ? tags.map(t => `<meta property="article:tag" content="${t}" />`).join('\n    ') : ''}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -103,44 +322,11 @@ function generatePostHTML(post) {
     <link rel="stylesheet" href="/css/main.css" />
     <link rel="stylesheet" href="/css/posts.css" />
 
-    <!-- JSON-LD BlogPosting -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": "${seoTitle}",
-      "description": "${seoDescription}",
-      "url": "${canonical}",
-      "datePublished": "${new Date(post.date).toISOString()}",
-      "dateModified": "${new Date(lastModified).toISOString()}",
-      ${tags ? `"keywords": "${tags}",` : ''}
-      ${post.category ? `"articleSection": "${post.category}",` : ''}
-      ${post.reading_time ? `"timeRequired": "PT${post.reading_time}M",` : ''}
-      "author": {
-        "@type": "${authorType}",
-        "name": "${author}"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Red Surge Technology",
-        "url": "https://redsurgetechnology.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://redsurgetechnology.com/images/logo_black.png"
-        }
-      },
-      "image": {
-        "@type": "ImageObject",
-        "url": "${fullOgImage}",
-        "width": 1200,
-        "height": 630
-      },
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "${canonical}"
-      }
-    }
-    </script>
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    ${jsonLd}
+
+    <!-- JSON-LD: Breadcrumb -->
+    ${breadcrumbJsonLd}
   </head>
   <body>
     <!-- Header -->
@@ -162,7 +348,7 @@ function generatePostHTML(post) {
               <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
             <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
-              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
             <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
               <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
@@ -209,22 +395,17 @@ function generatePostHTML(post) {
       </picture>
     </div>
 
+    <!-- Breadcrumb -->
+    ${breadcrumbHTML}
+
     <!-- Content -->
     <section id="content-page-714">
       ${post.cover_image ? `
       <div class="main-img-container">
-        <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title}" width="1280" height="720" />
+        <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title} - Red Surge Technology Blog" width="1280" height="720" />
       </div>` : ''}
       <div>
-        <!-- Post Meta -->
-        <div class="cs-post-meta">
-          <span class="cs-date">${publishedDate}</span>
-          ${post.category ? `<span class="cs-category">${post.category}</span>` : ''}
-          ${post.reading_time ? `<span class="cs-reading-time">${post.reading_time} min read</span>` : ''}
-          ${author ? `<span class="cs-author">By ${author}</span>` : ''}
-          ${post.last_modified ? `<span class="cs-last-modified">Updated: ${new Date(post.last_modified).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>` : ''}
-        </div>
-        ${tags ? `<div class="cs-tags">${Array.isArray(post.tags) ? post.tags.map(tag => `<span class="cs-tag">${tag}</span>`).join('') : ''}</div>` : ''}
+        ${metaBar}
         ${post.content}
       </div>
     </section>
@@ -322,7 +503,6 @@ function generatePostHTML(post) {
 
 // ─── Generate post pages (skip if handcrafted HTML already exists) ─────────────
 posts.forEach(post => {
-  // Posts with a custom_url point to existing handcrafted pages — skip generating
   if (post.custom_url) {
     console.log(`  ⏭️  Skipping ${post.slug} (has custom_url, using existing HTML)`);
     return;
@@ -351,8 +531,8 @@ function chunkArray(arr, size) {
 }
 
 function generateCardHTML(post) {
-  // Use custom_url if set (existing handcrafted posts), otherwise generate path
   const postUrl = post.custom_url || `/blog/${post.slug}.html`;
+  const tags = Array.isArray(post.tags) ? post.tags : (post.tags ? [post.tags] : []);
   return `
           <li class="cs-item${post.featured ? ' cs-featured' : ''}">
             <picture class="cs-picture" aria-hidden="true">
@@ -360,14 +540,21 @@ function generateCardHTML(post) {
             </picture>
             <div class="cs-flex">
               <div class="cs-meta">
-                <span class="cs-date">${new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                <span class="cs-date">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  <time datetime="${new Date(post.date).toISOString()}">${new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</time>
+                </span>
                 ${post.category ? `<span class="cs-category">${post.category}</span>` : ''}
-                ${post.reading_time ? `<span class="cs-reading-time">${post.reading_time} min read</span>` : ''}
+                ${post.reading_time ? `<span class="cs-reading-time">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="13" height="13"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  ${post.reading_time} min read
+                </span>` : ''}
               </div>
               <h2 class="cs-h3">${post.title}</h2>
               <p class="cs-item-text">${post.excerpt || ''}</p>
+              ${tags.length > 0 ? `<div class="cs-card-tags">${tags.slice(0, 3).map(tag => `<span class="cs-tag">${tag}</span>`).join('')}</div>` : ''}
               <a href="${postUrl}" class="cs-link">
-                Read More <span class="screen-reader-text">Details</span>
+                Read More <span class="screen-reader-text">about ${post.title}</span>
                 <img class="cs-arrow" loading="lazy" decoding="async" src="/images/event-chevron.svg" alt="chevron icon" width="20" height="20" aria-hidden="true" />
               </a>
             </div>
@@ -396,7 +583,7 @@ function generatePaginationHTML(currentPage, totalPages) {
   for (let i = 1; i <= totalPages; i++) {
     const href = i === 1 ? '/blog.html' : `/blog-page-${i}.html`;
     const active = i === currentPage ? ' cs-active' : '';
-    links += `<a href="${href}" class="cs-pagination-link${active}">${i}</a>`;
+    links += `<a href="${href}" class="cs-pagination-link${active}" aria-label="Page ${i}">${i}</a>`;
   }
 
   const prevHref = currentPage > 1
@@ -407,18 +594,17 @@ function generatePaginationHTML(currentPage, totalPages) {
     : null;
 
   return `
-    <div class="cs-pagination">
-      ${prevHref ? `<a href="${prevHref}" class="cs-pagination-link cs-prev">← Prev</a>` : ''}
+    <nav class="cs-pagination" aria-label="Blog pagination">
+      ${prevHref ? `<a href="${prevHref}" class="cs-pagination-link cs-prev" aria-label="Previous page">← Prev</a>` : ''}
       ${links}
-      ${nextHref ? `<a href="${nextHref}" class="cs-pagination-link cs-next">Next →</a>` : ''}
-    </div>`;
+      ${nextHref ? `<a href="${nextHref}" class="cs-pagination-link cs-next" aria-label="Next page">Next →</a>` : ''}
+    </nav>`;
 }
 
 // ─── Generate paginated blog index pages ──────────────────────────────────────
 const POSTS_PER_PAGE = 9;
 const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 
-// Read blog.html once as the base template for all pages
 const blogTemplatePath = './blog.html';
 const blogTemplate = fs.readFileSync(blogTemplatePath, 'utf8');
 
@@ -434,11 +620,9 @@ for (let page = 1; page <= totalPages; page++) {
   );
 
   if (page === 1) {
-    // Page 1 writes back to blog.html
     fs.writeFileSync(blogTemplatePath, pageHTML);
     console.log(`  📄 Updated blog.html (page 1 of ${totalPages})`);
   } else {
-    // Subsequent pages get their own file with updated canonical
     pageHTML = pageHTML.replace(
       `<link rel="canonical" href="https://redsurgetechnology.com/blog" />`,
       `<link rel="canonical" href="https://redsurgetechnology.com/blog-page-${page}" />`
