@@ -30,7 +30,7 @@ If you run a business in Central Jersey — whether you're in Toms River, Red Ba
 
 This guide breaks down exactly what local SEO is, why it matters for businesses in our area, and what you can do right now to start ranking higher in local search results. We've helped businesses across Ocean and Monmouth County climb to page one, and the strategies in this guide are the same ones we use every day.
 
-> **Not sure where your business stands in local search?** [Request your free local SEO audit](#contact) — we work with businesses across Ocean and Monmouth County and will show you exactly what's holding you back.
+> **Not sure where your business stands in local search?** [Request your free local SEO audit](/contact) — we work with businesses across Ocean and Monmouth County and will show you exactly what's holding you back.
 
 - - -
 
@@ -186,7 +186,7 @@ Key technical checks:
 
 Page speed is a confirmed Google ranking factor for both mobile and desktop search. A slow website doesn't just frustrate users — it actively drags your rankings down.
 
-If you're unsure how your site performs, our [free website audit](/services) covers speed, mobile usability, and core SEO health in one report.
+If you're unsure how your site performs, our [free website audit](/about) covers speed, mobile usability, and core SEO health in one report.
 
 - - -
 
@@ -214,7 +214,7 @@ The businesses that will win local search in 2026 and beyond are the ones that t
 
 At Red Surge Technology, we help Central New Jersey businesses build websites and digital strategies that get found locally. We've worked with businesses across Ocean and Monmouth County to improve their Google rankings, drive more local traffic, and turn clicks into real customers.
 
-If you want to know exactly where your business stands, [get in touch with us today](#contact) — we offer a **free local SEO audit** for businesses in the area.
+If you want to know exactly where your business stands, [get in touch with us today](/contact) — we offer a **free local SEO audit** for businesses in the area.
 
 - - -
 
@@ -246,4 +246,4 @@ It varies widely depending on the competitiveness of your market, the current st
 
 - - -
 
-*Written by Collin Stewart, founder of Red Surge Technology. We build high-performance websites and local SEO strategies for businesses across Ocean and Monmouth County, NJ. [Learn more about our services](/services) or [get in touch today](/contact).*
+*Written by Collin Stewart, founder of Red Surge Technology. We build high-performance websites and local SEO strategies for businesses across Ocean and Monmouth County, NJ. [Learn more about our services](/about) or [get in touch today](/contact).*
