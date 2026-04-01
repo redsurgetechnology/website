@@ -24,7 +24,6 @@ reading_time: 9
 featured: false
 no_index: false
 ---
-# The Local SEO Guide for Ocean & Monmouth County Businesses
 
 If you run a business in Central Jersey — whether you're in Toms River, Red Bank, Brick, Freehold, or anywhere across Ocean and Monmouth County — showing up on Google when locals search for your services isn't optional anymore. It's everything.
 
