@@ -148,4 +148,4 @@ Yes, and protecting your existing SEO equity is a core part of how we approach e
 
 ---
 
-*Written by Collin Stewart, founder of Red Surge Technology. We design and build high-performance websites for small businesses across Monmouth County and the Jersey Shore. [Learn more about our web design services](/services) or [get in touch today](/contact).*
+*Written by Collin Stewart, founder of Red Surge Technology. We design and build high-performance websites for small businesses across Monmouth County and the Jersey Shore. [Learn more about our web design services](/about) or [get in touch today](/contact).*

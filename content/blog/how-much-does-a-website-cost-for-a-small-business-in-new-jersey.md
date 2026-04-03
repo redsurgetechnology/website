@@ -180,4 +180,4 @@ No — a new website starts with zero authority and no rankings. A well-built si
 
 ---
 
-*Written by Collin Stewart, founder of Red Surge Technology. We design and build fast, high-performing websites for small businesses across New Jersey. [Learn more about our web design services](/services) or [contact us today](/contact) for a transparent, no-pressure quote.*
+*Written by Collin Stewart, founder of Red Surge Technology. We design and build fast, high-performing websites for small businesses across New Jersey. [Learn more about our web design services](/about) or [contact us today](/contact) for a transparent, no-pressure quote.*

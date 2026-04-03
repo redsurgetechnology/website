@@ -24,7 +24,7 @@ If you've been writing JavaScript for a while, you've probably used `fetch()` at
 
 This guide is for developers who know the basics of JavaScript and want to move past copy-pasted fetch snippets and actually understand what's happening. We'll cover how `fetch()` works under the hood, how to pair it cleanly with `async/await`, how to handle errors the right way (this is where most tutorials fall short), and a handful of real-world patterns you'll use in actual projects.
 
-> **Building a website for your business and wondering if it's doing its job?** We design and build fast, conversion-focused websites for small businesses. [See what Red Surge Technology offers](/services).
+> **Building a website for your business and wondering if it's doing its job?** We design and build fast, conversion-focused websites for small businesses. [See what Red Surge Technology offers](/about).
 
 ---
 

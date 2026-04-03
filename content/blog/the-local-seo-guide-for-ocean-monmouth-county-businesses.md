@@ -134,7 +134,7 @@ For a local business in Ocean or Monmouth County, you should have at minimum:
 
 Why does this matter? Google's AI Overviews — the AI-generated summaries that now appear above the map pack for many searches — pull directly from structured data. Businesses with clean schema markup are far more likely to appear in these AI-generated results, giving you visibility *above* the traditional map pack.
 
-This is something your web developer can implement, or something we handle as part of our [web design and SEO packages](/services).
+This is something your web developer can implement, or something we handle as part of our [web design and SEO packages](/about).
 
 - - -
 
