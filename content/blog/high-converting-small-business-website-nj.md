@@ -1,9 +1,9 @@
 ---
-title: "How to Build a High-Converting Small Business Website in New Jersey (2026 Guide)"
+title: "How to Build a High-Converting Small Business Website"
 date: 2026-05-04T09:00:00.000-04:00
 excerpt: "A great-looking website isn’t enough. This in-depth guide breaks down exactly how to build a small business website that ranks on Google, converts visitors into customers, and drives real growth in New Jersey."
 cover_image: /images/blog/uploads/high-converting-small-business-website-nj.webp
-seo_title: "How to Build a High-Converting Small Business Website (NJ Guide 2026)"
+seo_title: "How to Build a High-Converting Small Business Website"
 seo_description: "Learn how to build a small business website that ranks on Google and converts visitors into customers. A complete 2026 guide for New Jersey business owners."
 author_name: "Collin Stewart"
 last_modified: 2026-05-04T09:00:00.000-04:00

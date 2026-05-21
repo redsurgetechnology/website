@@ -108,51 +108,66 @@
       }
     </script>
 
-    <!-- JSON-LD: WebPage (Homepage) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://redsurgetechnology.com/",
-        "name": "Home",
-        "description": "Custom, responsive web design & development for businesses across Central New Jersey."
-      }
-    </script>
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://redsurgetechnology.com/#business",
+            "name": "Red Surge Technology",
+            "url": "https://redsurgetechnology.com",
+            "logo": "https://redsurgetechnology.com/images/logo_black.png",
+            "telephone": "+1-732-520-3386",
+            "email": "info@redsurgetechnology.com",
+            "priceRange": "$$",
 
-    <!-- JSON-LD: ProfessionalService Organization -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Red Surge Technology",
-        "url": "https://redsurgetechnology.com",
-        "logo": "https://redsurgetechnology.com/images/logo_black.png",
-        "sameAs": [
-          "https://www.instagram.com/redsurgetechnology/",
-          "https://www.facebook.com/redsurgetech",
-          "https://www.linkedin.com/company/red-surge-technology/"
-        ],
-        "telephone": "+1-732-520-3386",
-        "email": "info@redsurgetechnology.com",
-        "serviceArea": {
-          "@type": "Place",
-          "name": "Central New Jersey"
-        },
-        "priceRange": "$$"
-      }
-    </script>
+            "sameAs": [
+              "https://www.instagram.com/redsurgetechnology/",
+              "https://www.facebook.com/redsurgetech",
+              "https://www.linkedin.com/company/red-surge-technology/"
+            ],
 
-    <!-- JSON-LD: Service offerings -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "serviceType": "Responsive Web Design",
-        "provider": {
-          "@type": "ProfessionalService",
-          "name": "Red Surge Technology"
-        },
-        "description": "Mobile‑first, SEO‑friendly site designs that adapt perfectly to any screen."
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Toms River",
+              "addressRegion": "NJ",
+              "addressCountry": "US"
+            },
+
+            "areaServed": [
+              {
+                "@type": "AdministrativeArea",
+                "name": "Ocean County, NJ"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "Monmouth County, NJ"
+              }
+            ]
+          },
+
+          {
+            "@type": "WebPage",
+            "@id": "https://redsurgetechnology.com/#webpage",
+            "url": "https://redsurgetechnology.com/",
+            "name": "Home",
+            "description": "Custom, responsive web design & development for businesses across Central New Jersey.",
+            "about": {
+              "@id": "https://redsurgetechnology.com/#business"
+            }
+          },
+
+          {
+            "@type": "Service",
+            "@id": "https://redsurgetechnology.com/#responsive-web-design",
+            "serviceType": "Responsive Web Design",
+            "provider": {
+              "@id": "https://redsurgetechnology.com/#business"
+            },
+            "description": "Mobile-first, SEO-friendly site designs that adapt perfectly to any screen."
+          }
+        ]
       }
     </script>
   </head>
@@ -490,7 +505,7 @@
             From Central New Jersey to beyond, we partner with small businesses
             to build custom, mobile-first websites that look great, perform
             flawlessly, and drive real results. We also provide dedicated
-            <a href="/ocean-county-nj/"
+            <a href="/ocean-county-nj"
               >web design services in Ocean County, NJ</a
             >
             for businesses looking to grow locally.

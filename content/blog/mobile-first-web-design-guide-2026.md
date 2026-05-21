@@ -1,9 +1,9 @@
 ---
-title: "Mobile-First Web Design: Why Your Website Must Be Built for Phones First in 2026"
+title: "Mobile-First Web Design: Why It Matters for SEO in 2026"
 date: 2026-05-06T09:00:00.000-04:00
 excerpt: "Most website traffic now comes from mobile devices — but many small business sites still prioritize desktop. Learn why mobile-first design matters, how it impacts SEO and conversions, and how to implement it properly."
 cover_image: /images/blog/uploads/mobile-first-web-design-2026.webp
-seo_title: "Mobile-First Web Design Guide (2026): Why It Matters for SEO & Conversions"
+seo_title: "Mobile-First Web Design: Why It Matters for SEO in 2026"
 seo_description: "Learn why mobile-first web design is essential in 2026. Improve SEO, conversions, and user experience with practical tips for building mobile-first websites."
 author_name: "Collin Stewart"
 last_modified: 2026-05-06T09:00:00.000-04:00

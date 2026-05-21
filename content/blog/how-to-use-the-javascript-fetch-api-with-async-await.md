@@ -1,10 +1,10 @@
 ---
-title: "How to Use the JavaScript Fetch API with Async/Await"
+title: "JavaScript Fetch API with Async/Await: Complete Guide"
 date: 2026-04-03T09:00:00.000-04:00
 excerpt: "Learn how to use the JavaScript Fetch API with async/await to make GET and POST requests, handle errors properly, and build real-world data fetching patterns — no jQuery required."
 cover_image: /images/blog/uploads/javascript-fetch-api-async-await.webp
-seo_title: "How to Use the JavaScript Fetch API with Async/Await (2026 Guide)"
-seo_description: "A practical intermediate guide to the JavaScript Fetch API with async/await — covering GET and POST requests, error handling, loading states, and real-world patterns."
+seo_title: "JavaScript Fetch API with Async/Await: Complete Guide"
+seo_description: "Learn JavaScript Fetch API with async/await, including requests, error handling, and real-world examples."
 author_name: "Collin Stewart"
 last_modified: 2026-04-03T09:00:00.000-04:00
 tags:

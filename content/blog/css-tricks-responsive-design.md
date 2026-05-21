@@ -12,6 +12,6 @@ tags:
   - css grid
   - container queries
 seo_title: "CSS Tricks for Responsive Design: A Friendly Guide"
-seo_description: "Discover practical CSS tricks for responsive design—Flexbox, Grid, container queries, clamp(), aspect-ratio, and CSS variables with JS tweaks. Build layouts that adapt fluidly across all devices."
+seo_description: "Discover practical CSS techniques using Grid, Flexbox, container queries, and responsive design patterns."
 custom_url: "/blog/2025/july/css-tricks-responsive-design.html"
 ---

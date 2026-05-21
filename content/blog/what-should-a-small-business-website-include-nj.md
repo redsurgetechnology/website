@@ -1,10 +1,10 @@
 ---
-title: "What Should a Small Business Website Include? A Checklist for NJ Business Owners"
+title: "Small Business Website Checklist: What to Include in 2026"
 date: 2026-04-10T09:00:00.000-04:00
 excerpt: "Most small business websites are missing critical elements that turn visitors into customers. Here's exactly what your website needs — built for business owners in Monmouth and Ocean County, NJ."
 cover_image: /images/blog/uploads/small-business-website-checklist-new-jersey.webp
-seo_title: "What Should a Small Business Website Include? NJ Checklist (2026)"
-seo_description: "A practical checklist of everything a small business website needs to attract customers and rank on Google — written for business owners in Monmouth and Ocean County, NJ."
+seo_title: "Small Business Website Checklist: What to Include in 2026"
+seo_description: "Learn what every small business website should include to attract leads, build trust, and rank higher."
 author_name: "Collin Stewart"
 last_modified: 2026-04-10T09:00:00.000-04:00
 tags:

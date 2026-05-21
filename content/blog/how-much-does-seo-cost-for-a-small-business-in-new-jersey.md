@@ -1,10 +1,10 @@
 ---
-title: "How Much Does SEO Cost for a Small Business in New Jersey?"
+title: "How Much Does Small Business SEO Cost in NJ? (2026)"
 date: 2026-04-08T09:00:00.000-04:00
 excerpt: "SEO pricing in New Jersey ranges wildly — from $300/month to $5,000+. Here's an honest breakdown of what you actually get at each price point, and what makes sense for small businesses in Monmouth and Ocean County."
 cover_image: /images/blog/uploads/seo-cost-small-business-new-jersey.webp
-seo_title: "How Much Does SEO Cost for a Small Business in New Jersey? (2026)"
-seo_description: "Confused by SEO pricing in NJ? Here's an honest breakdown of what small businesses in Monmouth and Ocean County actually pay for SEO in 2026 — and what they get for it."
+seo_title: "How Much Does Small Business SEO Cost in NJ? (2026)"
+seo_description: "See what small businesses in New Jersey pay for SEO in 2026 and what services are typically included."
 author_name: "Collin Stewart"
 last_modified: 2026-04-08T09:00:00.000-04:00
 tags:

@@ -1,9 +1,9 @@
 ---
-title: "7 Signs Your Monmouth County Small Business Website Needs a Redesign"
+title: "7 Signs Your Small Business Website Needs a Redesign"
 date: 2026-03-30T09:00:00.000-04:00
 excerpt: "Is your website costing you customers without you knowing it? Here are 7 clear signs it's time for a redesign — written for small business owners across Monmouth County, NJ."
 cover_image: /images/blog/uploads/monmouth-county-website-redesign.webp
-seo_title: "7 Signs Your Small Business Website Needs a Redesign | Monmouth County NJ"
+seo_title: "7 Signs Your Small Business Website Needs a Redesign"
 seo_description: "Slow load times, outdated design, no mobile support — learn the 7 warning signs your Monmouth County small business website is overdue for a redesign."
 author_name: "Collin Stewart"
 last_modified: 2026-03-30T09:00:00.000-04:00

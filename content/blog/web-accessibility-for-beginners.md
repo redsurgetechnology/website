@@ -1,10 +1,10 @@
 ---
-title: "Web Accessibility for Beginners: How to Make Your Website Usable by Everyone"
+title: "Web Accessibility for Beginners: Simple 2026 Guide"
 date: 2026-04-13T09:00:00.000-04:00
 excerpt: "Web accessibility doesn't have to be overwhelming. This beginner's guide explains what it is, why it matters, what WCAG means in plain English, and the practical steps you can take today to make your website more inclusive."
 cover_image: /images/blog/uploads/web-accessibility-beginners-guide.webp
-seo_title: "Web Accessibility for Beginners: A Practical Guide (2026)"
-seo_description: "New to web accessibility? Learn what it is, why it matters, what WCAG levels mean, and the practical steps every developer can take to build more inclusive websites."
+seo_title: "Web Accessibility for Beginners: Simple 2026 Guide"
+seo_description: "Learn web accessibility basics, WCAG guidelines, and practical ways to build more inclusive websites."
 author_name: "Collin Stewart"
 last_modified: 2026-04-13T09:00:00.000-04:00
 tags:

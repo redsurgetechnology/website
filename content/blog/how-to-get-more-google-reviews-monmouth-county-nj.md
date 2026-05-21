@@ -1,9 +1,9 @@
 ---
-title: "How to Get More Google Reviews for Your Business in Monmouth County, NJ"
+title: "How to Get More Google Reviews for Your Business (2026)"
 date: 2026-04-22T09:00:00.000-04:00
 excerpt: "Want more Google reviews (and more leads)? Here's a practical, no-fluff guide for small businesses in Monmouth County, NJ."
 cover_image: /images/blog/uploads/get-more-google-reviews-nj.webp
-seo_title: "How to Get More Google Reviews Monmouth County NJ (2026 Guide)"
+seo_title: "How to Get More Google Reviews for Your Business (2026)"
 seo_description: "Learn how to get more Google reviews for your small business in Monmouth County, NJ. Proven strategies to increase trust, rankings, and leads."
 author_name: "Collin Stewart"
 last_modified: 2026-04-22T09:00:00.000-04:00

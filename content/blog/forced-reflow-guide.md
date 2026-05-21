@@ -12,6 +12,6 @@ tags:
   - layout thrashing
   - web optimization
 seo_title: "Forced Reflow: How to Prevent Layout Thrashing for Fast Performance"
-seo_description: "Learn what forced reflow is, why it causes jank, and how to eliminate layout thrashing in your web apps with practical code examples, modern CSS techniques, and tooling tips."
+seo_description: "Learn what causes forced reflow and how to prevent layout thrashing for faster, smoother websites."
 custom_url: "/blog/2025/july/forced-reflow-guide.html"
 ---

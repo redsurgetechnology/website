@@ -1,9 +1,9 @@
 ---
-title: "Ocean County NJ Web Development: What Local Businesses Need to Win Online in 2026"
+title: "Ocean County NJ Web Development Guide for Small Businesses"
 date: 2026-05-01T09:00:00.000-04:00
 excerpt: "If you're a business in Ocean County NJ, your website should do more than exist. Learn what modern web development looks like in 2026 and how local businesses can turn websites into real growth tools."
 cover_image: /images/blog/uploads/ocean-county-nj-web-development-2026.webp
-seo_title: "Ocean County NJ Web Development Guide for Small Businesses (2026)"
+seo_title: "Ocean County NJ Web Development Guide for Small Businesses"
 seo_description: "Need web development in Ocean County NJ? Learn what small business websites need in 2026 to rank higher, load faster, and generate more leads."
 author_name: "Collin Stewart"
 last_modified: 2026-05-01T09:00:00.000-04:00

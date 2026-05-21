@@ -1,9 +1,9 @@
 ---
-title: "A Practical Guide to CSS Grid Layout for Responsive Web Design"
+title: "CSS Grid Layout Guide for Responsive Web Design (2026)"
 date: 2026-04-06T09:00:00.000-04:00
 excerpt: "Go beyond the basics with CSS Grid. This intermediate guide covers grid-template-areas, minmax(), auto-fill, auto-fit, and container queries with real-world responsive layout examples."
 cover_image: /images/blog/uploads/css-grid-layout-responsive-web-design.webp
-seo_title: "CSS Grid Layout for Responsive Web Design: A Practical Guide (2026)"
+seo_title: "CSS Grid Layout Guide for Responsive Web Design (2026)"
 seo_description: "Learn how to build real-world responsive layouts with CSS Grid — covering grid-template-areas, minmax(), auto-fill vs auto-fit, subgrid, and container queries."
 author_name: "Collin Stewart"
 last_modified: 2026-04-06T09:00:00.000-04:00

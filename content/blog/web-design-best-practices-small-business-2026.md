@@ -1,9 +1,9 @@
 ---
-title: "Web Design Best Practices for Small Business Websites in 2026"
+title: "Small Business Web Design Best Practices (2026)"
 date: 2026-04-30T09:00:00.000-04:00
 excerpt: "A good-looking website and an effective website aren't the same thing. Here are the web design best practices that actually move the needle for small businesses in NJ."
 cover_image: /images/blog/uploads/web-design-best-practices-small-business-2026.webp
-seo_title: "Web Design Best Practices for Small Business Websites (2026 Guide)"
+seo_title: "Small Business Web Design Best Practices (2026)"
 seo_description: "Learn the web design best practices that help small business websites rank on Google, convert visitors into leads, and actually grow your business in 2026."
 author_name: "Collin Stewart"
 last_modified: 2026-04-30T09:00:00.000-04:00

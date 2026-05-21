@@ -1,9 +1,9 @@
 ---
-title: "Above the Fold Website Design: Best Practices That Actually Increase Conversions"
+title: "Above-the-Fold Website Design Tips That Increase Conversions"
 date: 2026-04-25T09:00:00.000-04:00
 excerpt: "Your above-the-fold design determines whether visitors stay or leave. Here’s how to get it right with practical, conversion-focused best practices."
 cover_image: /images/blog/uploads/above-the-fold-design.webp
-seo_title: "Above the Fold Website Design Best Practices (Increase Conversions)"
+seo_title: "Above-the-Fold Website Design Tips That Increase Conversions"
 seo_description: "Learn how to design above-the-fold sections that convert. Practical website design tips for small businesses and modern web projects."
 author_name: "Collin Stewart"
 last_modified: 2026-04-25T09:00:00.000-04:00

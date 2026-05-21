@@ -1,9 +1,9 @@
 ---
-title: "Why Your NJ Small Business Website Isn’t Ranking on Google (And How to Fix It)"
+title: "Why Your Website Isn’t Ranking on Google (NJ Guide)"
 date: 2026-04-15T09:00:00.000-04:00
 excerpt: "Struggling to get your website to show up on Google in Monmouth or Ocean County? Here are the real reasons your site isn’t ranking — and what to do about it."
 cover_image: /images/blog/uploads/why-your-website-isnt-ranking-nj.webp
-seo_title: "Why Your Website Isn’t Ranking on Google (NJ Small Business Guide 2026)"
+seo_title: "Why Your Website Isn’t Ranking on Google (NJ Guide)"
 seo_description: "Not showing up on Google? Learn why your NJ small business website isn’t ranking and how to fix it with practical, local SEO-focused strategies."
 author_name: "Collin Stewart"
 last_modified: 2026-04-15T09:00:00.000-04:00

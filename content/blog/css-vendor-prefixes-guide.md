@@ -12,6 +12,6 @@ tags:
   - autoprefixer
   - web development
 seo_title: "CSS Vendor Prefixes: Your Guide to Cross-Browser Compatibility"
-seo_description: "Learn how to use CSS vendor prefixes like -webkit-, -moz-, -ms-, and -o- to ensure your styles look perfect across all browsers. Discover when to add prefixes, automate with Autoprefixer, and keep your CSS lean."
+seo_description: "Learn when to use CSS vendor prefixes, browser compatibility tips, and how Autoprefixer simplifies workflows."
 custom_url: "/blog/2025/july/css-vendor-prefixes-guide.html"
 ---

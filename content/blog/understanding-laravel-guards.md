@@ -10,6 +10,6 @@ tags:
   - php
   - authentication
 seo_title: "Understanding Laravel Guards"
-seo_description: "A complete guide to understanding Laravel guards and how to use them to protect your application routes and authentication logic."
+seo_description: "Learn how Laravel guards work for multi-auth setups, API security, route protection, and safer applications."
 custom_url: "/blog/understanding-laravel-guards.html"
 ---

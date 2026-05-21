@@ -1,9 +1,9 @@
 ---
-title: "How to Improve Website Page Speed for SEO (Small Business Guide for NJ)"
+title: "How to Improve Website Speed for SEO (NJ Guide)"
 date: 2026-04-21T09:00:00.000-04:00
 excerpt: "A slow website is costing you rankings and leads. Here's how to improve your website speed for SEO — with practical fixes for small businesses in NJ."
 cover_image: /images/blog/uploads/improve-website-speed-seo-nj.webp
-seo_title: "How to Improve Website Page Speed for SEO (NJ Small Business Guide)"
+seo_title: "How to Improve Website Speed for SEO (NJ Guide)"
 seo_description: "Learn how to improve your website speed for better SEO rankings and more leads. Practical guide for small businesses in Monmouth County, NJ."
 author_name: "Collin Stewart"
 last_modified: 2026-04-21T09:00:00.000-04:00

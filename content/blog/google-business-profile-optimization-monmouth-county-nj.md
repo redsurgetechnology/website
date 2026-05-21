@@ -1,9 +1,9 @@
 ---
-title: "Google Business Profile Optimization in Monmouth County, NJ: How to Rank in the Local Pack"
+title: "Google Business Profile Optimization Guide (2026)"
 date: 2026-04-17T09:00:00.000-04:00
 excerpt: "Want your business to show up in the Google Maps results? Here's how to optimize your Google Business Profile for higher rankings in Monmouth County, NJ."
 cover_image: /images/blog/uploads/google-business-profile-optimization-nj.webp
-seo_title: "Google Business Profile Optimization Monmouth County NJ (2026 Guide)"
+seo_title: "Google Business Profile Optimization Guide (2026)"
 seo_description: "Learn how to optimize your Google Business Profile to rank higher in Monmouth County, NJ. Step-by-step local SEO guide for small businesses."
 author_name: "Collin Stewart"
 last_modified: 2026-04-17T09:00:00.000-04:00

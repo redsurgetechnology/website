@@ -1,9 +1,9 @@
 ---
-title: "How Much Does a Website Cost for a Small Business in New Jersey?"
+title: "How Much Does a Small Business Website Cost in NJ? (2026)"
 date: 2026-04-01T09:00:00.000-04:00
 excerpt: "Confused by wildly different web design quotes? Here's an honest, New Jersey-specific breakdown of what a small business website actually costs in 2026 — and what drives the price."
 cover_image: /images/blog/uploads/small-business-website-cost-new-jersey.webp
-seo_title: "How Much Does a Website Cost for a Small Business in New Jersey? (2026)"
+seo_title: "How Much Does a Small Business Website Cost in NJ? (2026)"
 seo_description: "From DIY builders to local NJ web agencies, here's what a small business website actually costs in New Jersey in 2026 — with real price ranges and zero fluff."
 author_name: "Collin Stewart"
 last_modified: 2026-04-01T09:00:00.000-04:00

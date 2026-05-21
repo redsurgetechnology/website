@@ -1,9 +1,9 @@
 ---
-title: "Best Website Features for Small Businesses in 2026: What Actually Drives Leads"
+title: "Best Website Features for Small Businesses in 2026"
 date: 2026-04-27T09:00:00.000-04:00
 excerpt: "Most business websites include the wrong features. Learn what actually helps small businesses rank on Google, build trust, and generate more leads in 2026."
 cover_image: /images/blog/uploads/best-website-features-small-business-2026.webp
-seo_title: "Best Website Features for Small Businesses in 2026 (Lead Generation Guide)"
+seo_title: "Best Website Features for Small Businesses in 2026"
 seo_description: "Discover the best website features for small businesses in 2026. Learn what truly helps with SEO, conversions, trust, and generating more leads."
 author_name: "Collin Stewart"
 last_modified: 2026-04-27T09:00:00.000-04:00

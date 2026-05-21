@@ -176,8 +176,8 @@ function generatePostHTML(post) {
           "addressCountry": "US"
         },
         "areaServed": [
-          { "@type": "County", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
-          { "@type": "County", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
         ],
         "priceRange": "$$",
         "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
@@ -279,7 +279,7 @@ function generatePostHTML(post) {
     <meta name="format-detection" content="telephone=no" />
 
     <!-- Primary Meta Tags -->
-    <title>${seoTitle} | Red Surge Technology</title>
+    <title>${seoTitle}</title>
     <meta name="description" content="${seoDescription}" />
     <meta name="author" content="${author}" />
     <meta name="robots" content="${robots}" />
@@ -626,6 +626,10 @@ for (let page = 1; page <= totalPages; page++) {
     pageHTML = pageHTML.replace(
       `<link rel="canonical" href="https://redsurgetechnology.com/blog" />`,
       `<link rel="canonical" href="https://redsurgetechnology.com/blog-page-${page}" />`
+    );
+    pageHTML = pageHTML.replace(
+      `<meta property="og:url" content="https://redsurgetechnology.com/blog" />`,
+      `<meta property="og:url" content="https://redsurgetechnology.com/blog-page-${page}" />`
     );
     fs.writeFileSync(`./blog-page-${page}.html`, pageHTML);
     console.log(`  📄 Generated blog-page-${page}.html`);
