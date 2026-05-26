@@ -19,8 +19,6 @@ featured: false
 no_index: false
 ---
 
-# Understanding React Server Components in Next.js
-
 Modern React development has changed dramatically over the last few years. For a long time, most React applications followed the same basic rendering model:
 
 1. The browser downloads JavaScript
@@ -67,13 +65,13 @@ A simple example of a Server Component in Next.js looks like this:
 
 ```tsx
 async function BlogPosts() {
-  const posts = await fetch("https://api.example.com/posts").then(res =>
-    res.json()
+  const posts = await fetch("https://api.example.com/posts").then((res) =>
+    res.json(),
   );
 
   return (
     <div>
-      {posts.map(post => (
+      {posts.map((post) => (
         <article key={post.id}>
           <h2>{post.title}</h2>
         </article>
@@ -230,11 +228,7 @@ import { useState } from "react";
 export default function Counter() {
   const [count, setCount] = useState(0);
 
-  return (
-    <button onClick={() => setCount(count + 1)}>
-      {count}
-    </button>
-  );
+  return <button onClick={() => setCount(count + 1)}>{count}</button>;
 }
 ```
 
@@ -285,7 +279,7 @@ Older React applications commonly fetched data in the browser using `useEffect()
 ```tsx
 useEffect(() => {
   fetch("/api/posts")
-    .then(res => res.json())
+    .then((res) => res.json())
     .then(setPosts);
 }, []);
 ```
@@ -301,13 +295,13 @@ Server Components simplify this dramatically:
 
 ```tsx
 async function Posts() {
-  const posts = await fetch("https://api.example.com/posts").then(res =>
-    res.json()
+  const posts = await fetch("https://api.example.com/posts").then((res) =>
+    res.json(),
   );
 
   return (
     <ul>
-      {posts.map(post => (
+      {posts.map((post) => (
         <li key={post.id}>{post.title}</li>
       ))}
     </ul>
@@ -405,7 +399,7 @@ Adding `"use client"` too high in the component tree causes large portions of th
 Another common mistake is trying to access browser APIs inside Server Components:
 
 ```tsx
-window.innerWidth
+window.innerWidth;
 ```
 
 This fails because Server Components execute on the server, not inside the browser.
