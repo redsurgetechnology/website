@@ -12,5 +12,5 @@ tags:
   - compliance
 seo_title: "WCAG Guidelines Checklist"
 seo_description: "A practical WCAG guidelines checklist to help you build accessible websites that meet modern compliance standards."
-custom_url: "/blog/wcag-guidelines-checklist.html"
+custom_url: "/blog/wcag-guidelines-checklist"
 ---

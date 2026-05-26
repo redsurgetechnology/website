@@ -12,5 +12,5 @@ tags:
   - web standards
 seo_title: "WAI-ARIA Authoring Practices for Accessible Web Components"
 seo_description: "Learn WAI-ARIA authoring practices, accessibility patterns, testing tips, and better screen-reader support."
-custom_url: "/blog/wai-aria-authoring-practices.html"
+custom_url: "/blog/wai-aria-authoring-practices"
 ---

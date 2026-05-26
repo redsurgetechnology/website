@@ -1,9 +1,15 @@
-/free-leetcode-alternatives /blog/free-leetcode-alternatives
-/jquery-document-ready-unleashing-the-power-of-efficient-web-development /blog/jquery-document-ready-complete-beginners-guide
-/design-for-a-local-audience /blog/2025/july/css-tricks-responsive-design
-/importance-of-social-media /blog
-/what-is-seo-and-how-does-it-work /blog
-/web-design-blogs-to-follow-top-10 /blog
-/seo-tips-and-tricks-part-1 /blog
-/what-are-vendor-prefixes-css /blog/2025/july/css-vendor-prefixes-guide
-/nginx-rtmp-server-a-comprehensive-guide /blog/2025/july/nginx-rtmp-guide
+# Force all versions to canonical non-www HTTPS (prevents redirect chains)
+http://www.redsurgetechnology.com/* https://redsurgetechnology.com/:splat 301!
+http://redsurgetechnology.com/* https://redsurgetechnology.com/:splat 301!
+https://www.redsurgetechnology.com/* https://redsurgetechnology.com/:splat 301!
+
+# Legacy page redirects
+/free-leetcode-alternatives /blog/free-leetcode-alternatives 301
+/jquery-document-ready-unleashing-the-power-of-efficient-web-development /blog/jquery-document-ready-complete-beginners-guide 301
+/design-for-a-local-audience /blog/2025/july/css-tricks-responsive-design 301
+/importance-of-social-media /blog 301
+/what-is-seo-and-how-does-it-work /blog 301
+/web-design-blogs-to-follow-top-10 /blog 301
+/seo-tips-and-tricks-part-1 /blog 301
+/what-are-vendor-prefixes-css /blog/2025/july/css-vendor-prefixes-guide 301
+/nginx-rtmp-server-a-comprehensive-guide /blog/2025/july/nginx-rtmp-guide 301

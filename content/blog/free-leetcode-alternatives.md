@@ -13,5 +13,5 @@ tags:
   - codewars
 seo_title: "7 Best Free LeetCode Alternatives for Coding Practice"
 seo_description: "Explore 7 free LeetCode alternatives like HackerRank and Codewars to improve your coding skills and prepare for technical interviews effectively."
-custom_url: "/blog/free-leetcode-alternatives.html"
+custom_url: "/blog/free-leetcode-alternatives"
 ---

@@ -13,5 +13,5 @@ tags:
   - key-value storage
 seo_title: "JavaScript HashMap Guide: Create and Optimize Key-Value Storage"
 seo_description: "Learn how JavaScript HashMaps work with real examples, performance tips, and techniques for efficient key-value storage."
-custom_url: "/blog/2025/july/javascript-hashmap-guide.html"
+custom_url: "/blog/2025/july/javascript-hashmap-guide"
 ---

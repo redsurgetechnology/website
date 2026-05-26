@@ -13,5 +13,5 @@ tags:
   - server setup
 seo_title: "Nginx RTMP Guide: Build, Secure & Optimize Your Live Streaming Server"
 seo_description: "Follow this hands-on nginx RTMP guide to set up, secure, and fine-tune your own live streaming server with HLS playback, low latency, and real-time monitoring."
-custom_url: "/blog/2025/july/nginx-rtmp-guide.html"
+custom_url: "/blog/2025/july/nginx-rtmp-guide"
 ---

@@ -13,5 +13,5 @@ tags:
   - container queries
 seo_title: "CSS Tricks for Responsive Design: A Friendly Guide"
 seo_description: "Discover practical CSS techniques using Grid, Flexbox, container queries, and responsive design patterns."
-custom_url: "/blog/2025/july/css-tricks-responsive-design.html"
+custom_url: "/blog/2025/july/css-tricks-responsive-design"
 ---

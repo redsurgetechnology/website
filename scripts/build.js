@@ -256,11 +256,11 @@ function generatePostHTML(post) {
     <nav class="cs-breadcrumb" aria-label="Breadcrumb">
       <ol class="cs-breadcrumb-list">
         <li class="cs-breadcrumb-item">
-          <a href="/index.html" class="cs-breadcrumb-link">Home</a>
+          <a href="/" class="cs-breadcrumb-link">Home</a>
           <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
         </li>
         <li class="cs-breadcrumb-item">
-          <a href="/blog.html" class="cs-breadcrumb-link">Blog</a>
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
           <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
         </li>
         <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
@@ -357,7 +357,7 @@ function generatePostHTML(post) {
         </div>
       </div>
       <div class="cs-container">
-        <a href="/index.html" class="cs-logo" aria-label="back to home">
+        <a href="/" class="cs-logo" aria-label="back to home">
           <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
         </a>
         <nav class="cs-nav" role="navigation">
@@ -370,15 +370,15 @@ function generatePostHTML(post) {
           </button>
           <div class="cs-ul-wrapper">
             <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
-              <li class="cs-li"><a href="/index.html" class="cs-li-link">Home</a></li>
-              <li class="cs-li"><a href="/about.html" class="cs-li-link">About</a></li>
-              <li class="cs-li"><a href="/portfolio.html" class="cs-li-link">Portfolio</a></li>
-              <li class="cs-li"><a href="/blog.html" class="cs-li-link cs-active">Blog</a></li>
-              <li class="cs-li"><a href="/contact.html" class="cs-li-link">Contact</a></li>
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
             </ul>
           </div>
         </nav>
-        <a href="/contact.html" class="cs-button-solid cs-nav-button">Get in Touch</a>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
       </div>
     </header>
 
@@ -425,17 +425,17 @@ function generatePostHTML(post) {
       </div>
       <div class="cs-container">
         <div class="cs-logo-group">
-          <a aria-label="go back to home" class="cs-logo" href="/index.html">
+          <a aria-label="go back to home" class="cs-logo" href="/">
             <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
           </a>
           <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
         </div>
         <ul class="cs-nav">
           <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
-          <li class="cs-nav-li"><a class="cs-nav-link" href="/index.html">Home</a></li>
-          <li class="cs-nav-li"><a class="cs-nav-link" href="/about.html">About</a></li>
-          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio.html">Portfolio</a></li>
-          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact.html">Contact</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
         </ul>
         <ul class="cs-nav">
           <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
@@ -460,9 +460,9 @@ function generatePostHTML(post) {
           <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
         </div>
         <div>
-          <a href="/privacy-policy.html" class="cs-nav-link">Privacy Policy</a>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
           <span>|</span>
-          <a href="/terms-of-use.html" class="cs-nav-link">Terms of Use</a>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
         </div>
       </div>
       <picture class="cs-background">

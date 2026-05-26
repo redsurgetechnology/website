@@ -11,5 +11,5 @@ tags:
   - web development
 seo_title: "jQuery Document Ready Complete Beginners Guide"
 seo_description: "Learn how jQuery document ready works and why it matters for your JavaScript code. A complete guide for developers of all levels."
-custom_url: "/blog/jquery-document-ready-complete-beginners-guide.html"
+custom_url: "/blog/jquery-document-ready-complete-beginners-guide"
 ---

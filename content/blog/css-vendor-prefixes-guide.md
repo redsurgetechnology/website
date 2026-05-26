@@ -13,5 +13,5 @@ tags:
   - web development
 seo_title: "CSS Vendor Prefixes: Your Guide to Cross-Browser Compatibility"
 seo_description: "Learn when to use CSS vendor prefixes, browser compatibility tips, and how Autoprefixer simplifies workflows."
-custom_url: "/blog/2025/july/css-vendor-prefixes-guide.html"
+custom_url: "/blog/2025/july/css-vendor-prefixes-guide"
 ---
