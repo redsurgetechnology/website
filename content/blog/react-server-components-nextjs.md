@@ -146,9 +146,7 @@ Many websites contain mostly static content:
 
 Yet developers often hydrate entire applications anyway.
 
-Hydration is the process where React attaches interactivity to server-rendered HTML. You can read more about hydration here:
-
-- https://redsurgetechnology.com/blog/react-hydration-guide
+Hydration is the process where React attaches interactivity to server-rendered HTML.
 
 The problem is that hydration requires JavaScript.
 
