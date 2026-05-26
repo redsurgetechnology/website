@@ -105,31 +105,26 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/privacy-policy.css" />
 
-    <!-- JSON‑LD: WebSite Schema -->
+    <!-- JSON-LD: WebSite Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "url": "https://redsurgetechnology.com/"
+        "@id": "https://redsurgetechnology.com/#website",
+        "url": "https://redsurgetechnology.com/",
+        "name": "Red Surge Technology",
+        "publisher": {
+          "@id": "https://redsurgetechnology.com/#organization"
+        }
       }
     </script>
 
-    <!-- JSON‑LD: WebPage (Privacy Policy) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://redsurgetechnology.com/privacy-policy",
-        "name": "Privacy Policy",
-        "description": "Red Surge Technology's privacy policy outlines how we collect, use, and protect your personal information while you interact with our site or services."
-      }
-    </script>
-
-    <!-- JSON‑LD: Organization Schema -->
+    <!-- JSON-LD: Organization (Properly Defined Once) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
+        "@id": "https://redsurgetechnology.com/#organization",
         "name": "Red Surge Technology",
         "url": "https://redsurgetechnology.com",
         "logo": "https://redsurgetechnology.com/images/logo_black.png",
@@ -140,11 +135,39 @@
         ],
         "telephone": "+1-732-520-3386",
         "email": "info@redsurgetechnology.com",
+        "priceRange": "$$",
         "serviceArea": {
           "@type": "Place",
           "name": "Central New Jersey"
+        }
+      }
+    </script>
+
+    <!-- JSON-LD: WebPage (Privacy Policy - FIXED) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://redsurgetechnology.com/privacy-policy#webpage",
+        "url": "https://redsurgetechnology.com/privacy-policy",
+        "name": "Privacy Policy",
+        "description": "Red Surge Technology's privacy policy outlines how we collect, use, and protect your personal information.",
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@id": "https://redsurgetechnology.com/#website"
         },
-        "priceRange": "$$"
+        "about": {
+          "@id": "https://redsurgetechnology.com/#organization"
+        },
+        "publisher": {
+          "@id": "https://redsurgetechnology.com/#organization"
+        },
+        "datePublished": "2025-05-22",
+        "dateModified": "2025-05-22",
+        "mainEntity": {
+          "@type": "WebPageElement",
+          "name": "Privacy Policy Content"
+        }
       }
     </script>
   </head>

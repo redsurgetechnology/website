@@ -99,22 +99,26 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/terms-of-use.css" />
 
-    <!-- JSON-LD: WebPage (Terms of Use) -->
+    <!-- JSON-LD: WebSite Schema -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://redsurgetechnology.com/terms-of-use",
-        "name": "Terms of Use",
-        "description": "Review the Terms of Use for Red Surge Technology. Understand your rights and responsibilities when accessing our website and services."
+        "@type": "WebSite",
+        "@id": "https://redsurgetechnology.com/#website",
+        "url": "https://redsurgetechnology.com/",
+        "name": "Red Surge Technology",
+        "publisher": {
+          "@id": "https://redsurgetechnology.com/#organization"
+        }
       }
     </script>
 
-    <!-- JSON-LD: Organization Schema -->
+    <!-- JSON-LD: Organization (single source of truth) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
+        "@id": "https://redsurgetechnology.com/#organization",
         "name": "Red Surge Technology",
         "url": "https://redsurgetechnology.com",
         "logo": "https://redsurgetechnology.com/images/logo_black.png",
@@ -125,11 +129,39 @@
         ],
         "telephone": "+1-732-520-3386",
         "email": "info@redsurgetechnology.com",
+        "priceRange": "$$",
         "serviceArea": {
           "@type": "Place",
           "name": "Central New Jersey"
+        }
+      }
+    </script>
+
+    <!-- JSON-LD: Terms of Use WebPage (FIXED + enhanced) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://redsurgetechnology.com/terms-of-use#webpage",
+        "url": "https://redsurgetechnology.com/terms-of-use",
+        "name": "Terms of Use",
+        "description": "Terms of Use for Red Surge Technology outlining user rights, responsibilities, and conditions for using the website and services.",
+        "inLanguage": "en-US",
+        "isPartOf": {
+          "@id": "https://redsurgetechnology.com/#website"
         },
-        "priceRange": "$$"
+        "about": {
+          "@id": "https://redsurgetechnology.com/#organization"
+        },
+        "publisher": {
+          "@id": "https://redsurgetechnology.com/#organization"
+        },
+        "datePublished": "2025-05-22",
+        "dateModified": "2025-05-22",
+        "mainEntity": {
+          "@type": "CreativeWork",
+          "name": "Website Terms of Use Agreement"
+        }
       }
     </script>
   </head>

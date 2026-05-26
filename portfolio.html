@@ -107,43 +107,187 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/portfolio.css" />
 
-    <!-- JSON‑LD: WebSite Schema -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "url": "https://redsurgetechnology.com/"
-      }
-    </script>
-
-    <!-- JSON‑LD: WebPage (Portfolio) -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "url": "https://redsurgetechnology.com/portfolio",
-        "name": "Portfolio",
-        "description": "Browse Red Surge Technology's portfolio of web design and development projects for Central New Jersey businesses."
-      }
-    </script>
-
-    <!-- JSON‑LD: ProfessionalService Organization -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Red Surge Technology",
-        "url": "https://redsurgetechnology.com",
-        "logo": "https://redsurgetechnology.com/images/logo_black.png",
-        "sameAs": [
-          "https://www.instagram.com/redsurgetechnology/",
-          "https://www.facebook.com/redsurgetech",
-          "https://www.linkedin.com/company/red-surge-technology/"
-        ],
-        "telephone": "+1-732-520-3386",
-        "email": "info@redsurgetechnology.com",
-        "serviceArea": { "@type": "Place", "name": "Central New Jersey" },
-        "priceRange": "$$"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://redsurgetechnology.com/#website",
+            "url": "https://redsurgetechnology.com",
+            "name": "Red Surge Technology",
+            "publisher": {
+              "@id": "https://redsurgetechnology.com/#organization"
+            }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://redsurgetechnology.com/#organization",
+            "name": "Red Surge Technology",
+            "url": "https://redsurgetechnology.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://redsurgetechnology.com/images/logo_black.png"
+            },
+            "image": "https://redsurgetechnology.com/images/og-image.jpg",
+            "description": "Red Surge Technology is a web design and development company creating high-performance websites, SEO-optimized builds, and digital solutions for businesses.",
+            "telephone": "+1-732-520-3386",
+            "email": "info@redsurgetechnology.com",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Wall Township",
+              "addressRegion": "NJ",
+              "postalCode": "07753",
+              "addressCountry": "US"
+            },
+            "areaServed": {
+              "@type": "State",
+              "name": "New Jersey"
+            },
+            "sameAs": [
+              "https://www.instagram.com/redsurgetechnology/",
+              "https://www.facebook.com/redsurgetech",
+              "https://www.linkedin.com/company/red-surge-technology/"
+            ]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://redsurgetechnology.com/portfolio/#webpage",
+            "url": "https://redsurgetechnology.com/portfolio",
+            "name": "Portfolio | Red Surge Technology",
+            "description": "Browse Red Surge Technology's portfolio of web design and development projects.",
+            "isPartOf": {
+              "@id": "https://redsurgetechnology.com/#website"
+            },
+            "about": {
+              "@id": "https://redsurgetechnology.com/#organization"
+            },
+            "mainEntity": {
+              "@id": "https://redsurgetechnology.com/portfolio/#itemlist"
+            }
+          },
+          {
+            "@type": "ItemList",
+            "@id": "https://redsurgetechnology.com/portfolio/#itemlist",
+            "name": "Web Design Portfolio Projects",
+            "itemListOrder": "https://schema.org/ItemListOrderUnordered",
+            "numberOfItems": 11,
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Vigilant Sky Technologies",
+                  "url": "https://vigilantskytechnologies.com",
+                  "description": "Drone and aerial intelligence solutions for public safety and enterprise operations."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Bobby Built It, LLC",
+                  "url": "https://bobbybuiltit.com",
+                  "description": "Local junk removal and cleanout services in Monmouth County, NJ."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "The Conover Killings",
+                  "url": "https://theconoverkillings.com/",
+                  "description": "Haunted attraction experience in Central New Jersey."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Europa Luxury Properties",
+                  "url": "https://europalp.com",
+                  "description": "Luxury property management services in Texas."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Astor D. Rice Foundation",
+                  "url": "https://astordricefoundation.com/",
+                  "description": "Nonprofit organization focused on community impact."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 6,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "First Valley Funding",
+                  "url": "https://firstvalleymortgages.com/",
+                  "description": "Mortgage and lending services in New Jersey."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 7,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Madison Trust Company",
+                  "url": "https://www.madisontrust.com/",
+                  "description": "Self-directed IRA custodian for alternative investments."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 8,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Albright College",
+                  "url": "https://www.albright.edu/home/",
+                  "description": "Private liberal arts college in Pennsylvania."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 9,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Precision Pro Golf",
+                  "url": "https://precisionprogolf.com/",
+                  "description": "Golf rangefinder e-commerce brand."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 10,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "Broad Financial",
+                  "url": "https://broadfinancial.com/",
+                  "description": "Self-directed retirement account services."
+                }
+              },
+              {
+                "@type": "ListItem",
+                "position": 11,
+                "item": {
+                  "@type": "WebSite",
+                  "name": "USA Garden State Basketball",
+                  "url": "https://usagardenstatebasketball.com/",
+                  "description": "Basketball training and fundraising program."
+                }
+              }
+            ]
+          }
+        ]
       }
     </script>
   </head>
@@ -259,9 +403,7 @@
                 <a href="/about" class="cs-li-link">About</a>
               </li>
               <li class="cs-li">
-                <a href="/portfolio" class="cs-li-link cs-active"
-                  >Portfolio</a
-                >
+                <a href="/portfolio" class="cs-li-link cs-active">Portfolio</a>
               </li>
               <li class="cs-li">
                 <a href="/blog" class="cs-li-link">Blog</a>

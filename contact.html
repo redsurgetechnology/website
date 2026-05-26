@@ -101,46 +101,77 @@
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/contact.css" />
 
-    <!-- JSON‑LD: WebSite Schema -->
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "WebSite",
-        "url": "https://redsurgetechnology.com/"
-      }
-    </script>
-
-    <!-- JSON‑LD: ContactPage -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ContactPage",
-        "url": "https://redsurgetechnology.com/contact",
-        "name": "Contact Us",
-        "description": "Connect with Red Surge Technology for web design, development, and SEO in Central New Jersey."
-      }
-    </script>
-
-    <!-- JSON‑LD: ProfessionalService Organization -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "ProfessionalService",
-        "name": "Red Surge Technology",
-        "url": "https://redsurgetechnology.com",
-        "logo": "https://redsurgetechnology.com/images/logo_black.png",
-        "sameAs": [
-          "https://www.instagram.com/redsurgetechnology/",
-          "https://www.facebook.com/redsurgetech",
-          "https://www.linkedin.com/company/red-surge-technology/"
-        ],
-        "telephone": "+1-732-520-3386",
-        "email": "info@redsurgetechnology.com",
-        "serviceArea": {
-          "@type": "Place",
-          "name": "Central New Jersey"
-        },
-        "priceRange": "$$"
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://redsurgetechnology.com/#website",
+            "url": "https://redsurgetechnology.com",
+            "name": "Red Surge Technology",
+            "publisher": {
+              "@id": "https://redsurgetechnology.com/#organization"
+            }
+          },
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://redsurgetechnology.com/#organization",
+            "name": "Red Surge Technology",
+            "url": "https://redsurgetechnology.com",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://redsurgetechnology.com/images/logo_black.png"
+            },
+            "image": "https://redsurgetechnology.com/images/og-image.jpg",
+            "description": "Red Surge Technology is a web design and development company helping businesses grow through custom websites, SEO, responsive design, and digital solutions.",
+            "telephone": "+1-732-520-3386",
+            "email": "info@redsurgetechnology.com",
+            "priceRange": "$$",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Wall Township",
+              "addressRegion": "NJ",
+              "postalCode": "07753",
+              "addressCountry": "US"
+            },
+            "areaServed": [
+              {
+                "@type": "State",
+                "name": "New Jersey"
+              }
+            ],
+            "sameAs": [
+              "https://www.instagram.com/redsurgetechnology/",
+              "https://www.facebook.com/redsurgetech",
+              "https://www.linkedin.com/company/red-surge-technology/"
+            ],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+1-732-520-3386",
+              "contactType": "customer service",
+              "email": "info@redsurgetechnology.com",
+              "availableLanguage": "English"
+            }
+          },
+          {
+            "@type": "ContactPage",
+            "@id": "https://redsurgetechnology.com/contact/#webpage",
+            "url": "https://redsurgetechnology.com/contact",
+            "name": "Contact Red Surge Technology",
+            "description": "Get in touch with Red Surge Technology for custom web design, development, SEO services, and digital strategy solutions.",
+            "isPartOf": {
+              "@id": "https://redsurgetechnology.com/#website"
+            },
+            "about": {
+              "@id": "https://redsurgetechnology.com/#organization"
+            },
+            "mainEntity": {
+              "@id": "https://redsurgetechnology.com/#organization"
+            }
+          }
+        ]
       }
     </script>
   </head>
@@ -266,9 +297,7 @@
                 <a href="/blog" class="cs-li-link"> Blog </a>
               </li>
               <li class="cs-li">
-                <a href="/contact" class="cs-li-link cs-active">
-                  Contact
-                </a>
+                <a href="/contact" class="cs-li-link cs-active"> Contact </a>
               </li>
             </ul>
           </div>
