@@ -283,6 +283,7 @@ function generatePostHTML(post) {
     <meta name="description" content="${seoDescription}" />
     <meta name="author" content="${author}" />
     <meta name="robots" content="${robots}" />
+    <meta name="google-adsense-account" content="ca-pub-1224182851595008">
     ${tagsString ? `<meta name="keywords" content="${tagsString}" />` : ''}
 
     <!-- Canonical -->
