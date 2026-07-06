@@ -284,6 +284,8 @@ function generatePostHTML(post) {
     <meta name="author" content="${author}" />
     <meta name="robots" content="${robots}" />
     <meta name="google-adsense-account" content="ca-pub-1224182851595008">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1224182851595008"
+     crossorigin="anonymous"></script>
     ${tagsString ? `<meta name="keywords" content="${tagsString}" />` : ''}
 
     <!-- Canonical -->
