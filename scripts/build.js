@@ -1,32 +1,32 @@
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
-const { marked } = require('marked');
+const fs = require("fs");
+const path = require("path");
+const matter = require("gray-matter");
+const { marked } = require("marked");
 
-const postsDir = './content/blog';
+const postsDir = "./content/blog";
 const posts = [];
 
 // Guard: skip if no content folder yet
 if (!fs.existsSync(postsDir)) {
-  console.log('No content/blog directory found, skipping.');
+  console.log("No content/blog directory found, skipping.");
   process.exit(0);
 }
 
 // Read all markdown files
-const files = fs.readdirSync(postsDir).filter(f => f.endsWith('.md'));
+const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
 
 if (files.length === 0) {
-  console.log('No posts found yet, skipping.');
+  console.log("No posts found yet, skipping.");
   process.exit(0);
 }
 
-files.forEach(file => {
-  const raw = fs.readFileSync(path.join(postsDir, file), 'utf8');
+files.forEach((file) => {
+  const raw = fs.readFileSync(path.join(postsDir, file), "utf8");
   const { data, content } = matter(raw);
   posts.push({
     ...data,
     content: marked(content),
-    slug: file.replace('.md', '')
+    slug: file.replace(".md", ""),
   });
 });
 
@@ -40,18 +40,36 @@ posts.sort((a, b) => {
 // ─── Generate individual post pages ───────────────────────────────────────────
 function generatePostHTML(post) {
   const seoTitle = post.seo_title || post.title;
-  const seoDescription = post.seo_description || post.excerpt || '';
-  const ogImage = post.og_image || post.cover_image || '/images/og-image.jpg';
-  const canonical = post.canonical || `https://redsurgetechnology.com/blog/${post.slug}`;
-  const robots = post.no_index ? 'noindex, nofollow' : 'index, follow';
-  const fullOgImage = ogImage.startsWith('http') ? ogImage : `https://redsurgetechnology.com${ogImage}`;
-  const author = post.author_name || 'Red Surge Technology';
-  const authorType = post.author_name && post.author_name !== 'Red Surge Technology' ? 'Person' : 'Organization';
+  const seoDescription = post.seo_description || post.excerpt || "";
+  const ogImage = post.og_image || post.cover_image || "/images/og-image.jpg";
+  const canonical =
+    post.canonical || `https://redsurgetechnology.com/blog/${post.slug}`;
+  const robots = post.no_index ? "noindex, nofollow" : "index, follow";
+  const fullOgImage = ogImage.startsWith("http")
+    ? ogImage
+    : `https://redsurgetechnology.com${ogImage}`;
+  const author = post.author_name || "Red Surge Technology";
+  const authorType =
+    post.author_name && post.author_name !== "Red Surge Technology"
+      ? "Person"
+      : "Organization";
   const lastModified = post.last_modified || post.date;
-  const tags = Array.isArray(post.tags) ? post.tags : (post.tags ? [post.tags] : []);
-  const tagsString = tags.join(', ');
-  const publishedDate = new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
-  const lastModifiedDate = new Date(lastModified).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
+  const tags = Array.isArray(post.tags)
+    ? post.tags
+    : post.tags
+      ? [post.tags]
+      : [];
+  const tagsString = tags.join(", ");
+  const publishedDate = new Date(post.date).toLocaleDateString("en-US", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+  const lastModifiedDate = new Date(lastModified).toLocaleDateString("en-US", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
 
   // ── Rich post meta bar HTML ──────────────────────────────────────────────────
   // Each item uses an inline SVG icon, semantic time/span elements, and
@@ -73,7 +91,9 @@ function generatePostHTML(post) {
             <time itemprop="datePublished" datetime="${new Date(post.date).toISOString()}">${publishedDate}</time>
           </div>
 
-          ${post.last_modified ? `
+          ${
+            post.last_modified
+              ? `
           <!-- Last updated -->
           <div class="cs-meta-item cs-meta-updated" title="Last updated">
             <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
@@ -81,7 +101,9 @@ function generatePostHTML(post) {
               <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
             </svg>
             <span>Updated: <time itemprop="dateModified" datetime="${new Date(lastModified).toISOString()}">${lastModifiedDate}</time></span>
-          </div>` : `<meta itemprop="dateModified" content="${new Date(lastModified).toISOString()}" />`}
+          </div>`
+              : `<meta itemprop="dateModified" content="${new Date(lastModified).toISOString()}" />`
+          }
 
           <!-- Author -->
           <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/${authorType}" title="Author">
@@ -92,7 +114,9 @@ function generatePostHTML(post) {
             <span itemprop="name">${author}</span>
           </div>
 
-          ${post.reading_time ? `
+          ${
+            post.reading_time
+              ? `
           <!-- Reading time -->
           <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
             <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
@@ -100,27 +124,37 @@ function generatePostHTML(post) {
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
             <span><meta itemprop="timeRequired" content="PT${post.reading_time}M" />${post.reading_time} min read</span>
-          </div>` : ''}
+          </div>`
+              : ""
+          }
 
-          ${post.category ? `
+          ${
+            post.category
+              ? `
           <!-- Category -->
           <div class="cs-meta-item cs-meta-category" title="Category">
             <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
               <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
             </svg>
             <span itemprop="articleSection">${post.category}</span>
-          </div>` : ''}
+          </div>`
+              : ""
+          }
         </div>
 
         <!-- Tags -->
-        ${tags.length > 0 ? `
+        ${
+          tags.length > 0
+            ? `
         <div class="cs-tags" aria-label="Post tags">
           <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
             <line x1="7" y1="7" x2="7.01" y2="7"></line>
           </svg>
-          ${tags.map(tag => `<span class="cs-tag" itemprop="keywords">${tag}</span>`).join('')}
-        </div>` : ''}`;
+          ${tags.map((tag) => `<span class="cs-tag" itemprop="keywords">${tag}</span>`).join("")}
+        </div>`
+            : ""
+        }`;
 
   // ── Full LocalBusiness + BlogPosting combined JSON-LD ───────────────────────
   const jsonLd = `
@@ -134,9 +168,9 @@ function generatePostHTML(post) {
         "url": "${canonical}",
         "datePublished": "${new Date(post.date).toISOString()}",
         "dateModified": "${new Date(lastModified).toISOString()}",
-        ${tagsString ? `"keywords": "${tagsString}",` : ''}
-        ${post.category ? `"articleSection": "${post.category}",` : ''}
-        ${post.reading_time ? `"timeRequired": "PT${post.reading_time}M",` : ''}
+        ${tagsString ? `"keywords": "${tagsString}",` : ""}
+        ${post.category ? `"articleSection": "${post.category}",` : ""}
+        ${post.reading_time ? `"timeRequired": "PT${post.reading_time}M",` : ""}
         "author": {
           "@type": "${authorType}",
           "name": "${author}"
@@ -222,30 +256,38 @@ function generatePostHTML(post) {
   // ── FAQ JSON-LD (if post content contains an FAQ section) ───────────────────
   // Looks for ## Frequently Asked Questions followed by ### Q / paragraph A pairs
   function extractFaqJsonLd(htmlContent, rawMarkdown) {
-    const faqRegex = /#{2,3}\s+Frequently Asked Questions[\s\S]*?(?=\n#{1,2}\s|\s*$)/i;
+    const faqRegex =
+      /#{2,3}\s+Frequently Asked Questions[\s\S]*?(?=\n#{1,2}\s|\s*$)/i;
     const faqBlock = rawMarkdown.match(faqRegex);
-    if (!faqBlock) return '';
+    if (!faqBlock) return "";
     const qaPairs = [];
     const qaRegex = /#{3,4}\s+(.+?)\n+([\s\S]+?)(?=\n#{3,4}|\s*$)/g;
     let match;
     while ((match = qaRegex.exec(faqBlock[0])) !== null) {
-      qaPairs.push({ q: match[1].trim(), a: match[2].trim().replace(/\n+/g, ' ') });
+      qaPairs.push({
+        q: match[1].trim(),
+        a: match[2].trim().replace(/\n+/g, " "),
+      });
     }
-    if (qaPairs.length === 0) return '';
+    if (qaPairs.length === 0) return "";
     return `
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        ${qaPairs.map(pair => `{
+        ${qaPairs
+          .map(
+            (pair) => `{
           "@type": "Question",
           "name": "${pair.q.replace(/"/g, '\\"')}",
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "${pair.a.replace(/"/g, '\\"')}"
           }
-        }`).join(',\n        ')}
+        }`,
+          )
+          .join(",\n        ")}
       ]
     }
     <\/script>`;
@@ -286,7 +328,7 @@ function generatePostHTML(post) {
     <meta name="google-adsense-account" content="ca-pub-1224182851595008">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1224182851595008"
      crossorigin="anonymous"></script>
-    ${tagsString ? `<meta name="keywords" content="${tagsString}" />` : ''}
+    ${tagsString ? `<meta name="keywords" content="${tagsString}" />` : ""}
 
     <!-- Canonical -->
     <link rel="canonical" href="${canonical}" />
@@ -302,9 +344,9 @@ function generatePostHTML(post) {
     <meta property="og:site_name" content="Red Surge Technology" />
     <meta property="article:published_time" content="${new Date(post.date).toISOString()}" />
     <meta property="article:modified_time" content="${new Date(lastModified).toISOString()}" />
-    ${post.category ? `<meta property="article:section" content="${post.category}" />` : ''}
-    ${tagsString ? `<meta property="article:tag" content="${tagsString}" />` : ''}
-    ${tagsString ? tags.map(t => `<meta property="article:tag" content="${t}" />`).join('\n    ') : ''}
+    ${post.category ? `<meta property="article:section" content="${post.category}" />` : ""}
+    ${tagsString ? `<meta property="article:tag" content="${tagsString}" />` : ""}
+    ${tagsString ? tags.map((t) => `<meta property="article:tag" content="${t}" />`).join("\n    ") : ""}
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -403,10 +445,14 @@ function generatePostHTML(post) {
 
     <!-- Content -->
     <section id="content-page-714">
-      ${post.cover_image ? `
+      ${
+        post.cover_image
+          ? `
       <div class="main-img-container">
         <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title} - Red Surge Technology Blog" width="1280" height="720" />
-      </div>` : ''}
+      </div>`
+          : ""
+      }
       <div>
         ${metaBar}
         ${post.content}
@@ -505,9 +551,11 @@ function generatePostHTML(post) {
 }
 
 // ─── Generate post pages (skip if handcrafted HTML already exists) ─────────────
-posts.forEach(post => {
+posts.forEach((post) => {
   if (post.custom_url) {
-    console.log(`  ⏭️  Skipping ${post.slug} (has custom_url, using existing HTML)`);
+    console.log(
+      `  ⏭️  Skipping ${post.slug} (has custom_url, using existing HTML)`,
+    );
     return;
   }
 
@@ -519,7 +567,7 @@ posts.forEach(post => {
   }
 
   const html = generatePostHTML(post);
-  fs.mkdirSync('./blog', { recursive: true });
+  fs.mkdirSync("./blog", { recursive: true });
   fs.writeFileSync(outPath, html);
   console.log(`  📄 Generated blog/${post.slug}.html`);
 });
@@ -535,27 +583,42 @@ function chunkArray(arr, size) {
 
 function generateCardHTML(post) {
   const postUrl = post.custom_url || `/blog/${post.slug}.html`;
-  const tags = Array.isArray(post.tags) ? post.tags : (post.tags ? [post.tags] : []);
+  const tags = Array.isArray(post.tags)
+    ? post.tags
+    : post.tags
+      ? [post.tags]
+      : [];
   return `
-          <li class="cs-item${post.featured ? ' cs-featured' : ''}">
+          <li class="cs-item${post.featured ? " cs-featured" : ""}">
             <picture class="cs-picture" aria-hidden="true">
-              <img decoding="async" src="${post.cover_image || '/images/og-image.jpg'}" alt="${post.title}" width="411" height="236" />
+              <img decoding="async" src="${post.cover_image || "/images/og-image.jpg"}" alt="${post.title}" width="411" height="236" />
             </picture>
             <div class="cs-flex">
               <div class="cs-meta">
                 <span class="cs-date">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="13" height="13"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  <time datetime="${new Date(post.date).toISOString()}">${new Date(post.date).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' })}</time>
+                  <time datetime="${new Date(post.date).toISOString()}">${new Date(post.date).toLocaleDateString("en-US", { day: "2-digit", month: "short", year: "numeric" })}</time>
                 </span>
-                ${post.category ? `<span class="cs-category">${post.category}</span>` : ''}
-                ${post.reading_time ? `<span class="cs-reading-time">
+                ${post.category ? `<span class="cs-category">${post.category}</span>` : ""}
+                ${
+                  post.reading_time
+                    ? `<span class="cs-reading-time">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="13" height="13"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                   ${post.reading_time} min read
-                </span>` : ''}
+                </span>`
+                    : ""
+                }
               </div>
               <h2 class="cs-h3">${post.title}</h2>
-              <p class="cs-item-text">${post.excerpt || ''}</p>
-              ${tags.length > 0 ? `<div class="cs-card-tags">${tags.slice(0, 3).map(tag => `<span class="cs-tag">${tag}</span>`).join('')}</div>` : ''}
+              <p class="cs-item-text">${post.excerpt || ""}</p>
+              ${
+                tags.length > 0
+                  ? `<div class="cs-card-tags">${tags
+                      .slice(0, 3)
+                      .map((tag) => `<span class="cs-tag">${tag}</span>`)
+                      .join("")}</div>`
+                  : ""
+              }
               <a href="${postUrl}" class="cs-link">
                 Read More <span class="screen-reader-text">about ${post.title}</span>
                 <img class="cs-arrow" loading="lazy" decoding="async" src="/images/event-chevron.svg" alt="chevron icon" width="20" height="20" aria-hidden="true" />
@@ -566,41 +629,48 @@ function generateCardHTML(post) {
 
 function generateCardGroupsHTML(pagePosts) {
   const rows = chunkArray(pagePosts, 3);
-  return rows.map(row => {
-    const items = row.map(generateCardHTML).join('');
-    const padding = row.length < 3
-      ? Array(3 - row.length).fill(`<li class="cs-item" style="visibility:hidden"></li>`).join('')
-      : '';
-    return `
+  return rows
+    .map((row) => {
+      const items = row.map(generateCardHTML).join("");
+      const padding =
+        row.length < 3
+          ? Array(3 - row.length)
+              .fill(`<li class="cs-item" style="visibility:hidden"></li>`)
+              .join("")
+          : "";
+      return `
         <ul class="cs-card-group">
           ${items}
           ${padding}
         </ul>`;
-  }).join('');
+    })
+    .join("");
 }
 
 function generatePaginationHTML(currentPage, totalPages) {
-  if (totalPages <= 1) return '';
+  if (totalPages <= 1) return "";
 
-  let links = '';
+  let links = "";
   for (let i = 1; i <= totalPages; i++) {
-    const href = i === 1 ? '/blog.html' : `/blog-page-${i}.html`;
-    const active = i === currentPage ? ' cs-active' : '';
+    const href = i === 1 ? "/blog.html" : `/blog-page-${i}.html`;
+    const active = i === currentPage ? " cs-active" : "";
     links += `<a href="${href}" class="cs-pagination-link${active}" aria-label="Page ${i}">${i}</a>`;
   }
 
-  const prevHref = currentPage > 1
-    ? (currentPage === 2 ? '/blog.html' : `/blog-page-${currentPage - 1}.html`)
-    : null;
-  const nextHref = currentPage < totalPages
-    ? `/blog-page-${currentPage + 1}.html`
-    : null;
+  const prevHref =
+    currentPage > 1
+      ? currentPage === 2
+        ? "/blog.html"
+        : `/blog-page-${currentPage - 1}.html`
+      : null;
+  const nextHref =
+    currentPage < totalPages ? `/blog-page-${currentPage + 1}.html` : null;
 
   return `
     <nav class="cs-pagination" aria-label="Blog pagination">
-      ${prevHref ? `<a href="${prevHref}" class="cs-pagination-link cs-prev" aria-label="Previous page">← Prev</a>` : ''}
+      ${prevHref ? `<a href="${prevHref}" class="cs-pagination-link cs-prev" aria-label="Previous page">← Prev</a>` : ""}
       ${links}
-      ${nextHref ? `<a href="${nextHref}" class="cs-pagination-link cs-next" aria-label="Next page">Next →</a>` : ''}
+      ${nextHref ? `<a href="${nextHref}" class="cs-pagination-link cs-next" aria-label="Next page">Next →</a>` : ""}
     </nav>`;
 }
 
@@ -608,34 +678,46 @@ function generatePaginationHTML(currentPage, totalPages) {
 const POSTS_PER_PAGE = 9;
 const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 
-const blogTemplatePath = './blog.html';
-const blogTemplate = fs.readFileSync(blogTemplatePath, 'utf8');
+const blogTemplatePath = "./blog.html";
+const blogTemplate = fs.readFileSync(blogTemplatePath, "utf8");
 
 for (let page = 1; page <= totalPages; page++) {
-  const pagePosts = posts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
+  const pagePosts = posts.slice(
+    (page - 1) * POSTS_PER_PAGE,
+    page * POSTS_PER_PAGE,
+  );
   const cardGroupsHTML = generateCardGroupsHTML(pagePosts);
   const paginationHTML = generatePaginationHTML(page, totalPages);
   const fullHTML = `${cardGroupsHTML}\n${paginationHTML}`;
 
   let pageHTML = blogTemplate.replace(
     /<!-- CMS_POSTS_START -->[\s\S]*?<!-- CMS_POSTS_END -->/,
-    `<!-- CMS_POSTS_START -->\n${fullHTML}\n    <!-- CMS_POSTS_END -->`
+    `<!-- CMS_POSTS_START -->\n${fullHTML}\n    <!-- CMS_POSTS_END -->`,
   );
 
   if (page === 1) {
     fs.writeFileSync(blogTemplatePath, pageHTML);
     console.log(`  📄 Updated blog.html (page 1 of ${totalPages})`);
   } else {
+    // Noindex paginated archives
     pageHTML = pageHTML.replace(
-      `<link rel="canonical" href="https://redsurgetechnology.com/blog" />`,
-      `<link rel="canonical" href="https://redsurgetechnology.com/blog-page-${page}" />`
+      '<meta name="robots" content="index, follow" />',
+      '<meta name="robots" content="noindex, follow" />',
     );
+
+    // Update canonical
     pageHTML = pageHTML.replace(
-      `<meta property="og:url" content="https://redsurgetechnology.com/blog" />`,
-      `<meta property="og:url" content="https://redsurgetechnology.com/blog-page-${page}" />`
+      '<link rel="canonical" href="https://redsurgetechnology.com/blog" />',
+      `<link rel="canonical" href="https://redsurgetechnology.com/blog-page-${page}" />`,
     );
+
+    // Update OG URL
+    pageHTML = pageHTML.replace(
+      '<meta property="og:url" content="https://redsurgetechnology.com/blog" />',
+      `<meta property="og:url" content="https://redsurgetechnology.com/blog-page-${page}" />`,
+    );
+
     fs.writeFileSync(`./blog-page-${page}.html`, pageHTML);
-    console.log(`  📄 Generated blog-page-${page}.html`);
   }
 }
 
