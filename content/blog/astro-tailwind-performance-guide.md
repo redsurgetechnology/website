@@ -41,7 +41,7 @@ In this guide, I'll break down exactly why this stack is so powerful, how it com
 
 ---
 
-# What Is Astro?
+## What Is Astro?
 
 [Astro](https://astro.build/) is a modern web framework designed around one core idea:
 
@@ -73,7 +73,7 @@ That means you can still use React components when needed without turning your e
 
 ---
 
-# Why Website Performance Matters More Than Ever
+## Why Website Performance Matters More Than Ever
 
 Website speed is no longer optional.
 
@@ -117,7 +117,7 @@ Astro naturally aligns with those performance goals.
 
 ---
 
-# Why Tailwind CSS Works So Well with Astro
+## Why Tailwind CSS Works So Well with Astro
 
 Tailwind CSS has completely changed how many developers approach styling.
 
@@ -141,9 +141,9 @@ At first, some developers dislike the utility-first approach.
 
 But once you build larger projects with Tailwind, the advantages become obvious.
 
-## Benefits of Tailwind CSS
+### Benefits of Tailwind CSS
 
-### 1. Faster Development
+#### 1. Faster Development
 
 Tailwind dramatically speeds up UI development.
 
@@ -159,7 +159,7 @@ This becomes especially powerful in component-based frameworks.
 
 ---
 
-### 2. Consistent Design Systems
+#### 2. Consistent Design Systems
 
 Tailwind encourages consistency through reusable utility scales:
 
@@ -174,7 +174,7 @@ That consistency is important when scaling websites or applications.
 
 ---
 
-### 3. Smaller CSS Bundles
+#### 3. Smaller CSS Bundles
 
 Tailwind removes unused CSS during production builds.
 
@@ -184,7 +184,7 @@ Combined with Astro's minimal JavaScript philosophy, the final output becomes in
 
 ---
 
-### 4. Responsive Design Is Easier
+#### 4. Responsive Design Is Easier
 
 Tailwind's responsive utilities make mobile-first development significantly cleaner.
 
@@ -204,7 +204,7 @@ If you're interested in responsive design techniques, these articles pair well w
 
 ---
 
-# Astro vs Next.js
+## Astro vs Next.js
 
 I still enjoy using Next.js, especially for applications that need:
 
@@ -217,7 +217,7 @@ I still enjoy using Next.js, especially for applications that need:
 
 But for many websites, Next.js can be overkill.
 
-## Where Astro Wins
+### Where Astro Wins
 
 Astro often performs better for:
 
@@ -236,7 +236,7 @@ If a page is mostly content, Astro produces cleaner output with less JavaScript 
 
 ---
 
-## Where Next.js Wins
+### Where Next.js Wins
 
 Next.js still shines for:
 
@@ -252,7 +252,7 @@ One mistake many developers make is using a heavyweight framework for every webs
 
 ---
 
-# The SEO Benefits of Astro
+## The SEO Benefits of Astro
 
 One reason I increasingly recommend Astro for business websites is SEO performance.
 
@@ -266,7 +266,7 @@ Search engines love:
 
 Astro naturally helps with all of these.
 
-## Better Core Web Vitals
+### Better Core Web Vitals
 
 Astro websites frequently score very high in:
 
@@ -278,7 +278,7 @@ Because less JavaScript is shipped, the browser spends less time parsing and exe
 
 ---
 
-## Cleaner HTML Output
+### Cleaner HTML Output
 
 Astro outputs lean HTML by default.
 
@@ -293,7 +293,7 @@ Compared to heavily hydrated frontend apps, Astro pages are easier for search en
 
 ---
 
-## Easier Content Structuring
+### Easier Content Structuring
 
 Astro works especially well for content-heavy sites because Markdown support is excellent.
 
@@ -309,7 +309,7 @@ This makes it ideal for SEO-focused blogging strategies.
 
 ---
 
-# Why I Still Use WordPress Sometimes
+## Why I Still Use WordPress Sometimes
 
 Even though I enjoy modern frameworks, WordPress still has value.
 
@@ -342,7 +342,7 @@ This gives clients a familiar editing experience while dramatically improving fr
 
 ---
 
-# Developer Experience Matters Too
+## Developer Experience Matters Too
 
 Performance matters.
 
@@ -352,7 +352,7 @@ But developer experience matters too.
 
 One reason I enjoy Astro and Tailwind is simply because development feels fast and enjoyable.
 
-## Hot Reloading Is Excellent
+### Hot Reloading Is Excellent
 
 Changes update almost instantly during development.
 
@@ -360,7 +360,7 @@ That quick feedback loop improves productivity significantly.
 
 ---
 
-## File Organization Is Clean
+### File Organization Is Clean
 
 Astro projects stay relatively organized even as they scale.
 
@@ -368,7 +368,7 @@ Layouts, components, and content collections are straightforward to structure.
 
 ---
 
-## Tailwind Reduces CSS Headaches
+### Tailwind Reduces CSS Headaches
 
 Traditional CSS often becomes difficult to maintain over time.
 
@@ -383,7 +383,7 @@ That means less time debugging styling issues and more time building features.
 
 ---
 
-# The Importance of Accessibility
+## The Importance of Accessibility
 
 Accessibility is something more developers are finally taking seriously.
 
@@ -424,7 +424,7 @@ It also improves:
 
 ---
 
-# Why Minimal JavaScript Is Becoming a Bigger Trend
+## Why Minimal JavaScript Is Becoming a Bigger Trend
 
 The frontend ecosystem went through a phase where many websites became unnecessarily complicated.
 
@@ -457,21 +457,21 @@ Astro fits perfectly into that movement.
 
 ---
 
-# My Typical Stack for Modern Business Websites
+## My Typical Stack for Modern Business Websites
 
 For many projects today, my stack looks something like this:
 
-## Frontend
+### Frontend
 
 - Astro
 - Tailwind CSS
 - React components where needed
 
-## Hosting
+### Hosting
 
 - Netlify
 
-## CMS Options
+### CMS Options
 
 Depending on the project:
 
@@ -480,7 +480,7 @@ Depending on the project:
 - WordPress
 - Decap CMS
 
-## Additional Tools
+### Additional Tools
 
 Sometimes I also integrate:
 
@@ -496,7 +496,7 @@ You can combine tools based on the needs of the project instead of forcing every
 
 ---
 
-# Should You Learn Astro in 2026?
+## Should You Learn Astro in 2026?
 
 I think Astro is absolutely worth learning.
 
@@ -514,7 +514,7 @@ Even if you continue using React or Next.js for larger applications, Astro is an
 
 ---
 
-# Final Thoughts
+## Final Thoughts
 
 The modern web doesn't need to be bloated.
 
@@ -546,7 +546,7 @@ And Astro is positioned extremely well for that future.
 
 ---
 
-## Related Articles
+### Related Articles
 
 - https://redsurgetechnology.com/blog/improve-website-page-speed-seo-nj
 - https://redsurgetechnology.com/blog/mobile-first-web-design-guide-2026
