@@ -1,9 +1,12 @@
 <!doctype html>
 <html lang="en-US">
   <head>
-    <meta name="google-adsense-account" content="ca-pub-1224182851595008">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1224182851595008"
-     crossorigin="anonymous"></script>
+    <meta name="google-adsense-account" content="ca-pub-1224182851595008" />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1224182851595008"
+      crossorigin="anonymous"
+    ></script>
     <!-- Critical CSS -->
     <style>
       :root {
@@ -505,6 +508,51 @@
           top: 0.625rem;
           left: -0.75rem;
         }
+        #content-page-714 h2 {
+          font-size: 1.8rem;
+          color: var(--headerColor);
+          margin: 2rem 0 1rem;
+          padding-bottom: 0.5rem;
+          border-bottom: 2px solid var(--primary);
+        }
+        #content-page-714 h3 {
+          font-size: 1.4rem;
+          color: var(--headerColor);
+          margin: 1.5rem 0 0.75rem;
+        }
+        #content-page-714 pre {
+          background: #f4f4f4;
+          border-left: 4px solid var(--primary);
+          padding: 1rem;
+          overflow-x: auto;
+          margin: 1rem 0;
+          font-size: 0.9rem;
+          line-height: 1.4;
+        }
+        #content-page-714 code {
+          background: #f0f0f0;
+          padding: 0.2rem 0.4rem;
+          border-radius: 3px;
+          font-size: 0.9em;
+        }
+        #content-page-714 pre code {
+          background: none;
+          padding: 0;
+        }
+        #content-page-714 .tip-box {
+          background: #e8f4fd;
+          border-left: 4px solid #0066cc;
+          padding: 1rem;
+          margin: 1.5rem 0;
+          border-radius: 0 4px 4px 0;
+        }
+        #content-page-714 .warning-box {
+          background: #fff3e0;
+          border-left: 4px solid #ff9800;
+          padding: 1rem;
+          margin: 1.5rem 0;
+          border-radius: 0 4px 4px 0;
+        }
       }
       @media only screen and (min-width: 48rem) {
         #cs-navigation .cs-top-link:nth-of-type(2) {
@@ -544,11 +592,11 @@
 
     <!-- Primary Meta Tags -->
     <title>
-      JavaScript HashMap Guide: Create and Optimize Key-Value Storage
+      JavaScript HashMap Guide: Create and Optimize Key-Value Storage in 2025
     </title>
     <meta
       name="description"
-      content="Learn how JavaScript HashMaps work with real examples, performance tips, and techniques for efficient key-value storage."
+      content="Complete JavaScript HashMap guide covering Map objects, plain objects as hashmaps, performance optimization, real-world examples, and when to use each approach for key-value storage."
     />
     <meta name="author" content="Red Surge Technology" />
 
@@ -573,7 +621,7 @@
     />
     <meta
       property="og:description"
-      content="Master JavaScript HashMaps with this in-depth guide. Learn when to use objects, Map, or custom structures for storing key-value pairs, plus performance tips and coding best practices."
+      content="Master JavaScript HashMaps with this in-depth guide. Learn when to use objects, Map, or WeakMap for key-value storage, plus performance tips and real-world coding patterns."
     />
     <meta
       property="og:image"
@@ -595,7 +643,7 @@
     />
     <meta
       name="twitter:description"
-      content="Discover everything about JavaScript HashMaps—how to create them, use them for key-value storage, optimize for performance, and apply in real-world projects."
+      content="Discover everything about JavaScript HashMaps—how to create them, use Map vs Object for key-value storage, optimize for performance, and apply in real-world projects."
     />
     <meta
       name="twitter:image"
@@ -668,7 +716,7 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "JavaScript HashMap Guide: How to Create, Use, and Optimize Key-Value Storage",
-        "description": "A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently in JavaScript using objects, Map, and custom implementations.",
+        "description": "A complete JavaScript HashMap guide covering creation, usage, performance tips, and real-world examples. Learn how to store key-value pairs efficiently using Map, Object, and WeakMap.",
         "url": "https://redsurgetechnology.com/blog/2025/july/javascript-hashmap-guide",
         "author": {
           "@type": "Organization",
@@ -803,7 +851,6 @@
               <span class="cs-line cs-line3" aria-hidden="true"></span>
             </div>
           </button>
-          <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
           <div class="cs-ul-wrapper">
             <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
               <li class="cs-li">
@@ -813,9 +860,7 @@
                 <a href="../../../about" class="cs-li-link"> About </a>
               </li>
               <li class="cs-li">
-                <a href="../../../portfolio" class="cs-li-link">
-                  Portfolio
-                </a>
+                <a href="../../../portfolio" class="cs-li-link"> Portfolio </a>
               </li>
               <li class="cs-li">
                 <a href="../../../blog" class="cs-li-link"> Blog </a>
@@ -841,25 +886,21 @@
       </div>
       <!--Background Image-->
       <picture class="cs-background">
-        <!-- Mobile (small phones) -->
         <source
           media="(max-width: 600px)"
           srcset="../../../images/banner_bg_red-360w.webp"
           type="image/webp"
         />
-        <!-- Tablet and small desktop -->
         <source
           media="(min-width: 601px) and (max-width: 1024px)"
           srcset="../../../images/banner_bg_red-720w.webp"
           type="image/webp"
         />
-        <!-- Large desktop -->
         <source
           media="(min-width: 1025px)"
           srcset="../../../images/banner_bg_red-1280w.webp"
           type="image/webp"
         />
-        <!-- Fallback image -->
         <img
           decoding="async"
           src="../../../images/banner_bg_red-1280w.webp"
@@ -875,7 +916,6 @@
     <section id="content-page-714">
       <div class="main-img-container">
         <picture>
-          <!-- Mobile (≤600px) -->
           <source
             media="(max-width: 600px)"
             srcset="
@@ -886,8 +926,6 @@
             sizes="(max-width: 600px) 360px"
             type="image/webp"
           />
-
-          <!-- Tablet (601px–1024px) -->
           <source
             media="(min-width: 601px) and (max-width: 1024px)"
             srcset="
@@ -897,8 +935,6 @@
             sizes="(max-width: 1024px) 720px"
             type="image/webp"
           />
-
-          <!-- Desktop (≥1025px) -->
           <source
             media="(min-width: 1025px)"
             srcset="
@@ -907,8 +943,6 @@
             sizes="1280px"
             type="image/webp"
           />
-
-          <!-- Fallback image -->
           <img
             fetchpriority="high"
             decoding="sync"
@@ -921,6 +955,7 @@
         </picture>
       </div>
       <div>
+        <h2>Table of Contents</h2>
         <ul>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;"
@@ -929,212 +964,752 @@
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;"
-              >Understanding the ES6 Map and Why It Feels Like a HashMap</a
+              >Understanding the ES6 Map: JavaScript's Built-In HashMap</a
             >
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;"
-              >Starting Your First JavaScript HashMap</a
+              >Creating and Initializing Your First JavaScript HashMap</a
             >
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;"
-              >Adding, Getting, and Updating Your Data</a
+              >Core Operations: Adding, Getting, and Updating Values</a
             >
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;"
-              >Finding and Removing Keys</a
+              >Checking, Deleting, and Managing Keys</a
             >
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;"
-              >Looping Through Your HashMap</a
+              >Iterating Through Your HashMap Efficiently</a
             >
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;"
-              >Choosing Between a Map and an Object</a
+              >Map vs Object: Choosing the Right Tool for Key-Value Storage</a
             >
           </li>
           <li>
             <a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;"
+              >Performance Considerations and Best Practices</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-9'); return false;"
+              >Real-World HashMap Patterns and Examples</a
+            >
+          </li>
+          <li>
+            <a href="#" onclick="scrollToTargetAdjusted('h2-10'); return false;"
               >Final Thoughts on Mastering JavaScript HashMaps</a
             >
           </li>
         </ul>
 
-        <section>
-          <p>
-            If you’ve ever sat down to build something in JavaScript—maybe a
-            little to-do list app, maybe an entire analytics dashboard—you’ve
-            probably needed a way to store and retrieve data quickly. And not
-            just in a “loop through an array and hope it’s there” kind of way.
-            You wanted something faster, cleaner, and more predictable.
-          </p>
-          <p>
-            That’s where the idea of a <strong>HashMap</strong> comes in. In
-            other languages like Java or C#, a HashMap is a native data
-            structure designed for lightning-fast lookups using a unique key.
-            JavaScript doesn’t come with a literal <code>HashMap</code> type out
-            of the box, but it does have two powerful tools that work in the
-            same spirit: objects and the ES6 <code>Map</code> object.
-          </p>
-          <p>
-            The difference between using a plain object and using a Map might
-            seem small at first—kind of like the difference between storing
-            notes in a messy drawer versus using a labeled filing cabinet. But
-            once you understand the subtle distinctions, it’s hard to go back.
-          </p>
-        </section>
+        <p>
+          If you've ever built anything non-trivial in JavaScript — a task
+          management app, a real-time analytics dashboard, or even a simple
+          caching layer — you've probably needed a way to store and retrieve
+          data by a unique identifier. Not by looping through an array hoping to
+          find a match (an O(n) operation that gets painfully slow with larger
+          datasets), but with true constant-time lookups where you jump directly
+          to the value using its key.
+        </p>
 
-        <section>
-          <h2 id="h2-1">What a HashMap Really Means in JavaScript</h2>
-          <p>
-            A HashMap is like a phonebook in your code. You have a name (key),
-            you have a phone number (value), and you want to jump straight to
-            the number without flipping through every page. That’s exactly what
-            a HashMap does—turns the key into a quick address where the value is
-            stored.
-          </p>
-          <p>
-            In JavaScript, we mimic this behavior with two main structures:
-            objects and Maps. You can think of the <code>Map</code> object as a
-            supercharged version of an object. It doesn’t come with inherited
-            methods from <code>Object.prototype</code>, so you don’t risk
-            accidentally overwriting built-in properties. It also remembers the
-            order in which you add entries—something plain objects only started
-            doing reliably in modern engines.
-          </p>
-          <pre><code class="language-js">// Using a Map as a HashMap
-const userPreferences = new Map();
-userPreferences.set('theme', 'dark');
-userPreferences.set('notifications', true);
+        <p>
+          That's exactly what a <strong>HashMap</strong> provides. In languages
+          like Java, C#, and Python, a HashMap (or Dictionary) is a first-class
+          data structure built into the language core. JavaScript doesn't ship
+          with a literal <code>HashMap</code> class, but it gives us two
+          powerful tools that serve the same purpose: plain objects and the ES6
+          <code>Map</code> object. Understanding when and how to use each is one
+          of those skills that separates intermediate developers from the ones
+          writing cleaner, faster, more maintainable code.
+        </p>
 
-console.log(userPreferences.get('theme')); // "dark"
+        <p>
+          This guide covers everything you need to know about using HashMaps in
+          JavaScript — from basic creation to performance optimization and
+          real-world patterns. Whether you're building a cache, tracking unique
+          values, or structuring complex application state, you'll leave with a
+          clear understanding of which tool to reach for and why.
+        </p>
+
+        <h2 id="h2-1">What a HashMap Really Means in JavaScript</h2>
+
+        <p>
+          At its core, a HashMap is an abstract data type that maps keys to
+          values using a hash function. The hash function takes a key, computes
+          an index, and stores the value at that index in an underlying array.
+          When you need to retrieve the value later, the same hash function
+          computes the same index, giving you O(1) average-case lookup time —
+          meaning the lookup speed stays constant regardless of how many entries
+          you've stored.
+        </p>
+
+        <p>
+          Think of it like a well-organized filing cabinet. Each file has a
+          unique label (the key), and a lookup system tells you exactly which
+          drawer and folder contains that file (the hash). You don't flip
+          through every drawer — you go straight to the right one. That's the
+          fundamental advantage of a HashMap over an array search.
+        </p>
+
+        <p>
+          In JavaScript, we achieve this behavior through two primary
+          mechanisms:
+        </p>
+
+        <ul>
+          <li>
+            <strong>Plain objects</strong> — the original key-value store in
+            JavaScript, where all keys are converted to strings (or Symbols)
+          </li>
+          <li>
+            <strong>The Map object</strong> — introduced in ES6 (ES2015), a
+            dedicated key-value store that preserves insertion order and allows
+            keys of any type
+          </li>
+        </ul>
+
+        <p>
+          There's also <strong>WeakMap</strong> — a specialized variant we'll
+          touch on later — that accepts only objects as keys and holds weak
+          references, making it ideal for metadata storage that shouldn't
+          prevent garbage collection.
+        </p>
+
+        <div class="tip-box">
+          <strong>Key Insight:</strong> When developers refer to a "JavaScript
+          HashMap," they're almost always talking about either a plain object or
+          a Map instance. The term "HashMap" describes the behavior (efficient
+          key-value lookups), not a specific JavaScript type.
+        </div>
+
+        <h2 id="h2-2">
+          Understanding the ES6 Map: JavaScript's Built-In HashMap
+        </h2>
+
+        <p>
+          When
+          <a
+            href="https://blog.stackademic.com/unlocking-modern-javascript-a-comprehensive-guide-to-ecmascript-6-features-c165f7956720"
+            target="_blank"
+            >ECMAScript 2015 (ES6)</a
+          >
+          arrived, it brought the <code>Map</code> object — JavaScript's first
+          dedicated key-value data structure designed specifically for use as a
+          hash map. Unlike plain objects, Map was built from the ground up for
+          storing and retrieving values by key, without the baggage of object
+          prototype inheritance.
+        </p>
+
+        <h3>What Makes Map Different from Objects</h3>
+
+        <p>
+          Plain objects come with inherited properties and methods from
+          <code>Object.prototype</code> — things like <code>toString</code>,
+          <code>hasOwnProperty</code>, and <code>constructor</code>. This means
+          if you're not careful, a user-supplied key could collide with a
+          built-in property name. Map has no such problem because it doesn't
+          inherit from anything — its keys exist in a clean namespace.
+        </p>
+
+        <p>
+          Map also preserves insertion order. While modern JavaScript engines do
+          maintain property order for most string keys on plain objects, this
+          behavior wasn't always guaranteed and can still have edge cases
+          (particularly with numeric keys). Map makes order preservation an
+          explicit part of its specification.
+        </p>
+
+        <p>
+          Perhaps most importantly, Map accepts
+          <strong>keys of any type</strong> — objects, functions, DOM elements,
+          even other Maps. Plain objects coerce all keys to strings (or
+          Symbols), which means <code>obj[1]</code> and
+          <code>obj["1"]</code> reference the same property. Map treats them as
+          distinct keys.
+        </p>
+
+        <pre><code class="language-js">// Map accepts any key type without coercion
+const cache = new Map();
+const userObject = { id: 1, name: 'Alice' };
+const domElement = document.querySelector('#main');
+
+cache.set(userObject, { lastLogin: new Date() });
+cache.set(domElement, { clickCount: 0 });
+cache.set(1, 'number one');
+cache.set('1', 'string one');
+
+// These are different entries — no key coercion
+console.log(cache.get(1));     // "number one"
+console.log(cache.get('1'));   // "string one"
 </code></pre>
-        </section>
 
-        <section>
-          <h2 id="h2-2">
-            Understanding the ES6 Map and Why It Feels Like a HashMap
-          </h2>
-          <p>
-            When
-            <a
-              href="https://blog.stackademic.com/unlocking-modern-javascript-a-comprehensive-guide-to-ecmascript-6-features-c165f7956720"
-              target="_blank"
-              >ECMAScript 2015 (ES6)</a
-            >
-            arrived, it introduced the <code>Map</code> object. This was
-            JavaScript’s first real answer to developers who needed a true
-            key-value store that could handle more than just strings as keys.
-          </p>
-          <p>
-            With <code>Map</code>, you can even use objects or DOM elements as
-            keys without converting them to strings.
-          </p>
-          <pre><code class="language-js">const elementMap = new Map();
-const button = document.querySelector('#submit');
+        <h3>When WeakMap Makes Sense</h3>
 
-elementMap.set(button, { clicked: false });
-console.log(elementMap.get(button)); // { clicked: false }
-</code></pre>
-        </section>
+        <p>
+          <strong>WeakMap</strong> is a specialized variant of Map that only
+          accepts objects as keys and holds those keys weakly — meaning if no
+          other reference to the key object exists, it can be garbage collected,
+          and the WeakMap entry disappears automatically. This makes WeakMap
+          ideal for storing metadata about objects you don't control the
+          lifecycle of.
+        </p>
 
-        <section>
-          <h2 id="h2-3">Starting Your First JavaScript HashMap</h2>
-          <p>Creating an empty Map is straightforward:</p>
-          <pre><code class="language-js">const myMap = new Map();
-</code></pre>
-          <p>You can also initialize a Map with data:</p>
-          <pre><code class="language-js">const myMap = new Map([
-  ['name', 'Alice'],
-  ['age', 30],
-  ['role', 'Developer']
-]);
-</code></pre>
-        </section>
+        <pre><code class="language-js">// WeakMap for private data or metadata
+const userMetadata = new WeakMap();
 
-        <section>
-          <h2 id="h2-4">Adding, Getting, and Updating Your Data</h2>
-          <p>
-            Adding or updating entries in a Map uses
-            <code>.set(key, value)</code>:
-          </p>
-          <pre><code class="language-js">const settings = new Map();
-settings.set('language', 'English');
-settings.set('language', 'Spanish'); // updates existing key
-</code></pre>
-          <p>Retrieving values uses <code>.get(key)</code>:</p>
-          <pre><code class="language-js">console.log(settings.get('language')); // "Spanish"
-</code></pre>
-        </section>
+function processUser(user) {
+  // Store processing metadata without preventing garbage collection
+  userMetadata.set(user, {
+    processedAt: Date.now(),
+    retryCount: 0
+  });
 
-        <section>
-          <h2 id="h2-5">Finding and Removing Keys</h2>
-          <p>Check if a key exists using <code>.has(key)</code>:</p>
-          <pre><code class="language-js">if (settings.has('language')) {
-  console.log('Language setting found.');
+  // When 'user' goes out of scope elsewhere, both the object
+  // and its metadata can be garbage collected automatically
 }
 </code></pre>
-          <p>Remove a single entry with <code>.delete(key)</code>:</p>
-          <pre><code class="language-js">settings.delete('language');
-</code></pre>
-          <p>Clear the entire Map with <code>.clear()</code>:</p>
-          <pre><code class="language-js">settings.clear();
-</code></pre>
-        </section>
 
-        <section>
-          <h2 id="h2-6">Looping Through Your HashMap</h2>
-          <p>Maps are iterable, so you can loop through them directly.</p>
-          <pre><code class="language-js">// Using forEach
-settings.forEach((value, key) =&gt; {
-  console.log(`${key}: ${value}`);
+        <h2 id="h2-3">
+          Creating and Initializing Your First JavaScript HashMap
+        </h2>
+
+        <p>
+          Creating a Map is straightforward. The constructor accepts an optional
+          iterable — usually an array of key-value pairs — allowing you to
+          initialize the Map with data immediately.
+        </p>
+
+        <pre><code class="language-js">// Empty Map
+const emptyMap = new Map();
+
+// Initialized with data — each inner array is [key, value]
+const settings = new Map([
+  ['theme', 'dark'],
+  ['notifications', true],
+  ['language', 'en-US']
+]);
+
+// From an existing object's entries
+const user = { name: 'Collin', role: 'Developer', location: 'NJ' };
+const userMap = new Map(Object.entries(user));
+
+console.log(userMap.get('name')); // "Collin"
+</code></pre>
+
+        <p>
+          The <code>Object.entries()</code> method is particularly useful when
+          you have existing object data that you want to convert into a Map. It
+          returns an array of <code>[key, value]</code> pairs, which is exactly
+          the format Map's constructor expects.
+        </p>
+
+        <h3>Determining Map Size</h3>
+
+        <p>
+          Unlike objects — where you'd need
+          <code>Object.keys(obj).length</code> — Map provides a direct
+          <code>.size</code> property:
+        </p>
+
+        <pre><code class="language-js">const inventory = new Map([
+  ['apples', 12],
+  ['oranges', 7],
+  ['bananas', 20]
+]);
+
+console.log(inventory.size); // 3
+</code></pre>
+
+        <h2 id="h2-4">Core Operations: Adding, Getting, and Updating Values</h2>
+
+        <p>
+          The Map API is intentionally simple and consistent. Every operation is
+          a method call, with no bracket notation or property access quirks to
+          worry about.
+        </p>
+
+        <h3>Adding and Updating with .set()</h3>
+
+        <p>
+          The <code>.set(key, value)</code> method adds a new entry or updates
+          an existing one if the key already exists. It returns the Map itself,
+          which enables method chaining for concise initialization or bulk
+          updates.
+        </p>
+
+        <pre><code class="language-js">const settings = new Map();
+
+// Adding new entries
+settings.set('theme', 'dark');
+settings.set('fontSize', 16);
+
+// Updating an existing key — no error, just overwrites
+settings.set('theme', 'light');
+
+// Method chaining for concise updates
+settings
+  .set('notifications', true)
+  .set('autosave', false)
+  .set('language', 'en-US');
+
+console.log(settings.get('theme')); // "light"
+</code></pre>
+
+        <h3>Retrieving with .get()</h3>
+
+        <p>
+          The <code>.get(key)</code> method returns the value associated with
+          the key, or <code>undefined</code> if the key doesn't exist. This is
+          cleaner than object property access because there's no risk of
+          prototype chain interference.
+        </p>
+
+        <pre><code class="language-js">const cache = new Map();
+cache.set('user:42', { name: 'Alice', lastSeen: Date.now() });
+
+const userData = cache.get('user:42');
+const missingData = cache.get('user:999');
+
+console.log(userData?.name);     // "Alice"
+console.log(missingData);        // undefined
+</code></pre>
+
+        <p>
+          Note the use of optional chaining (<code>?.</code>) in the example
+          above. Since <code>.get()</code> can return <code>undefined</code>,
+          optional chaining is a safe way to access nested properties without
+          throwing errors.
+        </p>
+
+        <h2 id="h2-5">Checking, Deleting, and Managing Keys</h2>
+
+        <p>
+          Map provides dedicated methods for existence checking, deletion, and
+          clearing — all with clearer semantics than the equivalent object
+          operations.
+        </p>
+
+        <h3>Checking Key Existence with .has()</h3>
+
+        <p>
+          Unlike objects where you might write
+          <code>if (obj[key] !== undefined)</code> or
+          <code>obj.hasOwnProperty(key)</code>, Map uses
+          <code>.has(key)</code> which returns a boolean:
+        </p>
+
+        <pre><code class="language-js">const config = new Map([['debug', false], ['port', 3000]]);
+
+if (config.has('debug')) {
+  console.log('Debug mode configured');
+}
+
+// .has() works correctly even when the value is falsy
+console.log(config.has('debug')); // true (value is false, but key exists)
+</code></pre>
+
+        <p>
+          This is an important distinction: with objects, checking
+          <code>obj.debug</code> would return <code>false</code>, which is
+          ambiguous — does the property not exist, or does it exist with a falsy
+          value? <code>.has()</code> eliminates this ambiguity.
+        </p>
+
+        <h3>Removing Entries with .delete() and .clear()</h3>
+
+        <pre><code class="language-js">const data = new Map([
+  ['temp', 'temporary value'],
+  ['persistent', 'keep this'],
+  ['cache-buster', Date.now()]
+]);
+
+// Remove a single entry — returns true if key existed
+console.log(data.delete('temp'));      // true
+console.log(data.delete('nonexistent')); // false
+
+// Remove all entries at once
+data.clear();
+console.log(data.size); // 0
+</code></pre>
+
+        <div class="warning-box">
+          <strong>Performance Note:</strong> Unlike the
+          <code>delete</code> operator on objects — which can degrade
+          performance by de-optimizing the object's hidden class in some
+          JavaScript engines — Map's <code>.delete()</code> method is optimized
+          for frequent additions and removals. If you're doing a lot of dynamic
+          key management, Map is the better choice.
+        </div>
+
+        <h2 id="h2-6">Iterating Through Your HashMap Efficiently</h2>
+
+        <p>
+          One of Map's strongest features is its built-in iteration protocol.
+          Maps are directly iterable, meaning you can use
+          <code>for...of</code> loops without any intermediate method calls.
+          They also provide <code>.forEach()</code> for functional-style
+          iteration and separate iterators for keys, values, and entries.
+        </p>
+
+        <pre><code class="language-js">const scores = new Map([
+  ['Alice', 95],
+  ['Bob', 82],
+  ['Charlie', 78]
+]);
+
+// for...of with destructuring (cleanest approach)
+for (let [name, score] of scores) {
+  console.log(`${name}: ${score}`);
+}
+
+// forEach with value-first callback (consistent with Array.forEach)
+scores.forEach((score, name) => {
+  console.log(`${name} scored ${score}`);
 });
 
-// Using for...of with entries
-for (let [key, value] of settings.entries()) {
-  console.log(key, value);
+// Iterate only keys or only values
+const names = [...scores.keys()];     // ["Alice", "Bob", "Charlie"]
+const allScores = [...scores.values()]; // [95, 82, 78]
+
+// entries() iterator — same as the default iterator
+for (let entry of scores.entries()) {
+  console.log(entry); // ["Alice", 95], ["Bob", 82], etc.
 }
 </code></pre>
-        </section>
 
-        <section>
-          <h2 id="h2-7">Choosing Between a Map and an Object</h2>
-          <p>
-            Objects work well for fixed string keys and lightweight storage,
-            especially for JSON. Maps are better when keys can be any type, when
-            insertion order matters, or when performance is important for
-            frequent changes.
-          </p>
-          <p>
-            In large applications, replacing objects with Maps for certain
-            workloads can lead to significant performance improvements.
-          </p>
-        </section>
+        <p>
+          Notice that <code>.forEach()</code> on a Map passes
+          <code>(value, key, map)</code> to the callback — the same signature as
+          <code>Array.prototype.forEach</code> with
+          <code>(element, index, array)</code>. This consistency makes Maps feel
+          natural when you're already comfortable with array iteration.
+        </p>
 
-        <section>
-          <h2 id="h2-8">Final Thoughts on Mastering JavaScript HashMaps</h2>
-          <p>
-            Using Maps as HashMaps in JavaScript can make your code more
-            efficient and easier to manage. The key is knowing when to choose a
-            Map over an object. For dynamic keys, frequent updates, and
-            guaranteed order, Maps are the clear winner. For fixed
-            configurations or JSON structures, objects still hold their ground.
-          </p>
-          <p>
-            Once you start working with Maps, you might find yourself wondering
-            how you managed without them.
-          </p>
-          <p>
-            If you enjoyed this article, check out our latest post on
-            <a href="./nginx-rtmp-guide">Nginx RTMP guide</a>. As always,
-            if you have any questions or comments, feel free to
-            <a href="../../../contact">contact us</a>.
-          </p>
-        </section>
+        <h2 id="h2-7">
+          Map vs Object: Choosing the Right Tool for Key-Value Storage
+        </h2>
+
+        <p>
+          This is the question that trips up many developers. Both can store
+          key-value pairs. Both are widely used. So when should you choose one
+          over the other? The answer depends on your specific use case.
+        </p>
+
+        <h3>When to Use an Object</h3>
+
+        <p>Objects remain the right choice for several common scenarios:</p>
+
+        <ul>
+          <li>
+            <strong>JSON serialization:</strong>
+            <code>JSON.stringify()</code> works directly on objects. Maps
+            require conversion (e.g., <code>JSON.stringify([...map])</code>) and
+            lose their structure in the process.
+          </li>
+          <li>
+            <strong>Fixed, known keys:</strong> When your keys are predetermined
+            string identifiers — like configuration objects or data transfer
+            objects — the simpler syntax of object literals is often clearer.
+          </li>
+          <li>
+            <strong>API responses and data modeling:</strong> Most APIs return
+            JSON objects, and ORMs and data libraries expect plain objects.
+            Using objects in these contexts avoids unnecessary conversions.
+          </li>
+          <li>
+            <strong>Destructuring and spread:</strong> Object destructuring and
+            the spread operator provide concise syntax that Maps can't match
+            directly.
+          </li>
+        </ul>
+
+        <h3>When to Use a Map</h3>
+
+        <p>Map becomes the better choice when:</p>
+
+        <ul>
+          <li>
+            <strong>Keys are dynamic or unknown:</strong> If keys come from user
+            input or external sources, Map avoids prototype pollution risks.
+          </li>
+          <li>
+            <strong>Keys aren't strings:</strong> When you need to key by
+            objects, functions, or other non-string values.
+          </li>
+          <li>
+            <strong>Performance matters:</strong> For frequent additions and
+            removals, Map outperforms objects, especially in hot loops.
+          </li>
+          <li>
+            <strong>Insertion order matters:</strong> Map guarantees
+            insertion-order iteration without caveats.
+          </li>
+          <li>
+            <strong>You need size tracking:</strong> <code>map.size</code> is
+            O(1); <code>Object.keys(obj).length</code> is O(n).
+          </li>
+          <li>
+            <strong>You're building a cache:</strong> Map's consistent API and
+            performance characteristics make it ideal for caching layers.
+          </li>
+        </ul>
+
+        <div class="tip-box">
+          <strong>Rule of Thumb:</strong> Use objects for structured,
+          known-shape data (like API responses and configuration). Use Maps for
+          hash-map-style storage where keys are dynamic, performance matters, or
+          you need non-string keys.
+        </div>
+
+        <h2 id="h2-8">Performance Considerations and Best Practices</h2>
+
+        <p>
+          The performance differences between Map and Object aren't theoretical
+          — they're measurable and can matter significantly in data-intensive
+          applications.
+        </p>
+
+        <h3>Insertion Performance</h3>
+
+        <p>
+          Both Map and Object handle individual insertions in effectively
+          constant time. However, under heavy insertion workloads — particularly
+          when keys are added and removed repeatedly — Map consistently
+          outperforms Object. This is because JavaScript engines optimize
+          objects with "hidden classes" (also called "shapes"), and frequent
+          property additions or deletions can de-optimize these structures,
+          causing the engine to fall back to slower dictionary mode.
+        </p>
+
+        <p>
+          Map doesn't have this problem. It's designed for dynamic key
+          management from the start, so adding and removing keys doesn't trigger
+          de-optimization paths.
+        </p>
+
+        <h3>Iteration Speed</h3>
+
+        <p>
+          For straightforward iteration over all entries, Map and Object are
+          comparable in modern engines. However, Map's direct iterability means
+          you can write cleaner code without intermediate
+          <code>Object.entries()</code> or <code>Object.keys()</code> calls,
+          which allocate temporary arrays.
+        </p>
+
+        <h3>Memory Usage</h3>
+
+        <p>
+          Map typically uses more memory per entry than a plain object, because
+          each Map entry is a separate object with pointers for key and value.
+          For small datasets (dozens to hundreds of entries), this difference is
+          negligible. For very large datasets (millions of entries), Objects may
+          have a slight memory advantage — though at that scale, you should be
+          profiling and measuring your specific use case.
+        </p>
+
+        <h3>When Performance Actually Matters</h3>
+
+        <p>
+          For most application code — configuration objects, form data, API
+          responses — the performance difference between Map and Object is
+          imperceptible. Choose based on API clarity, key types, and iteration
+          needs. Only micro-optimize for Map's performance characteristics in
+          hot paths, game loops, or data processing pipelines where profiling
+          shows a bottleneck.
+        </p>
+
+        <h2 id="h2-9">Real-World HashMap Patterns and Examples</h2>
+
+        <h3>Pattern 1: Simple In-Memory Cache</h3>
+
+        <p>
+          Caching is one of the most common use cases for Maps. A time-to-live
+          (TTL) cache stores values with an expiration time, automatically
+          evicting stale entries.
+        </p>
+
+        <pre><code class="language-js">class TTLCache {
+  constructor(defaultTTL = 60000) {
+    this.cache = new Map();
+    this.defaultTTL = defaultTTL; // milliseconds
+  }
+
+  set(key, value, ttl = this.defaultTTL) {
+    const expires = Date.now() + ttl;
+    this.cache.set(key, { value, expires });
+  }
+
+  get(key) {
+    const entry = this.cache.get(key);
+    if (!entry) return undefined;
+
+    if (Date.now() > entry.expires) {
+      this.cache.delete(key);
+      return undefined;
+    }
+
+    return entry.value;
+  }
+
+  has(key) {
+    return this.get(key) !== undefined;
+  }
+
+  cleanup() {
+    const now = Date.now();
+    for (const [key, entry] of this.cache) {
+      if (now > entry.expires) {
+        this.cache.delete(key);
+      }
+    }
+  }
+}
+
+// Usage
+const apiCache = new TTLCache(30000); // 30-second TTL
+apiCache.set('users:list', fetchedUsers);
+</code></pre>
+
+        <h3>Pattern 2: Counting Frequencies</h3>
+
+        <p>
+          Maps excel at counting occurrences — word frequencies, event counts,
+          or any scenario where you need to tally by key:
+        </p>
+
+        <pre><code class="language-js">function countWords(text) {
+  const wordCounts = new Map();
+  const words = text.toLowerCase().match(/\b\w+\b/g) || [];
+
+  for (const word of words) {
+    wordCounts.set(word, (wordCounts.get(word) || 0) + 1);
+  }
+
+  // Sort by frequency descending
+  return [...wordCounts.entries()]
+    .sort((a, b) => b[1] - a[1]);
+}
+
+const topWords = countWords(
+  'The quick brown fox jumps over the lazy dog. The fox was quick.'
+);
+console.log(topWords.slice(0, 3));
+// [["the", 3], ["quick", 2], ["fox", 2]]
+</code></pre>
+
+        <h3>Pattern 3: Grouping Data by Key</h3>
+
+        <p>
+          Maps are a natural fit for grouping operations, and ES2024 introduced
+          <code>Map.groupBy()</code> to make this even more ergonomic:
+        </p>
+
+        <pre><code class="language-js">// Grouping with Map.groupBy (ES2024+)
+const people = [
+  { name: 'Alice', role: 'developer' },
+  { name: 'Bob', role: 'designer' },
+  { name: 'Charlie', role: 'developer' },
+  { name: 'Diana', role: 'manager' }
+];
+
+const byRole = Map.groupBy(people, person => person.role);
+
+console.log(byRole.get('developer'));
+// [{ name: 'Alice', role: 'developer' }, { name: 'Charlie', role: 'developer' }]
+
+// Manual grouping for broader compatibility
+function groupBy(array, keyFn) {
+  const groups = new Map();
+  for (const item of array) {
+    const key = keyFn(item);
+    if (!groups.has(key)) {
+      groups.set(key, []);
+    }
+    groups.get(key).push(item);
+  }
+  return groups;
+}
+</code></pre>
+
+        <h3>Pattern 4: Deduplication and Set-Like Behavior</h3>
+
+        <p>
+          While JavaScript has a dedicated <code>Set</code> for unique value
+          storage, Map can track both uniqueness and associated metadata:
+        </p>
+
+        <pre><code class="language-js">// Track unique users with visit timestamps
+const visitorLog = new Map();
+
+function recordVisit(userId) {
+  if (visitorLog.has(userId)) {
+    const record = visitorLog.get(userId);
+    record.visitCount++;
+    record.lastVisit = new Date();
+  } else {
+    visitorLog.set(userId, {
+      firstVisit: new Date(),
+      lastVisit: new Date(),
+      visitCount: 1
+    });
+  }
+}
+</code></pre>
+
+        <h2 id="h2-10">Final Thoughts on Mastering JavaScript HashMaps</h2>
+
+        <p>
+          The journey from "I use objects for everything" to "I choose the right
+          tool for each situation" is a sign of maturing as a JavaScript
+          developer. Map isn't a replacement for objects — it's a complementary
+          tool that shines in specific, common scenarios.
+        </p>
+
+        <p>Here's the mental model to carry forward:</p>
+
+        <ul>
+          <li>
+            <strong>Use objects</strong> when you have a fixed set of known
+            string keys — configuration, data models, API payloads, and anything
+            that needs JSON serialization.
+          </li>
+          <li>
+            <strong>Use Map</strong> when keys are dynamic, when you need
+            non-string keys, when insertion order matters, or when you're
+            building a cache, counter, or lookup table.
+          </li>
+          <li>
+            <strong>Use WeakMap</strong> when you need to associate metadata
+            with objects without preventing their garbage collection.
+          </li>
+        </ul>
+
+        <p>
+          Once you start working with Maps intentionally — reaching for them in
+          the situations where they excel — you'll likely find your code
+          becoming cleaner, more expressive, and less prone to subtle
+          prototype-related bugs. The API is small and consistent, the
+          performance is solid, and the use cases are everywhere.
+        </p>
+
+        <p>
+          If you enjoyed this article, check out our guide on
+          <a href="./nginx-rtmp-guide"
+            >building an Nginx RTMP streaming server</a
+          >
+          or our
+          <a href="./css-vendor-prefixes-guide">CSS vendor prefixes guide</a>.
+          As always, if you have any questions or comments, feel free to
+          <a href="../../../contact">contact us</a>.
+        </p>
       </div>
     </section>
 
@@ -1150,7 +1725,6 @@ for (let [key, value] of settings.entries()) {
         width="1920"
         height="163"
       />
-      <!-- Subscribe Form -->
       <div id="cta-1185">
         <div class="cs-content">
           <h2 class="cs-title">Stay in the Loop</h2>
@@ -1177,13 +1751,8 @@ for (let [key, value] of settings.entries()) {
         </div>
       </div>
       <div class="cs-container">
-        <!-- Logo Group -->
         <div class="cs-logo-group">
-          <a
-            aria-label="go back to home"
-            class="cs-logo"
-            href="../../../"
-          >
+          <a aria-label="go back to home" class="cs-logo" href="../../../">
             <img
               class="cs-logo-img"
               aria-hidden="true"
@@ -1201,7 +1770,6 @@ for (let [key, value] of settings.entries()) {
             web.
           </p>
         </div>
-        <!-- Links -->
         <ul class="cs-nav">
           <li class="cs-nav-li">
             <span class="cs-header">Quick Links</span>
@@ -1219,7 +1787,6 @@ for (let [key, value] of settings.entries()) {
             <a class="cs-nav-link" href="../../../contact">Contact</a>
           </li>
         </ul>
-        <!-- Contact Info -->
         <ul class="cs-nav">
           <li class="cs-nav-li">
             <span class="cs-header">Contact</span>
@@ -1293,32 +1860,25 @@ for (let [key, value] of settings.entries()) {
             >Privacy Policy</a
           >
           <span>|</span>
-          <a href="../../../terms-of-use" class="cs-nav-link"
-            >Terms of Use</a
-          >
+          <a href="../../../terms-of-use" class="cs-nav-link">Terms of Use</a>
         </div>
       </div>
-      <!--Background Image-->
       <picture class="cs-background">
-        <!-- Mobile -->
         <source
           media="(max-width: 600px)"
           srcset="../../../images/footer_bg-360w.webp"
           type="image/webp"
         />
-        <!-- Tablet -->
         <source
           media="(min-width: 601px) and (max-width: 1024px)"
           srcset="../../../images/footer_bg-720w.webp"
           type="image/webp"
         />
-        <!-- Desktop -->
         <source
           media="(min-width: 1025px)"
           srcset="../../../images/footer_bg-1280w.webp"
           type="image/webp"
         />
-        <!-- Fallback -->
         <img
           loading="lazy"
           decoding="async"
@@ -1330,31 +1890,25 @@ for (let [key, value] of settings.entries()) {
       </picture>
     </footer>
 
-    <!-- JavaScript -->
     <script src="../../../js/main.js" defer></script>
     <script src="../../../js/posts.js" defer></script>
-    <!-- Brevo Integration -->
     <script>
       document
         .getElementById("subscribe-form")
         .addEventListener("submit", async function (e) {
           e.preventDefault();
-
           const email = document.getElementById("cs-email-1185").value;
-
           const data = {
             email: email,
             listIds: [11],
             updateEnabled: true,
           };
-
           try {
             const response = await fetch("/.netlify/functions/subscribe", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(data),
             });
-
             if (response.ok) {
               alert("Thanks for subscribing!");
             } else {
