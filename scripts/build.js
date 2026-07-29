@@ -3,6 +3,74 @@ const path = require("path");
 const matter = require("gray-matter");
 const { marked } = require("marked");
 
+// ── AdSense manual ad slots ─────────────────────────────────────────────────
+// Replace these with the real data-ad-slot values from Step 2.
+const ADSENSE_CLIENT = "ca-pub-1224182851595008";
+const AD_SLOTS = {
+  top: "3250995195", // Blog - Top Banner
+  sidebar: "4831524387", // Blog - Sidebar
+  inArticle: "2859967162", // Blog - In Content
+};
+
+// ── Ad unit markup ──────────────────────────────────────────────────────────
+function generateAdUnitHTML(slot, extraClass) {
+  return `
+    <div class="cs-ad-slot ${extraClass}">
+      <span class="cs-ad-label">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="${ADSENSE_CLIENT}"
+           data-ad-slot="${slot}"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>`;
+}
+
+// ── Insert an in-content ad after every 3rd top-level <p> ──────────────────
+// Only counts <p>...</p> blocks, so paragraphs inside code blocks, lists,
+// and headings are left alone.
+function insertContentAds(html, slot) {
+  const adBlock = generateAdUnitHTML(slot, "cs-ad-in-article");
+  let count = 0;
+  return html.replace(/<p>[\s\S]*?<\/p>/g, (match) => {
+    count++;
+    return count % 3 === 0 ? `${match}\n${adBlock}` : match;
+  });
+}
+
+// ── Sidebar: ad + 5 most recent posts (by date, not featured order) ────────
+function generateRecentPostsHTML(currentSlug, postsByDate) {
+  const recent = postsByDate.filter((p) => p.slug !== currentSlug).slice(0, 5);
+
+  return `
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          ${recent
+            .map((p) => {
+              const url = p.custom_url || `/blog/${p.slug}.html`;
+              return `
+          <li class="cs-sidebar-item">
+            <a href="${url}" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb" src="${p.cover_image || "/images/og-image.jpg"}" alt="${p.title}" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">${p.title}</span>
+            </a>
+          </li>`;
+            })
+            .join("")}
+        </ul>
+      </div>`;
+}
+
+function generateSidebarHTML(post, postsByDate) {
+  return `
+    <aside class="cs-post-sidebar">
+      ${generateAdUnitHTML(AD_SLOTS.sidebar, "cs-ad-sidebar")}
+      ${generateRecentPostsHTML(post.slug, postsByDate)}
+    </aside>`;
+}
+
 const postsDir = "./content/blog";
 const posts = [];
 
@@ -38,7 +106,7 @@ posts.sort((a, b) => {
 });
 
 // ─── Generate individual post pages ───────────────────────────────────────────
-function generatePostHTML(post) {
+function generatePostHTML(post, postsByDate) {
   const seoTitle = post.seo_title || post.title;
   const seoDescription = post.seo_description || post.excerpt || "";
   const ogImage = post.og_image || post.cover_image || "/images/og-image.jpg";
@@ -427,6 +495,9 @@ function generatePostHTML(post) {
       </div>
     </header>
 
+    <!-- Top Ad -->
+    ${generateAdUnitHTML(AD_SLOTS.top, "cs-ad-top")}
+
     <!-- Banner -->
     <div id="banner-712">
       <div class="cs-container">
@@ -445,17 +516,22 @@ function generatePostHTML(post) {
 
     <!-- Content -->
     <section id="content-page-714">
-      ${
-        post.cover_image
-          ? `
-      <div class="main-img-container">
-        <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title} - Red Surge Technology Blog" width="1280" height="720" />
-      </div>`
-          : ""
-      }
-      <div>
-        ${metaBar}
-        ${post.content}
+      <div class="cs-post-layout">
+        ${generateSidebarHTML(post, postsByDate)}
+        <div class="cs-post-main">
+          ${
+            post.cover_image
+              ? `
+          <div class="main-img-container">
+            <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title} - Red Surge Technology Blog" width="1280" height="720" />
+          </div>`
+              : ""
+          }
+          <div>
+            ${metaBar}
+            ${insertContentAds(post.content, AD_SLOTS.inArticle)}
+          </div>
+        </div>
       </div>
     </section>
 
@@ -550,6 +626,11 @@ function generatePostHTML(post) {
 </html>`;
 }
 
+// True chronological order, independent of the featured-first sort above
+const postsByDate = [...posts].sort(
+  (a, b) => new Date(b.date) - new Date(a.date),
+);
+
 // ─── Generate post pages (skip if handcrafted HTML already exists) ─────────────
 posts.forEach((post) => {
   if (post.custom_url) {
@@ -566,7 +647,7 @@ posts.forEach((post) => {
     return;
   }
 
-  const html = generatePostHTML(post);
+  const html = generatePostHTML(post, postsByDate);
   fs.mkdirSync("./blog", { recursive: true });
   fs.writeFileSync(outPath, html);
   console.log(`  📄 Generated blog/${post.slug}.html`);

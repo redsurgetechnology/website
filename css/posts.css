@@ -1389,7 +1389,7 @@ html {
 /* Vertical dividers between items on wider screens */
 @media (min-width: 640px) {
   .cs-meta-item + .cs-meta-item::before {
-    content: '';
+    content: "";
     display: inline-block;
     width: 1px;
     height: 1rem;
@@ -1492,4 +1492,107 @@ html {
   .cs-breadcrumb-current {
     max-width: 24ch;
   }
+}
+
+/* ── Post layout: sidebar + article ─────────────────────────────────────── */
+.cs-post-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.cs-post-sidebar {
+  flex: 0 0 280px;
+  position: sticky;
+  top: 20px;
+}
+
+.cs-post-main {
+  flex: 1;
+  min-width: 0; /* prevents flex overflow on long code blocks/images */
+}
+
+/* Stack sidebar below article on mobile/tablet, per your call */
+@media (max-width: 900px) {
+  .cs-post-layout {
+    flex-direction: column;
+  }
+  .cs-post-sidebar {
+    flex: 1 1 auto;
+    width: 100%;
+    order: 2; /* sidebar renders after the article in DOM flow */
+    position: static;
+  }
+  .cs-post-main {
+    order: 1;
+  }
+}
+
+/* ── Ad slots ────────────────────────────────────────────────────────────── */
+.cs-ad-slot {
+  margin: 24px 0;
+  text-align: center;
+}
+
+.cs-ad-label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #999;
+  margin-bottom: 6px;
+}
+
+.cs-ad-top {
+  margin: 0 0 16px;
+  padding: 12px 0;
+}
+
+.cs-ad-sidebar {
+  margin: 0 0 24px;
+}
+
+/* ── Sidebar recent posts ───────────────────────────────────────────────── */
+.cs-sidebar-recent {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.cs-sidebar-heading {
+  font-size: 16px;
+  margin: 0 0 12px;
+}
+
+.cs-sidebar-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cs-sidebar-item + .cs-sidebar-item {
+  margin-top: 12px;
+}
+
+.cs-sidebar-link {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.cs-sidebar-thumb {
+  width: 80px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.cs-sidebar-title {
+  font-size: 13px;
+  line-height: 1.35;
 }
