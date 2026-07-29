@@ -35,7 +35,7 @@ function insertContentAds(html, slot) {
   let count = 0;
   return html.replace(/<p>[\s\S]*?<\/p>/g, (match) => {
     count++;
-    return count % 4 === 0 ? `${match}\n${adBlock}` : match;
+    return count % 5 === 0 ? `${match}\n${adBlock}` : match;
   });
 }
 
@@ -508,16 +508,15 @@ function generatePostHTML(post, postsByDate) {
       </picture>
     </div>
 
-    <!-- Top Ad -->
-    ${generateAdUnitHTML(AD_SLOTS.top, "cs-ad-top")}
-
     <!-- Breadcrumb -->
     ${breadcrumbHTML}
+
+    <!-- Top Ad -->
+    ${generateAdUnitHTML(AD_SLOTS.top, "cs-ad-top")}
 
     <!-- Content -->
     <section id="content-page-714">
       <div class="cs-post-layout">
-        ${generateSidebarHTML(post, postsByDate)}
         <div class="cs-post-main">
           ${
             post.cover_image
@@ -532,6 +531,7 @@ function generatePostHTML(post, postsByDate) {
             ${insertContentAds(post.content, AD_SLOTS.inArticle)}
           </div>
         </div>
+        ${generateSidebarHTML(post, postsByDate)}
       </div>
     </section>
 

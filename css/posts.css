@@ -1514,7 +1514,7 @@ html {
   min-width: 0; /* prevents flex overflow on long code blocks/images */
 }
 
-/* Stack sidebar below article on mobile/tablet, per your call */
+/* Stack sidebar below article on mobile/tablet */
 @media (max-width: 900px) {
   .cs-post-layout {
     flex-direction: column;
@@ -1522,11 +1522,7 @@ html {
   .cs-post-sidebar {
     flex: 1 1 auto;
     width: 100%;
-    order: 2; /* sidebar renders after the article in DOM flow */
     position: static;
-  }
-  .cs-post-main {
-    order: 1;
   }
 }
 
