@@ -35,7 +35,7 @@ function insertContentAds(html, slot) {
   let count = 0;
   return html.replace(/<p>[\s\S]*?<\/p>/g, (match) => {
     count++;
-    return count % 3 === 0 ? `${match}\n${adBlock}` : match;
+    return count % 4 === 0 ? `${match}\n${adBlock}` : match;
   });
 }
 
@@ -495,9 +495,6 @@ function generatePostHTML(post, postsByDate) {
       </div>
     </header>
 
-    <!-- Top Ad -->
-    ${generateAdUnitHTML(AD_SLOTS.top, "cs-ad-top")}
-
     <!-- Banner -->
     <div id="banner-712">
       <div class="cs-container">
@@ -510,6 +507,9 @@ function generatePostHTML(post, postsByDate) {
         <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
       </picture>
     </div>
+
+    <!-- Top Ad -->
+    ${generateAdUnitHTML(AD_SLOTS.top, "cs-ad-top")}
 
     <!-- Breadcrumb -->
     ${breadcrumbHTML}
