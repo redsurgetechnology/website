@@ -526,6 +526,9 @@ function generatePostHTML(post, postsByDate) {
           <div>
             ${metaBar}
           </div>
+          <div class="cs-post-content">
+            ${post.content}
+          </div>
         </div>
       </div>
     </section>
