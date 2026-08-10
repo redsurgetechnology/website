@@ -528,7 +528,6 @@ function generatePostHTML(post, postsByDate) {
           }
           <div>
             ${metaBar}
-            ${insertContentAds(post.content, AD_SLOTS.inArticle)}
           </div>
         </div>
         ${generateSidebarHTML(post, postsByDate)}
