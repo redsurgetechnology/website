@@ -511,9 +511,6 @@ function generatePostHTML(post, postsByDate) {
     <!-- Breadcrumb -->
     ${breadcrumbHTML}
 
-    <!-- Top Ad -->
-    ${generateAdUnitHTML(AD_SLOTS.top, "cs-ad-top")}
-
     <!-- Content -->
     <section id="content-page-714">
       <div class="cs-post-layout">
@@ -530,7 +527,6 @@ function generatePostHTML(post, postsByDate) {
             ${metaBar}
           </div>
         </div>
-        ${generateSidebarHTML(post, postsByDate)}
       </div>
     </section>
 
