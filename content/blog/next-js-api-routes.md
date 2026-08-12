@@ -4,7 +4,7 @@ date: "2026-07-23T10:00:00.000Z"
 excerpt: "Learn how Next.js API routes let you build server-side logic, handle form submissions, and create a full backend API without setting up a separate server."
 cover_image: "/images/blog/uploads/nextjs-api-routes-guide.webp"
 seo_title: "Next.js API Routes: Build a Backend Without Leaving Your Frontend"
-seo_description: "Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and how they compare to server components."
+seo_description: "Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and server components."
 author_name: "Collin Stewart"
 tags:
   - Next.js

@@ -4,7 +4,7 @@ date: "2026-07-22T10:00:00.000Z"
 excerpt: "Learn how to use the React Email library to create reusable, type-safe email templates with React components. No more string concatenation or messy HTML tables."
 cover_image: "/images/blog/uploads/react-email-component-guide.webp"
 seo_title: "React Email Component: Build Type-Safe Email Templates with React"
-seo_description: "Create email templates using React components with the React Email library. Learn setup, styling, previewing, and sending production emails with Resend or your own provider."
+seo_description: "Build type-safe email templates in React with React Email. Learn setup, styling, previewing, and sending via Resend or your own provider."
 author_name: "Collin Stewart"
 tags:
   - React

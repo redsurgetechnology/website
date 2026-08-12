@@ -4,7 +4,7 @@ date: 2026-04-22T09:00:00.000-04:00
 excerpt: "A practical, no-fluff guide to getting more Google reviews for your small business. Learn the exact timing, scripts, and systems that turn happy customers into consistent five-star reviews."
 cover_image: /images/blog/uploads/get-more-google-reviews-nj.webp
 seo_title: "How to Get More Google Reviews for Your Business (2026)"
-seo_description: "Learn how to get more Google reviews for your small business. Proven strategies for timing, review links, follow-up scripts, and building a reputation system that compounds over time."
+seo_description: "Get more Google reviews for your small business. Proven strategies for timing, review links, follow-up scripts, and a reputation system that compounds."
 author_name: "Collin Stewart"
 last_modified: 2026-04-22T09:00:00.000-04:00
 tags:

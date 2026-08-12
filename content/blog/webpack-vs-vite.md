@@ -4,7 +4,7 @@ date: "2026-07-30T10:00:00.000Z"
 excerpt: "Webpack or Vite? The build tool debate isn't just about speed. Compare configuration, dev server startup, production builds, and migration effort to see which one fits your workflow."
 cover_image: "/images/blog/uploads/webpack-vs-vite.webp"
 seo_title: "Webpack vs Vite in 2026: Speed, Configuration, and Real-World Tradeoffs"
-seo_description: "Webpack vs Vite compared: dev server speed, build performance, configuration complexity, ecosystem maturity, and migration tips. Find out which tool suits your next project."
+seo_description: "Webpack vs Vite compared: dev server speed, build performance, configuration complexity, ecosystem maturity, and migration tips."
 author_name: "Collin Stewart"
 tags:
   - Webpack

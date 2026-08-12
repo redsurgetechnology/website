@@ -4,7 +4,7 @@ date: "2026-08-03T10:00:00.000Z"
 excerpt: "Stuck between useState and useReducer? Learn the real differences, when to pick one over the other, and how to refactor messy state logic without losing your mind."
 cover_image: "/images/blog/uploads/react-usestate-vs-usereducer.webp"
 seo_title: "React useState vs useReducer: How to Choose the Right State Hook"
-seo_description: "Confused about useState vs useReducer in React? We break down the tradeoffs with practical code comparisons, performance tips, and a real-world refactoring story."
+seo_description: "Confused about useState vs useReducer in React? See tradeoffs, code comparisons, performance tips, and a real-world refactoring story."
 author_name: "Collin Stewart"
 tags:
   - React

@@ -4,7 +4,7 @@ date: "2026-07-13T10:00:00.000Z"
 excerpt: "Comparing Django vs FastAPI for your next Python project. We cover performance, async support, developer experience, ecosystem, and which one fits your use case."
 cover_image: "/images/blog/uploads/django-vs-fastapi-2026.webp"
 seo_title: "Django vs FastAPI in 2026: Which Python Framework Fits Your Project?"
-seo_description: "Django vs FastAPI compared across performance, async support, ORM, admin panel, API development, and learning curve. Find the right Python framework for your project."
+seo_description: "Django vs FastAPI compared: performance, async support, ORM, admin panel, API development, and learning curve. Find the right Python framework."
 author_name: "Collin Stewart"
 tags:
   - Python

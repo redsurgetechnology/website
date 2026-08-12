@@ -4,7 +4,7 @@ date: "2026-08-11T10:00:00.000Z"
 excerpt: "Learn how to implement JWT authentication in Astro—from issuing tokens on login to verifying them in API routes, protecting pages, and handling token refresh."
 cover_image: "/images/blog/uploads/astro-jwt-authentication.webp"
 seo_title: "Astro JWT Authentication: Secure Your Astro Site with JSON Web Tokens"
-seo_description: "A hands-on guide to adding JWT authentication to an Astro project. Create login endpoints, verify tokens in server-side routes, and manage user sessions without a heavy backend."
+seo_description: "Add JWT authentication to Astro. Create login endpoints, verify tokens in server-side routes, and manage sessions without a heavy backend."
 author_name: "Collin Stewart"
 tags:
   - Astro

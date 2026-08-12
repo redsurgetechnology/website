@@ -4,7 +4,7 @@ date: "2026-07-14T10:00:00.000Z"
 excerpt: "Confused about Promise.all vs Promise.allSettled? Learn the key differences, see practical examples, and know exactly which one to use for your async JavaScript."
 cover_image: "/images/blog/uploads/promise-all-vs-allsettled.webp"
 seo_title: "Promise.all vs Promise.allSettled: Key Differences Explained"
-seo_description: "Learn the difference between Promise.all and Promise.allSettled with practical examples for API calls, error handling, and concurrent async operations in JavaScript."
+seo_description: "Promise.all vs Promise.allSettled: learn key differences with examples for API calls, error handling, and concurrent async operations in JavaScript."
 author_name: "Collin Stewart"
 tags:
   - JavaScript

@@ -1,7 +1,7 @@
 ---
 title: "Git Rebase Tutorial: Master Rewriting History Without Losing Your Work"
 date: "2026-08-12T10:00:00.000Z"
-excerpt: "Learn git rebase step-by-step with practical examples. Fix conflicts, squash messy commits, reorder changes, and understand when rebasing is safe—and when it isn't."
+excerpt: "Learn git rebase with practical examples: fix conflicts, squash commits, reorder changes, and understand when rebasing is safe—and when it isn't."
 cover_image: "/images/blog/uploads/git-rebase-tutorial.webp"
 seo_title: "Git Rebase Tutorial: A Hands-On Guide to Clean Commit History"
 seo_description: "This git rebase tutorial walks you through interactive rebasing, conflict resolution, commit squashing, and safe rebasing workflows. Perfect for developers who want cleaner histories."
@@ -22,7 +22,7 @@ You've probably heard someone say "rebase your branch before merging" and nodded
 
 Think of rebase as a way to rewrite the history of your current branch so it looks like you started from a different point. Instead of merging two branches together with a merge commit, you take your commits, lift them up, and replay them on top of another branch's latest commit. The result is a clean, linear history that reads like a story.
 
-In this tutorial, we'll go beyond the basics. I'll show you what happens during a rebase, how to handle conflicts without panicking, how to use interactive mode to squash and reorder commits, and—most importantly—when you should *never* rebase. If you've read our comparison of [git rebase vs merge](/blog/git-rebase-vs-merge), you already know the philosophical differences. This post is the hands-on follow-up.
+In this tutorial, we'll go beyond the basics. I'll show you what happens during a rebase, how to handle conflicts without panicking, how to use interactive mode to squash and reorder commits, and—most importantly—when you should _never_ rebase. If you've read our comparison of [git rebase vs merge](/blog/git-rebase-vs-merge), you already know the philosophical differences. This post is the hands-on follow-up.
 
 ## What actually happens during a rebase
 
@@ -136,7 +136,7 @@ I once worked on a feature branch that had accumulated 27 commits over two weeks
 
 Before opening a pull request, I ran an interactive rebase against `main`. I squashed the WIP commits into logical units, reworded several messages, and dropped a commit that reverted a previous commit (they canceled out). The final branch had 9 clean commits: one per feature slice, with descriptive messages. The code reviewer commented on how easy it was to understand the changes.
 
-That's the beauty of interactive rebase: you get to shape your history *after* the fact. You don't need to write perfect commits from the start.
+That's the beauty of interactive rebase: you get to shape your history _after_ the fact. You don't need to write perfect commits from the start.
 
 ## Rebasing onto another branch
 
@@ -196,4 +196,4 @@ The next time you're about to open a pull request with 20 messy commits, take a 
 
 ---
 
-*Want to level up your Git workflow and make collaboration smoother? Red Surge Technology helps teams adopt practical version control practices that scale. [Get in touch](/contact) to discuss how we can help.*
+_Want to level up your Git workflow and make collaboration smoother? Red Surge Technology helps teams adopt practical version control practices that scale. [Get in touch](/contact) to discuss how we can help._

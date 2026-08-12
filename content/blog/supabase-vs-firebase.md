@@ -4,7 +4,7 @@ date: "2026-07-10T10:00:00.000Z"
 excerpt: "Comparing Supabase vs Firebase for your next project. We break down pricing, database architecture, real-time features, vendor lock-in, and developer experience."
 cover_image: "/images/blog/uploads/supabase-vs-firebase-2026.webp"
 seo_title: "Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?"
-seo_description: "Supabase vs Firebase compared across pricing, database architecture, real-time features, authentication, and vendor lock-in. Find the right backend for your project."
+seo_description: "Supabase vs Firebase compared: pricing, database architecture, real-time features, authentication, and vendor lock-in. Find your backend."
 author_name: "Collin Stewart"
 tags:
   - Supabase

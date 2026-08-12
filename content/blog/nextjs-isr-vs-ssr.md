@@ -4,7 +4,7 @@ date: "2026-07-31T10:00:00.000Z"
 excerpt: "Next.js gives you two powerful ways to serve dynamic content: Server-Side Rendering and Incremental Static Regeneration. But which one should you pick? Learn the real tradeoffs."
 cover_image: "/images/blog/uploads/nextjs-isr-vs-ssr.webp"
 seo_title: "Next.js ISR vs SSR: How to Choose the Right Rendering Strategy"
-seo_description: "Confused about ISR vs SSR in Next.js? We break down the performance, freshness, and complexity tradeoffs, with practical code examples and a real-world migration story."
+seo_description: "Confused about ISR vs SSR in Next.js? See performance, freshness, and complexity tradeoffs with code examples and a real migration story."
 author_name: "Collin Stewart"
 tags:
   - Next.js

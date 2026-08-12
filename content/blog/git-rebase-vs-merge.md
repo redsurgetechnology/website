@@ -4,7 +4,7 @@ date: "2026-07-29T10:00:00.000Z"
 excerpt: "The git rebase vs merge debate doesn't have to be confusing. Learn the real differences, the tradeoffs, and a practical workflow that keeps your history clean without losing your mind."
 cover_image: "/images/blog/uploads/git-rebase-vs-merge.webp"
 seo_title: "Git Rebase vs Merge: How to Choose the Right Git Strategy"
-seo_description: "Understand the difference between git rebase and git merge. Learn when to use each, the risks of rebasing, and a practical team workflow that keeps your commit history clean."
+seo_description: "Git rebase vs merge: learn when to use each, the risks of rebasing, and a team workflow that keeps your commit history clean."
 author_name: "Collin Stewart"
 tags:
   - Git

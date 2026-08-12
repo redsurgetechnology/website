@@ -4,7 +4,7 @@ date: "2026-08-05T10:00:00.000Z"
 excerpt: "Confused about controlled vs uncontrolled components in React? Learn the real tradeoffs, when to use each, and how to avoid common form handling pitfalls."
 cover_image: "/images/blog/uploads/react-controlled-vs-uncontrolled.webp"
 seo_title: "React Controlled vs Uncontrolled Components: When to Use Each"
-seo_description: "Master the difference between controlled and uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real-world refactoring story."
+seo_description: "Master controlled vs uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real refactoring story."
 author_name: "Collin Stewart"
 tags:
   - React

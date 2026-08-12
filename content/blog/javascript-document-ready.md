@@ -4,7 +4,7 @@ date: "2026-08-07T10:00:00.000Z"
 excerpt: "Stop relying on jQuery's $(document).ready() for DOM detection. Learn how to use vanilla JavaScript's DOMContentLoaded event, the defer attribute, and modern async patterns."
 cover_image: "/images/blog/uploads/javascript-document-ready.webp"
 seo_title: "JavaScript Document Ready: Vanilla JS DOMContentLoaded vs jQuery"
-seo_description: "Master the JavaScript document ready equivalent without jQuery. Learn DOMContentLoaded, defer, async, and how to safely manipulate the DOM as soon as it's ready."
+seo_description: "Vanilla JS document ready: DOMContentLoaded, defer, async, and how to safely manipulate the DOM without jQuery."
 author_name: "Collin Stewart"
 tags:
   - JavaScript

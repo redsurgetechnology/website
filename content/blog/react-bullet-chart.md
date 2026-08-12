@@ -4,7 +4,7 @@ date: "2026-08-10T10:00:00.000Z"
 excerpt: "Bullet charts are a clean alternative to gauges and progress bars. Learn how to build them in React with Recharts, complete with actual vs. target visuals and interactive tooltips."
 cover_image: "/images/blog/uploads/react-bullet-chart.webp"
 seo_title: "React Bullet Chart: Build Performance Gauges with Recharts"
-seo_description: "Step-by-step guide to creating bullet charts in React. Use Recharts to compare actual performance against targets, ranges, and qualitative benchmarks—no heavy custom SVG required."
+seo_description: "Create React bullet charts with Recharts. Compare actual performance against targets, ranges, and benchmarks—no heavy custom SVG required."
 author_name: "Collin Stewart"
 tags:
   - React

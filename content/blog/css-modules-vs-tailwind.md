@@ -4,7 +4,7 @@ date: "2026-07-17T10:00:00.000Z"
 excerpt: "Comparing CSS Modules vs Tailwind CSS for styling React applications. Learn the tradeoffs in developer experience, performance, maintainability, and team workflow."
 cover_image: "/images/blog/uploads/css-modules-vs-tailwind.webp"
 seo_title: "CSS Modules vs Tailwind CSS: Which Styling Approach Should You Use?"
-seo_description: "CSS Modules vs Tailwind CSS compared across developer experience, performance, bundle size, and maintainability. Find the right styling approach for your project."
+seo_description: "CSS Modules vs Tailwind CSS compared: developer experience, performance, bundle size, and maintainability. Find the right styling approach."
 author_name: "Collin Stewart"
 tags:
   - CSS

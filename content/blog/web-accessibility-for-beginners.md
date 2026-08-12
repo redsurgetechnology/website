@@ -4,7 +4,7 @@ date: 2026-04-13T09:00:00.000-04:00
 excerpt: "Web accessibility doesn't have to be overwhelming. This beginner's guide explains what it is, why it matters, what WCAG means in plain English, and the practical steps you can take today to make your website more inclusive."
 cover_image: /images/blog/uploads/web-accessibility-beginners-guide.webp
 seo_title: "Web Accessibility for Beginners: Simple 2026 Guide"
-seo_description: "Learn web accessibility basics, WCAG guidelines, and practical ways to build more inclusive websites. Covers alt text, keyboard navigation, color contrast, form labels, and simple testing workflows."
+seo_description: "Web accessibility basics for beginners. Learn WCAG guidelines, alt text, keyboard navigation, color contrast, form labels, and simple testing workflows."
 author_name: "Collin Stewart"
 last_modified: 2026-04-13T09:00:00.000-04:00
 tags:

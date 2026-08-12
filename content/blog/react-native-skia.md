@@ -4,7 +4,7 @@ date: "2026-07-16T10:00:00.000Z"
 excerpt: "Learn how to use React Native Skia for custom 2D graphics, smooth animations, and GPU-accelerated rendering in your Expo and React Native applications."
 cover_image: "/images/blog/uploads/react-native-skia-guide.webp"
 seo_title: "React Native Skia: High-Performance 2D Graphics and Animations Guide"
-seo_description: "Master React Native Skia with practical examples for custom drawing, shaders, gradients, and GPU-accelerated animations. Build performant graphics in your mobile apps."
+seo_description: "Master React Native Skia for custom drawing, shaders, gradients, and GPU-accelerated animations. Build performant graphics in mobile apps."
 author_name: "Collin Stewart"
 tags:
   - React Native

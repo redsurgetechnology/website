@@ -4,7 +4,7 @@ date: "2026-08-04T10:00:00.000Z"
 excerpt: "Learn the React compound components pattern to build flexible, reusable UI without prop drilling. Tabs, accordions, and selects become cleaner and more intuitive."
 cover_image: "/images/blog/uploads/react-compound-components-pattern.webp"
 seo_title: "React Compound Components Pattern: Build Flexible UI Components"
-seo_description: "Master the React compound components pattern with practical examples. Learn how to share state implicitly using Context, build Tabs and Select, and when this pattern shines."
+seo_description: "Master React compound components with examples. Share state implicitly via Context, build Tabs and Select, and learn when this pattern shines."
 author_name: "Collin Stewart"
 tags:
   - React

@@ -4,7 +4,7 @@ date: "2026-08-06T10:00:00.000Z"
 excerpt: "Incremental Static Regeneration lets you update static content without a full rebuild. Learn revalidation strategies, on-demand updates, and how to avoid common ISR pitfalls in Next.js."
 cover_image: "/images/blog/uploads/nextjs-isr-guide.webp"
 seo_title: "Next.js ISR Guide: Master Incremental Static Regeneration"
-seo_description: "A complete guide to Incremental Static Regeneration in Next.js. Learn time-based revalidation, on-demand ISR, stale-while-revalidate, and debugging tips with practical examples."
+seo_description: "Master Next.js Incremental Static Regeneration. Learn time-based revalidation, on-demand ISR, stale-while-revalidate, and debugging with examples."
 author_name: "Collin Stewart"
 tags:
   - Next.js
