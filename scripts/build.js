@@ -71,6 +71,23 @@ function generateSidebarHTML(post, postsByDate) {
     </aside>`;
 }
 
+function getMarkdownFiles(dir) {
+  const entries = fs.readdirSync(dir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(dir, entry.name);
+
+    if (entry.isDirectory()) {
+      files.push(...getMarkdownFiles(fullPath));
+    } else if (entry.isFile() && entry.name.endsWith(".md")) {
+      files.push(fullPath);
+    }
+  }
+
+  return files;
+}
+
 const postsDir = "./content/blog";
 const posts = [];
 
@@ -81,7 +98,7 @@ if (!fs.existsSync(postsDir)) {
 }
 
 // Read all markdown files
-const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
+const files = getMarkdownFiles(postsDir);
 
 if (files.length === 0) {
   console.log("No posts found yet, skipping.");
@@ -89,12 +106,12 @@ if (files.length === 0) {
 }
 
 files.forEach((file) => {
-  const raw = fs.readFileSync(path.join(postsDir, file), "utf8");
+  const raw = fs.readFileSync(file, "utf8");
   const { data, content } = matter(raw);
   posts.push({
     ...data,
     content: marked(content),
-    slug: file.replace(".md", ""),
+    slug: path.basename(file, ".md"),
   });
 });
 
