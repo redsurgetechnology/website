@@ -547,6 +547,7 @@ function generatePostHTML(post, postsByDate) {
             ${post.content}
           </div>
         </div>
+        ${generateSidebarHTML(post, postsByDate)}
       </div>
     </section>
 
