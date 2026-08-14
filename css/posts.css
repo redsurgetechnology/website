@@ -671,13 +671,13 @@ html {
 
   /* ── Content page ─────────────────────────────────────── */
   #content-page-714 {
-    padding: var(--sectionPadding);
-    background-color: #fff;
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
+    box-sizing: border-box;
+    width: 100%;
     max-width: 80rem;
     margin: 0 auto;
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
   }
   #content-page-714 .cs-container {
     width: 100%;
@@ -1591,4 +1591,85 @@ html {
 .cs-sidebar-title {
   font-size: 13px;
   line-height: 1.35;
+}
+
+/* ============================================================
+   MOBILE BLOG POST FIX
+   ============================================================ */
+
+#content-page-714 {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#content-page-714 .cs-post-layout {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+#content-page-714 .cs-post-main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+#content-page-714 .cs-post-content {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Make all article media respect the article width */
+#content-page-714 .cs-post-content img,
+#content-page-714 .cs-post-content video,
+#content-page-714 .cs-post-content iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Code blocks can be wider than the phone */
+#content-page-714 .cs-post-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+/* Tables should scroll instead of forcing the entire page wider */
+#content-page-714 .cs-post-content table {
+  max-width: 100%;
+}
+
+/* Prevent long URLs/code strings from forcing horizontal overflow */
+#content-page-714 .cs-post-content,
+#content-page-714 .cs-post-content p,
+#content-page-714 .cs-post-content li,
+#content-page-714 .cs-post-content a {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+@media (max-width: 767px) {
+  #content-page-714 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  #content-page-714 .cs-post-layout {
+    gap: 2rem;
+  }
+
+  #content-page-714 .cs-post-main {
+    width: 100%;
+  }
+
+  #content-page-714 .cs-post-content h1,
+  #content-page-714 .cs-post-content h2,
+  #content-page-714 .cs-post-content h3,
+  #content-page-714 .cs-post-content h4 {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
 }
