@@ -3,42 +3,6 @@ const path = require("path");
 const matter = require("gray-matter");
 const { marked } = require("marked");
 
-// ── AdSense manual ad slots ─────────────────────────────────────────────────
-// Replace these with the real data-ad-slot values from Step 2.
-const ADSENSE_CLIENT = "ca-pub-1224182851595008";
-const AD_SLOTS = {
-  top: "3250995195", // Blog - Top Banner
-  sidebar: "4831524387", // Blog - Sidebar
-  inArticle: "2859967162", // Blog - In Content
-};
-
-// ── Ad unit markup ──────────────────────────────────────────────────────────
-function generateAdUnitHTML(slot, extraClass) {
-  return `
-    <div class="cs-ad-slot ${extraClass}">
-      <span class="cs-ad-label">Advertisement</span>
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="${ADSENSE_CLIENT}"
-           data-ad-slot="${slot}"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>`;
-}
-
-// ── Insert an in-content ad after every 3rd top-level <p> ──────────────────
-// Only counts <p>...</p> blocks, so paragraphs inside code blocks, lists,
-// and headings are left alone.
-function insertContentAds(html, slot) {
-  const adBlock = generateAdUnitHTML(slot, "cs-ad-in-article");
-  let count = 0;
-  return html.replace(/<p>[\s\S]*?<\/p>/g, (match) => {
-    count++;
-    return count % 5 === 0 ? `${match}\n${adBlock}` : match;
-  });
-}
-
 // ── Sidebar: ad + 5 most recent posts (by date, not featured order) ────────
 function generateRecentPostsHTML(currentSlug, postsByDate) {
   const recent = postsByDate.filter((p) => p.slug !== currentSlug).slice(0, 5);
@@ -66,7 +30,6 @@ function generateRecentPostsHTML(currentSlug, postsByDate) {
 function generateSidebarHTML(post, postsByDate) {
   return `
     <aside class="cs-post-sidebar">
-      ${generateAdUnitHTML(AD_SLOTS.sidebar, "cs-ad-sidebar")}
       ${generateRecentPostsHTML(post.slug, postsByDate)}
     </aside>`;
 }
@@ -410,9 +373,7 @@ function generatePostHTML(post, postsByDate) {
     <meta name="description" content="${seoDescription}" />
     <meta name="author" content="${author}" />
     <meta name="robots" content="${robots}" />
-    <meta name="google-adsense-account" content="ca-pub-1224182851595008">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1224182851595008"
-     crossorigin="anonymous"></script>
+    
     ${tagsString ? `<meta name="keywords" content="${tagsString}" />` : ""}
 
     <!-- Canonical -->
