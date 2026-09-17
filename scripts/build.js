@@ -526,7 +526,7 @@ function generatePostHTML(post, postsByDate) {
     ${breadcrumbHTML}
 
     <!-- Content -->
-    <section id="content-page-714">
+    <main id="content-page-714">
       <div class="cs-post-layout">
         <div class="cs-post-main">
           ${
@@ -563,7 +563,7 @@ function generatePostHTML(post, postsByDate) {
         </div>
         ${generateSidebarHTML(post, postsByDate)}
       </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer id="cs-footer-1185">
