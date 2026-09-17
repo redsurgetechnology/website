@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Native Skia Tutorial for Beginners: Your First Graphics and Animations</title>
+    <meta name="description" content="Learn React Native Skia from scratch. This beginner tutorial covers installation, canvas, basic shapes, gradients, and simple animations with code examples you can run today." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React Native, Skia, Tutorial, Animation, Beginner" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners" />
+    <meta property="og:title" content="React Native Skia Tutorial for Beginners: Your First Graphics and Animations" />
+    <meta property="og:description" content="Learn React Native Skia from scratch. This beginner tutorial covers installation, canvas, basic shapes, gradients, and simple animations with code examples you can run today." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-native-skia-tutorial-beginners.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-09-03T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-09-03T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React Native, Skia, Tutorial, Animation, Beginner" />
+    <meta property="article:tag" content="React Native" />
+    <meta property="article:tag" content="Skia" />
+    <meta property="article:tag" content="Tutorial" />
+    <meta property="article:tag" content="Animation" />
+    <meta property="article:tag" content="Beginner" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners" />
+    <meta name="twitter:title" content="React Native Skia Tutorial for Beginners: Your First Graphics and Animations" />
+    <meta name="twitter:description" content="Learn React Native Skia from scratch. This beginner tutorial covers installation, canvas, basic shapes, gradients, and simple animations with code examples you can run today." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-native-skia-tutorial-beginners.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Native Skia Tutorial for Beginners: Your First Graphics and Animations",
+        "description": "Learn React Native Skia from scratch. This beginner tutorial covers installation, canvas, basic shapes, gradients, and simple animations with code examples you can run today.",
+        "url": "https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners",
+        "datePublished": "2026-09-03T10:00:00.000Z",
+        "dateModified": "2026-09-03T10:00:00.000Z",
+        "keywords": "React Native, Skia, Tutorial, Animation, Beginner",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT12M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-native-skia-tutorial-beginners.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Native Skia Tutorial for Beginners: Draw Your First Graphics and Animations",
+          "item": "https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Native Skia Tutorial for Beginners: Draw Your First Graphics and Animations</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Native Skia Tutorial for Beginners: Draw Your First Graphics and Animations
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-native-skia-tutorial-beginners-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-native-skia-tutorial-beginners-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-native-skia-tutorial-beginners.webp"
+      alt="React Native Skia Tutorial for Beginners: Draw Your First Graphics and Animations - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Native Skia Tutorial for Beginners: Your First Graphics and Animations" />
+          <meta itemprop="description" content="Learn React Native Skia from scratch. This beginner tutorial covers installation, canvas, basic shapes, gradients, and simple animations with code examples you can run today." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-native-skia-tutorial-for-beginners" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-09-03T10:00:00.000Z">Sep 03, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-09-03T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT12M" />12 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React Native</span><span class="cs-tag" itemprop="keywords">Skia</span><span class="cs-tag" itemprop="keywords">Tutorial</span><span class="cs-tag" itemprop="keywords">Animation</span><span class="cs-tag" itemprop="keywords">Beginner</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>If you&#39;ve ever wanted to draw custom graphics or create smooth animations in a React Native app, you&#39;ve probably hit the limits of standard views. Buttons, text, and images are fine—but what about a circular progress ring, a particle effect, or a custom shape that doesn&#39;t exist in any component library? That&#39;s where Skia comes in.</p>
+<p>React Native Skia is a library that brings the Skia graphics engine (the same one behind Chrome and Flutter) to React Native. It lets you draw directly onto a canvas with hardware acceleration. The learning curve can feel steep if you&#39;ve never worked with canvas or graphics before, but the fundamentals are surprisingly approachable.</p>
+<p>I remember the first time I got a circle to appear on screen using Skia—it felt like unlocking a superpower. In this tutorial, I&#39;ll take you from zero to your first animation, step by step. No prior graphics experience needed. By the end, you&#39;ll have a working foundation to build on.</p>
+<h2>What is Skia and why should you care?</h2>
+<p>Skia is an open-source 2D graphics library used by Chrome, Android, Flutter, and now React Native. It handles the low-level drawing—shapes, paths, text, images, gradients—and does it fast, using the GPU when possible.</p>
+<p>In React Native, standard views are great for UI elements. But when you need custom drawing or high-performance animations, the normal view system becomes a bottleneck. Skia bypasses that by rendering directly to a canvas. You&#39;re no longer limited to rectangles and text; you can draw anything you can describe in code.</p>
+<p>If you&#39;ve read our earlier <a href="/blog/react-native-skia">React Native Skia guide</a>, you know it&#39;s powerful but can be complex. This tutorial is different—it&#39;s the beginner path. We&#39;ll start with the absolute basics.</p>
+<h2>Prerequisites and setup</h2>
+<p>You need a React Native project with Expo or bare React Native. I&#39;ll use Expo for simplicity, but the concepts apply either way.</p>
+<ol>
+<li><strong>Create a new Expo project</strong> (if you don&#39;t have one):</li>
+</ol>
+<pre><code class="language-bash">npx create-expo-app SkiaTutorial
+cd SkiaTutorial
+</code></pre>
+<ol start="2">
+<li><strong>Install the required packages</strong>:</li>
+</ol>
+<pre><code class="language-bash">npx expo install @shopify/react-native-skia react-native-reanimated
+</code></pre>
+<p><code>@shopify/react-native-skia</code> is the Skia binding. <code>react-native-reanimated</code> is needed for animations. If you&#39;re using Expo Go, note that Skia requires a development build because it includes native code. You can create one with <code>npx expo run:ios</code> or <code>npx expo run:android</code>, or use EAS Build.</p>
+<ol start="3">
+<li><strong>Wrap your app in <code>GestureHandlerRootView</code></strong> (for future gesture work) and ensure Reanimated is configured. For this tutorial, we&#39;ll just use the <code>Canvas</code> component from Skia, which doesn&#39;t require additional setup.</li>
+</ol>
+<h2>Your first Skia canvas</h2>
+<p>Let&#39;s create a simple screen that shows a circle. Open <code>App.js</code> and replace the contents with:</p>
+<pre><code class="language-javascript">import { StyleSheet, View } from &quot;react-native&quot;;
+import { Canvas, Circle } from &quot;@shopify/react-native-skia&quot;;
+
+export default function App() {
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Canvas style={{ flex: 1 }}&gt;
+        &lt;Circle cx={200} cy={200} r={100} color=&quot;blue&quot; /&gt;
+      &lt;/Canvas&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: &quot;#fff&quot;,
+  },
+});
+</code></pre>
+<p>That&#39;s it. A blue circle centered at (200, 200) with radius 100. The <code>Canvas</code> component creates a drawing surface. Inside it, you place Skia drawing components like <code>Circle</code>, <code>Rect</code>, <code>Path</code>, etc. Coordinates are in pixels, with (0,0) at the top-left.</p>
+<p>The <code>Canvas</code> has <code>style={{ flex: 1 }}</code> to fill the screen. Run the app, and you&#39;ll see the circle.</p>
+<h2>Drawing basic shapes</h2>
+<p>Skia provides components for common shapes. Let&#39;s add a rectangle and a line. Replace the canvas content:</p>
+<pre><code class="language-javascript">&lt;Canvas style={{ flex: 1 }}&gt;
+  &lt;Circle cx={100} cy={100} r={50} color=&quot;red&quot; /&gt;
+  &lt;Rect x={200} y={50} width={100} height={100} color=&quot;green&quot; /&gt;
+  &lt;Line
+    p1={{ x: 50, y: 300 }}
+    p2={{ x: 350, y: 300 }}
+    color=&quot;black&quot;
+    strokeWidth={5}
+  /&gt;
+&lt;/Canvas&gt;
+</code></pre>
+<ul>
+<li><code>Circle</code> takes <code>cx</code>, <code>cy</code>, <code>r</code>.</li>
+<li><code>Rect</code> takes <code>x</code>, <code>y</code>, <code>width</code>, <code>height</code>.</li>
+<li><code>Line</code> takes <code>p1</code> and <code>p2</code> objects, plus <code>strokeWidth</code> for thickness.</li>
+</ul>
+<p>You can combine multiple shapes in one canvas. They are drawn in order, so later shapes appear on top.</p>
+<h2>Adding gradients</h2>
+<p>Flat colors are nice, but gradients add depth. Skia supports linear and radial gradients.</p>
+<pre><code class="language-javascript">import {
+  Canvas,
+  Circle,
+  LinearGradient,
+  vec,
+} from &quot;@shopify/react-native-skia&quot;;
+
+&lt;Canvas style={{ flex: 1 }}&gt;
+  &lt;Circle cx={200} cy={200} r={100}&gt;
+    &lt;LinearGradient
+      start={vec(100, 100)}
+      end={vec(300, 300)}
+      colors={[&quot;#ff6b6b&quot;, &quot;#feca57&quot;, &quot;#48dbfb&quot;]}
+    /&gt;
+  &lt;/Circle&gt;
+&lt;/Canvas&gt;;
+</code></pre>
+<p>The <code>vec</code> function creates a point. The gradient goes from start to end, interpolating colors. Notice the gradient is inside the shape component. This applies the gradient to that shape.</p>
+<h2>Your first animation: pulsing circle</h2>
+<p>Static drawings are fine, but animations make Skia shine. To animate, we need Reanimated shared values. Here&#39;s a simple pulsing circle that changes radius.</p>
+<pre><code class="language-javascript">import { StyleSheet, View } from &quot;react-native&quot;;
+import { Canvas, Circle } from &quot;@shopify/react-native-skia&quot;;
+import {
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  useDerivedValue,
+} from &quot;react-native-reanimated&quot;;
+
+export default function App() {
+  const radius = useSharedValue(50);
+
+  radius.value = withRepeat(withTiming(100, { duration: 1000 }), -1, true);
+
+  const animatedRadius = useDerivedValue(() =&gt; radius.value, [radius]);
+
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;Canvas style={{ flex: 1 }}&gt;
+        &lt;Circle cx={200} cy={200} r={animatedRadius} color=&quot;purple&quot; /&gt;
+      &lt;/Canvas&gt;
+    &lt;/View&gt;
+  );
+}
+</code></pre>
+<p>Explanation:</p>
+<ul>
+<li><code>useSharedValue(50)</code> creates a value that can be animated without re-rendering React.</li>
+<li><code>withRepeat</code> and <code>withTiming</code> animate it from 50 to 100 and back repeatedly.</li>
+<li><code>useDerivedValue</code> lets Skia read the current value each frame.</li>
+<li>We pass <code>animatedRadius</code> directly to <code>r</code>. Skia updates efficiently on the UI thread.</li>
+</ul>
+<p>When you run this, the circle pulses smoothly. That&#39;s the foundation for more complex animations.</p>
+<h2>Combining animation with gradients</h2>
+<p>Let&#39;s make the gradient change too. We&#39;ll animate the gradient start and end positions.</p>
+<pre><code class="language-javascript">const startX = useSharedValue(0);
+const startY = useSharedValue(0);
+const endX = useSharedValue(200);
+const endY = useSharedValue(200);
+
+startX.value = withRepeat(withTiming(200, { duration: 2000 }), -1, true);
+endX.value = withRepeat(withTiming(0, { duration: 2000 }), -1, true);
+
+const gradientStart = useDerivedValue(() =&gt; vec(startX.value, startY.value));
+const gradientEnd = useDerivedValue(() =&gt; vec(endX.value, endY.value));
+
+&lt;Circle cx={200} cy={200} r={100}&gt;
+  &lt;LinearGradient
+    start={gradientStart}
+    end={gradientEnd}
+    colors={[&quot;red&quot;, &quot;blue&quot;]}
+  /&gt;
+&lt;/Circle&gt;;
+</code></pre>
+<p>Now the gradient shifts over time. This pattern—animating shared values and mapping them to Skia props via <code>useDerivedValue</code>—is the core of Skia animations.</p>
+<h2>Common beginner pitfalls</h2>
+<ul>
+<li><strong>Forgetting to wrap animations in <code>useDerivedValue</code></strong>: If you pass a plain number, the animation won&#39;t update. Always derive a value when you&#39;re using shared values.</li>
+<li><strong>Using <code>Canvas</code> inside <code>ScrollView</code> without <code>style={{ flex: 1 }}</code></strong>: The canvas needs dimensions. Set explicit <code>width</code> and <code>height</code> or <code>flex: 1</code>.</li>
+<li><strong>Trying to use Expo Go</strong>: Skia requires a development build. If you see errors, build with <code>npx expo run:ios</code> or use EAS.</li>
+<li><strong>Drawing outside the canvas bounds</strong>: Shapes are clipped. Make sure coordinates stay within the canvas size.</li>
+</ul>
+<h2>Next steps from here</h2>
+<p>Now that you can draw shapes and animate them, the possibilities are open. You can:</p>
+<ul>
+<li>Build custom progress indicators with <code>Path</code> and <code>Arc</code>.</li>
+<li>Create particle effects with many circles.</li>
+<li>Use shaders for advanced effects (check our <a href="/blog/react-native-skia">React Native Skia guide</a> for more).</li>
+<li>Combine with gestures to create interactive graphics.</li>
+</ul>
+<p>If you&#39;re interested in building that premium &quot;liquid glass&quot; look, we have a <a href="/blog/react-native-expo-liquid-glass-effect">tutorial on React Native Expo liquid glass</a> that builds on these fundamentals.</p>
+<p>And if you&#39;re looking for more animation patterns beyond Skia, our <a href="/blog/react-native-expo-animations-guide">React Native Expo animations guide</a> covers the broader toolkit.</p>
+<h2>A real story: my first Skia project</h2>
+<p>When I first tried Skia, I wanted to build a simple audio waveform visualizer. I didn&#39;t know any graphics programming, and the Skia docs felt intimidating. I followed a tutorial similar to this one, got a circle to appear, then a line, then a gradient. Within a day, I had a moving waveform by connecting data points. It wasn&#39;t perfect, but it worked, and the sense of accomplishment was huge. The key was breaking it down: shapes first, then gradients, then animation.</p>
+<p>Don&#39;t rush. Experiment with each step. Change colors, positions, sizes. See what happens. That&#39;s how you learn.</p>
+<h2>Wrapping up</h2>
+<p>React Native Skia opens a door to custom graphics and high-performance animations that standard views can&#39;t match. The learning curve is real, but the fundamentals are manageable. Start with shapes, add gradients, then bring them to life with Reanimated.</p>
+<p>We covered the absolute basics, but Skia goes much deeper—paths, shaders, text, images, and more. For a comprehensive overview, see our <a href="/blog/react-native-skia">main Skia guide</a>. For now, play around, break things, and have fun. That&#39;s the best way to learn.</p>
+<p>Happy drawing!</p>
+<hr>
+<p><em>Want to build a custom graphics feature in your React Native app? Red Surge Technology specializes in high-performance mobile UI and animations. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

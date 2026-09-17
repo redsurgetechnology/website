@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>JavaScript Closures Explained: Simple Examples & Real-World Use Cases</title>
+    <meta name="description" content="JavaScript closures explained clearly. Learn how closures work, why they matter, and how to use them in event handlers, factories, and async code." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="JavaScript, Fundamentals, Web Development, Coding, Closures" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/javascript-closures-explained" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/javascript-closures-explained" />
+    <meta property="og:title" content="JavaScript Closures Explained: Simple Examples & Real-World Use Cases" />
+    <meta property="og:description" content="JavaScript closures explained clearly. Learn how closures work, why they matter, and how to use them in event handlers, factories, and async code." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/javascript-closures-explained.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-28T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-28T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="JavaScript, Fundamentals, Web Development, Coding, Closures" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Fundamentals" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Coding" />
+    <meta property="article:tag" content="Closures" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/javascript-closures-explained" />
+    <meta name="twitter:title" content="JavaScript Closures Explained: Simple Examples & Real-World Use Cases" />
+    <meta name="twitter:description" content="JavaScript closures explained clearly. Learn how closures work, why they matter, and how to use them in event handlers, factories, and async code." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/javascript-closures-explained.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript Closures Explained: Simple Examples & Real-World Use Cases",
+        "description": "JavaScript closures explained clearly. Learn how closures work, why they matter, and how to use them in event handlers, factories, and async code.",
+        "url": "https://redsurgetechnology.com/blog/javascript-closures-explained",
+        "datePublished": "2026-07-28T10:00:00.000Z",
+        "dateModified": "2026-07-28T10:00:00.000Z",
+        "keywords": "JavaScript, Fundamentals, Web Development, Coding, Closures",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT11M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/javascript-closures-explained.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/javascript-closures-explained"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JavaScript Closures Explained: Finally Understand What's Going On",
+          "item": "https://redsurgetechnology.com/blog/javascript-closures-explained"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">JavaScript Closures Explained: Finally Understand What's Going On</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          JavaScript Closures Explained: Finally Understand What's Going On
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/javascript-closures-explained-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/javascript-closures-explained-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/javascript-closures-explained.webp"
+      alt="JavaScript Closures Explained: Finally Understand What's Going On - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="JavaScript Closures Explained: Simple Examples & Real-World Use Cases" />
+          <meta itemprop="description" content="JavaScript closures explained clearly. Learn how closures work, why they matter, and how to use them in event handlers, factories, and async code." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/javascript-closures-explained" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-28T10:00:00.000Z">Jul 28, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-28T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT11M" />11 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Fundamentals</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Coding</span><span class="cs-tag" itemprop="keywords">Closures</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Most developers have a moment with closures. That moment usually arrives sometime after you&#39;ve been writing JavaScript for a while and someone asks you to explain what a closure actually is. You open your mouth, pause, and realize you don&#39;t quite have the words. You use them every day, but defining one cleanly feels harder than it should.</p>
+<p>And honestly, that&#39;s not your fault. A lot of explanations make closures sound like some mysterious, advanced feature. They&#39;re not. A closure is just a function that remembers the variables from the place where it was defined, even when you call the function somewhere completely different. That&#39;s it. The rest is details.</p>
+<p>Let me walk through how closures actually work, why they&#39;re so useful, the gotchas that trip people up, and the patterns you&#39;ve probably already been using without realizing it.</p>
+<h2>Lexical scoping is the foundation</h2>
+<p>Before closures make sense, you need to understand lexical scoping. In JavaScript, where a variable is defined determines where it can be accessed. A variable declared inside a function can&#39;t be seen from outside that function. A variable declared outside any function can be seen from inside any function.</p>
+<pre><code class="language-javascript">const outside = &quot;I&#39;m visible everywhere&quot;;
+
+function demo() {
+  const inside = &quot;I&#39;m only visible here&quot;;
+  console.log(outside); // works
+  console.log(inside); // works
+}
+
+console.log(outside); // works
+console.log(inside); // ReferenceError
+</code></pre>
+<p>That&#39;s lexical scoping. The <code>inside</code> variable is scoped to the <code>demo</code> function. Nothing outside that function can touch it. You&#39;ve probably internalized this without thinking about it.</p>
+<p>Now, what happens if you return a function from inside <code>demo</code>? That inner function has access to the variables in its outer scope. That&#39;s where closures come from.</p>
+<pre><code class="language-javascript">function createGreeter(name) {
+  const greeting = `Hello, ${name}`;
+
+  return function () {
+    console.log(greeting);
+  };
+}
+
+const greetCollin = createGreeter(&quot;Collin&quot;);
+greetCollin(); // &quot;Hello, Collin&quot;
+</code></pre>
+<p>The inner function is returned and called later, long after <code>createGreeter</code> has finished executing. Yet it still remembers <code>greeting</code>. That remembered bundle of variables is the closure. The function &quot;closes over&quot; its surrounding state.</p>
+<h2>Why closures are everywhere without you noticing</h2>
+<p>Once you know what to look for, you&#39;ll see closures all over your codebase. Every event handler you write is a closure. Every callback you pass to <code>setTimeout</code> or <code>fetch</code> is a closure. Every React component function that uses state or props is a closure.</p>
+<pre><code class="language-javascript">function setupButton(buttonId, message) {
+  const button = document.getElementById(buttonId);
+
+  button.addEventListener(&quot;click&quot;, function () {
+    alert(message); // This is a closure—&#39;message&#39; comes from the outer function
+  });
+}
+
+setupButton(&quot;btn1&quot;, &quot;You clicked button one&quot;);
+</code></pre>
+<p>The click handler function accesses <code>message</code> from the outer <code>setupButton</code> function. By the time someone actually clicks the button, <code>setupButton</code> finished running ages ago. The closure keeps <code>message</code> alive.</p>
+<p>This is also how debounce and throttle functions work. The timer variable is stored in the closure, persisting across multiple function calls.</p>
+<pre><code class="language-javascript">function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() =&gt; fn.apply(this, args), delay);
+  };
+}
+</code></pre>
+<p>The returned function remembers <code>timer</code> and <code>delay</code>. Every time you call the debounced version, it accesses and updates that same <code>timer</code> variable. If you&#39;ve read our deep dive on <a href="/blog/javascript-debounce-vs-throttle">JavaScript debounce vs throttle</a>, you&#39;ve already seen closures doing real work under the hood.</p>
+<h2>The classic for-loop trap</h2>
+<p>There&#39;s one closure gotcha that almost everyone hits. It involves creating functions inside a loop and trying to capture the loop variable.</p>
+<pre><code class="language-javascript">for (var i = 1; i &lt;= 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+// Output: 4, 4, 4 (not 1, 2, 3)
+</code></pre>
+<p>All three callbacks share the same <code>i</code> variable. By the time they run, the loop has finished and <code>i</code> is 4. The fix, historically, was to create a new scope for each iteration using an IIFE (immediately invoked function expression).</p>
+<pre><code class="language-javascript">for (var i = 1; i &lt;= 3; i++) {
+  (function (capturedI) {
+    setTimeout(function () {
+      console.log(capturedI);
+    }, capturedI * 1000);
+  })(i);
+}
+// Output: 1, 2, 3
+</code></pre>
+<p>These days, <code>let</code> solves this more cleanly. <code>let</code> is block-scoped, so each loop iteration gets its own <code>i</code>.</p>
+<pre><code class="language-javascript">for (let i = 1; i &lt;= 3; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
+}
+// Output: 1, 2, 3
+</code></pre>
+<p>This trips up beginners because <code>var</code> doesn&#39;t create a new binding per iteration, but <code>let</code> does. It&#39;s a subtle difference that only makes sense once you understand closures. If you&#39;re preparing for interviews, this exact question comes up a lot—our <a href="/blog/typescript-interview-questions">TypeScript interview questions</a> guide covers similar gotchas where scoping matters.</p>
+<h2>Closures in async code</h2>
+<p>Async operations and closures go hand in hand. When you <code>await</code> a promise inside an async function, any variables you reference after the <code>await</code> are captured in a closure.</p>
+<pre><code class="language-javascript">async function fetchUserData(userId) {
+  const user = await fetch(`/users/${userId}`).then((r) =&gt; r.json());
+  // The variable &#39;user&#39; is available here, inside this function&#39;s closure
+  return user.name;
+}
+</code></pre>
+<p>The tricky part is when you mix loops and async operations. If you&#39;re iterating over an array and making async calls inside the loop, the closure captures the loop variable. With <code>var</code>, you&#39;d get the classic trap again. With <code>let</code> or <code>for...of</code>, each iteration gets its own scope.</p>
+<pre><code class="language-javascript">const ids = [1, 2, 3];
+const results = [];
+
+for (const id of ids) {
+  const data = await fetch(`/users/${id}`).then((r) =&gt; r.json());
+  results.push(data);
+}
+</code></pre>
+<p>Each iteration&#39;s closure captures the <code>id</code> for that specific iteration. No surprises.</p>
+<p>If you&#39;ve been working with promises and need to fire off multiple requests at once, our comparison of <a href="/blog/promise-all-vs-promise-allsettled">Promise.all vs Promise.allSettled</a> shows how closures keep your data handling clean when responses come back.</p>
+<h2>Practical use: private variables</h2>
+<p>Closures give you a way to create truly private variables in JavaScript. Before classes had private fields (the <code>#</code> syntax), closures were the main way to hide data.</p>
+<pre><code class="language-javascript">function createCounter() {
+  let count = 0;
+
+  return {
+    increment() {
+      count++;
+    },
+    decrement() {
+      count--;
+    },
+    getCount() {
+      return count;
+    },
+  };
+}
+
+const counter = createCounter();
+counter.increment();
+counter.increment();
+console.log(counter.getCount()); // 2
+console.log(counter.count); // undefined
+</code></pre>
+<p>The <code>count</code> variable is completely inaccessible from the outside. Only the methods returned from <code>createCounter</code> can touch it. This is the module pattern, and it&#39;s the foundation of how JavaScript handled encapsulation before ES modules.</p>
+<p>Even today, closures are used for this in functional programming patterns and React hooks. The <code>useState</code> hook uses closures under the hood to remember state between renders.</p>
+<h2>A memory consideration worth mentioning</h2>
+<p>Because closures keep references to variables, they can prevent garbage collection. If a closure captures a large object and the closure itself stays alive (like an event listener that&#39;s never removed), that object stays in memory.</p>
+<pre><code class="language-javascript">function setupLargeDataHandler() {
+  const hugeDataset = new Array(1000000).fill(&quot;data&quot;);
+
+  document.addEventListener(&quot;click&quot;, function () {
+    console.log(hugeDataset.length); // Closure keeps hugeDataset alive
+  });
+}
+</code></pre>
+<p>As long as that click listener exists, the entire <code>hugeDataset</code> array stays in memory, even if the function only uses its <code>length</code>. This can become a problem in long-running applications if you&#39;re not mindful.</p>
+<p>The fix is to only capture what you need, or to clean up event listeners when they&#39;re no longer needed. React&#39;s <code>useEffect</code> cleanup function exists partly for this reason—removing listeners so closures can be garbage collected.</p>
+<h2>A story about a closure bug that took an afternoon to find</h2>
+<p>I once spent half a day debugging a React component that was behaving inconsistently. It was a search form with autocomplete. The user typed a query, and debounced results appeared. Most of the time it worked perfectly. But occasionally, the results displayed for one search term while the user had already typed a different term.</p>
+<p>The issue was a stale closure. The fetch callback inside the <code>useEffect</code> captured the <code>query</code> state variable from an old render. When a new render happened, the old callback was still floating around due to the debounce timer, and it would fire with the old <code>query</code> value.</p>
+<pre><code class="language-javascript">// Buggy version — stale closure
+useEffect(() =&gt; {
+  const timer = setTimeout(() =&gt; {
+    fetchResults(query); // &#39;query&#39; might be stale
+  }, 300);
+  return () =&gt; clearTimeout(timer);
+}, [query]);
+</code></pre>
+<p>The fix involved making sure the cleanup function actually cleared the timer and that the effect properly depended on the latest query. Understanding closures helped me trace exactly why the old value was being used.</p>
+<p>This is the kind of bug that only makes sense once you can mentally visualize what variables a function is closing over and when those variables update. If you&#39;ve been exploring <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>, you&#39;ve seen how closures can interact with error objects in catch clauses, sometimes holding onto them longer than expected.</p>
+<h2>Closures and the event loop</h2>
+<p>Closures play a role in how asynchronous code behaves alongside the event loop. When you pass a callback to <code>setTimeout</code>, that callback closes over the current scope. But the callback doesn&#39;t run immediately—it&#39;s placed in the task queue and executes after the current call stack clears.</p>
+<pre><code class="language-javascript">let message = &quot;first&quot;;
+
+setTimeout(function () {
+  console.log(message); // What does this log?
+}, 0);
+
+message = &quot;second&quot;;
+// Output: &#39;second&#39;
+</code></pre>
+<p>Even though the timeout is set to zero, the callback runs after the current synchronous code finishes. By then, <code>message</code> has been reassigned. The closure captures the variable reference, not a snapshot of the value. So it sees the updated value.</p>
+<p>If you want to capture a snapshot, you need to pass the value in a way that creates a new binding—using a function parameter or an immediately invoked function.</p>
+<h2>Wrapping up</h2>
+<p>Closures aren&#39;t a special feature you opt into. They&#39;re a consequence of how JavaScript handles scope and functions. Every function you write forms a closure over its surrounding scope. You&#39;re using them constantly, whether you realize it or not.</p>
+<p>The key things to remember: a closure is a function plus its remembered outer variables. Lexical scoping determines which variables those are. The classic for-loop trap happens because <code>var</code> doesn&#39;t create a new binding per iteration. And closures are what make callbacks, event handlers, debouncing, and async code work the way they do.</p>
+<p>If closures still feel a bit fuzzy after reading this, that&#39;s normal. The best way to internalize them is to build something that uses them deliberately. Write a debounce function from scratch. Build a counter with private state. Create a few event handlers that access outer variables. The moment you see a closure working in code you wrote, the concept goes from abstract to obvious.</p>
+<hr>
+<p><em>Brushing up on JavaScript fundamentals and want to level up your overall frontend skills? Red Surge Technology works with developers and teams to build solid, maintainable codebases. <a href="/contact">Get in touch</a> to discuss how we can help.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

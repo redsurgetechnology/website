@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Web Accessibility for Beginners: Simple 2026 Guide</title>
+    <meta name="description" content="Web accessibility basics for beginners. Learn WCAG guidelines, alt text, keyboard navigation, color contrast, form labels, and simple testing workflows." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="web accessibility, WCAG, inclusive design, web development, tutorial, beginner, ADA compliance, semantic HTML" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/web-accessibility-for-beginners" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/web-accessibility-for-beginners" />
+    <meta property="og:title" content="Web Accessibility for Beginners: Simple 2026 Guide" />
+    <meta property="og:description" content="Web accessibility basics for beginners. Learn WCAG guidelines, alt text, keyboard navigation, color contrast, form labels, and simple testing workflows." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/web-accessibility-beginners-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-04-13T13:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-04-13T13:00:00.000Z" />
+    <meta property="article:section" content="Web Development" />
+    <meta property="article:tag" content="web accessibility, WCAG, inclusive design, web development, tutorial, beginner, ADA compliance, semantic HTML" />
+    <meta property="article:tag" content="web accessibility" />
+    <meta property="article:tag" content="WCAG" />
+    <meta property="article:tag" content="inclusive design" />
+    <meta property="article:tag" content="web development" />
+    <meta property="article:tag" content="tutorial" />
+    <meta property="article:tag" content="beginner" />
+    <meta property="article:tag" content="ADA compliance" />
+    <meta property="article:tag" content="semantic HTML" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/web-accessibility-for-beginners" />
+    <meta name="twitter:title" content="Web Accessibility for Beginners: Simple 2026 Guide" />
+    <meta name="twitter:description" content="Web accessibility basics for beginners. Learn WCAG guidelines, alt text, keyboard navigation, color contrast, form labels, and simple testing workflows." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/web-accessibility-beginners-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Web Accessibility for Beginners: Simple 2026 Guide",
+        "description": "Web accessibility basics for beginners. Learn WCAG guidelines, alt text, keyboard navigation, color contrast, form labels, and simple testing workflows.",
+        "url": "https://redsurgetechnology.com/blog/web-accessibility-for-beginners",
+        "datePublished": "2026-04-13T13:00:00.000Z",
+        "dateModified": "2026-04-13T13:00:00.000Z",
+        "keywords": "web accessibility, WCAG, inclusive design, web development, tutorial, beginner, ADA compliance, semantic HTML",
+        "articleSection": "Web Development",
+        "timeRequired": "PT16M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/web-accessibility-beginners-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/web-accessibility-for-beginners"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Web Accessibility for Beginners: Simple 2026 Guide",
+          "item": "https://redsurgetechnology.com/blog/web-accessibility-for-beginners"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Web Accessibility for Beginners: Simple 2026 Guide</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Web Accessibility for Beginners: Simple 2026 Guide
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/web-accessibility-beginners-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/web-accessibility-beginners-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/web-accessibility-beginners-guide.webp"
+      alt="Web Accessibility for Beginners: Simple 2026 Guide - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Web Accessibility for Beginners: Simple 2026 Guide" />
+          <meta itemprop="description" content="Web accessibility basics for beginners. Learn WCAG guidelines, alt text, keyboard navigation, color contrast, form labels, and simple testing workflows." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/web-accessibility-for-beginners" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-04-13T13:00:00.000Z">Apr 13, 2026</time>
+          </div>
+
+          
+          <!-- Last updated -->
+          <div class="cs-meta-item cs-meta-updated" title="Last updated">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Updated: <time itemprop="dateModified" datetime="2026-04-13T13:00:00.000Z">Apr 13, 2026</time></span>
+          </div>
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT16M" />16 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Web Development</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">web accessibility</span><span class="cs-tag" itemprop="keywords">WCAG</span><span class="cs-tag" itemprop="keywords">inclusive design</span><span class="cs-tag" itemprop="keywords">web development</span><span class="cs-tag" itemprop="keywords">tutorial</span><span class="cs-tag" itemprop="keywords">beginner</span><span class="cs-tag" itemprop="keywords">ADA compliance</span><span class="cs-tag" itemprop="keywords">semantic HTML</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>If you&#39;ve heard the term &quot;web accessibility&quot; and mentally filed it under &quot;important but complicated — deal with later,&quot; you&#39;re not alone. A lot of developers, especially those just starting out, treat accessibility as an advanced topic they&#39;ll circle back to once they&#39;ve mastered everything else.</p>
+<p>Here&#39;s the problem: nearly all of the top one million websites on the internet have critical accessibility issues. According to WebAIM&#39;s annual accessibility analysis of the top 1,000,000 homepages, over 96% of pages tested had detectable WCAG failures. The average homepage contained over 50 distinct accessibility errors. That means the overwhelming majority of websites are, to some degree, unusable by a significant portion of the people trying to use them.</p>
+<p>This guide is for developers who want to change that — starting today. We&#39;re going to cover what web accessibility actually means, who it helps, what WCAG is in plain English, and the specific, practical things you can do right now to make your websites more inclusive. No jargon. No overwhelming checklists. Just a clear, actionable starting point.</p>
+<blockquote>
+<p><strong>Building a website for your business and want it done right from day one?</strong> Red Surge Technology builds accessible, fast websites for small businesses across New Jersey. <a href="/about">Learn more about what we offer</a>.</p>
+</blockquote>
+<hr>
+<h2>Table of Contents</h2>
+<ol>
+<li><a href="#what-is-web-accessibility">What Is Web Accessibility?</a></li>
+<li><a href="#why-it-matters-beyond-ethics">Why It Matters Beyond Ethics</a></li>
+<li><a href="#what-is-wcag-understanding-the-standard">What Is WCAG? Understanding the Standard</a></li>
+<li><a href="#the-four-principles-of-accessibility-pour">The Four Principles of Accessibility: POUR</a></li>
+<li><a href="#wcag-conformance-levels-a-aa-and-aaa">WCAG Conformance Levels: A, AA, and AAA</a></li>
+<li><a href="#the-most-common-accessibility-issues-and-how-to-fix-them">The Most Common Accessibility Issues and How to Fix Them</a></li>
+<li><a href="#a-simple-accessibility-testing-workflow">A Simple Accessibility Testing Workflow</a></li>
+<li><a href="#where-to-go-from-here">Where to Go From Here</a></li>
+<li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+</ol>
+<hr>
+<h2>What Is Web Accessibility?</h2>
+<p>Web accessibility means designing and building websites so that people with disabilities can use them. That includes people who:</p>
+<ul>
+<li><strong>Can&#39;t see</strong> — and use screen readers to have content read aloud to them, or braille displays to read content tactilely</li>
+<li><strong>Can&#39;t hear</strong> — and need captions or transcripts for audio and video content</li>
+<li><strong>Can&#39;t use a mouse</strong> — and navigate entirely by keyboard, switch device, or voice command</li>
+<li><strong>Have cognitive disabilities</strong> — and benefit from clear language, consistent navigation, and predictable layouts</li>
+<li><strong>Have low vision</strong> — and need to zoom in significantly or require high colour contrast to distinguish text from backgrounds</li>
+</ul>
+<p>But here&#39;s something important that often gets lost: <strong>accessibility improvements help far more people than just those with permanent disabilities.</strong> They benefit:</p>
+<ul>
+<li>People using a phone in bright sunlight who can&#39;t see low-contrast text</li>
+<li>People with a broken arm or repetitive strain injury temporarily navigating by keyboard</li>
+<li>Older users whose fine motor control or vision has declined with age</li>
+<li>People in noisy environments who can&#39;t listen to audio</li>
+<li>Anyone on a slow connection for whom a media-heavy page is effectively unusable</li>
+<li>Power users who prefer keyboard shortcuts and efficient navigation</li>
+</ul>
+<p>In other words, <strong>accessibility is good design for everyone.</strong> The features you add to support a screen reader user also produce cleaner, more semantic HTML that helps your SEO. The captions you add for a deaf user help the person watching your video in a quiet office. The keyboard navigation you implement for a motor-impaired user helps power users who prefer the keyboard to the mouse. The clear, structured content that helps someone with a cognitive disability also helps someone scanning your page quickly on their lunch break.</p>
+<p>Accessibility isn&#39;t a niche accommodation for a small group of users. It&#39;s a quality standard that raises the baseline experience for everyone.</p>
+<hr>
+<h2>Why It Matters Beyond Ethics</h2>
+<p>The ethical case for accessibility is clear — you want your website to work for everyone. But there are practical reasons too that are worth understanding, whether you&#39;re a developer justifying time investment to a client, or a business owner deciding where to allocate resources.</p>
+<h3>Legal Risk</h3>
+<p>In the United States, websites are increasingly being held to ADA (Americans with Disabilities Act) standards. Thousands of accessibility lawsuits are filed each year against businesses with inaccessible websites, and courts have consistently ruled that websites qualify as places of public accommodation under the ADA. This isn&#39;t just a concern for large companies — small businesses have been targeted too, and the number of lawsuits continues to rise year over year.</p>
+<p>Beyond US law, the European Accessibility Act (EAA) came into force in June 2025, requiring many digital products and services to meet accessibility standards across the EU. If you serve customers internationally, accessibility compliance is no longer optional.</p>
+<h3>SEO Overlap</h3>
+<p>Many accessibility best practices directly improve your search rankings. This isn&#39;t coincidence — search engines and assistive technologies both rely on the same underlying structure of semantic HTML to understand your content.</p>
+<p>Descriptive alt text on images helps screen reader users <em>and</em> helps Google understand what your images contain. Proper heading structure helps people navigate your page <em>and</em> helps search engines understand your content hierarchy. Fast load times and clean semantic HTML are good for accessibility <em>and</em> for Core Web Vitals, which Google uses as a ranking signal. Descriptive link text helps screen reader users <em>and</em> provides contextual relevance signals to search engines.</p>
+<p>Building for accessibility and building for SEO are largely the same work.</p>
+<h3>Wider Audience</h3>
+<p>The World Health Organization estimates that over 16% of the world&#39;s population has some form of disability. That&#39;s more than 1.3 billion people. When you factor in temporary and situational impairments — a broken arm, a noisy environment, an aging population — the percentage of people who benefit from accessible design at any given moment is far higher.</p>
+<p>Building an inaccessible website isn&#39;t just an ethical problem — it&#39;s a business problem. You&#39;re actively excluding a significant portion of your potential audience.</p>
+<hr>
+<h2>What Is WCAG? Understanding the Standard</h2>
+<p>WCAG stands for <strong>Web Content Accessibility Guidelines.</strong> It&#39;s the international standard for web accessibility, developed and maintained by the W3C (the same organization that develops the standards for HTML and CSS). When people talk about making a website &quot;accessible,&quot; they usually mean meeting WCAG standards.</p>
+<p>The current version is WCAG 2.2, published in October 2023. It builds on WCAG 2.1 by adding nine new success criteria and removing one (4.1.1 Parsing, which became redundant as modern browsers handle malformed HTML gracefully). The new criteria in 2.2 primarily improve accessibility for users with cognitive disabilities, low vision, and motor impairments — covering things like focus appearance, dragging movements, and consistent help mechanisms.</p>
+<p>When starting a new project in 2026, target WCAG 2.2 from the beginning.</p>
+<hr>
+<h2>The Four Principles of Accessibility: POUR</h2>
+<p>WCAG is organized around four core principles, often abbreviated as <strong>POUR</strong>. Every success criterion in the guidelines fits under one of these principles. Understanding POUR gives you a mental framework for thinking about accessibility without memorizing the entire specification.</p>
+<h3>Perceivable</h3>
+<p>Users must be able to perceive all content and interface elements using at least one of their senses. If someone can&#39;t see an image, there needs to be a text alternative they can hear or feel. If someone can&#39;t hear an audio track, there needs to be a caption or transcript they can read. If content relies purely on colour to convey information — like a red border indicating an error — there needs to be an additional indicator like an icon or text label for users who are colour blind.</p>
+<p>This principle covers: text alternatives for non-text content, captions for multimedia, adaptable content that can be presented in different ways without losing meaning, and sufficient colour contrast.</p>
+<h3>Operable</h3>
+<p>Users must be able to operate all interface elements regardless of their input method. If someone can&#39;t use a mouse, they need to be able to do everything with a keyboard. Buttons need to be clickable via keyboard. Custom widgets like dropdowns and modals need to follow standard keyboard interaction patterns. Time limits need to be adjustable or removable. Content shouldn&#39;t flash at rates that could trigger seizures. Navigation needs to be consistent and predictable.</p>
+<p>This principle covers: keyboard accessibility, sufficient time to complete tasks, seizure-safe content, navigable and findable content, and input modalities beyond the keyboard.</p>
+<h3>Understandable</h3>
+<p>Content and interfaces need to be understandable. Language should be clear and readable. Error messages should explain what went wrong and how to fix it. Navigation and labelling should be consistent across pages. Forms should provide clear instructions. The default language of the page should be declared so screen readers can pronounce it correctly.</p>
+<p>This principle covers: readable text, predictable layouts and interactions, and input assistance that helps users avoid and correct mistakes.</p>
+<h3>Robust</h3>
+<p>Content needs to work reliably across different browsers, devices, and assistive technologies — now and in the future. This means writing valid, semantic HTML that assistive technologies can interpret correctly. It means using ARIA attributes appropriately when HTML semantics aren&#39;t sufficient. It means testing across different screen readers, browsers, and devices to ensure broad compatibility.</p>
+<p>This principle covers: compatible markup that can be reliably interpreted by current and future user agents and assistive technologies.</p>
+<hr>
+<h2>WCAG Conformance Levels: A, AA, and AAA</h2>
+<p>WCAG has three levels of conformance. Understanding what each level means helps you set realistic targets for your projects.</p>
+<h3>Level A — Minimum</h3>
+<p>Level A criteria are the most critical accessibility requirements — the ones without which entire categories of users simply cannot use your site at all. These are non-negotiable basics.</p>
+<p>Examples of Level A criteria:</p>
+<ul>
+<li>All non-text content has a text alternative (like alt text on images)</li>
+<li>All content and functionality can be accessed by keyboard</li>
+<li>No content flashes more than three times per second (a seizure risk)</li>
+<li>Form inputs have associated labels</li>
+<li>The page has a meaningful title</li>
+</ul>
+<h3>Level AA — Standard Target</h3>
+<p>Level AA is the standard that most accessibility laws and guidelines reference. It addresses the most common and impactful barriers for disabled users without requiring a prohibitive level of effort. For most developers and most projects, <strong>WCAG 2.2 Level AA is the target.</strong></p>
+<p>Examples of Level AA criteria (in addition to all Level A):</p>
+<ul>
+<li>Text has a minimum contrast ratio of 4.5:1 against its background</li>
+<li>Captions are provided for all live audio content in synchronized media</li>
+<li>Consistent navigation and identification across pages</li>
+<li>Error messages clearly identify the problem field and suggest corrections</li>
+<li>Focus indicators are visible</li>
+</ul>
+<h3>Level AAA — Highest</h3>
+<p>Level AAA criteria are aspirational guidelines that may not be achievable for all content in all contexts. Most websites aim for AA compliance rather than AAA. Some AAA criteria are feasible to implement (like providing sign language interpretation for all video content) while others may be impractical for certain types of content (like ensuring reading level doesn&#39;t exceed lower secondary education for all text).</p>
+<p>For practical purposes, target <strong>WCAG 2.2 Level AA.</strong> That&#39;s what the law typically references, what accessibility auditors check against, and what will address the vast majority of real-world barriers your users face.</p>
+<hr>
+<h2>The Most Common Accessibility Issues and How to Fix Them</h2>
+<p>Rather than overwhelming you with the full WCAG checklist, here are the issues that appear most frequently on real websites — and the specific, actionable fixes for each. These seven issues account for the overwhelming majority of accessibility failures detected in automated scans.</p>
+<h3>1. Images Without Alt Text</h3>
+<p>Every meaningful image on your website needs an <code>alt</code> attribute that describes what the image contains. Screen readers read this text aloud to users who can&#39;t see the image. Search engines use it to understand image content.</p>
+<pre><code class="language-html">&lt;!-- Bad: missing alt text entirely — screen reader may read the filename --&gt;
+&lt;img src=&quot;team-photo.jpg&quot; /&gt;
+
+&lt;!-- Bad: unhelpful alt text that adds no information --&gt;
+&lt;img src=&quot;team-photo.jpg&quot; alt=&quot;image&quot; /&gt;
+
+&lt;!-- Good: descriptive alt text that conveys the image&#39;s meaning --&gt;
+&lt;img
+  src=&quot;team-photo.jpg&quot;
+  alt=&quot;The Red Surge Technology team at our Monmouth County office&quot;
+/&gt;
+</code></pre>
+<p><strong>For decorative images</strong> — dividers, background textures, purely aesthetic icons that don&#39;t convey information — use an empty alt attribute. This tells screen readers to skip the image entirely rather than reading out the filename or the word &quot;image.&quot;</p>
+<pre><code class="language-html">&lt;!-- Decorative image: empty alt tells screen readers to skip it --&gt;
+&lt;img src=&quot;decorative-divider.png&quot; alt=&quot;&quot; /&gt;
+</code></pre>
+<p><strong>How to write good alt text:</strong> Imagine you&#39;re describing the image to someone over the phone. What&#39;s important about the image in the context of the surrounding content? An image of a pie chart on a financial report needs different alt text than the same image in an article about data visualization. Context determines what&#39;s relevant.</p>
+<h3>2. Poor Colour Contrast</h3>
+<p>Low contrast between text and its background makes content difficult or impossible to read for users with low vision or colour blindness — and hard to read for anyone in bright sunlight or on a dimmed screen.</p>
+<p><strong>WCAG AA requires:</strong></p>
+<ul>
+<li>A minimum contrast ratio of <strong>4.5:1</strong> for normal text (under 18pt or 14pt bold)</li>
+<li>A minimum contrast ratio of <strong>3:1</strong> for large text (18pt+ or 14pt+ bold)</li>
+</ul>
+<p><strong>Tools to check your contrast:</strong></p>
+<ul>
+<li><a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> — paste in your hex colours and get an instant pass/fail for AA and AAA</li>
+<li>Chrome DevTools — open the Elements panel, select a text element, and check the accessibility inspector for contrast information</li>
+<li>axe DevTools browser extension — scans your entire page and reports contrast failures</li>
+</ul>
+<pre><code class="language-css">/* Bad: light grey text on white background — likely fails AA */
+.text-muted {
+  color: #aaaaaa;
+  background: #ffffff;
+}
+
+/* Good: dark grey text on white — passes AA comfortably */
+.text-body {
+  color: #333333;
+  background: #ffffff;
+}
+</code></pre>
+<p><strong>Common trap:</strong> Using grey text on light backgrounds for secondary information. Designers often make secondary text lighter to create visual hierarchy, but if the contrast drops below 4.5:1, that information becomes invisible to users with low vision. Use size and spacing for visual hierarchy, not just colour.</p>
+<h3>3. Missing or Non-Descriptive Link Text</h3>
+<p>Screen reader users often navigate by jumping between links on a page — they bring up a list of all links and jump directly to the one they want. If every link just says &quot;click here,&quot; &quot;read more,&quot; or &quot;learn more,&quot; that list is completely useless without the surrounding context.</p>
+<pre><code class="language-html">&lt;!-- Bad: no context for screen reader users navigating by links --&gt;
+&lt;a href=&quot;/blog/seo-guide&quot;&gt;Click here&lt;/a&gt;
+&lt;a href=&quot;/blog/website-cost&quot;&gt;Read more&lt;/a&gt;
+
+&lt;!-- Good: descriptive link text that makes sense out of context --&gt;
+&lt;a href=&quot;/blog/seo-guide&quot;&gt;Read our Local SEO Guide for NJ Businesses&lt;/a&gt;
+&lt;a href=&quot;/blog/website-cost&quot;&gt;See how much a website costs in New Jersey&lt;/a&gt;
+</code></pre>
+<p>If you genuinely need a short call-to-action like &quot;Read more&quot; for design reasons, you can provide additional context hidden visually but available to screen readers:</p>
+<pre><code class="language-html">&lt;a href=&quot;/blog/seo-guide&quot;&gt;
+  Read more
+  &lt;span class=&quot;visually-hidden&quot;&gt; about local SEO for NJ businesses&lt;/span&gt;
+&lt;/a&gt;
+</code></pre>
+<pre><code class="language-css">.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+</code></pre>
+<p>This <code>.visually-hidden</code> class is a standard pattern used across the web. It hides content visually while keeping it in the accessibility tree so screen readers can find it.</p>
+<h3>4. No Keyboard Navigation</h3>
+<p>Every interactive element on your page — links, buttons, form fields, dropdowns, modals, custom widgets — must be reachable and operable by keyboard alone. Users who can&#39;t use a mouse navigate by pressing Tab to move between elements and Enter or Space to activate them.</p>
+<p><strong>The most common mistake</strong> is removing the default focus indicator:</p>
+<pre><code class="language-css">/* Bad: removes the visible focus ring entirely — keyboard users are lost */
+*:focus {
+  outline: none;
+}
+
+/* Good: customize the focus style rather than removing it */
+*:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+</code></pre>
+<p>Never use <code>outline: none</code> without replacing it with a clearly visible custom focus style. Without a visible focus indicator, keyboard users have no idea where they are on the page. The <code>:focus-visible</code> pseudo-class is preferred because it only shows the focus ring when the user is navigating by keyboard — not when they&#39;re clicking with a mouse — which gives you the best of both worlds.</p>
+<p><strong>To test keyboard accessibility on your own site:</strong> Put your mouse aside and try to complete a full user journey using only Tab, Shift+Tab, Enter, Space, and arrow keys. Can you get everywhere you need to go? Can you tell where you are at all times? Are there any elements you can reach but can&#39;t operate? Any keyboard traps where you can Tab into a component but can&#39;t Tab out?</p>
+<h3>5. Forms Without Proper Labels</h3>
+<p>Every form input needs a visible, associated label. Placeholder text is not a substitute for a label — it disappears when the user starts typing, leaving them with no reminder of what the field is for. Placeholder text also typically has low contrast by design, making it hard to read for many users.</p>
+<pre><code class="language-html">&lt;!-- Bad: no label, using placeholder as a substitute --&gt;
+&lt;input type=&quot;email&quot; placeholder=&quot;Email address&quot; /&gt;
+
+&lt;!-- Good: explicit label properly associated with the input --&gt;
+&lt;label for=&quot;email&quot;&gt;Email address&lt;/label&gt;
+&lt;input type=&quot;email&quot; id=&quot;email&quot; name=&quot;email&quot; placeholder=&quot;you@example.com&quot; /&gt;
+</code></pre>
+<p>The <code>for</code> attribute on the label must match the <code>id</code> attribute on the input. This association means:</p>
+<ul>
+<li>Clicking the label focuses the input (better usability for everyone)</li>
+<li>Screen readers announce the label when the input receives focus</li>
+<li>The form works correctly for all users regardless of how they interact with it</li>
+</ul>
+<p><strong>For required fields</strong>, mark them explicitly — don&#39;t rely on colour alone:</p>
+<pre><code class="language-html">&lt;label for=&quot;name&quot;&gt;
+  Full name
+  &lt;span aria-hidden=&quot;true&quot;&gt;*&lt;/span&gt;
+  &lt;span class=&quot;visually-hidden&quot;&gt;(required)&lt;/span&gt;
+&lt;/label&gt;
+&lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; required aria-required=&quot;true&quot; /&gt;
+</code></pre>
+<p>The <code>aria-hidden=&quot;true&quot;</code> prevents screen readers from reading the asterisk aloud (which would be confusing), while the visually-hidden text ensures that screen reader users still know the field is required. The <code>aria-required=&quot;true&quot;</code> attribute provides a programmatic indication that assistive technology can use.</p>
+<p><strong>For error messages</strong>, associate them with the field they relate to:</p>
+<pre><code class="language-html">&lt;label for=&quot;email&quot;&gt;Email address&lt;/label&gt;
+&lt;input
+  type=&quot;email&quot;
+  id=&quot;email&quot;
+  name=&quot;email&quot;
+  aria-describedby=&quot;email-error&quot;
+  aria-invalid=&quot;true&quot;
+/&gt;
+&lt;span id=&quot;email-error&quot; role=&quot;alert&quot;&gt;Please enter a valid email address.&lt;/span&gt;
+</code></pre>
+<p>The <code>aria-describedby</code> attribute connects the error message to the input so screen readers announce it when the field receives focus. The <code>role=&quot;alert&quot;</code> ensures the error is announced immediately when it appears. The <code>aria-invalid</code> attribute provides a programmatic indication that the field contains an error.</p>
+<h3>6. No Page Structure — Headings and Landmarks</h3>
+<p>Screen reader users navigate documents by jumping between headings — similar to how sighted users scan a page visually, looking at headings to understand the structure and find what they need. If your page has no headings, or uses headings purely for visual styling rather than structure, this navigation completely breaks down.</p>
+<p><strong>Use headings in a logical hierarchy:</strong></p>
+<ul>
+<li>One <code>&lt;h1&gt;</code> per page (the main title)</li>
+<li><code>&lt;h2&gt;</code> for main sections</li>
+<li><code>&lt;h3&gt;</code> for subsections within those</li>
+<li>Never skip levels (jumping from <code>&lt;h2&gt;</code> to <code>&lt;h4&gt;</code>)</li>
+<li>Never choose a heading level based on how it looks — use CSS for visual sizing</li>
+</ul>
+<pre><code class="language-html">&lt;!-- Bad: headings chosen for size, not structure — no logical hierarchy --&gt;
+&lt;h3&gt;Welcome to Our Website&lt;/h3&gt;
+&lt;h1&gt;Our Services&lt;/h1&gt;
+&lt;h3&gt;Web Design&lt;/h3&gt;
+
+&lt;!-- Good: logical hierarchy reflecting the document structure --&gt;
+&lt;h1&gt;Welcome to Red Surge Technology&lt;/h1&gt;
+&lt;h2&gt;Our Services&lt;/h2&gt;
+&lt;h3&gt;Web Design&lt;/h3&gt;
+&lt;h3&gt;Local SEO&lt;/h3&gt;
+&lt;h2&gt;About Us&lt;/h2&gt;
+&lt;h3&gt;Our Team&lt;/h3&gt;
+&lt;h3&gt;Our Process&lt;/h3&gt;
+</code></pre>
+<p><strong>Use semantic HTML landmark elements</strong> to define the major regions of your page:</p>
+<pre><code class="language-html">&lt;header&gt;
+  &lt;!-- Site header, logo, primary navigation --&gt;
+  &lt;nav&gt;
+    &lt;!-- Navigation menus (can have multiple) --&gt;
+    &lt;main&gt;
+      &lt;!-- Main page content — one per page --&gt;
+      &lt;aside&gt;
+        &lt;!-- Sidebar or complementary content --&gt;
+        &lt;footer&gt;&lt;!-- Site footer, copyright, secondary links --&gt;&lt;/footer&gt;
+      &lt;/aside&gt;
+    &lt;/main&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+</code></pre>
+<p>These elements give screen reader users the ability to jump directly to the main content, skip navigation, or go straight to the footer — without having to Tab through every element on the page. This is the equivalent of a sighted user glancing at the page layout and immediately understanding where the navigation ends and the content begins.</p>
+<h3>7. Videos Without Captions</h3>
+<p>Any video on your website with meaningful audio content needs captions. Not just auto-generated captions — which are often inaccurate and can garble technical terms, names, and context — but accurate, properly timed captions that convey everything important in the audio track.</p>
+<p>For videos hosted on YouTube or Vimeo, you can upload a caption file (.vtt or .srt format) directly in the platform&#39;s video settings. YouTube also provides auto-generated captions that you can download and correct — much faster than starting from scratch.</p>
+<p>For HTML5 video embedded directly on your site:</p>
+<pre><code class="language-html">&lt;video controls&gt;
+  &lt;source src=&quot;intro.mp4&quot; type=&quot;video/mp4&quot; /&gt;
+  &lt;track
+    kind=&quot;captions&quot;
+    src=&quot;intro-captions.vtt&quot;
+    srclang=&quot;en&quot;
+    label=&quot;English&quot;
+    default
+  /&gt;
+  Your browser does not support the video tag.
+&lt;/video&gt;
+</code></pre>
+<p>The <code>&lt;track&gt;</code> element with <code>kind=&quot;captions&quot;</code> provides the caption file. The <code>srclang</code> attribute specifies the language. The <code>default</code> attribute tells the browser to enable these captions by default. The fallback text inside the <code>&lt;video&gt;</code> element displays if the browser doesn&#39;t support HTML5 video at all.</p>
+<p><strong>For audio-only content</strong> like podcasts, provide a transcript. This helps deaf users, users in noisy environments, and users who simply prefer reading to listening.</p>
+<hr>
+<h2>A Simple Accessibility Testing Workflow</h2>
+<p>You don&#39;t need expensive tools or certification to start testing for accessibility. Here&#39;s a practical, repeatable workflow you can use on any project starting today.</p>
+<h3>Step 1 — Automated Scan</h3>
+<p>Run your page through a free automated tool. <a href="https://wave.webaim.org/">WAVE</a> is browser-based and requires no installation. The <a href="https://www.deque.com/axe/">axe DevTools</a> browser extension integrates directly into Chrome or Firefox DevTools.</p>
+<p>These tools catch roughly 30–40% of accessibility issues automatically: missing alt text, contrast failures, missing form labels, invalid ARIA attributes, and structural errors like skipped heading levels. An automated scan gives you a prioritized list of issues to address and takes under a minute to run.</p>
+<h3>Step 2 — Keyboard Test</h3>
+<p>Close your mouse. Seriously — put it out of reach. Now navigate your page using only the Tab key, Shift+Tab to go backwards, Enter to activate links and buttons, Space to toggle checkboxes, and arrow keys to navigate within components.</p>
+<p>Ask yourself:</p>
+<ul>
+<li>Can you reach every interactive element?</li>
+<li>Is the focus indicator always clearly visible?</li>
+<li>Can you operate every button, link, form field, dropdown, and modal?</li>
+<li>Are there any keyboard traps where you Tab into something and can&#39;t Tab out?</li>
+<li>Does the tab order follow a logical path through the page?</li>
+</ul>
+<h3>Step 3 — Screen Reader Test</h3>
+<p>Turn on a screen reader and try to navigate your page without looking at the screen. On Mac, VoiceOver is built in (Command + F5 to toggle). On Windows, <a href="https://www.nvaccess.org/">NVDA</a> is free and widely used. On iOS, VoiceOver is in Settings &gt; Accessibility. On Android, TalkBack works similarly.</p>
+<p>You don&#39;t need to become a screen reader expert. Just experience what it&#39;s like to consume your page without seeing it. Can you understand the content? Can you navigate between sections? Do the forms make sense? Do images have appropriate alt text?</p>
+<h3>Step 4 — Contrast Check</h3>
+<p>Use the <a href="https://webaim.org/resources/contrastchecker/">WebAIM Contrast Checker</a> to test your text colours against their backgrounds. Check your primary text colour, your secondary or muted text colour, your link colour, and your button text colour. Any colour combination that fails AA contrast requirements needs adjustment.</p>
+<h3>Step 5 — Zoom Test</h3>
+<p>Set your browser zoom to 200% (Ctrl/Cmd + Plus). At this zoom level, WCAG requires that content remain readable and functional without horizontal scrolling. Does your layout hold together? Is any content clipped, overlapping, or hidden? Can you still navigate and complete key tasks?</p>
+<h3>Step 6 — Content Review</h3>
+<p>Read through your page with fresh eyes — or ask someone unfamiliar with the project to do so. Are your headings descriptive? Do your links make sense out of context? Are your error messages clear about what went wrong and how to fix it? Is your language clear and straightforward?</p>
+<hr>
+<h2>Where to Go From Here</h2>
+<p>Accessibility is a broad field, and this guide is a starting point — not an endpoint. The most important thing is to start. Every improvement you make today helps real users right now, and building accessibility into your workflow from the beginning costs far less than retrofitting later.</p>
+<h3>Resources Worth Bookmarking</h3>
+<ul>
+<li><strong><a href="https://webaim.org/">WebAIM</a></strong> — The most approachable accessibility resource on the web, with practical guides on screen reader testing, contrast checking, WCAG interpretation, and an annual accessibility analysis of the top million websites.</li>
+<li><strong><a href="https://www.a11yproject.com/">The A11Y Project</a></strong> — A community-driven resource with practical checklists, articles, and patterns written in plain language for developers.</li>
+<li><strong><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility">MDN Accessibility documentation</a></strong> — Thorough reference material for HTML semantics, ARIA usage, accessible component patterns, and testing guidance.</li>
+<li><strong><a href="https://www.w3.org/WAI/WCAG22/quickref/">WCAG 2.2 Quick Reference</a></strong> — The official success criteria with filters to show only Level A and AA. Best used as a reference, not read cover to cover.</li>
+<li><strong><a href="https://inclusive-components.design/">Inclusive Components</a></strong> — A blog and book by Heydon Pickering with deeply practical patterns for building accessible, inclusive UI components.</li>
+</ul>
+<p>The best time to build accessibility in is at the start of a project. The second-best time is right now.</p>
+<hr>
+<h2>Frequently Asked Questions About Web Accessibility</h2>
+<h3>Do I have to make my website accessible by law?</h3>
+<p>In the United States, the ADA has been increasingly applied to websites by courts, which have consistently ruled that websites serving the public qualify as places of public accommodation. Section 508 of the Rehabilitation Act applies directly to federal agencies and their contractors. Beyond US law, the European Accessibility Act came into force in June 2025, requiring many digital products and services to meet accessibility standards across the EU. The legal landscape continues to evolve, but the direction is clear: accessibility requirements are expanding. If you have specific questions about your legal obligations, consult a qualified legal professional familiar with digital accessibility law.</p>
+<h3>What&#39;s the difference between WCAG 2.1 and WCAG 2.2?</h3>
+<p>WCAG 2.2, published in October 2023, builds on 2.1 by adding nine new success criteria and removing one (4.1.1 Parsing, which became redundant as modern browsers handle malformed HTML gracefully). The new criteria in 2.2 primarily improve accessibility for users with cognitive disabilities, low vision, and motor impairments — covering areas like focus appearance requirements, dragging movements, target size minimums, and consistent help mechanisms. If your site already meets WCAG 2.1 AA, upgrading to 2.2 AA requires addressing the nine new criteria. When starting a new project in 2026, target 2.2 from the beginning.</p>
+<h3>What is ARIA and when should I use it?</h3>
+<p>ARIA (Accessible Rich Internet Applications) is a set of HTML attributes that provide additional semantic information to assistive technologies. It&#39;s most useful for dynamic, interactive components — custom dropdowns, modal dialogs, tab panels, carousels — where native HTML elements don&#39;t provide sufficient semantics on their own. The cardinal rule of ARIA is simple: <strong>don&#39;t use it when native HTML will do the job.</strong> A <code>&lt;button&gt;</code> is always better than <code>&lt;div role=&quot;button&quot;&gt;</code>. A <code>&lt;nav&gt;</code> is always better than <code>&lt;div role=&quot;navigation&quot;&gt;</code>. ARIA fills the gaps that HTML semantics can&#39;t cover; it shouldn&#39;t replace them. When you do use ARIA, test thoroughly with a screen reader to verify it behaves as expected.</p>
+<h3>How do I make an existing website accessible without rebuilding from scratch?</h3>
+<p>Start with an audit. Run your existing site through WAVE or axe to identify the issues, then prioritize fixes by impact. Missing alt text, contrast failures, and missing form labels are usually the quickest wins with the highest impact. Then move to structural issues like heading hierarchy and landmark elements. Keyboard navigation and screen reader testing will reveal the deeper interaction issues that automated tools miss. You don&#39;t have to fix everything at once — a steady, prioritized approach makes accessibility work sustainable on existing projects.</p>
+<h3>Does accessibility hurt website performance or design?</h3>
+<p>No — when done correctly, accessibility improvements generally have a neutral or positive effect on both. Semantic HTML is lighter and faster than div-soup. Descriptive link text and headings improve SEO. Good colour contrast tends to improve readability for everyone, not just users with low vision. The perception that accessible design is visually boring or limiting is a myth — some of the best-designed websites on the internet are also the most accessible. Accessibility constraints push you toward clarity and structure, which usually produces better design outcomes overall.</p>
+<h3>How much extra work is accessibility if I start from the beginning?</h3>
+<p>Studies and industry experience consistently show that building accessibility in from the start adds roughly 10–20% to development time — far less than retrofitting an inaccessible site later, which can cost several times the original build. The single most impactful thing you can do is write semantic HTML from the start: use the right elements for the right jobs, structure your headings correctly, label your forms properly, and make sure everything works by keyboard. Most of the foundation of accessibility is just good HTML. It only becomes expensive when it&#39;s ignored until the end.</p>
+<h3>What&#39;s the one thing I should fix first?</h3>
+<p>If you&#39;re overwhelmed and don&#39;t know where to start, begin with keyboard accessibility. Close your mouse and try to use your entire site. Every issue you discover is something real users experience every day. Fixing keyboard navigation and focus management addresses barriers for the widest range of users — including screen reader users, motor-impaired users, and power users — and forces you to think about interactive element semantics, which naturally leads to improvements in other areas.</p>
+<hr>
+<p><em>Written by Collin Stewart, founder of Red Surge Technology. We build fast, accessible websites for small businesses across New Jersey — with clean code and inclusive design from day one. Check out our other developer guides: <a href="/blog/css-grid-layout-responsive-web-design">CSS Grid for responsive web design</a> and <a href="/blog/how-to-use-the-javascript-fetch-api-with-async-await">how to use the JavaScript Fetch API</a>. If you have questions about making your website more accessible, <a href="/contact">reach out</a> — we&#39;re happy to help.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

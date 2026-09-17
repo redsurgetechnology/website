@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Native Expo Liquid Glass Effect: Build Stunning UI Components</title>
+    <meta name="description" content="Create a liquid glass effect in React Native Expo with step-by-step examples using Skia, blur views, and Reanimated. Perfect for modern mobile UI design." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React Native, Expo, UI Design, Mobile Development, JavaScript" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect" />
+    <meta property="og:title" content="React Native Expo Liquid Glass Effect: Build Stunning UI Components" />
+    <meta property="og:description" content="Create a liquid glass effect in React Native Expo with step-by-step examples using Skia, blur views, and Reanimated. Perfect for modern mobile UI design." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-native-expo-liquid-glass.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-03T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-03T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React Native, Expo, UI Design, Mobile Development, JavaScript" />
+    <meta property="article:tag" content="React Native" />
+    <meta property="article:tag" content="Expo" />
+    <meta property="article:tag" content="UI Design" />
+    <meta property="article:tag" content="Mobile Development" />
+    <meta property="article:tag" content="JavaScript" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect" />
+    <meta name="twitter:title" content="React Native Expo Liquid Glass Effect: Build Stunning UI Components" />
+    <meta name="twitter:description" content="Create a liquid glass effect in React Native Expo with step-by-step examples using Skia, blur views, and Reanimated. Perfect for modern mobile UI design." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-native-expo-liquid-glass.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Native Expo Liquid Glass Effect: Build Stunning UI Components",
+        "description": "Create a liquid glass effect in React Native Expo with step-by-step examples using Skia, blur views, and Reanimated. Perfect for modern mobile UI design.",
+        "url": "https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect",
+        "datePublished": "2026-07-03T10:00:00.000Z",
+        "dateModified": "2026-07-03T10:00:00.000Z",
+        "keywords": "React Native, Expo, UI Design, Mobile Development, JavaScript",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT11M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-native-expo-liquid-glass.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Native Expo Liquid Glass Effect: Build Stunning UI Components",
+          "item": "https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Native Expo Liquid Glass Effect: Build Stunning UI Components</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Native Expo Liquid Glass Effect: Build Stunning UI Components
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-native-expo-liquid-glass-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-native-expo-liquid-glass-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-native-expo-liquid-glass.webp"
+      alt="React Native Expo Liquid Glass Effect: Build Stunning UI Components - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Native Expo Liquid Glass Effect: Build Stunning UI Components" />
+          <meta itemprop="description" content="Create a liquid glass effect in React Native Expo with step-by-step examples using Skia, blur views, and Reanimated. Perfect for modern mobile UI design." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-native-expo-liquid-glass-effect" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-03T10:00:00.000Z">Jul 03, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-03T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT11M" />11 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React Native</span><span class="cs-tag" itemprop="keywords">Expo</span><span class="cs-tag" itemprop="keywords">UI Design</span><span class="cs-tag" itemprop="keywords">Mobile Development</span><span class="cs-tag" itemprop="keywords">JavaScript</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>There&#39;s a certain magic to interfaces that feel physical. Not in a skeuomorphic, leather-stitching-and-green-felt kind of way. More like a quiet sophistication. A depth that makes you want to reach out and touch the screen.</p>
+<p>Apple&#39;s been pushing this aesthetic hard with visionOS and the latest iOS updates. Frosted glass panels. Translucent surfaces that subtly warp whatever sits behind them. Elements that feel suspended in space rather than flatly painted onto a rectangle.</p>
+<p>The terminology floating around for this is &quot;liquid glass.&quot; It&#39;s not an official API or a specific library. It&#39;s more of a design language. A set of visual techniques that combine blur, transparency, subtle borders, and light-reactive surfaces to create interfaces that feel fluid and dimensional.</p>
+<p>Building this in React Native Expo takes some work, but it&#39;s absolutely achievable. Here&#39;s how to pull it off.</p>
+<h2>What liquid glass actually means in practice</h2>
+<p>Before writing any code, it helps to pin down what we&#39;re building toward. The liquid glass look typically involves a few key characteristics.</p>
+<p>There&#39;s a background blur effect, often called a frosted glass or backdrop filter. The surface itself is semi-transparent, letting the content behind it bleed through in a softened way. There&#39;s usually a subtle gradient overlay that mimics light hitting glass at an angle. A thin, semi-transparent border creates the edge of the glass panel. And sometimes there&#39;s a slight inner shadow or highlight that enhances the dimensionality.</p>
+<p>None of these things individually are difficult. Layering them together convincingly is where the craft comes in.</p>
+<p>You see this effect all over modern operating systems now. Windows 11 uses it extensively in the Start menu and Settings panels. macOS has had it in the Dock and Finder sidebars for years. iOS uses it in Control Center and notification panels. It&#39;s everywhere, and users increasingly expect it in the apps they use.</p>
+<h2>The Expo tools you&#39;ll need</h2>
+<p>React Native doesn&#39;t ship with a built-in backdrop blur component. At least, not one that works consistently across platforms. So we&#39;re pulling in a few key libraries.</p>
+<p>The heavy lifting comes from <code>@shopify/react-native-skia</code>, which gives us a hardware-accelerated 2D graphics canvas. Skia is the same rendering engine that powers Chrome and Flutter, so it&#39;s fast enough for real-time effects. We&#39;ll use it for custom blur shaders and gradient overlays.</p>
+<p>For smooth animations, <code>react-native-reanimated</code> handles the heavy math on the UI thread. This keeps animations running at 60 frames per second without stuttering, even when the JavaScript thread is busy. For anything that moves or transitions, Reanimated is the right tool.</p>
+<p>We&#39;ll also use <code>expo-blur</code> for simpler cases where a basic frosted glass look is enough. It wraps the native blur views on iOS and Android, giving you a decent effect with minimal code.</p>
+<pre><code class="language-bash">npx expo install @shopify/react-native-skia react-native-reanimated expo-blur
+</code></pre>
+<p>A quick note on Skia. It requires a bit of setup in your Expo config. Make sure you&#39;re using the development client rather than Expo Go, since Skia needs native modules.</p>
+<pre><code class="language-json">// app.json
+{
+  &quot;expo&quot;: {
+    &quot;plugins&quot;: [&quot;@shopify/react-native-skia&quot;, &quot;react-native-reanimated&quot;]
+  }
+}
+</code></pre>
+<h2>Starting with a basic frosted glass card</h2>
+<p>The simplest entry point uses <code>expo-blur</code>. It gives you a blurred backdrop that works on both platforms out of the box. It won&#39;t win any design awards on its own, but it&#39;s a solid foundation.</p>
+<pre><code class="language-javascript">import { BlurView } from &quot;expo-blur&quot;;
+import { StyleSheet, View, Text } from &quot;react-native&quot;;
+
+export default function GlassCard({ children }) {
+  return (
+    &lt;View style={styles.container}&gt;
+      &lt;BlurView intensity={40} tint=&quot;light&quot; style={styles.glass}&gt;
+        &lt;Text style={styles.text}&gt;{children}&lt;/Text&gt;
+      &lt;/BlurView&gt;
+    &lt;/View&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: &quot;center&quot;,
+    alignItems: &quot;center&quot;,
+    backgroundColor: &quot;#1a1a2e&quot;,
+  },
+  glass: {
+    width: 300,
+    height: 200,
+    borderRadius: 24,
+    overflow: &quot;hidden&quot;,
+    justifyContent: &quot;center&quot;,
+    alignItems: &quot;center&quot;,
+    borderWidth: 1,
+    borderColor: &quot;rgba(255, 255, 255, 0.2)&quot;,
+  },
+  text: {
+    color: &quot;#ffffff&quot;,
+    fontSize: 18,
+    fontWeight: &quot;600&quot;,
+  },
+});
+</code></pre>
+<p>The <code>intensity</code> prop controls how much blur gets applied. Lower values are more subtle. Higher values make the glass more opaque. Somewhere between 30 and 60 usually looks right, depending on the background.</p>
+<p>The border color is important here. Pure white borders look harsh against dark backgrounds. Using <code>rgba(255, 255, 255, 0.2)</code> gives you that delicate glass edge that catches the light without drawing too much attention.</p>
+<h2>Adding the liquid dimension with Skia</h2>
+<p><code>expo-blur</code> gets you about 60% of the way there. For the full liquid glass effect, Skia opens up a lot more creative control. You can layer multiple blurs, add gradient overlays that mimic light refraction, and create custom shaders if you&#39;re feeling adventurous.</p>
+<p>Here&#39;s a more advanced glass panel using Skia&#39;s canvas:</p>
+<pre><code class="language-javascript">import {
+  Canvas,
+  RoundedRect,
+  Blur,
+  Fill,
+  Group,
+} from &quot;@shopify/react-native-skia&quot;;
+import { View, StyleSheet, Text } from &quot;react-native&quot;;
+
+export default function LiquidGlassCard({
+  width = 300,
+  height = 200,
+  children,
+}) {
+  return (
+    &lt;View style={[styles.wrapper, { width, height }]}&gt;
+      &lt;Canvas style={StyleSheet.absoluteFill}&gt;
+        &lt;Group&gt;
+          &lt;RoundedRect
+            x={0}
+            y={0}
+            width={width}
+            height={height}
+            r={24}
+            color=&quot;rgba(255, 255, 255, 0.08)&quot;
+          /&gt;
+          &lt;Blur blur={20} /&gt;
+        &lt;/Group&gt;
+        &lt;RoundedRect
+          x={0}
+          y={0}
+          width={width}
+          height={height}
+          r={24}
+          color=&quot;rgba(255, 255, 255, 0.05)&quot;
+          strokeWidth={1}
+          style=&quot;stroke&quot;
+        /&gt;
+      &lt;/Canvas&gt;
+      &lt;View style={styles.content}&gt;
+        &lt;Text style={styles.text}&gt;{children}&lt;/Text&gt;
+      &lt;/View&gt;
+    &lt;/View&gt;
+  );
+}
+</code></pre>
+<p>The first <code>RoundedRect</code> with blur creates that soft, translucent base. The second one draws the hairline border. Layering them together starts to look convincingly like physical glass.</p>
+<p>You can push this further by adding a gradient overlay that simulates light hitting the surface. A diagonal gradient from slightly brighter in one corner to transparent in the opposite corner creates the illusion of a light source reflecting off the glass.</p>
+<pre><code class="language-javascript">import { LinearGradient, vec } from &quot;@shopify/react-native-skia&quot;;
+
+// Inside the Canvas, after the blurred rect
+&lt;LinearGradient
+  start={vec(0, 0)}
+  end={vec(width, height)}
+  colors={[&quot;rgba(255, 255, 255, 0.15)&quot;, &quot;rgba(255, 255, 255, 0.02)&quot;]}
+/&gt;;
+</code></pre>
+<p>That subtle gradient is what takes the effect from &quot;frosted rectangle&quot; to something that feels premium. The eye picks up on the unevenness and reads it as light interacting with a physical surface. It&#39;s a small detail that makes a big difference.</p>
+<h2>Making it interactive with Reanimated</h2>
+<p>Static glass looks nice. Glass that responds to touch and device motion feels alive.</p>
+<p>A particularly satisfying interaction is having the glass panel subtly shift its gradient based on where the user touches it. Imagine pressing on the left side of a card and seeing the highlight move toward your finger, as if the glass is catching light from that direction.</p>
+<pre><code class="language-javascript">import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from &quot;react-native-reanimated&quot;;
+import { Gesture, GestureDetector } from &quot;react-native-gesture-handler&quot;;
+
+export default function InteractiveGlassCard() {
+  const pressedX = useSharedValue(0);
+  const pressedY = useSharedValue(0);
+  const isPressed = useSharedValue(false);
+
+  const gesture = Gesture.Pan()
+    .onBegin((e) =&gt; {
+      isPressed.value = true;
+      pressedX.value = e.x;
+      pressedY.value = e.y;
+    })
+    .onUpdate((e) =&gt; {
+      pressedX.value = e.x;
+      pressedY.value = e.y;
+    })
+    .onEnd(() =&gt; {
+      isPressed.value = false;
+    });
+
+  const glassStyle = useAnimatedStyle(() =&gt; {
+    return {
+      transform: [
+        {
+          perspective: 600,
+        },
+        {
+          rotateY: withSpring(
+            isPressed.value ? `${(pressedX.value - 150) / 20}deg` : &quot;0deg&quot;,
+          ),
+        },
+        {
+          rotateX: withSpring(
+            isPressed.value ? `${(150 - pressedY.value) / 20}deg` : &quot;0deg&quot;,
+          ),
+        },
+      ],
+    };
+  });
+
+  return (
+    &lt;GestureDetector gesture={gesture}&gt;
+      &lt;Animated.View style={[styles.card, glassStyle]}&gt;
+        {/* Glass content here */}
+      &lt;/Animated.View&gt;
+    &lt;/GestureDetector&gt;
+  );
+}
+</code></pre>
+<p>This gives the card a subtle tilt that follows the user&#39;s finger. The <code>perspective</code> transform creates a 3D space, and the rotation values shift based on touch position. Because Reanimated runs on the UI thread, the animation stays buttery smooth even on older devices.</p>
+<p>The key is restraint. A tilt of a few degrees feels premium. Twenty degrees of rotation feels like a carnival ride. Small movements, gentle springs, and quick settle times keep the interaction feeling polished.</p>
+<h2>A story about going too far with effects</h2>
+<p>I built a weather app last year that went heavy on the glass aesthetic. The main dashboard had frosted panels layered over a dynamic gradient background that shifted colors based on the current temperature. The panels responded to touch, tilt, and even the device accelerometer if you moved your phone around.</p>
+<p>It looked incredible in demos. Seriously, the kind of thing you screenshot and send to designer friends.</p>
+<p>Then I tested it on a mid-range Android device that was about three years old. The frame rate dropped to something resembling a slideshow. The blur calculations alone were eating up GPU resources, and the accelerometer polling made everything worse. Users with flagship phones loved it. Everyone else had a terrible experience.</p>
+<p>I ended up shipping a simplified version. Static glass panels with subtle gradient overlays, no real-time blur, no accelerometer. Still looked clean. Still had that premium feel. But it ran at 60 frames per second on basically anything made in the last five years.</p>
+<p>The lesson stuck with me. Effects like liquid glass are seasoning, not the main course. They should enhance the experience, not define it. If the effect is getting in the way of the content or the performance, you&#39;ve probably gone too far.</p>
+<h2>Platform differences you&#39;ll run into</h2>
+<p>iOS handles blur effects natively through <code>UIVisualEffectView</code> and the underlying Metal framework. It&#39;s fast, energy-efficient, and looks great out of the box. If you&#39;ve read through our guide on <a href="/blog/react-native-expo-animations-guide">React Native Expo animations</a>, you already know that iOS tends to handle visual effects with less friction than Android.</p>
+<p>Android is trickier. The <code>BlurView</code> on Android uses a software-based approach that can be noticeably slower. Skia helps here because it renders through the GPU, but you still need to be mindful of performance.</p>
+<p>A practical strategy is adjusting the blur intensity and complexity based on the platform. iOS can handle higher blur radii and real-time updates without breaking a sweat. Android benefits from simpler effects, lower blur values, and caching rendered outputs when possible.</p>
+<pre><code class="language-javascript">import { Platform } from &quot;react-native&quot;;
+
+const blurIntensity = Platform.OS === &quot;ios&quot; ? 50 : 30;
+const enableRealtimeBlur = Platform.OS === &quot;ios&quot;;
+</code></pre>
+<p>Users on Android won&#39;t notice that the glass is slightly less translucent. They will notice if the app stutters. Err on the side of performance.</p>
+<h2>Accessibility considerations worth mentioning</h2>
+<p>Translucent interfaces create genuine readability challenges for some users. Low vision users, people with astigmatism, and anyone using their phone in bright sunlight might struggle with text rendered over a blurred background.</p>
+<p>Apple&#39;s Human Interface Guidelines recommend maintaining a minimum contrast ratio even for glass surfaces. In practice, this means the text on your glass panels should stay legible when the background behind the blur changes. A white background behind the blur can wash out light text. A dark background can swallow dark text.</p>
+<p>Consider adding a subtle dark overlay behind the text or increasing the blur intensity to improve readability. Better yet, respect the system&#39;s accessibility settings.</p>
+<pre><code class="language-javascript">import { AccessibilityInfo } from &quot;react-native&quot;;
+
+const [reduceTransparency, setReduceTransparency] = useState(false);
+
+useEffect(() =&gt; {
+  AccessibilityInfo.isReduceTransparencyEnabled().then(setReduceTransparency);
+}, []);
+
+// Use solid backgrounds when reduce transparency is enabled
+const blurIntensity = reduceTransparency ? 0 : 40;
+</code></pre>
+<p>When users enable Reduce Transparency in their device settings, your app should respect that preference. Swap the glass effect for a solid, opaque background. The aesthetic takes a back seat to usability.</p>
+<h2>When liquid glass is worth the effort</h2>
+<p>Not every screen in your app needs this treatment. Glass effects work best on overlays, modals, bottom sheets, and cards that float above a visually interesting background. If the background is a flat color, the blur effect is invisible and all that complexity is wasted.</p>
+<p>Save liquid glass for moments where it enhances the hierarchy. A music player overlay floating above album art. A weather card sitting over a gradient sky background. A settings panel that slides over content. These contexts let the effect shine.</p>
+<p>For everything else, a clean opaque surface with good spacing and typography will serve you better than a blur effect nobody can see.</p>
+<p>If you&#39;re interested in other ways to make interfaces feel polished without over-engineering, our post on <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a> touches on how visual weight affects perceived performance. Sometimes the heaviest-looking interfaces are actually the lightest, and vice versa.</p>
+<h2>Wrapping up</h2>
+<p>The liquid glass aesthetic isn&#39;t going anywhere. Apple&#39;s bet on spatial computing and translucent interfaces means these patterns will keep showing up across platforms. Getting comfortable with the tools now puts you ahead of the curve.</p>
+<p>Start with <code>expo-blur</code> for simple cases. Reach for Skia when you need more control over gradients, layers, and custom shaders. Use Reanimated to add that subtle responsiveness that makes glass feel physical rather than decorative. And always test on real devices, especially older Android phones, to make sure your effects aren&#39;t tanking performance.</p>
+<p>The best glass effects are the ones users don&#39;t consciously notice. They just feel like the interface has a certain quality to it. A depth and tactility that&#39;s hard to describe but immediately recognizable when it&#39;s done well.</p>
+<hr>
+<p><em>Building a mobile app and want the UI to feel truly premium? Red Surge Technology helps teams craft polished React Native experiences that perform well on real devices. <a href="/contact">Reach out</a> and let&#39;s discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

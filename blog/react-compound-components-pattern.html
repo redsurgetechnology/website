@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Compound Components Pattern: Build Flexible UI Components</title>
+    <meta name="description" content="Master React compound components with examples. Share state implicitly via Context, build Tabs and Select, and learn when this pattern shines." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, JavaScript, Design Patterns, Component Architecture, Web Development" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-compound-components-pattern" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-compound-components-pattern" />
+    <meta property="og:title" content="React Compound Components Pattern: Build Flexible UI Components" />
+    <meta property="og:description" content="Master React compound components with examples. Share state implicitly via Context, build Tabs and Select, and learn when this pattern shines." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-compound-components-pattern.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-04T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-04T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React, JavaScript, Design Patterns, Component Architecture, Web Development" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Design Patterns" />
+    <meta property="article:tag" content="Component Architecture" />
+    <meta property="article:tag" content="Web Development" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-compound-components-pattern" />
+    <meta name="twitter:title" content="React Compound Components Pattern: Build Flexible UI Components" />
+    <meta name="twitter:description" content="Master React compound components with examples. Share state implicitly via Context, build Tabs and Select, and learn when this pattern shines." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-compound-components-pattern.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Compound Components Pattern: Build Flexible UI Components",
+        "description": "Master React compound components with examples. Share state implicitly via Context, build Tabs and Select, and learn when this pattern shines.",
+        "url": "https://redsurgetechnology.com/blog/react-compound-components-pattern",
+        "datePublished": "2026-08-04T10:00:00.000Z",
+        "dateModified": "2026-08-04T10:00:00.000Z",
+        "keywords": "React, JavaScript, Design Patterns, Component Architecture, Web Development",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT11M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-compound-components-pattern.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-compound-components-pattern"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Compound Components Pattern: Write Smarter, More Flexible UI",
+          "item": "https://redsurgetechnology.com/blog/react-compound-components-pattern"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Compound Components Pattern: Write Smarter, More Flexible UI</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Compound Components Pattern: Write Smarter, More Flexible UI
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-compound-components-pattern-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-compound-components-pattern-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-compound-components-pattern.webp"
+      alt="React Compound Components Pattern: Write Smarter, More Flexible UI - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Compound Components Pattern: Build Flexible UI Components" />
+          <meta itemprop="description" content="Master React compound components with examples. Share state implicitly via Context, build Tabs and Select, and learn when this pattern shines." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-compound-components-pattern" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-04T10:00:00.000Z">Aug 04, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-04T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT11M" />11 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Design Patterns</span><span class="cs-tag" itemprop="keywords">Component Architecture</span><span class="cs-tag" itemprop="keywords">Web Development</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Some React components start out simple. A <code>&lt;Tabs&gt;</code> component that takes an array of labels and some content. It works. Then the designer wants one tab to have a badge. Then another tab needs an icon. Then the active tab needs a completely different background style. Suddenly your clean, prop-driven component has eighteen props, half of them optional, and the code is a maze of conditional rendering.</p>
+<p>There&#39;s a better way. Instead of forcing all the configuration through a single component&#39;s props, you let the developer compose the UI using a set of related components that share state behind the scenes. This is the compound components pattern. It&#39;s not a library or a new API—it&#39;s a way of structuring your components so they&#39;re flexible without being complicated.</p>
+<p>The <code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> elements in HTML are the original compound components. You don&#39;t pass an array of options to <code>&lt;select&gt;</code>. You nest <code>&lt;option&gt;</code> elements inside it. The parent and children communicate through the DOM hierarchy. React&#39;s compound components pattern brings that same composability to your own components, using Context to share state instead of the DOM.</p>
+<h2>The problem compound components solve</h2>
+<p>Imagine building a <code>&lt;Select&gt;</code> component from scratch. The standard approach is a single component that takes an <code>options</code> array and an <code>onChange</code> callback.</p>
+<pre><code class="language-javascript">&lt;Select
+  options={[
+    { value: &quot;dog&quot;, label: &quot;Dog&quot; },
+    { value: &quot;cat&quot;, label: &quot;Cat&quot; },
+  ]}
+  value={selected}
+  onChange={setSelected}
+/&gt;
+</code></pre>
+<p>This works until you need a custom option renderer. Or a header inside the dropdown. Or an option with a tooltip. Or an option that navigates instead of selecting. Each new requirement forces you to add more props and more conditional logic. Eventually, the component becomes a Swiss Army knife that&#39;s bad at everything.</p>
+<p>The compound components approach inverts the control. Instead of passing data as props, you compose the UI with child components that know how to talk to the parent.</p>
+<pre><code class="language-javascript">&lt;Select value={selected} onChange={setSelected}&gt;
+  &lt;Select.Option value=&quot;dog&quot;&gt;Dog&lt;/Select.Option&gt;
+  &lt;Select.Option value=&quot;cat&quot;&gt;Cat&lt;/Select.Option&gt;
+  &lt;Select.Header&gt;Favorites&lt;/Select.Header&gt;
+  &lt;Select.Option value=&quot;bird&quot;&gt;Bird&lt;/Select.Option&gt;
+&lt;/Select&gt;
+</code></pre>
+<p>The developer has full control over the markup and can insert anything between options. The parent <code>&lt;Select&gt;</code> provides state through React Context, and the <code>&lt;Select.Option&gt;</code> components consume that context to know if they&#39;re selected, to fire the onChange, and to apply active styles.</p>
+<p>This is the same pattern that libraries like <a href="/blog/react-aria-components">React Aria Components</a> use. They give you composable parts that handle accessibility and behavior, while you control the visual output.</p>
+<h2>How the magic actually works</h2>
+<p>The implementation is surprisingly straightforward. A Context holds the state and any callbacks. The parent component provides that context. Child components consume it.</p>
+<p>Let&#39;s build a <code>&lt;Tabs&gt;</code> component to see it in action.</p>
+<pre><code class="language-javascript">import { createContext, useContext, useState } from &quot;react&quot;;
+
+// 1. Create the context
+const TabsContext = createContext();
+
+// 2. The parent component provides state
+function Tabs({ children, defaultTab }) {
+  const [activeTab, setActiveTab] = useState(defaultTab);
+
+  return (
+    &lt;TabsContext.Provider value={{ activeTab, setActiveTab }}&gt;
+      {children}
+    &lt;/TabsContext.Provider&gt;
+  );
+}
+</code></pre>
+<p>So far, nothing special. The <code>&lt;Tabs&gt;</code> component just wraps its children in a context provider. Now the child components can access that context.</p>
+<pre><code class="language-javascript">// 3. Custom hook to consume the context safely
+function useTabs() {
+  const context = useContext(TabsContext);
+  if (!context) {
+    throw new Error(&quot;Tab components must be used within a &lt;Tabs&gt;&quot;);
+  }
+  return context;
+}
+
+// 4. The TabList and Tab components
+function TabList({ children }) {
+  return &lt;div role=&quot;tablist&quot;&gt;{children}&lt;/div&gt;;
+}
+
+function Tab({ children, id }) {
+  const { activeTab, setActiveTab } = useTabs();
+  const isActive = activeTab === id;
+
+  return (
+    &lt;button
+      role=&quot;tab&quot;
+      aria-selected={isActive}
+      onClick={() =&gt; setActiveTab(id)}
+      style={{
+        padding: &quot;10px 16px&quot;,
+        background: isActive ? &quot;#3b82f6&quot; : &quot;#e5e7eb&quot;,
+        color: isActive ? &quot;white&quot; : &quot;black&quot;,
+        border: &quot;none&quot;,
+        cursor: &quot;pointer&quot;,
+      }}
+    &gt;
+      {children}
+    &lt;/button&gt;
+  );
+}
+
+function TabPanel({ children, id }) {
+  const { activeTab } = useTabs();
+  if (activeTab !== id) return null;
+
+  return &lt;div role=&quot;tabpanel&quot;&gt;{children}&lt;/div&gt;;
+}
+</code></pre>
+<p>Finally, we attach the child components to the parent, so they can be used with dot notation.</p>
+<pre><code class="language-javascript">Tabs.TabList = TabList;
+Tabs.Tab = Tab;
+Tabs.TabPanel = TabPanel;
+
+export { Tabs };
+</code></pre>
+<p>Now the developer uses them naturally.</p>
+<pre><code class="language-javascript">&lt;Tabs defaultTab=&quot;dogs&quot;&gt;
+  &lt;Tabs.TabList&gt;
+    &lt;Tabs.Tab id=&quot;dogs&quot;&gt;Dogs&lt;/Tabs.Tab&gt;
+    &lt;Tabs.Tab id=&quot;cats&quot;&gt;Cats&lt;/Tabs.Tab&gt;
+  &lt;/Tabs.TabList&gt;
+  &lt;Tabs.TabPanel id=&quot;dogs&quot;&gt;Content about dogs&lt;/Tabs.TabPanel&gt;
+  &lt;Tabs.TabPanel id=&quot;cats&quot;&gt;Content about cats&lt;/Tabs.TabPanel&gt;
+&lt;/Tabs&gt;
+</code></pre>
+<p>The <code>&lt;Tabs.Tab&gt;</code> and <code>&lt;Tabs.TabPanel&gt;</code> components don&#39;t need any props drilled down. They read the active tab and the setter directly from context. The API is clean, the markup is flexible, and the state is managed in one place.</p>
+<p>If the designer wants a badge on the &quot;Cats&quot; tab, the developer adds it inside the <code>&lt;Tabs.Tab&gt;</code> element. No props need to be added to the <code>&lt;Tabs&gt;</code> component. That&#39;s the power of compound components.</p>
+<h2>An accordion story (and why I almost over-engineered it)</h2>
+<p>A while back, I built a help center with an accordion component. The initial version was simple: a single <code>&lt;Accordion&gt;</code> that took an array of items, each with a title and content. It worked perfectly for the first two weeks.</p>
+<p>Then the product team wanted one accordion item to contain a video, not just text. Then another needed a nested accordion inside it. Then they wanted to add a &quot;Was this helpful?&quot; button at the bottom of specific items.</p>
+<p>I spent an afternoon trying to extend the original component with more and more props—<code>renderItem</code>, <code>itemProps</code>, <code>customFooter</code>. The code got ugly fast. Then I remembered the compound components pattern.</p>
+<p>I refactored the accordion into <code>&lt;Accordion&gt;</code>, <code>&lt;Accordion.Item&gt;</code>, <code>&lt;Accordion.Button&gt;</code>, and <code>&lt;Accordion.Panel&gt;</code>. The refactor took about two hours, and suddenly all the edge cases disappeared. The video, the nested accordion, the feedback button—they were all just content placed inside <code>&lt;Accordion.Panel&gt;</code>. The component didn&#39;t need to know about them.</p>
+<p>The lesson: compound components shine when you can&#39;t predict all the future use cases. They give the developer the power to compose, not just configure.</p>
+<h2>When to use compound components (and when not to)</h2>
+<p>Compound components aren&#39;t always the right choice. They add indirection. A developer reading the code needs to understand that <code>&lt;Tabs.Tab&gt;</code> gets its props from a parent provider, not from its immediate parent in the JSX. This mental model is easy once you learn it, but it&#39;s an extra step.</p>
+<p>Use compound components when:</p>
+<ul>
+<li>The component has multiple parts that need to share state (tabs, accordion, select, menu, modal).</li>
+<li>You expect developers to customize the markup—inserting custom elements between the standard ones.</li>
+<li>The component has optional children that may or may not appear (a footer in a modal, an icon in a tab, a description in an option).</li>
+</ul>
+<p>Avoid compound components for components with a fixed structure that won&#39;t change. A simple button doesn&#39;t need a <code>&lt;Button.Text&gt;</code> and <code>&lt;Button.Icon&gt;</code>. A regular prop is fine.</p>
+<p>If you&#39;ve been working on keeping your React app performant, you&#39;ll find that compound components play nicely with the patterns from <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders</a>. Since state lives in the parent and is distributed via context, child components can be memoized and only re-render when their specific slice of state changes.</p>
+<h2>Adding state management: useState or useReducer?</h2>
+<p>The compound components pattern is just the UI layer. The state management inside the parent can be <code>useState</code> or <code>useReducer</code>. For a simple tabs component, <code>useState</code> is enough. For something like a multi-select with search, filtering, and keyboard navigation, <code>useReducer</code> becomes invaluable.</p>
+<p>As we covered in <a href="/blog/react-usestate-vs-usereducer">useState vs useReducer</a>, a reducer helps when state transitions are interdependent. A <code>&lt;Select&gt;</code> that needs to handle open/close, search query, highlighted index, and selected value all at once benefits from a reducer that ensures consistency.</p>
+<pre><code class="language-javascript">function selectReducer(state, action) {
+  switch (action.type) {
+    case &quot;OPEN&quot;:
+      return { ...state, isOpen: true };
+    case &quot;CLOSE&quot;:
+      return { ...state, isOpen: false, query: &quot;&quot;, highlightedIndex: -1 };
+    case &quot;SET_QUERY&quot;:
+      return { ...state, query: action.payload, highlightedIndex: 0 };
+    // ...
+  }
+}
+</code></pre>
+<p>The component structure stays the same—the parent provides the context. The difference is whether the context value comes from <code>useState</code> or <code>useReducer</code>. The pattern itself is state-management-agnostic.</p>
+<h2>Wrapping up</h2>
+<p>The compound components pattern is one of those ideas that, once you understand it, you&#39;ll start seeing places to use it everywhere. It turns monolithic, prop-heavy components into flexible, composable APIs that feel natural to use.</p>
+<p>The implementation is surprisingly simple: a Context, a Provider, and a few child components that consume that context. The payoff is huge. Developers using your components get the flexibility to customize the markup without you having to predict every edge case. And because the state lives in one place, the logic is easier to test and debug.</p>
+<p>Next time you find yourself adding the ninth optional prop to a component, ask yourself: should this be a compound component instead?</p>
+<hr>
+<p><em>Building a React component library that&#39;s both powerful and flexible? Red Surge Technology helps teams design composable component APIs that scale with their products. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

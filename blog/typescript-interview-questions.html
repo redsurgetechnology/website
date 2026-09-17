@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>TypeScript Interview Questions: What Actually Gets Asked in 2026</title>
+    <meta name="description" content="Prepare for your TypeScript interview with real questions on utility types, generics, type narrowing, and more. Includes practical examples and explanations." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="TypeScript, JavaScript, Interview Prep, Web Development, Career" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/typescript-interview-questions" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/typescript-interview-questions" />
+    <meta property="og:title" content="TypeScript Interview Questions: What Actually Gets Asked in 2026" />
+    <meta property="og:description" content="Prepare for your TypeScript interview with real questions on utility types, generics, type narrowing, and more. Includes practical examples and explanations." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/typescript-interview-questions-2026.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-08T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-08T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="TypeScript, JavaScript, Interview Prep, Web Development, Career" />
+    <meta property="article:tag" content="TypeScript" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Interview Prep" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Career" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/typescript-interview-questions" />
+    <meta name="twitter:title" content="TypeScript Interview Questions: What Actually Gets Asked in 2026" />
+    <meta name="twitter:description" content="Prepare for your TypeScript interview with real questions on utility types, generics, type narrowing, and more. Includes practical examples and explanations." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/typescript-interview-questions-2026.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TypeScript Interview Questions: What Actually Gets Asked in 2026",
+        "description": "Prepare for your TypeScript interview with real questions on utility types, generics, type narrowing, and more. Includes practical examples and explanations.",
+        "url": "https://redsurgetechnology.com/blog/typescript-interview-questions",
+        "datePublished": "2026-07-08T10:00:00.000Z",
+        "dateModified": "2026-07-08T10:00:00.000Z",
+        "keywords": "TypeScript, JavaScript, Interview Prep, Web Development, Career",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT13M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/typescript-interview-questions-2026.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/typescript-interview-questions"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TypeScript Interview Questions: What Actually Gets Asked in 2026",
+          "item": "https://redsurgetechnology.com/blog/typescript-interview-questions"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">TypeScript Interview Questions: What Actually Gets Asked in 2026</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          TypeScript Interview Questions: What Actually Gets Asked in 2026
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/typescript-interview-questions-2026-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/typescript-interview-questions-2026-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/typescript-interview-questions-2026.webp"
+      alt="TypeScript Interview Questions: What Actually Gets Asked in 2026 - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="TypeScript Interview Questions: What Actually Gets Asked in 2026" />
+          <meta itemprop="description" content="Prepare for your TypeScript interview with real questions on utility types, generics, type narrowing, and more. Includes practical examples and explanations." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/typescript-interview-questions" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-08T10:00:00.000Z">Jul 08, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-08T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT13M" />13 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">TypeScript</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Interview Prep</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Career</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>TypeScript interviews have changed. A few years ago, knowing the difference between <code>interface</code> and <code>type</code> was enough to impress most interviewers. Now that&#39;s basically the warm-up question. The bar has shifted.</p>
+<p>Part of this is because TypeScript adoption has exploded. It&#39;s not a niche tool anymore. It&#39;s the default for serious JavaScript projects. Companies expect developers to be productive with it on day one, not learning it on the job. The interview questions have gotten deeper accordingly.</p>
+<p>I&#39;ve been on both sides of the table enough times now to notice patterns. Certain questions come up over and over. Not because interviewers lack creativity, but because they test for genuine understanding rather than memorized syntax. Here&#39;s what you&#39;re likely to encounter and how to think about each topic.</p>
+<h2>The basics still matter, but the framing has changed</h2>
+<p>Nobody asks &quot;What is TypeScript?&quot; anymore. The basic questions have evolved into practical scenarios that test whether you actually use the language or just let the compiler do its thing.</p>
+<p>A common opener is something like: &quot;Walk me through how you&#39;d type an API response you&#39;ve never seen before.&quot; This tests multiple skills at once. Do you reach for <code>any</code> immediately? Do you use <code>unknown</code> and narrow it? Do you talk about runtime validation versus compile-time types?</p>
+<p>The strongest answers acknowledge that TypeScript types disappear at runtime. You can&#39;t trust that an API response matches your types. There&#39;s always a gap between what TypeScript believes and what actually arrives over the network. If you&#39;ve read our deep dive on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>, you already know this tension well.</p>
+<p>A solid response might sound like: &quot;I&#39;d start by defining the shape I expect using an interface, but I wouldn&#39;t trust it blindly. For critical API responses, I&#39;d use a validation library like Zod to verify the data at runtime and infer the types from the schema. That way the types are grounded in actual validation logic rather than assumptions.&quot;</p>
+<p>That answer demonstrates you understand the limits of the type system. Interviewers light up when they hear that.</p>
+<h2>Utility types come up constantly</h2>
+<p>If there&#39;s one topic that separates TypeScript novices from experienced developers, it&#39;s utility types. <code>Partial</code>, <code>Pick</code>, <code>Omit</code>, <code>Record</code>, <code>ReturnType</code>. These aren&#39;t advanced features. They&#39;re daily tools.</p>
+<p>A typical question: &quot;Given this interface for a user profile, how would you create a type for the update payload where all fields are optional except the user ID?&quot;</p>
+<pre><code class="language-typescript">interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  avatar: string;
+  bio: string;
+}
+
+// The interviewer expects something like:
+type UpdateUserPayload = Partial&lt;Omit&lt;UserProfile, &quot;id&quot;&gt;&gt; &amp; { id: string };
+</code></pre>
+<p>This combines <code>Omit</code> to remove the <code>id</code> field, <code>Partial</code> to make everything else optional, and an intersection to add <code>id</code> back as required. It&#39;s practical. It&#39;s composable. It shows you understand how utility types work together.</p>
+<p>Another frequent one: &quot;What&#39;s the difference between <code>Record</code> and a mapped type?&quot; The answer is that <code>Record</code> is a shorthand for a mapped type with a specific key constraint. <code>Record&lt;string, number&gt;</code> is equivalent to <code>{ [key: string]: number }</code>. But <code>Record</code> reads cleaner and communicates intent more clearly.</p>
+<p>Interviewers also love asking about <code>Extract</code> and <code>Exclude</code>. Given a union type like <code>type Status = &#39;active&#39; | &#39;inactive&#39; | &#39;pending&#39; | &#39;deleted&#39;</code>, how would you create a type that only includes statuses where the user is still visible? <code>Extract&lt;Status, &#39;active&#39; | &#39;inactive&#39; | &#39;pending&#39;&gt;</code> does the job. Or using <code>Exclude</code> to remove &#39;deleted&#39; instead.</p>
+<h2>Generics beyond the basics</h2>
+<p>Basic generics are a given. <code>function identity&lt;T&gt;(value: T): T</code> is the hello world of generics and nobody&#39;s impressed by it anymore. The questions now involve constraints, defaults, and patterns.</p>
+<p>A question that comes up: &quot;Write a generic function that takes an array of items and a key, and returns an object grouped by that key.&quot; This tests whether you can constrain a generic to ensure the key actually exists on the type.</p>
+<pre><code class="language-typescript">function groupBy&lt;T extends Record&lt;string, any&gt;, K extends keyof T&gt;(
+  items: T[],
+  key: K,
+): Record&lt;string, T[]&gt; {
+  return items.reduce(
+    (groups, item) =&gt; {
+      const groupKey = String(item[key]);
+      if (!groups[groupKey]) {
+        groups[groupKey] = [];
+      }
+      groups[groupKey].push(item);
+      return groups;
+    },
+    {} as Record&lt;string, T[]&gt;,
+  );
+}
+</code></pre>
+<p>The constraints are what matter here. <code>T extends Record&lt;string, any&gt;</code> ensures the items are objects. <code>K extends keyof T</code> ensures the key you&#39;re grouping by actually exists on those objects. Without those constraints, the function would accept arrays of primitives and crash at runtime.</p>
+<p>Another pattern that signals experience: generic defaults. If you write <code>function fetchData&lt;T = unknown&gt;(url: string): Promise&lt;T&gt;</code>, you&#39;re telling TypeScript that when the caller doesn&#39;t specify a type, it should default to <code>unknown</code> rather than <code>any</code>. That&#39;s a deliberate safety choice that prevents accidental unchecked access to response data.</p>
+<h2>Type narrowing and discriminated unions</h2>
+<p>Interviewers want to see that you can narrow types safely. The days of slapping <code>as</code> assertions everywhere are over. Type narrowing with <code>typeof</code>, <code>instanceof</code>, and <code>in</code> operators shows you understand control flow analysis.</p>
+<p>Discriminated unions are the gold standard here. A question might present a shape like:</p>
+<pre><code class="language-typescript">type ApiResponse =
+  | { status: &quot;success&quot;; data: User[] }
+  | { status: &quot;error&quot;; message: string }
+  | { status: &quot;loading&quot; };
+</code></pre>
+<p>And ask: &quot;Write a function that renders a UI state based on this type, making sure you handle all cases.&quot; The key is narrowing on the discriminant property.</p>
+<pre><code class="language-typescript">function renderResponse(response: ApiResponse) {
+  switch (response.status) {
+    case &#39;success&#39;:
+      return &lt;UserList users={response.data} /&gt;;
+    case &#39;error&#39;:
+      return &lt;ErrorBanner message={response.message} /&gt;;
+    case &#39;loading&#39;:
+      return &lt;Spinner /&gt;;
+    default:
+      // This should be unreachable if the union is exhaustive
+      const _exhaustiveCheck: never = response;
+      return _exhaustiveCheck;
+  }
+}
+</code></pre>
+<p>The <code>never</code> assignment in the default case is a clever trick. If someone adds a new variant to <code>ApiResponse</code> later, TypeScript will flag this line as an error because the new variant can&#39;t be assigned to <code>never</code>. It&#39;s a compile-time guard against unhandled cases. Interviewers who see you use this pattern know you&#39;ve been around TypeScript for a while.</p>
+<h2>Conditional types and the infer keyword</h2>
+<p>This is where interviews start separating the daily users from the power users. Conditional types look like ternary operators at the type level, and they unlock a lot of advanced patterns.</p>
+<p>A question I&#39;ve seen multiple times: &quot;Write a type that extracts the element type from an array type.&quot; The answer uses <code>infer</code>:</p>
+<pre><code class="language-typescript">type ArrayElement&lt;T&gt; = T extends (infer U)[] ? U : never;
+</code></pre>
+<p><code>infer</code> declares a type variable that TypeScript will deduce from context. When <code>T</code> matches the pattern of an array containing something, <code>U</code> captures that something and returns it. If <code>T</code> isn&#39;t an array type, it returns <code>never</code>.</p>
+<p>A follow-up might ask you to write a type that extracts the resolved value from a Promise. Same pattern, different target:</p>
+<pre><code class="language-typescript">type Awaited&lt;T&gt; = T extends Promise&lt;infer U&gt; ? U : T;
+</code></pre>
+<p>TypeScript actually ships <code>Awaited</code> as a built-in utility type now, so mentioning that shows you keep up with language updates. But knowing how to write it yourself demonstrates deeper understanding.</p>
+<h2>The template literal type curveball</h2>
+<p>Template literal types arrived in TypeScript 4.1 and they&#39;ve slowly worked their way into interview questions. They let you construct string types using template syntax at the type level.</p>
+<p>A practical example: &quot;Create a type that takes an object and produces CSS custom property names.&quot; If you pass <code>{ color: string; fontSize: number }</code>, you&#39;d get <code>&#39;--color&#39; | &#39;--fontSize&#39;</code>.</p>
+<pre><code class="language-typescript">type CSSVariables&lt;T&gt; = {
+  [K in keyof T &amp; string]: `--${K}`;
+}[keyof T &amp; string];
+</code></pre>
+<p>This is admittedly niche. But it tests whether you understand mapped types, template literals, and indexed access types all at once. It&#39;s a dense question that covers a lot of ground.</p>
+<p>Interviewers don&#39;t expect you to nail template literal types from memory. They&#39;re looking to see if you can reason through the problem and understand what the syntax is doing. Talking through your thought process matters as much as the final answer.</p>
+<h2>Real-world scenario questions</h2>
+<p>The trend I&#39;m seeing more of is scenario-based questions that mirror actual development work. Instead of &quot;explain generics,&quot; you get &quot;here&#39;s a component that&#39;s not type-safe, fix it.&quot;</p>
+<p>A React example: &quot;This component accepts a <code>data</code> prop that could be either an array of users or an array of posts. How would you type it so that the render function is type-safe in both cases?&quot;</p>
+<pre><code class="language-typescript">interface User {
+  id: string;
+  name: string;
+}
+
+interface Post {
+  id: string;
+  title: string;
+}
+
+// Before: loose typing
+function DataList({ data, renderItem }: { data: any[]; renderItem: (item: any) =&gt; JSX.Element }) {
+  return &lt;ul&gt;{data.map(renderItem)}&lt;/ul&gt;;
+}
+
+// After: discriminated or generic
+function DataList&lt;T&gt;({ data, renderItem }: { data: T[]; renderItem: (item: T) =&gt; JSX.Element }) {
+  return &lt;ul&gt;{data.map(renderItem)}&lt;/ul&gt;;
+}
+</code></pre>
+<p>The generic solution is elegant and lets TypeScript infer the item type from usage. If you pass <code>User[]</code>, the render function&#39;s parameter is automatically typed as <code>User</code>. No assertions needed.</p>
+<p>Another scenario: &quot;We have a configuration object with dozens of optional fields. How would you create a type-safe merge function that applies defaults?&quot; This tests your understanding of <code>Partial</code>, intersection types, and how to handle nested objects.</p>
+<h2>What interviewers are actually evaluating</h2>
+<p>Having conducted my share of TypeScript interviews, I can tell you what most interviewers are looking for beneath the surface.</p>
+<p>They want to see that you use TypeScript proactively, not reactively. That means adding types before the compiler complains, not fixing errors after the fact. It means thinking about edge cases like <code>null</code> and <code>undefined</code> before they become bugs. It means choosing between <code>interface</code> and <code>type</code> based on the use case rather than defaulting to one.</p>
+<p>They also want to see that you understand TypeScript&#39;s limitations. The type system is powerful but not perfect. Knowing when to trust it and when to add runtime validation shows maturity. As we covered in our post on <a href="/blog/how-to-use-the-javascript-fetch-api-with-async-await">JavaScript fetch API with async await</a>, the boundary between your application and external data is where types become assumptions rather than guarantees.</p>
+<p>Finally, interviewers want to see that you can explain TypeScript concepts clearly. If you can teach a complex type to someone who doesn&#39;t understand it yet, you probably understand it well yourself. That communication skill matters in code reviews, documentation, and mentoring.</p>
+<h2>Preparing effectively</h2>
+<p>Reading interview questions is fine. Writing code is better. The TypeScript playground is your best study tool. Type out the examples. Break them. Fix them. Change the constraints and see what happens.</p>
+<p>I&#39;d also recommend reading through the TypeScript release notes for versions 4.0 through 5.x. Each version introduces features that have since become common in production code. Understanding what was added when helps you recognize patterns that older tutorials might miss.</p>
+<p>For algorithm practice, platforms like <a href="/blog/free-leetcode-alternatives">free LeetCode alternatives</a> often support TypeScript now. Solving problems in TypeScript rather than plain JavaScript forces you to think about types while working through logic. It&#39;s dual-purpose practice.</p>
+<p>And one unconventional tip. Read other people&#39;s type definitions. DefinitelyTyped packages on GitHub, utility type libraries like <code>type-fest</code>, even the TypeScript source code itself. You&#39;ll pick up patterns and tricks that tutorial authors haven&#39;t written about yet.</p>
+<h2>Wrapping up</h2>
+<p>TypeScript interviews have matured past syntax checks and into genuine problem-solving with types. The questions reflect real-world challenges. Type safety at API boundaries, reusable generic patterns, exhaustive type narrowing, and practical utility type composition.</p>
+<p>The good news is that these are all learnable skills. They&#39;re not trick questions. They test for experience that comes from building things with TypeScript, not memorizing documentation. If you&#39;ve been writing TypeScript in production for a while, you probably know more than you think.</p>
+<p>And if you&#39;re early in your TypeScript journey, focus on the patterns rather than the syntax. Understand why you&#39;d use a discriminated union instead of optional properties. Understand when a generic makes your code more reusable versus more complex. The syntax you can always look up. The judgment comes from practice.</p>
+<hr>
+<p><em>Preparing for a technical interview and want to sharpen your TypeScript skills? Red Surge Technology works with developers to level up their craft through real-world project experience. <a href="/contact">Get in touch</a> to learn more.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

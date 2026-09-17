@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Redis Cache Design Patterns: Practical Strategies for Faster Apps</title>
+    <meta name="description" content="Master Redis cache design patterns with practical examples. Learn cache-aside, write-through, write-behind, read-through strategies and when to use each one." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Redis, Caching, Backend, Performance, Web Development" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/redis-cache-design-patterns" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/redis-cache-design-patterns" />
+    <meta property="og:title" content="Redis Cache Design Patterns: Practical Strategies for Faster Apps" />
+    <meta property="og:description" content="Master Redis cache design patterns with practical examples. Learn cache-aside, write-through, write-behind, read-through strategies and when to use each one." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/redis-cache-design-patterns.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-15T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-15T10:00:00.000Z" />
+    <meta property="article:section" content="Web Development" />
+    <meta property="article:tag" content="Redis, Caching, Backend, Performance, Web Development" />
+    <meta property="article:tag" content="Redis" />
+    <meta property="article:tag" content="Caching" />
+    <meta property="article:tag" content="Backend" />
+    <meta property="article:tag" content="Performance" />
+    <meta property="article:tag" content="Web Development" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/redis-cache-design-patterns" />
+    <meta name="twitter:title" content="Redis Cache Design Patterns: Practical Strategies for Faster Apps" />
+    <meta name="twitter:description" content="Master Redis cache design patterns with practical examples. Learn cache-aside, write-through, write-behind, read-through strategies and when to use each one." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/redis-cache-design-patterns.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Redis Cache Design Patterns: Practical Strategies for Faster Apps",
+        "description": "Master Redis cache design patterns with practical examples. Learn cache-aside, write-through, write-behind, read-through strategies and when to use each one.",
+        "url": "https://redsurgetechnology.com/blog/redis-cache-design-patterns",
+        "datePublished": "2026-07-15T10:00:00.000Z",
+        "dateModified": "2026-07-15T10:00:00.000Z",
+        "keywords": "Redis, Caching, Backend, Performance, Web Development",
+        "articleSection": "Web Development",
+        "timeRequired": "PT13M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/redis-cache-design-patterns.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/redis-cache-design-patterns"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Redis Cache Design Patterns: Practical Strategies for Faster Applications",
+          "item": "https://redsurgetechnology.com/blog/redis-cache-design-patterns"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Redis Cache Design Patterns: Practical Strategies for Faster Applications</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Redis Cache Design Patterns: Practical Strategies for Faster Applications
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/redis-cache-design-patterns-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/redis-cache-design-patterns-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/redis-cache-design-patterns.webp"
+      alt="Redis Cache Design Patterns: Practical Strategies for Faster Applications - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Redis Cache Design Patterns: Practical Strategies for Faster Apps" />
+          <meta itemprop="description" content="Master Redis cache design patterns with practical examples. Learn cache-aside, write-through, write-behind, read-through strategies and when to use each one." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/redis-cache-design-patterns" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-15T10:00:00.000Z">Jul 15, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-15T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT13M" />13 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Web Development</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Redis</span><span class="cs-tag" itemprop="keywords">Caching</span><span class="cs-tag" itemprop="keywords">Backend</span><span class="cs-tag" itemprop="keywords">Performance</span><span class="cs-tag" itemprop="keywords">Web Development</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Adding Redis to your application feels amazing for about a week. Suddenly your response times drop by 90%, the database stops sweating, and everything feels snappy. Your users notice. The team celebrates. You feel like a genius.</p>
+<p>Then the weird bugs start. A customer swears they updated their profile, but they&#39;re still seeing their old email address. Another user sees a price that changed yesterday. And you start asking yourself the uncomfortable questions: How long should this data live in the cache? What happens if the database gets updated but Redis doesn&#39;t know about it? And the scariest one—what does my application do if Redis just… goes away?</p>
+<p>I learned these questions the hard way a few years ago, working on an e-commerce backend that served product details to a mobile app. We&#39;d slapped in Redis using the simplest approach we could think of—cache everything for an hour, invalidate nothing—and for a while it worked beautifully. Then one afternoon, our merchandising team updated the price of a popular winter coat. The change went into the database immediately. But because our cache had another 47 minutes before it expired, the app kept showing the old price to thousands of customers. We only found out because a customer service agent noticed a user complaining on Twitter. That afternoon I learned that a cache isn&#39;t just a performance tool—it&#39;s a consistency contract you&#39;re making with your users, whether you realize it or not.</p>
+<p>The good news is that Redis gives you a clean, predictable set of commands. The patterns for using those commands effectively, though, are what separate a cache that quietly improves your application from one that creates sporadic, hair-pulling bugs. So let&#39;s walk through the patterns you&#39;ll actually use in production, the tradeoffs you&#39;re making with each one, and how to sleep better at night.</p>
+<hr>
+<h2>Cache-aside: the lazy pattern (and why that&#39;s often a good thing)</h2>
+<p>Cache-aside, sometimes called lazy loading, is the most common Redis caching pattern. And there&#39;s a good chance you&#39;re already using it, even if you never gave it a name. The idea is dead simple: the application checks the cache first. If the data is there, great—hand it back. If not, go fetch it from the database, store a copy in Redis, and then return it.</p>
+<pre><code class="language-javascript">async function getUser(userId) {
+  // Check cache first
+  const cached = await redis.get(`user:${userId}`);
+  if (cached) {
+    return JSON.parse(cached);
+  }
+
+  // Cache miss — fetch from the database
+  const user = await db.query(&quot;SELECT * FROM users WHERE id = $1&quot;, [userId]);
+
+  if (user) {
+    // Store it with a TTL so it doesn&#39;t live forever
+    await redis.set(`user:${userId}`, JSON.stringify(user), &quot;EX&quot;, 3600);
+  }
+
+  return user;
+}
+</code></pre>
+<p>You know why this pattern is so popular? It&#39;s predictable. Nothing happens automatically. You don&#39;t populate the cache until someone actually asks for that specific piece of data. For a read-heavy workload where data changes infrequently—think user profiles, product descriptions, configuration settings—it&#39;s often all you need. You get the speed boost without much extra complexity.</p>
+<p>The trap, though, is staleness. When that user updates their email address, your database writes the new value, but Redis still holds the old one. If your code doesn&#39;t explicitly invalidate <code>user:123</code>, the stale data sits there until the TTL naturally expires. For my e-commerce coat pricing fiasco, that was exactly the problem—we forgot to tell the cache that the data had changed. These bugs are intermittent by nature. They appear only when the cache hasn&#39;t been refreshed, which makes them maddening to track down. The customer who updates their profile once a day might never notice. The one who updates it twice within an hour? They&#39;ll call support.</p>
+<p>Cache-aside is a solid default. But you need to be honest with yourself about how much inconsistency you can tolerate. If the answer is &quot;almost none,&quot; keep reading.</p>
+<hr>
+<h2>Write-through: the careful bookkeeper</h2>
+<p>Write-through addresses the staleness problem by updating the cache at the same moment as the database. Every time you write data, you write to both places, synchronously, before returning to the client.</p>
+<pre><code class="language-javascript">async function updateUser(userId, data) {
+  // Update the database first
+  await db.query(&quot;UPDATE users SET name = $1, email = $2 WHERE id = $3&quot;, [
+    data.name,
+    data.email,
+    userId,
+  ]);
+
+  // Then immediately refresh the cache with the latest data
+  const user = await db.query(&quot;SELECT * FROM users WHERE id = $1&quot;, [userId]);
+  await redis.set(`user:${userId}`, JSON.stringify(user), &quot;EX&quot;, 3600);
+
+  return user;
+}
+</code></pre>
+<p>Now the cache always reflects reality. Readers never see stale information because writers update the cache as part of the write operation. That entire category of &quot;Why is this data wrong?&quot; bugs just disappears. If you&#39;re running a content management system or a product catalog where accuracy matters more than write speed, this pattern can feel like a warm blanket.</p>
+<p>But there&#39;s a cost. Every write now touches two systems—the database and Redis—and that extra hop adds latency. For a write-heavy application, all those cache updates add up fast. You&#39;re also spending effort caching data that might never be read again. A user uploads three new profile photos in quick succession; you&#39;re paying to cache each one even if nobody views the profile between the second and third upload. It&#39;s wasteful in terms of write throughput.</p>
+<p>Write-through makes sense when your read volume dwarfs your write volume, and when consistency matters. If a customer sees the wrong price for even a few seconds and that could cause a real problem, the slight write slowdown is worth it.</p>
+<hr>
+<h2>Write-behind: speed now, persist later</h2>
+<p>Write-behind flips the script entirely. Writes go straight to Redis first, and the application returns immediately. Redis acknowledges the write in microseconds because it&#39;s all in memory. Then, later, a background worker picks up the changes and pushes them to the database in batches. From the user&#39;s perspective, the operation is lightning fast.</p>
+<pre><code class="language-javascript">async function recordPageView(pageId, userId) {
+  // Write to Redis immediately
+  const key = `pageviews:${pageId}`;
+  await redis.zincrby(key, 1, userId);
+
+  // That&#39;s it. The flush to the database happens asynchronously.
+  // A separate process reads from Redis and writes to the database in bulk.
+}
+</code></pre>
+<p>This is the pattern you use when speed is everything and perfect accuracy is negotiable. Analytics events, page view counters, rate limit tracking, activity logs—data where losing a few records in a rare crash is acceptable. The tradeoff is clear: you get blazing writes, but you accept that if Redis crashes before the background flush runs, those writes vanish. You can reduce the risk with Redis persistence (RDB snapshots, AOF logs), but the risk never drops to zero. You absolutely would not use write-behind for financial transactions. Or medical records. Or anything where losing a write could have serious consequences.</p>
+<p>The other thing to keep in mind is that the background flush process is your responsibility. You have to write the worker that reads from Redis and writes to the database. That adds some operational complexity. But for the right use case, the speed boost is hard to beat.</p>
+<hr>
+<h2>Read-through: when the cache becomes the middleman</h2>
+<p>Read-through is similar to cache-aside, but the cache layer itself handles the database fetch. Your application code only ever talks to Redis. If Redis has the data, it returns it. If not, Redis (or a thin abstraction in front of it) goes to the database, stores the result, and hands it back. Your application doesn&#39;t see the difference.</p>
+<p>Implementing pure read-through requires a Redis module like RedisGears, or you can build a lightweight abstraction in your application code. Here&#39;s what that abstraction often looks like:</p>
+<pre><code class="language-javascript">// A simple read-through helper
+async function getOrSet(key, ttl, fetchFn) {
+  const cached = await redis.get(key);
+  if (cached) return JSON.parse(cached);
+
+  const data = await fetchFn();
+  await redis.set(key, JSON.stringify(data), &quot;EX&quot;, ttl);
+  return data;
+}
+
+// Usage: your code stays clean
+const user = await getOrSet(`user:${userId}`, 3600, () =&gt; {
+  return db.query(&quot;SELECT * FROM users WHERE id = $1&quot;, [userId]);
+});
+</code></pre>
+<p>The big win here is that your business logic stays simple. You don&#39;t write conditional &quot;is it cached?&quot; checks everywhere. The caching behavior is consolidated in one place. This pattern also helps with a classic caching headache called the thundering herd—when a popular cache entry expires and dozens of requests all try to repopulate it at the same time, hammering your database. A well-built read-through layer can include a lock or a promise deduplication mechanism to handle that, which we&#39;ll get to in a bit.</p>
+<p>Read-through isn&#39;t as common in the wild as cache-aside because it often adds a layer of abstraction that some teams find harder to debug. But when you&#39;re dealing with a high-traffic endpoint and you want to simplify your application code, it&#39;s a pattern worth knowing.</p>
+<hr>
+<h2>TTL strategies: more art than science</h2>
+<p>Every cache key needs an expiration. Without TTLs, your Redis instance will quietly fill up until it runs out of memory and starts evicting things at random, which is a great way to introduce unpredictable performance problems. But the strategy behind those TTL numbers deserves more thought than most people give it.</p>
+<p>Fixed TTLs are the straightforward approach. Cache everything for 5 minutes. Or an hour. Pick a number that matches your data&#39;s freshness requirements and call it a day. The problem is that fixed TTLs ignore how often the data actually changes. A product description that hasn&#39;t been updated in three years expires at the same rate as a price that changes daily. That&#39;s fine if you want simplicity above all else. It&#39;s less fine if you&#39;re trying to balance freshness with cache hit rate.</p>
+<p>Sliding TTLs reset the timer every time the data is accessed. Think of a user session. You might set a 30-minute sliding TTL. As long as the user keeps making requests, their session stays alive in Redis. Once they go idle, the clock runs out and the session naturally expires.</p>
+<pre><code class="language-javascript">async function getUserSession(sessionId) {
+  const session = await redis.get(`session:${sessionId}`);
+  if (session) {
+    // Reset the clock on every access
+    await redis.expire(`session:${sessionId}`, 1800);
+  }
+  return session ? JSON.parse(session) : null;
+}
+</code></pre>
+<p>Then there&#39;s probabilistic early expiration. You add a bit of random jitter to your TTLs so that a bunch of popular keys don&#39;t all expire at the same instant and trigger a stampede to the database. Instead of caching everything for exactly 3600 seconds, you scatter the expirations between, say, 3300 and 3900 seconds.</p>
+<pre><code class="language-javascript">const BASE_TTL = 3600;
+const jitter = Math.floor(Math.random() * 600); // 0-600 seconds
+await redis.set(key, value, &quot;EX&quot;, BASE_TTL + jitter);
+</code></pre>
+<p>That tiny bit of randomness spreads out the refresh load, and your database will thank you for it. I&#39;ve seen a simple jitter drop database CPU spikes by over 30% during cache repopulation windows.</p>
+<p>If you&#39;ve been working on <a href="/blog/improve-website-page-speed-seo-nj">making your website pages faster</a>, caching strategies like this are some of the highest-leverage optimizations you can make. A well-tuned cache can absorb the vast majority of your read traffic, and a poorly tuned one can make your application feel slower than if you had no cache at all.</p>
+<hr>
+<h2>Cache invalidation: the problem Phil Karlton warned us about</h2>
+<p>There&#39;s a famous quote in computer science: &quot;There are only two hard things in computer science: cache invalidation and naming things.&quot; Redis gives you solid tools for managing invalidation, but the thinking part is still on you.</p>
+<p>The simplest method is key-based invalidation. When you update a user&#39;s record, you delete <code>user:{id}</code> from Redis. The next read request will be a cache miss, so it&#39;ll fetch fresh data from the database and repopulate the cache with the correct information.</p>
+<pre><code class="language-javascript">async function updateUserProfile(userId, data) {
+  await db.query(&quot;UPDATE users SET ... WHERE id = $1&quot;, [userId]);
+  // Invalidate the specific cache entry
+  await redis.del(`user:${userId}`);
+
+  // Also invalidate any aggregated lists that included this user
+  await redis.del(&quot;users:active&quot;);
+  await redis.del(&quot;users:premium&quot;);
+}
+</code></pre>
+<p>The tricky part is knowing which other keys are affected. That user&#39;s email might show up in a dashboard aggregation, a search index, and a few list endpoints. If you forget to invalidate any of those, you get scattered pockets of stale data. Keeping a mental map of all those dependencies gets unwieldy as your application grows.</p>
+<p>Tag-based invalidation can help. You group related cache entries under a tag, then invalidate everything with that tag in one shot. Redis doesn&#39;t natively support tags, but you can build them with sets.</p>
+<pre><code class="language-javascript">// Tagging a cache entry
+async function cacheUser(userId, user) {
+  await redis.set(`user:${userId}`, JSON.stringify(user), &quot;EX&quot;, 3600);
+  await redis.sadd(`tag:user:${userId}`, `user:${userId}`);
+}
+
+// Invalidate by tag
+async function invalidateUser(userId) {
+  const keys = await redis.smembers(`tag:user:${userId}`);
+  if (keys.length &gt; 0) {
+    await redis.del(keys);
+    await redis.del(`tag:user:${userId}`);
+  }
+}
+</code></pre>
+<p>It adds a little overhead, but it makes your invalidation logic far more maintainable. I&#39;ve used this on a project where a single &quot;product update&quot; needed to clear the product page cache, the category listing cache, the search index cache, and the admin dashboard cache. Without tags, we would have had to hardcode every one of those key patterns. With tags, it was one call.</p>
+<hr>
+<h2>The thundering herd (and how to calm it)</h2>
+<p>Picture this: you&#39;ve got a popular cache key—something like a homepage feed or a trending items list. It&#39;s under heavy load, hundreds of requests per second. The TTL expires. Suddenly, every one of those in-flight requests sees a cache miss and rushes to the database to fetch the same data. Your database gets hammered with identical queries, and most of the work is wasted. That&#39;s the thundering herd.</p>
+<p>The fix is a lightweight lock. The first request that spots the cache miss grabs a lock, does the work of fetching the data and populating the cache, and then releases the lock. All the other requests wait until the lock is released, then read from the newly warmed cache.</p>
+<pre><code class="language-javascript">async function getPopularFeed() {
+  const cacheKey = &quot;popular:items&quot;;
+  const cached = await redis.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+
+  // Try to acquire a lock
+  const lockKey = `${cacheKey}:lock`;
+  const acquired = await redis.set(lockKey, &quot;1&quot;, &quot;NX&quot;, &quot;EX&quot;, 5);
+
+  if (acquired) {
+    try {
+      const data = await db.query(&quot;SELECT * FROM items WHERE popular = true&quot;);
+      await redis.set(cacheKey, JSON.stringify(data), &quot;EX&quot;, 300);
+      return data;
+    } finally {
+      await redis.del(lockKey);
+    }
+  } else {
+    // Another request is doing the work; wait and retry
+    await new Promise((resolve) =&gt; setTimeout(resolve, 100));
+    return getPopularFeed(); // retry
+  }
+}
+</code></pre>
+<p>The <code>NX</code> flag on the <code>SET</code> command is the secret sauce. It means &quot;only set if the key does not exist.&quot; That makes the lock atomic—only one request succeeds in acquiring it, and the others see <code>null</code> and know to wait. The lock itself has a short TTL (5 seconds here) so that if the fetching request crashes, the lock doesn&#39;t get stuck forever.</p>
+<p>This does add a tiny bit of latency for the requests that have to wait. But it&#39;s the difference between a momentary pause and a database meltdown. For any high-traffic endpoint with an expensive backing query, this pattern is worth its weight in uptime.</p>
+<hr>
+<h2>What happens when Redis disappears</h2>
+<p>Adding Redis to your stack means you now have another dependency that can fail. And on a long enough timeline, it will. The question isn&#39;t if, but how your application behaves when it can&#39;t reach Redis. The answer should be a deliberate design choice, not something you discover during a 3 a.m. outage.</p>
+<p>The most common approach is graceful degradation. Your code tries Redis, and if that fails—because the connection timed out or the server is down—it falls back to the database and carries on. Response times will be slower, but the application stays functional.</p>
+<pre><code class="language-javascript">async function getUser(userId) {
+  try {
+    const cached = await redis.get(`user:${userId}`);
+    if (cached) return JSON.parse(cached);
+  } catch (err) {
+    logger.warn(&quot;Redis unavailable, falling back to database&quot;, err);
+  }
+
+  return db.query(&quot;SELECT * FROM users WHERE id = $1&quot;, [userId]);
+}
+</code></pre>
+<p>The catch here is your database. If Redis was absorbing 90% of your read traffic, all of that suddenly hits the database directly. You need to be sure your database connection pool and query performance can handle the load. For many applications, that spike is fine. For others, it&#39;s a cascading failure.</p>
+<p>A circuit breaker can add another layer of resilience. If Redis fails a few times in a row, the circuit breaker &quot;opens&quot; and stops even trying to reach Redis for a cooling-off period (say, 30 seconds). That prevents every single request from suffering a connection timeout delay, which can add up and make your whole application feel sluggish. Once the cool-down period passes, the circuit breaker lets a few test requests through to see if Redis has recovered.</p>
+<p>This approach pairs nicely with good monitoring and alerts, so you&#39;re aware of the problem while your application keeps limping along gracefully.</p>
+<hr>
+<h2>A quick story about compression</h2>
+<p>This isn&#39;t as dramatic as a thundering herd, but it&#39;s practical. I once worked on an API that cached rendered HTML fragments for a dozen different regional storefronts. The data was highly compressible—lots of repetitive markup and JSON blobs. We were burning through Redis memory faster than we&#39;d budgeted, and the network transfer time for these chunky cache entries was adding 50-80 milliseconds to some responses. Not a disaster, but noticeable.</p>
+<p>We added gzip compression before storing values in Redis. The overhead of compressing and decompressing was around 1-2 milliseconds, but the network savings more than made up for it. Our cache memory usage dropped by nearly 80%, and the total response time for cache hits actually went down because we were pushing fewer bytes over the wire.</p>
+<pre><code class="language-javascript">const zlib = require(&quot;zlib&quot;);
+
+async function cacheLargeData(key, data) {
+  const compressed = zlib.deflateSync(JSON.stringify(data));
+  await redis.set(key, compressed, &quot;EX&quot;, 3600);
+}
+
+async function getLargeData(key) {
+  const compressed = await redis.getBuffer(key);
+  if (!compressed) return null;
+  return JSON.parse(zlib.inflateSync(compressed).toString());
+}
+</code></pre>
+<p>If you&#39;re caching big blobs of text, it&#39;s a cheap win. JSON compresses beautifully—80-90% ratios are common for real API responses.</p>
+<hr>
+<h2>Picking the right pattern for the job</h2>
+<p>None of these patterns is universally correct. Cache-aside is the default for a reason: it&#39;s simple, it&#39;s predictable, and it works for the majority of read-heavy workloads. Write-through trades some write speed for strong consistency. Write-behind gives you screaming writes at the cost of potential data loss. Read-through can simplify your application code but asks for a bit more infrastructure discipline.</p>
+<p>What matters is that you&#39;re deliberate. You should be able to answer three questions for every piece of cached data in your system: What happens when the cache is empty? What happens when the cache is wrong? And what happens when the cache isn&#39;t reachable at all? If you can answer those clearly, you&#39;re in good shape.</p>
+<p>If you&#39;ve been following our series on application performance—from <a href="/blog/why-modern-websites-feel-slower">why modern websites can feel slow</a> to backend framework comparisons like <a href="/blog/django-vs-fastapi">Django vs FastAPI</a>—caching is one of the highest-return investments you can make. A few hours of intentional cache design often does more for perceived performance than weeks of query optimization.</p>
+<p>And if you take one thing away from all of this, let it be the lesson of the winter coat. Always, always think about what happens when the data in your cache no longer matches the truth. Your customers will notice before you do.</p>
+<hr>
+<p><em>Need help designing a caching strategy that holds up in production? Red Surge Technology helps teams implement Redis patterns that actually work. <a href="/contact">Get in touch</a> to talk about your performance goals.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

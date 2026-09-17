@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Next.js CMS Integration Guide: Step-by-Step from Schema to Production</title>
+    <meta name="description" content="A practical guide to integrating a headless CMS with Next.js. Walk through schema setup, fetching content in server components, ISR, webhooks, preview drafts, and type safety." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Next.js, Headless CMS, Integration, Tutorial, Web Development" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/nextjs-cms-integration-guide" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/nextjs-cms-integration-guide" />
+    <meta property="og:title" content="Next.js CMS Integration Guide: Step-by-Step from Schema to Production" />
+    <meta property="og:description" content="A practical guide to integrating a headless CMS with Next.js. Walk through schema setup, fetching content in server components, ISR, webhooks, preview drafts, and type safety." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/nextjs-cms-integration-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-09-02T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-09-02T10:00:00.000Z" />
+    <meta property="article:section" content="Web Development" />
+    <meta property="article:tag" content="Next.js, Headless CMS, Integration, Tutorial, Web Development" />
+    <meta property="article:tag" content="Next.js" />
+    <meta property="article:tag" content="Headless CMS" />
+    <meta property="article:tag" content="Integration" />
+    <meta property="article:tag" content="Tutorial" />
+    <meta property="article:tag" content="Web Development" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/nextjs-cms-integration-guide" />
+    <meta name="twitter:title" content="Next.js CMS Integration Guide: Step-by-Step from Schema to Production" />
+    <meta name="twitter:description" content="A practical guide to integrating a headless CMS with Next.js. Walk through schema setup, fetching content in server components, ISR, webhooks, preview drafts, and type safety." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/nextjs-cms-integration-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Next.js CMS Integration Guide: Step-by-Step from Schema to Production",
+        "description": "A practical guide to integrating a headless CMS with Next.js. Walk through schema setup, fetching content in server components, ISR, webhooks, preview drafts, and type safety.",
+        "url": "https://redsurgetechnology.com/blog/nextjs-cms-integration-guide",
+        "datePublished": "2026-09-02T10:00:00.000Z",
+        "dateModified": "2026-09-02T10:00:00.000Z",
+        "keywords": "Next.js, Headless CMS, Integration, Tutorial, Web Development",
+        "articleSection": "Web Development",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/nextjs-cms-integration-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/nextjs-cms-integration-guide"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Next.js CMS Integration Guide: Step-by-Step from Schema to Production",
+          "item": "https://redsurgetechnology.com/blog/nextjs-cms-integration-guide"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Next.js CMS Integration Guide: Step-by-Step from Schema to Production</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Next.js CMS Integration Guide: Step-by-Step from Schema to Production
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/nextjs-cms-integration-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/nextjs-cms-integration-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/nextjs-cms-integration-guide.webp"
+      alt="Next.js CMS Integration Guide: Step-by-Step from Schema to Production - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Next.js CMS Integration Guide: Step-by-Step from Schema to Production" />
+          <meta itemprop="description" content="A practical guide to integrating a headless CMS with Next.js. Walk through schema setup, fetching content in server components, ISR, webhooks, preview drafts, and type safety." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/nextjs-cms-integration-guide" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-09-02T10:00:00.000Z">Sep 02, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-09-02T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Web Development</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Next.js</span><span class="cs-tag" itemprop="keywords">Headless CMS</span><span class="cs-tag" itemprop="keywords">Integration</span><span class="cs-tag" itemprop="keywords">Tutorial</span><span class="cs-tag" itemprop="keywords">Web Development</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>So you&#39;ve chosen a headless CMS for your Next.js project. Maybe you picked Sanity after reading our <a href="/blog/best-headless-cms-for-nextjs-in-2026">best headless CMS for Next.js</a> guide, or perhaps you&#39;re still evaluating and want to see what the integration actually looks like. Either way, you&#39;re now faced with the real work: connecting the CMS to your frontend, fetching content, keeping it fresh, and handling previews.</p>
+<p>The good news is that Next.js and modern headless CMS platforms are built to work together. The integration patterns are well-established. The bad news is that the details matter—getting the schema right, setting up webhooks for on-demand revalidation, and making sure your preview mode works across environments.</p>
+<p>In this guide, I&#39;ll walk through a complete integration using <strong>Sanity</strong> as the example, but the patterns apply to any headless CMS. By the end, you&#39;ll have a clear roadmap from initial schema setup to production-ready content delivery. I&#39;ll cover the exact code you need, the common pitfalls, and the architectural decisions that will save you time later.</p>
+<h2>Why integration patterns matter</h2>
+<p>Before we start coding, let&#39;s understand the pieces we&#39;re building. A Next.js CMS integration typically involves:</p>
+<ol>
+<li><strong>Schema definition</strong> – Define your content models in the CMS.</li>
+<li><strong>Client setup</strong> – Create a connection between Next.js and the CMS.</li>
+<li><strong>Data fetching</strong> – Pull content into your pages or components.</li>
+<li><strong>Static generation and ISR</strong> – Decide when and how often to fetch.</li>
+<li><strong>On-demand revalidation</strong> – Update pages when content changes.</li>
+<li><strong>Preview mode</strong> – Let editors see drafts before publishing.</li>
+<li><strong>Type safety</strong> – Ensure TypeScript types match your schema.</li>
+</ol>
+<p>Each piece builds on the previous one. Getting the schema right makes the client setup easier. Getting the client setup right makes fetching content straightforward. And so on.</p>
+<p>If you&#39;ve read our <a href="/blog/nextjs-isr-guide">Incremental Static Regeneration guide</a>, you already understand the importance of caching and freshness. CMS integration is where that theory meets practice.</p>
+<h2>Step 1: Define your schema in Sanity</h2>
+<p>Sanity uses JavaScript (or TypeScript) files to define schemas. These schemas live in your project and are deployed along with the Sanity Studio. Here&#39;s a simple blog post schema:</p>
+<pre><code class="language-javascript">// schemas/post.ts
+export default {
+  name: &quot;post&quot;,
+  title: &quot;Blog Post&quot;,
+  type: &quot;document&quot;,
+  fields: [
+    {
+      name: &quot;title&quot;,
+      title: &quot;Title&quot;,
+      type: &quot;string&quot;,
+      validation: (Rule) =&gt; Rule.required(),
+    },
+    {
+      name: &quot;slug&quot;,
+      title: &quot;Slug&quot;,
+      type: &quot;slug&quot;,
+      options: { source: &quot;title&quot;, maxLength: 96 },
+    },
+    {
+      name: &quot;excerpt&quot;,
+      title: &quot;Excerpt&quot;,
+      type: &quot;text&quot;,
+      rows: 3,
+    },
+    {
+      name: &quot;body&quot;,
+      title: &quot;Body&quot;,
+      type: &quot;blockContent&quot;, // custom rich text type
+    },
+    {
+      name: &quot;publishedAt&quot;,
+      title: &quot;Published At&quot;,
+      type: &quot;datetime&quot;,
+    },
+    {
+      name: &quot;coverImage&quot;,
+      title: &quot;Cover Image&quot;,
+      type: &quot;image&quot;,
+      options: { hotspot: true },
+    },
+  ],
+};
+</code></pre>
+<p>Key points:</p>
+<ul>
+<li>The <code>slug</code> field uses <code>source: &#39;title&#39;</code> to auto-generate a URL-friendly string from the title.</li>
+<li>The <code>body</code> field is a custom rich text type. You can define <code>blockContent</code> separately or use Sanity&#39;s built-in portable text.</li>
+<li>The <code>image</code> type includes hotspot options for responsive images.</li>
+</ul>
+<p>If you&#39;re using Payload, the schema would be a TypeScript config file. For Strapi, you&#39;d define content types in the admin UI or via code. The concept is the same: define your content model so it&#39;s structured and queryable.</p>
+<h2>Step 2: Set up the Sanity client</h2>
+<p>Create a client file that connects to your Sanity project. You&#39;ll need the project ID and dataset name.</p>
+<pre><code class="language-javascript">// lib/sanity.ts
+import { createClient } from &quot;next-sanity&quot;;
+
+export const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || &quot;production&quot;,
+  apiVersion: &quot;2024-01-01&quot;,
+  useCdn: process.env.NODE_ENV === &quot;production&quot;,
+});
+</code></pre>
+<p>Here I&#39;m using <code>next-sanity</code>, a wrapper that provides Next.js-specific helpers. The <code>useCdn</code> flag tells Sanity to use the CDN in production for faster reads. In development, it&#39;s disabled so you get fresh data immediately.</p>
+<p>You also need to add environment variables to your <code>.env.local</code> file:</p>
+<pre><code>NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
+NEXT_PUBLIC_SANITY_DATASET=production
+</code></pre>
+<h2>Step 3: Fetch content in a server component</h2>
+<p>Now you can fetch content inside a Next.js App Router page. Use the <code>client.fetch</code> method with a GROQ query.</p>
+<pre><code class="language-javascript">// app/blog/[slug]/page.tsx
+import { client } from &#39;@/lib/sanity&#39;;
+
+async function getPost(slug: string) {
+  const post = await client.fetch(
+    `*[_type == &quot;post&quot; &amp;&amp; slug.current == $slug][0]{
+      title,
+      excerpt,
+      body,
+      publishedAt,
+      coverImage { asset-&gt;{ url } }
+    }`,
+    { slug }
+  );
+  return post;
+}
+
+export default async function PostPage({ params }) {
+  const post = await getPost(params.slug);
+
+  if (!post) {
+    return &lt;div&gt;Post not found&lt;/div&gt;;
+  }
+
+  return (
+    &lt;article&gt;
+      &lt;h1&gt;{post.title}&lt;/h1&gt;
+      &lt;p&gt;{post.excerpt}&lt;/p&gt;
+      {/* render body */}
+    &lt;/article&gt;
+  );
+}
+</code></pre>
+<p>This is a server component, so it runs on the server and sends HTML to the client. No client-side JavaScript needed. It&#39;s simple and performant.</p>
+<p>If you want to use ISR, you can add <code>revalidate</code>:</p>
+<pre><code class="language-javascript">export const revalidate = 60; // revalidate every 60 seconds
+</code></pre>
+<p>Or, better yet, use on-demand revalidation via webhooks (Step 5).</p>
+<h2>Step 4: Generate static params for SSG/ISR</h2>
+<p>For dynamic routes like <code>/blog/[slug]</code>, you need to tell Next.js which slugs to generate at build time. Use <code>generateStaticParams</code>:</p>
+<pre><code class="language-javascript">// app/blog/[slug]/page.tsx
+export async function generateStaticParams() {
+  const slugs = await client.fetch(`*[_type == &quot;post&quot;]{ slug { current } }`);
+  return slugs.map((s) =&gt; ({ slug: s.slug.current }));
+}
+</code></pre>
+<p>This fetches all post slugs and pre-generates them. If a user requests a slug that wasn&#39;t pre-generated, Next.js will fallback to on-demand generation (if you&#39;ve set <code>fallback: &#39;blocking&#39;</code> in Pages Router or the default in App Router with <code>dynamicParams = true</code>).</p>
+<h2>Step 5: Set up on-demand revalidation via webhooks</h2>
+<p>When content changes in Sanity, you want to update the corresponding page immediately. Sanity can send a webhook to a custom API route that calls <code>revalidatePath</code> or <code>revalidateTag</code>.</p>
+<p>Create an API route:</p>
+<pre><code class="language-javascript">// app/api/revalidate/route.ts
+import { revalidatePath } from &#39;next/cache&#39;;
+import { NextRequest } from &#39;next/server&#39;;
+import { isValidSignature, SIGNATURE_HEADER_NAME } from &#39;@sanity/webhook&#39;;
+
+const secret = process.env.SANITY_WEBHOOK_SECRET;
+
+export async function POST(req: NextRequest) {
+  const body = await req.json();
+  const signature = req.headers.get(SIGNATURE_HEADER_NAME);
+
+  if (!secret || !isValidSignature(body, signature, secret)) {
+    return new Response(&#39;Invalid signature&#39;, { status: 401 });
+  }
+
+  const { slug } = body;
+  if (slug) {
+    revalidatePath(`/blog/${slug}`);
+  }
+  revalidatePath(&#39;/blog&#39;); // revalidate blog index too
+
+  return Response.json({ revalidated: true });
+}
+</code></pre>
+<p>In Sanity, you configure a webhook to hit this endpoint whenever a post is created, updated, or deleted. You can also use <code>revalidateTag</code> if you tag your fetch calls.</p>
+<p>If you&#39;re using Strapi, the webhook setup is similar—just point it to your Next.js route and validate the payload.</p>
+<h2>Step 6: Implement preview mode</h2>
+<p>Preview mode lets editors see drafts before they&#39;re published. Next.js has built-in support for draft mode.</p>
+<p>First, create an API route that enables draft mode and redirects to the preview page:</p>
+<pre><code class="language-javascript">// app/api/draft/route.ts
+import { draftMode } from &#39;next/headers&#39;;
+import { redirect } from &#39;next/navigation&#39;;
+
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const slug = searchParams.get(&#39;slug&#39;);
+
+  draftMode().enable();
+  redirect(`/blog/${slug}`);
+}
+</code></pre>
+<p>Then, in your page component, check if draft mode is enabled and fetch draft content:</p>
+<pre><code class="language-javascript">import { draftMode } from &quot;next/headers&quot;;
+
+export default async function PostPage({ params }) {
+  const { isEnabled } = draftMode();
+  const post = await getPost(params.slug, isEnabled);
+
+  // ...
+}
+</code></pre>
+<p>And in <code>getPost</code>, you&#39;d use <code>useCdn: false</code> when draft mode is enabled to get unpublished content.</p>
+<h2>Step 7: Ensure TypeScript types match your schema</h2>
+<p>Without type safety, you risk runtime errors when the schema changes. Sanity provides a <code>sanity-codegen</code> tool to generate TypeScript types from your schema. Alternatively, you can define types manually.</p>
+<p>For Payload, types are automatic because schemas are TypeScript. For Strapi and Contentful, you can use codegen or define interfaces manually.</p>
+<pre><code class="language-typescript">// types/post.ts
+export interface Post {
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  body: any; // portable text
+  publishedAt: string;
+  coverImage?: { asset: { url: string } };
+}
+</code></pre>
+<p>Then use this type in your <code>getPost</code> function.</p>
+<h2>Step 8: Handle images and optimization</h2>
+<p>Sanity provides image URLs via the CDN. You can use <code>next/image</code> with these URLs for optimization. Sanity also has a <code>sanity-image</code> package or you can construct URLs with query parameters.</p>
+<p>For example:</p>
+<pre><code class="language-javascript">import Image from &quot;next/image&quot;;
+
+function CoverImage({ src, alt }) {
+  return (
+    &lt;Image
+      src={src}
+      alt={alt}
+      width={800}
+      height={400}
+      style={{ objectFit: &quot;cover&quot; }}
+    /&gt;
+  );
+}
+</code></pre>
+<p>Use <code>next/image</code> for automatic resizing and lazy loading. This works well with Sanity&#39;s CDN.</p>
+<h2>Common pitfalls to avoid</h2>
+<ol>
+<li><strong>Not setting <code>useCdn: false</code> in development</strong> – You&#39;ll see stale content while editing.</li>
+<li><strong>Forgetting to handle missing content</strong> – A deleted post slug will cause runtime errors. Always check for null and display a 404.</li>
+<li><strong>Ignoring webhook security</strong> – Always validate the webhook signature to prevent malicious revalidation attacks.</li>
+<li><strong>Not using tags for related content</strong> – When a post changes, you often need to update the blog index and related posts. Tags make this easy.</li>
+<li><strong>Overfetching data</strong> – GROQ lets you select only the fields you need. Don&#39;t fetch the entire document if you only need title and excerpt.</li>
+</ol>
+<h2>A real integration story: connecting a Next.js marketing site to Sanity</h2>
+<p>I recently built a marketing site with Next.js and Sanity. The content team needed to publish blog posts and landing pages without developer help. We set up a schema with a <code>page</code> type and a <code>post</code> type, both using portable text for body content.</p>
+<p>The integration took about half a day. The key pieces were:</p>
+<ul>
+<li>Sanity Studio deployed as part of the Next.js app.</li>
+<li><code>generateStaticParams</code> for all posts and pages.</li>
+<li><code>revalidate: 60</code> as a fallback, plus on-demand revalidation via webhook.</li>
+<li>Preview mode so editors could see changes instantly.</li>
+</ul>
+<p>The content team loved it. They could write posts, preview them, and publish—all without involving developers. The site remained fast because most pages were static and cached.</p>
+<p>The lesson: invest time in setting up the webhook and preview mode early. It pays off in editor productivity and content freshness.</p>
+<h2>Wrapping up</h2>
+<p>Integrating a headless CMS with Next.js is a multi-step process, but each step is well-defined. The key is to think through the content flow: how content is created, when it&#39;s fetched, how it&#39;s cached, and how it&#39;s updated.</p>
+<p>If you follow the steps in this guide—schema setup, client config, server-side fetching, ISR, webhooks, preview, and type safety—you&#39;ll end up with a robust content pipeline that serves both developers and content editors.</p>
+<p>And remember, the CMS you choose is just one piece of the puzzle. How you integrate it determines whether your site is fast, fresh, and maintainable. For more on choosing the right CMS, check out our <a href="/blog/best-headless-cms-for-nextjs-in-2026">headless CMS comparison</a>. For deeper dives into ISR, our <a href="/blog/nextjs-isr-guide">complete ISR guide</a> has you covered.</p>
+<p>Now go build something content-rich and lightning fast.</p>
+<hr>
+<p><em>Need help integrating a CMS with your Next.js project? Red Surge Technology builds seamless content pipelines that keep both developers and editors happy. <a href="/contact">Get in touch</a> to discuss your needs.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Promise.all vs Promise.allSettled: Key Differences Explained</title>
+    <meta name="description" content="Promise.all vs Promise.allSettled: learn key differences with examples for API calls, error handling, and concurrent async operations in JavaScript." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="JavaScript, Promises, Async, Web Development, Error Handling" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled" />
+    <meta property="og:title" content="Promise.all vs Promise.allSettled: Key Differences Explained" />
+    <meta property="og:description" content="Promise.all vs Promise.allSettled: learn key differences with examples for API calls, error handling, and concurrent async operations in JavaScript." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/promise-all-vs-allsettled.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-14T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-14T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="JavaScript, Promises, Async, Web Development, Error Handling" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Promises" />
+    <meta property="article:tag" content="Async" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Error Handling" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled" />
+    <meta name="twitter:title" content="Promise.all vs Promise.allSettled: Key Differences Explained" />
+    <meta name="twitter:description" content="Promise.all vs Promise.allSettled: learn key differences with examples for API calls, error handling, and concurrent async operations in JavaScript." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/promise-all-vs-allsettled.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Promise.all vs Promise.allSettled: Key Differences Explained",
+        "description": "Promise.all vs Promise.allSettled: learn key differences with examples for API calls, error handling, and concurrent async operations in JavaScript.",
+        "url": "https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled",
+        "datePublished": "2026-07-14T10:00:00.000Z",
+        "dateModified": "2026-07-14T10:00:00.000Z",
+        "keywords": "JavaScript, Promises, Async, Web Development, Error Handling",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT10M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/promise-all-vs-allsettled.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Promise.all vs Promise.allSettled: What's the Difference and When to Use Each",
+          "item": "https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Promise.all vs Promise.allSettled: What's the Difference and When to Use Each</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Promise.all vs Promise.allSettled: What's the Difference and When to Use Each
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/promise-all-vs-allsettled-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/promise-all-vs-allsettled-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/promise-all-vs-allsettled.webp"
+      alt="Promise.all vs Promise.allSettled: What's the Difference and When to Use Each - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Promise.all vs Promise.allSettled: Key Differences Explained" />
+          <meta itemprop="description" content="Promise.all vs Promise.allSettled: learn key differences with examples for API calls, error handling, and concurrent async operations in JavaScript." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-14T10:00:00.000Z">Jul 14, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-14T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT10M" />10 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Promises</span><span class="cs-tag" itemprop="keywords">Async</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Error Handling</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>There&#39;s a moment in every JavaScript developer&#39;s journey where <code>Promise.all</code> betrays you. You fire off five API calls, wait for them all to resolve, and then one of them rejects. Suddenly your entire operation fails. The other four calls — which worked perfectly fine — their results are gone. Poof. The promise rejects and that&#39;s the end of it.</p>
+<p>The first time this happens, it feels like a bug in the language. It&#39;s not. <code>Promise.all</code> is working exactly as designed. The problem is that nobody told you there&#39;s a different tool for when you want partial results. A tool that waits for all promises to settle — whether they resolve or reject — and gives you everything.</p>
+<p>That tool is <code>Promise.allSettled</code>, and it solves a problem that <code>Promise.all</code> was never designed to handle. Let me walk through the difference, when each one makes sense, and how to stop getting burned by choosing the wrong one.</p>
+<h2>What Promise.all actually does</h2>
+<p><code>Promise.all</code> takes an array of promises and returns a single promise. If every promise in the array resolves successfully, the returned promise resolves with an array of the resolved values. If any promise rejects, the returned promise rejects immediately with that rejection reason.</p>
+<pre><code class="language-javascript">const [user, posts, settings] = await Promise.all([
+  fetchUser(userId),
+  fetchPosts(userId),
+  fetchSettings(userId),
+]);
+</code></pre>
+<p>This is elegant when all three calls need to succeed for the operation to make sense. If the user doesn&#39;t exist, there&#39;s no point in loading their posts or settings. Fast failure is the right behavior.</p>
+<p>The catch is that <code>Promise.all</code> fails fast. As soon as one promise rejects, it stops caring about the others. The remaining promises might still resolve in the background, but their results are lost. You can&#39;t access them from the rejected promise.</p>
+<pre><code class="language-javascript">try {
+  const results = await Promise.all([
+    fetchCriticalData(), // This fails
+    fetchAnalytics(), // This succeeds but you never get the data
+    fetchNotifications(), // Same here
+  ]);
+} catch (error) {
+  // You only know about the first failure
+  // The other results are inaccessible
+}
+</code></pre>
+<p>For some use cases, this is exactly what you want. For others, it&#39;s a source of frustration.</p>
+<h2>What Promise.allSettled does differently</h2>
+<p><code>Promise.allSettled</code> waits for every promise in the array to finish, regardless of whether each one resolves or rejects. The returned promise never rejects. Instead, it resolves with an array of result objects, each with a <code>status</code> property of either <code>&#39;fulfilled&#39;</code> or <code>&#39;rejected&#39;</code>.</p>
+<pre><code class="language-javascript">const results = await Promise.allSettled([
+  fetchUser(userId),
+  fetchPosts(userId),
+  fetchSettings(userId),
+]);
+
+results.forEach((result) =&gt; {
+  if (result.status === &quot;fulfilled&quot;) {
+    console.log(&quot;Success:&quot;, result.value);
+  } else {
+    console.log(&quot;Failure:&quot;, result.reason);
+  }
+});
+</code></pre>
+<p>This is the key difference. <code>Promise.allSettled</code> doesn&#39;t short-circuit. It waits for everything. You get the successes and the failures, and you decide what to do with each one.</p>
+<p>The result objects follow a consistent shape. Fulfilled promises have <code>{ status: &#39;fulfilled&#39;, value: ... }</code>. Rejected promises have <code>{ status: &#39;rejected&#39;, reason: ... }</code>. TypeScript can narrow these with type guards, making the results type-safe to work with.</p>
+<h2>The dashboard that taught me this lesson</h2>
+<p>A while back, I built an analytics dashboard that loaded data from about eight different microservices. User counts from one service. Revenue data from another. Recent activity from a third. Server health from a fourth. You get the idea.</p>
+<p>I used <code>Promise.all</code> because it was the concurrency tool I knew. And most of the time, it worked great. All eight services were healthy, all eight calls resolved, and the dashboard loaded quickly.</p>
+<p>Then one of the microservices went down for maintenance. Not a critical one — just the one that handled feature adoption metrics. Nice to have, not essential. But because I used <code>Promise.all</code>, the entire dashboard crashed. Users saw an error screen instead of their data. Seven perfectly healthy services, and one tiny outage took down everything.</p>
+<p>Switching to <code>Promise.allSettled</code> fixed it. The dashboard loaded all the available data and displayed a small &quot;Feature adoption data unavailable&quot; card where the failed service&#39;s data would have been. Users still got their core analytics. The degraded experience was far better than a blank error page.</p>
+<p>That experience clarified something for me. <code>Promise.all</code> implies that every promise is critical. <code>Promise.allSettled</code> acknowledges that some data is optional and the application should degrade gracefully rather than fail completely.</p>
+<h2>When Promise.all is the right choice</h2>
+<p><code>Promise.all</code> still has its place. It&#39;s the correct tool when the promises are interdependent — when one failing genuinely means the entire operation should abort.</p>
+<p>Database transactions are the classic example. If you&#39;re inserting a user and their default settings in parallel, and either insert fails, you want to roll back both. <code>Promise.all</code> combined with a transaction mechanism gives you that atomicity.</p>
+<p>Form validation that requires multiple checks is another good fit. If you&#39;re validating an email address against an API, checking a username for uniqueness, and verifying a password strength score, and any of those fail, the form submission should fail. The partial results don&#39;t matter because the user can&#39;t submit anyway.</p>
+<p>The pattern to look for is interdependence. If the promises are all needed for the next step of your logic, <code>Promise.all</code> communicates that requirement clearly. Future developers reading your code will understand that these operations are a unit.</p>
+<h2>When Promise.allSettled makes more sense</h2>
+<p><code>Promise.allSettled</code> shines when you&#39;re fetching independent pieces of data. Dashboard widgets. Search results from multiple indexes. Data from third-party APIs that might be unreliable. Any scenario where partial results are better than no results.</p>
+<p>It&#39;s also the right tool when you want to report detailed error information. Instead of catching the first failure and losing context about what else went wrong, you can collect all the failures and present them coherently.</p>
+<pre><code class="language-javascript">const results = await Promise.allSettled([
+  fetchUserProfile(userId),
+  fetchUserPosts(userId),
+  fetchUserFollowers(userId),
+]);
+
+const errors = results
+  .filter((r) =&gt; r.status === &quot;rejected&quot;)
+  .map((r, i) =&gt; ({
+    source: [&quot;profile&quot;, &quot;posts&quot;, &quot;followers&quot;][i],
+    error: r.reason,
+  }));
+
+if (errors.length &gt; 0) {
+  console.error(&quot;Some data failed to load:&quot;, errors);
+}
+</code></pre>
+<p>This gives you a complete picture of what went wrong. You can log it, report it to your monitoring service, and show the user a helpful message about which features are temporarily unavailable.</p>
+<p>If you&#39;ve read our post on <a href="/blog/how-to-use-the-javascript-fetch-api-with-async-await">JavaScript fetch API with async await</a>, you know that network requests are inherently unreliable. <code>Promise.allSettled</code> embraces that reality instead of pretending every request will succeed.</p>
+<h2>Combining both patterns</h2>
+<p>Real applications often need a mix of both approaches. Some data is critical. Some is optional. You can compose <code>Promise.all</code> and <code>Promise.allSettled</code> to handle both cases.</p>
+<pre><code class="language-javascript">// Critical data — must all succeed
+const [user, account] = await Promise.all([
+  fetchUser(userId),
+  fetchAccount(accountId),
+]);
+
+// Optional data — partial results are fine
+const optionalResults = await Promise.allSettled([
+  fetchRecommendations(userId),
+  fetchActivityFeed(userId),
+  fetchSocialConnections(userId),
+]);
+
+// Process optional results gracefully
+const recommendations =
+  optionalResults[0].status === &quot;fulfilled&quot; ? optionalResults[0].value : [];
+const activityFeed =
+  optionalResults[1].status === &quot;fulfilled&quot; ? optionalResults[1].value : [];
+</code></pre>
+<p>The critical path uses <code>Promise.all</code> because the page can&#39;t render without the user and account. The nice-to-have data uses <code>Promise.allSettled</code> so a failing recommendation service doesn&#39;t prevent the page from loading.</p>
+<p>This pattern shows up a lot in real codebases. The critical data loads first and fast-fails if something is wrong. The enrichment data loads in parallel and fills in as it arrives. Users see a working page quickly, with optional content populating as it becomes available.</p>
+<h2>Promise.race and Promise.any: the other siblings</h2>
+<p>While we&#39;re on the topic, <code>Promise.race</code> and <code>Promise.any</code> deserve a mention because they solve related but different problems.</p>
+<p><code>Promise.race</code> resolves or rejects as soon as the first promise in the array settles. It doesn&#39;t care about the others. This is useful for timeouts — race your API call against a promise that rejects after five seconds.</p>
+<pre><code class="language-javascript">const result = await Promise.race([fetchData(), timeout(5000)]);
+</code></pre>
+<p><code>Promise.any</code> resolves as soon as the first promise fulfills. It ignores rejections unless all promises reject. This is useful when you have redundant data sources and want the fastest response.</p>
+<pre><code class="language-javascript">const data = await Promise.any([
+  fetchFromPrimaryServer(),
+  fetchFromSecondaryServer(),
+  fetchFromCache(),
+]);
+</code></pre>
+<p>Both are more specialized than <code>Promise.all</code> and <code>Promise.allSettled</code>, but knowing they exist rounds out your understanding of promise combinators.</p>
+<h2>A note on performance</h2>
+<p>A common misconception is that <code>Promise.allSettled</code> is slower than <code>Promise.all</code> because it waits for everything. In practice, both run the promises concurrently. The total wall-clock time is determined by the slowest promise, not by which combinator you use.</p>
+<p>The difference is in what happens when a promise rejects. <code>Promise.all</code> short-circuits and returns early. <code>Promise.allSettled</code> continues waiting for the remaining promises. If you&#39;re dealing with promises that take a long time to reject — perhaps a timeout-based rejection — <code>Promise.allSettled</code> will take longer because it waits for the full timeout rather than aborting.</p>
+<p>But for typical API calls that resolve or reject quickly, the performance difference is negligible. Choose based on the behavior you need, not on micro-optimizations.</p>
+<h2>TypeScript considerations</h2>
+<p>TypeScript makes the distinction between these two methods clearer. <code>Promise.all</code> returns <code>Promise&lt;[A, B, C]&gt;</code> — a tuple of the resolved types. <code>Promise.allSettled</code> returns <code>Promise&lt;PromiseSettledResult&lt;A | B | C&gt;[]&gt;</code> — an array of result objects.</p>
+<pre><code class="language-typescript">type SettledResult&lt;T&gt; =
+  | { status: &quot;fulfilled&quot;; value: T }
+  | { status: &quot;rejected&quot;; reason: any };
+</code></pre>
+<p>The type narrowing with <code>result.status === &#39;fulfilled&#39;</code> works the same way we covered in our post on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>. TypeScript understands that checking the status narrows the type, giving you access to <code>value</code> on fulfilled results and <code>reason</code> on rejected ones.</p>
+<h2>Wrapping up</h2>
+<p><code>Promise.all</code> and <code>Promise.allSettled</code> solve different problems, and using the wrong one creates bugs that are easy to miss in development but painful in production. <code>Promise.all</code> is for when every promise is critical — fast failure is the right behavior. <code>Promise.allSettled</code> is for when partial results are useful — graceful degradation is the right behavior.</p>
+<p>The dashboard story I shared earlier is a pattern I&#39;ve seen repeated across multiple codebases. Developers reach for <code>Promise.all</code> because it&#39;s the promise combinator they know. Then a non-critical service goes down and takes the entire application with it. A one-line change to <code>Promise.allSettled</code> would have prevented the outage.</p>
+<p>Next time you&#39;re writing concurrent promises, ask yourself: if one of these fails, should everything fail? If the answer is no, you probably want <code>Promise.allSettled</code>.</p>
+<hr>
+<p><em>Building JavaScript applications that handle errors gracefully? Red Surge Technology helps teams write resilient async code that works in the real world. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

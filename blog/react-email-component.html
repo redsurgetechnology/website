@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Email Component: Build Type-Safe Email Templates with React</title>
+    <meta name="description" content="Build type-safe email templates in React with React Email. Learn setup, styling, previewing, and sending via Resend or your own provider." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, Email, TypeScript, Web Development, Frontend" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-email-component" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-email-component" />
+    <meta property="og:title" content="React Email Component: Build Type-Safe Email Templates with React" />
+    <meta property="og:description" content="Build type-safe email templates in React with React Email. Learn setup, styling, previewing, and sending via Resend or your own provider." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-email-component-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-22T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-22T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React, Email, TypeScript, Web Development, Frontend" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="Email" />
+    <meta property="article:tag" content="TypeScript" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Frontend" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-email-component" />
+    <meta name="twitter:title" content="React Email Component: Build Type-Safe Email Templates with React" />
+    <meta name="twitter:description" content="Build type-safe email templates in React with React Email. Learn setup, styling, previewing, and sending via Resend or your own provider." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-email-component-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Email Component: Build Type-Safe Email Templates with React",
+        "description": "Build type-safe email templates in React with React Email. Learn setup, styling, previewing, and sending via Resend or your own provider.",
+        "url": "https://redsurgetechnology.com/blog/react-email-component",
+        "datePublished": "2026-07-22T10:00:00.000Z",
+        "dateModified": "2026-07-22T10:00:00.000Z",
+        "keywords": "React, Email, TypeScript, Web Development, Frontend",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT12M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-email-component-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-email-component"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Email Component: Build Beautiful, Type-Safe Email Templates with React",
+          "item": "https://redsurgetechnology.com/blog/react-email-component"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Email Component: Build Beautiful, Type-Safe Email Templates with React</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Email Component: Build Beautiful, Type-Safe Email Templates with React
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-email-component-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-email-component-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-email-component-guide.webp"
+      alt="React Email Component: Build Beautiful, Type-Safe Email Templates with React - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Email Component: Build Type-Safe Email Templates with React" />
+          <meta itemprop="description" content="Build type-safe email templates in React with React Email. Learn setup, styling, previewing, and sending via Resend or your own provider." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-email-component" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-22T10:00:00.000Z">Jul 22, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-22T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT12M" />12 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">Email</span><span class="cs-tag" itemprop="keywords">TypeScript</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Frontend</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Sending emails from a web application sounds straightforward until you actually try to do it. You need an HTML template that looks decent across Gmail, Outlook, Apple Mail, and a dozen other clients. You need to inline your CSS because most email clients strip out <code>&lt;style&gt;</code> tags. You need to test on actual devices because rendering quirks vary wildly. And you need to do all of this without losing your mind.</p>
+<p>The traditional approach involves string concatenation, template literals, or some templating language like Handlebars. You build an HTML string, inject variables, and hope the result doesn&#39;t break when rendered. It works. Barely. But maintaining those templates over time, especially as your application&#39;s design evolves, is unpleasant.</p>
+<p>React Email changes this equation. Instead of writing raw HTML strings, you compose email templates using React components. You get type safety, component reuse, and a live preview environment. The library renders your React components to static HTML at build time or on the server, producing the exact HTML email clients need.</p>
+<p>It&#39;s not a full-stack email service. It&#39;s the template layer — the part that creates the HTML. But it makes that part dramatically better than what came before.</p>
+<h2>Why React components make sense for email</h2>
+<p>At first glance, using React for email templates seems like overkill. React is a UI framework for interactive applications. Emails are static documents. They don&#39;t have state, event handlers, or re-rendering. Why bring React into this?</p>
+<p>The answer is composition. Email templates are made of reusable pieces. Headers, footers, buttons, hero sections, order summaries — the same patterns appear across dozens of email types. Without a component model, you end up copying and pasting HTML snippets between templates. Small inconsistencies creep in. A button in the welcome email looks slightly different from a button in the password reset email. Nobody notices until a designer points it out six months later.</p>
+<p>React components solve this naturally. You build a <code>&lt;Button&gt;</code>, a <code>&lt;Container&gt;</code>, a <code>&lt;Heading&gt;</code>, and use them everywhere. Change the button styling once, and every email template that uses that button updates automatically. The same reasons React works for web applications apply to email templates.</p>
+<pre><code class="language-javascript">// A reusable button component for emails
+import { Button } from &quot;@react-email/button&quot;;
+
+function EmailButton({ href, children }) {
+  return (
+    &lt;Button
+      href={href}
+      style={{
+        backgroundColor: &quot;#3b82f6&quot;,
+        color: &quot;#ffffff&quot;,
+        padding: &quot;12px 24px&quot;,
+        borderRadius: &quot;6px&quot;,
+        fontWeight: 600,
+        textDecoration: &quot;none&quot;,
+        display: &quot;inline-block&quot;,
+      }}
+    &gt;
+      {children}
+    &lt;/Button&gt;
+  );
+}
+</code></pre>
+<p>This button renders as a styled <code>&lt;a&gt;</code> tag with inline styles — exactly what email clients expect. The React component abstraction handles the implementation details. You just use <code>&lt;EmailButton&gt;</code> wherever you need a call to action.</p>
+<h2>Getting started with React Email</h2>
+<p>The React Email library provides a set of primitives optimized for email rendering. It knows that email clients need inline styles, table-based layouts, and conservative HTML. The components handle these constraints internally.</p>
+<p>Setting up a new email project is straightforward. You can add React Email to an existing application or create a dedicated email package within a monorepo.</p>
+<pre><code class="language-bash">npm install @react-email/components react-email
+</code></pre>
+<p>The <code>@react-email/components</code> package includes all the primitives: <code>Html</code>, <code>Head</code>, <code>Body</code>, <code>Container</code>, <code>Section</code>, <code>Text</code>, <code>Link</code>, <code>Button</code>, <code>Img</code>, and more. These replace standard HTML elements with email-safe versions that render properly across clients.</p>
+<p>A minimal welcome email looks like this:</p>
+<pre><code class="language-javascript">import {
+  Html,
+  Head,
+  Body,
+  Container,
+  Text,
+  Link,
+  Preview,
+} from &quot;@react-email/components&quot;;
+
+export function WelcomeEmail({ username }) {
+  return (
+    &lt;Html&gt;
+      &lt;Head /&gt;
+      &lt;Preview&gt;Welcome to our platform!&lt;/Preview&gt;
+      &lt;Body
+        style={{ backgroundColor: &quot;#f9fafb&quot;, fontFamily: &quot;Arial, sans-serif&quot; }}
+      &gt;
+        &lt;Container
+          style={{ maxWidth: &quot;600px&quot;, margin: &quot;0 auto&quot;, padding: &quot;40px 20px&quot; }}
+        &gt;
+          &lt;Text style={{ fontSize: &quot;24px&quot;, fontWeight: 600, color: &quot;#111827&quot; }}&gt;
+            Welcome, {username}!
+          &lt;/Text&gt;
+          &lt;Text
+            style={{ fontSize: &quot;16px&quot;, color: &quot;#6b7280&quot;, lineHeight: &quot;1.5&quot; }}
+          &gt;
+            Thanks for signing up. We&#39;re excited to have you on board.
+          &lt;/Text&gt;
+          &lt;Link
+            href=&quot;https://example.com/getting-started&quot;
+            style={{
+              display: &quot;inline-block&quot;,
+              backgroundColor: &quot;#3b82f6&quot;,
+              color: &quot;#ffffff&quot;,
+              padding: &quot;12px 24px&quot;,
+              borderRadius: &quot;6px&quot;,
+              textDecoration: &quot;none&quot;,
+              fontWeight: 600,
+              marginTop: &quot;16px&quot;,
+            }}
+          &gt;
+            Get started
+          &lt;/Link&gt;
+        &lt;/Container&gt;
+      &lt;/Body&gt;
+    &lt;/Html&gt;
+  );
+}
+</code></pre>
+<p>The <code>&lt;Preview&gt;</code> component sets the preview text that appears in inboxes next to the subject line. The <code>&lt;Container&gt;</code> handles centering and max-width. The inline styles look verbose, but they&#39;re necessary because email clients ignore external stylesheets and often strip <code>&lt;style&gt;</code> blocks.</p>
+<h2>The preview experience</h2>
+<p>One of React Email&#39;s best features is the development server. Running <code>email dev</code> starts a local server that renders your templates in real time as you edit them. You see exactly what recipients will see, across simulated desktop and mobile views.</p>
+<pre><code class="language-bash">npx email dev
+</code></pre>
+<p>The preview updates on every save. You can switch between templates, test different prop values, and verify that your layout doesn&#39;t break. This alone is a massive improvement over the old workflow of deploying to a staging environment and sending test emails to yourself.</p>
+<p>The preview environment also validates your HTML against common email client quirks. It flags issues like unsupported CSS properties, missing alt text on images, and contrast problems. These are the kinds of things that would normally require manual testing across multiple clients.</p>
+<h2>Styling in an email-unfriendly world</h2>
+<p>If you&#39;ve spent any time with modern CSS — flexbox, grid, custom properties, container queries — styling emails will feel like stepping back in time. Email clients support roughly the CSS that was available in 2005. Tables for layout. Inline styles. Limited font support. No JavaScript.</p>
+<p>React Email doesn&#39;t magically fix this, but it makes it manageable. The component props accept a <code>style</code> object that gets inlined automatically. You don&#39;t have to manually convert CSS to inline styles — the library handles that during rendering.</p>
+<p>For complex layouts, you still need tables. React Email provides a <code>&lt;Section&gt;</code> component that abstracts some of this away, but you&#39;ll occasionally reach for raw <code>&lt;table&gt;</code>, <code>&lt;tr&gt;</code>, and <code>&lt;td&gt;</code> elements when you need multi-column layouts.</p>
+<pre><code class="language-javascript">import { Section, Column, Row } from &quot;@react-email/components&quot;;
+
+function TwoColumnLayout() {
+  return (
+    &lt;Section&gt;
+      &lt;Row&gt;
+        &lt;Column style={{ width: &quot;50%&quot;, paddingRight: &quot;10px&quot; }}&gt;
+          &lt;Text&gt;Left column content&lt;/Text&gt;
+        &lt;/Column&gt;
+        &lt;Column style={{ width: &quot;50%&quot;, paddingLeft: &quot;10px&quot; }}&gt;
+          &lt;Text&gt;Right column content&lt;/Text&gt;
+        &lt;/Column&gt;
+      &lt;/Row&gt;
+    &lt;/Section&gt;
+  );
+}
+</code></pre>
+<p>The <code>Column</code> and <code>Row</code> components render as table cells and rows, giving you the layout control that email clients require without writing raw table markup. It&#39;s still table-based layout under the hood, but the abstraction makes it less painful.</p>
+<p>If you&#39;ve been comparing <a href="/blog/css-modules-vs-tailwind">CSS Modules vs Tailwind</a> for web applications, you&#39;ll find that email styling is a different beast entirely. Tailwind&#39;s utility classes don&#39;t work in email clients. CSS Modules&#39; scoping doesn&#39;t matter because everything is inlined. The styling approach for email is its own thing, and React Email&#39;s inline style objects are as good as it gets.</p>
+<h2>TypeScript and type safety</h2>
+<p>React Email works with TypeScript out of the box. Your email components accept typed props, and the component hierarchy is type-checked. This catches mistakes that would otherwise result in broken emails discovered after sending.</p>
+<pre><code class="language-typescript">interface OrderConfirmationProps {
+  orderNumber: string;
+  items: Array&lt;{
+    name: string;
+    quantity: number;
+    price: number;
+  }&gt;;
+  total: number;
+  customerName: string;
+}
+
+export function OrderConfirmationEmail({
+  orderNumber,
+  items,
+  total,
+  customerName,
+}: OrderConfirmationProps) {
+  return (
+    &lt;Html&gt;
+      &lt;Body&gt;
+        &lt;Text&gt;Order #{orderNumber}&lt;/Text&gt;
+        &lt;Text&gt;Hi {customerName},&lt;/Text&gt;
+        {/* Render order items */}
+        {items.map((item) =&gt; (
+          &lt;Text key={item.name}&gt;
+            {item.name} x {item.quantity} — ${item.price}
+          &lt;/Text&gt;
+        ))}
+        &lt;Text style={{ fontWeight: 700 }}&gt;Total: ${total}&lt;/Text&gt;
+      &lt;/Body&gt;
+    &lt;/Html&gt;
+  );
+}
+</code></pre>
+<p>TypeScript ensures that every prop is provided with the correct type. If you refactor the component and change a prop name, the compiler catches every usage site. This is the same type safety you get with React components in a web application, and it&#39;s just as valuable in email templates.</p>
+<p>If you&#39;ve worked through our guide on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>, you&#39;ll appreciate that type-safe email components eliminate a category of runtime errors. A missing prop on a web component might break interactivity. A missing prop on an email component might send a broken email to thousands of users.</p>
+<h2>Rendering and sending emails</h2>
+<p>React Email components render to static HTML. You call a <code>render</code> function that takes the component and returns an HTML string. This string is what you pass to your email provider.</p>
+<pre><code class="language-javascript">import { render } from &quot;@react-email/components&quot;;
+import { WelcomeEmail } from &quot;./emails/welcome&quot;;
+
+const html = await render(&lt;WelcomeEmail username=&quot;Collin&quot; /&gt;);
+// Pass `html` to your email sending service
+</code></pre>
+<p>You can render emails at build time for static templates, or at request time for dynamic content. The rendering is server-side only — there&#39;s no client-side React involved. The components are just a convenient way to construct HTML strings.</p>
+<p>For sending, the React Email ecosystem integrates naturally with Resend, the email API built by the same team. But you can use any email provider. SendGrid, Postmark, AWS SES, Mailgun — anything that accepts an HTML string works. React Email is just the template layer.</p>
+<pre><code class="language-javascript">import { Resend } from &quot;resend&quot;;
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+await resend.emails.send({
+  from: &quot;hello@example.com&quot;,
+  to: &quot;user@example.com&quot;,
+  subject: &quot;Welcome!&quot;,
+  react: &lt;WelcomeEmail username=&quot;Collin&quot; /&gt;,
+});
+</code></pre>
+<p>Resend&#39;s SDK accepts React elements directly, which means you don&#39;t even need to call <code>render</code> yourself. The SDK handles rendering, inlining, and sending in a single call. For other providers, you&#39;d render to HTML first and pass the resulting string.</p>
+<h2>Testing emails without sending them</h2>
+<p>One of the most useful features of React Email is the ability to test templates without actually sending emails. The preview server shows you what the email looks like. You can also write unit tests that render the component and verify the output.</p>
+<pre><code class="language-javascript">import { render } from &quot;@react-email/components&quot;;
+import { WelcomeEmail } from &quot;./emails/welcome&quot;;
+
+test(&quot;welcome email renders username&quot;, async () =&gt; {
+  const html = await render(&lt;WelcomeEmail username=&quot;Collin&quot; /&gt;);
+  expect(html).toContain(&quot;Welcome, Collin!&quot;);
+  expect(html).toContain(&quot;Get started&quot;);
+});
+</code></pre>
+<p>These tests run quickly because there&#39;s no browser involved. The components render to strings in Node.js. You can verify that dynamic content appears correctly, that conditional sections render when expected, and that links point to the right URLs.</p>
+<p>Testing email templates used to be so cumbersome that most teams simply didn&#39;t do it. You&#39;d manually send test emails to yourself and visually check them. React Email&#39;s testability changes the calculus. You can catch regressions in CI before they reach production.</p>
+<h2>Comparison with alternatives</h2>
+<p>React Email isn&#39;t the only way to build email templates. MJML is a popular alternative that uses a custom XML-like syntax. It compiles to responsive HTML that works across email clients. There&#39;s a React wrapper called <code>mjml-react</code> that lets you use JSX to write MJML.</p>
+<p>The main difference is the rendering engine. MJML has its own rendering logic that&#39;s been battle-tested across thousands of email campaigns. React Email is newer but benefits from being part of the React ecosystem — the development experience is familiar, the TypeScript support is first-class, and the component model matches how frontend developers already think.</p>
+<p>For teams already using React heavily, React Email reduces context switching. The same developers building the web application can build the email templates using the same patterns. For teams with dedicated email developers who live in MJML, that ecosystem is still excellent.</p>
+<p>Neither approach is wrong. React Email wins on developer experience for React teams. MJML wins on rendering maturity and client compatibility. The gap is narrowing as React Email&#39;s rendering improves.</p>
+<h2>Accessibility in email</h2>
+<p>Email accessibility is often overlooked but genuinely matters. Recipients use screen readers. They view emails on small screens. They may have color vision deficiencies. Many of the <a href="/blog/web-accessibility-for-beginners">web accessibility principles</a> you already know apply to email as well.</p>
+<p>React Email components encourage accessible defaults. The <code>&lt;Img&gt;</code> component requires an <code>alt</code> attribute. The <code>&lt;Link&gt;</code> component renders proper anchor tags. But you still need to make thoughtful choices about color contrast, font sizes, and content structure.</p>
+<pre><code class="language-javascript">&lt;Img
+  src=&quot;https://example.com/logo.png&quot;
+  alt=&quot;Company Logo&quot;
+  width={120}
+  height={40}
+/&gt;
+
+&lt;Text style={{ fontSize: &#39;16px&#39;, color: &#39;#111827&#39; }}&gt;
+  This body text meets minimum contrast requirements.
+&lt;/Text&gt;
+</code></pre>
+<p>A good rule: if your email looks like a wall of tiny gray text, it&#39;s going to be hard for many people to read. Use sufficient font sizes, maintain contrast ratios, and provide text alternatives for images. The same discipline that makes websites accessible makes emails accessible.</p>
+<h2>The workflow that changed how I think about email</h2>
+<p>Before adopting React Email, I treated email templates as separate artifacts. They lived in a different part of the codebase, used a different templating language, and followed different conventions from the rest of the application. Updating an email template felt like archaeology — digging through layers of Handlebars partials and raw HTML to figure out where a change needed to go.</p>
+<p>The first project where I used React Email was a SaaS application with about a dozen transactional emails. Welcome, password reset, invoice, team invitation, notification digest — the usual suspects. I built each one as a React component, extracted the shared pieces into a design system, and wired everything together.</p>
+<p>The moment that sold me was when the design team updated the brand colors. In the old workflow, that would have meant finding every email template and updating hex codes manually — and inevitably missing one. With React Email, I changed the color in one shared component, and every email updated automatically. It took thirty seconds.</p>
+<p>That kind of maintainability doesn&#39;t matter when you have three email templates. It matters enormously when you have thirty.</p>
+<h2>Wrapping up</h2>
+<p>React Email brings the component model to email template development. Instead of wrestling with raw HTML strings and Handlebars partials, you compose templates using React components with type-safe props, live preview, and automated testing.</p>
+<p>The rendering constraints of email clients still exist. You still need inline styles. You still need table-based layouts for complex designs. You still need to test across Gmail, Outlook, and Apple Mail. React Email doesn&#39;t eliminate these challenges, but it makes them manageable within a workflow that feels familiar to React developers.</p>
+<p>If you&#39;re building a Next.js application with <a href="/blog/react-server-components-nextjs">React Server Components</a>, you can even render email templates server-side as part of your application logic. The integration is seamless because both use the same rendering model — React components that produce HTML.</p>
+<p>For transactional emails, marketing campaigns, and any email your application sends programmatically, React Email is worth a serious look. The developer experience is a genuine step forward from the string-concatenation workflows it replaces.</p>
+<hr>
+<p><em>Building an application that needs reliable, maintainable transactional emails? Red Surge Technology helps teams implement email systems that scale with their products. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

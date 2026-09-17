@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>jQuery Document Ready vs Vanilla JavaScript: DOMContentLoaded Compared</title>
+    <meta name="description" content="Compare jQuery's $(document).ready() with vanilla JavaScript DOMContentLoaded, defer, and readyState. Learn when each approach makes sense and how to modernize legacy code." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="jQuery, JavaScript, DOM, Web Development, Legacy Code" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript" />
+    <meta property="og:title" content="jQuery Document Ready vs Vanilla JavaScript: DOMContentLoaded Compared" />
+    <meta property="og:description" content="Compare jQuery's $(document).ready() with vanilla JavaScript DOMContentLoaded, defer, and readyState. Learn when each approach makes sense and how to modernize legacy code." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/jquery-document-ready-vs-vanilla-javascript.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-21T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-21T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="jQuery, JavaScript, DOM, Web Development, Legacy Code" />
+    <meta property="article:tag" content="jQuery" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="DOM" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Legacy Code" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript" />
+    <meta name="twitter:title" content="jQuery Document Ready vs Vanilla JavaScript: DOMContentLoaded Compared" />
+    <meta name="twitter:description" content="Compare jQuery's $(document).ready() with vanilla JavaScript DOMContentLoaded, defer, and readyState. Learn when each approach makes sense and how to modernize legacy code." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/jquery-document-ready-vs-vanilla-javascript.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "jQuery Document Ready vs Vanilla JavaScript: DOMContentLoaded Compared",
+        "description": "Compare jQuery's $(document).ready() with vanilla JavaScript DOMContentLoaded, defer, and readyState. Learn when each approach makes sense and how to modernize legacy code.",
+        "url": "https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript",
+        "datePublished": "2026-08-21T10:00:00.000Z",
+        "dateModified": "2026-08-21T10:00:00.000Z",
+        "keywords": "jQuery, JavaScript, DOM, Web Development, Legacy Code",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT10M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/jquery-document-ready-vs-vanilla-javascript.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "jQuery Document Ready vs Vanilla JavaScript: Which One Should You Use in 2026?",
+          "item": "https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">jQuery Document Ready vs Vanilla JavaScript: Which One Should You Use in 2026?</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          jQuery Document Ready vs Vanilla JavaScript: Which One Should You Use in 2026?
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/jquery-document-ready-vs-vanilla-javascript-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/jquery-document-ready-vs-vanilla-javascript-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/jquery-document-ready-vs-vanilla-javascript.webp"
+      alt="jQuery Document Ready vs Vanilla JavaScript: Which One Should You Use in 2026? - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="jQuery Document Ready vs Vanilla JavaScript: DOMContentLoaded Compared" />
+          <meta itemprop="description" content="Compare jQuery's $(document).ready() with vanilla JavaScript DOMContentLoaded, defer, and readyState. Learn when each approach makes sense and how to modernize legacy code." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/jquery-document-ready-vs-vanilla-javascript" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-21T10:00:00.000Z">Aug 21, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-21T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT10M" />10 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">jQuery</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">DOM</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Legacy Code</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>For over a decade, <code>$(document).ready()</code> was the first line of nearly every jQuery script. It was a security blanket—a promise that the DOM was ready, cross-browser compatible, and forgiving of messy markup. Back then, vanilla JavaScript didn&#39;t offer a simple equivalent. You either used jQuery or you wrote your own hacky <code>window.onload</code> workaround that fired too late.</p>
+<p>The web has changed. Modern browsers give you <code>DOMContentLoaded</code>, the <code>defer</code> attribute, and native ES modules. You can achieve the same result with zero dependencies and often less code. But the muscle memory of <code>$(document).ready()</code> runs deep, and legacy projects still depend on it.</p>
+<p>This post is a side-by-side look at both approaches. If you&#39;re maintaining a jQuery codebase and wondering whether to modernize, or if you&#39;re starting a new project and want to avoid unnecessary dependencies, here&#39;s what you need to know.</p>
+<h2>What jQuery&#39;s ready actually did</h2>
+<p>Before we compare, let&#39;s pin down what <code>$(document).ready()</code> actually does under the hood. In jQuery, you pass a callback function, and jQuery runs it as soon as the browser has finished parsing the HTML and building the DOM tree. It doesn&#39;t wait for images, stylesheets, or iframes—just the document structure.</p>
+<pre><code class="language-javascript">$(document).ready(function () {
+  // DOM is ready to manipulate
+  $(&quot;#header&quot;).text(&quot;Hello world&quot;);
+});
+</code></pre>
+<p>It also works in a shorthand form:</p>
+<pre><code class="language-javascript">$(function () {
+  // Same thing
+});
+</code></pre>
+<p>If you&#39;ve ever read a jQuery tutorial, you&#39;ve seen this pattern. It was everywhere. The reason it was so popular was simple: without jQuery, detecting the DOM ready moment in old browsers was painful. Different browsers had different events (<code>DOMContentLoaded</code> wasn&#39;t universally supported until IE9), and jQuery smoothed over those differences.</p>
+<p>If you want a deeper walkthrough of jQuery&#39;s approach, our <a href="/blog/jquery-document-ready-complete-beginners-guide">jQuery document ready beginner&#39;s guide</a> covers the history and the variations.</p>
+<h2>The vanilla equivalent: DOMContentLoaded</h2>
+<p>Modern vanilla JavaScript has a direct replacement for <code>$(document).ready()</code>: the <code>DOMContentLoaded</code> event.</p>
+<pre><code class="language-javascript">document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+  // DOM is ready to manipulate
+  document.querySelector(&quot;#header&quot;).textContent = &quot;Hello world&quot;;
+});
+</code></pre>
+<p>This fires at the same moment—when the HTML is parsed and the DOM is built. It works in every browser released in the last decade, including IE9 and above. That&#39;s as far back as most developers need to care about.</p>
+<p>The syntax is slightly more verbose than jQuery&#39;s shorthand, but there&#39;s no dependency. No 30 KB library to download. No extra HTTP request. No version conflicts. Just native browser APIs.</p>
+<p>If you need a full guide on using <code>DOMContentLoaded</code> and the related <code>defer</code> and <code>readyState</code> patterns, our <a href="/blog/javascript-document-ready">JavaScript document ready</a> post has you covered with practical examples.</p>
+<h2>A quick side-by-side comparison</h2>
+<p>Let&#39;s lay out the two approaches next to each other.</p>
+<p><strong>jQuery:</strong></p>
+<pre><code class="language-javascript">$(document).ready(function () {
+  $(&quot;.button&quot;).on(&quot;click&quot;, handleClick);
+});
+</code></pre>
+<p><strong>Vanilla:</strong></p>
+<pre><code class="language-javascript">document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+  document.querySelectorAll(&quot;.button&quot;).forEach(function (btn) {
+    btn.addEventListener(&quot;click&quot;, handleClick);
+  });
+});
+</code></pre>
+<p>Both do the same thing: wait for the DOM, then attach a click handler to every element with the class <code>button</code>. The vanilla version is a bit longer, but it eliminates the entire jQuery dependency.</p>
+<p>Here&#39;s the thing, though. In modern projects, you often don&#39;t need either version. If you place your <code>&lt;script&gt;</code> tag at the end of <code>&lt;body&gt;</code>, or use the <code>defer</code> attribute in the <code>&lt;head&gt;</code>, the DOM is already ready by the time your code runs. No event listener required.</p>
+<pre><code class="language-html">&lt;!-- Option 1: script at end of body --&gt;
+&lt;body&gt;
+  &lt;button class=&quot;button&quot;&gt;Click me&lt;/button&gt;
+  &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+
+&lt;!-- Option 2: defer in head --&gt;
+&lt;head&gt;
+  &lt;script src=&quot;app.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+</code></pre>
+<p>With either approach, the script executes after the DOM is parsed, so you can query elements directly at the top level without wrapping everything in a ready callback.</p>
+<h2>Where jQuery still makes sense</h2>
+<p>Let&#39;s be honest: jQuery isn&#39;t dead. Millions of websites still use it, and some situations genuinely warrant it.</p>
+<p><strong>Legacy codebases.</strong> If you&#39;re maintaining a project built on jQuery, ripping out <code>$(document).ready()</code> everywhere is a risky, low-reward change. The jQuery version works. It&#39;ll keep working. Unless you&#39;re already modernizing the whole codebase, leave it alone.</p>
+<p><strong>jQuery plugins.</strong> If your project depends on jQuery plugins (carousels, date pickers, modal libraries), those plugins often expect jQuery to be loaded and the DOM to be ready. Mixing vanilla and jQuery can cause timing issues, so keeping jQuery for consistency makes sense.</p>
+<p><strong>Team familiarity.</strong> If everyone on your team knows jQuery and nobody wants to learn modern JavaScript patterns, forcing vanilla <code>DOMContentLoaded</code> may slow things down. That said, if you&#39;re building something new, it&#39;s worth investing in vanilla skills—jQuery&#39;s relevance will only continue to fade.</p>
+<h2>Where vanilla JavaScript clearly wins</h2>
+<p><strong>Performance.</strong> jQuery adds about 30 KB (minified and gzipped) to your page. For a single DOM ready call, that&#39;s a hefty tax. Vanilla <code>DOMContentLoaded</code> adds nothing. On mobile connections, that extra weight matters. If you care about <a href="/blog/improve-website-page-speed-seo-nj">page speed and performance</a>, dropping jQuery is a quick win.</p>
+<p><strong>Modern frameworks.</strong> React, Vue, and Svelte don&#39;t use jQuery&#39;s DOM ready pattern at all. Component lifecycle methods handle the DOM readiness for you. If you&#39;re building with a modern framework, <code>$(document).ready()</code> isn&#39;t just unnecessary—it doesn&#39;t fit the mental model.</p>
+<p><strong>Native features.</strong> The <code>defer</code> attribute, ES modules, and <code>document.readyState</code> give you more control than jQuery ever did. You can choose exactly when your code runs relative to the DOM, stylesheets, and images.</p>
+<p><strong>No dependency.</strong> Every dependency is a security and maintenance burden. jQuery is stable now, but it&#39;s no longer actively updated with new features. Vanilla JavaScript is maintained by the browser vendors themselves and never needs a version bump.</p>
+<p>If you&#39;ve been reducing your JavaScript bundle size, as we discuss in our <a href="/blog/reduce-javascript-bundle-size-react">React bundle size guide</a>, eliminating jQuery is one of the highest-impact changes you can make.</p>
+<h2>A story about modernizing a legacy widget</h2>
+<p>A couple of years ago, I inherited a marketing site that used jQuery heavily. Every page included three jQuery plugins and a custom <code>$(document).ready()</code> block that initialized sliders, tooltips, and form validation. The site worked, but page load was sluggish, and the jQuery dependency was eating into the performance budget.</p>
+<p>I didn&#39;t rip everything out at once. Instead, I tackled the <code>$(document).ready()</code> blocks first. For each one, I asked: &quot;Is this code doing something that can be done with native <code>DOMContentLoaded</code> or <code>defer</code>?&quot; About half the time, the answer was yes. Those blocks became vanilla, and I removed the jQuery import from those pages.</p>
+<p>The sliders and tooltips were harder—they depended on jQuery plugins. I left those alone initially. Over time, I replaced the plugins with lightweight vanilla alternatives (or built custom versions), and eventually dropped jQuery entirely.</p>
+<p>The page load time improved by about 40%. The JavaScript bundle shrank dramatically. The maintenance burden disappeared because there were no more version updates or security patches to worry about.</p>
+<p>The lesson: you don&#39;t have to do a big bang migration. Start with the ready blocks, move to vanilla <code>DOMContentLoaded</code>, and chip away at the rest.</p>
+<h2><code>document.readyState</code>: the underrated alternative</h2>
+<p>jQuery&#39;s ready function handles one edge case beautifully: what if the DOM is already ready by the time your script runs? jQuery checks and calls your callback immediately. Vanilla JavaScript can do the same thing with <code>document.readyState</code>.</p>
+<pre><code class="language-javascript">function onReady(callback) {
+  if (document.readyState === &quot;loading&quot;) {
+    document.addEventListener(&quot;DOMContentLoaded&quot;, callback);
+  } else {
+    callback();
+  }
+}
+
+onReady(function () {
+  // DOM is ready
+});
+</code></pre>
+<p>This pattern is exactly what jQuery does under the hood. <code>document.readyState</code> tells you whether the document is still loading, already interactive, or complete. If it&#39;s not loading, you can run your code immediately. This is useful for third-party scripts, dynamically injected scripts, or modules that might load after the page has already rendered.</p>
+<h2>The &quot;which should I use&quot; answer</h2>
+<p>If you&#39;re starting a new project and don&#39;t need jQuery for anything else, use vanilla JavaScript. Use the <code>defer</code> attribute or <code>DOMContentLoaded</code>, depending on where your script lives. You&#39;ll get better performance, no dependency, and a more modern codebase.</p>
+<p>If you&#39;re maintaining a legacy jQuery project and it&#39;s working fine, don&#39;t rush to replace every <code>$(document).ready()</code>. Instead, modernize incrementally. When you touch a page or component, convert the ready block to vanilla. Over time, the jQuery usage will shrink until you can drop it entirely.</p>
+<p>If you&#39;re actively building with jQuery plugins that don&#39;t have vanilla equivalents, accept that jQuery is part of your stack for now. Use <code>$(document).ready()</code> where it&#39;s already in place, and focus your modernization energy elsewhere.</p>
+<h2>Wrapping up</h2>
+<p>The <code>$(document).ready()</code> versus <code>DOMContentLoaded</code> debate isn&#39;t really about which one is &quot;correct.&quot; jQuery&#39;s ready function was the right tool for its era, and vanilla JavaScript has caught up. Today, the choice is about dependencies, performance, and the trajectory of your codebase.</p>
+<p>Vanilla JavaScript gives you the same capability with less overhead. The patterns—<code>DOMContentLoaded</code>, <code>defer</code>, <code>document.readyState</code>—are easy to learn and widely supported. If you&#39;re moving away from jQuery, this is one of the easiest places to start.</p>
+<p>If you want the full vanilla tutorial, check out our <a href="/blog/javascript-document-ready">JavaScript document ready guide</a>. And if you&#39;re still working with jQuery, the <a href="/blog/jquery-document-ready-complete-beginners-guide">beginner&#39;s guide to jQuery document ready</a> will help you understand the legacy patterns you&#39;re maintaining.</p>
+<p>The web has moved on. Your DOM ready code should too—eventually.</p>
+<hr>
+<p><em>Modernizing a legacy jQuery codebase or starting fresh with vanilla JavaScript? Red Surge Technology helps teams reduce dependencies and build faster, maintainable frontends. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

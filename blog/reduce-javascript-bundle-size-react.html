@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>How to Reduce JavaScript Bundle Size in React Applications</title>
+    <meta name="description" content="Practical strategies to reduce React bundle size using code splitting, tree shaking, dependency cleanup, and performance-focused architecture choices." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, JavaScript, Performance, Web Development, Core Web Vitals" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react" />
+    <meta property="og:title" content="How to Reduce JavaScript Bundle Size in React Applications" />
+    <meta property="og:description" content="Practical strategies to reduce React bundle size using code splitting, tree shaking, dependency cleanup, and performance-focused architecture choices." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-bundle-size-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-06-11T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-06-11T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React, JavaScript, Performance, Web Development, Core Web Vitals" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Performance" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Core Web Vitals" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react" />
+    <meta name="twitter:title" content="How to Reduce JavaScript Bundle Size in React Applications" />
+    <meta name="twitter:description" content="Practical strategies to reduce React bundle size using code splitting, tree shaking, dependency cleanup, and performance-focused architecture choices." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-bundle-size-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How to Reduce JavaScript Bundle Size in React Applications",
+        "description": "Practical strategies to reduce React bundle size using code splitting, tree shaking, dependency cleanup, and performance-focused architecture choices.",
+        "url": "https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react",
+        "datePublished": "2026-06-11T10:00:00.000Z",
+        "dateModified": "2026-06-11T10:00:00.000Z",
+        "keywords": "React, JavaScript, Performance, Web Development, Core Web Vitals",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT11M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-bundle-size-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to Reduce JavaScript Bundle Size in React Applications",
+          "item": "https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">How to Reduce JavaScript Bundle Size in React Applications</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          How to Reduce JavaScript Bundle Size in React Applications
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-bundle-size-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-bundle-size-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-bundle-size-guide.webp"
+      alt="How to Reduce JavaScript Bundle Size in React Applications - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="How to Reduce JavaScript Bundle Size in React Applications" />
+          <meta itemprop="description" content="Practical strategies to reduce React bundle size using code splitting, tree shaking, dependency cleanup, and performance-focused architecture choices." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/reduce-javascript-bundle-size-react" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-06-11T10:00:00.000Z">Jun 11, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-06-11T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT11M" />11 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Performance</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Core Web Vitals</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>There’s a point in most React projects where everything feels fast during development, then noticeably slower in production. You build a few features, add a couple of libraries, plug in analytics, maybe a chat widget, and suddenly the app doesn’t feel as light as it once did. It’s not always obvious what changed, but users start noticing delays before anything even appears on screen.</p>
+<p>The tricky part is that nothing feels obviously “wrong.” The UI still works, the components are structured cleanly, and the codebase might even look better than it did before. But under the surface, the JavaScript payload has grown quietly, almost without resistance. That growth is what eventually shows up as sluggish interactions, delayed rendering, and that subtle feeling that the site is heavier than it should be.</p>
+<h2>Why bundle size quietly becomes a real problem</h2>
+<p>JavaScript bundle size doesn’t just affect download time, even though that’s usually the first thing people think about. Once the file arrives in the browser, it still needs to be parsed, compiled, and executed. Those steps can take longer than the download itself, especially on mid-range mobile devices that are still widely used.</p>
+<p>What makes this harder to catch is that modern development machines rarely show the issue. A developer on a fast laptop with a stable connection won’t feel the pain the same way a user on a congested mobile network will. That gap creates a false sense of performance, which slowly pushes bundle size out of mind during day-to-day development.</p>
+<p>If you’ve read <a href="/blog/why-modern-websites-feel-slower">Why Modern Websites Feel Slower</a>, this is one of the core reasons behind that experience. It’s not one big mistake, but a steady accumulation of small decisions that increase JavaScript weight over time.</p>
+<h2>Dependencies tend to grow faster than expected</h2>
+<p>One of the easiest ways a React application grows in size is through dependencies. A single package might seem harmless at first, especially when it solves a problem quickly. Over time though, those packages stack up, and each one adds its own set of internal dependencies.</p>
+<p>It’s rarely intentional. A date utility gets added for convenience. A charting library comes in for one dashboard page. A form helper simplifies validation. Individually they make sense, but collectively they create a much larger JavaScript footprint than expected.</p>
+<p>The challenge here is awareness. It’s easy to forget that most libraries are designed for general use cases, not your specific implementation. That means you often ship far more code than you actually use.</p>
+<h2>Measuring before changing anything</h2>
+<p>Before making adjustments, it helps to actually see what’s inside your bundle. Without measurement, optimization turns into guesswork, and guesswork usually leads to unnecessary refactoring or missed opportunities.</p>
+<p>Tools like bundle analyzers give you a visual breakdown of what is being shipped to the browser. You can immediately see which dependencies are taking up the most space and which parts of your codebase are contributing the most weight.</p>
+<p>A typical discovery looks something like this: a single library that was added months ago is quietly responsible for a significant percentage of the total bundle size. Nobody noticed because the app still worked fine during development. That’s usually the moment the conversation around performance becomes much more concrete.</p>
+<h2>Code splitting changes how everything loads</h2>
+<p>Instead of sending one large bundle to every user, code splitting allows you to break your application into smaller pieces. These pieces are then loaded only when they are needed, which reduces the amount of JavaScript that has to be processed upfront.</p>
+<p>React supports this pattern through dynamic imports and lazy loading. It’s not complicated to implement, but it does require a shift in thinking about how and when components should be loaded.</p>
+<pre><code>import React, { Suspense, lazy } from &#39;react&#39;
+
+const Dashboard = lazy(() =&gt; import(&#39;./Dashboard&#39;))
+
+function App() {
+  return (
+    &lt;Suspense fallback={&lt;p&gt;Loading...&lt;/p&gt;}&gt;
+      &lt;Dashboard /&gt;
+    &lt;/Suspense&gt;
+  )
+}
+</code></pre>
+<p>Instead of treating the application as one unified payload, you start thinking in terms of routes and user flow. Not every component needs to exist in the initial load. Some parts of the application can wait until the user actually needs them.</p>
+<h2>Third-party libraries deserve a second look</h2>
+<p>It’s easy to underestimate how much weight third-party libraries bring into a project. A single import can sometimes introduce dozens of internal modules that you never directly interact with. Over time, this can become one of the largest contributors to bundle growth.</p>
+<p>That doesn’t mean libraries are bad. They often save significant development time and reduce complexity in areas like state management, formatting, or UI behavior. The key is making sure they still earn their place in the project as it evolves.</p>
+<p>Sometimes a library made sense early on, but later becomes unnecessary as the application matures. Removing or replacing it can lead to noticeable performance improvements without changing user-facing functionality.</p>
+<h2>Tree shaking helps, but it’s not automatic magic</h2>
+<p>Tree shaking is one of those concepts that sounds like it should solve everything automatically, but in reality it depends heavily on how code is written and imported. When done correctly, it removes unused code during the build process, reducing the final bundle size.</p>
+<p>The problem is that not all libraries are structured in a way that supports effective tree shaking. In those cases, importing an entire package can still pull in far more code than expected.</p>
+<pre><code>import _ from &#39;lodash&#39;
+
+import debounce from &#39;lodash/debounce&#39;
+</code></pre>
+<p>Small changes like this can have a noticeable impact over time. It’s not about avoiding libraries altogether, but about being intentional with what actually gets included in the final build.</p>
+<h2>A project that reminded me how easy it is to overlook performance</h2>
+<p>A while back, I worked on a project for a small business that had been running for a few years without major technical updates. The site looked fine visually and had plenty of functionality, but the owner mentioned that users were dropping off before completing key actions.</p>
+<p>At first, the assumption was that the issue was design-related. Maybe the layout wasn’t clear enough or the messaging needed improvement. But once I loaded the site on a mid-range mobile device, the issue became obvious within seconds. The interface took a noticeable moment before becoming interactive.</p>
+<p>After digging in, the problem wasn’t a single mistake. It was a collection of small additions over time. A chat widget here, a tracking script there, multiple animation libraries, and a few unused utilities that no one remembered installing. Even some features that had been replaced were still loading in the background.</p>
+<p>Once those unnecessary pieces were removed and the remaining JavaScript was split more carefully, the difference was immediate. The site didn’t change visually, but it felt completely different to use. That experience stuck with me because it wasn’t about rewriting everything. It was about being more selective about what actually needed to exist.</p>
+<h2>React Server Components shift some of the workload away from the browser</h2>
+<p>One of the more interesting changes in modern React architecture is the introduction of server-side rendering patterns that reduce how much JavaScript is shipped to the client. React Server Components allow parts of the UI to be rendered on the server, which reduces the amount of work the browser has to do.</p>
+<p>We’ve covered this in more detail in <a href="/blog/react-server-components-nextjs">React Server Components in Next.js</a>, but the important idea here is simple. If something doesn’t need to run in the browser, it probably shouldn’t.</p>
+<h2>Images, scripts, and everything else that adds up</h2>
+<p>JavaScript often gets most of the attention in performance discussions, but it’s not the only factor. Large images, unnecessary scripts, and third-party embeds can also contribute to slower experiences. The problem is that these elements tend to accumulate gradually, just like dependencies in your codebase.</p>
+<p>A good mental model is to treat every asset as something that has a cost. If it’s not contributing directly to the user experience, it should be questioned.</p>
+<h2>Hydration costs are easy to underestimate</h2>
+<p>Hydration is what makes server-rendered HTML interactive in React applications. It’s powerful, but it also introduces additional JavaScript work that runs after the initial page load. The more interactive components you have, the more work the browser needs to do before everything feels responsive.</p>
+<p>This is where architectural decisions start to matter more than individual optimizations. Sometimes the best performance improvement isn’t tweaking code, but reducing how much of the page needs to be interactive in the first place.</p>
+<p>Frameworks like Astro take a different approach by limiting how much JavaScript is sent by default. You can read more in <a href="/blog/astro-tailwind-performance-guide">Astro Tailwind Performance Guide</a>.</p>
+<h2>A simple checklist that actually helps</h2>
+<p>Before wrapping up a React project or pushing a major update, it helps to run through a quick mental checklist.</p>
+<p>Start by reviewing dependencies and asking whether each one is still necessary. Then check whether code splitting is being used effectively across routes. Look at whether large libraries are being imported wholesale when smaller imports would work just as well. Finally, consider whether certain features actually need to run on the client at all.</p>
+<p>Even small adjustments can compound into noticeable performance gains over time.</p>
+<h2>Final thoughts</h2>
+<p>Reducing JavaScript bundle size isn’t about chasing a number or a perfect score. It’s about making applications feel responsive and enjoyable for real users.</p>
+<p>Most performance issues don’t come from a single decision. They come from many small ones stacking up over time. The good news is that fixing them doesn’t require perfection, just attention.</p>
+<p>React gives you flexibility, but sometimes the best performance improvement is simply shipping less JavaScript.</p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

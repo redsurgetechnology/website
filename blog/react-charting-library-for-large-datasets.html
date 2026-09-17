@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Charting Library for Large Datasets: Performance Strategies for 100k+ Points</title>
+    <meta name="description" content="Find the best React charting library for large datasets. Discover downsampling, canvas rendering, virtualization, and memoization tips to keep charts responsive with 100k+ data points." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, Data Visualization, Performance, Large Datasets, JavaScript" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets" />
+    <meta property="og:title" content="React Charting Library for Large Datasets: Performance Strategies for 100k+ Points" />
+    <meta property="og:description" content="Find the best React charting library for large datasets. Discover downsampling, canvas rendering, virtualization, and memoization tips to keep charts responsive with 100k+ data points." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-charting-library-large-datasets.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-26T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-26T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React, Data Visualization, Performance, Large Datasets, JavaScript" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="Data Visualization" />
+    <meta property="article:tag" content="Performance" />
+    <meta property="article:tag" content="Large Datasets" />
+    <meta property="article:tag" content="JavaScript" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets" />
+    <meta name="twitter:title" content="React Charting Library for Large Datasets: Performance Strategies for 100k+ Points" />
+    <meta name="twitter:description" content="Find the best React charting library for large datasets. Discover downsampling, canvas rendering, virtualization, and memoization tips to keep charts responsive with 100k+ data points." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-charting-library-large-datasets.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Charting Library for Large Datasets: Performance Strategies for 100k+ Points",
+        "description": "Find the best React charting library for large datasets. Discover downsampling, canvas rendering, virtualization, and memoization tips to keep charts responsive with 100k+ data points.",
+        "url": "https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets",
+        "datePublished": "2026-08-26T10:00:00.000Z",
+        "dateModified": "2026-08-26T10:00:00.000Z",
+        "keywords": "React, Data Visualization, Performance, Large Datasets, JavaScript",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-charting-library-large-datasets.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Charting Library for Large Datasets: How to Handle Millions of Points Without Crashing",
+          "item": "https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Charting Library for Large Datasets: How to Handle Millions of Points Without Crashing</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Charting Library for Large Datasets: How to Handle Millions of Points Without Crashing
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-charting-library-large-datasets-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-charting-library-large-datasets-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-charting-library-large-datasets.webp"
+      alt="React Charting Library for Large Datasets: How to Handle Millions of Points Without Crashing - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Charting Library for Large Datasets: Performance Strategies for 100k+ Points" />
+          <meta itemprop="description" content="Find the best React charting library for large datasets. Discover downsampling, canvas rendering, virtualization, and memoization tips to keep charts responsive with 100k+ data points." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-charting-library-for-large-datasets" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-26T10:00:00.000Z">Aug 26, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-26T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">Data Visualization</span><span class="cs-tag" itemprop="keywords">Performance</span><span class="cs-tag" itemprop="keywords">Large Datasets</span><span class="cs-tag" itemprop="keywords">JavaScript</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Most React charting tutorials show you 20 data points. The demo chart renders instantly, the tooltip hovers smoothly, and everything looks great. Then you try it with your real dataset—500,000 rows from a sensor, a year of stock ticks, or a million user events—and the browser freezes so hard you can hear the CPU fan spinning.</p>
+<p>The truth is, not every charting library can handle large datasets. SVG-based libraries, which create a DOM node for every data point, start choking around a few thousand elements. Canvas-based libraries do much better, but even they need help when the numbers get really big. The solution isn&#39;t just picking the right library; it&#39;s combining the right library with the right rendering strategies.</p>
+<p>In this guide, I&#39;ll show you which React charting libraries are actually built for large datasets, and the techniques—downsampling, canvas rendering, virtualization, and smart memoization—that keep charts smooth when your data could fill a spreadsheet from here to the moon.</p>
+<h2>Why SVG falls apart at scale</h2>
+<p>Most React chart libraries—Recharts, Victory, Nivo—render to SVG. SVG is great for a few reasons: you can style it with CSS, it&#39;s accessible, and each element is a separate DOM node that can have its own event handlers. But that last point is a killer for large datasets. Each data point becomes a circle, a line segment, or a rectangle in the DOM. 10,000 points means 10,000 DOM nodes. 100,000 points means 100,000 nodes. The browser has to layout, paint, and manage hit-testing for all of them. Scrolling or hovering becomes a slideshow.</p>
+<p>Canvas rendering, on the other hand, draws everything to a single bitmap. There&#39;s only one DOM element—the canvas—so the browser doesn&#39;t care how many points you draw. Chart.js (via <code>react-chartjs-2</code>) uses canvas by default, and it can handle hundreds of thousands of points without breaking a sweat. The tradeoff is that you lose fine-grained CSS styling and per-point accessibility, but for large datasets, that&#39;s usually an acceptable compromise.</p>
+<p>If you&#39;re still weighing your options, our <a href="/blog/react-chart-library-performance-benchmarks">React chart library performance benchmarks</a> showed that canvas solutions are 10x faster than SVG at 10,000 points. The gap only widens from there.</p>
+<h2>The library shortlist for big data</h2>
+<p>Here&#39;s what I actually recommend when the data volume is the primary constraint:</p>
+<ul>
+<li><p><strong>react-chartjs-2 (Chart.js)</strong> – The best all-around canvas option. Handles huge datasets out of the box, has extensive options for performance (decimation, disabling animation, etc.), and is widely used. If you&#39;re unsure, start here.</p>
+</li>
+<li><p><strong>visx with canvas</strong> – visx gives you low-level control. You can build a canvas-based scatter plot or line chart yourself, optimized exactly for your data shape. The bundle is tiny, and you only render what you need. Requires D3 knowledge, but for extreme performance, it&#39;s unbeatable.</p>
+</li>
+<li><p><strong>Plotly.js with react-plotly.js</strong> – If you need WebGL rendering (for millions of points), Plotly is the heavyweight. It can push rendering to the GPU, making even 1M+ points interactive. The bundle is massive, though, so it&#39;s overkill for most dashboards.</p>
+</li>
+<li><p><strong>Recharts (with heavy optimization)</strong> – Can work if you downsample aggressively and disable animations, but honestly, it&#39;s fighting against SVG&#39;s fundamental limits. I wouldn&#39;t choose it for a greenfield large-data project.</p>
+</li>
+</ul>
+<p>If your app is a typical dashboard with a few thousand points per chart, SVG is fine. But if you know you&#39;ll cross the 10k mark, skip straight to canvas.</p>
+<h2>Downsampling: do you really need to show every point?</h2>
+<p>The cheapest way to handle a million points is to not render a million points. Downsampling reduces the data to a manageable size before it ever hits the chart. There are several algorithms, but the simplest and most effective for time-series data is <strong>min-max decimation</strong> or <strong>largest triangle three buckets (LTTB)</strong>.</p>
+<p>For most visualizations, you can&#39;t perceive more than a few thousand points per pixel width anyway. If your chart is 800 pixels wide, showing more than 800–1600 points per series is pure waste. Downsample to fit the viewport, and the chart looks identical—but renders 100x faster.</p>
+<p>Here&#39;s a basic min-max decimation for time series:</p>
+<pre><code class="language-javascript">function downsample(data, maxPoints) {
+  if (data.length &lt;= maxPoints) return data;
+
+  const bucketSize = Math.floor(data.length / maxPoints);
+  const result = [];
+
+  for (let i = 0; i &lt; data.length; i += bucketSize) {
+    const bucket = data.slice(i, i + bucketSize);
+    const min = bucket.reduce((a, b) =&gt; (a.value &lt; b.value ? a : b));
+    const max = bucket.reduce((a, b) =&gt; (a.value &gt; b.value ? a : b));
+    // Keep both min and max to preserve spikes
+    result.push(min, max);
+  }
+
+  return result;
+}
+</code></pre>
+<p>This preserves the visual envelope of the data, so spikes and dips aren&#39;t lost. For line charts, you might also consider the LTTB algorithm, which does a better job of keeping the visual shape. Libraries like <code>downsample</code> or <code>chartjs-plugin-downsample</code> implement these for you.</p>
+<p>If you&#39;re using Chart.js, the built-in decimation plugin is on by default for line charts. It automatically reduces the number of points drawn based on the canvas width. You can tune it with the <code>decimation</code> option:</p>
+<pre><code class="language-javascript">const options = {
+  decimation: {
+    enabled: true,
+    algorithm: &quot;lttb&quot;,
+    samples: 500,
+  },
+};
+</code></pre>
+<p>This single option can take a 1M-point dataset and render it as 500 representative points, making the chart interactive again.</p>
+<h2>Virtualization for bar charts and lists</h2>
+<p>Downsampling works for continuous series, but what about bar charts with thousands of bars? The answer is virtualization: only render the bars that are actually visible in the viewport, and draw the rest as a scrollable canvas or as placeholder space.</p>
+<p>Canvas libraries like Chart.js handle this naturally because they redraw the visible area efficiently. But if you&#39;re using an SVG library, you&#39;ll need to implement your own virtualization—either by rendering only a slice of bars and updating on scroll, or by using a canvas overlay for the bars and SVG only for axes.</p>
+<p>A simpler approach for bar charts with many categories: aggregate the bars into larger buckets. If you have 10,000 transactions per day for a year, show monthly totals instead of daily. The user can drill down if they need details. This is often the right product decision anyway—too many bars are visually overwhelming.</p>
+<h2>Memoization and preventing unnecessary re-renders</h2>
+<p>Even with canvas, your React component can still become a bottleneck if it re-renders on every data update. If the chart receives new props every second, and the whole component tree re-renders, you&#39;ll see jank even if the canvas drawing is fast.</p>
+<p>The solution is to isolate the chart component and wrap it in <code>React.memo</code>, passing only stable, memoized props. Use <code>useMemo</code> to keep the data reference stable when the underlying data hasn&#39;t changed, and <code>useCallback</code> for event handlers. These patterns are covered in our guide on <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a>, but they&#39;re especially crucial for data-heavy charts.</p>
+<p>For real-time updates, throttle or debounce the data stream before it reaches the chart. If updates arrive every 50ms, but the user can&#39;t perceive changes faster than 100ms, throttle to 100ms and cut the render frequency in half. Combine this with <a href="/blog/javascript-debounce-vs-throttle">debounce and throttle patterns</a> to smooth out bursts.</p>
+<pre><code class="language-javascript">import { useMemo, memo } from &quot;react&quot;;
+import throttle from &quot;lodash.throttle&quot;;
+
+const BigChart = memo(({ data }) =&gt; {
+  // Chart rendering uses memoized data
+  return &lt;CanvasChart data={data} /&gt;;
+});
+
+function ChartContainer({ rawData }) {
+  const throttledData = useMemo(() =&gt; throttle(rawData, 100), [rawData]);
+
+  return &lt;BigChart data={throttledData} /&gt;;
+}
+</code></pre>
+<h2>WebGL: when you truly have millions of points</h2>
+<p>If you&#39;re plotting 1 million+ points and need interactivity like zooming and hovering, canvas alone might not cut it. This is where WebGL rendering comes in. WebGL uses the GPU to draw points, which is orders of magnitude faster than CPU-side canvas or SVG.</p>
+<p>Plotly.js is the most popular library with WebGL support for scatter plots (via <code>scattergl</code>). It can handle 10 million points with smooth zoom and pan. The downside is a huge bundle (several hundred KB) and a different API from the React-centric libraries.</p>
+<p>For most web dashboards, WebGL is overkill. But for scientific visualization, financial analysis, or any app that deals with truly massive point clouds, it&#39;s the only sane option.</p>
+<h2>A real-world story: rendering 1M points in a browser</h2>
+<p>A few years back, I worked on a genomics visualization tool that needed to display millions of data points along a chromosome. The initial version was built with D3 and SVG—every point was a tiny <code>&lt;circle&gt;</code>. It worked with 100,000 points, barely. With 1 million, the page locked up for 30 seconds and then crashed.</p>
+<p>We rebuilt it using canvas and a custom scatter plot with downsampling. At 1 million points, we sampled down to about 50,000 visible points per screen, which looked identical to the full dataset at any zoom level. Then we added WebGL for the highest zoom levels, where individual points became visible and needed to be interactive. The result was a tool that could smoothly zoom from the whole genome down to a single base pair—something SVG could never handle.</p>
+<p>The lesson: don&#39;t fight the rendering model. If your data is huge, use canvas or WebGL, downsample aggressively, and only render what the user can actually see.</p>
+<h2>Additional optimizations worth knowing</h2>
+<ul>
+<li><strong>Disable animations</strong> for large datasets. Animation implies re-rendering every frame, which is expensive. For static or infrequently updated charts, turn it off.</li>
+<li><strong>Use data decimation for line charts</strong> (as mentioned) to reduce the number of drawn segments.</li>
+<li><strong>Limit point radius for scatter plots.</strong> A 1px radius renders much faster than a 5px radius with shadows.</li>
+<li><strong>Consider using <code>requestAnimationFrame</code></strong> to batch chart updates and avoid layout thrashing.</li>
+<li><strong>Avoid heavy tooltips</strong> on hover if performance is critical. Tooltips that compute and render complex HTML can slow down even canvas charts. Use simple text tooltips.</li>
+</ul>
+<h2>Wrapping up</h2>
+<p>Large datasets don&#39;t have to mean a frozen UI. The key is to match the rendering technology to the data volume: SVG for small, canvas for large, WebGL for massive. Then apply downsampling, virtualization, and memoization to keep your React components as lightweight as possible.</p>
+<p>If you&#39;re just starting, pick <code>react-chartjs-2</code>—it&#39;s the most straightforward path to canvas rendering and has built-in decimation. If you have D3 experience and need fine-grained control, build a custom canvas chart with visx. And if you&#39;re already using an SVG library like Recharts and can&#39;t switch, at least downsample your data to under 1,000 points per chart and disable animations.</p>
+<p>For more on how these libraries compare in feature sets, see our <a href="/blog/react-chart-library-comparison">React chart library comparison</a>. And for raw performance numbers, our <a href="/blog/react-chart-library-performance-benchmarks">React chart library benchmarks</a> have you covered.</p>
+<p>The browser can handle more than you think—if you feed it right.</p>
+<hr>
+<p><em>Struggling with large datasets in your React app? Red Surge Technology builds high-performance data visualizations that stay smooth at any scale. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

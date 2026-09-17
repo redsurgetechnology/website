@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Astro JWT Authentication: Secure Your Astro Site with JSON Web Tokens</title>
+    <meta name="description" content="Add JWT authentication to Astro. Create login endpoints, verify tokens in server-side routes, and manage sessions without a heavy backend." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Astro, JWT, Authentication, JavaScript, Security" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/astro-jwt-authentication" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/astro-jwt-authentication" />
+    <meta property="og:title" content="Astro JWT Authentication: Secure Your Astro Site with JSON Web Tokens" />
+    <meta property="og:description" content="Add JWT authentication to Astro. Create login endpoints, verify tokens in server-side routes, and manage sessions without a heavy backend." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/astro-jwt-authentication.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-11T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-11T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="Astro, JWT, Authentication, JavaScript, Security" />
+    <meta property="article:tag" content="Astro" />
+    <meta property="article:tag" content="JWT" />
+    <meta property="article:tag" content="Authentication" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Security" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/astro-jwt-authentication" />
+    <meta name="twitter:title" content="Astro JWT Authentication: Secure Your Astro Site with JSON Web Tokens" />
+    <meta name="twitter:description" content="Add JWT authentication to Astro. Create login endpoints, verify tokens in server-side routes, and manage sessions without a heavy backend." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/astro-jwt-authentication.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Astro JWT Authentication: Secure Your Astro Site with JSON Web Tokens",
+        "description": "Add JWT authentication to Astro. Create login endpoints, verify tokens in server-side routes, and manage sessions without a heavy backend.",
+        "url": "https://redsurgetechnology.com/blog/astro-jwt-authentication",
+        "datePublished": "2026-08-11T10:00:00.000Z",
+        "dateModified": "2026-08-11T10:00:00.000Z",
+        "keywords": "Astro, JWT, Authentication, JavaScript, Security",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT12M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/astro-jwt-authentication.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/astro-jwt-authentication"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Astro JWT Authentication: A Practical Guide to Securing Your Astro Site with JSON Web Tokens",
+          "item": "https://redsurgetechnology.com/blog/astro-jwt-authentication"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Astro JWT Authentication: A Practical Guide to Securing Your Astro Site with JSON Web Tokens</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Astro JWT Authentication: A Practical Guide to Securing Your Astro Site with JSON Web Tokens
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/astro-jwt-authentication-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/astro-jwt-authentication-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/astro-jwt-authentication.webp"
+      alt="Astro JWT Authentication: A Practical Guide to Securing Your Astro Site with JSON Web Tokens - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Astro JWT Authentication: Secure Your Astro Site with JSON Web Tokens" />
+          <meta itemprop="description" content="Add JWT authentication to Astro. Create login endpoints, verify tokens in server-side routes, and manage sessions without a heavy backend." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/astro-jwt-authentication" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-11T10:00:00.000Z">Aug 11, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-11T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT12M" />12 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Astro</span><span class="cs-tag" itemprop="keywords">JWT</span><span class="cs-tag" itemprop="keywords">Authentication</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Security</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Astro&#39;s main superpower is generating static HTML—fast, SEO‑friendly, and easy to deploy. But most real‑world applications need some kind of authentication: a members‑only area, a dashboard, or an API that knows who&#39;s making the request. Suddenly you need tokens, session cookies, and protected routes, and the static‑by‑default model feels at odds with that.</p>
+<p>JSON Web Tokens (JWT) offer a lightweight way to add authentication without a separate backend server. They&#39;re compact, self‑contained, and work beautifully with Astro&#39;s API routes and server‑side rendering. You can issue a token after a user logs in, store it in an HTTP‑only cookie, and verify it on every subsequent request—all within your Astro project.</p>
+<p>In this guide I&#39;ll walk through a complete JWT setup: hashing passwords, generating access and refresh tokens, protecting API endpoints, and conditionally rendering UI based on the user&#39;s session. You can drop this into an existing Astro site or use it as the starting point for a new one.</p>
+<h2>The overall flow</h2>
+<p>Before we write any code, let&#39;s map out how the pieces fit together.</p>
+<ol>
+<li>A user submits their email and password to a login endpoint (<code>/api/auth/login</code>).</li>
+<li>The endpoint checks the credentials (against a database or a static list).</li>
+<li>If valid, the server creates a JWT containing the user&#39;s ID and role, signs it with a secret, and sends it back—either in the response body or, better, as an HTTP‑only, Secure cookie.</li>
+<li>The browser automatically includes this cookie on every subsequent request.</li>
+<li>Any API route that needs authentication reads the cookie, verifies the JWT, and extracts the user information.</li>
+<li>If the token is missing or invalid, the route returns 401 Unauthorized.</li>
+<li>Astro pages that require authentication can either be rendered on the server (SSR mode) and check the cookie before returning HTML, or they can be client‑side heavy and call an authenticated API endpoint.</li>
+</ol>
+<p>We&#39;ll store the token in a cookie rather than <code>localStorage</code> because cookies are inaccessible to JavaScript when marked <code>HttpOnly</code>, which protects against XSS attacks. They&#39;re also automatically sent with every request, saving you from manually attaching headers.</p>
+<h2>Project setup: installing the JWT library</h2>
+<p>Astro doesn&#39;t care what runtime you use—Node.js, Deno, Bun, or the Edge—so you have a choice of JWT libraries. For this guide I&#39;ll use <code>jose</code>, which works in any standard Web API environment and is ideal for Astro&#39;s modern runtime flexibility.</p>
+<pre><code class="language-bash">npm install jose
+</code></pre>
+<p>I also recommend <code>bcryptjs</code> (pure JavaScript) or <code>bcrypt</code> (native bindings) for hashing passwords.</p>
+<pre><code class="language-bash">npm install bcryptjs
+</code></pre>
+<p>Now let&#39;s create a simple environment variable for the JWT secret. In an <code>.env</code> file:</p>
+<pre><code>JWT_SECRET=&quot;a-very-long-random-string-change-me&quot;
+</code></pre>
+<p>Never commit this secret to version control. In production, use a strong, randomly generated value and store it in your hosting provider&#39;s environment variable dashboard.</p>
+<h2>Building the login endpoint</h2>
+<p>An Astro API route is just a <code>.ts</code> or <code>.js</code> file inside <code>src/pages/api/</code>. Create <code>src/pages/api/auth/login.ts</code>:</p>
+<pre><code class="language-typescript">import { SignJWT } from &quot;jose&quot;;
+import bcrypt from &quot;bcryptjs&quot;;
+
+// Mock user database – replace with your actual data source
+const users = [
+  {
+    id: 1,
+    email: &quot;user@example.com&quot;,
+    // bcrypt hash of &quot;password123&quot;
+    password: &quot;$2a$10$EixZaYVK1fsbw1ZfbX3OXe.P0ZGgYt0qCF8gFsGvOLKhC2z0Mf/7q&quot;,
+  },
+];
+
+export async function POST({ request, cookies }) {
+  const { email, password } = await request.json();
+
+  const user = users.find((u) =&gt; u.email === email);
+  if (!user) {
+    return new Response(
+      JSON.stringify({ error: &quot;Invalid email or password&quot; }),
+      {
+        status: 401,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+      },
+    );
+  }
+
+  const passwordMatch = await bcrypt.compare(password, user.password);
+  if (!passwordMatch) {
+    return new Response(
+      JSON.stringify({ error: &quot;Invalid email or password&quot; }),
+      {
+        status: 401,
+        headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+      },
+    );
+  }
+
+  // Create JWT with the user&#39;s ID
+  const secret = new TextEncoder().encode(import.meta.env.JWT_SECRET);
+  const token = await new SignJWT({ sub: user.id, email: user.email })
+    .setProtectedHeader({ alg: &quot;HS256&quot; })
+    .setIssuedAt()
+    .setExpirationTime(&quot;2h&quot;)
+    .sign(secret);
+
+  // Set the token as an HTTP‑only cookie
+  cookies.set(&quot;token&quot;, token, {
+    httpOnly: true,
+    secure: import.meta.env.PROD, // HTTPS only in production
+    sameSite: &quot;lax&quot;,
+    path: &quot;/&quot;,
+    maxAge: 60 * 60 * 2, // 2 hours in seconds
+  });
+
+  return new Response(JSON.stringify({ success: true }), {
+    status: 200,
+    headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+  });
+}
+</code></pre>
+<p>Key details:</p>
+<ul>
+<li>The JWT contains a <code>sub</code> (subject) claim with the user&#39;s ID, and an <code>email</code> claim. You can add any other claims you need—role, name, etc.—but keep the payload small.</li>
+<li>The cookie is <code>HttpOnly</code> (JavaScript can&#39;t read it), <code>Secure</code> in production, and <code>SameSite: &#39;lax&#39;</code> (balances security and usability). The <code>path: &#39;/&#39;</code> makes it available to every route.</li>
+<li>The token expires in two hours. That means even if someone steals the cookie, they only have a two‑hour window.</li>
+</ul>
+<p>If you&#39;ve previously set up generic authentication with our <a href="/blog/astro-js-authentication-guide">Astro authentication guide</a>, you&#39;ll notice that JWT specifically removes the need for server‑side session storage. The token itself carries the session data.</p>
+<h2>Verifying the JWT in a protected route</h2>
+<p>Now that we can issue tokens, we need a way to verify them. Create a utility function in <code>src/lib/auth.ts</code>:</p>
+<pre><code class="language-typescript">import { jwtVerify } from &quot;jose&quot;;
+
+export async function getUserFromToken(token: string) {
+  const secret = new TextEncoder().encode(import.meta.env.JWT_SECRET);
+  try {
+    const { payload } = await jwtVerify(token, secret);
+    return { id: payload.sub, email: payload.email };
+  } catch (error) {
+    // Token expired, invalid signature, etc.
+    return null;
+  }
+}
+</code></pre>
+<p>Now any API route can call this function to authenticate the request. Create a protected endpoint at <code>src/pages/api/user/profile.ts</code>:</p>
+<pre><code class="language-typescript">import { getUserFromToken } from &quot;../../../lib/auth&quot;;
+
+export async function GET({ cookies }) {
+  const token = cookies.get(&quot;token&quot;)?.value;
+  if (!token) {
+    return new Response(JSON.stringify({ error: &quot;Not authenticated&quot; }), {
+      status: 401,
+      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+    });
+  }
+
+  const user = await getUserFromToken(token);
+  if (!user) {
+    return new Response(JSON.stringify({ error: &quot;Invalid or expired token&quot; }), {
+      status: 401,
+      headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+    });
+  }
+
+  // Fetch user data from your database
+  return new Response(JSON.stringify({ user }), {
+    status: 200,
+    headers: { &quot;Content-Type&quot;: &quot;application/json&quot; },
+  });
+}
+</code></pre>
+<p>The beauty of this pattern is that any cookie‑based client (the browser, a mobile app, a SPA) automatically sends the token. You don&#39;t need to handle <code>Authorization</code> headers unless you&#39;re dealing with a third‑party API client.</p>
+<p>If you enjoy deep‑diving into error handling patterns, our post on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a> covers similar logic—the <code>jwtVerify</code> function throws if the token is malformed, so the <code>try/catch</code> in <code>getUserFromToken</code> is essential.</p>
+<h2>Protecting Astro pages: server‑side checks</h2>
+<p>An Astro page can be rendered on the server (SSR mode) by adding <code>export const prerender = false;</code> at the top. You can then access the cookies via <code>Astro.cookies</code> and decide what to render.</p>
+<pre><code class="language-astro">---
+// src/pages/dashboard.astro
+export const prerender = false;
+
+const token = Astro.cookies.get(&#39;token&#39;)?.value;
+let user = null;
+
+if (token) {
+  const { getUserFromToken } = await import(&#39;../lib/auth&#39;);
+  user = await getUserFromToken(token);
+}
+
+if (!user) {
+  return Astro.redirect(&#39;/login&#39;);
+}
+---
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Welcome, {user.email}&lt;/h1&gt;
+    &lt;!-- dashboard content --&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>If the token is missing or invalid, the user is redirected to the login page. Because this runs on the server, the protected content never reaches the browser.</p>
+<h2>Refreshing tokens and logout</h2>
+<p>Short‑lived access tokens limit the damage of a stolen cookie, but you don&#39;t want users logging in every two hours. The standard solution is a <strong>refresh token</strong>—a longer‑lived token stored in another cookie, used only to obtain new access tokens.</p>
+<p>When the access token expires, the client calls a refresh endpoint (<code>/api/auth/refresh</code>). That endpoint reads the refresh token, verifies it, and issues a new access token (and optionally a new refresh token, for rotation).</p>
+<pre><code class="language-typescript">// Inside /api/auth/refresh.ts
+export async function POST({ cookies }) {
+  const refreshToken = cookies.get(&quot;refresh_token&quot;)?.value;
+  if (!refreshToken) {
+    return new Response(JSON.stringify({ error: &quot;No refresh token&quot; }), {
+      status: 401,
+    });
+  }
+
+  const user = await getUserFromToken(refreshToken);
+  if (!user) {
+    return new Response(JSON.stringify({ error: &quot;Invalid refresh token&quot; }), {
+      status: 401,
+    });
+  }
+
+  // Issue new access token
+  const secret = new TextEncoder().encode(import.meta.env.JWT_SECRET);
+  const newAccessToken = await new SignJWT({ sub: user.id, email: user.email })
+    .setProtectedHeader({ alg: &quot;HS256&quot; })
+    .setIssuedAt()
+    .setExpirationTime(&quot;2h&quot;)
+    .sign(secret);
+
+  cookies.set(&quot;token&quot;, newAccessToken, {
+    /* same options as before */
+  });
+
+  return new Response(JSON.stringify({ success: true }));
+}
+</code></pre>
+<p>Logout is trivial: just delete the cookies.</p>
+<pre><code class="language-typescript">// /api/auth/logout.ts
+export async function POST({ cookies }) {
+  cookies.delete(&quot;token&quot;, { path: &quot;/&quot; });
+  cookies.delete(&quot;refresh_token&quot;, { path: &quot;/&quot; });
+  return new Response(JSON.stringify({ success: true }));
+}
+</code></pre>
+<h2>A real‑world pitfall: token size and cookie limits</h2>
+<p>JWTs can grow quickly if you stuff them with too many claims. A typical JWT with just <code>sub</code> and <code>email</code> is around 200 bytes. Add permissions, roles, and metadata, and you might exceed the 4 KB cookie size limit. Keep tokens lean—only store the user ID, and fetch the rest from a database on the server.</p>
+<p>Also, remember that every request that includes the cookie sends the token over the wire. If you&#39;re serving a page with 50 sub‑requests (images, CSS, JS), those requests don&#39;t need the token. You can mitigate this by setting the cookie&#39;s <code>path</code> to only apply to <code>/api</code> and your SSR pages, but this gets fiddly. Many developers prefer to handle authentication at the API layer and let the static pages remain public.</p>
+<h2>Wrapping up</h2>
+<p>Astro&#39;s API routes and cookie support make JWT authentication surprisingly straightforward. You can have a fully functional login system without any external service or additional server. The key takeaways:</p>
+<ul>
+<li>Use <code>jose</code> for JWT operations—it&#39;s lightweight and works across all Astro runtimes.</li>
+<li>Store tokens in HTTP‑only, Secure cookies for safety.</li>
+<li>Verify the token in API routes or server‑side rendered pages before returning sensitive data.</li>
+<li>Keep JWTs small; only include user identifiers, not the whole profile.</li>
+<li>Implement refresh tokens for a better user experience.</li>
+</ul>
+<p>If you&#39;ve already set up general authentication with our <a href="/blog/astro-js-authentication-guide">Astro authentication guide</a>, adding JWT to the mix gives you a stateless, scalable alternative to session‑based auth. And if you&#39;re concerned about performance, our post on <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a> includes tips on keeping auth checks fast.</p>
+<p>Now you can protect your Astro site without giving up its static magic.</p>
+<hr>
+<p><em>Need help implementing authentication in your Astro project? Red Surge Technology builds secure, performant web applications with modern frameworks. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Expo Liquid Glass Animation Tutorial: Interactive Frosted UI Effects</title>
+    <meta name="description" content="Follow this step-by-step Expo liquid glass animation tutorial. Build frosted glass cards, animate gradients with Reanimated, add touch tilt, and create premium UI effects in React Native." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Expo, React Native, Liquid Glass, Animation, Skia" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial" />
+    <meta property="og:title" content="Expo Liquid Glass Animation Tutorial: Interactive Frosted UI Effects" />
+    <meta property="og:description" content="Follow this step-by-step Expo liquid glass animation tutorial. Build frosted glass cards, animate gradients with Reanimated, add touch tilt, and create premium UI effects in React Native." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/expo-liquid-glass-animation-tutorial.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-09-04T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-09-04T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="Expo, React Native, Liquid Glass, Animation, Skia" />
+    <meta property="article:tag" content="Expo" />
+    <meta property="article:tag" content="React Native" />
+    <meta property="article:tag" content="Liquid Glass" />
+    <meta property="article:tag" content="Animation" />
+    <meta property="article:tag" content="Skia" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial" />
+    <meta name="twitter:title" content="Expo Liquid Glass Animation Tutorial: Interactive Frosted UI Effects" />
+    <meta name="twitter:description" content="Follow this step-by-step Expo liquid glass animation tutorial. Build frosted glass cards, animate gradients with Reanimated, add touch tilt, and create premium UI effects in React Native." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/expo-liquid-glass-animation-tutorial.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Expo Liquid Glass Animation Tutorial: Interactive Frosted UI Effects",
+        "description": "Follow this step-by-step Expo liquid glass animation tutorial. Build frosted glass cards, animate gradients with Reanimated, add touch tilt, and create premium UI effects in React Native.",
+        "url": "https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial",
+        "datePublished": "2026-09-04T10:00:00.000Z",
+        "dateModified": "2026-09-04T10:00:00.000Z",
+        "keywords": "Expo, React Native, Liquid Glass, Animation, Skia",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/expo-liquid-glass-animation-tutorial.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Expo Liquid Glass Animation Tutorial: Build Interactive, Flowing UI Effects",
+          "item": "https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Expo Liquid Glass Animation Tutorial: Build Interactive, Flowing UI Effects</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Expo Liquid Glass Animation Tutorial: Build Interactive, Flowing UI Effects
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/expo-liquid-glass-animation-tutorial-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/expo-liquid-glass-animation-tutorial-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/expo-liquid-glass-animation-tutorial.webp"
+      alt="Expo Liquid Glass Animation Tutorial: Build Interactive, Flowing UI Effects - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Expo Liquid Glass Animation Tutorial: Interactive Frosted UI Effects" />
+          <meta itemprop="description" content="Follow this step-by-step Expo liquid glass animation tutorial. Build frosted glass cards, animate gradients with Reanimated, add touch tilt, and create premium UI effects in React Native." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/expo-liquid-glass-animation-tutorial" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-09-04T10:00:00.000Z">Sep 04, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-09-04T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Expo</span><span class="cs-tag" itemprop="keywords">React Native</span><span class="cs-tag" itemprop="keywords">Liquid Glass</span><span class="cs-tag" itemprop="keywords">Animation</span><span class="cs-tag" itemprop="keywords">Skia</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>The &quot;liquid glass&quot; aesthetic has been everywhere in modern UI—translucent panels, frosted backgrounds, subtle light refractions that make interfaces feel physical. Apple&#39;s recent designs lean heavily into this, and the web is following. But building that effect in React Native takes a specific set of tools: Skia for rendering, Reanimated for animation, and a careful eye for performance.</p>
+<p>If you&#39;ve already read our <a href="/blog/react-native-expo-liquid-glass-effect">guide to building the React Native Expo liquid glass effect</a>, you know the basic ingredients: background blur, semi-transparent surfaces, gradient overlays, and delicate borders. This tutorial goes further—we&#39;ll focus on <em>animating</em> those ingredients. You&#39;ll learn how to make the glass respond to touch, how to shift gradients over time, and how to create that smooth, liquid feel that makes the effect come alive.</p>
+<p>By the end, you&#39;ll have a working, interactive glass card that reacts to your finger and pulses with ambient animation—all running at 60 frames per second on a real device. Let&#39;s get started.</p>
+<h2>What you&#39;ll need</h2>
+<p>This tutorial assumes a basic Expo project. If you&#39;re starting fresh, create one:</p>
+<pre><code class="language-bash">npx create-expo-app LiquidGlassTutorial
+cd LiquidGlassTutorial
+</code></pre>
+<p>Install the required libraries:</p>
+<pre><code class="language-bash">npx expo install @shopify/react-native-skia react-native-reanimated react-native-gesture-handler
+</code></pre>
+<p>Skia handles the rendering, Reanimated drives the animations, and gesture-handler gives us touch tracking. You&#39;ll also need to enable Reanimated&#39;s Babel plugin. Add this to <code>babel.config.js</code>:</p>
+<pre><code class="language-javascript">module.exports = function (api) {
+  api.cache(true);
+  return {
+    presets: [&quot;babel-preset-expo&quot;],
+    plugins: [&quot;react-native-reanimated/plugin&quot;],
+  };
+};
+</code></pre>
+<p>And wrap your app in <code>GestureHandlerRootView</code>:</p>
+<pre><code class="language-javascript">// App.js
+import { GestureHandlerRootView } from &quot;react-native-gesture-handler&quot;;
+
+export default function App() {
+  return (
+    &lt;GestureHandlerRootView style={{ flex: 1 }}&gt;
+      {/* rest of your app */}
+    &lt;/GestureHandlerRootView&gt;
+  );
+}
+</code></pre>
+<p>Now we&#39;re ready to build.</p>
+<h2>Step 1: Create a static glass card</h2>
+<p>Before we animate, we need something to animate. A basic glass card uses Skia&#39;s blur and semi-transparent rectangles layered over a colorful background. Let&#39;s create the foundation.</p>
+<pre><code class="language-javascript">import { Canvas, RoundedRect, Blur, Group } from &quot;@shopify/react-native-skia&quot;;
+import { View, StyleSheet } from &quot;react-native&quot;;
+
+function GlassCard({ width = 300, height = 200 }) {
+  return (
+    &lt;View style={[styles.cardContainer, { width, height }]}&gt;
+      &lt;Canvas style={StyleSheet.absoluteFill}&gt;
+        &lt;Group&gt;
+          &lt;RoundedRect
+            x={0}
+            y={0}
+            width={width}
+            height={height}
+            r={24}
+            color=&quot;rgba(255, 255, 255, 0.08)&quot;
+          /&gt;
+          &lt;Blur blur={20} /&gt;
+        &lt;/Group&gt;
+        {/* hairline border */}
+        &lt;RoundedRect
+          x={0.5}
+          y={0.5}
+          width={width - 1}
+          height={height - 1}
+          r={24}
+          color=&quot;transparent&quot;
+          strokeWidth={1}
+          style=&quot;stroke&quot;
+          strokeColor=&quot;rgba(255,255,255,0.2)&quot;
+        /&gt;
+      &lt;/Canvas&gt;
+    &lt;/View&gt;
+  );
+}
+</code></pre>
+<p>The first <code>RoundedRect</code> is translucent, and the <code>Blur</code> filter softens it. The second <code>RoundedRect</code> draws a thin border around the edge. That&#39;s your basic frosted glass look. The background behind this card should be a colorful gradient or image so the blur has something to refract.</p>
+<h2>Step 2: Add an animated gradient overlay</h2>
+<p>A static glass card is nice, but the &quot;liquid&quot; feel comes from gradients that move. We&#39;ll add a <code>LinearGradient</code> that shifts over time using Reanimated&#39;s <code>useSharedValue</code> and <code>withRepeat</code>.</p>
+<pre><code class="language-javascript">import {
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  useDerivedValue,
+} from &quot;react-native-reanimated&quot;;
+import { LinearGradient, vec } from &quot;@shopify/react-native-skia&quot;;
+
+function AnimatedGlassCard({ width = 300, height = 200 }) {
+  const startX = useSharedValue(0);
+  const startY = useSharedValue(0);
+  const endX = useSharedValue(width);
+  const endY = useSharedValue(height);
+
+  // Animate gradient start and end points
+  startX.value = withRepeat(withTiming(width, { duration: 3000 }), -1, true);
+  endX.value = withRepeat(withTiming(0, { duration: 3000 }), -1, true);
+  startY.value = withRepeat(withTiming(height, { duration: 4000 }), -1, true);
+  endY.value = withRepeat(withTiming(0, { duration: 4000 }), -1, true);
+
+  const gradientStart = useDerivedValue(() =&gt; vec(startX.value, startY.value));
+  const gradientEnd = useDerivedValue(() =&gt; vec(endX.value, endY.value));
+
+  return (
+    &lt;View style={[styles.cardContainer, { width, height }]}&gt;
+      &lt;Canvas style={StyleSheet.absoluteFill}&gt;
+        &lt;Group&gt;
+          &lt;RoundedRect
+            x={0}
+            y={0}
+            width={width}
+            height={height}
+            r={24}
+            color=&quot;rgba(255, 255, 255, 0.08)&quot;
+          /&gt;
+          &lt;Blur blur={20} /&gt;
+        &lt;/Group&gt;
+        &lt;RoundedRect x={0} y={0} width={width} height={height} r={24}&gt;
+          &lt;LinearGradient
+            start={gradientStart}
+            end={gradientEnd}
+            colors={[&quot;rgba(255,255,255,0.1)&quot;, &quot;rgba(255,255,255,0.02)&quot;]}
+          /&gt;
+        &lt;/RoundedRect&gt;
+        &lt;RoundedRect
+          x={0.5}
+          y={0.5}
+          width={width - 1}
+          height={height - 1}
+          r={24}
+          color=&quot;transparent&quot;
+          strokeWidth={1}
+          style=&quot;stroke&quot;
+          strokeColor=&quot;rgba(255,255,255,0.2)&quot;
+        /&gt;
+      &lt;/Canvas&gt;
+    &lt;/View&gt;
+  );
+}
+</code></pre>
+<p>Now the light highlights inside the glass drift slowly, creating that &quot;liquid&quot; refraction effect. The <code>useDerivedValue</code> ensures the gradient updates without causing a React re-render—it&#39;s all handled on the UI thread.</p>
+<h2>Step 3: Make the card respond to touch</h2>
+<p>The next layer of realism is touch interaction. We want the glass to tilt slightly as you drag your finger across it, as if it&#39;s catching light from your movement. We&#39;ll use <code>GestureDetector</code> from <code>react-native-gesture-handler</code> to track the finger position and update two shared values.</p>
+<pre><code class="language-javascript">import { Gesture, GestureDetector } from &quot;react-native-gesture-handler&quot;;
+import Animated, {
+  useAnimatedStyle,
+  withSpring,
+} from &quot;react-native-reanimated&quot;;
+
+function TouchableGlassCard({ width = 300, height = 200 }) {
+  const pressedX = useSharedValue(0);
+  const pressedY = useSharedValue(0);
+  const isPressed = useSharedValue(false);
+
+  const pan = Gesture.Pan()
+    .onBegin((e) =&gt; {
+      isPressed.value = true;
+      pressedX.value = e.x;
+      pressedY.value = e.y;
+    })
+    .onUpdate((e) =&gt; {
+      pressedX.value = e.x;
+      pressedY.value = e.y;
+    })
+    .onEnd(() =&gt; {
+      isPressed.value = false;
+      // spring back to center
+      pressedX.value = withSpring(width / 2);
+      pressedY.value = withSpring(height / 2);
+    });
+
+  const glassStyle = useAnimatedStyle(() =&gt; {
+    const rotateY = isPressed.value
+      ? withSpring((pressedX.value - width / 2) / 20)
+      : withSpring(0);
+    const rotateX = isPressed.value
+      ? withSpring((height / 2 - pressedY.value) / 20)
+      : withSpring(0);
+    return {
+      transform: [
+        { perspective: 600 },
+        { rotateY: `${rotateY}deg` },
+        { rotateX: `${rotateX}deg` },
+      ],
+    };
+  });
+
+  return (
+    &lt;GestureDetector gesture={pan}&gt;
+      &lt;Animated.View style={[{ width, height }, glassStyle]}&gt;
+        {/* Glass card content */}
+      &lt;/Animated.View&gt;
+    &lt;/GestureDetector&gt;
+  );
+}
+</code></pre>
+<p>Here&#39;s the breakdown:</p>
+<ul>
+<li><code>Gesture.Pan()</code> tracks the finger.</li>
+<li><code>pressedX</code> and <code>pressedY</code> store the current touch location.</li>
+<li><code>useAnimatedStyle</code> maps those values to 3D rotation: moving right tilts the card right, moving up tilts it up.</li>
+<li>The spring animation (<code>withSpring</code>) smooths the motion and returns the card to neutral when released.</li>
+</ul>
+<p>Wrap this around the glass card component, and you have a touch-reactive liquid glass panel. The rotation is subtle—a few degrees—which feels premium without being distracting.</p>
+<h2>Step 4: Add ambient floating animation</h2>
+<p>Beyond touch response, we can add an ambient &quot;breathing&quot; effect to the card—a slow scale and opacity pulse that makes it feel alive.</p>
+<pre><code class="language-javascript">function BreathingGlassCard() {
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(1);
+
+  useEffect(() =&gt; {
+    scale.value = withRepeat(withTiming(1.03, { duration: 2000 }), -1, true);
+    opacity.value = withRepeat(withTiming(0.9, { duration: 2000 }), -1, true);
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() =&gt; ({
+    transform: [{ scale: scale.value }],
+    opacity: opacity.value,
+  }));
+
+  return (
+    &lt;Animated.View style={[styles.cardWrapper, animatedStyle]}&gt;
+      {/* Glass card */}
+    &lt;/Animated.View&gt;
+  );
+}
+</code></pre>
+<p>This gives a gentle pulse, as if the glass is subtly shifting with ambient light. Combine it with the touch tilt for a card that feels both interactive and organic.</p>
+<h2>Step 5: Put it all together</h2>
+<p>Here&#39;s a full example that includes a colorful background, an animated gradient, touch tilt, and breathing:</p>
+<pre><code class="language-javascript">import { StyleSheet, View } from &quot;react-native&quot;;
+import {
+  GestureHandlerRootView,
+  GestureDetector,
+  Gesture,
+} from &quot;react-native-gesture-handler&quot;;
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withRepeat,
+  withTiming,
+  useDerivedValue,
+} from &quot;react-native-reanimated&quot;;
+import {
+  Canvas,
+  RoundedRect,
+  Blur,
+  LinearGradient,
+  vec,
+  Group,
+} from &quot;@shopify/react-native-skia&quot;;
+
+export default function LiquidGlassDemo() {
+  return (
+    &lt;GestureHandlerRootView style={{ flex: 1 }}&gt;
+      &lt;View style={styles.container}&gt;
+        &lt;TouchableGlassCard /&gt;
+      &lt;/View&gt;
+    &lt;/GestureHandlerRootView&gt;
+  );
+}
+
+function TouchableGlassCard({ width = 320, height = 220 }) {
+  const pressedX = useSharedValue(width / 2);
+  const pressedY = useSharedValue(height / 2);
+  const isPressed = useSharedValue(false);
+  const scale = useSharedValue(1);
+  const opacity = useSharedValue(1);
+
+  // ambient breathing
+  useEffect(() =&gt; {
+    scale.value = withRepeat(withTiming(1.03, { duration: 2000 }), -1, true);
+    opacity.value = withRepeat(withTiming(0.92, { duration: 2000 }), -1, true);
+  }, []);
+
+  const pan = Gesture.Pan()
+    .onBegin((e) =&gt; {
+      isPressed.value = true;
+      pressedX.value = e.x;
+      pressedY.value = e.y;
+    })
+    .onUpdate((e) =&gt; {
+      pressedX.value = e.x;
+      pressedY.value = e.y;
+    })
+    .onEnd(() =&gt; {
+      isPressed.value = false;
+      pressedX.value = withSpring(width / 2);
+      pressedY.value = withSpring(height / 2);
+    });
+
+  const glassStyle = useAnimatedStyle(() =&gt; {
+    const rotateY = isPressed.value
+      ? withSpring((pressedX.value - width / 2) / 20)
+      : withSpring(0);
+    const rotateX = isPressed.value
+      ? withSpring((height / 2 - pressedY.value) / 20)
+      : withSpring(0);
+    return {
+      transform: [
+        { perspective: 600 },
+        { scale: scale.value },
+        { rotateY: `${rotateY}deg` },
+        { rotateX: `${rotateX}deg` },
+      ],
+      opacity: opacity.value,
+    };
+  });
+
+  const gradientStart = useDerivedValue(() =&gt;
+    vec(pressedX.value, pressedY.value),
+  );
+  const gradientEnd = useDerivedValue(() =&gt;
+    vec(width - pressedX.value, height - pressedY.value),
+  );
+
+  return (
+    &lt;GestureDetector gesture={pan}&gt;
+      &lt;Animated.View style={[{ width, height }, glassStyle]}&gt;
+        &lt;Canvas style={StyleSheet.absoluteFill}&gt;
+          &lt;Group&gt;
+            &lt;RoundedRect
+              x={0}
+              y={0}
+              width={width}
+              height={height}
+              r={24}
+              color=&quot;rgba(255,255,255,0.08)&quot;
+            /&gt;
+            &lt;Blur blur={20} /&gt;
+          &lt;/Group&gt;
+          &lt;RoundedRect x={0} y={0} width={width} height={height} r={24}&gt;
+            &lt;LinearGradient
+              start={gradientStart}
+              end={gradientEnd}
+              colors={[&quot;rgba(255,255,255,0.15)&quot;, &quot;rgba(255,255,255,0.02)&quot;]}
+            /&gt;
+          &lt;/RoundedRect&gt;
+          &lt;RoundedRect
+            x={0.5}
+            y={0.5}
+            width={width - 1}
+            height={height - 1}
+            r={24}
+            color=&quot;transparent&quot;
+            strokeWidth={1}
+            style=&quot;stroke&quot;
+            strokeColor=&quot;rgba(255,255,255,0.2)&quot;
+          /&gt;
+        &lt;/Canvas&gt;
+      &lt;/Animated.View&gt;
+    &lt;/GestureDetector&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: &quot;center&quot;,
+    justifyContent: &quot;center&quot;,
+    backgroundColor: &quot;#0f0f1a&quot;,
+  },
+});
+</code></pre>
+<p>When you run this, you&#39;ll see a frosted glass card that tilts with your touch, breathes slowly, and has a gradient that shifts based on finger position. The effect is subtle but unmistakably premium.</p>
+<h2>Performance tips</h2>
+<p>Liquid glass effects can be heavy if you&#39;re not careful. Here&#39;s how to keep it smooth:</p>
+<ul>
+<li><strong>Limit blur radius</strong>: A <code>Blur</code> of 20 is usually enough. Higher values cost more GPU time.</li>
+<li><strong>Use <code>useDerivedValue</code></strong>: Always map shared values to Skia props via <code>useDerivedValue</code>. It keeps work on the UI thread.</li>
+<li><strong>Avoid re-rendering</strong>: Don&#39;t put animated styles in React state. Use Reanimated&#39;s shared values and <code>useAnimatedStyle</code>.</li>
+<li><strong>Test on real devices</strong>: Simulators can be misleading. Mid-range Android devices may struggle with heavy blur.</li>
+</ul>
+<p>If you notice frame drops, consider simplifying the background gradient or disabling the breathing animation on low-end devices. For more performance patterns, check our guide on <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a> and our <a href="/blog/react-native-skia-tutorial-beginners">React Native Skia tutorial for beginners</a> for fundamentals.</p>
+<h2>A real project: bringing a dashboard to life</h2>
+<p>A while back, I built a smart home dashboard with this exact effect. The original UI used flat cards—functional but boring. We added liquid glass panels with touch tilt and a slow ambient glow. The difference was night and day. Users described it as &quot;premium&quot; and &quot;alive.&quot; It wasn&#39;t gimmicky; it made the interface feel tangible, like you could almost touch the glass. We spent a week perfecting the animations, but it paid off in user engagement.</p>
+<p>The key was restraint. The animations were subtle—never more than a few degrees of rotation or a slow opacity pulse. That&#39;s the secret to liquid glass: it should feel like a natural material, not a cartoon.</p>
+<h2>Wrapping up</h2>
+<p>You now have the building blocks for an animated liquid glass effect in Expo. Start with the static frosted card, layer in an animated gradient, add touch-reactive tilt, and finish with ambient breathing. Each step uses Reanimated shared values and Skia&#39;s GPU-accelerated rendering to keep everything at 60fps.</p>
+<p>For a deeper dive into the static effect, revisit our <a href="/blog/react-native-expo-liquid-glass-effect">original liquid glass guide</a>. For more on Skia&#39;s capabilities, see our <a href="/blog/react-native-skia">React Native Skia guide</a>. And if you&#39;re looking to expand your animation toolkit, our <a href="/blog/react-native-expo-animations-guide">React Native Expo animations guide</a> has you covered.</p>
+<p>Now go make something that feels as good as it looks.</p>
+<hr>
+<p><em>Want to implement liquid glass animations in your own app? Red Surge Technology builds premium mobile experiences with React Native and Skia. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

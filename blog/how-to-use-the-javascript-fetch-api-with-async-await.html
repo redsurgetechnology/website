@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>JavaScript Fetch API with Async/Await: Complete Guide</title>
+    <meta name="description" content="Learn JavaScript Fetch API with async/await, including requests, error handling, and real-world examples." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="javascript, fetch api, async await, web development, tutorial, frontend" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await" />
+    <meta property="og:title" content="JavaScript Fetch API with Async/Await: Complete Guide" />
+    <meta property="og:description" content="Learn JavaScript Fetch API with async/await, including requests, error handling, and real-world examples." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/javascript-fetch-api-async-await.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-04-03T13:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-04-03T13:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="javascript, fetch api, async await, web development, tutorial, frontend" />
+    <meta property="article:tag" content="javascript" />
+    <meta property="article:tag" content="fetch api" />
+    <meta property="article:tag" content="async await" />
+    <meta property="article:tag" content="web development" />
+    <meta property="article:tag" content="tutorial" />
+    <meta property="article:tag" content="frontend" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await" />
+    <meta name="twitter:title" content="JavaScript Fetch API with Async/Await: Complete Guide" />
+    <meta name="twitter:description" content="Learn JavaScript Fetch API with async/await, including requests, error handling, and real-world examples." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/javascript-fetch-api-async-await.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript Fetch API with Async/Await: Complete Guide",
+        "description": "Learn JavaScript Fetch API with async/await, including requests, error handling, and real-world examples.",
+        "url": "https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await",
+        "datePublished": "2026-04-03T13:00:00.000Z",
+        "dateModified": "2026-04-03T13:00:00.000Z",
+        "keywords": "javascript, fetch api, async await, web development, tutorial, frontend",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT9M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/javascript-fetch-api-async-await.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JavaScript Fetch API with Async/Await: Complete Guide",
+          "item": "https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">JavaScript Fetch API with Async/Await: Complete Guide</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          JavaScript Fetch API with Async/Await: Complete Guide
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/javascript-fetch-api-async-await-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/javascript-fetch-api-async-await-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/javascript-fetch-api-async-await.webp"
+      alt="JavaScript Fetch API with Async/Await: Complete Guide - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="JavaScript Fetch API with Async/Await: Complete Guide" />
+          <meta itemprop="description" content="Learn JavaScript Fetch API with async/await, including requests, error handling, and real-world examples." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/how-to-use-the-javascript-fetch-api-with-async-await" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-04-03T13:00:00.000Z">Apr 03, 2026</time>
+          </div>
+
+          
+          <!-- Last updated -->
+          <div class="cs-meta-item cs-meta-updated" title="Last updated">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Updated: <time itemprop="dateModified" datetime="2026-04-03T13:00:00.000Z">Apr 03, 2026</time></span>
+          </div>
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT9M" />9 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">javascript</span><span class="cs-tag" itemprop="keywords">fetch api</span><span class="cs-tag" itemprop="keywords">async await</span><span class="cs-tag" itemprop="keywords">web development</span><span class="cs-tag" itemprop="keywords">tutorial</span><span class="cs-tag" itemprop="keywords">frontend</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>If you&#39;ve been writing JavaScript for a while, you&#39;ve probably used <code>fetch()</code> at some point — maybe to pull data from an API, submit a form, or load some JSON. But there&#39;s a big difference between code that <em>works</em> and code that handles the real world well: proper error handling, clean async patterns, and requests that don&#39;t silently fail when something goes wrong.</p>
+<p>This guide is for developers who know the basics of JavaScript and want to move past copy-pasted fetch snippets and actually understand what&#39;s happening. We&#39;ll cover how <code>fetch()</code> works under the hood, how to pair it cleanly with <code>async/await</code>, how to handle errors the right way (this is where most tutorials fall short), and a handful of real-world patterns you&#39;ll use in actual projects.</p>
+<blockquote>
+<p><strong>Building a website for your business and wondering if it&#39;s doing its job?</strong> We design and build fast, conversion-focused websites for small businesses. <a href="/about">See what Red Surge Technology offers</a>.</p>
+</blockquote>
+<hr>
+<h2>What Is the Fetch API?</h2>
+<p>The Fetch API is the modern, native browser interface for making HTTP requests in JavaScript. It replaced <code>XMLHttpRequest</code> (XHR) — the older, callback-based approach that powered early AJAX — and it&#39;s been fully supported across all major browsers since around 2017.</p>
+<p>The key thing to understand about <code>fetch()</code> is that it is <strong>Promise-based</strong>. When you call <code>fetch()</code>, it doesn&#39;t return the data — it returns a Promise that <em>resolves</em> to a <code>Response</code> object. You then have to call another method on that response (like <code>.json()</code>) to actually extract the data, which is <em>also</em> a Promise.</p>
+<p>This two-step nature trips up a lot of developers early on, and it&#39;s why pairing <code>fetch()</code> with <code>async/await</code> makes the code so much cleaner to read and reason about.</p>
+<hr>
+<h2>The Basic Structure: GET Request with Async/Await</h2>
+<p>Here&#39;s the cleanest way to write a basic GET request:</p>
+<pre><code class="language-javascript">async function getData(url) {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+</code></pre>
+<p>Simple enough — but this version has a critical flaw. It has <strong>no error handling</strong>. If the server returns a 404 or 500, <code>fetch()</code> won&#39;t throw an error. It will resolve successfully with a <code>Response</code> object that has <code>response.ok</code> set to <code>false</code>. If you don&#39;t check for that, your code will quietly try to parse an error page as JSON and produce confusing bugs.</p>
+<p>Here&#39;s how it should actually look:</p>
+<pre><code class="language-javascript">async function getData(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Request failed: ${response.status} ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data;
+}
+</code></pre>
+<p>Now wrap the call in a <code>try/catch</code> at the point where you use it:</p>
+<pre><code class="language-javascript">async function loadUser() {
+  try {
+    const user = await getData(&#39;https://api.example.com/users/1&#39;);
+    console.log(user);
+  } catch (error) {
+    console.error(&#39;Failed to load user:&#39;, error.message);
+  }
+}
+</code></pre>
+<p>This pattern separates two distinct failure modes that developers often conflate:</p>
+<ul>
+<li><strong>Network errors</strong> (no internet, DNS failure, CORS block) — these cause <code>fetch()</code> to reject the Promise entirely, and <code>catch</code> handles them.</li>
+<li><strong>HTTP errors</strong> (404, 500, 401) — these cause <code>fetch()</code> to <em>resolve</em>, but with a non-OK response. The <code>if (!response.ok)</code> check handles these.</li>
+</ul>
+<p>Miss either one and you&#39;ll have bugs that are hard to track down in production.</p>
+<hr>
+<h2>Making a POST Request</h2>
+<p>GET requests are read-only. When you need to send data to a server — submitting a form, creating a record, logging a user in — you&#39;ll use a POST request. Here&#39;s the full pattern:</p>
+<pre><code class="language-javascript">async function postData(url, payload) {
+  const response = await fetch(url, {
+    method: &#39;POST&#39;,
+    headers: {
+      &#39;Content-Type&#39;: &#39;application/json&#39;,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error(`POST failed: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+</code></pre>
+<p>A few things worth noting here:</p>
+<p><strong><code>method: &#39;POST&#39;</code></strong> — <code>fetch()</code> defaults to GET, so you need to specify any other method explicitly. The same applies for PUT, PATCH, and DELETE.</p>
+<p><strong><code>headers: { &#39;Content-Type&#39;: &#39;application/json&#39; }</code></strong> — this tells the server what format your request body is in. Without it, many server-side frameworks will fail to parse the body and you&#39;ll get an empty object on the backend — a frustrating bug to debug.</p>
+<p><strong><code>JSON.stringify(payload)</code></strong> — the <code>body</code> option only accepts a string (or a few other specific types like <code>FormData</code> or <code>Blob</code>). Plain JavaScript objects need to be serialized first.</p>
+<p>A real usage example, submitting a contact form:</p>
+<pre><code class="language-javascript">async function submitContactForm(formData) {
+  try {
+    const result = await postData(&#39;/api/contact&#39;, {
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+    });
+
+    console.log(&#39;Form submitted successfully:&#39;, result);
+    showSuccessMessage();
+  } catch (error) {
+    console.error(&#39;Submission failed:&#39;, error.message);
+    showErrorMessage();
+  }
+}
+</code></pre>
+<hr>
+<h2>Handling Different Response Types</h2>
+<p>Not every API returns JSON. <code>fetch()</code> gives you several methods on the <code>Response</code> object to handle different content types:</p>
+<pre><code class="language-javascript">// JSON — most APIs
+const data = await response.json();
+
+// Plain text
+const text = await response.text();
+
+// Binary data (images, files, PDFs)
+const blob = await response.blob();
+
+// Form data
+const formData = await response.formData();
+
+// Low-level binary buffer
+const buffer = await response.arrayBuffer();
+</code></pre>
+<p>You can only call one of these once per response — they consume the response body as a stream. If you need to both read the body <em>and</em> do something else with it, you can clone the response first with <code>response.clone()</code>.</p>
+<p>A practical example — checking the content type before parsing:</p>
+<pre><code class="language-javascript">async function fetchResource(url) {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed: ${response.status}`);
+  }
+
+  const contentType = response.headers.get(&#39;Content-Type&#39;) ?? &#39;&#39;;
+
+  if (contentType.includes(&#39;application/json&#39;)) {
+    return response.json();
+  }
+
+  if (contentType.includes(&#39;text/&#39;)) {
+    return response.text();
+  }
+
+  return response.blob();
+}
+</code></pre>
+<hr>
+<h2>Adding Request Headers</h2>
+<p>Many APIs require authentication tokens, API keys, or custom headers. You pass these in the <code>headers</code> option:</p>
+<pre><code class="language-javascript">async function fetchProtectedData(url, token) {
+  const response = await fetch(url, {
+    headers: {
+      &#39;Authorization&#39;: `Bearer ${token}`,
+      &#39;Content-Type&#39;: &#39;application/json&#39;,
+      &#39;X-Api-Version&#39;: &#39;2&#39;,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`Auth request failed: ${response.status}`);
+  }
+
+  return response.json();
+}
+</code></pre>
+<p>You can also use the <code>Headers</code> constructor for more control, which lets you append, delete, and check for existing headers programmatically — useful when building reusable API clients.</p>
+<hr>
+<h2>Cancelling a Fetch Request with AbortController</h2>
+<p>One limitation of early <code>fetch()</code> implementations was that there was no clean way to cancel an in-flight request. <code>AbortController</code> fixes that — and it&#39;s essential for any UI where a user can navigate away or trigger a new search before the old one completes.</p>
+<pre><code class="language-javascript">function fetchWithTimeout(url, timeoutMs = 5000) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() =&gt; controller.abort(), timeoutMs);
+
+  return fetch(url, { signal: controller.signal })
+    .then(response =&gt; {
+      clearTimeout(timeoutId);
+      if (!response.ok) throw new Error(`Failed: ${response.status}`);
+      return response.json();
+    })
+    .catch(error =&gt; {
+      if (error.name === &#39;AbortError&#39;) {
+        throw new Error(&#39;Request timed out&#39;);
+      }
+      throw error;
+    });
+}
+</code></pre>
+<p>A real-world use case — cancelling a previous search request when the user types again:</p>
+<pre><code class="language-javascript">let currentController = null;
+
+async function searchUsers(query) {
+  // Cancel the previous request if it&#39;s still in flight
+  if (currentController) {
+    currentController.abort();
+  }
+
+  currentController = new AbortController();
+
+  try {
+    const response = await fetch(`/api/users?q=${encodeURIComponent(query)}`, {
+      signal: currentController.signal,
+    });
+
+    if (!response.ok) throw new Error(`Search failed: ${response.status}`);
+    return await response.json();
+
+  } catch (error) {
+    if (error.name === &#39;AbortError&#39;) {
+      // This is expected — previous request was cancelled
+      return null;
+    }
+    throw error;
+  }
+}
+</code></pre>
+<p>This pattern prevents race conditions where an older, slower request resolves after a newer one and overwrites the correct result.</p>
+<hr>
+<h2>Building a Reusable API Client</h2>
+<p>Once you&#39;re writing <code>fetch()</code> calls across a real project, you&#39;ll want to centralise the shared logic — base URL, auth headers, error handling — rather than duplicating it in every function. Here&#39;s a clean pattern for a reusable API client:</p>
+<pre><code class="language-javascript">class ApiClient {
+  constructor(baseUrl, token = null) {
+    this.baseUrl = baseUrl;
+    this.token = token;
+  }
+
+  getHeaders() {
+    const headers = { &#39;Content-Type&#39;: &#39;application/json&#39; };
+    if (this.token) {
+      headers[&#39;Authorization&#39;] = `Bearer ${this.token}`;
+    }
+    return headers;
+  }
+
+  async request(endpoint, options = {}) {
+    const url = `${this.baseUrl}${endpoint}`;
+
+    const response = await fetch(url, {
+      headers: this.getHeaders(),
+      ...options,
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`API error ${response.status}: ${errorBody}`);
+    }
+
+    // Handle empty responses (e.g., 204 No Content)
+    const contentType = response.headers.get(&#39;Content-Type&#39;) ?? &#39;&#39;;
+    if (contentType.includes(&#39;application/json&#39;)) {
+      return response.json();
+    }
+
+    return response.text();
+  }
+
+  get(endpoint) {
+    return this.request(endpoint, { method: &#39;GET&#39; });
+  }
+
+  post(endpoint, data) {
+    return this.request(endpoint, {
+      method: &#39;POST&#39;,
+      body: JSON.stringify(data),
+    });
+  }
+
+  put(endpoint, data) {
+    return this.request(endpoint, {
+      method: &#39;PUT&#39;,
+      body: JSON.stringify(data),
+    });
+  }
+
+  delete(endpoint) {
+    return this.request(endpoint, { method: &#39;DELETE&#39; });
+  }
+}
+
+// Usage
+const api = new ApiClient(&#39;https://api.example.com&#39;, userToken);
+
+const user = await api.get(&#39;/users/1&#39;);
+const newPost = await api.post(&#39;/posts&#39;, { title: &#39;Hello&#39;, body: &#39;World&#39; });
+</code></pre>
+<p>This is the kind of abstraction that makes working with APIs in a real codebase clean and maintainable. It&#39;s a simple pattern, but it eliminates a huge amount of repetition and makes it trivial to swap in a new base URL, rotate tokens, or add request logging later.</p>
+<hr>
+<h2>Practical Loading State Pattern</h2>
+<p>In any UI, you&#39;ll want to show a loading indicator while a fetch is in progress and handle both success and error states. Here&#39;s a clean vanilla JS pattern for that:</p>
+<pre><code class="language-javascript">async function fetchAndRender(url, containerEl) {
+  // Show loading state
+  containerEl.innerHTML = &#39;&lt;p class=&quot;loading&quot;&gt;Loading...&lt;/p&gt;&#39;;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to load: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    // Render success state
+    containerEl.innerHTML = `
+      &lt;ul&gt;
+        ${data.map(item =&gt; `&lt;li&gt;${item.name}&lt;/li&gt;`).join(&#39;&#39;)}
+      &lt;/ul&gt;
+    `;
+
+  } catch (error) {
+    // Render error state
+    containerEl.innerHTML = `
+      &lt;p class=&quot;error&quot;&gt;Something went wrong: ${error.message}&lt;/p&gt;
+    `;
+  }
+}
+</code></pre>
+<p>This three-state pattern — loading / success / error — is the foundation of how virtually every modern UI handles async data fetching, whether you&#39;re in vanilla JS, React, Vue, or anything else.</p>
+<hr>
+<h2>Frequently Asked Questions About the JavaScript Fetch API</h2>
+<h3>What&#39;s the difference between fetch() and XMLHttpRequest?</h3>
+<p><code>XMLHttpRequest</code> is the older approach — callback-based, verbose, and harder to read. <code>fetch()</code> is Promise-based, which makes it much cleaner to use with <code>async/await</code>. The two also differ in how they handle cookies and CORS by default. Unless you&#39;re supporting very old browsers or need specific XHR features, <code>fetch()</code> is the right choice for all new code.</p>
+<h3>Why doesn&#39;t fetch() throw an error on a 404 or 500?</h3>
+<p>This surprises a lot of developers. <code>fetch()</code> only rejects its Promise on <em>network-level</em> failures — no connection, DNS errors, and so on. HTTP error status codes (4xx, 5xx) are considered valid responses from the server&#39;s perspective. You need to check <code>response.ok</code> or <code>response.status</code> yourself and throw if needed. Always include this check — it&#39;s the most common source of silent bugs in fetch-based code.</p>
+<h3>Should I use fetch() or Axios?</h3>
+<p>For most projects, the native Fetch API is more than capable. Axios adds automatic JSON parsing, request/response interceptors, and slightly more consistent error handling — but it&#39;s an extra dependency. If you&#39;re already building the reusable client pattern shown above, you&#39;ll get most of the same benefits from <code>fetch()</code> with zero added bundle weight.</p>
+<h3>How do I send form data instead of JSON?</h3>
+<p>Use the <code>FormData</code> API as the body, and don&#39;t set a <code>Content-Type</code> header — the browser will automatically set the correct multipart form boundary:</p>
+<pre><code class="language-javascript">const formData = new FormData(formElement);
+const response = await fetch(&#39;/api/upload&#39;, {
+  method: &#39;POST&#39;,
+  body: formData,
+});
+</code></pre>
+<h3>How do I handle CORS errors with fetch()?</h3>
+<p>CORS errors are enforced by the browser as a security measure and can only be properly fixed on the server — by setting the correct <code>Access-Control-Allow-Origin</code> response headers. On the client side, setting <code>mode: &#39;no-cors&#39;</code> will suppress the error but make the response opaque (unreadable), which is rarely useful. If you&#39;re hitting CORS during development, a dev proxy (like Vite&#39;s <code>server.proxy</code>) is the cleanest workaround.</p>
+<h3>Can I use fetch() in Node.js?</h3>
+<p>Yes — <code>fetch()</code> has been available natively in Node.js since version 18, without needing any polyfill or library. For older Node versions, <code>node-fetch</code> was the standard workaround. If you&#39;re on Node 18+, the native <code>fetch()</code> behaves identically to the browser version.</p>
+<hr>
+<p><em>Written by Collin Stewart, founder of Red Surge Technology. We build fast, modern websites for small businesses across New Jersey. If you found this useful, check out our other posts on <a href="/blog/how-much-does-a-website-cost-for-a-small-business-in-new-jersey">web design</a> and <a href="/blog/the-local-seo-guide-for-ocean-monmouth-county-businesses">local SEO</a>.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

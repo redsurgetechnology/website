@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>WCAG Checklist for Web Developers: Actionable Accessibility Guide</title>
+    <meta name="description" content="Use this practical WCAG checklist for web developers to build accessible websites. Covers contrast, keyboard support, forms, ARIA, and testing tips you can apply today." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Accessibility, WCAG, Web Development, ARIA, Testing" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers" />
+    <meta property="og:title" content="WCAG Checklist for Web Developers: Actionable Accessibility Guide" />
+    <meta property="og:description" content="Use this practical WCAG checklist for web developers to build accessible websites. Covers contrast, keyboard support, forms, ARIA, and testing tips you can apply today." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/wcag-checklist-for-web-developers.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-20T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-20T10:00:00.000Z" />
+    <meta property="article:section" content="Web Development" />
+    <meta property="article:tag" content="Accessibility, WCAG, Web Development, ARIA, Testing" />
+    <meta property="article:tag" content="Accessibility" />
+    <meta property="article:tag" content="WCAG" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="ARIA" />
+    <meta property="article:tag" content="Testing" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers" />
+    <meta name="twitter:title" content="WCAG Checklist for Web Developers: Actionable Accessibility Guide" />
+    <meta name="twitter:description" content="Use this practical WCAG checklist for web developers to build accessible websites. Covers contrast, keyboard support, forms, ARIA, and testing tips you can apply today." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/wcag-checklist-for-web-developers.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "WCAG Checklist for Web Developers: Actionable Accessibility Guide",
+        "description": "Use this practical WCAG checklist for web developers to build accessible websites. Covers contrast, keyboard support, forms, ARIA, and testing tips you can apply today.",
+        "url": "https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers",
+        "datePublished": "2026-08-20T10:00:00.000Z",
+        "dateModified": "2026-08-20T10:00:00.000Z",
+        "keywords": "Accessibility, WCAG, Web Development, ARIA, Testing",
+        "articleSection": "Web Development",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/wcag-checklist-for-web-developers.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "WCAG Checklist for Web Developers: Your Actionable Accessibility Cheat Sheet",
+          "item": "https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">WCAG Checklist for Web Developers: Your Actionable Accessibility Cheat Sheet</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          WCAG Checklist for Web Developers: Your Actionable Accessibility Cheat Sheet
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/wcag-checklist-for-web-developers-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/wcag-checklist-for-web-developers-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/wcag-checklist-for-web-developers.webp"
+      alt="WCAG Checklist for Web Developers: Your Actionable Accessibility Cheat Sheet - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="WCAG Checklist for Web Developers: Actionable Accessibility Guide" />
+          <meta itemprop="description" content="Use this practical WCAG checklist for web developers to build accessible websites. Covers contrast, keyboard support, forms, ARIA, and testing tips you can apply today." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/wcag-checklist-for-web-developers" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-20T10:00:00.000Z">Aug 20, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-20T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Web Development</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Accessibility</span><span class="cs-tag" itemprop="keywords">WCAG</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">ARIA</span><span class="cs-tag" itemprop="keywords">Testing</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>The WCAG guidelines are thorough, but they read like legal documents. Thousands of words, dozens of success criteria, and enough cross-references to make your head spin. Web developers don&#39;t need more documentation—they need a checklist they can actually use while building.</p>
+<p>That&#39;s what this post is. A developer-focused, practical WCAG checklist. No fluff, no legalese. Just the accessibility checks that matter most when you&#39;re writing HTML, CSS, and JavaScript, organized by what you&#39;re building.</p>
+<p>If you&#39;ve ever stared at the official WCAG spec and wondered where to start, this is your starting point. We&#39;ll cover the criteria that cause the most real-world failures, with concrete tests you can run in your browser&#39;s DevTools.</p>
+<h2>Why a developer checklist matters</h2>
+<p>Most accessibility issues aren&#39;t caused by malicious intent. They&#39;re caused by ignorance. Developers don&#39;t know that a color contrast ratio of 4.5:1 is required for normal text. They don&#39;t realize that a <code>&lt;div&gt;</code> with an <code>onClick</code> handler isn&#39;t keyboard accessible. They don&#39;t know that <code>aria-label</code> only works on certain elements.</p>
+<p>The WCAG guidelines fix the ignorance problem, but they create an overwhelming one. The spec is organized by principle (Perceivable, Operable, Understandable, Robust) and by level (A, AA, AAA). That&#39;s useful for auditors but not for developers trying to build a login form.</p>
+<p>A checklist gives you a concrete set of checks you can apply to each component you build. Did I provide alt text? Did I test keyboard navigation? Did I check the contrast ratio? These are binary questions with clear answers.</p>
+<p>If you&#39;re new to accessibility concepts, our <a href="/blog/web-accessibility-for-beginners">beginner&#39;s guide to web accessibility</a> explains the &quot;why&quot; behind these checks. This checklist is the &quot;what.&quot;</p>
+<h2>The non-negotiable basics</h2>
+<p>These checks apply to every page, every component, every feature. If you do nothing else, do these.</p>
+<p><strong>1. Every image has meaningful alt text.</strong> Decorative images should have empty alt (<code>alt=&quot;&quot;</code>) so screen readers skip them. Functional images (icons, buttons with only an image) need descriptive alt text that conveys the action or content, not just a description of the picture.</p>
+<p><strong>2. Color is never the only way to convey information.</strong> If an error message is red text, add an icon or text label like &quot;Error:&quot; so colorblind users can distinguish it. Links should be underlined or have another visual indicator besides color.</p>
+<p><strong>3. Text contrast meets WCAG AA.</strong> Normal text needs a 4.5:1 contrast ratio against its background. Large text (18pt or 14pt bold and larger) needs 3:1. Use the DevTools color picker or a contrast checker tool.</p>
+<p><strong>4. Every interactive element is keyboard accessible.</strong> Tab to it. Activate it with Enter or Space. See a visible focus indicator. If you can&#39;t use a button, link, or form field without a mouse, it&#39;s not accessible.</p>
+<p><strong>5. Page has a logical heading structure.</strong> One <code>&lt;h1&gt;</code> per page, headings in order (<code>h1</code> → <code>h2</code> → <code>h3</code>). Don&#39;t skip levels. Headings are the primary navigation method for screen reader users.</p>
+<p><strong>6. Form inputs have associated labels.</strong> Every <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, and <code>&lt;textarea&gt;</code> needs a <code>&lt;label&gt;</code> that&#39;s programmatically associated via <code>for</code> and <code>id</code>, or by wrapping the input inside the label. Placeholder text is not a label.</p>
+<p><strong>7. Videos have captions; audio has transcripts.</strong> Pre-recorded video must have synchronized captions (WCAG A). Audio-only content needs a text transcript.</p>
+<p><strong>8. No keyboard traps.</strong> If you can tab into a modal, you must be able to tab out. Focus should be trapped within modals deliberately, with a close button that works.</p>
+<p>These basics cover the majority of accessibility complaints. Get them right and you&#39;re ahead of most websites.</p>
+<h2>Forms: the most common source of frustration</h2>
+<p>Forms are where accessibility failures hurt the most. A user who can&#39;t complete a form can&#39;t sign up, make a purchase, or contact you. Here&#39;s your form checklist:</p>
+<ul>
+<li>Every input has a visible label that&#39;s programmatically associated.</li>
+<li>Required fields are marked both visually (asterisk) and semantically (<code>required</code> attribute or <code>aria-required=&quot;true&quot;</code>).</li>
+<li>Error messages are clear, specific, and announced by screen readers. Use <code>aria-describedby</code> to link the error message to the input.</li>
+<li>Error states are not communicated by color alone. Add an icon, text, or both.</li>
+<li>Form validation happens on submit, not on every keystroke (or if it does, it doesn&#39;t prevent focus or interrupt the user).</li>
+<li>Radio buttons and checkboxes are grouped with <code>&lt;fieldset&gt;</code> and <code>&lt;legend&gt;</code>.</li>
+<li>Select menus work with keyboard: arrow keys navigate options, Enter selects, Escape closes.</li>
+<li>Autocomplete attributes (<code>autocomplete=&quot;name&quot;</code>, <code>email</code>, etc.) are set where appropriate so users can fill forms faster.</li>
+<li>Focus returns to the input that had an error after submit, or focus moves to the error summary.</li>
+<li>There&#39;s a way to skip repeated content (like navigation) and jump to the main content: a &quot;Skip to main content&quot; link.</li>
+</ul>
+<p>Here&#39;s a quick example of an accessible text input with error:</p>
+<pre><code class="language-html">&lt;label for=&quot;email&quot;&gt;Email address&lt;/label&gt;
+&lt;input
+  type=&quot;email&quot;
+  id=&quot;email&quot;
+  name=&quot;email&quot;
+  required
+  aria-describedby=&quot;email-error&quot;
+  aria-invalid=&quot;true&quot;
+/&gt;
+&lt;p id=&quot;email-error&quot; role=&quot;alert&quot;&gt;Please enter a valid email address.&lt;/p&gt;
+</code></pre>
+<p>The <code>aria-describedby</code> links the input to the error, and <code>role=&quot;alert&quot;</code> ensures screen readers announce it immediately when it appears.</p>
+<h2>Images and media: the alt text checklist</h2>
+<p>Alt text is simple in concept, nuanced in practice. Here&#39;s how to nail it:</p>
+<ul>
+<li>Informative images: describe the content and function (e.g., &quot;Pie chart showing revenue by quarter&quot;).</li>
+<li>Decorative images: use <code>alt=&quot;&quot;</code> (empty) so screen readers skip them.</li>
+<li>Images as links or buttons: describe the destination or action, not the image (e.g., &quot;View cart&quot; instead of &quot;Shopping cart icon&quot;).</li>
+<li>Complex charts or diagrams: provide a long description nearby or via <code>aria-describedby</code>.</li>
+<li>Icons with adjacent text: if an icon is decorative and the text conveys the meaning, use <code>aria-hidden=&quot;true&quot;</code> on the icon and skip the alt.</li>
+</ul>
+<p>Screen readers announce images as &quot;Image: [alt text]&quot;. So don&#39;t include &quot;Image of&quot; or &quot;Picture of&quot; in the alt—the screen reader already says that.</p>
+<p>If you&#39;ve been building components with <a href="/blog/react-aria-components">React Aria Components</a>, you know that accessible names and roles are often handled for you. For custom images, you still need to provide alt text.</p>
+<h2>Keyboard navigation and focus management</h2>
+<p>Keyboard accessibility is the backbone of WCAG compliance. If a user can&#39;t navigate with Tab and Shift+Tab, they can&#39;t use your site.</p>
+<ul>
+<li>All interactive elements are reachable by Tab. This includes links, buttons, form fields, and custom widgets (sliders, accordions, tabs).</li>
+<li>Custom widgets have keyboard support that matches their pattern. For example, tabs use arrow keys to switch, Enter to activate. Accordions use Tab to move between headers, Enter/Space to expand/collapse.</li>
+<li>Focus is never lost. When a modal opens, focus moves to the modal. When it closes, focus returns to the element that triggered it.</li>
+<li>Skip links work: &quot;Skip to main content&quot; is the first focusable element on the page.</li>
+<li>Focus indicators are visible and have sufficient contrast. Don&#39;t use <code>outline: none</code> unless you provide a better indicator.</li>
+</ul>
+<p>If you&#39;re building a custom select, autocomplete, or menu, the WAI-ARIA authoring practices provide the expected keyboard behavior. Our <a href="/blog/wai-aria-authoring-practices">WAI-ARIA authoring practices guide</a> breaks down the patterns for common widgets.</p>
+<h2>ARIA: use it sparingly and correctly</h2>
+<p>ARIA can make accessibility better—or much worse if misused. The first rule of ARIA: <strong>don&#39;t use ARIA if a native HTML element does the job.</strong></p>
+<ul>
+<li>Use native <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;input&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;dialog&gt;</code> elements whenever possible. They have built-in accessibility.</li>
+<li><code>aria-label</code> only works on elements with a role. Don&#39;t put it on a <code>&lt;div&gt;</code> without a role.</li>
+<li><code>aria-hidden=&quot;true&quot;</code> hides content from screen readers. Use it only for decorative or duplicated content.</li>
+<li><code>aria-expanded</code> must reflect the actual state of a collapsible element.</li>
+<li><code>aria-live=&quot;polite&quot;</code> announces dynamic content changes. Use it for notifications, status updates, form results.</li>
+<li>Roles should match the element&#39;s behavior. Don&#39;t give a <code>&lt;div&gt;</code> <code>role=&quot;button&quot;</code> unless you also implement Tab focus, Enter/Space activation, and the correct semantics.</li>
+</ul>
+<p>If you&#39;re styling based on ARIA states (e.g., <code>[aria-expanded=&quot;true&quot;]</code>), you can create accessible, stateful components without extra CSS classes. That&#39;s exactly what we covered in <a href="/blog/css-attribute-selectors">CSS attribute selectors</a>. The ARIA attribute serves double duty: it informs assistive tech and drives your styles.</p>
+<h2>Color and contrast: the most common failure</h2>
+<p>Contrast failures are the most frequently cited WCAG violations. They&#39;re easy to check and easy to fix.</p>
+<ul>
+<li>Normal text (under 18pt): 4.5:1 contrast ratio.</li>
+<li>Large text (18pt+ or 14pt bold+): 3:1 contrast ratio.</li>
+<li>UI components (borders, icons, focus indicators): 3:1 against adjacent colors.</li>
+<li>Links in body text: 3:1 against surrounding text, plus another indicator (underline) on hover/focus.</li>
+<li>Placeholder text: 4.5:1 (though some browsers may not enforce this, it&#39;s still required).</li>
+</ul>
+<p>Use the Chrome DevTools color picker or a tool like WebAIM&#39;s Contrast Checker. If a color combination fails, adjust the text color or background color until it passes.</p>
+<p>Remember: <code>rgba(0,0,0,0.5)</code> on white is effectively gray. If you use opacity, compute the effective color before checking contrast.</p>
+<h2>Mobile and responsive accessibility</h2>
+<p>WCAG applies to mobile web too. Small screens, touch targets, and viewport settings introduce additional considerations.</p>
+<ul>
+<li>Tap targets are at least 44×44 CSS pixels (WCAG 2.5.5 AAA) or at least 24×24 with adequate spacing (WCAG 2.5.8 AA).</li>
+<li>Pinch zoom is not disabled. Don&#39;t use <code>user-scalable=no</code> in the viewport meta tag.</li>
+<li>Content reflows to a single column without horizontal scrolling at 320px width.</li>
+<li>Touch gestures have alternatives (e.g., a carousel that swipes should also have buttons).</li>
+<li>No content is hidden behind overlays on small screens.</li>
+<li>Keyboard access works with mobile keyboard (no custom gestures required).</li>
+</ul>
+<p>Many of the same principles apply: sufficient contrast, logical order, visible focus, and touch-friendly targets.</p>
+<h2>Testing: you can&#39;t fix what you don&#39;t find</h2>
+<p>You can&#39;t audit accessibility by reading a checklist. You have to test. Here&#39;s a practical testing workflow:</p>
+<p><strong>1. Run an automated checker.</strong> Tools like axe (available as a browser extension or in CI) catch 30–50% of issues automatically. Run it on every page.</p>
+<p><strong>2. Test with keyboard only.</strong> Unplug your mouse. Try to complete every task on your site. Tab through forms, open modals, navigate menus. If you get stuck, users will too.</p>
+<p><strong>3. Test with a screen reader.</strong> NVDA (Windows) or VoiceOver (Mac) are free. Learn the basics: use heading navigation, form controls, and landmarks. This is the closest you&#39;ll get to the actual user experience.</p>
+<p><strong>4. Check contrast ratios</strong> with a tool like WebAIM&#39;s Contrast Checker or the DevTools color picker.</p>
+<p><strong>5. Test on mobile.</strong> Resize your browser, use DevTools device emulation, and test on a real phone if possible.</p>
+<p><strong>6. Check your HTML semantics.</strong> View the source. Are headings in order? Are labels associated with inputs? Are buttons actually <code>&lt;button&gt;</code> elements?</p>
+<p>If you&#39;ve implemented caching or dynamic content updates, test those too. A screen reader user should hear updates when content changes asynchronously. Our guide on <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a> touches on how perceived performance affects accessibility—a page that loads instantly but is not announced to screen readers is still broken.</p>
+<h2>A real story: the &quot;invisible&quot; button</h2>
+<p>A few months ago, I was auditing a client&#39;s checkout page. It had a &quot;Remove item&quot; button next to each product—a small X icon with no visible text. Visually, it was clear. Accessibly, it was a disaster.</p>
+<p>The button was a <code>&lt;span&gt;</code> with an <code>onClick</code> handler. No role, no tabindex, no label. Screen readers saw nothing. Keyboard users couldn&#39;t reach it. The fix was two lines of HTML: change <code>&lt;span&gt;</code> to <code>&lt;button&gt;</code> and add an <code>aria-label=&quot;Remove item&quot;</code>. That&#39;s it.</p>
+<p>The client had no idea the button was invisible to 10% of their users. It wasn&#39;t malice; it was ignorance. A five-minute accessibility check would have caught it.</p>
+<p>The lesson: run the checklist. Even the basics will catch issues that are invisible to sighted users but obvious to assistive technology.</p>
+<h2>Wrapping up</h2>
+<p>This checklist isn&#39;t exhaustive—WCAG has 78 success criteria—but it covers the issues that cause the vast majority of real-world failures. If you can check every item on this list, you&#39;ll be ahead of 90% of websites.</p>
+<p>Print it out. Stick it on your monitor. Use it as a pre-launch checklist. Run through it during code reviews. Make accessibility a habit, not an afterthought.</p>
+<p>And if you want the full specification without the legal jargon, check out our <a href="/blog/wcag-guidelines-checklist">WCAG guidelines checklist</a> for a plain-English summary of each criterion. The two posts work together: that one gives you the full list; this one gives you the actionable developer checklist.</p>
+<hr>
+<p><em>Want to make accessibility a core part of your development workflow? Red Surge Technology builds inclusive web experiences from the ground up. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

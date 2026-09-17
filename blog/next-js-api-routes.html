@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Next.js API Routes Guide: Build a Backend Without Leaving Your Frontend</title>
+    <meta name="description" content="Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and server components." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Next.js, API, Backend, Web Development, JavaScript" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/next-js-api-routes" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/next-js-api-routes" />
+    <meta property="og:title" content="Next.js API Routes Guide: Build a Backend Without Leaving Your Frontend" />
+    <meta property="og:description" content="Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and server components." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/nextjs-api-routes-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-07-23T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-07-23T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="Next.js, API, Backend, Web Development, JavaScript" />
+    <meta property="article:tag" content="Next.js" />
+    <meta property="article:tag" content="API" />
+    <meta property="article:tag" content="Backend" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="JavaScript" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/next-js-api-routes" />
+    <meta name="twitter:title" content="Next.js API Routes Guide: Build a Backend Without Leaving Your Frontend" />
+    <meta name="twitter:description" content="Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and server components." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/nextjs-api-routes-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Next.js API Routes Guide: Build a Backend Without Leaving Your Frontend",
+        "description": "Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and server components.",
+        "url": "https://redsurgetechnology.com/blog/next-js-api-routes",
+        "datePublished": "2026-07-23T10:00:00.000Z",
+        "dateModified": "2026-07-23T10:00:00.000Z",
+        "keywords": "Next.js, API, Backend, Web Development, JavaScript",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT12M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/nextjs-api-routes-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/next-js-api-routes"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Next.js API Routes Guide: Build a Full Backend Without Leaving Your Frontend",
+          "item": "https://redsurgetechnology.com/blog/next-js-api-routes"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Next.js API Routes Guide: Build a Full Backend Without Leaving Your Frontend</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Next.js API Routes Guide: Build a Full Backend Without Leaving Your Frontend
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/nextjs-api-routes-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/nextjs-api-routes-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/nextjs-api-routes-guide.webp"
+      alt="Next.js API Routes Guide: Build a Full Backend Without Leaving Your Frontend - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Next.js API Routes Guide: Build a Backend Without Leaving Your Frontend" />
+          <meta itemprop="description" content="Master Next.js API routes with practical examples. Learn dynamic routes, middleware, request handling, error management, and server components." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/next-js-api-routes" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-07-23T10:00:00.000Z">Jul 23, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-07-23T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT12M" />12 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Next.js</span><span class="cs-tag" itemprop="keywords">API</span><span class="cs-tag" itemprop="keywords">Backend</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">JavaScript</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>There’s something quietly powerful about being able to write backend code without setting up a separate server. No Express boilerplate. No CORS configuration. No deploying and managing two different applications just so a contact form on your marketing page can send an email.</p>
+<p>Next.js API routes give you exactly that. They live in the same project as your frontend, share the same deployment pipeline, and run as serverless functions that scale automatically. You create a file under <code>pages/api</code> or <code>app/api</code>, export a function, and suddenly you have an endpoint that can query a database, call an external service, or process a webhook.</p>
+<p>I remember the first time I used this in a real project. We had a client who needed a simple newsletter signup form on their marketing site. The previous developer had set up a whole separate Express app just to handle that one form submission—separate repo, separate deployment, separate environment variables. Every time we wanted to tweak the form or add a field, we had to coordinate changes across two codebases. It was tedious. Then someone on the team suggested, “Why don’t we just use an API route?” Within an hour, we had deleted the Express app entirely. The form posted directly to <code>/api/subscribe</code>, the logic lived in a single file, and the client never noticed the difference—except that deployments got simpler and the site got faster. That was the moment I realized API routes weren’t just a convenience; they were a legitimate architectural choice that could save teams from unnecessary complexity.</p>
+<p>So if you’re new to this concept or just want a deeper understanding of how to use it well, this guide is for you. We’ll walk through the patterns, the tradeoffs, and the practical techniques that turn a basic route handler into a production-ready backend.</p>
+<h2>The file-system router you already know</h2>
+<p>If you’ve used Next.js, you already understand how API routes work. The routing is identical to pages. A file at <code>pages/api/users.js</code> becomes the endpoint <code>/api/users</code>. A file at <code>pages/api/users/[id].js</code> becomes <code>/api/users/123</code>. Dynamic segments, catch-all routes, optional parameters—every routing feature you use for pages applies to API routes.</p>
+<p>In the newer App Router, API routes live under <code>app/api</code>. The pattern is the same, but you export named functions for each HTTP method instead of a default handler.</p>
+<pre><code class="language-javascript">// app/api/users/route.ts
+export async function GET(request: Request) {
+  const users = await db.user.findMany();
+  return Response.json(users);
+}
+
+export async function POST(request: Request) {
+  const body = await request.json();
+  const user = await db.user.create({ data: body });
+  return Response.json(user, { status: 201 });
+}
+</code></pre>
+<p>Each exported function handles a specific HTTP method. <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>—the browser makes a request, Next.js matches the method to the exported function, and your code runs. If a method isn’t exported, Next.js returns a 405 Method Not Allowed automatically. It’s clean, predictable, and honestly kind of fun to work with.</p>
+<p>The Pages Router uses a different convention—a single default export that receives <code>req</code> and <code>res</code> objects from Node.js:</p>
+<pre><code class="language-javascript">// pages/api/users.js
+export default async function handler(req, res) {
+  if (req.method === &quot;GET&quot;) {
+    const users = await db.user.findMany();
+    res.status(200).json(users);
+  } else {
+    res.status(405).json({ error: &quot;Method not allowed&quot; });
+  }
+}
+</code></pre>
+<p>Both approaches work. The App Router version with <code>Request</code> and <code>Response</code> objects is more aligned with web standards and feels more modern. The Pages Router version feels like Express and might be more familiar if you’ve spent years in the Node.js world. If you’re starting a new project, the App Router is the future. But plenty of production applications still use the Pages Router pattern, and it’s perfectly fine. The important thing is understanding the concept: a file under the <code>api</code> directory becomes a serverless endpoint.</p>
+<h2>When to use API routes instead of server components</h2>
+<p>Next.js now gives you two ways to run server-side code: API routes and server components. The overlap creates a question that comes up constantly: when should something be an API route, and when should it be a server component?</p>
+<p>Let me break it down in a way that makes sense. Server components run during rendering. They fetch data and return JSX. They’re for building pages—fetching the data a page needs to display, then rendering the markup. They don’t expose endpoints that clients can call directly. Think of them as the “server-side rendering” layer.</p>
+<p>API routes, on the other hand, are endpoints. They return JSON, not JSX. They’re for form submissions, webhooks, mobile app backends, and any situation where a client needs to send data to your server outside of a page navigation.</p>
+<p>A practical rule of thumb: if a browser page needs data to render, fetch it in a server component. If a form needs to submit data, create an API route. If a mobile app or third-party service needs to interact with your backend, create an API route.</p>
+<pre><code class="language-javascript">// Server Component — fetches data for page rendering
+export default async function UsersPage() {
+  const users = await db.user.findMany();
+  return &lt;UserList users={users} /&gt;;
+}
+
+// API Route — handles form submissions
+export async function POST(request: Request) {
+  const { name, email } = await request.json();
+  await db.user.create({ data: { name, email } });
+  return Response.json({ success: true }, { status: 201 });
+}
+</code></pre>
+<p>Server components can’t handle POST requests. API routes can. That’s the fundamental distinction. If you’ve been working with <a href="/blog/react-server-components-nextjs">React Server Components in Next.js</a>, you already know that they’re designed for data fetching during rendering. API routes handle everything else. Once you internalize that separation, your architecture gets a lot cleaner.</p>
+<h2>Handling request bodies, query parameters, and headers</h2>
+<p>API routes give you full access to the incoming request. The <code>Request</code> object in the App Router provides methods for reading the body, parsing form data, and accessing headers. Query parameters come from the URL.</p>
+<pre><code class="language-javascript">export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const page = searchParams.get(&#39;page&#39;) || &#39;1&#39;;
+  const limit = searchParams.get(&#39;limit&#39;) || &#39;10&#39;;
+  const sort = searchParams.get(&#39;sort&#39;) || &#39;createdAt&#39;;
+
+  const users = await db.user.findMany({
+    skip: (Number(page) - 1) * Number(limit),
+    take: Number(limit),
+    orderBy: { [sort]: &#39;desc&#39; },
+  });
+
+  return Response.json(users);
+}
+</code></pre>
+<p>For POST requests with JSON bodies, <code>request.json()</code> parses the incoming data. For form submissions, <code>request.formData()</code> handles multipart form data, including file uploads. The web standard APIs are fully supported, which means your API route code is portable—it would work in any runtime that supports the Fetch API. That’s a big deal because it means you can reuse your logic in edge functions, service workers, or even other frameworks.</p>
+<p>Dynamic route segments become parameters you can access from the function arguments:</p>
+<pre><code class="language-javascript">export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  const user = await db.user.findUnique({
+    where: { id: params.id },
+  });
+
+  if (!user) {
+    return Response.json({ error: &#39;User not found&#39; }, { status: 404 });
+  }
+
+  return Response.json(user);
+}
+</code></pre>
+<p>The <code>params</code> object contains the dynamic segments from the URL. TypeScript infers the types if you define them, giving you autocomplete and catching typos. It’s a small detail, but it makes development smoother.</p>
+<h2>Error handling that doesn’t crash your endpoint</h2>
+<p>API routes need error handling. An unhandled rejection in an API route crashes the function—Next.js catches it and returns a 500 status, but you lose control over the error response. Adding structured error handling gives you consistent error responses and better debugging.</p>
+<p>The pattern is straightforward. Wrap your handler logic in a try-catch, log the error, and return an appropriate response.</p>
+<pre><code class="language-javascript">export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const user = await db.user.create({ data: body });
+    return Response.json(user, { status: 201 });
+  } catch (error) {
+    console.error(&#39;Failed to create user:&#39;, error);
+
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      return Response.json(
+        { error: &#39;A user with that email already exists&#39; },
+        { status: 409 }
+      );
+    }
+
+    return Response.json(
+      { error: &#39;Internal server error&#39; },
+      { status: 500 }
+    );
+  }
+}
+</code></pre>
+<p>For a more thorough approach, extract the error handling into a reusable wrapper. This keeps your route handlers clean and ensures consistent error responses across all endpoints.</p>
+<pre><code class="language-javascript">function withErrorHandler(handler: Function) {
+  return async (request: Request, context: any) =&gt; {
+    try {
+      return await handler(request, context);
+    } catch (error) {
+      console.error(error);
+      return Response.json(
+        { error: &#39;Internal server error&#39; },
+        { status: 500 }
+      );
+    }
+  };
+}
+
+export const GET = withErrorHandler(async (request: Request) =&gt; {
+  const users = await db.user.findMany();
+  return Response.json(users);
+});
+</code></pre>
+<p>If you’ve read our deep dive on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>, you know that the <code>unknown</code> type in catch clauses forces you to handle the possibility that errors aren’t always <code>Error</code> instances. The same principle applies here. Your API routes can throw anything—validation errors, database errors, network errors—and a generic handler gives you a safety net. I’ve found that taking the time to set this up early saves hours of debugging later.</p>
+<h2>Middleware that runs before your route handler</h2>
+<p>API routes support middleware—code that runs before your handler and can modify the request, add headers, or short-circuit with a response. In the Pages Router, you’d wrap your handler. In the App Router, you use the <code>middleware.ts</code> file at the project root, which runs for both pages and API routes.</p>
+<p>For API-specific middleware—like authentication checks or rate limiting—you can create helper functions that wrap individual route handlers:</p>
+<pre><code class="language-javascript">function withAuth(handler: Function) {
+  return async (request: Request, context: any) =&gt; {
+    const token = request.headers.get(&#39;authorization&#39;)?.replace(&#39;Bearer &#39;, &#39;&#39;);
+
+    if (!token) {
+      return Response.json({ error: &#39;Unauthorized&#39; }, { status: 401 });
+    }
+
+    const user = await verifyToken(token);
+    if (!user) {
+      return Response.json({ error: &#39;Invalid token&#39; }, { status: 401 });
+    }
+
+    // Attach user to request for downstream handlers
+    const authenticatedRequest = Object.assign(request, { user });
+    return handler(authenticatedRequest, context);
+  };
+}
+
+export const GET = withAuth(async (request: Request) =&gt; {
+  const user = request.user;
+  const data = await db.post.findMany({ where: { authorId: user.id } });
+  return Response.json(data);
+});
+</code></pre>
+<p>This composable approach lets you build a toolkit of reusable middleware. Authentication, rate limiting, request validation, logging—each one is a function that wraps a handler. You combine them as needed per route. It’s like having a set of Lego bricks for your API logic. The result is consistent, testable, and easy to reason about.</p>
+<h2>Edge vs Node.js runtimes</h2>
+<p>Next.js API routes can run in two different runtimes: the default Node.js runtime, or the Edge runtime. The choice affects what APIs are available, how your code is deployed, and where it runs geographically.</p>
+<p>Node.js routes run in a serverless function on AWS or a similar provider. You have access to the full Node.js API—filesystem, native modules, any npm package. The cold start time is typically a few hundred milliseconds. This is the right choice for most API routes, especially ones that use database libraries or need the Node.js ecosystem.</p>
+<p>Edge routes run on Vercel’s Edge Network, close to users. They use a subset of the Web API—no filesystem access, no native modules. Cold starts are nearly instant. This is ideal for lightweight middleware, A/B testing logic, geolocation-based redirects, and API routes that need minimal latency.</p>
+<pre><code class="language-javascript">export const runtime = &#39;edge&#39;;
+
+export async function GET(request: Request) {
+  const country = request.headers.get(&#39;x-vercel-ip-country&#39;) || &#39;US&#39;;
+  const localizedGreeting = country === &#39;FR&#39; ? &#39;Bonjour&#39; : &#39;Hello&#39;;
+  return Response.json({ greeting: localizedGreeting });
+}
+</code></pre>
+<p>The <code>runtime</code> export tells Next.js where to run the route. If you don’t specify, it defaults to Node.js. Edge routes have limitations—no Prisma, no <code>fs</code>, no long-running connections—but for simple logic that benefits from global distribution, they’re a powerful option. I’ve used edge routes for things like A/B test bucketing and geolocation-based redirects, and the speed difference is noticeable.</p>
+<h2>Streaming responses for real-time data</h2>
+<p>API routes can stream responses using the Web Streams API. Instead of waiting for all data to be available and sending one large JSON response, you can send data as it becomes available. The client reads the stream incrementally.</p>
+<p>This pattern works well for AI responses, real-time dashboards, and any situation where the response is generated over time.</p>
+<pre><code class="language-javascript">export async function POST(request: Request) {
+  const { prompt } = await request.json();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      const encoder = new TextEncoder();
+
+      // Simulate streaming AI response
+      const words = prompt.split(&#39; &#39;);
+      for (const word of words) {
+        controller.enqueue(encoder.encode(JSON.stringify({ word }) + &#39;\n&#39;));
+        await new Promise(resolve =&gt; setTimeout(resolve, 100));
+      }
+
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      &#39;Content-Type&#39;: &#39;text/event-stream&#39;,
+      &#39;Cache-Control&#39;: &#39;no-cache&#39;,
+    },
+  });
+}
+</code></pre>
+<p>The client uses <code>fetch</code> and reads the response body as a stream, processing each chunk as it arrives. This is the same pattern that powers ChatGPT-style interfaces. The user sees the response build in real time rather than waiting for the entire thing to complete. It’s a fantastic way to improve perceived performance, especially when you’re dealing with long-running operations.</p>
+<h2>Caching API responses</h2>
+<p>API routes that perform expensive computations or query external services benefit from caching. Next.js provides built-in cache headers, but for fine-grained control, you can integrate a caching layer like Redis.</p>
+<pre><code class="language-javascript">import { Redis } from &#39;@upstash/redis&#39;;
+
+const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_URL!,
+  token: process.env.UPSTASH_REDIS_TOKEN!,
+});
+
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get(&#39;q&#39;);
+  const cacheKey = `search:${query}`;
+
+  const cached = await redis.get(cacheKey);
+  if (cached) {
+    return Response.json(cached);
+  }
+
+  const results = await performExpensiveSearch(query);
+  await redis.set(cacheKey, results, { ex: 3600 });
+
+  return Response.json(results);
+}
+</code></pre>
+<p>If you’ve explored our guide on <a href="/blog/redis-cache-design-patterns">Redis cache design patterns</a>, you’ll recognize this as the cache-aside pattern. The API route checks the cache first, falls back to the expensive operation, and stores the result for subsequent requests. For public API routes that serve the same data to many users, this can dramatically reduce response times and external API costs. It’s one of those optimizations that feels like cheating because it’s so effective with so little code.</p>
+<h2>Concurrency in API routes</h2>
+<p>API routes often need to fetch data from multiple sources. A dashboard endpoint might query a database, call an analytics service, and fetch feature flags—all in a single request. Doing these sequentially adds latency. Doing them concurrently with <code>Promise.all</code> or <code>Promise.allSettled</code> improves response times.</p>
+<pre><code class="language-javascript">export async function GET(request: Request) {
+  const [userCount, revenue, recentActivity] = await Promise.all([
+    db.user.count(),
+    fetchRevenueData(),
+    db.activity.findMany({ take: 10 }),
+  ]);
+
+  return Response.json({
+    userCount,
+    revenue,
+    recentActivity,
+  });
+}
+</code></pre>
+<p>If one of these calls fails, should the entire request fail? That depends on the data. If the analytics service is down, you might still want to return user counts and activity. <code>Promise.allSettled</code> handles this gracefully, as we covered in our comparison of <a href="/blog/promise-all-vs-promise-allsettled">Promise.all vs Promise.allSettled</a>.</p>
+<pre><code class="language-javascript">const results = await Promise.allSettled([
+  db.user.count(),
+  fetchRevenueData(),
+  db.activity.findMany({ take: 10 }),
+]);
+
+const userCount = results[0].status === &quot;fulfilled&quot; ? results[0].value : null;
+const revenue = results[1].status === &quot;fulfilled&quot; ? results[1].value : null;
+const recentActivity =
+  results[2].status === &quot;fulfilled&quot; ? results[2].value : [];
+</code></pre>
+<p>The API route degrades gracefully. If one data source fails, the others still return. The client receives partial data rather than an error. This is the kind of resilience that production applications need. It’s not glamorous, but it keeps your users happy when something inevitably breaks.</p>
+<h2>Wrapping up</h2>
+<p>Next.js API routes collapse the frontend and backend into a single codebase. One project. One deployment. One set of TypeScript types shared between the client and the server. The productivity gains are real, especially for small to medium teams that don’t have the bandwidth to maintain separate backend infrastructure.</p>
+<p>They’re not a replacement for a dedicated backend in every scenario. If your API has hundreds of endpoints, complex business logic, or needs to scale independently of your frontend, a separate backend service might make more sense. But for the vast middle ground—form handling, webhooks, simple CRUD operations, and backend-for-frontend patterns—API routes are more than enough.</p>
+<p>The key patterns to remember: use server components for data fetching during page rendering, use API routes for mutating data and external clients. Handle errors consistently. Cache expensive responses. And don’t overcomplicate things—sometimes a simple route handler that returns JSON is all you need.</p>
+<p>I hope this guide has given you a clearer picture of what Next.js API routes can do and how to use them effectively. They’re one of the quiet superpowers of the framework, and once you start using them, you’ll wonder why you ever did it any other way.</p>
+<hr>
+<p><em>Building a Next.js application and need help designing your API layer? Red Surge Technology works with teams to architect backend patterns that scale with your frontend. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

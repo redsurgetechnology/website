@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Native Skia Animations Guide: Reanimated + Skia for 60fps</title>
+    <meta name="description" content="A complete guide to React Native Skia animations. Use Reanimated shared values, useDerivedValue, withTiming, withSpring, interpolate, and gestures to build fluid custom animations." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React Native, Skia, Animation, Reanimated, Mobile Development" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-native-skia-animations-guide" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-native-skia-animations-guide" />
+    <meta property="og:title" content="React Native Skia Animations Guide: Reanimated + Skia for 60fps" />
+    <meta property="og:description" content="A complete guide to React Native Skia animations. Use Reanimated shared values, useDerivedValue, withTiming, withSpring, interpolate, and gestures to build fluid custom animations." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-native-skia-animations-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-09-09T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-09-09T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React Native, Skia, Animation, Reanimated, Mobile Development" />
+    <meta property="article:tag" content="React Native" />
+    <meta property="article:tag" content="Skia" />
+    <meta property="article:tag" content="Animation" />
+    <meta property="article:tag" content="Reanimated" />
+    <meta property="article:tag" content="Mobile Development" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-native-skia-animations-guide" />
+    <meta name="twitter:title" content="React Native Skia Animations Guide: Reanimated + Skia for 60fps" />
+    <meta name="twitter:description" content="A complete guide to React Native Skia animations. Use Reanimated shared values, useDerivedValue, withTiming, withSpring, interpolate, and gestures to build fluid custom animations." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-native-skia-animations-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Native Skia Animations Guide: Reanimated + Skia for 60fps",
+        "description": "A complete guide to React Native Skia animations. Use Reanimated shared values, useDerivedValue, withTiming, withSpring, interpolate, and gestures to build fluid custom animations.",
+        "url": "https://redsurgetechnology.com/blog/react-native-skia-animations-guide",
+        "datePublished": "2026-09-09T10:00:00.000Z",
+        "dateModified": "2026-09-09T10:00:00.000Z",
+        "keywords": "React Native, Skia, Animation, Reanimated, Mobile Development",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-native-skia-animations-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-native-skia-animations-guide"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Native Skia Animations Guide: Smooth UI at 60fps",
+          "item": "https://redsurgetechnology.com/blog/react-native-skia-animations-guide"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Native Skia Animations Guide: Smooth UI at 60fps</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Native Skia Animations Guide: Smooth UI at 60fps
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-native-skia-animations-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-native-skia-animations-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-native-skia-animations-guide.webp"
+      alt="React Native Skia Animations Guide: Smooth UI at 60fps - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Native Skia Animations Guide: Reanimated + Skia for 60fps" />
+          <meta itemprop="description" content="A complete guide to React Native Skia animations. Use Reanimated shared values, useDerivedValue, withTiming, withSpring, interpolate, and gestures to build fluid custom animations." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-native-skia-animations-guide" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-09-09T10:00:00.000Z">Sep 09, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-09-09T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React Native</span><span class="cs-tag" itemprop="keywords">Skia</span><span class="cs-tag" itemprop="keywords">Animation</span><span class="cs-tag" itemprop="keywords">Reanimated</span><span class="cs-tag" itemprop="keywords">Mobile Development</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Skia gives you the power to draw almost anything in React Native. But drawing alone isn&#39;t enough—animation is what makes custom graphics feel alive. A static chart is informative; an animated chart tells a story. A pulsing indicator draws the eye; a smoothly transitioning gradient feels premium.</p>
+<p>React Native Skia pairs beautifully with Reanimated, the animation library that runs on the UI thread. Together, they let you create complex, GPU-accelerated animations that hit 60 frames per second without breaking a sweat. The key is understanding how to connect Reanimated&#39;s shared values to Skia&#39;s drawing props.</p>
+<p>In this guide, I&#39;ll walk through the core animation patterns, from simple timing to gesture-driven interactions. If you&#39;re new to Skia itself, check our <a href="/blog/react-native-skia-tutorial-beginners">React Native Skia tutorial for beginners</a> first. If you&#39;re already comfortable with the basics, this guide will take your animations to the next level.</p>
+<h2>The animation architecture: Shared Values and Derived Values</h2>
+<p>Skia animations in React Native rely on two Reanimated concepts: <strong>shared values</strong> and <strong>derived values</strong>.</p>
+<p>A shared value is a mutable number that lives on the UI thread. When you update it, Reanimated knows to update anything that depends on it—without re-rendering React. This is the foundation of high-performance animation.</p>
+<p>A derived value is a value computed from one or more shared values. In Skia, you use <code>useDerivedValue</code> to map shared values to props like <code>r</code>, <code>cx</code>, <code>color</code>, or gradient endpoints. Skia reads these derived values each frame and redraws efficiently.</p>
+<p>Here&#39;s the simplest example: animating a circle&#39;s radius.</p>
+<pre><code class="language-javascript">import { Canvas, Circle } from &quot;@shopify/react-native-skia&quot;;
+import {
+  useSharedValue,
+  withRepeat,
+  withTiming,
+  useDerivedValue,
+} from &quot;react-native-reanimated&quot;;
+
+function PulsingCircle() {
+  const radius = useSharedValue(40);
+
+  radius.value = withRepeat(withTiming(80, { duration: 1000 }), -1, true);
+
+  const animatedRadius = useDerivedValue(() =&gt; radius.value, [radius]);
+
+  return (
+    &lt;Canvas style={{ width: 200, height: 200 }}&gt;
+      &lt;Circle cx={100} cy={100} r={animatedRadius} color=&quot;blue&quot; /&gt;
+    &lt;/Canvas&gt;
+  );
+}
+</code></pre>
+<p>The shared value <code>radius</code> animates from 40 to 80 and back repeatedly. The derived value <code>animatedRadius</code> ensures Skia reads the latest value each frame. The result is a smooth pulse with zero React re-renders.</p>
+<h2>Timing and Springs: The Two Basic Animation Functions</h2>
+<p>Reanimated provides two primary animation functions: <code>withTiming</code> and <code>withSpring</code>.</p>
+<p><strong><code>withTiming</code></strong> animates a value to a target over a specified duration with an easing curve. It&#39;s predictable and precise.</p>
+<pre><code class="language-javascript">const x = useSharedValue(0);
+x.value = withTiming(200, { duration: 500, easing: Easing.inOut(Easing.ease) });
+</code></pre>
+<p><strong><code>withSpring</code></strong> animates a value to a target using a spring simulation, which feels more natural for user-driven interactions. You can configure damping, stiffness, and mass.</p>
+<pre><code class="language-javascript">const scale = useSharedValue(1);
+scale.value = withSpring(1.5, { damping: 10, stiffness: 150 });
+</code></pre>
+<p>Which one should you use? Springs are great for gesture-driven movements (like pulling a card). Timing is better for predictable, repeatable animations (like a progress bar). Experiment with both.</p>
+<p>In the context of Skia, you can apply these to any numeric prop. For example, a springy scale:</p>
+<pre><code class="language-javascript">const scale = useSharedValue(1);
+scale.value = withSpring(1.5, { damping: 10 });
+
+const animatedScale = useDerivedValue(() =&gt; scale.value, [scale]);
+&lt;Circle
+  cx={100}
+  cy={100}
+  r={50}
+  transform={[{ scale: animatedScale }]}
+  color=&quot;green&quot;
+/&gt;;
+</code></pre>
+<h2>Interpolating values for richer effects</h2>
+<p>Often you want to map one range to another. That&#39;s where <code>interpolate</code> comes in. For example, you might want a color to change from red to green as a progress value goes from 0 to 1. Reanimated&#39;s <code>interpolateColor</code> handles this.</p>
+<pre><code class="language-javascript">const progress = useSharedValue(0);
+progress.value = withRepeat(withTiming(1, { duration: 2000 }), -1, true);
+
+const animatedColor = useDerivedValue(() =&gt; {
+  return interpolateColor(progress.value, [0, 1], [&quot;#ff6b6b&quot;, &quot;#48dbfb&quot;]);
+}, [progress]);
+
+&lt;Circle cx={100} cy={100} r={60} color={animatedColor} /&gt;;
+</code></pre>
+<p>You can also interpolate numeric ranges to drive positions, sizes, opacities, etc. The possibilities are endless.</p>
+<h2>Gesture-Driven Animations: Reacting to Touch</h2>
+<p>One of the most powerful patterns is driving animations from user gestures. Using <code>react-native-gesture-handler</code>, you can track finger position and map it to Skia props in real time.</p>
+<p>Here&#39;s an example: a circle that moves with your finger.</p>
+<pre><code class="language-javascript">import { Gesture, GestureDetector } from &quot;react-native-gesture-handler&quot;;
+import { useSharedValue, useDerivedValue } from &quot;react-native-reanimated&quot;;
+import { Canvas, Circle } from &quot;@shopify/react-native-skia&quot;;
+
+function DraggableCircle() {
+  const x = useSharedValue(100);
+  const y = useSharedValue(100);
+
+  const pan = Gesture.Pan().onUpdate((e) =&gt; {
+    x.value = e.absoluteX;
+    y.value = e.absoluteY;
+  });
+
+  const animatedX = useDerivedValue(() =&gt; x.value, [x]);
+  const animatedY = useDerivedValue(() =&gt; y.value, [y]);
+
+  return (
+    &lt;GestureDetector gesture={pan}&gt;
+      &lt;Canvas style={{ flex: 1 }}&gt;
+        &lt;Circle cx={animatedX} cy={animatedY} r={40} color=&quot;orange&quot; /&gt;
+      &lt;/Canvas&gt;
+    &lt;/GestureDetector&gt;
+  );
+}
+</code></pre>
+<p>Because shared values are on the UI thread, the circle follows your finger with zero lag. You can add springs to smooth the movement:</p>
+<pre><code class="language-javascript">.onUpdate((e) =&gt; {
+  x.value = withSpring(e.absoluteX, { damping: 20, stiffness: 200 });
+  y.value = withSpring(e.absoluteY, { damping: 20, stiffness: 200 });
+});
+</code></pre>
+<p>Now the circle springs to your finger, creating a playful, physical feel.</p>
+<h2>Animating Multiple Properties Simultaneously</h2>
+<p>In real apps, you often want to animate several properties at once—size, opacity, color, gradient. Reanimated handles this naturally because each derived value updates independently. There&#39;s no need to coordinate multiple state updates; just define separate shared values and derived values.</p>
+<pre><code class="language-javascript">const radius = useSharedValue(20);
+const opacity = useSharedValue(1);
+const color = useSharedValue(0); // for interpolation
+
+radius.value = withRepeat(withTiming(60, { duration: 1500 }), -1, true);
+opacity.value = withRepeat(withTiming(0.3, { duration: 1500 }), -1, true);
+color.value = withRepeat(withTiming(1, { duration: 1500 }), -1, true);
+
+const animatedRadius = useDerivedValue(() =&gt; radius.value, [radius]);
+const animatedOpacity = useDerivedValue(() =&gt; opacity.value, [opacity]);
+const animatedColor = useDerivedValue(
+  () =&gt; interpolateColor(color.value, [0, 1], [&quot;purple&quot;, &quot;cyan&quot;]),
+  [color],
+);
+
+&lt;Circle
+  cx={100}
+  cy={100}
+  r={animatedRadius}
+  opacity={animatedOpacity}
+  color={animatedColor}
+/&gt;;
+</code></pre>
+<p>All these updates happen together on the UI thread, resulting in a rich, synchronized animation without any re-render overhead.</p>
+<h2>Optimizing Performance: The Rules of Thumb</h2>
+<p>While Skia is fast, there are still ways to shoot yourself in the foot. Here are the rules I follow:</p>
+<ol>
+<li><p><strong>Always use <code>useDerivedValue</code> for animated props.</strong> Never pass a shared value directly to a Skia component; Skia expects a derived value. If you pass a raw number, the animation won&#39;t update.</p>
+</li>
+<li><p><strong>Avoid creating new objects inside <code>useDerivedValue</code>.</strong> If you need a point or vector, use <code>vec</code> inside the derived value, but keep the computation minimal. For example, <code>vec(x.value, y.value)</code> is fine; constructing a complex path or array may be expensive each frame.</p>
+</li>
+<li><p><strong>Use <code>useSharedValue</code> for numbers, not objects or strings.</strong> If you need to animate a color, use <code>interpolateColor</code> with a numeric shared value, or use <code>useDerivedValue</code> to produce the final string.</p>
+</li>
+<li><p><strong>Memoize static components.</strong> If a shape is not animated, memoize it with <code>useMemo</code> or wrap it in <code>React.memo</code> to prevent unnecessary re-renders. Skia components can be expensive to recreate.</p>
+</li>
+<li><p><strong>Test on real devices.</strong> Simulators may hide performance issues. Mid-range Android devices especially can struggle with heavy blur or complex shaders.</p>
+</li>
+<li><p><strong>Limit the number of active animations.</strong> Too many simultaneous animations can saturate the GPU. If possible, reduce the number of animated elements or lower the frame rate.</p>
+</li>
+</ol>
+<p>If you&#39;ve read our <a href="/blog/react-native-skia">React Native Skia guide</a>, you know the underlying rendering engine is powerful but requires discipline. These performance rules are your guardrails.</p>
+<h2>Real-World Example: Animated Progress Ring</h2>
+<p>Let&#39;s combine these patterns into a practical component: a circular progress ring with a gradient stroke that fills based on a progress value (0 to 1). This is a common UI element for dashboards, fitness apps, or audio players.</p>
+<pre><code class="language-javascript">import { Canvas, Path, Skia, vec } from &quot;@shopify/react-native-skia&quot;;
+import {
+  useSharedValue,
+  withTiming,
+  useDerivedValue,
+} from &quot;react-native-reanimated&quot;;
+
+function ProgressRing({ progress, size = 200, strokeWidth = 12 }) {
+  const center = size / 2;
+  const radius = (size - strokeWidth) / 2;
+  const animatedProgress = useSharedValue(progress);
+
+  // Animate progress changes
+  animatedProgress.value = withTiming(progress, { duration: 600 });
+
+  const path = useDerivedValue(() =&gt; {
+    const p = Skia.Path.Make();
+    const startAngle = -Math.PI / 2;
+    const endAngle = startAngle + 2 * Math.PI * animatedProgress.value;
+    p.addArc(
+      {
+        x: center - radius,
+        y: center - radius,
+        width: radius * 2,
+        height: radius * 2,
+      },
+      (startAngle * 180) / Math.PI,
+      ((endAngle - startAngle) * 180) / Math.PI,
+    );
+    return p;
+  }, [animatedProgress]);
+
+  const gradientStart = useDerivedValue(() =&gt; vec(0, 0));
+  const gradientEnd = useDerivedValue(() =&gt; vec(size, size));
+
+  return (
+    &lt;Canvas style={{ width: size, height: size }}&gt;
+      {/* Background track */}
+      &lt;Path
+        path={path}
+        style=&quot;stroke&quot;
+        strokeWidth={strokeWidth}
+        strokeCap=&quot;round&quot;
+        color=&quot;rgba(255,255,255,0.1)&quot;
+      /&gt;
+      {/* Progress arc with gradient */}
+      &lt;Path
+        path={path}
+        style=&quot;stroke&quot;
+        strokeWidth={strokeWidth}
+        strokeCap=&quot;round&quot;
+      &gt;
+        &lt;LinearGradient
+          start={gradientStart}
+          end={gradientEnd}
+          colors={[&quot;#ff6b6b&quot;, &quot;#feca57&quot;, &quot;#48dbfb&quot;]}
+        /&gt;
+      &lt;/Path&gt;
+    &lt;/Canvas&gt;
+  );
+}
+</code></pre>
+<p>This component smoothly animates the progress value using <code>withTiming</code>, and the gradient adds a premium feel. The path is computed in <code>useDerivedValue</code> so it updates on the UI thread.</p>
+<h2>Where to Go from Here</h2>
+<p>Skia animations can be as simple or as complex as you need. Here are some directions to explore:</p>
+<ul>
+<li><strong>Particle systems</strong>: Use many small circles with random velocities and positions, driven by shared values and springs.</li>
+<li><strong>Shaders</strong>: Custom fragment shaders can create real-time effects like noise, waves, and lighting. This is the deep end, but incredibly powerful.</li>
+<li><strong>Morphing paths</strong>: Interpolate between different path definitions to create shape morphing animations.</li>
+<li><strong>Chart animations</strong>: Animate data transitions in bar charts, line charts, and pie charts.</li>
+</ul>
+<p>If you&#39;ve been following our series, you know we&#39;ve covered <a href="/blog/expo-liquid-glass-animation-tutorial">React Native Expo liquid glass</a>, which is a prime example of Skia animations in action. We also have a <a href="/blog/react-native-skia-tutorial-beginners">beginner Skia tutorial</a> if you need a refresher on the fundamentals.</p>
+<h2>Wrapping Up</h2>
+<p>React Native Skia animations open a world of possibilities for custom UI. By combining Reanimated&#39;s shared values with Skia&#39;s GPU rendering, you can create fluid, high-performance animations that feel native. The key patterns—shared values, derived values, timing, springs, interpolation, and gesture-driven updates—will serve you in almost any project.</p>
+<p>Start with simple animations, master the patterns, and then push the boundaries. The mobile web is becoming more interactive and visually rich, and Skia is one of the best tools to meet that demand.</p>
+<p>Now go build something that moves.</p>
+<hr>
+<p><em>Need help with custom Skia animations in your React Native app? Red Surge Technology builds high-performance, visually stunning mobile experiences. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

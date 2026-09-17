@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>TypeScript Error Handling in Try Catch Blocks: A Practical Guide</title>
+    <meta name="description" content="Master TypeScript error handling in try catch blocks with practical techniques for typing errors, using type guards, and handling async operations safely." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="TypeScript, JavaScript, Error Handling, Web Development, Async" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide" />
+    <meta property="og:title" content="TypeScript Error Handling in Try Catch Blocks: A Practical Guide" />
+    <meta property="og:description" content="Master TypeScript error handling in try catch blocks with practical techniques for typing errors, using type guards, and handling async operations safely." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/typescript-error-handling-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-06-29T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-06-29T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="TypeScript, JavaScript, Error Handling, Web Development, Async" />
+    <meta property="article:tag" content="TypeScript" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Error Handling" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Async" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide" />
+    <meta name="twitter:title" content="TypeScript Error Handling in Try Catch Blocks: A Practical Guide" />
+    <meta name="twitter:description" content="Master TypeScript error handling in try catch blocks with practical techniques for typing errors, using type guards, and handling async operations safely." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/typescript-error-handling-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TypeScript Error Handling in Try Catch Blocks: A Practical Guide",
+        "description": "Master TypeScript error handling in try catch blocks with practical techniques for typing errors, using type guards, and handling async operations safely.",
+        "url": "https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide",
+        "datePublished": "2026-06-29T10:00:00.000Z",
+        "dateModified": "2026-06-29T10:00:00.000Z",
+        "keywords": "TypeScript, JavaScript, Error Handling, Web Development, Async",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT9M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/typescript-error-handling-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TypeScript Error Handling in Try Catch Blocks: A Practical Guide",
+          "item": "https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">TypeScript Error Handling in Try Catch Blocks: A Practical Guide</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          TypeScript Error Handling in Try Catch Blocks: A Practical Guide
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/typescript-error-handling-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/typescript-error-handling-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/typescript-error-handling-guide.webp"
+      alt="TypeScript Error Handling in Try Catch Blocks: A Practical Guide - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="TypeScript Error Handling in Try Catch Blocks: A Practical Guide" />
+          <meta itemprop="description" content="Master TypeScript error handling in try catch blocks with practical techniques for typing errors, using type guards, and handling async operations safely." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/typescript-error-handling-in-try-catch-blocks-guide" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-06-29T10:00:00.000Z">Jun 29, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-06-29T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT9M" />9 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">TypeScript</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Error Handling</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Async</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>There&#39;s a moment in every TypeScript developer&#39;s journey where you stare at a catch block and think, &quot;Wait, what type is this error again?&quot;</p>
+<p>You wrap some async code in a try catch, everything looks clean, and then the editor starts complaining. TypeScript tells you the error is <code>unknown</code>. Not <code>Error</code>. Not <code>AxiosError</code>. Not whatever specific thing you expected. Just... unknown. And honestly? It&#39;s frustrating the first time you run into it.</p>
+<p>The thing is, TypeScript&#39;s error handling behavior catches a lot of people off guard. Not because it&#39;s poorly designed, but because JavaScript itself has never enforced what gets thrown. You can throw a string. A number. An object literal. Heck, you can throw <code>undefined</code> if you really want to. JavaScript doesn&#39;t care. So TypeScript, being the cautious friend it is, defaults to the safest possible assumption.</p>
+<h2>Why TypeScript treats catch errors as unknown</h2>
+<p>Let&#39;s back up for a second and look at why this happens. Before TypeScript 4.0, catch clause variables were always typed as <code>any</code>. You could access <code>error.message</code> directly and TypeScript wouldn&#39;t say a word. The problem, of course, was that if someone threw something other than an Error object, your code would crash at runtime with no compile-time warning.</p>
+<p>That changed with TypeScript 4.0, when the team introduced the <code>useUnknownInCatchVariables</code> compiler option. It defaults to <code>true</code> in strict mode, which means every error in a catch block gets the <code>unknown</code> type unless you explicitly annotate it otherwise.</p>
+<pre><code class="language-typescript">try {
+  await fetchUserData(userId);
+} catch (error) {
+  // error is &#39;unknown&#39; here
+  console.log(error.message); // TypeScript error!
+}
+</code></pre>
+<p>That squiggly red line isn&#39;t TypeScript being pedantic. It&#39;s genuinely protecting you from runtime explosions. If someone somewhere throws a string, accessing <code>.message</code> on it returns <code>undefined</code>. Your error logging suddenly becomes useless. Your user-facing messages break. Debugging becomes a nightmare.</p>
+<h2>The quick annotation approach (and when it&#39;s enough)</h2>
+<p>The most straightforward fix looks something like this:</p>
+<pre><code class="language-typescript">try {
+  await processPayment(amount);
+} catch (error: any) {
+  console.error(error.message);
+}
+</code></pre>
+<p>TypeScript allows type annotations on catch variables, even though JavaScript doesn&#39;t support them natively. The annotation gets stripped during compilation, so it&#39;s purely a TypeScript construct.</p>
+<p>But here&#39;s the thing. Using <code>any</code> sort of defeats the purpose of having TypeScript in the first place. It&#39;s like buying a fancy security system and then leaving the front door unlocked. Sometimes it&#39;s fine. Most of the time, actually, the error really will be an <code>Error</code> instance. But you&#39;re giving up the safety net.</p>
+<p>I&#39;d argue that annotating with <code>Error</code> directly is marginally better:</p>
+<pre><code class="language-typescript">try {
+  await saveDocument(doc);
+} catch (error: Error) {
+  console.error(error.message);
+  showToast(error.message);
+}
+</code></pre>
+<p>This works until it doesn&#39;t. If something throws a non-Error value, TypeScript won&#39;t warn you at compile time, but your assumption at runtime falls apart. The <code>.message</code> property might be <code>undefined</code>, and if you&#39;re passing that to a toast notification component, users see blank error messages. Not a great experience.</p>
+<h2>Type narrowing with instanceof</h2>
+<p>A more robust approach involves actually checking what you caught before using it:</p>
+<pre><code class="language-typescript">try {
+  await uploadFile(file);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+    showErrorNotification(error.message);
+  } else {
+    console.error(&quot;Something unexpected was thrown:&quot;, error);
+    showErrorNotification(&quot;An unexpected error occurred&quot;);
+  }
+}
+</code></pre>
+<p>This pattern handles both cases gracefully. If it&#39;s an Error, you get access to <code>message</code>, <code>stack</code>, <code>cause</code>, all the standard properties. If it&#39;s something else, you handle that too. Users never see a blank error notification.</p>
+<p>You know what? This approach has an elegance to it. It acknowledges the messy reality of JavaScript without giving up on type safety. It&#39;s defensive without being paranoid.</p>
+<p>The downside is verbosity. Every catch block grows by several lines. For utility functions or smaller projects, that might not matter. But across a large codebase with dozens of try catch blocks, the repetition adds up.</p>
+<h2>Custom type guards for cleaner narrowing</h2>
+<p>One way to reduce the boilerplate is extracting the type check into a reusable utility:</p>
+<pre><code class="language-typescript">function isError(value: unknown): value is Error {
+  return value instanceof Error;
+}
+
+try {
+  await syncCalendar(events);
+} catch (error) {
+  if (isError(error)) {
+    logger.error(error.message, { stack: error.stack });
+  } else {
+    logger.error(&quot;Non-Error thrown during sync&quot;, { error });
+  }
+}
+</code></pre>
+<p>The type predicate <code>value is Error</code> tells TypeScript that inside the <code>if</code> block, the variable is guaranteed to be an Error. This compiles away cleanly and adds zero runtime overhead beyond the instanceof check itself.</p>
+<p>Some teams prefer an assertion-based approach instead:</p>
+<pre><code class="language-typescript">function assertError(value: unknown): asserts value is Error {
+  if (!(value instanceof Error)) {
+    throw new Error(&quot;Expected an Error instance&quot;);
+  }
+}
+
+try {
+  await processQueue(items);
+} catch (error) {
+  assertError(error);
+  // error is now typed as Error
+  analytics.track(&quot;queue_error&quot;, { message: error.message });
+}
+</code></pre>
+<p>The assertion function changes the type within the current scope, similar to how <code>instanceof</code> narrowing works. If the assertion fails, it throws a new Error, which you&#39;d presumably catch further up the chain or let crash in a controlled way.</p>
+<h2>The real world doesn&#39;t always throw Error instances</h2>
+<p>Here&#39;s where things get nuanced. In practice, not every library or API throws proper Error objects. Axios, for example, throws <code>AxiosError</code> instances that extend Error. That&#39;s fine because <code>instanceof Error</code> still matches. But other libraries might throw plain objects with custom properties.</p>
+<p>Then there are browser APIs. The Fetch API doesn&#39;t throw on non-2xx status codes at all. You have to check <code>response.ok</code> manually. But if there&#39;s a network failure, it throws a <code>TypeError</code>. Still an Error subclass, so narrowing works.</p>
+<p>What about promise rejections? If you <code>await</code> a promise that rejects with a string, that string propagates as the thrown value:</p>
+<pre><code class="language-typescript">async function fetchLegacyData() {
+  return Promise.reject(&quot;Database connection failed&quot;);
+}
+
+try {
+  await fetchLegacyData();
+} catch (error) {
+  // error is literally the string &#39;Database connection failed&#39;
+  console.log(typeof error); // &#39;string&#39;
+}
+</code></pre>
+<p>Older codebases and third-party libraries sometimes do this. It&#39;s not great practice, but it&#39;s reality. Your error handling needs to account for it.</p>
+<h2>A pattern I&#39;ve settled on after years of dealing with this</h2>
+<p>After bouncing between different approaches on different projects, I&#39;ve landed on something that feels right. It&#39;s not revolutionary, but it&#39;s served me well:</p>
+<pre><code class="language-typescript">function getErrorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    return error.message;
+  }
+  if (typeof error === &quot;string&quot;) {
+    return error;
+  }
+  return &quot;An unexpected error occurred&quot;;
+}
+
+try {
+  await criticalOperation();
+} catch (error) {
+  const message = getErrorMessage(error);
+  logger.error(message, { originalError: error });
+  userFeedback.show(message);
+}
+</code></pre>
+<p>This extracts the message logic into a single function that handles the common cases. For structured logging, I still pass the original error so I can inspect it later. For user-facing messages, I use the cleaned-up string. It keeps catch blocks short while remaining safe.</p>
+<h2>Async error handling and unhandled rejections</h2>
+<p>You can&#39;t really talk about try catch in TypeScript without touching on async patterns. If you forget to await a promise, errors slip through silently. Or worse, they crash your Node.js process with an unhandled rejection.</p>
+<pre><code class="language-typescript">// Dangerous — the promise rejection is lost
+function handleClick() {
+  fetchUserData(userId); // missing &#39;await&#39;
+}
+
+// Safe — the error is caught
+async function handleClick() {
+  try {
+    await fetchUserData(userId);
+  } catch (error) {
+    handleUserError(error);
+  }
+}
+</code></pre>
+<p>Linters like typescript-eslint have rules that catch floating promises, which helps. But it&#39;s worth building the mental habit. Whenever you write a function call that returns a promise, ask yourself: did I handle the rejection path?</p>
+<p>Event handlers in React components are a common trap. They can be async, but React doesn&#39;t await them. If an error occurs inside an async event handler, it won&#39;t crash the component. It&#39;ll silently fail, and you&#39;ll wonder why the UI isn&#39;t updating.</p>
+<pre><code class="language-typescript">// This looks fine but swallows errors
+&lt;button onClick={async () =&gt; {
+  await saveChanges(data);
+  navigate(&#39;/success&#39;);
+}}&gt;
+  Save
+&lt;/button&gt;
+
+// Better
+&lt;button onClick={() =&gt; {
+  saveChanges(data)
+    .then(() =&gt; navigate(&#39;/success&#39;))
+    .catch(handleSaveError);
+}}&gt;
+  Save
+&lt;/button&gt;
+</code></pre>
+<p>The second version makes the error handling explicit. There&#39;s no ambiguity about what happens when things go wrong.</p>
+<h2>A story about an error that wasn&#39;t what I expected</h2>
+<p>A few months back, I was debugging a production issue that had our team stumped. Users were reporting that a file upload feature worked intermittently. The upload would appear to succeed, but sometimes the file wouldn&#39;t actually process.</p>
+<p>We checked the logs and found error entries, but they were all empty. No message. No stack trace. Just a timestamp and the user ID. Bizarre.</p>
+<p>It turned out that a library we used for file validation was throwing objects that looked like <code>{ code: &#39;VALIDATION_ERROR&#39; }</code>. No message property at all. Our error handling assumed every error had a <code>.message</code>, so our logs were capturing nothing useful. The user saw a generic &quot;Something went wrong&quot; message that gave us zero clues.</p>
+<p>Once we realized what was happening, the fix was trivial. We updated our error logging to serialize the full error object when no message was available. Suddenly we could see the validation codes and trace the problem to a specific file type check.</p>
+<p>That experience cemented something for me. Error handling isn&#39;t just about preventing crashes. It&#39;s about preserving information. When something goes wrong in production, the error object might be the only clue you have. Treating every error as <code>unknown</code> until proven otherwise gives you the chance to capture whatever that clue contains.</p>
+<h2>Wrapping up</h2>
+<p>TypeScript&#39;s decision to type catch variables as <code>unknown</code> is one of those things that feels annoying until it saves you. It nudges you toward handling edge cases that JavaScript has always allowed but that cause real problems in production.</p>
+<p>The right approach depends on your context. For a quick script or a personal project, annotating with <code>Error</code> or even <code>any</code> might be fine. For a production application with paying users, narrowing with <code>instanceof</code> or a utility function is worth the few extra lines.</p>
+<p>If you&#39;ve been working through performance topics like <a href="/blog/prevent-unnecessary-rerenders-react">How to Prevent Unnecessary Re-renders in React Applications</a>, error handling might feel like a detour. But reliable applications are fast <em>and</em> stable. Crashes are the ultimate performance problem. A page that doesn&#39;t load at all is a lot slower than one that renders an extra time or two.</p>
+<p>TypeScript gives you the tools to write error handling that&#39;s actually robust. Not just wrapping everything in try catch and hoping for the best, but thinking carefully about what might go wrong and making sure you capture enough information to fix it when it does.</p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

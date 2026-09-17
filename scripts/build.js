@@ -17,7 +17,9 @@ function generateRecentPostsHTML(currentSlug, postsByDate) {
               return `
           <li class="cs-sidebar-item">
             <a href="${url}" class="cs-sidebar-link">
-              <img class="cs-sidebar-thumb" src="${p.cover_image || "/images/og-image.jpg"}" alt="${p.title}" width="80" height="60" loading="lazy" decoding="async" />
+              <img class="cs-sidebar-thumb"
+     src="${p.cover_image ? p.cover_image.replace(/\.webp$/, "-100.webp") : "/images/og-image.jpg"}"
+     alt="${p.title}" width="80" height="60" loading="lazy" decoding="async" />
               <span class="cs-sidebar-title">${p.title}</span>
             </a>
           </li>`;
@@ -26,6 +28,36 @@ function generateRecentPostsHTML(currentSlug, postsByDate) {
         </ul>
       </div>`;
 }
+
+const sharp = require("sharp");
+
+const ROOT = path.resolve(__dirname);
+
+async function generateImageVariants(coverImage) {
+  if (!coverImage || coverImage.startsWith("http")) return;
+
+  const src = path.join(ROOT, coverImage);
+  if (!fs.existsSync(src)) {
+    console.warn(`  ⚠️  Source image not found: ${src}`);
+    return;
+  }
+
+  const variants = [
+    { suffix: "-100", width: 100 },
+    { suffix: "-400", width: 400 },
+    { suffix: "-800", width: 800 },
+  ];
+
+  for (const { suffix, width } of variants) {
+    const outRel = coverImage.replace(/\.webp$/, `${suffix}.webp`);
+    const outAbs = path.join(ROOT, outRel);
+    if (fs.existsSync(outAbs)) continue;
+
+    await sharp(src).resize({ width }).webp({ quality: 78 }).toFile(outAbs);
+    console.log(`  🖼️  Generated ${outRel}`);
+  }
+}
+
 
 function generateSidebarHTML(post, postsByDate) {
   return `
@@ -409,9 +441,12 @@ function generatePostHTML(post, postsByDate) {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#d90700" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/main.css" />
-    <link rel="stylesheet" href="/css/posts.css" />
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
 
     <!-- JSON-LD: BlogPosting + LocalBusiness -->
     ${jsonLd}
@@ -497,8 +532,25 @@ function generatePostHTML(post, postsByDate) {
             post.cover_image
               ? `
           <div class="main-img-container">
-            <img fetchpriority="high" decoding="sync" src="${post.cover_image}" alt="${post.title} - Red Surge Technology Blog" width="1280" height="720" />
-          </div>`
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="${post.cover_image.replace(/\.webp$/, "-400.webp")}"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="${post.cover_image.replace(/\.webp$/, "-800.webp")}"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="${post.cover_image}"
+      alt="${post.title} - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>`
               : ""
           }
           <div>
@@ -609,26 +661,22 @@ const postsByDate = [...posts].sort(
 );
 
 // ─── Generate post pages (skip if handcrafted HTML already exists) ─────────────
-posts.forEach((post) => {
-  if (post.custom_url) {
-    console.log(
-      `  ⏭️  Skipping ${post.slug} (has custom_url, using existing HTML)`,
-    );
-    return;
+(async () => {
+  for (const post of posts) {
+    if (post.custom_url) continue;
+
+    const outPath = `./blog/${post.slug}.html`;
+
+    if (post.cover_image) {
+      await generateImageVariants(post.cover_image);
+    }
+
+    const html = generatePostHTML(post, postsByDate);
+    fs.mkdirSync("./blog", { recursive: true });
+    fs.writeFileSync(outPath, html);
+    console.log(`  📄 Generated blog/${post.slug}.html`);
   }
-
-  const outPath = `./blog/${post.slug}.html`;
-
-  if (fs.existsSync(outPath)) {
-    console.log(`  ⏭️  Skipping blog/${post.slug}.html (already exists)`);
-    return;
-  }
-
-  const html = generatePostHTML(post, postsByDate);
-  fs.mkdirSync("./blog", { recursive: true });
-  fs.writeFileSync(outPath, html);
-  console.log(`  📄 Generated blog/${post.slug}.html`);
-});
+})();
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 function chunkArray(arr, size) {

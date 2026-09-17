@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>JavaScript Document Ready: Vanilla JS DOMContentLoaded vs jQuery</title>
+    <meta name="description" content="Vanilla JS document ready: DOMContentLoaded, defer, async, and how to safely manipulate the DOM without jQuery." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="JavaScript, DOM, jQuery, Web Development, Events" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/javascript-document-ready" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/javascript-document-ready" />
+    <meta property="og:title" content="JavaScript Document Ready: Vanilla JS DOMContentLoaded vs jQuery" />
+    <meta property="og:description" content="Vanilla JS document ready: DOMContentLoaded, defer, async, and how to safely manipulate the DOM without jQuery." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/javascript-document-ready.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-07T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-07T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="JavaScript, DOM, jQuery, Web Development, Events" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="DOM" />
+    <meta property="article:tag" content="jQuery" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Events" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/javascript-document-ready" />
+    <meta name="twitter:title" content="JavaScript Document Ready: Vanilla JS DOMContentLoaded vs jQuery" />
+    <meta name="twitter:description" content="Vanilla JS document ready: DOMContentLoaded, defer, async, and how to safely manipulate the DOM without jQuery." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/javascript-document-ready.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "JavaScript Document Ready: Vanilla JS DOMContentLoaded vs jQuery",
+        "description": "Vanilla JS document ready: DOMContentLoaded, defer, async, and how to safely manipulate the DOM without jQuery.",
+        "url": "https://redsurgetechnology.com/blog/javascript-document-ready",
+        "datePublished": "2026-08-07T10:00:00.000Z",
+        "dateModified": "2026-08-07T10:00:00.000Z",
+        "keywords": "JavaScript, DOM, jQuery, Web Development, Events",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT10M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/javascript-document-ready.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/javascript-document-ready"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "JavaScript Document Ready: Vanilla JS DOMContentLoaded Explained",
+          "item": "https://redsurgetechnology.com/blog/javascript-document-ready"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">JavaScript Document Ready: Vanilla JS DOMContentLoaded Explained</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          JavaScript Document Ready: Vanilla JS DOMContentLoaded Explained
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/javascript-document-ready-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/javascript-document-ready-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/javascript-document-ready.webp"
+      alt="JavaScript Document Ready: Vanilla JS DOMContentLoaded Explained - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="JavaScript Document Ready: Vanilla JS DOMContentLoaded vs jQuery" />
+          <meta itemprop="description" content="Vanilla JS document ready: DOMContentLoaded, defer, async, and how to safely manipulate the DOM without jQuery." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/javascript-document-ready" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-07T10:00:00.000Z">Aug 07, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-07T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT10M" />10 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">DOM</span><span class="cs-tag" itemprop="keywords">jQuery</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Events</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Back when jQuery ruled the frontend, every developer started their script with a sacred incantation:</p>
+<pre><code class="language-javascript">$(document).ready(function () {
+  // Safe to mess with the DOM here
+});
+</code></pre>
+<p>It was simple, bulletproof, and cross‑browser compatible—something vanilla JavaScript didn&#39;t offer in the IE6 era. But the web has moved on. Today, native browser APIs give you everything you need to know exactly when the DOM is ready, often without writing a single event listener.</p>
+<p>If you&#39;ve only ever reached for <code>$(document).ready()</code> out of habit, or if you&#39;ve been slapping <code>DOMContentLoaded</code> everywhere without really understanding the alternatives, this post is for you. Let&#39;s walk through what &quot;document ready&quot; actually means, how to detect it in plain JavaScript, and when you might not need any detection code at all.</p>
+<h2>What &quot;document ready&quot; actually means</h2>
+<p>Before any JavaScript can touch a page element—add a class, change text, attach an event listener—that element must exist in the browser&#39;s Document Object Model. The DOM is built incrementally as the browser parses the HTML. If your script runs before the <code>&lt;body&gt;</code> has finished parsing, any attempt to query for elements will return <code>null</code> or an empty collection, and your code silently fails.</p>
+<p>&quot;Document ready&quot; is the moment when the browser has finished parsing the entire HTML document and built the complete DOM tree. Images, stylesheets, and external resources may still be loading, but every <code>&lt;div&gt;</code>, <code>&lt;button&gt;</code>, and <code>&lt;p&gt;</code> tag is accessible.</p>
+<p>If you&#39;ve been exploring DOM manipulation patterns, like those in our <a href="/blog/javascript-debounce-vs-throttle">JavaScript debounce vs throttle guide</a>, you&#39;ll know that those techniques only work once the elements they target actually exist. That&#39;s the whole point of waiting for document ready.</p>
+<h2>The vanilla JavaScript equivalent: DOMContentLoaded</h2>
+<p>The modern, jQuery‑free way to detect document ready is the <code>DOMContentLoaded</code> event. It fires exactly when the HTML is fully parsed and the DOM is ready, without waiting for stylesheets or images.</p>
+<pre><code class="language-javascript">document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+  console.log(&quot;DOM fully loaded and parsed&quot;);
+  // All your initialization code goes here
+});
+</code></pre>
+<p>That&#39;s it. One event listener, zero dependencies. It works in every modern browser—IE9 and up, which is as far back as anyone needs to care about these days. If you really need IE8 support, you&#39;re probably still using jQuery anyway.</p>
+<p>One important gotcha: <code>DOMContentLoaded</code> waits for synchronous scripts to finish executing, but it does <strong>not</strong> wait for asynchronous scripts or stylesheets. If your code depends on CSS layout being fully computed (to measure element sizes, for example), you might need the <code>load</code> event instead, which fires after everything—images, iframes, stylesheets—has loaded.</p>
+<pre><code class="language-javascript">window.addEventListener(&quot;load&quot;, function () {
+  console.log(&quot;Page fully loaded, including all assets&quot;);
+});
+</code></pre>
+<p>But for typical DOM manipulation—showing a modal, attaching click handlers, initialising a carousel—<code>DOMContentLoaded</code> is exactly what you want.</p>
+<h2>A common mistake: scripts that run too early</h2>
+<p>The most common reason developers reach for document ready is that they placed their <code>&lt;script&gt;</code> tag in the <code>&lt;head&gt;</code> without any attributes. In that position, the script runs immediately, before the browser has parsed any body content.</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+    &lt;!-- Runs before body exists --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;button id=&quot;myButton&quot;&gt;Click me&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>Inside <code>app.js</code>, <code>document.getElementById(&#39;myButton&#39;)</code> returns <code>null</code> because the button hasn&#39;t been parsed yet. You could wrap all your code in <code>DOMContentLoaded</code>, but there&#39;s a simpler fix: put your scripts at the end of <code>&lt;body&gt;</code>.</p>
+<pre><code class="language-html">&lt;body&gt;
+  &lt;button id=&quot;myButton&quot;&gt;Click me&lt;/button&gt;
+  &lt;script src=&quot;app.js&quot;&gt;&lt;/script&gt;
+  &lt;!-- Runs after the button exists --&gt;
+&lt;/body&gt;
+</code></pre>
+<p>Now the script executes after the DOM elements it needs are already available. No event listener required. It&#39;s the oldest trick in the book, and it still works perfectly.</p>
+<h2>The modern solution: the defer attribute</h2>
+<p>If you prefer to keep <code>&lt;script&gt;</code> tags in the <code>&lt;head&gt;</code>—for organisation, or because your build tool places them there—use the <code>defer</code> attribute. A deferred script downloads in parallel with HTML parsing but doesn&#39;t execute until the DOM is fully built, right before <code>DOMContentLoaded</code> fires.</p>
+<pre><code class="language-html">&lt;head&gt;
+  &lt;script src=&quot;app.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;button id=&quot;myButton&quot;&gt;Click me&lt;/button&gt;
+&lt;/body&gt;
+</code></pre>
+<p>Inside <code>app.js</code>, you can safely query for <code>#myButton</code> at the top level—no event listener needed. <code>defer</code> scripts maintain their order, so if you have multiple deferred scripts that depend on each other, they execute in sequence.</p>
+<p>The <code>async</code> attribute is similar but not the same. An <code>async</code> script executes as soon as it finishes downloading, regardless of whether the DOM is ready, and it doesn&#39;t respect execution order. <code>async</code> is great for independent third‑party scripts like analytics. For your application code that manipulates the DOM, <code>defer</code> is almost always what you want.</p>
+<p>If you&#39;ve been exploring <a href="/blog/why-modern-websites-feel-slower">modern website performance optimizations</a>, you&#39;ll appreciate that <code>defer</code> improves perceived load time by not blocking rendering, while still giving you a fully‑baked DOM when your code runs.</p>
+<h2>What if you&#39;re not sure the DOM is ready yet?</h2>
+<p>Sometimes you&#39;re writing a script that might execute after <code>DOMContentLoaded</code> has already fired—for example, in a dynamically loaded module or a third‑party widget. In that case, checking <code>document.readyState</code> tells you whether you need to listen for the event at all.</p>
+<pre><code class="language-javascript">function onReady(callback) {
+  if (document.readyState === &quot;loading&quot;) {
+    document.addEventListener(&quot;DOMContentLoaded&quot;, callback);
+  } else {
+    callback();
+  }
+}
+
+onReady(function () {
+  console.log(&quot;DOM is ready!&quot;);
+});
+</code></pre>
+<p>The <code>document.readyState</code> property has three values: <code>&#39;loading&#39;</code> (HTML still being parsed), <code>&#39;interactive&#39;</code> (DOM ready, but some resources still loading), and <code>&#39;complete&#39;</code> (everything loaded). If the state is already <code>&#39;interactive&#39;</code> or <code>&#39;complete&#39;</code>, the DOM is ready, and you can call your function immediately.</p>
+<p>This is exactly what jQuery&#39;s <code>$(document).ready()</code> does under the hood. But now you can do it in four lines of vanilla JavaScript.</p>
+<h2>The jQuery-to-vanilla migration</h2>
+<p>If you&#39;re maintaining an older project that still uses <code>$(document).ready()</code>, the migration path is straightforward. Most ready‑block code doesn&#39;t actually depend on jQuery; it just uses jQuery selectors for convenience. Replace the jQuery wrapper with <code>DOMContentLoaded</code> and swap <code>$()</code> for <code>document.querySelectorAll()</code>.</p>
+<p>Before:</p>
+<pre><code class="language-javascript">$(document).ready(function () {
+  $(&quot;.accordion-toggle&quot;).on(&quot;click&quot;, function () {
+    $(this).next(&quot;.accordion-content&quot;).slideToggle();
+  });
+});
+</code></pre>
+<p>After:</p>
+<pre><code class="language-javascript">document.addEventListener(&quot;DOMContentLoaded&quot;, function () {
+  document.querySelectorAll(&quot;.accordion-toggle&quot;).forEach(function (toggle) {
+    toggle.addEventListener(&quot;click&quot;, function () {
+      const content = this.nextElementSibling;
+      content.classList.toggle(&quot;open&quot;);
+    });
+  });
+});
+</code></pre>
+<p>The animation (<code>slideToggle</code>) requires a CSS transition instead of jQuery&#39;s <code>slideToggle()</code>, but the DOM logic is the same. And you&#39;ve just removed a 30 KB library dependency.</p>
+<h2>A real story about a script that loaded too late</h2>
+<p>I once worked on a content site that had a &quot;back to top&quot; button. The button was initialised inside a <code>DOMContentLoaded</code> listener, and it worked perfectly. Then the marketing team added a heavy analytics script that loaded asynchronously and sometimes took five seconds to finish. The <code>load</code> event—which the analytics team used to send page timing data—fired long after the button was already working.</p>
+<p>A new developer, seeing the <code>load</code> event in the codebase, assumed it was the &quot;proper&quot; way to initialise UI components. They moved the back‑to‑top button initialization from <code>DOMContentLoaded</code> to <code>load</code>. Suddenly, users on slow connections saw no button for five seconds. A tiny change broke a perfectly good feature.</p>
+<p>The fix was reverting to <code>DOMContentLoaded</code> for UI initialization and keeping the <code>load</code> event only for analytics. The lesson: <code>DOMContentLoaded</code> is for DOM‑dependent code. <code>load</code> is for asset‑dependent code. Mixing them up causes real user‑visible delays.</p>
+<h2>When you don&#39;t need any &quot;ready&quot; code at all</h2>
+<p>Modern frameworks like React, Vue, and Svelte handle DOM readiness for you. When a component mounts, its DOM elements already exist. You never need <code>DOMContentLoaded</code> inside a React component&#39;s <code>useEffect</code> with an empty dependency array (that runs after paint, but the DOM is guaranteed to be there).</p>
+<p>If you&#39;re writing vanilla JavaScript for a project that uses ES modules and the <code>defer</code> attribute, you might not need any readiness detection. The script executes after the DOM is parsed, and your top‑level code can safely query for elements.</p>
+<pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>ES module scripts automatically behave like they have <code>defer</code>. They execute after the DOM is ready, in order, without blocking rendering. It&#39;s the cleanest approach for modern browsers.</p>
+<h2>Wrapping up</h2>
+<p>The <code>$(document).ready()</code> era is over—not because jQuery is dead, but because the web platform caught up. <code>DOMContentLoaded</code> gives you the same guarantee in vanilla JavaScript. The <code>defer</code> attribute and ES modules let you write code that doesn&#39;t need any readiness wrapper at all.</p>
+<p>If you&#39;re starting a new project, use <code>&lt;script defer&gt;</code> or <code>&lt;script type=&quot;module&quot;&gt;</code> and write your code at the top level. If you&#39;re supporting dynamic scripts that might load after the page has already loaded, use <code>document.readyState</code> to handle both cases elegantly. And if you find a stray <code>$(document).ready()</code> in an old codebase, you now know exactly how to replace it.</p>
+<p>No more incantations. Just the DOM, ready when you are.</p>
+<hr>
+<p><em>Brushing up on modern JavaScript fundamentals and want to write cleaner, dependency‑free code? Red Surge Technology helps teams modernise their frontend stack. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

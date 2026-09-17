@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>React Controlled vs Uncontrolled Components: When to Use Each</title>
+    <meta name="description" content="Master controlled vs uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real refactoring story." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, JavaScript, Forms, State Management, Web Development" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled" />
+    <meta property="og:title" content="React Controlled vs Uncontrolled Components: When to Use Each" />
+    <meta property="og:description" content="Master controlled vs uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real refactoring story." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-controlled-vs-uncontrolled.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-05T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-05T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React, JavaScript, Forms, State Management, Web Development" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Forms" />
+    <meta property="article:tag" content="State Management" />
+    <meta property="article:tag" content="Web Development" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled" />
+    <meta name="twitter:title" content="React Controlled vs Uncontrolled Components: When to Use Each" />
+    <meta name="twitter:description" content="Master controlled vs uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real refactoring story." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-controlled-vs-uncontrolled.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "React Controlled vs Uncontrolled Components: When to Use Each",
+        "description": "Master controlled vs uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real refactoring story.",
+        "url": "https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled",
+        "datePublished": "2026-08-05T10:00:00.000Z",
+        "dateModified": "2026-08-05T10:00:00.000Z",
+        "keywords": "React, JavaScript, Forms, State Management, Web Development",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT11M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-controlled-vs-uncontrolled.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "React Controlled vs Uncontrolled Components: A Practical Guide for Forms and Beyond",
+          "item": "https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">React Controlled vs Uncontrolled Components: A Practical Guide for Forms and Beyond</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          React Controlled vs Uncontrolled Components: A Practical Guide for Forms and Beyond
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/react-controlled-vs-uncontrolled-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/react-controlled-vs-uncontrolled-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/react-controlled-vs-uncontrolled.webp"
+      alt="React Controlled vs Uncontrolled Components: A Practical Guide for Forms and Beyond - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="React Controlled vs Uncontrolled Components: When to Use Each" />
+          <meta itemprop="description" content="Master controlled vs uncontrolled components in React. Practical examples for forms, file inputs, and performance, plus a real refactoring story." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-controlled-vs-uncontrolled" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-05T10:00:00.000Z">Aug 05, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-05T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT11M" />11 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Forms</span><span class="cs-tag" itemprop="keywords">State Management</span><span class="cs-tag" itemprop="keywords">Web Development</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>There are two ways to handle form inputs in React. You can let the DOM handle the input&#39;s value, only grabbing it when you need it. Or you can take full control, binding the input&#39;s value to React state and updating it on every keystroke. These two approaches are called uncontrolled and controlled components, and they&#39;re the source of more confusion than they deserve.</p>
+<p>The React docs mention both, but they don&#39;t always make it clear why you&#39;d pick one over the other. The discussion often devolves into &quot;controlled is the React way&quot; versus &quot;uncontrolled is simpler.&quot; Neither statement is completely true. Both patterns exist for a reason, and picking the right one can save you from a lot of unnecessary code—or a lot of subtle bugs.</p>
+<p>I&#39;ve watched junior developers wrap every single input in <code>useState</code> without thinking, and I&#39;ve seen senior developers avoid controlled components so religiously that they can&#39;t validate a field in real time. The truth is, this isn&#39;t a binary choice. It&#39;s a spectrum, and your job is to find the right spot on it for each input.</p>
+<h2>The fundamental difference</h2>
+<p>In a controlled component, React state is the single source of truth. The input&#39;s <code>value</code> prop is set to a state variable, and an <code>onChange</code> handler updates that state. React owns the value completely.</p>
+<pre><code class="language-javascript">function ControlledForm() {
+  const [email, setEmail] = useState(&quot;&quot;);
+
+  return (
+    &lt;input
+      type=&quot;email&quot;
+      value={email}
+      onChange={(e) =&gt; setEmail(e.target.value)}
+    /&gt;
+  );
+}
+</code></pre>
+<p>Every keystroke triggers a state update, which triggers a re-render, which puts the new value back into the input. The user sees exactly what&#39;s in state. If you want to validate the email on the fly, format it, or restrict certain characters, you can do that in the <code>onChange</code> handler. The UI always reflects your logic.</p>
+<p>In an uncontrolled component, the DOM owns the value. You access it with a ref when you need it—typically on form submission.</p>
+<pre><code class="language-javascript">function UncontrolledForm() {
+  const emailRef = useRef(null);
+
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    // Use the email...
+  };
+
+  return &lt;input type=&quot;email&quot; ref={emailRef} /&gt;;
+}
+</code></pre>
+<p>React doesn&#39;t know or care what&#39;s in that input until you read it from the ref. There&#39;s no state update on every keystroke. There&#39;s no re-render. The input behaves exactly like a plain HTML input, which can feel refreshingly simple.</p>
+<h2>The &quot;one source of truth&quot; advantage</h2>
+<p>The biggest argument for controlled components is that they make your UI predictable. The input&#39;s value is always <code>state.email</code>. If you need to display that value somewhere else—a preview, a character count, a validation message—you just read from state. You don&#39;t need to sync anything.</p>
+<pre><code class="language-javascript">function EmailWithValidation() {
+  const [email, setEmail] = useState(&quot;&quot;);
+  const isValid = email.includes(&quot;@&quot;);
+
+  return (
+    &lt;div&gt;
+      &lt;input value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;
+      {!isValid &amp;&amp; &lt;p className=&quot;error&quot;&gt;Please enter a valid email&lt;/p&gt;}
+      &lt;p&gt;Character count: {email.length}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+</code></pre>
+<p>The validation message and character count update instantly because they&#39;re derived from state. If you used an uncontrolled input, you&#39;d need to either read from the ref on every keystroke (which defeats the purpose) or maintain a separate state variable that mirrors the input (which is essentially a controlled component with extra steps).</p>
+<p>Real-time validation, conditional submit buttons, input masks, and instant search all benefit from having the value in React state. This is the controlled component&#39;s killer feature, and it&#39;s the reason most form libraries—Formik, React Hook Form, Final Form—use controlled inputs under the hood.</p>
+<h2>The performance objection (and when it actually matters)</h2>
+<p>The classic argument against controlled components is performance. Every keystroke triggers a state update and a re-render. Type a sentence, and React re-renders the component fifty times. That sounds bad, but it&#39;s usually not. React is fast at re-rendering, and if your component tree is shallow, the user won&#39;t notice.</p>
+<p>The problem arises with complex forms—dozens of fields, deeply nested components, expensive validation logic running on every keystroke. If you&#39;ve read our guide on <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a>, you know that uncontrolled re-renders in large trees can cause jank. A controlled input at the top of a complex form can cascade renders through every child, even if the child doesn&#39;t depend on the input value.</p>
+<p>This is where uncontrolled components can genuinely help. By keeping the value in the DOM, you avoid the render cascade entirely. Libraries like React Hook Form embrace this—they use refs under the hood, only pulling values when needed, and minimize re-renders.</p>
+<p>But for most forms, performance isn&#39;t the deciding factor. A login form with three fields isn&#39;t going to benefit from uncontrolled components. A spreadsheet-like data grid with hundreds of cells might. Don&#39;t optimize prematurely; start controlled and switch to uncontrolled only if you measure a problem.</p>
+<h2>The file input exception</h2>
+<p>There&#39;s one input type where uncontrolled is basically mandatory: <code>type=&quot;file&quot;</code>. The file input&#39;s value is a <code>FileList</code> object, and it&#39;s read-only. You can&#39;t set <code>value</code> on a file input programmatically—it&#39;s a security restriction in browsers. So controlled components are out.</p>
+<pre><code class="language-javascript">function FileUpload() {
+  const fileRef = useRef(null);
+
+  const handleSubmit = (e) =&gt; {
+    e.preventDefault();
+    const file = fileRef.current.files[0];
+    if (file) uploadFile(file);
+  };
+
+  return &lt;input type=&quot;file&quot; ref={fileRef} /&gt;;
+}
+</code></pre>
+<p>This is an uncontrolled component, and it&#39;s the only sensible way to handle file inputs. You can combine it with controlled state for the file metadata or upload progress, but the raw file input must remain uncontrolled.</p>
+<h2>A story about a form that broke in production</h2>
+<p>I once worked on a checkout flow that used controlled inputs for credit card details. The card number, expiration, and CVC were all in React state, with real-time formatting (inserting spaces every four digits, adding a slash between month and year). It worked beautifully in development.</p>
+<p>Then we got reports from users that the form was broken on certain Android devices. The card number field would lose focus after every few keystrokes. The formatting was causing the cursor to jump to the end, and on some keyboards, that triggered a blur event.</p>
+<p>The fix was to keep the input visually formatted but store the raw value in state and only apply formatting on blur. We used an uncontrolled approach for the visual display, syncing it with state when the user left the field. It was a hybrid: uncontrolled for the input&#39;s native behavior, controlled for the validation logic.</p>
+<p>That experience taught me that the controlled vs uncontrolled distinction isn&#39;t always strict. Sometimes the best approach is a mix of both—using a ref to read the value when you need it, but also maintaining state for validation messages or dependent UI.</p>
+<h2>The hybrid approach using React Hook Form</h2>
+<p>React Hook Form popularized a hybrid approach that many developers now use. It registers inputs as uncontrolled (using refs under the hood), but it gives you access to values, errors, and touched states in real time without triggering full re-renders.</p>
+<pre><code class="language-javascript">import { useForm } from &quot;react-hook-form&quot;;
+
+function LoginForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  return (
+    &lt;form onSubmit={handleSubmit(onSubmit)}&gt;
+      &lt;input {...register(&quot;email&quot;, { required: true })} /&gt;
+      {errors.email &amp;&amp; &lt;span&gt;Email is required&lt;/span&gt;}
+      &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+</code></pre>
+<p>The input behaves as uncontrolled—no <code>value</code> prop, no <code>onChange</code> handler. But the library tracks the value, validates it, and surfaces errors, all without forcing a re-render on every keystroke. Under the hood, it&#39;s using refs and subscribing to specific fields to update only what needs to update.</p>
+<p>If you&#39;ve been building forms with <a href="/blog/react-usestate-vs-usereducer">React&#39;s useState vs useReducer</a>, you&#39;ll find that libraries like React Hook Form replace a lot of the boilerplate you&#39;d otherwise write. They handle the controlled/uncontrolled decision for you, giving you the real-time validation of controlled components with the performance of uncontrolled ones.</p>
+<h2>When to go fully controlled</h2>
+<p>Controlled components are the right call when you need to derive UI from input values in real time. Instant search fields that filter results as you type. Character counters. Live previews. Password strength meters. Any situation where the input value drives other parts of the UI immediately.</p>
+<p>They&#39;re also better when you need to manipulate the value programmatically. Formatting a phone number as the user types. Restricting input to digits only. Converting to uppercase. These require you to set the <code>value</code> prop, which means controlled.</p>
+<p>And they&#39;re better for complex validation that depends on multiple fields. If the validity of the &quot;confirm password&quot; field depends on the &quot;password&quot; field, you need both values in state so you can compare them on every change. Doing this with refs would be awkward.</p>
+<p>If you&#39;ve been exploring <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>, you know that typed, predictable state prevents bugs. Controlled forms give you typed, predictable form state that you can validate, transform, and submit with confidence.</p>
+<h2>When to stay uncontrolled</h2>
+<p>Uncontrolled components shine when you don&#39;t need real-time validation or derived UI. A simple contact form with name, email, and message that only validates on submit. A search bar that only fires a request when the user presses Enter. A settings page where users click &quot;Save&quot; to apply changes.</p>
+<p>They&#39;re also simpler to integrate with non-React code. If you&#39;re embedding React into a legacy application or working with a third-party library that expects to own the DOM, uncontrolled components avoid conflicts.</p>
+<p>And as mentioned, they can improve performance in forms with many fields. If you&#39;re building a data grid where each cell is an input, making them all controlled can cause noticeable lag. Uncontrolled cells with refs avoid the re-render overhead.</p>
+<h2>The mental model shift</h2>
+<p>I&#39;ve found it helpful to think of controlled and uncontrolled not as competing strategies but as different ownership models. With controlled, React owns the value. With uncontrolled, the DOM owns the value. The question is: who needs to know about the value right now?</p>
+<p>If React needs to know (for validation, formatting, dependent UI), go controlled. If only the DOM needs to know until the user submits, go uncontrolled. If both need to know at different times, use a hybrid—a library like React Hook Form or a custom hook that syncs when needed.</p>
+<h2>Wrapping up</h2>
+<p>The controlled vs uncontrolled debate isn&#39;t about which is &quot;more React.&quot; It&#39;s about which ownership model fits your use case. Controlled components give you real-time access to input values, making validation and dependent UI straightforward. Uncontrolled components keep things simple and performant when you don&#39;t need that real-time access.</p>
+<p>Most forms in production use a mix of both, whether explicitly or through a library. The important thing is to make the choice deliberately, not out of habit. Next time you add an input to a component, take a second to ask: does React need to know about every keystroke, or can it wait until the form is submitted?</p>
+<hr>
+<p><em>Building forms in React and want to strike the right balance between control and performance? Red Surge Technology helps teams implement clean, maintainable form patterns. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>

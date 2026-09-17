@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Webpack to Vite Migration Guide: Step-by-Step for 2026</title>
+    <meta name="description" content="A practical Webpack to Vite migration guide. Learn how to replace webpack.config.js, update scripts, handle environment variables, and fix common compatibility issues." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Vite, Webpack, Build Tools, Migration, JavaScript" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide" />
+    <meta property="og:title" content="Webpack to Vite Migration Guide: Step-by-Step for 2026" />
+    <meta property="og:description" content="A practical Webpack to Vite migration guide. Learn how to replace webpack.config.js, update scripts, handle environment variables, and fix common compatibility issues." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/webpack-to-vite-migration-guide.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-08-19T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-08-19T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="Vite, Webpack, Build Tools, Migration, JavaScript" />
+    <meta property="article:tag" content="Vite" />
+    <meta property="article:tag" content="Webpack" />
+    <meta property="article:tag" content="Build Tools" />
+    <meta property="article:tag" content="Migration" />
+    <meta property="article:tag" content="JavaScript" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide" />
+    <meta name="twitter:title" content="Webpack to Vite Migration Guide: Step-by-Step for 2026" />
+    <meta name="twitter:description" content="A practical Webpack to Vite migration guide. Learn how to replace webpack.config.js, update scripts, handle environment variables, and fix common compatibility issues." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/webpack-to-vite-migration-guide.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: async load to avoid render-blocking -->
+    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
+
+    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Webpack to Vite Migration Guide: Step-by-Step for 2026",
+        "description": "A practical Webpack to Vite migration guide. Learn how to replace webpack.config.js, update scripts, handle environment variables, and fix common compatibility issues.",
+        "url": "https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide",
+        "datePublished": "2026-08-19T10:00:00.000Z",
+        "dateModified": "2026-08-19T10:00:00.000Z",
+        "keywords": "Vite, Webpack, Build Tools, Migration, JavaScript",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/webpack-to-vite-migration-guide.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Webpack to Vite Migration Guide: A Practical Step-by-Step Walkthrough",
+          "item": "https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+    <div id="banner-712">
+      <div class="cs-container">
+        <h1 class="cs-int-title">Webpack to Vite Migration Guide: A Practical Step-by-Step Walkthrough</h1>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
+        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+      </picture>
+    </div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Webpack to Vite Migration Guide: A Practical Step-by-Step Walkthrough
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <section id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <picture>
+    <source
+      media="(max-width: 600px)"
+      srcset="/images/blog/uploads/webpack-to-vite-migration-guide-400.webp"
+      type="image/webp" />
+    <source
+      media="(max-width: 1024px)"
+      srcset="/images/blog/uploads/webpack-to-vite-migration-guide-800.webp"
+      type="image/webp" />
+    <img
+      fetchpriority="high"
+      decoding="async"
+      src="/images/blog/uploads/webpack-to-vite-migration-guide.webp"
+      alt="Webpack to Vite Migration Guide: A Practical Step-by-Step Walkthrough - Red Surge Technology Blog"
+      width="1280"
+      height="720"
+    />
+  </picture>
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Webpack to Vite Migration Guide: Step-by-Step for 2026" />
+          <meta itemprop="description" content="A practical Webpack to Vite migration guide. Learn how to replace webpack.config.js, update scripts, handle environment variables, and fix common compatibility issues." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/webpack-to-vite-migration-guide" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-08-19T10:00:00.000Z">Aug 19, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-08-19T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Vite</span><span class="cs-tag" itemprop="keywords">Webpack</span><span class="cs-tag" itemprop="keywords">Build Tools</span><span class="cs-tag" itemprop="keywords">Migration</span><span class="cs-tag" itemprop="keywords">JavaScript</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>So you&#39;ve heard the good news: Vite starts the dev server in milliseconds, bundles faster, and has a much simpler config. You&#39;ve seen the comparison, maybe read our <a href="/blog/webpack-vs-vite">Webpack vs Vite</a> breakdown, and you&#39;re convinced. Now you want to migrate an existing project.</p>
+<p>The good news is that for many projects, the migration is surprisingly smooth. Vite is designed to work out of the box with modern frameworks and standard practices. The bad news is that if your Webpack config is a 400-line monster with custom loaders and <code>require.context</code> hacks, you&#39;ll have some work to do.</p>
+<p>I&#39;ve guided several migrations—some straightforward, some hairier. Here&#39;s a structured approach that will save you from the most common pitfalls. We&#39;ll go step by step, from prep to final cleanup, and I&#39;ll flag the gotchas that tend to trip people up.</p>
+<h2>Pre-migration checklist: know what you&#39;re working with</h2>
+<p>Before you touch anything, inspect your current <code>webpack.config.js</code> (or <code>webpack.config.ts</code>) and note the following:</p>
+<ul>
+<li><strong>Entry points</strong> – are they simple, or do you have multiple entries?</li>
+<li><strong>Loaders</strong> – what file types are you handling? (TypeScript, CSS, Sass, images, SVGs, etc.)</li>
+<li><strong>Plugins</strong> – which Webpack plugins are you using, and do they have Vite equivalents?</li>
+<li><strong>Environment variables</strong> – how does your app access <code>process.env.X</code>?</li>
+<li><strong>Special syntax</strong> – do you use <code>require.context</code>? Webpack-specific import syntax? <code>__dirname</code>?</li>
+<li><strong>Testing</strong> – are you using Jest with a Webpack transform?</li>
+</ul>
+<p>Understanding these will help you map each piece to its Vite counterpart. If your config is simple—just <code>ts-loader</code> and <code>css-loader</code>—you&#39;ll be done in minutes. If it&#39;s complex, take your time.</p>
+<h2>Step 1: install Vite and the necessary plugins</h2>
+<p>First, add Vite to your project:</p>
+<pre><code class="language-bash">npm install -D vite
+</code></pre>
+<p>If you&#39;re using React, add the official React plugin:</p>
+<pre><code class="language-bash">npm install -D @vitejs/plugin-react
+</code></pre>
+<p>For Vue, it&#39;s <code>@vitejs/plugin-vue</code>; for Svelte, <code>@vitejs/plugin-svelte</code>; for plain JS, you may not need anything. These plugins handle hot module replacement, JSX transformation, and other framework-specific needs that Webpack loaders used to manage.</p>
+<p>If you use TypeScript with React, Vite handles <code>.tsx</code> files natively; you just need the plugin for JSX runtime.</p>
+<h2>Step 2: move and update the index.html</h2>
+<p>In Webpack, <code>index.html</code> often lives in the project root or a <code>public/</code> folder and references a generated bundle. Vite expects <code>index.html</code> at the project root and uses it as the dev server entry point.</p>
+<p>Create a new <code>index.html</code> at the project root (or move the existing one). Update the script tag to point to your main source file:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot; /&gt;
+    &lt;title&gt;My App&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
+    &lt;script type=&quot;module&quot; src=&quot;/src/main.tsx&quot;&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>The <code>type=&quot;module&quot;</code> is important. Vite serves your source files as native ES modules during development, so the browser loads them directly. No bundling step, no <code>src</code> attribute pointing to a generated chunk.</p>
+<p>If you previously had HTML in a <code>public/</code> folder, Vite uses <code>public/</code> for static assets that should be served as-is. Move anything like <code>favicon.ico</code>, <code>robots.txt</code>, or <code>manifest.json</code> there, and reference them with absolute paths.</p>
+<h2>Step 3: create a minimal Vite config</h2>
+<p>Replace your <code>webpack.config.js</code> with <code>vite.config.ts</code> (or <code>.js</code>). Here&#39;s a basic React example:</p>
+<pre><code class="language-typescript">// vite.config.ts
+import { defineConfig } from &quot;vite&quot;;
+import react from &quot;@vitejs/plugin-react&quot;;
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      &quot;@&quot;: &quot;/src&quot;,
+    },
+  },
+});
+</code></pre>
+<p>That&#39;s it. No loaders, no entry point, no output config. Vite uses sensible defaults for development and production. The <code>resolve.alias</code> option replaces Webpack&#39;s <code>resolve.alias</code> for path shortcuts.</p>
+<p>If you had <code>process.env.NODE_ENV</code> checks, Vite provides <code>import.meta.env.MODE</code> instead (see step 6).</p>
+<p>If you were using webpack-specific import syntax like <code>import.meta.glob</code> is Vite&#39;s answer to <code>require.context</code> (more on that later).</p>
+<h2>Step 4: update package.json scripts</h2>
+<p>Webpack projects typically have scripts like:</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;start&quot;: &quot;webpack serve --mode development&quot;,
+    &quot;build&quot;: &quot;webpack --mode production&quot;
+  }
+}
+</code></pre>
+<p>Replace them with Vite equivalents:</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;dev&quot;: &quot;vite&quot;,
+    &quot;build&quot;: &quot;vite build&quot;,
+    &quot;preview&quot;: &quot;vite preview&quot;
+  }
+}
+</code></pre>
+<p><code>npm run dev</code> starts the Vite dev server. <code>npm run build</code> creates a production build in <code>dist/</code>. <code>npm run preview</code> serves the production build locally to test before deployment.</p>
+<p>Run <code>npm run dev</code> and see if the page loads. In many simple projects, this works immediately.</p>
+<h2>Step 5: update imports and environment variables</h2>
+<p>Two common changes will break your code:</p>
+<p><strong>1. <code>process.env.X</code> → <code>import.meta.env.VITE_X</code></strong></p>
+<p>Vite does not expose <code>process.env</code> in the browser. Instead, use <code>import.meta.env</code>. Only variables prefixed with <code>VITE_</code> are exposed from <code>.env</code> files to client code.</p>
+<p>Create a <code>.env</code> file at the project root:</p>
+<pre><code>VITE_API_URL=https://api.example.com
+VITE_FEATURE_FLAG=true
+</code></pre>
+<p>In your code, replace <code>process.env.API_URL</code> with <code>import.meta.env.VITE_API_URL</code>. For variables used only in <code>vite.config.ts</code> or server-side code, you can still use <code>process.env</code> if you load them with a library like <code>dotenv</code>, but for client code, <code>import.meta.env</code> is the way.</p>
+<p><strong>2. <code>require</code> → <code>import</code></strong></p>
+<p>Webpack supports CommonJS <code>require</code>. Vite is ESM-first. Change <code>const x = require(&#39;x&#39;)</code> to <code>import x from &#39;x&#39;</code>. If you have dynamic <code>require</code> calls, see the next section.</p>
+<h2>Step 6: replace <code>require.context</code> with <code>import.meta.glob</code></h2>
+<p>Webpack&#39;s <code>require.context</code> allowed you to load many files at once, useful for auto-importing components or routes. Vite&#39;s equivalent is <code>import.meta.glob</code>.</p>
+<p>Before (Webpack):</p>
+<pre><code class="language-javascript">const modules = require.context(&quot;./components&quot;, false, /\.jsx$/);
+modules.keys().forEach((key) =&gt; {
+  const component = modules(key).default;
+  // register component
+});
+</code></pre>
+<p>After (Vite):</p>
+<pre><code class="language-javascript">const modules = import.meta.glob(&quot;./components/*.jsx&quot;);
+for (const path in modules) {
+  const component = (await modules[path]()).default;
+  // register component
+}
+</code></pre>
+<p><code>import.meta.glob</code> returns a promise for each module. If you need synchronous access, you can use <code>import.meta.glob</code> with <code>{ eager: true }</code> to import all modules at once, but that increases the bundle. For most use cases, lazy loading is better.</p>
+<h2>Step 7: CSS and preprocessors</h2>
+<p>Webpack used <code>css-loader</code>, <code>style-loader</code>, and <code>sass-loader</code>. Vite handles CSS natively and supports Sass, Less, and Stylus with the appropriate preprocessor installed.</p>
+<ul>
+<li><strong>Plain CSS</strong>: just import it. Vite processes it automatically.</li>
+<li><strong>CSS Modules</strong>: Vite treats files ending in <code>.module.css</code> as CSS Modules automatically, no config needed.</li>
+<li><strong>Sass/Less</strong>: install <code>sass</code> or <code>less</code> as a dev dependency, and Vite will handle <code>*.scss</code> / <code>*.less</code> imports out of the box.</li>
+<li><strong>PostCSS</strong>: Vite automatically reads <code>postcss.config.js</code> if present. No special plugin needed.</li>
+</ul>
+<p>If you had a custom Webpack setup for CSS Modules or PostCSS presets, verify your <code>postcss.config.js</code> is compatible with Vite (most are).</p>
+<h2>Step 8: static assets and URL handling</h2>
+<p>In Webpack, you often used <code>file-loader</code> or <code>url-loader</code> for images and fonts. Vite handles assets natively. Importing an image returns its URL:</p>
+<pre><code class="language-javascript">import logo from &quot;./logo.png&quot;;
+console.log(logo); // &quot;/src/logo.png&quot; in dev, hashed URL in production
+</code></pre>
+<p>Assets smaller than 4 KB are inlined as base64 by default (configurable via <code>build.assetsInlineLimit</code>). For assets in <code>public/</code>, reference them with absolute paths like <code>/logo.png</code>.</p>
+<p>If you were using <code>file-loader</code> with custom naming, you can customize Vite&#39;s output via <code>build.rollupOptions</code>, but for most projects the defaults are fine.</p>
+<h2>Step 9: TypeScript adjustments</h2>
+<p>Vite supports TypeScript out of the box, but it does not perform type checking during build. It uses esbuild to transpile TS to JS quickly. Type errors won&#39;t fail the build.</p>
+<p>If you want type checking, add <code>vue-tsc</code> (for Vue) or <code>tsc --noEmit</code> before <code>vite build</code> in your scripts. For React, you can use <code>tsc --noEmit &amp;&amp; vite build</code>.</p>
+<p>Also, update <code>tsconfig.json</code>:</p>
+<ul>
+<li>Set <code>&quot;module&quot;: &quot;ESNext&quot;</code> and <code>&quot;moduleResolution&quot;: &quot;bundler&quot;</code> (or <code>&quot;node&quot;</code> if you&#39;re on an older version).</li>
+<li>Add <code>&quot;types&quot;: [&quot;vite/client&quot;]</code> if you use <code>import.meta.env</code> to get proper type hints.</li>
+<li>Remove any Webpack-specific path aliases and add them to Vite&#39;s <code>resolve.alias</code>.</li>
+</ul>
+<h2>Step 10: replace Jest with Vitest</h2>
+<p>If you were using Jest with a Webpack transform, consider switching to Vitest, which shares Vite&#39;s config and transform pipeline. Vitest is API-compatible with Jest for most tests.</p>
+<p>Install Vitest:</p>
+<pre><code class="language-bash">npm install -D vitest
+</code></pre>
+<p>Update <code>package.json</code>:</p>
+<pre><code class="language-json">{
+  &quot;scripts&quot;: {
+    &quot;test&quot;: &quot;vitest&quot;
+  }
+}
+</code></pre>
+<p>Your existing test files usually work without changes. Vitest automatically picks up <code>*.test.ts</code> and <code>*.spec.ts</code> files.</p>
+<p>If you have complex Jest config with module mappers, you can often replace it with Vite&#39;s <code>resolve.alias</code> and <code>define</code> options. The migration from Jest to Vitest is usually straightforward.</p>
+<h2>Common pitfalls and how to fix them</h2>
+<p>Here are the issues I&#39;ve seen most often during migrations:</p>
+<p><strong><code>__dirname</code> is not defined</strong> – Vite runs in the browser, so Node-specific globals are absent. Use <code>import.meta.url</code> or Vite&#39;s <code>define</code> to inject constants. For config files, <code>__dirname</code> works because the config runs in Node.</p>
+<p><strong><code>process</code> is not defined</strong> – Use <code>import.meta.env</code> for environment variables in client code. If you need <code>process</code> in the browser (for a library), you can polyfill it via <code>vite-plugin-node-stdlib-browser</code>.</p>
+<p><strong>Deep imports from a package fail</strong> – Some packages rely on Node.js internals. Vite pre-bundles dependencies, but some need explicit <code>optimizeDeps</code> config. If a package fails, add it to <code>optimizeDeps.include</code>.</p>
+<p><strong><code>module.exports</code> in dependencies</strong> – Most modern packages are ESM-compatible, but some older ones use CommonJS. Vite&#39;s pre-bundling handles this automatically in most cases. If not, consider replacing the dependency.</p>
+<p><strong>Webpack-specific syntax like <code>import.meta.webpackHot</code></strong> – Remove or replace with Vite&#39;s HMR API (<code>import.meta.hot</code>).</p>
+<p><strong>Long absolute imports</strong> – Update <code>resolve.alias</code> in Vite config to match your Webpack aliases.</p>
+<h2>A real-world migration story</h2>
+<p>I migrated a React dashboard from Webpack to Vite a few months ago. The Webpack config was 350 lines, with custom loaders for SVG sprites, a custom babel plugin, and a complicated <code>SplitChunksPlugin</code> setup. The dev server took 80 seconds to start, which made every change painful.</p>
+<p>We followed the steps above. The initial migration took about two hours to get the page loading. The remaining time was spent on three issues: replacing <code>require.context</code> for auto-importing routes, fixing a few Sass imports that used Webpack-specific tilde (<code>~</code>) syntax, and swapping the Jest config for Vitest.</p>
+<p>The result: dev server started in under 2 seconds. Hot module replacement was instant. The team&#39;s productivity jumped immediately. The build time dropped from 45 seconds to 18 seconds. The simplified config was easier for new developers to understand.</p>
+<p>The main lesson: don&#39;t try to replicate every Webpack customization in Vite. Many of those customizations existed because Webpack required them. Vite&#39;s defaults often eliminate the need entirely.</p>
+<h2>Wrapping up</h2>
+<p>Migrating from Webpack to Vite is a worthwhile investment for most projects. The dev server speed alone will make you wonder why you waited. The simplified config reduces maintenance burden, and the faster builds improve CI pipelines.</p>
+<p>Start with a minimal Vite config, get the app running, then gradually add back any customizations you actually need. Don&#39;t port your Webpack config line by line—re-evaluate each piece. Many of the loaders and plugins you thought you needed are built into Vite or replaced by simpler configuration.</p>
+<p>If you&#39;re still on the fence, revisit our <a href="/blog/webpack-vs-vite">Webpack vs Vite</a> comparison for the full picture. And if performance is your main motivation, check out our guide on <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a> to see how tooling fits into the bigger picture.</p>
+<hr>
+<p><em>Ready to modernize your frontend tooling? Red Surge Technology helps teams migrate from Webpack to Vite with minimal downtime. <a href="/contact">Get in touch</a> to discuss your migration.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
+     alt="React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Sparkline Chart Library: The Best Options for Tiny Trend Visualizations in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-heatmap-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-heatmap-chart-library-100.webp"
+     alt="React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Heatmap Chart Library: The Best Options for Data Density Visualization in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-stock-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-stock-chart-library-guide-100.webp"
+     alt="React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Stock Chart Library Guide: The Best Options for Financial Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-chart-library-100.webp"
+     alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-graph-library-guide-100.webp"
+     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>
