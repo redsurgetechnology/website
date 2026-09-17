@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/redsurgetechnology/website#readme",
   "dependencies": {
+    "clean-css": "^5.3.3",
     "gray-matter": "^4.0.3",
     "marked": "^17.0.4",
     "node-fetch": "^3.3.2",

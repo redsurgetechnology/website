@@ -4,8 +4,20 @@ const matter = require("gray-matter");
 const { marked } = require("marked");
 
 // ── Inlined CSS (read once, injected into every post) ─────────────────────
-const mainCss = fs.readFileSync("./css/main.css", "utf8");
-const postsCss = fs.readFileSync("./css/posts.css", "utf8");
+const CleanCSS = require("clean-css");
+
+function minifyCss(filePath) {
+  const raw = fs.readFileSync(filePath, "utf8");
+  const result = new CleanCSS({ level: 2 }).minify(raw);
+  if (result.errors.length) {
+    console.error(`  ❌ CSS minify errors in ${filePath}:`, result.errors);
+    process.exit(1);
+  }
+  return result.styles;
+}
+
+const mainCss = minifyCss("./css/main.css");
+const postsCss = minifyCss("./css/posts.css");
 
 // ── Sidebar: ad + 5 most recent posts (by date, not featured order) ────────
 function generateRecentPostsHTML(currentSlug, postsByDate) {
@@ -110,6 +122,7 @@ files.forEach((file) => {
   posts.push({
     ...data,
     content: marked(content),
+    rawMarkdown: raw, // ← add this
     slug: path.basename(file, ".md"),
   });
 });
@@ -124,6 +137,7 @@ posts.sort((a, b) => {
 // ─── Generate individual post pages ───────────────────────────────────────────
 function generatePostHTML(post, postsByDate) {
   const seoTitle = post.seo_title || post.title;
+  const faqJsonLd = extractFaqJsonLd(post.content, post.rawMarkdown || "");
   const seoDescription = post.seo_description || post.excerpt || "";
   const ogImage = post.og_image || post.cover_image || "/images/og-image.jpg";
   const canonical =
@@ -310,6 +324,8 @@ function generatePostHTML(post, postsByDate) {
 
   // ── Breadcrumb JSON-LD ───────────────────────────────────────────────────────
   const breadcrumbJsonLd = `
+  <!-- JSON-LD: FAQ (only if post has FAQ section) -->
+${faqJsonLd}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -399,6 +415,8 @@ function generatePostHTML(post, postsByDate) {
 <html lang="en-US">
   <head>
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Language" content="en-US" />
@@ -427,7 +445,6 @@ function generatePostHTML(post, postsByDate) {
     <meta property="article:published_time" content="${new Date(post.date).toISOString()}" />
     <meta property="article:modified_time" content="${new Date(lastModified).toISOString()}" />
     ${post.category ? `<meta property="article:section" content="${post.category}" />` : ""}
-    ${tagsString ? `<meta property="article:tag" content="${tagsString}" />` : ""}
     ${tagsString ? tags.map((t) => `<meta property="article:tag" content="${t}" />`).join("\n    ") : ""}
 
     <!-- Twitter Card -->
@@ -475,7 +492,7 @@ function generatePostHTML(post, postsByDate) {
               <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
             <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
-              <img class="cs-meta-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
             <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
               <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
