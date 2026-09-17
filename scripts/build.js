@@ -50,6 +50,7 @@ async function generateImageVariants(coverImage) {
     { suffix: "-100", width: 100 },
     { suffix: "-400", width: 400 },
     { suffix: "-800", width: 800 },
+    { suffix: "-1600", width: 1600 },
   ];
 
   for (const { suffix, width } of variants) {
@@ -61,7 +62,6 @@ async function generateImageVariants(coverImage) {
     console.log(`  🖼️  Generated ${outRel}`);
   }
 }
-
 
 function generateSidebarHTML(post, postsByDate) {
   return `
@@ -533,24 +533,19 @@ function generatePostHTML(post, postsByDate) {
             post.cover_image
               ? `
           <div class="main-img-container">
-  <picture>
-    <source
-      media="(max-width: 600px)"
-      srcset="${post.cover_image.replace(/\.webp$/, "-400.webp")}"
-      type="image/webp" />
-    <source
-      media="(max-width: 1024px)"
-      srcset="${post.cover_image.replace(/\.webp$/, "-800.webp")}"
-      type="image/webp" />
-    <img
-      fetchpriority="high"
-      decoding="async"
-      src="${post.cover_image}"
-      alt="${post.title} - Red Surge Technology Blog"
-      width="1280"
-      height="720"
-    />
-  </picture>
+  <img
+    fetchpriority="high"
+    decoding="async"
+    src="${post.cover_image}"
+    srcset="
+      ${post.cover_image.replace(/\.webp$/, "-400.webp")} 400w,
+      ${post.cover_image.replace(/\.webp$/, "-800.webp")} 800w
+    "
+    sizes="(max-width: 1024px) 92vw, 800px"
+    alt="${post.title} - Red Surge Technology Blog"
+    width="1280"
+    height="720"
+  />
 </div>`
               : ""
           }
