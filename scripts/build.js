@@ -3,6 +3,10 @@ const path = require("path");
 const matter = require("gray-matter");
 const { marked } = require("marked");
 
+// ── Inlined CSS (read once, injected into every post) ─────────────────────
+const mainCss = fs.readFileSync("./css/main.css", "utf8");
+const postsCss = fs.readFileSync("./css/posts.css", "utf8");
+
 // ── Sidebar: ad + 5 most recent posts (by date, not featured order) ────────
 function generateRecentPostsHTML(currentSlug, postsByDate) {
   const recent = postsByDate.filter((p) => p.slug !== currentSlug).slice(0, 5);
@@ -441,12 +445,9 @@ function generatePostHTML(post, postsByDate) {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#d90700" />
 
-    <!-- CSS: async load to avoid render-blocking -->
-    <link rel="preload" href="/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/css/main.css" /></noscript>
-
-    <link rel="preload" href="/css/posts.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/css/posts.css" /></noscript>
+    <!-- CSS: inlined to eliminate render-blocking and prevent FOUC/CLS -->
+    <style>${mainCss}</style>
+    <style>${postsCss}</style>
 
     <!-- JSON-LD: BlogPosting + LocalBusiness -->
     ${jsonLd}
