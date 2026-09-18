@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Language" content="en-US" />
@@ -211,17 +220,17 @@
     </header>
 
     <!-- Banner -->
-    <div id="banner-712">
-      <div class="cs-container">
-        <h1 class="cs-int-title">WCAG Checklist for Web Developers: Your Actionable Accessibility Cheat Sheet</h1>
-      </div>
-      <picture class="cs-background">
-        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
-        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
-        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
-        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
-      </picture>
-    </div>
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">WCAG Checklist for Web Developers: Your Actionable Accessibility Cheat Sheet</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
 
     <!-- Breadcrumb -->
     
@@ -452,6 +461,14 @@
         <ul class="cs-sidebar-list">
           
           <li class="cs-sidebar-item">
+            <a href="/blog/react-gauge-chart-library.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gauge-chart-library-100.webp"
+     alt="React Gauge Chart Library: The Best Options for KPI Dashboards in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gauge Chart Library: The Best Options for KPI Dashboards in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
             <a href="/blog/react-sparkline-chart-library.html" class="cs-sidebar-link">
               <img class="cs-sidebar-thumb"
      src="/images/blog/uploads/react-sparkline-chart-library-100.webp"
@@ -481,14 +498,6 @@
      src="/images/blog/uploads/react-gantt-chart-library-100.webp"
      alt="React Gantt Chart Library: The Best Options for Project Management in 2026" width="80" height="60" loading="lazy" decoding="async" />
               <span class="cs-sidebar-title">React Gantt Chart Library: The Best Options for Project Management in 2026</span>
-            </a>
-          </li>
-          <li class="cs-sidebar-item">
-            <a href="/blog/react-graph-library-guide.html" class="cs-sidebar-link">
-              <img class="cs-sidebar-thumb"
-     src="/images/blog/uploads/react-graph-library-guide-100.webp"
-     alt="React Graph Library Guide: Network Visualization and Plotting in 2026" width="80" height="60" loading="lazy" decoding="async" />
-              <span class="cs-sidebar-title">React Graph Library Guide: Network Visualization and Plotting in 2026</span>
             </a>
           </li>
         </ul>

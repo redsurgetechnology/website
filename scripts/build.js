@@ -417,6 +417,15 @@ ${faqJsonLd}
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Language" content="en-US" />
@@ -527,17 +536,17 @@ ${faqJsonLd}
     </header>
 
     <!-- Banner -->
-    <div id="banner-712">
-      <div class="cs-container">
-        <h1 class="cs-int-title">${post.title}</h1>
-      </div>
-      <picture class="cs-background">
-        <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" />
-        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" />
-        <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" />
-        <img decoding="async" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
-      </picture>
-    </div>
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">${post.title}</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
 
     <!-- Breadcrumb -->
     ${breadcrumbHTML}
