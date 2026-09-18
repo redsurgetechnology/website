@@ -47,7 +47,7 @@ function generateRecentPostsHTML(currentSlug, postsByDate) {
 
 const sharp = require("sharp");
 
-const ROOT = path.resolve(__dirname);
+const ROOT = path.resolve(__dirname, "..");
 
 async function generateImageVariants(coverImage) {
   if (!coverImage || coverImage.startsWith("http")) return;
