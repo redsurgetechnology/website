@@ -18,185 +18,193 @@ featured: false
 no_index: false
 ---
 
-When most developers hear "React data visualization," they think of charts. Line charts, bar charts, pie charts. And to be fair, that's the bulk of what gets built. But data visualization is a much broader discipline. It's about turning data into understanding, and sometimes a bar chart isn't the right tool. Sometimes you need a network graph to show relationships. A map to show geography. A 3D scatter plot to reveal clusters in high-dimensional data. A heatmap to surface density patterns.
+A few years back, I was building an internal tool for a consulting firm. The brief seemed straightforward enough: "We want a dashboard showing which consultants are working on which client engagements." I heard the word "dashboard" and my brain immediately jumped to charts. Bar chart of hours per client. Line chart of utilization over time. Maybe a nice donut for team allocation.
 
-The React ecosystem has libraries for all of these. The challenge is knowing which one to reach for—and understanding that the "best" library depends entirely on what you're trying to visualize. A tool that's perfect for a sales dashboard would be useless for a knowledge graph. A library that renders beautiful maps can't draw a candlestick chart.
+I built it. It looked great. And it completely missed the point.
 
-This guide is a map of the entire landscape. We'll cover charting libraries, network graph libraries, map libraries, 3D visualization tools, and specialized libraries for time-series and financial data. By the end, you'll know which tool to pick for your specific visualization challenge.
+What the client actually needed wasn't a chart at all. It was a **network**. Each consultant was a node. Each client was a node. Each engagement was an edge connecting them. They wanted to look at the screen and instantly see which consultants were clustered around certain clients, who was isolated, where the bottlenecks were. A bar chart can't show that. It just can't. It shows quantities along an axis. It doesn't show _relationships_.
 
-## The Three Categories of Data Visualization
+I rebuilt the whole thing with a force-directed graph library, and the client's reaction told me everything I needed to know. "Oh — _now_ I can see it."
 
-Before we dive into specific libraries, it helps to understand the fundamental categories. Most data visualization problems fall into one of three buckets, and each bucket has different requirements.
+That's the lesson that shaped this guide. The phrase "React data visualization libraries" gets thrown around like it's one category, but it isn't. It's at least four or five distinct categories, each solving a fundamentally different problem. Pick from the wrong category and no amount of tuning will save you. Pick from the right one and the hard part is already done.
 
-**1. Charts and dashboards.** These are the most common. Line charts, bar charts, pie charts, area charts, scatter plots, and combinations. They visualize quantitative data along one or two dimensions. The requirements are relatively straightforward: render shapes efficiently, handle tooltips and interactions, respond to data updates.
+So let's walk through the whole landscape — charts, network graphs, maps, 3D, and specialized tools — and figure out which library actually fits the job you're trying to do.
 
-**2. Network and graph visualization.** These visualize entities and relationships. Nodes and edges. Force-directed layouts, hierarchical trees, clustered networks. The rendering challenge is different—layout algorithms are expensive, and the number of elements can be large. Different libraries excel here.
+## The mental model: four categories, not one
 
-**3. Specialized visualizations.** Maps, 3D plots, heatmaps, Sankey diagrams, chord diagrams, and other domain-specific visualizations. These often require specialized rendering engines (WebGL for 3D, canvas for heatmaps) and have unique APIs.
+Before we start naming libraries, get the categories straight. Most data visualization problems fall into one of these buckets, and each bucket has different technical requirements.
 
-If you've read our [React chart library comparison](/blog/react-chart-library-comparison), you're familiar with the first category. This post covers all three, with a focus on helping you pick the right tool for the job.
+**Charts and dashboards.** Line charts, bar charts, area charts, scatter plots, and the occasional pie. These show quantitative values along one or two axes. Most tutorials you'll read cover only this category.
 
-## Charting Libraries: The Dashboard Workhorses
+**Network and graph visualization.** Nodes and edges. Relationships between entities. Force-directed layouts, hierarchical trees, clustered networks. The rendering challenge here isn't drawing shapes — it's computing layout, which gets expensive fast.
 
-Let's start with the most common category. These libraries render traditional charts—line, bar, area, pie, scatter—and are the foundation of most dashboards.
+**Maps and geospatial.** Data tied to geography. Tiles, projections, layers, markers. These need specialized rendering engines built around coordinate systems.
 
-### Recharts: The Pragmatic Default
+**3D and spatial.** Scatter plots in three dimensions, globes, point clouds. These almost always mean WebGL.
 
-Recharts remains the most popular React charting library by a wide margin, with over 27k GitHub stars and 48 million weekly downloads[reference:0]. The component-based API feels natural in React—you compose charts by nesting components, which mirrors the visual hierarchy.
+If you've read our [React chart library comparison](/blog/react-chart-library-comparison), you already know the first category well. This guide covers all four, plus a handful of niche libraries that solve specific problems you'll run into sooner or later.
 
-**Strengths:** Simple API, excellent documentation, large community, handles standard dashboard charts without friction. It's the default choice for shadcn/ui Charts, which wraps Recharts for a polished, Tailwind-friendly experience[reference:1].
+## Charting libraries: the dashboard workhorses
 
-**Weaknesses:** SVG rendering limits performance with large datasets. At a few thousand data points, you'll start seeing render bottlenecks. The component API can feel rigid for highly custom visualizations.
+Let's start where most projects start. These libraries render traditional charts — line, bar, area, pie, scatter — and they form the backbone of nearly every React dashboard.
 
-**When to choose it:** You're building a standard dashboard with line, bar, area, and pie charts, and you want the widest ecosystem and the least friction.
+### Recharts: the pragmatic default
 
-### Apache ECharts: The Feature-Rich Powerhouse
+Recharts is still the most popular React charting library by a wide margin, with over 27,000 GitHub stars and tens of millions of weekly downloads. The component-based API feels like it was made for React, because it basically was. You compose a chart by nesting components, and the resulting JSX mirrors the visual hierarchy of the chart itself.
 
-Apache ECharts is one of the most capable charting libraries available, with 66k GitHub stars and 2.7 million weekly downloads[reference:2]. It uses canvas rendering by default, which makes it dramatically faster than SVG libraries for large datasets. It supports every chart type you can imagine—candlestick, heatmap, Sankey, graph, treemap, gauge—and has built-in features like data zoom, brush selection, and visual mapping.
+**What it's good at:** Simple API, excellent documentation, a massive community, and zero friction for standard dashboard charts. It's the default choice behind shadcn/ui Charts, which wraps Recharts to give you a polished, Tailwind-friendly starting point.
 
-**Strengths:** Handles 50K+ data points smoothly. Extensive feature set. Tree-shakeable to reduce bundle size. The `echarts-for-react` wrapper is mature and well-maintained.
+**Where it struggles:** SVG rendering puts a ceiling on how much data you can throw at it. A few thousand points and you'll start seeing render bottlenecks. The component API can also feel stiff when you need something genuinely custom.
 
-**Weaknesses:** Bundle size is larger than lightweight alternatives (~200 KB, or ~80 KB tree-shaken)[reference:3]. The API is imperative and configuration-heavy, which can feel verbose compared to Recharts' declarative JSX.
+**Pick it when:** You're building a standard dashboard with line, bar, area, and pie charts, and you want the widest ecosystem with the least setup.
 
-**When to choose it:** You have large datasets (50K+ points), need advanced chart types, or require features like data zoom and brush selection. Our [React charting library performance benchmarks](/blog/react-chart-library-performance-benchmarks) show ECharts is one of the fastest options for high-volume data.
+### Apache ECharts: the feature-rich powerhouse
 
-### visx: The Low-Level Building Blocks
+Apache ECharts is one of the most capable charting libraries in any ecosystem, with 66,000 GitHub stars and millions of weekly downloads. It renders to canvas by default, which makes it dramatically faster than SVG libraries for large datasets. It supports essentially every chart type you can imagine — candlestick, heatmap, Sankey, graph, treemap, gauge — and ships with built-in features like data zoom, brush selection, and visual mapping.
 
-visx from Airbnb is not a charting library in the traditional sense—it's a collection of low-level visualization primitives. You compose axes, scales, shapes, and tooltips yourself. It's essentially D3 with a React-friendly wrapper, giving you complete control over rendering.
+**What it's good at:** Handles 50K+ data points smoothly. Feature set is enormous. Tree-shakeable, so you can trim the bundle to what you actually use. The `echarts-for-react` wrapper is mature and well-maintained.
 
-**Strengths:** Maximum flexibility. Tiny bundle size because you only import what you use (~5–15 KB per package)[reference:4]. Excellent TypeScript support. Best choice for custom, highly interactive visualizations.
+**Where it struggles:** The full bundle is larger than lightweight alternatives — around 200 KB, or roughly 80 KB when tree-shaken. The API is imperative and configuration-heavy, which can feel verbose next to Recharts' declarative JSX.
 
-**Weaknesses:** Steep learning curve. You're building charts from primitives, which takes more code than using a pre-built component. Requires D3 knowledge for scales and layouts.
+**Pick it when:** You have large datasets (50K+ points), need advanced chart types, or want data zoom and brush selection out of the box. Our [React charting library performance tests](/blog/react-chart-library-performance-benchmarks) showed ECharts consistently among the fastest options for high-volume data.
 
-**When to choose it:** You need highly custom visualizations that don't fit standard chart types, or you're building a design system with specific rendering requirements. It's the go-to for teams with D3 experience.
+### visx: the low-level building blocks
 
-### Nivo: Beautiful Defaults, Rich Chart Types
+visx from Airbnb isn't really a charting library. It's a collection of low-level visualization primitives. You compose axes, scales, shapes, and tooltips yourself. Think of it as D3 with a React-friendly wrapper — full control, no hand-holding.
 
-Nivo is built on D3 and provides a rich set of dataviz components with beautiful defaults. It supports 14k+ GitHub stars and includes unusual chart types like Sankey, chord, and stream[reference:5]. It renders to SVG, Canvas, or HTML depending on the component.
+**What it's good at:** Maximum flexibility. Tiny bundle because you only import what you use — usually 5 to 15 KB per package. Excellent TypeScript support. The best option when you need something truly custom.
 
-**Strengths:** Aesthetically polished out of the box. Server-side rendering support. Wide range of chart types. Good for dashboards where visual quality matters.
+**Where it struggles:** Steep learning curve. You're building charts from primitives, so it takes noticeably more code than a pre-built component. You'll want some familiarity with D3 scales and layouts.
 
-**Weaknesses:** SVG rendering limits performance at scale. Bundle size is moderate (~50–80 KB per chart type)[reference:6]. Less flexible for deep customization than visx.
+**Pick it when:** You need highly custom visualizations that don't fit standard chart types, or you're building a design system with specific rendering requirements. It's the natural choice for teams with D3 experience.
 
-**When to choose it:** You want beautiful, themed charts with minimal configuration and your dataset is moderate in size.
+### Nivo: beautiful defaults, rich chart types
 
-### react-chartjs-2: The Canvas Workhorse
+Nivo is built on D3 and delivers a wide set of dataviz components with genuinely nice defaults. It has around 14,000 GitHub stars and includes less common chart types like Sankey, chord, and stream. It renders to SVG, Canvas, or HTML depending on the component.
 
-react-chartjs-2 wraps Chart.js, which uses canvas rendering. It's the battle-tested option for teams already familiar with Chart.js.
+**What it's good at:** Aesthetically polished with almost no configuration. Server-side rendering support. Wide range of chart types. Great for dashboards where visual quality matters.
 
-**Strengths:** Canvas rendering handles large datasets well. Simple API. Extensive documentation from the Chart.js community.
+**Where it struggles:** SVG rendering limits performance at scale. Bundle size is moderate — roughly 50 to 80 KB per chart type. Less flexible for deep customization than visx.
 
-**Weaknesses:** Less React-idiomatic than Recharts or Nivo. The bundle size is moderate (~85 KB)[reference:7]. The library's development has slowed in recent years, though it's still widely used.
+**Pick it when:** You want beautiful, themed charts with minimal setup and your dataset is moderate in size.
 
-**When to choose it:** You're migrating from Chart.js or need canvas performance with a familiar API. For new projects, ECharts is generally a better choice.
+### react-chartjs-2: the canvas workhorse
 
-## Network Graph Libraries: Visualizing Relationships
+react-chartjs-2 wraps Chart.js, which uses canvas rendering. It's the battle-tested option for teams already familiar with Chart.js from other projects.
 
-Network graphs are a different beast. Nodes and edges, force-directed layouts, and graph algorithms. The libraries in this space are specialized and often lesser-known than the charting giants.
+**What it's good at:** Canvas rendering handles larger datasets well. Simple API. Deep documentation from the Chart.js community.
 
-### reagraph: WebGL Performance for Networks
+**Where it struggles:** Less React-idiomatic than Recharts or Nivo. Bundle size is moderate at around 85 KB. Development has slowed in recent years, though it's still widely used and maintained.
 
-reagraph is a high-performance network graph visualization built in WebGL for React. It's part of the Reaflow/Reablocks ecosystem and focuses specifically on graph rendering at scale.
+**Pick it when:** You're migrating from Chart.js or need canvas performance with a familiar API. For brand-new projects, ECharts is usually the better starting point.
 
-**Strengths:** WebGL rendering handles thousands of nodes. Built-in layouts include force-directed, tree, radial, hierarchical, and concentric. Features like path finding, expand/collapse nodes, lasso selection, and edge bundling are included.
+## Network graph libraries: visualizing relationships
 
-**Weaknesses:** The API is more complex than general charting libraries. It's a specialized tool, so the community is smaller.
+Network graphs are a different beast entirely. Nodes and edges, force-directed layouts, graph algorithms. The libraries here are more specialized and often less famous than the charting giants. This is the category I should have reached for on that consulting dashboard.
 
-**When to choose it:** You need to visualize large networks (thousands of nodes) with rich interactions and built-in layouts. Our [React graph library guide](/blog/react-graph-library-guide) covers reagraph in more depth.
+### reagraph: WebGL performance for networks
 
-### react-force-graph: The Declarative Force-Directed Option
+reagraph is a high-performance network graph visualization built in WebGL for React. It's part of the Reaflow/Reablocks ecosystem and focuses specifically on rendering graphs at scale.
+
+**What it's good at:** WebGL rendering handles thousands of nodes without breaking a sweat. Built-in layouts include force-directed, tree, radial, hierarchical, and concentric. Features like path finding, expand/collapse nodes, lasso selection, and edge bundling are included out of the box.
+
+**Where it struggles:** The API is more complex than general charting libraries. It's a specialized tool, so the community is smaller.
+
+**Pick it when:** You need to visualize large networks — thousands of nodes — with rich interactions and built-in layouts. Our [React graph library guide](/blog/react-graph-library-guide) covers reagraph in more depth.
+
+### react-force-graph: the declarative force-directed option
 
 react-force-graph is a set of React components for 2D, 3D, VR, and AR force-directed graphs. It wraps the popular `force-graph` library from the same author.
 
-**Strengths:** Declarative React API. Multiple rendering targets (2D canvas, 3D WebGL, VR). Zoom, pan, drag, and click handlers work out of the box. Reasonable bundle size (~60 KB).
+**What it's good at:** Declarative React API. Multiple rendering targets — 2D canvas, 3D WebGL, VR. Zoom, pan, drag, and click handlers work without any wiring. Reasonable bundle size, around 60 KB.
 
-**Weaknesses:** Canvas-based 2D rendering handles ~500 nodes smoothly; beyond that, performance degrades. Limited graph algorithms.
+**Where it struggles:** Canvas-based 2D rendering handles roughly 500 nodes smoothly. Beyond that, performance degrades noticeably. Limited graph algorithms compared to specialized tools.
 
-**When to choose it:** You need force-directed layouts and want a declarative React component. It's great for knowledge graphs and personal-scale networks.
+**Pick it when:** You need force-directed layouts and want a declarative React component. Great for knowledge graphs and personal-scale networks.
 
-### nx-react-sigma: The High-Performance Sigma.js Wrapper
+### nx-react-sigma: the high-performance Sigma.js wrapper
 
-nx-react-sigma is a modern React wrapper for Sigma.js v3, built with Clean Architecture principles. It provides type-safe, modular graph visualization with performance optimizations for large graphs.
+nx-react-sigma is a modern React wrapper for Sigma.js v3, built with Clean Architecture principles. It provides type-safe, modular graph visualization with strong performance characteristics for large graphs.
 
-**Strengths:** Built with TypeScript for full type safety. Uses `use-context-selector` to minimize React re-renders, ensuring 60fps performance even with large graphs[reference:8]. Integrated layout management including Force, ForceAtlas2, Noverlap, and custom layouts. Drag-and-drop, hover, click, and zoom interactions work out of the box[reference:9].
+**What it's good at:** Built with TypeScript for full type safety. Uses `use-context-selector` to minimize React re-renders, keeping performance smooth even with large graphs. Integrated layout management includes Force, ForceAtlas2, Noverlap, and custom layouts. Drag-and-drop, hover, click, and zoom interactions work out of the box.
 
-**Weaknesses:** Newer library with a smaller community. Less documentation than established alternatives.
+**Where it struggles:** Newer library with a smaller community. Less documentation than established alternatives.
 
-**When to choose it:** You need WebGL-powered graph rendering with strong TypeScript support and modern architecture.
+**Pick it when:** You need WebGL-powered graph rendering with strong TypeScript support and modern architecture.
 
-## Map and Geospatial Libraries
+## Map and geospatial libraries
 
-Maps are a distinct visualization category. The data is geographic, and the rendering requirements—tiles, projections, layers—are specialized.
+Maps are their own category. The data is geographic, and the rendering requirements — tiles, projections, layers — are specialized enough that you can't fake it with a chart library.
 
-### react-map-gl: The Mapbox/MapLibre Wrapper
+### react-map-gl: the Mapbox/MapLibre wrapper
 
-react-map-gl is a React wrapper for Mapbox GL JS and MapLibre GL JS. It provides a declarative API for interactive maps with layers, markers, popups, and navigation controls.
+react-map-gl is a React wrapper for Mapbox GL JS and MapLibre GL JS. It gives you a declarative API for interactive maps with layers, markers, popups, and navigation controls.
 
-**Strengths:** Excellent performance with WebGL rendering. Rich ecosystem of plugins and styles. Works with Mapbox or the open-source MapLibre fork.
+**What it's good at:** Excellent performance thanks to WebGL rendering. Rich ecosystem of plugins and styles. Works with Mapbox or the open-source MapLibre fork.
 
-**Weaknesses:** Requires a Mapbox access token (unless using MapLibre). The API is tied to the underlying map library.
+**Where it struggles:** Requires a Mapbox access token unless you're using MapLibre. The API is tightly coupled to the underlying map library.
 
-**When to choose it:** You need interactive, customizable maps with layers, markers, and geospatial data. It's the standard for map-heavy applications.
+**Pick it when:** You need interactive, customizable maps with layers, markers, and geospatial data. It's the standard for map-heavy applications.
 
-### react-simple-maps: The SVG Map Option
+### react-simple-maps: the SVG map option
 
-react-simple-maps is a lightweight library for rendering SVG maps of the world, continents, and countries. It's simpler than react-map-gl and doesn't require external tile services.
+react-simple-maps is a lightweight library for rendering SVG maps of the world, continents, and countries. It's simpler than react-map-gl and doesn't need external tile services.
 
-**Strengths:** Lightweight and easy to use. Renders to SVG, which makes styling and interaction straightforward. No API keys required.
+**What it's good at:** Lightweight and easy to use. Renders to SVG, which makes styling and interaction straightforward. No API keys required.
 
-**Weaknesses:** Limited to pre-defined geographies (world, countries, states). Not suitable for street-level maps or custom tiles.
+**Where it struggles:** Limited to pre-defined geographies — world, countries, states. Not suitable for street-level maps or custom tiles.
 
-**When to choose it:** You need a simple choropleth map or geographic visualization without the overhead of a full mapping library.
+**Pick it when:** You need a simple choropleth map or geographic visualization without the overhead of a full mapping library.
 
-## 3D Visualization Libraries
+## 3D visualization libraries
 
-3D visualization is a niche but growing area. These libraries render data in three dimensions, often using WebGL.
+3D visualization is a niche but growing area. These libraries render data in three dimensions, almost always using WebGL.
 
-### react-three-fiber: The Three.js Renderer for React
+### react-three-fiber: the Three.js renderer for React
 
-react-three-fiber is a React renderer for Three.js, the most popular WebGL library. It lets you build 3D scenes with React components, using a declarative API that feels natural in the React ecosystem.
+react-three-fiber is a React renderer for Three.js, the most popular WebGL library in the world. It lets you build 3D scenes with React components, using a declarative API that feels at home in React.
 
-**Strengths:** Huge ecosystem (Three.js). Declarative React API. Excellent performance for complex 3D scenes. Works with React Three Drei for common abstractions.
+**What it's good at:** Huge ecosystem because it sits on top of Three.js. Declarative React API. Excellent performance for complex 3D scenes. Plays nicely with React Three Drei, which provides common abstractions.
 
-**Weaknesses:** Steep learning curve if you're new to 3D graphics. Bundle size can be large depending on what you import.
+**Where it struggles:** Steep learning curve if you're new to 3D graphics. Bundle size can grow depending on what you import.
 
-**When to choose it:** You need 3D scatter plots, globe visualizations, or custom 3D data representations. It's the foundation for most 3D visualization in React.
+**Pick it when:** You need 3D scatter plots, globe visualizations, or custom 3D data representations. It's the foundation for most 3D visualization in React.
 
-### earth-map-3d-react: The 3D Globe Component
+### earth-map-3d-react: the 3D globe component
 
 earth-map-3d-react is a specialized component for viewing the Earth in 3D with network edges between countries or cities. It's built on Three.js and Globe.gl.
 
-**Strengths:** Purpose-built for globe visualizations with network data. Simple API—pass nodes and edges, get an interactive 3D globe. TypeScript support.
+**What it's good at:** Purpose-built for globe visualizations with network data. Simple API — pass in nodes and edges, get an interactive 3D globe. TypeScript support included.
 
-**Weaknesses:** Very niche. Limited to globe visualization. Small community.
+**Where it struggles:** Very niche. Limited to globe visualization. Small community.
 
-**When to choose it:** You need a 3D globe showing connections between geographic locations. It's a focused tool that does one thing well.
+**Pick it when:** You need a 3D globe showing connections between geographic locations. It's a focused tool that does one thing well.
 
-## Specialized and Niche Libraries
+## Specialized and niche libraries
 
-Beyond the major categories, there are libraries for specific visualization types.
+Beyond the major categories, there are libraries built for specific visualization types.
 
-### react-canvas-timechart: Synchronized Time-Series
+### react-canvas-timechart: synchronized time-series
 
 react-canvas-timechart is a high-performance canvas-based time-series chart with synchronized zoom, pan, and multi-chart tooltip support via `ChartProvider`.
 
-**When to choose it:** You need synchronized time-series charts for analytics dashboards, sensor data, or multi-metric monitoring. It's excellent for any application where multiple charts need to stay in sync.
+**Pick it when:** You need synchronized time-series charts for analytics dashboards, sensor data, or multi-metric monitoring. It's excellent when multiple charts need to stay in sync.
 
-### react-financial-charts (Fork): Full-Featured Trading
+### react-financial-charts (fork): full-featured trading
 
 The `@sgonzaloc/react-financial-charts` fork provides a comprehensive financial charting library with 15+ technical indicators, 10+ drawing tools, and chart types including Candlestick, OHLC, HeikenAshi, Renko, Kagi, and Point & Figure. It's React 18/19 ready and TypeScript-native.
 
-**When to choose it:** You're building a trading interface that needs built-in indicators and drawing tools without a commercial license. Our [React financial/time-series charts guide](/blog/react-financial-time-series-charts) covers this in depth.
+**Pick it when:** You're building a trading interface that needs built-in indicators and drawing tools without a commercial license. Our [React financial and time-series charts guide](/blog/react-financial-time-series-charts) covers this in depth.
 
-### JointJS for React: Diagramming and Flowcharts
+### JointJS for React: diagramming and flowcharts
 
 JointJS is a production-grade diagramming library for React. It's designed for flowcharts, org charts, and other diagrammatic visualizations.
 
-**Strengths:** Purpose-built for diagramming. Rich interaction model. Enterprise support available.
+**What it's good at:** Purpose-built for diagramming. Rich interaction model. Enterprise support available.
 
-**When to choose it:** You need to build flowcharts, process diagrams, or interactive node-link diagrams where the focus is on editing and manipulation rather than data-driven layout.
+**Pick it when:** You need to build flowcharts, process diagrams, or interactive node-link diagrams where the focus is editing and manipulation rather than data-driven layout.
 
-## Comparison Table: React Data Visualization Libraries by Category
+## Comparison table: React data visualization libraries by category
 
 | Category        | Library                | Rendering    | Best For                              | License    |
 | --------------- | ---------------------- | ------------ | ------------------------------------- | ---------- |
@@ -204,6 +212,7 @@ JointJS is a production-grade diagramming library for React. It's designed for f
 | **Charts**      | Apache ECharts         | Canvas/SVG   | Large datasets, advanced interactions | Apache 2.0 |
 | **Charts**      | visx                   | SVG          | Custom visualizations                 | MIT        |
 | **Charts**      | Nivo                   | SVG/Canvas   | Beautiful defaults, many chart types  | MIT        |
+| **Charts**      | react-chartjs-2        | Canvas       | Chart.js users, moderate datasets     | MIT        |
 | **Network**     | reagraph               | WebGL        | Large networks, built-in layouts      | MIT        |
 | **Network**     | react-force-graph      | Canvas/WebGL | Force-directed, declarative React     | MIT        |
 | **Network**     | nx-react-sigma         | WebGL        | High-performance, TypeScript          | MIT        |
@@ -215,56 +224,91 @@ JointJS is a production-grade diagramming library for React. It's designed for f
 | **Financial**   | react-financial-charts | SVG          | Trading interfaces                    | MIT        |
 | **Diagramming** | JointJS for React      | SVG/Canvas   | Flowcharts, org charts                | Commercial |
 
-## Decision Framework: How to Pick the Right Library
+## Decision framework: how to actually pick
 
-Here's the decision tree I use when recommending data visualization libraries:
+Here's the decision tree I run through when recommending a library. Start at the top and work down.
 
-**1. What are you visualizing?**
+**Step 1: What are you visualizing?**
 
-- **Quantitative data (numbers over time or categories):** → Charting library (Recharts, ECharts, visx).
-- **Relationships (nodes and edges):** → Network graph library (reagraph, react-force-graph, nx-react-sigma).
-- **Geography:** → Map library (react-map-gl, react-simple-maps).
-- **3D data:** → 3D library (react-three-fiber, earth-map-3d-react).
-- **Time-series with synchronization:** → react-canvas-timechart.
-- **Financial/trading data:** → @sgonzaloc/react-financial-charts.
+- **Quantitative data over time or categories** → charting library (Recharts, ECharts, visx, Nivo)
+- **Relationships between entities** → network graph library (reagraph, react-force-graph, nx-react-sigma)
+- **Geography** → map library (react-map-gl, react-simple-maps)
+- **Spatial data in three dimensions** → 3D library (react-three-fiber, earth-map-3d-react)
+- **Synchronized time-series** → react-canvas-timechart
+- **Financial or trading data** → @sgonzaloc/react-financial-charts
+- **Flowcharts and process diagrams** → JointJS for React
 
-**2. How much data?**
+**Step 2: How much data?**
 
-- **Under 1,000 points:** SVG libraries are fine (Recharts, Nivo, visx).
-- **1,000–10,000 points:** Canvas libraries (ECharts, react-chartjs-2) or optimized SVG.
-- **10,000+ points:** Canvas or WebGL (ECharts, reagraph, react-three-fiber).
+- **Under 1,000 points** → SVG libraries are fine (Recharts, Nivo, visx)
+- **1,000 to 10,000 points** → canvas libraries (ECharts, react-chartjs-2) or heavily optimized SVG
+- **10,000+ points** → canvas or WebGL (ECharts, reagraph, react-three-fiber)
 
-**3. How much customization?**
+**Step 3: How much customization do you need?**
 
-- **Standard charts, minimal customization:** Recharts or Nivo.
-- **Deep customization:** visx or react-three-fiber.
-- **Advanced chart types:** ECharts or Nivo.
+- **Standard charts, minimal customization** → Recharts or Nivo
+- **Deep customization** → visx or react-three-fiber
+- **Advanced chart types** → ECharts or Nivo
 
-**4. What's your team's experience?**
+**Step 4: What's your team's experience?**
 
-- **New to visualization:** Recharts or Nivo.
-- **D3 experience:** visx or raw D3.
-- **3D/graphics experience:** react-three-fiber.
+- **New to visualization** → Recharts or Nivo
+- **Comfortable with D3** → visx or raw D3
+- **3D or graphics background** → react-three-fiber
 
-## Performance Considerations Across All Categories
+## Performance considerations across every category
 
-Performance is the most common pain point in data visualization. The principles are consistent across categories:
+Performance is the single most common pain point in data visualization, and the principles hold steady no matter which category you're in.
 
-**Rendering model matters most.** SVG creates a DOM node per element. Canvas renders to a single element. WebGL uses the GPU. For high-volume data, canvas or WebGL is almost always necessary. Our [React charting library for large datasets](/blog/react-charting-library-for-large-datasets) guide covers the specifics.
+**Rendering model matters more than anything else.** SVG creates a DOM node per element. Canvas renders everything into a single element. WebGL uses the GPU. For high-volume data, canvas or WebGL is almost always necessary. Our [React charting library for large datasets](/blog/react-charting-library-for-large-datasets) guide walks through the specifics.
 
-**Downsample when possible.** A 100,000-point scatter plot doesn't need 100,000 rendered points. Downsample to a few thousand and the visual result is identical. Use min-max decimation or LTTB for time-series data.
+**Downsample when you can.** A 100,000-point scatter plot doesn't need 100,000 rendered points. Downsample to a few thousand and the visual result is effectively identical. Min-max decimation and LTTB work well for time-series data.
 
-**Memoize components.** Wrap visualization components in `React.memo` and ensure props are stable. This prevents unnecessary re-renders when the parent updates. Our guide on [preventing unnecessary re-renders in React](/blog/prevent-unnecessary-rerenders-react) covers the patterns.
+**Memoize your components.** Wrap visualization components in `React.memo` and keep props stable. This prevents unnecessary re-renders when parent components update. Our guide on [preventing unnecessary re-renders in React](/blog/prevent-unnecessary-rerenders-react) has the patterns.
 
-**Debounce updates.** If your data streams in, throttle or debounce updates to avoid re-rendering on every tick. Our [JavaScript debounce vs throttle](/blog/javascript-debounce-vs-throttle) guide has the details.
+**Debounce streaming updates.** If your data arrives in a stream, throttle or debounce the updates so you're not re-rendering on every tick. Our [JavaScript debounce vs throttle](/blog/javascript-debounce-vs-throttle) guide explains the tradeoffs.
 
-**Test on real devices.** A visualization that's fast on a laptop can stutter on a tablet. Always benchmark on representative hardware.
+**Test on real devices.** A visualization that feels instant on a laptop can stutter on a tablet. Always test on the hardware your users actually have.
 
-## Wrapping Up
+## Frequently asked questions about React data visualization libraries
 
-The React data visualization ecosystem is vast and diverse. There's no single "best" library—there's only the right tool for your specific data and use case. Charting libraries like Recharts, ECharts, and visx handle the bulk of dashboard needs. Network graph libraries like reagraph and react-force-graph visualize relationships. Map libraries handle geography. 3D libraries open up spatial visualization. And specialized libraries cover time-series, financial data, and diagramming.
+### What's the most popular React data visualization library?
 
-The key is to start by understanding what you're visualizing, not by picking a library. Once you know the category—charts, networks, maps, or 3D—the right library becomes much clearer. And if you're building a dashboard, don't miss our guide on the [best React chart library for dashboards](/blog/best-react-chart-library-for-dashboards-2026), which narrows the focus to the most common use case.
+Recharts is the most widely used React charting library by a large margin, thanks to its component-based API and gentle learning curve. It's followed closely by Apache ECharts, which is more feature-rich but has a heavier configuration-based API. For network graphs, reagraph and react-force-graph are the current go-to options. For maps, react-map-gl is the standard.
+
+### What's the difference between a charting library and a data visualization library?
+
+A charting library focuses on traditional charts — line, bar, area, pie, scatter. A data visualization library is a broader category that includes charts, but also network graphs, maps, 3D plots, heatmaps, and any other way of turning data into something visual. If you only need standard charts, a charting library is enough. If you need to visualize relationships, geography, or spatial data, you'll need something from a different category.
+
+### Which React library is best for large datasets?
+
+For canvas-based charting with large datasets, Apache ECharts handles 50K+ points smoothly and is the safest choice among the general charting libraries. For network graphs with thousands of nodes, reagraph and nx-react-sigma use WebGL and stay performant. For 3D data, react-three-fiber inherits Three.js's performance characteristics. The general rule: SVG breaks down past a few thousand points, canvas handles tens of thousands, and WebGL scales further still.
+
+### Can I use Recharts and ECharts in the same project?
+
+Yes, and plenty of teams do. Recharts is a good fit for simple dashboard charts where the API overhead isn't worth it, and ECharts is better for the heavy-hitting visualizations that need canvas performance or advanced chart types. The one thing to watch is bundle size — pulling in both libraries adds weight, so only import what you're actually using.
+
+### Do I need WebGL for data visualization in React?
+
+Not always. WebGL only becomes necessary when you're rendering thousands of elements at once, or when you're working in 3D. For typical dashboards with a handful of charts, SVG or canvas is more than enough. Reach for WebGL when you hit a real performance wall, not preemptively.
+
+### What's the best React library for network graphs?
+
+It depends on scale. For a few hundred nodes with a declarative API, react-force-graph is simple and pleasant. For thousands of nodes with built-in layouts and rich interactions, reagraph is the strongest option. For a TypeScript-first codebase that wants modern architecture and WebGL performance, nx-react-sigma is worth a look.
+
+### Should I use react-three-fiber for 2D charts?
+
+No. react-three-fiber is a React renderer for Three.js, and while you could theoretically render a 2D chart with it, you'd be fighting the tool. Use a proper charting library for 2D charts and reach for react-three-fiber only when you genuinely need three dimensions.
+
+## Wrapping up
+
+The React data visualization ecosystem is bigger and more diverse than most developers realize. There's no single "best" library — there's only the right tool for the data you have and the story you're trying to tell.
+
+Charting libraries like Recharts, ECharts, and visx handle the vast majority of dashboard needs. Network graph libraries like reagraph and react-force-graph visualize relationships. Map libraries handle geography. 3D libraries open up spatial visualization. And specialized libraries cover time-series, financial data, and diagramming.
+
+The most useful habit you can build is to start with the question, not the library. What are you actually visualizing? Once you know the category — charts, networks, maps, or 3D — the right library becomes obvious. That consulting dashboard I mentioned at the top would have taken half the time if I'd asked that question before opening my editor.
+
+And if you're building a dashboard specifically, don't miss our guide on the [best React chart library for dashboards](/blog/best-react-chart-library-for-dashboards-2026), which narrows the focus to the most common use case.
 
 Now go turn your data into understanding.
 
