@@ -22,7 +22,7 @@ Skia gives you the power to draw almost anything in React Native. But drawing al
 
 React Native Skia pairs beautifully with Reanimated, the animation library that runs on the UI thread. Together, they let you create complex, GPU-accelerated animations that hit 60 frames per second without breaking a sweat. The key is understanding how to connect Reanimated's shared values to Skia's drawing props.
 
-In this guide, I'll walk through the core animation patterns, from simple timing to gesture-driven interactions. If you're new to Skia itself, check our [React Native Skia tutorial for beginners](/blog/react-native-skia-tutorial-beginners) first. If you're already comfortable with the basics, this guide will take your animations to the next level.
+In this guide, I'll walk through the core animation patterns, from simple timing to gesture-driven interactions. If you're new to Skia itself, check our [React Native Skia tutorial for beginners](/blog/react-native-skia-tutorial-for-beginners) first. If you're already comfortable with the basics, this guide will take your animations to the next level.
 
 ## The animation architecture: Shared Values and Derived Values
 
@@ -285,7 +285,7 @@ Skia animations can be as simple or as complex as you need. Here are some direct
 - **Morphing paths**: Interpolate between different path definitions to create shape morphing animations.
 - **Chart animations**: Animate data transitions in bar charts, line charts, and pie charts.
 
-If you've been following our series, you know we've covered [React Native Expo liquid glass](/blog/expo-liquid-glass-animation-tutorial), which is a prime example of Skia animations in action. We also have a [beginner Skia tutorial](/blog/react-native-skia-tutorial-beginners) if you need a refresher on the fundamentals.
+If you've been following our series, you know we've covered [React Native Expo liquid glass](/blog/expo-liquid-glass-animation-tutorial), which is a prime example of Skia animations in action. We also have a [beginner Skia tutorial](/blog/react-native-skia-tutorial-for-beginners) if you need a refresher on the fundamentals.
 
 ## Wrapping Up
 

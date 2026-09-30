@@ -428,7 +428,7 @@ Liquid glass effects can be heavy if you're not careful. Here's how to keep it s
 - **Avoid re-rendering**: Don't put animated styles in React state. Use Reanimated's shared values and `useAnimatedStyle`.
 - **Test on real devices**: Simulators can be misleading. Mid-range Android devices may struggle with heavy blur.
 
-If you notice frame drops, consider simplifying the background gradient or disabling the breathing animation on low-end devices. For more performance patterns, check our guide on [preventing unnecessary re-renders in React](/blog/prevent-unnecessary-rerenders-react) and our [React Native Skia tutorial for beginners](/blog/react-native-skia-tutorial-beginners) for fundamentals.
+If you notice frame drops, consider simplifying the background gradient or disabling the breathing animation on low-end devices. For more performance patterns, check our guide on [preventing unnecessary re-renders in React](/blog/prevent-unnecessary-rerenders-react) and our [React Native Skia tutorial for beginners](/blog/react-native-skia-tutorial-for-beginners) for fundamentals.
 
 ## A real project: bringing a dashboard to life
 

@@ -158,7 +158,7 @@ ReGraph from Cambridge Intelligence is a commercial React graph visualization SD
 
 Not every search for a "React graph library" is about networks. Some developers mean plotting libraries—tools for mathematical functions, scatter plots, and scientific visualization. These overlap with charting libraries but have a different focus.
 
-**Plotly.js** (with react-plotly.js) is the heavyweight. It supports WebGL rendering for millions of points, 3D plots, and scientific chart types. The bundle is massive (~3MB), but for scientific applications, it's the standard. Our [React charting library performance benchmarks](/blog/react-charting-library-performance-benchmarks) cover Plotly's performance profile.
+**Plotly.js** (with react-plotly.js) is the heavyweight. It supports WebGL rendering for millions of points, 3D plots, and scientific chart types. The bundle is massive (~3MB), but for scientific applications, it's the standard. Our [React charting library performance benchmarks](/blog/react-chart-library-performance-benchmarks) cover Plotly's performance profile.
 
 **D3.js** is the low-level foundation. It's not a React library, but React developers frequently use D3 for scales, shapes, and layouts while rendering with React. Libraries like visx wrap D3 primitives into React components. If you need complete control over plotting, D3 + React is the most flexible approach, at the cost of more code.
 

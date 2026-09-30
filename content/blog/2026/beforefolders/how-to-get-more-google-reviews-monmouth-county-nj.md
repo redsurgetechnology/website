@@ -72,7 +72,7 @@ Google's local algorithm weighs review signals heavily. Three factors stand abov
 
 More reviews combined with better ratings translate directly into higher visibility in the local Map Pack — those top three listings that show up above the organic results. For location-based searches like "plumber near me" or "best coffee shop Monmouth County," the Map Pack grabs the majority of clicks.
 
-This ties straight into your overall Google Business Profile strategy. A fully optimized profile with a steady stream of fresh reviews outperforms an incomplete one every time. If you haven't tuned yours yet, our [Google Business Profile optimization guide for Monmouth County businesses](/blog/google-business-profile-optimization-guide-2026) walks through the whole process.
+This ties straight into your overall Google Business Profile strategy. A fully optimized profile with a steady stream of fresh reviews outperforms an incomplete one every time. If you haven't tuned yours yet, our [Google Business Profile optimization guide for Monmouth County businesses](/blog/google-business-profile-optimization-monmouth-county-nj) walks through the whole process.
 
 ### 2. Click-through rate and first impressions
 

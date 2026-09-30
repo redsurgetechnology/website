@@ -697,7 +697,7 @@ const styles = StyleSheet.create({
 <li><strong>Avoid re-rendering</strong>: Don&#39;t put animated styles in React state. Use Reanimated&#39;s shared values and <code>useAnimatedStyle</code>.</li>
 <li><strong>Test on real devices</strong>: Simulators can be misleading. Mid-range Android devices may struggle with heavy blur.</li>
 </ul>
-<p>If you notice frame drops, consider simplifying the background gradient or disabling the breathing animation on low-end devices. For more performance patterns, check our guide on <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a> and our <a href="/blog/react-native-skia-tutorial-beginners">React Native Skia tutorial for beginners</a> for fundamentals.</p>
+<p>If you notice frame drops, consider simplifying the background gradient or disabling the breathing animation on low-end devices. For more performance patterns, check our guide on <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a> and our <a href="/blog/react-native-skia-tutorial-for-beginners">React Native Skia tutorial for beginners</a> for fundamentals.</p>
 <h2>A real project: bringing a dashboard to life</h2>
 <p>A while back, I built a smart home dashboard with this exact effect. The original UI used flat cards—functional but boring. We added liquid glass panels with touch tilt and a slow ambient glow. The difference was night and day. Users described it as &quot;premium&quot; and &quot;alive.&quot; It wasn&#39;t gimmicky; it made the interface feel tangible, like you could almost touch the glass. We spent a week perfecting the animations, but it paid off in user engagement.</p>
 <p>The key was restraint. The animations were subtle—never more than a few degrees of rotation or a slow opacity pulse. That&#39;s the secret to liquid glass: it should feel like a natural material, not a cartoon.</p>
@@ -717,6 +717,14 @@ const styles = StyleSheet.create({
         <h3 class="cs-sidebar-heading">Recent Posts</h3>
         <ul class="cs-sidebar-list">
           
+          <li class="cs-sidebar-item">
+            <a href="/blog/bitbucket-gitlab-rebase-vs-merge.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/bitbucket-gitlab-rebase-vs-merge-100.webp"
+     alt="Bitbucket & GitLab Rebase vs Merge: Platform-Specific Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Bitbucket & GitLab Rebase vs Merge: Platform-Specific Guide for 2026</span>
+            </a>
+          </li>
           <li class="cs-sidebar-item">
             <a href="/blog/wordpress-jquery-document-ready.html" class="cs-sidebar-link">
               <img class="cs-sidebar-thumb"
@@ -747,14 +755,6 @@ const styles = StyleSheet.create({
      src="/images/blog/uploads/webaim-wcag-checklist-guide-100.webp"
      alt="WebAIM WCAG Checklist: The Complete Developer Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
               <span class="cs-sidebar-title">WebAIM WCAG Checklist: The Complete Developer Guide for 2026</span>
-            </a>
-          </li>
-          <li class="cs-sidebar-item">
-            <a href="/blog/react-data-visualization-libraries.html" class="cs-sidebar-link">
-              <img class="cs-sidebar-thumb"
-     src="/images/blog/uploads/react-data-visualization-libraries-100.webp"
-     alt="React Data Visualization Libraries: The Complete Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
-              <span class="cs-sidebar-title">React Data Visualization Libraries: The Complete Guide for 2026</span>
             </a>
           </li>
         </ul>

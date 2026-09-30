@@ -18,7 +18,7 @@ featured: false
 no_index: false
 ---
 
-So you've chosen a headless CMS for your Next.js project. Maybe you picked Sanity after reading our [best headless CMS for Next.js](/blog/best-headless-cms-for-nextjs-in-2026) guide, or perhaps you're still evaluating and want to see what the integration actually looks like. Either way, you're now faced with the real work: connecting the CMS to your frontend, fetching content, keeping it fresh, and handling previews.
+So you've chosen a headless CMS for your Next.js project. Maybe you picked Sanity after reading our [best headless CMS for Next.js](/blog/best-headless-cms-for-nextjs-2026) guide, or perhaps you're still evaluating and want to see what the integration actually looks like. Either way, you're now faced with the real work: connecting the CMS to your frontend, fetching content, keeping it fresh, and handling previews.
 
 The good news is that Next.js and modern headless CMS platforms are built to work together. The integration patterns are well-established. The bad news is that the details matter—getting the schema right, setting up webhooks for on-demand revalidation, and making sure your preview mode works across environments.
 
@@ -329,7 +329,7 @@ Integrating a headless CMS with Next.js is a multi-step process, but each step i
 
 If you follow the steps in this guide—schema setup, client config, server-side fetching, ISR, webhooks, preview, and type safety—you'll end up with a robust content pipeline that serves both developers and content editors.
 
-And remember, the CMS you choose is just one piece of the puzzle. How you integrate it determines whether your site is fast, fresh, and maintainable. For more on choosing the right CMS, check out our [headless CMS comparison](/blog/best-headless-cms-for-nextjs-in-2026). For deeper dives into ISR, our [complete ISR guide](/blog/nextjs-isr-guide) has you covered.
+And remember, the CMS you choose is just one piece of the puzzle. How you integrate it determines whether your site is fast, fresh, and maintainable. For more on choosing the right CMS, check out our [headless CMS comparison](/blog/best-headless-cms-for-nextjs-2026). For deeper dives into ISR, our [complete ISR guide](/blog/nextjs-isr-guide) has you covered.
 
 Now go build something content-rich and lightning fast.
 

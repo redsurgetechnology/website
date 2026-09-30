@@ -330,7 +330,7 @@
         </div>
           </div>
           <div class="cs-post-content">
-            <p>So you&#39;ve chosen a headless CMS for your Next.js project. Maybe you picked Sanity after reading our <a href="/blog/best-headless-cms-for-nextjs-in-2026">best headless CMS for Next.js</a> guide, or perhaps you&#39;re still evaluating and want to see what the integration actually looks like. Either way, you&#39;re now faced with the real work: connecting the CMS to your frontend, fetching content, keeping it fresh, and handling previews.</p>
+            <p>So you&#39;ve chosen a headless CMS for your Next.js project. Maybe you picked Sanity after reading our <a href="/blog/best-headless-cms-for-nextjs-2026">best headless CMS for Next.js</a> guide, or perhaps you&#39;re still evaluating and want to see what the integration actually looks like. Either way, you&#39;re now faced with the real work: connecting the CMS to your frontend, fetching content, keeping it fresh, and handling previews.</p>
 <p>The good news is that Next.js and modern headless CMS platforms are built to work together. The integration patterns are well-established. The bad news is that the details matter—getting the schema right, setting up webhooks for on-demand revalidation, and making sure your preview mode works across environments.</p>
 <p>In this guide, I&#39;ll walk through a complete integration using <strong>Sanity</strong> as the example, but the patterns apply to any headless CMS. By the end, you&#39;ll have a clear roadmap from initial schema setup to production-ready content delivery. I&#39;ll cover the exact code you need, the common pitfalls, and the architectural decisions that will save you time later.</p>
 <h2>Why integration patterns matter</h2>
@@ -573,7 +573,7 @@ function CoverImage({ src, alt }) {
 <h2>Wrapping up</h2>
 <p>Integrating a headless CMS with Next.js is a multi-step process, but each step is well-defined. The key is to think through the content flow: how content is created, when it&#39;s fetched, how it&#39;s cached, and how it&#39;s updated.</p>
 <p>If you follow the steps in this guide—schema setup, client config, server-side fetching, ISR, webhooks, preview, and type safety—you&#39;ll end up with a robust content pipeline that serves both developers and content editors.</p>
-<p>And remember, the CMS you choose is just one piece of the puzzle. How you integrate it determines whether your site is fast, fresh, and maintainable. For more on choosing the right CMS, check out our <a href="/blog/best-headless-cms-for-nextjs-in-2026">headless CMS comparison</a>. For deeper dives into ISR, our <a href="/blog/nextjs-isr-guide">complete ISR guide</a> has you covered.</p>
+<p>And remember, the CMS you choose is just one piece of the puzzle. How you integrate it determines whether your site is fast, fresh, and maintainable. For more on choosing the right CMS, check out our <a href="/blog/best-headless-cms-for-nextjs-2026">headless CMS comparison</a>. For deeper dives into ISR, our <a href="/blog/nextjs-isr-guide">complete ISR guide</a> has you covered.</p>
 <p>Now go build something content-rich and lightning fast.</p>
 <hr>
 <p><em>Need help integrating a CMS with your Next.js project? Red Surge Technology builds seamless content pipelines that keep both developers and editors happy. <a href="/contact">Get in touch</a> to discuss your needs.</em></p>
@@ -587,6 +587,14 @@ function CoverImage({ src, alt }) {
         <h3 class="cs-sidebar-heading">Recent Posts</h3>
         <ul class="cs-sidebar-list">
           
+          <li class="cs-sidebar-item">
+            <a href="/blog/bitbucket-gitlab-rebase-vs-merge.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/bitbucket-gitlab-rebase-vs-merge-100.webp"
+     alt="Bitbucket & GitLab Rebase vs Merge: Platform-Specific Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Bitbucket & GitLab Rebase vs Merge: Platform-Specific Guide for 2026</span>
+            </a>
+          </li>
           <li class="cs-sidebar-item">
             <a href="/blog/wordpress-jquery-document-ready.html" class="cs-sidebar-link">
               <img class="cs-sidebar-thumb"
@@ -617,14 +625,6 @@ function CoverImage({ src, alt }) {
      src="/images/blog/uploads/webaim-wcag-checklist-guide-100.webp"
      alt="WebAIM WCAG Checklist: The Complete Developer Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
               <span class="cs-sidebar-title">WebAIM WCAG Checklist: The Complete Developer Guide for 2026</span>
-            </a>
-          </li>
-          <li class="cs-sidebar-item">
-            <a href="/blog/react-data-visualization-libraries.html" class="cs-sidebar-link">
-              <img class="cs-sidebar-thumb"
-     src="/images/blog/uploads/react-data-visualization-libraries-100.webp"
-     alt="React Data Visualization Libraries: The Complete Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
-              <span class="cs-sidebar-title">React Data Visualization Libraries: The Complete Guide for 2026</span>
             </a>
           </li>
         </ul>
