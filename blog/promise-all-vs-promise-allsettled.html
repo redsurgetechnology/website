@@ -80,7 +80,7 @@
         "dateModified": "2026-07-14T10:00:00.000Z",
         "keywords": "JavaScript, Promises, Async, Web Development, Error Handling",
         "articleSection": "JavaScript",
-        "timeRequired": "PT10M",
+        "timeRequired": "PT12M",
         "author": {
           "@type": "Person",
           "name": "Collin Stewart"
@@ -141,6 +141,78 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What's the difference between Promise.all and Promise.allSettled?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "`Promise.all` resolves only if every promise in the array resolves. If any promise rejects, the entire thing rejects immediately with that failure reason, and the other results are lost. `Promise.allSettled` waits for every promise to either resolve or reject, and always resolves with an array of result objects that describe what happened to each promise. It never rejects."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I use Promise.allSettled instead of Promise.all?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use `Promise.allSettled` when the promises are independent — like loading multiple dashboard widgets, fetching data from multiple unreliable third-party services, or any scenario where partial results are better than no results. Use `Promise.all` when the promises are interdependent and the whole operation should fail if any one of them fails, like a database transaction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Promise.allSettled ever reject?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. `Promise.allSettled` always resolves. Even if every promise in the array rejects, the outer promise resolves with an array of result objects, each with `status: 'rejected'` and a `reason`. This is one of its key advantages — you handle errors in the results, not with try/catch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What order does Promise.all return results in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "`Promise.all` returns results in the same order as the input array, regardless of which promise resolves first. If you pass `[p1, p2, p3]`, the resolved array is `[r1, r2, r3]`, even if `p3` resolved before `p1`."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Promise.allSettled slower than Promise.all?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not in any meaningful way. Both run the promises concurrently. The wall-clock time is determined by the slowest promise. The only difference is that `Promise.all` short-circuits when a promise rejects, while `Promise.allSettled` waits for the rest. In practice, this only matters if promises are slow to reject — which is rare for typical API calls."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use Promise.allSettled in older browsers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "`Promise.allSettled` was added in ES2020 and has universal browser support as of 2026. It works in all modern browsers and all supported versions of Node.js. If you need to support very old browsers (IE11), you'll need a polyfill, but that's an edge case in 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between Promise.all and Promise.race?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "`Promise.all` waits for all promises to resolve (or one to reject). `Promise.race` waits for the first promise to settle, whether it resolves or rejects. Use `Promise.race` for timeouts and \"fastest wins\" scenarios. Use `Promise.all` when you need every result."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between Promise.all and Promise.any?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "`Promise.all` resolves when all promises resolve. `Promise.any` resolves when the first promise resolves, ignoring rejections. Use `Promise.any` when you have redundant sources and just need one to succeed. Use `Promise.all` when you need every source."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
@@ -158,7 +230,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Promise.all vs Promise.allSettled: What's the Difference and When to Use Each",
+          "name": "Promise.all vs Promise.allSettled: Key Differences and When to Use Each (2026)",
           "item": "https://redsurgetechnology.com/blog/promise-all-vs-promise-allsettled"
         }
       ]
@@ -222,7 +294,7 @@
     <!-- Banner -->
 <div id="banner-712">
   <div class="cs-container">
-    <h1 class="cs-int-title">Promise.all vs Promise.allSettled: What's the Difference and When to Use Each</h1>
+    <h1 class="cs-int-title">Promise.all vs Promise.allSettled: Key Differences and When to Use Each (2026)</h1>
   </div>
   <picture class="cs-background">
     <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
@@ -245,7 +317,7 @@
           <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
         </li>
         <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
-          Promise.all vs Promise.allSettled: What's the Difference and When to Use Each
+          Promise.all vs Promise.allSettled: Key Differences and When to Use Each (2026)
         </li>
       </ol>
     </nav>
@@ -265,7 +337,7 @@
       /images/blog/uploads/promise-all-vs-allsettled-800.webp 800w
     "
     sizes="(max-width: 1024px) 92vw, 800px"
-    alt="Promise.all vs Promise.allSettled: What's the Difference and When to Use Each - Red Surge Technology Blog"
+    alt="Promise.all vs Promise.allSettled: Key Differences and When to Use Each (2026) - Red Surge Technology Blog"
     width="1280"
     height="720"
   />
@@ -306,7 +378,7 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span><meta itemprop="timeRequired" content="PT10M" />10 min read</span>
+            <span><meta itemprop="timeRequired" content="PT12M" />12 min read</span>
           </div>
 
           
@@ -332,9 +404,54 @@
           <div class="cs-post-content">
             <p>There&#39;s a moment in every JavaScript developer&#39;s journey where <code>Promise.all</code> betrays you. You fire off five API calls, wait for them all to resolve, and then one of them rejects. Suddenly your entire operation fails. The other four calls — which worked perfectly fine — their results are gone. Poof. The promise rejects and that&#39;s the end of it.</p>
 <p>The first time this happens, it feels like a bug in the language. It&#39;s not. <code>Promise.all</code> is working exactly as designed. The problem is that nobody told you there&#39;s a different tool for when you want partial results. A tool that waits for all promises to settle — whether they resolve or reject — and gives you everything.</p>
-<p>That tool is <code>Promise.allSettled</code>, and it solves a problem that <code>Promise.all</code> was never designed to handle. Let me walk through the difference, when each one makes sense, and how to stop getting burned by choosing the wrong one.</p>
+<p>That tool is <code>Promise.allSettled</code>, and it solves a problem <code>Promise.all</code> was never designed to handle.</p>
+<p>I learned this the hard way. A few years back, I built an analytics dashboard that pulled data from about eight different microservices. User counts from one service. Revenue from another. Recent activity from a third. Server health from a fourth. I used <code>Promise.all</code> because it was the concurrency tool I knew. And it worked great — until one of those services went down for scheduled maintenance. Not a critical one, just the service that handled feature adoption metrics. Nice to have. But because I used <code>Promise.all</code>, the entire dashboard crashed. Users saw an error page instead of their data. Seven healthy services, one tiny outage, and everything fell apart.</p>
+<p>Switching to <code>Promise.allSettled</code> fixed it in minutes. The dashboard loaded all the available data and showed a small &quot;Feature adoption data unavailable&quot; card where the failed service&#39;s data would have been. Users still got their core analytics. That experience taught me something that every async JavaScript developer eventually needs to learn: <code>Promise.all</code> implies every promise is critical, and <code>Promise.allSettled</code> acknowledges that some data is optional.</p>
+<p>Let&#39;s walk through the difference, when each one makes sense, and how to stop getting burned by choosing the wrong one.</p>
+<h2>Promise.all vs Promise.allSettled: the short answer</h2>
+<p>If you want the fastest possible answer, here it is:</p>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th><code>Promise.all</code></th>
+<th><code>Promise.allSettled</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Resolves when</strong></td>
+<td>All promises fulfill</td>
+<td>All promises settle (fulfill or reject)</td>
+</tr>
+<tr>
+<td><strong>Rejects when</strong></td>
+<td>Any promise rejects</td>
+<td>Never rejects</td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td>Array of values</td>
+<td>Array of <code>{status, value/reason}</code> objects</td>
+</tr>
+<tr>
+<td><strong>Behavior on failure</strong></td>
+<td>Short-circuits, loses other results</td>
+<td>Waits for everything, keeps all results</td>
+</tr>
+<tr>
+<td><strong>Best for</strong></td>
+<td>Interdependent operations that must all succeed</td>
+<td>Independent operations where partial results are useful</td>
+</tr>
+<tr>
+<td><strong>Introduced in</strong></td>
+<td>ES6 (ES2015)</td>
+<td>ES2020</td>
+</tr>
+</tbody></table>
+<p>Now let&#39;s look at the details and real examples.</p>
 <h2>What Promise.all actually does</h2>
-<p><code>Promise.all</code> takes an array of promises and returns a single promise. If every promise in the array resolves successfully, the returned promise resolves with an array of the resolved values. If any promise rejects, the returned promise rejects immediately with that rejection reason.</p>
+<p><code>Promise.all</code> takes an array of promises and returns a single promise. If every promise in the array resolves successfully, the returned promise resolves with an array of the resolved values — in the same order as the input array. If any promise rejects, the returned promise rejects immediately with that rejection reason.</p>
 <pre><code class="language-javascript">const [user, posts, settings] = await Promise.all([
   fetchUser(userId),
   fetchPosts(userId),
@@ -372,18 +489,18 @@ results.forEach((result) =&gt; {
 });
 </code></pre>
 <p>This is the key difference. <code>Promise.allSettled</code> doesn&#39;t short-circuit. It waits for everything. You get the successes and the failures, and you decide what to do with each one.</p>
-<p>The result objects follow a consistent shape. Fulfilled promises have <code>{ status: &#39;fulfilled&#39;, value: ... }</code>. Rejected promises have <code>{ status: &#39;rejected&#39;, reason: ... }</code>. TypeScript can narrow these with type guards, making the results type-safe to work with.</p>
-<h2>The dashboard that taught me this lesson</h2>
-<p>A while back, I built an analytics dashboard that loaded data from about eight different microservices. User counts from one service. Revenue data from another. Recent activity from a third. Server health from a fourth. You get the idea.</p>
-<p>I used <code>Promise.all</code> because it was the concurrency tool I knew. And most of the time, it worked great. All eight services were healthy, all eight calls resolved, and the dashboard loaded quickly.</p>
-<p>Then one of the microservices went down for maintenance. Not a critical one — just the one that handled feature adoption metrics. Nice to have, not essential. But because I used <code>Promise.all</code>, the entire dashboard crashed. Users saw an error screen instead of their data. Seven perfectly healthy services, and one tiny outage took down everything.</p>
-<p>Switching to <code>Promise.allSettled</code> fixed it. The dashboard loaded all the available data and displayed a small &quot;Feature adoption data unavailable&quot; card where the failed service&#39;s data would have been. Users still got their core analytics. The degraded experience was far better than a blank error page.</p>
-<p>That experience clarified something for me. <code>Promise.all</code> implies that every promise is critical. <code>Promise.allSettled</code> acknowledges that some data is optional and the application should degrade gracefully rather than fail completely.</p>
+<p>The result objects follow a consistent shape:</p>
+<ul>
+<li>Fulfilled promises: <code>{ status: &#39;fulfilled&#39;, value: ... }</code></li>
+<li>Rejected promises: <code>{ status: &#39;rejected&#39;, reason: ... }</code></li>
+</ul>
+<p>TypeScript can narrow these with type guards, making the results type-safe to work with. This is a bigger deal than it sounds because it means you don&#39;t have to write defensive <code>if (result.value)</code> checks that lie to the type system.</p>
 <h2>When Promise.all is the right choice</h2>
 <p><code>Promise.all</code> still has its place. It&#39;s the correct tool when the promises are interdependent — when one failing genuinely means the entire operation should abort.</p>
-<p>Database transactions are the classic example. If you&#39;re inserting a user and their default settings in parallel, and either insert fails, you want to roll back both. <code>Promise.all</code> combined with a transaction mechanism gives you that atomicity.</p>
-<p>Form validation that requires multiple checks is another good fit. If you&#39;re validating an email address against an API, checking a username for uniqueness, and verifying a password strength score, and any of those fail, the form submission should fail. The partial results don&#39;t matter because the user can&#39;t submit anyway.</p>
-<p>The pattern to look for is interdependence. If the promises are all needed for the next step of your logic, <code>Promise.all</code> communicates that requirement clearly. Future developers reading your code will understand that these operations are a unit.</p>
+<p><strong>Database transactions.</strong> If you&#39;re inserting a user and their default settings in parallel, and either insert fails, you want to roll back both. <code>Promise.all</code> combined with a transaction mechanism gives you that atomicity.</p>
+<p><strong>Form validation with multiple checks.</strong> If you&#39;re validating an email against an API, checking a username for uniqueness, and verifying a password strength score, and any of those fail, the form submission should fail. Partial results don&#39;t matter because the user can&#39;t submit anyway.</p>
+<p><strong>Fetching a single logical record spread across services.</strong> If your <code>fetchUser</code> hits three services to assemble one complete user object, and any of them fails, you don&#39;t have a user. Better to fail cleanly than present a partial record.</p>
+<p>The pattern to look for is interdependence. If the promises are all needed for the next step of your logic, <code>Promise.all</code> communicates that requirement clearly. Future developers reading your code will understand these operations are a unit.</p>
 <h2>When Promise.allSettled makes more sense</h2>
 <p><code>Promise.allSettled</code> shines when you&#39;re fetching independent pieces of data. Dashboard widgets. Search results from multiple indexes. Data from third-party APIs that might be unreliable. Any scenario where partial results are better than no results.</p>
 <p>It&#39;s also the right tool when you want to report detailed error information. Instead of catching the first failure and losing context about what else went wrong, you can collect all the failures and present them coherently.</p>
@@ -405,35 +522,97 @@ if (errors.length &gt; 0) {
 }
 </code></pre>
 <p>This gives you a complete picture of what went wrong. You can log it, report it to your monitoring service, and show the user a helpful message about which features are temporarily unavailable.</p>
-<p>If you&#39;ve read our post on <a href="/blog/how-to-use-the-javascript-fetch-api-with-async-await">JavaScript fetch API with async await</a>, you know that network requests are inherently unreliable. <code>Promise.allSettled</code> embraces that reality instead of pretending every request will succeed.</p>
+<p>If you&#39;ve read our post on <a href="/blog/how-to-use-the-javascript-fetch-api-with-async-await">JavaScript fetch API with async await</a>, you know network requests are inherently unreliable. <code>Promise.allSettled</code> embraces that reality instead of pretending every request will succeed.</p>
+<h2>Promise.all vs Promise.allSettled: real-world examples side by side</h2>
+<p>Theoretical differences are one thing. Seeing them in action is another. Here&#39;s the same scenario implemented both ways.</p>
+<p><strong>Scenario:</strong> You&#39;re building a dashboard that needs to load user data, recent orders, and recommended products. The recommendations come from a third-party service that sometimes times out.</p>
+<h3>Version 1: Promise.all (fails if anything fails)</h3>
+<pre><code class="language-javascript">async function loadDashboard(userId) {
+  try {
+    const [user, orders, recommendations] = await Promise.all([
+      fetchUser(userId),
+      fetchOrders(userId),
+      fetchRecommendations(userId), // Sometimes times out
+    ]);
+
+    return { user, orders, recommendations };
+  } catch (error) {
+    // If ANY call fails, the whole dashboard fails
+    throw new Error(&quot;Failed to load dashboard&quot;);
+  }
+}
+</code></pre>
+<p>When <code>fetchRecommendations</code> times out, users see nothing. Even though their user data and orders loaded fine.</p>
+<h3>Version 2: Promise.allSettled (degrades gracefully)</h3>
+<pre><code class="language-javascript">async function loadDashboard(userId) {
+  const results = await Promise.allSettled([
+    fetchUser(userId),
+    fetchOrders(userId),
+    fetchRecommendations(userId),
+  ]);
+
+  const [userResult, ordersResult, recommendationsResult] = results;
+
+  // Critical data — if these failed, we have a real problem
+  if (userResult.status === &quot;rejected&quot; || ordersResult.status === &quot;rejected&quot;) {
+    throw new Error(&quot;Failed to load critical dashboard data&quot;);
+  }
+
+  return {
+    user: userResult.value,
+    orders: ordersResult.value,
+    // Recommendations are optional — degrade gracefully
+    recommendations:
+      recommendationsResult.status === &quot;fulfilled&quot;
+        ? recommendationsResult.value
+        : [],
+    recommendationsAvailable: recommendationsResult.status === &quot;fulfilled&quot;,
+  };
+}
+</code></pre>
+<p>When <code>fetchRecommendations</code> times out, users still get their dashboard — just without recommendations. The UI can show a small note that recommendations are temporarily unavailable. That&#39;s a dramatically better experience than a blank error page.</p>
+<p>This pattern shows up constantly in real applications. The critical data loads first and fails loudly if something is wrong. The enrichment data loads in parallel and fills in as it arrives.</p>
 <h2>Combining both patterns</h2>
 <p>Real applications often need a mix of both approaches. Some data is critical. Some is optional. You can compose <code>Promise.all</code> and <code>Promise.allSettled</code> to handle both cases.</p>
-<pre><code class="language-javascript">// Critical data — must all succeed
-const [user, account] = await Promise.all([
-  fetchUser(userId),
-  fetchAccount(accountId),
-]);
+<pre><code class="language-javascript">async function loadPage(userId, accountId) {
+  // Critical data — must all succeed
+  const [user, account] = await Promise.all([
+    fetchUser(userId),
+    fetchAccount(accountId),
+  ]);
 
-// Optional data — partial results are fine
-const optionalResults = await Promise.allSettled([
-  fetchRecommendations(userId),
-  fetchActivityFeed(userId),
-  fetchSocialConnections(userId),
-]);
+  // Optional data — partial results are fine
+  const optionalResults = await Promise.allSettled([
+    fetchRecommendations(userId),
+    fetchActivityFeed(userId),
+    fetchSocialConnections(userId),
+  ]);
 
-// Process optional results gracefully
-const recommendations =
-  optionalResults[0].status === &quot;fulfilled&quot; ? optionalResults[0].value : [];
-const activityFeed =
-  optionalResults[1].status === &quot;fulfilled&quot; ? optionalResults[1].value : [];
+  const recommendations =
+    optionalResults[0].status === &quot;fulfilled&quot; ? optionalResults[0].value : [];
+  const activityFeed =
+    optionalResults[1].status === &quot;fulfilled&quot; ? optionalResults[1].value : [];
+  const socialConnections =
+    optionalResults[2].status === &quot;fulfilled&quot; ? optionalResults[2].value : [];
+
+  return { user, account, recommendations, activityFeed, socialConnections };
+}
 </code></pre>
-<p>The critical path uses <code>Promise.all</code> because the page can&#39;t render without the user and account. The nice-to-have data uses <code>Promise.allSettled</code> so a failing recommendation service doesn&#39;t prevent the page from loading.</p>
-<p>This pattern shows up a lot in real codebases. The critical data loads first and fast-fails if something is wrong. The enrichment data loads in parallel and fills in as it arrives. Users see a working page quickly, with optional content populating as it becomes available.</p>
-<h2>Promise.race and Promise.any: the other siblings</h2>
-<p>While we&#39;re on the topic, <code>Promise.race</code> and <code>Promise.any</code> deserve a mention because they solve related but different problems.</p>
+<p>The critical path uses <code>Promise.all</code> because the page can&#39;t render without the user and account. The nice-to-have data uses <code>Promise.allSettled</code> so a failing recommendation service doesn&#39;t prevent the page from loading. Users see a working page quickly, with optional content populating as it becomes available.</p>
+<h2>Promise.race and Promise.any: the other combinators</h2>
+<p>While we&#39;re on the topic, <code>Promise.race</code> and <code>Promise.any</code> deserve a mention because they solve related but different problems. If you&#39;ve ever landed on a <code>promise.all vs promise.race</code> search, this section is for you.</p>
+<h3>Promise.race</h3>
 <p><code>Promise.race</code> resolves or rejects as soon as the first promise in the array settles. It doesn&#39;t care about the others. This is useful for timeouts — race your API call against a promise that rejects after five seconds.</p>
-<pre><code class="language-javascript">const result = await Promise.race([fetchData(), timeout(5000)]);
+<pre><code class="language-javascript">function timeout(ms) {
+  return new Promise((_, reject) =&gt;
+    setTimeout(() =&gt; reject(new Error(&quot;Timeout&quot;)), ms),
+  );
+}
+
+const result = await Promise.race([fetchData(), timeout(5000)]);
 </code></pre>
+<p>Whichever finishes first wins — either the data arrives, or the timeout rejects.</p>
+<h3>Promise.any</h3>
 <p><code>Promise.any</code> resolves as soon as the first promise fulfills. It ignores rejections unless all promises reject. This is useful when you have redundant data sources and want the fastest response.</p>
 <pre><code class="language-javascript">const data = await Promise.any([
   fetchFromPrimaryServer(),
@@ -441,22 +620,82 @@ const activityFeed =
   fetchFromCache(),
 ]);
 </code></pre>
-<p>Both are more specialized than <code>Promise.all</code> and <code>Promise.allSettled</code>, but knowing they exist rounds out your understanding of promise combinators.</p>
+<p>The first server to respond wins. If all three fail, <code>Promise.any</code> rejects with an <code>AggregateError</code> containing all the rejection reasons.</p>
+<h3>Quick comparison of all four</h3>
+<table>
+<thead>
+<tr>
+<th>Combinator</th>
+<th>Resolves when</th>
+<th>Rejects when</th>
+<th>Best for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Promise.all</code></td>
+<td>All fulfill</td>
+<td>Any rejects</td>
+<td>Interdependent operations</td>
+</tr>
+<tr>
+<td><code>Promise.allSettled</code></td>
+<td>All settle</td>
+<td>Never</td>
+<td>Independent operations, partial results OK</td>
+</tr>
+<tr>
+<td><code>Promise.race</code></td>
+<td>First settles (fulfill or reject)</td>
+<td>First settles (reject)</td>
+<td>Timeouts, fastest response</td>
+</tr>
+<tr>
+<td><code>Promise.any</code></td>
+<td>First fulfills</td>
+<td>All reject</td>
+<td>Redundant sources, ignore failures</td>
+</tr>
+</tbody></table>
 <h2>A note on performance</h2>
 <p>A common misconception is that <code>Promise.allSettled</code> is slower than <code>Promise.all</code> because it waits for everything. In practice, both run the promises concurrently. The total wall-clock time is determined by the slowest promise, not by which combinator you use.</p>
 <p>The difference is in what happens when a promise rejects. <code>Promise.all</code> short-circuits and returns early. <code>Promise.allSettled</code> continues waiting for the remaining promises. If you&#39;re dealing with promises that take a long time to reject — perhaps a timeout-based rejection — <code>Promise.allSettled</code> will take longer because it waits for the full timeout rather than aborting.</p>
 <p>But for typical API calls that resolve or reject quickly, the performance difference is negligible. Choose based on the behavior you need, not on micro-optimizations.</p>
 <h2>TypeScript considerations</h2>
 <p>TypeScript makes the distinction between these two methods clearer. <code>Promise.all</code> returns <code>Promise&lt;[A, B, C]&gt;</code> — a tuple of the resolved types. <code>Promise.allSettled</code> returns <code>Promise&lt;PromiseSettledResult&lt;A | B | C&gt;[]&gt;</code> — an array of result objects.</p>
-<pre><code class="language-typescript">type SettledResult&lt;T&gt; =
-  | { status: &quot;fulfilled&quot;; value: T }
-  | { status: &quot;rejected&quot;; reason: any };
+<p>The built-in <code>PromiseSettledResult&lt;T&gt;</code> type is a discriminated union:</p>
+<pre><code class="language-typescript">type PromiseSettledResult&lt;T&gt; =
+  { status: &quot;fulfilled&quot;; value: T } | { status: &quot;rejected&quot;; reason: any };
 </code></pre>
 <p>The type narrowing with <code>result.status === &#39;fulfilled&#39;</code> works the same way we covered in our post on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>. TypeScript understands that checking the status narrows the type, giving you access to <code>value</code> on fulfilled results and <code>reason</code> on rejected ones.</p>
+<p>This is a huge advantage over reaching for <code>try/catch</code> inside a loop or wrapping each promise individually. The type system enforces that you handle both the success and failure cases.</p>
+<h2>Common mistakes with Promise combinators</h2>
+<p>After reviewing a lot of async JavaScript, these are the mistakes I see most often.</p>
+<p><strong>Mistake 1: Using Promise.all when partial results are fine.</strong> This is the big one. If you&#39;re fetching independent data sources and one failing shouldn&#39;t break everything, use <code>Promise.allSettled</code>. Your users will thank you.</p>
+<p><strong>Mistake 2: Using Promise.allSettled when you need atomic behavior.</strong> The reverse is also true. If you&#39;re doing a database transaction, you need <code>Promise.all</code> because partial success is a bug, not a feature.</p>
+<p><strong>Mistake 3: Forgetting to check status on allSettled results.</strong> When you use <code>Promise.allSettled</code>, you MUST check <code>result.status</code> before accessing <code>result.value</code>. TypeScript will force you to, but in plain JavaScript, forgetting this leads to silent <code>undefined</code> bugs.</p>
+<p><strong>Mistake 4: Assuming Promise.all preserves order.</strong> It does — the returned array matches the input array&#39;s order. But if you&#39;re iterating with <code>forEach</code> on the input array, don&#39;t assume the corresponding result is at the same index. Actually, this one is fine — <code>Promise.all</code> does preserve order. The confusion comes from the fact that promises <em>resolve</em> in arbitrary order, but the <em>results array</em> is always in input order. Worth remembering.</p>
+<p><strong>Mistake 5: Using Promise.race for timeouts without cleanup.</strong> If you race a fetch against a timeout, and the fetch eventually resolves after the race has moved on, you might still have a pending fetch that continues running. This isn&#39;t usually a problem, but it can waste resources. If cleanup matters, use <code>AbortController</code> alongside the timeout.</p>
+<h2>Frequently asked questions</h2>
+<h3>What&#39;s the difference between Promise.all and Promise.allSettled?</h3>
+<p><code>Promise.all</code> resolves only if every promise in the array resolves. If any promise rejects, the entire thing rejects immediately with that failure reason, and the other results are lost. <code>Promise.allSettled</code> waits for every promise to either resolve or reject, and always resolves with an array of result objects that describe what happened to each promise. It never rejects.</p>
+<h3>When should I use Promise.allSettled instead of Promise.all?</h3>
+<p>Use <code>Promise.allSettled</code> when the promises are independent — like loading multiple dashboard widgets, fetching data from multiple unreliable third-party services, or any scenario where partial results are better than no results. Use <code>Promise.all</code> when the promises are interdependent and the whole operation should fail if any one of them fails, like a database transaction.</p>
+<h3>Does Promise.allSettled ever reject?</h3>
+<p>No. <code>Promise.allSettled</code> always resolves. Even if every promise in the array rejects, the outer promise resolves with an array of result objects, each with <code>status: &#39;rejected&#39;</code> and a <code>reason</code>. This is one of its key advantages — you handle errors in the results, not with try/catch.</p>
+<h3>What order does Promise.all return results in?</h3>
+<p><code>Promise.all</code> returns results in the same order as the input array, regardless of which promise resolves first. If you pass <code>[p1, p2, p3]</code>, the resolved array is <code>[r1, r2, r3]</code>, even if <code>p3</code> resolved before <code>p1</code>.</p>
+<h3>Is Promise.allSettled slower than Promise.all?</h3>
+<p>Not in any meaningful way. Both run the promises concurrently. The wall-clock time is determined by the slowest promise. The only difference is that <code>Promise.all</code> short-circuits when a promise rejects, while <code>Promise.allSettled</code> waits for the rest. In practice, this only matters if promises are slow to reject — which is rare for typical API calls.</p>
+<h3>Can I use Promise.allSettled in older browsers?</h3>
+<p><code>Promise.allSettled</code> was added in ES2020 and has universal browser support as of 2026. It works in all modern browsers and all supported versions of Node.js. If you need to support very old browsers (IE11), you&#39;ll need a polyfill, but that&#39;s an edge case in 2026.</p>
+<h3>What&#39;s the difference between Promise.all and Promise.race?</h3>
+<p><code>Promise.all</code> waits for all promises to resolve (or one to reject). <code>Promise.race</code> waits for the first promise to settle, whether it resolves or rejects. Use <code>Promise.race</code> for timeouts and &quot;fastest wins&quot; scenarios. Use <code>Promise.all</code> when you need every result.</p>
+<h3>What&#39;s the difference between Promise.all and Promise.any?</h3>
+<p><code>Promise.all</code> resolves when all promises resolve. <code>Promise.any</code> resolves when the first promise resolves, ignoring rejections. Use <code>Promise.any</code> when you have redundant sources and just need one to succeed. Use <code>Promise.all</code> when you need every source.</p>
 <h2>Wrapping up</h2>
 <p><code>Promise.all</code> and <code>Promise.allSettled</code> solve different problems, and using the wrong one creates bugs that are easy to miss in development but painful in production. <code>Promise.all</code> is for when every promise is critical — fast failure is the right behavior. <code>Promise.allSettled</code> is for when partial results are useful — graceful degradation is the right behavior.</p>
-<p>The dashboard story I shared earlier is a pattern I&#39;ve seen repeated across multiple codebases. Developers reach for <code>Promise.all</code> because it&#39;s the promise combinator they know. Then a non-critical service goes down and takes the entire application with it. A one-line change to <code>Promise.allSettled</code> would have prevented the outage.</p>
-<p>Next time you&#39;re writing concurrent promises, ask yourself: if one of these fails, should everything fail? If the answer is no, you probably want <code>Promise.allSettled</code>.</p>
+<p>The dashboard story I shared at the top is a pattern I&#39;ve seen repeated across multiple codebases. Developers reach for <code>Promise.all</code> because it&#39;s the promise combinator they know. Then a non-critical service goes down and takes the entire application with it. A one-line change to <code>Promise.allSettled</code> would have prevented the outage.</p>
+<p>Next time you&#39;re writing concurrent promises, ask yourself: <strong>if one of these fails, should everything fail?</strong> If the answer is no, you probably want <code>Promise.allSettled</code>.</p>
 <hr>
 <p><em>Building JavaScript applications that handle errors gracefully? Red Surge Technology helps teams write resilient async code that works in the real world. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
 
