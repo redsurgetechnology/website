@@ -19,40 +19,40 @@
     <meta name="format-detection" content="telephone=no" />
 
     <!-- Primary Meta Tags -->
-    <title>Next.js API Routes Guide: Build a Backend Without a Separate Server</title>
-    <meta name="description" content="Master Next.js API routes with practical examples. Learn App Router vs Pages Router, dynamic routes, middleware, error handling, testing, and server components in Next.js 15." />
+    <title>Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?</title>
+    <meta name="description" content="Confused about reflow, forced reflow, and layout thrashing? This guide explains the difference between these browser performance problems and how to fix each one." />
     <meta name="author" content="Collin Stewart" />
     <meta name="robots" content="index, follow" />
     
-    <meta name="keywords" content="Next.js, API, Backend, Web Development, JavaScript" />
+    <meta name="keywords" content="JavaScript, Performance, Browser, Web Development, Optimization" />
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://redsurgetechnology.com/blog/next-js-api-routes" />
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://redsurgetechnology.com/blog/next-js-api-routes" />
-    <meta property="og:title" content="Next.js API Routes Guide: Build a Backend Without a Separate Server" />
-    <meta property="og:description" content="Master Next.js API routes with practical examples. Learn App Router vs Pages Router, dynamic routes, middleware, error handling, testing, and server components in Next.js 15." />
-    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/nextjs-api-routes-guide.webp" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow" />
+    <meta property="og:title" content="Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?" />
+    <meta property="og:description" content="Confused about reflow, forced reflow, and layout thrashing? This guide explains the difference between these browser performance problems and how to fix each one." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Red Surge Technology" />
-    <meta property="article:published_time" content="2026-07-23T10:00:00.000Z" />
-    <meta property="article:modified_time" content="2026-07-23T10:00:00.000Z" />
+    <meta property="article:published_time" content="2026-10-07T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-10-07T10:00:00.000Z" />
     <meta property="article:section" content="JavaScript" />
-    <meta property="article:tag" content="Next.js" />
-    <meta property="article:tag" content="API" />
-    <meta property="article:tag" content="Backend" />
-    <meta property="article:tag" content="Web Development" />
     <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="Performance" />
+    <meta property="article:tag" content="Browser" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Optimization" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/next-js-api-routes" />
-    <meta name="twitter:title" content="Next.js API Routes Guide: Build a Backend Without a Separate Server" />
-    <meta name="twitter:description" content="Master Next.js API routes with practical examples. Learn App Router vs Pages Router, dynamic routes, middleware, error handling, testing, and server components in Next.js 15." />
-    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/nextjs-api-routes-guide.webp" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow" />
+    <meta name="twitter:title" content="Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?" />
+    <meta name="twitter:description" content="Confused about reflow, forced reflow, and layout thrashing? This guide explains the difference between these browser performance problems and how to fix each one." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow.webp" />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -73,14 +73,14 @@
       {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": "Next.js API Routes Guide: Build a Backend Without a Separate Server",
-        "description": "Master Next.js API routes with practical examples. Learn App Router vs Pages Router, dynamic routes, middleware, error handling, testing, and server components in Next.js 15.",
-        "url": "https://redsurgetechnology.com/blog/next-js-api-routes",
-        "datePublished": "2026-07-23T10:00:00.000Z",
-        "dateModified": "2026-07-23T10:00:00.000Z",
-        "keywords": "Next.js, API, Backend, Web Development, JavaScript",
+        "headline": "Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?",
+        "description": "Confused about reflow, forced reflow, and layout thrashing? This guide explains the difference between these browser performance problems and how to fix each one.",
+        "url": "https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow",
+        "datePublished": "2026-10-07T10:00:00.000Z",
+        "dateModified": "2026-10-07T10:00:00.000Z",
+        "keywords": "JavaScript, Performance, Browser, Web Development, Optimization",
         "articleSection": "JavaScript",
-        "timeRequired": "PT14M",
+        "timeRequired": "PT13M",
         "author": {
           "@type": "Person",
           "name": "Collin Stewart"
@@ -96,13 +96,13 @@
         },
         "image": {
           "@type": "ImageObject",
-          "url": "https://redsurgetechnology.com/images/blog/uploads/nextjs-api-routes-guide.webp",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow.webp",
           "width": 1200,
           "height": 630
         },
         "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://redsurgetechnology.com/blog/next-js-api-routes"
+          "@id": "https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow"
         }
       },
       {
@@ -141,78 +141,6 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What are Next.js API routes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Next.js API routes are server-side endpoints defined inside your Next.js project. You create a file under `app/api` (App Router) or `pages/api` (Pages Router), export a function per HTTP method, and Next.js turns that file into an HTTP endpoint that returns JSON. They let you build a backend API in the same codebase and deployment as your frontend."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the difference between App Router and Pages Router API routes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "App Router API routes live in `app/api/*/route.ts` and export named functions per HTTP method (`GET`, `POST`, etc.) that receive Web-standard `Request` and `Response` objects. Pages Router API routes live in `pages/api/*.js` and use a single default export that receives Node.js `req` and `res` objects. The App Router is recommended for new projects."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "When should I use an API route instead of a server component?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Use server components for fetching data that a page needs to render. Use API routes for form submissions, webhooks, mobile app backends, third-party integrations, and any situation where a client needs to send data to your server outside of a page navigation. Server components can't handle POST requests; API routes can."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I test Next.js API routes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Use `next-test-api-route-handler` (NTAH). It runs your route handlers in-process with the full request lifecycle, so you get realistic tests without spinning up a server. Pair it with Jest or Vitest and write tests for request validation, authentication, and error paths."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I use Next.js API routes with an external API?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes, and it's one of the most common patterns. Your API route acts as a proxy—the client hits your endpoint, your endpoint calls the external service with a server-side API key, and returns the result. This keeps secrets out of the browser and avoids CORS issues."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's the difference between Node.js and Edge runtimes in Next.js API routes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Node.js runtime (the default) has full Node.js APIs available, including the filesystem and native modules, with cold starts of a few hundred milliseconds. The Edge runtime runs on a global network close to users, uses a subset of the Web API, and has nearly instant cold starts—but no filesystem or native modules. Choose Edge for latency-sensitive logic; stick with Node.js for anything needing npm packages like Prisma."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I add authentication to Next.js API routes?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Wrap your handler in an authentication middleware function that reads the `authorization` header, verifies the token, and either returns a 401 or passes the authenticated request to the handler. You can also use NextAuth.js or Auth.js, which integrate with the App Router and expose a session helper you can call inside API routes."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I stream responses from a Next.js API route?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Return a `ReadableStream` wrapped in a `Response`, and set the `Content-Type` to `text/event-stream`. The client reads the body with `fetch` and processes chunks as they arrive. This is the standard pattern for AI responses and real-time dashboards."
-          }
-        }
-      ]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
@@ -230,8 +158,8 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Next.js API Routes Guide: Build a Backend API Without a Separate Server (2026)",
-          "item": "https://redsurgetechnology.com/blog/next-js-api-routes"
+          "name": "Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?",
+          "item": "https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow"
         }
       ]
     }
@@ -294,7 +222,7 @@
     <!-- Banner -->
 <div id="banner-712">
   <div class="cs-container">
-    <h1 class="cs-int-title">Next.js API Routes Guide: Build a Backend API Without a Separate Server (2026)</h1>
+    <h1 class="cs-int-title">Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?</h1>
   </div>
   <picture class="cs-background">
     <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
@@ -317,7 +245,7 @@
           <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
         </li>
         <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
-          Next.js API Routes Guide: Build a Backend API Without a Separate Server (2026)
+          Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?
         </li>
       </ol>
     </nav>
@@ -331,13 +259,13 @@
   <img
     fetchpriority="high"
     decoding="async"
-    src="/images/blog/uploads/nextjs-api-routes-guide.webp"
+    src="/images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow.webp"
     srcset="
-      /images/blog/uploads/nextjs-api-routes-guide-400.webp 400w,
-      /images/blog/uploads/nextjs-api-routes-guide-800.webp 800w
+      /images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow-400.webp 400w,
+      /images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow-800.webp 800w
     "
     sizes="(max-width: 1024px) 92vw, 800px"
-    alt="Next.js API Routes Guide: Build a Backend API Without a Separate Server (2026) - Red Surge Technology Blog"
+    alt="Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference? - Red Surge Technology Blog"
     width="1280"
     height="720"
   />
@@ -345,9 +273,9 @@
           <div>
             
         <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
-          <meta itemprop="headline" content="Next.js API Routes Guide: Build a Backend Without a Separate Server" />
-          <meta itemprop="description" content="Master Next.js API routes with practical examples. Learn App Router vs Pages Router, dynamic routes, middleware, error handling, testing, and server components in Next.js 15." />
-          <meta itemprop="url" content="https://redsurgetechnology.com/blog/next-js-api-routes" />
+          <meta itemprop="headline" content="Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?" />
+          <meta itemprop="description" content="Confused about reflow, forced reflow, and layout thrashing? This guide explains the difference between these browser performance problems and how to fix each one." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/layout-thrashing-vs-forced-reflow-vs-reflow" />
 
           <!-- Published date -->
           <div class="cs-meta-item cs-meta-date" title="Published date">
@@ -357,10 +285,10 @@
               <line x1="8" y1="2" x2="8" y2="6"></line>
               <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
-            <time itemprop="datePublished" datetime="2026-07-23T10:00:00.000Z">Jul 23, 2026</time>
+            <time itemprop="datePublished" datetime="2026-10-07T10:00:00.000Z">Oct 07, 2026</time>
           </div>
 
-          <meta itemprop="dateModified" content="2026-07-23T10:00:00.000Z" />
+          <meta itemprop="dateModified" content="2026-10-07T10:00:00.000Z" />
 
           <!-- Author -->
           <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
@@ -378,7 +306,7 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+            <span><meta itemprop="timeRequired" content="PT13M" />13 min read</span>
           </div>
 
           
@@ -398,410 +326,186 @@
             <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
             <line x1="7" y1="7" x2="7.01" y2="7"></line>
           </svg>
-          <span class="cs-tag" itemprop="keywords">Next.js</span><span class="cs-tag" itemprop="keywords">API</span><span class="cs-tag" itemprop="keywords">Backend</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">JavaScript</span>
+          <span class="cs-tag" itemprop="keywords">JavaScript</span><span class="cs-tag" itemprop="keywords">Performance</span><span class="cs-tag" itemprop="keywords">Browser</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Optimization</span>
         </div>
           </div>
           <div class="cs-post-content">
-            <p>There&#39;s something quietly powerful about being able to write backend code without setting up a separate server. No Express boilerplate. No CORS configuration. No deploying and managing two different applications just so a contact form on your marketing page can send an email.</p>
-<p>Next.js API routes give you exactly that. They live in the same project as your frontend, share the same deployment pipeline, and run as serverless functions that scale automatically. You create a file under <code>app/api</code> or <code>pages/api</code>, export a function, and suddenly you have a backend API endpoint that can query a database, call an external service, or process a webhook.</p>
-<p>I remember the first time I used this on a real project. A client needed a simple newsletter signup form on their marketing site. The previous developer had set up a whole separate Express app just to handle that one form submission—separate repo, separate deployment, separate environment variables. Every time we wanted to tweak the form or add a field, we had to coordinate changes across two codebases. It was tedious. Then someone on the team suggested, &quot;Why don&#39;t we just use a Next.js API route?&quot; Within an hour, we deleted the Express app entirely. The form posted directly to <code>/api/subscribe</code>, the logic lived in a single file, and the client never noticed—except that deployments got simpler and the site got faster. That was the moment I realized Next.js API routes weren&#39;t just a convenience. They were a legitimate architectural choice that could save teams from unnecessary complexity.</p>
-<p>So whether you&#39;re new to Next.js API routing or you&#39;ve been using it for a while and want a deeper reference, this guide covers everything: how the file-system router works, when to use API routes vs server components, how to handle requests and errors, middleware, Edge vs Node.js runtimes, streaming, caching, testing, and the patterns that hold up in production.</p>
-<h2>What are Next.js API routes?</h2>
-<p>Next.js API routes are server-side endpoints you define inside your Next.js project. They let your frontend and backend live in one codebase, deployed together. You write a file, export a function, and Next.js turns it into an HTTP endpoint that returns JSON.</p>
-<p>Two things make them especially useful:</p>
-<p><strong>One deployment, one codebase.</strong> No separate backend repository, no CORS setup between frontend and backend, no duplicate TypeScript types. Your API routes and your pages share the same project.</p>
-<p><strong>Serverless by default.</strong> On Vercel and similar platforms, each API route becomes a serverless function that scales automatically. You don&#39;t manage servers, load balancers, or container orchestration.</p>
-<p>The trade-off: Next.js API routes aren&#39;t a great fit for every backend. If you have hundreds of endpoints, heavy background processing, or need to scale backend independently of the frontend, a dedicated service might be the better call. But for the vast middle ground—form handling, webhooks, simple CRUD, backend-for-frontend patterns—Next.js API routes are more than enough.</p>
-<h2>The file-system router you already know</h2>
-<p>If you&#39;ve used Next.js at all, you already understand how the API routing works. The routing is identical to pages. A file at <code>app/api/users/route.ts</code> becomes the endpoint <code>/api/users</code>. A file at <code>app/api/users/[id]/route.ts</code> becomes <code>/api/users/123</code>. Dynamic segments, catch-all routes, optional parameters—every routing feature from pages applies to API routes.</p>
-<p>There are two conventions, depending on whether you&#39;re using the App Router or the older Pages Router.</p>
-<h3>App Router (Next.js 13+): the modern approach</h3>
-<p>In the App Router, API routes live under <code>app/api</code>. You export named functions for each HTTP method.</p>
-<pre><code class="language-javascript">// app/api/users/route.ts
-export async function GET(request: Request) {
-  const users = await db.user.findMany();
-  return Response.json(users);
-}
+            <p>If you&#39;ve spent any time debugging browser performance, you&#39;ve seen these three terms. Reflow. Forced reflow. Layout thrashing. They show up in Chrome DevTools warnings, Lighthouse reports, and blog posts about making websites faster. And they&#39;re often used as if they mean the same thing.</p>
+<p>They don&#39;t. They describe three related but distinct problems, and understanding the difference changes how you diagnose and fix them.</p>
+<p>Here&#39;s the short version. Reflow is a normal part of rendering. It happens constantly and isn&#39;t a problem by itself. Forced reflow is when your JavaScript asks the browser for layout information at an inconvenient moment, forcing it to recalculate geometry synchronously. Layout thrashing is when you do that in a loop, creating a cascade of forced reflows that tanks performance.</p>
+<p>If you&#39;ve read our <a href="/blog/2025/july/forced-reflow-guide">forced reflow guide</a>, you have the basics. This post is the comparison—what each term actually means, why the distinction matters, and how to recognize which one you&#39;re dealing with.</p>
+<h2>What Reflow Actually Is</h2>
+<p>Reflow is the browser recalculating the position and size of every element on the page. It&#39;s also called layout in some contexts, and the two terms are essentially interchangeable. When the browser needs to know where things are and how big they are, it performs a reflow.</p>
+<p>Reflow happens constantly. Every time you change something that affects layout—adding an element, changing a font size, resizing a container, modifying a class that affects geometry—the browser schedules a reflow. It doesn&#39;t run immediately. It batches changes and runs the reflow once, at the next opportunity, typically before the next paint.</p>
+<p>This batching is a feature, not a bug. If you change five elements&#39; widths in a row, the browser doesn&#39;t reflow five times. It queues the changes, then reflows once when it needs to display the result. That single reflow is fast. For a typical page, it takes a few milliseconds.</p>
+<p>A single reflow is normal. Your application triggers hundreds of them during a typical session, and you never notice. The problems start when reflows become frequent, expensive, or synchronous.</p>
+<h2>What Forced Reflow Actually Is</h2>
+<p>Forced reflow happens when JavaScript reads a layout-dependent property after the browser has pending layout changes but before the browser has had a chance to reflow. The read forces the browser to flush its queue and compute layout immediately, synchronously, so it can return accurate values.</p>
+<p>The properties that trigger forced reflow are the ones that depend on layout: <code>offsetHeight</code>, <code>offsetWidth</code>, <code>offsetTop</code>, <code>offsetLeft</code>, <code>clientHeight</code>, <code>clientWidth</code>, <code>scrollHeight</code>, <code>scrollWidth</code>, <code>scrollTop</code>, <code>scrollLeft</code>, <code>getBoundingClientRect()</code>, <code>getComputedStyle()</code>, and a handful of others.</p>
+<p>Here&#39;s the simplest example:</p>
+<pre><code class="language-javascript">// Write to the DOM
+element.style.width = &quot;200px&quot;;
 
-export async function POST(request: Request) {
-  const body = await request.json();
-  const user = await db.user.create({ data: body });
-  return Response.json(user, { status: 201 });
+// Read a layout property
+const height = element.offsetHeight; // Forced reflow
+</code></pre>
+<p>That <code>element.offsetHeight</code> read forces the browser to recalculate layout immediately, even though it just scheduled a reflow from the width change. The browser had to &quot;flush&quot; its pending changes to give you an accurate number.</p>
+<p>A single forced reflow isn&#39;t the end of the world. It&#39;s a few milliseconds wasted. The problem is when forced reflows happen repeatedly, or when they happen inside loops that process many elements.</p>
+<p>Chrome DevTools reports forced reflow as &quot;Forced reflow while executing JavaScript&quot; or &quot;Forced synchronous layout.&quot; It&#39;s a warning, not an error. It&#39;s telling you that the browser had to do extra work because your code read layout at the wrong moment.</p>
+<h2>What Layout Thrashing Actually Is</h2>
+<p>Layout thrashing is the pathological pattern. It&#39;s what happens when you interleave reads and writes in a loop, forcing the browser to reflow repeatedly for the same batch of changes.</p>
+<p>Here&#39;s the classic example:</p>
+<pre><code class="language-javascript">const elements = document.querySelectorAll(&quot;.item&quot;);
+
+for (const el of elements) {
+  // Read (forces reflow if there are pending changes)
+  const width = el.offsetWidth;
+
+  // Write (invalidates layout)
+  el.style.width = `${width + 10}px`;
 }
 </code></pre>
-<p>Each exported function handles a specific HTTP method. <code>GET</code>, <code>POST</code>, <code>PUT</code>, <code>PATCH</code>, <code>DELETE</code>—Next.js matches the incoming request method to the exported function automatically. If a method isn&#39;t exported, Next.js returns a 405 Method Not Allowed. Clean, predictable, and aligned with web standards.</p>
-<h3>Pages Router: the older convention</h3>
-<p>The Pages Router uses a single default export that receives Node.js <code>req</code> and <code>res</code> objects.</p>
-<pre><code class="language-javascript">// pages/api/users.js
-export default async function handler(req, res) {
-  if (req.method === &quot;GET&quot;) {
-    const users = await db.user.findMany();
-    res.status(200).json(users);
-  } else {
-    res.status(405).json({ error: &quot;Method not allowed&quot; });
-  }
-}
-</code></pre>
-<p>Both approaches work. The App Router version with <code>Request</code> and <code>Response</code> objects is more aligned with web standards and pairs naturally with React Server Components. The Pages Router version feels like Express and might be more familiar if you&#39;ve spent years in the Node.js world. If you&#39;re starting a new project in 2026, use the App Router. But plenty of production applications still run on the Pages Router, and it&#39;s not going away.</p>
-<h3>App Router vs Pages Router: quick comparison</h3>
+<p>Each iteration reads <code>offsetWidth</code> and writes <code>style.width</code>. The read forces a reflow of everything that&#39;s pending. The write invalidates the layout. The next read forces another reflow. With 100 elements, you get 100 forced reflows instead of one batched reflow.</p>
+<p>That&#39;s thrashing. The browser is constantly recalculating layout because you keep changing things and then asking for layout information. The name is apt—the browser is thrashing between calculation and invalidation.</p>
+<p>In Chrome DevTools, layout thrashing shows up as multiple forced reflows in quick succession, often inside the same function call. The Performance panel will show a long &quot;Recalculate Style&quot; or &quot;Layout&quot; block with many sub-entries. It&#39;s one of the most common causes of slow JavaScript execution on pages that manipulate the DOM heavily.</p>
+<h2>The Side-by-Side Comparison</h2>
+<p>Let me lay out the three terms clearly.</p>
 <table>
 <thead>
 <tr>
-<th>Feature</th>
-<th>App Router</th>
-<th>Pages Router</th>
+<th>Term</th>
+<th>What It Is</th>
+<th>When It Happens</th>
+<th>Is It a Problem?</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>Location</td>
-<td><code>app/api/*/route.ts</code></td>
-<td><code>pages/api/*.js</code></td>
+<td><strong>Reflow</strong></td>
+<td>Browser recalculating layout</td>
+<td>Any layout-affecting change</td>
+<td>No—it&#39;s normal and batched</td>
 </tr>
 <tr>
-<td>Method handling</td>
-<td>Named exports per method</td>
-<td>Single default export</td>
+<td><strong>Forced Reflow</strong></td>
+<td>Synchronous layout triggered by a read</td>
+<td>Reading layout after writing</td>
+<td>Sometimes—only if excessive</td>
 </tr>
 <tr>
-<td>Request/Response</td>
-<td>Web standard <code>Request</code>/<code>Response</code></td>
-<td>Node.js <code>req</code>/<code>res</code></td>
-</tr>
-<tr>
-<td>Server components</td>
-<td>Yes</td>
-<td>No</td>
-</tr>
-<tr>
-<td>Middleware</td>
-<td>Root <code>middleware.ts</code></td>
-<td>Root <code>middleware.ts</code></td>
-</tr>
-<tr>
-<td>Recommended for new projects</td>
-<td>Yes</td>
-<td>No</td>
+<td><strong>Layout Thrashing</strong></td>
+<td>Repeated forced reflows in a loop</td>
+<td>Interleaving reads and writes</td>
+<td>Yes—always a performance problem</td>
 </tr>
 </tbody></table>
-<h2>When to use API routes instead of server components</h2>
-<p>Next.js gives you two ways to run server-side code: API routes and React Server Components. The overlap creates a question that comes up constantly: when should something be an API route, and when should it be a server component?</p>
-<p>The short answer: <strong>server components run during rendering to fetch data for pages. API routes are endpoints that return JSON and can accept any HTTP method.</strong></p>
-<p>Server components fetch data and return JSX. They&#39;re for building pages—fetching the data a page needs to display, then rendering the markup. They don&#39;t expose endpoints that clients can call directly.</p>
-<p>API routes return JSON, not JSX. They&#39;re for form submissions, webhooks, mobile app backends, and any situation where a client needs to send data to your server outside of a page navigation.</p>
-<pre><code class="language-javascript">// Server Component — fetches data for page rendering
-export default async function UsersPage() {
-  const users = await db.user.findMany();
-  return &lt;UserList users={users} /&gt;;
+<p>The distinction matters because the fixes are different. If you have a single forced reflow, you can often ignore it. If you have layout thrashing, you need to restructure your code.</p>
+<h2>How to Recognize Which One You Have</h2>
+<p>Chrome DevTools is your best diagnostic tool. Open the Performance panel, record a session, and look for these patterns.</p>
+<p><strong>Single forced reflow.</strong> A short &quot;Recalculate Style&quot; or &quot;Layout&quot; entry in the flame chart, with &quot;Forced reflow while executing JavaScript&quot; in the warnings panel. This is usually fine. If it happens once, it&#39;s a minor cost.</p>
+<p><strong>Multiple forced reflows.</strong> Several &quot;Recalculate Style&quot; or &quot;Layout&quot; entries clustered together, each triggered by JavaScript. You&#39;re probably doing something in a loop that could be restructured.</p>
+<p><strong>Layout thrashing.</strong> A long sequence of &quot;Recalculate Style&quot; and &quot;Layout&quot; entries interleaved with JavaScript execution, often within the same function. The total time spent in layout is significant—hundreds of milliseconds or more. This is the pattern that needs to be fixed.</p>
+<p>You can also use the <code>performance.measure()</code> API to instrument specific functions and see how much time they spend in layout. But in practice, the DevTools Performance panel gives you enough information to diagnose the problem.</p>
+<p>If you&#39;ve been following our performance series, from <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a> to <a href="/blog/improve-website-page-speed-seo-nj">improving page speed for SEO</a>, you know that these rendering issues are one of the most common causes of perceived slowness. Layout thrashing is the worst offender because it multiplies the cost.</p>
+<h2>How to Fix Each One</h2>
+<p>The fixes differ depending on which problem you have.</p>
+<h3>Fixing forced reflow</h3>
+<p>A single forced reflow isn&#39;t usually worth fixing. The cost is a few milliseconds, and the code is often clearer when you read layout properties naturally.</p>
+<p>That said, if you&#39;re doing forced reflows frequently—say, in a scroll handler or a resize handler—you can reduce them by caching the values you need. Read all the layout properties you need once, store them in variables, and use the cached values instead of re-reading.</p>
+<pre><code class="language-javascript">// Before: forced reflow on every call
+function handleScroll() {
+  const height = container.offsetHeight; // Forced reflow
+  doSomething(height);
 }
 
-// API Route — handles form submissions
-export async function POST(request: Request) {
-  const { name, email } = await request.json();
-  await db.user.create({ data: { name, email } });
-  return Response.json({ success: true }, { status: 201 });
-}
-</code></pre>
-<p>Server components can&#39;t handle POST requests. API routes can. That&#39;s the fundamental distinction. If you&#39;ve been working with <a href="/blog/react-server-components-nextjs">React Server Components in Next.js</a>, you know they&#39;re designed for data fetching during rendering. API routes handle everything else. Once you internalize that separation, your architecture gets a lot cleaner.</p>
-<h2>Handling request bodies, query parameters, and headers</h2>
-<p>API routes give you full access to the incoming request. The <code>Request</code> object in the App Router provides methods for reading the body, parsing form data, and accessing headers. Query parameters come from the URL.</p>
-<h3>Query parameters and pagination</h3>
-<pre><code class="language-javascript">export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const page = searchParams.get(&#39;page&#39;) || &#39;1&#39;;
-  const limit = searchParams.get(&#39;limit&#39;) || &#39;10&#39;;
-  const sort = searchParams.get(&#39;sort&#39;) || &#39;createdAt&#39;;
-
-  const users = await db.user.findMany({
-    skip: (Number(page) - 1) * Number(limit),
-    take: Number(limit),
-    orderBy: { [sort]: &#39;desc&#39; },
-  });
-
-  return Response.json(users);
-}
-</code></pre>
-<h3>Request bodies and form data</h3>
-<p>For POST requests with JSON bodies, <code>request.json()</code> parses the incoming data. For form submissions, <code>request.formData()</code> handles multipart form data, including file uploads.</p>
-<pre><code class="language-javascript">export async function POST(request: Request) {
-  const contentType = request.headers.get(&#39;content-type&#39;);
-
-  if (contentType?.includes(&#39;application/json&#39;)) {
-    const body = await request.json();
-    return Response.json({ received: body });
+// After: cache and reuse
+let cachedHeight;
+function handleScroll() {
+  if (cachedHeight === undefined) {
+    cachedHeight = container.offsetHeight;
   }
-
-  if (contentType?.includes(&#39;multipart/form-data&#39;)) {
-    const formData = await request.formData();
-    const file = formData.get(&#39;file&#39;) as File;
-    return Response.json({ filename: file.name, size: file.size });
-  }
-
-  return Response.json({ error: &#39;Unsupported content type&#39; }, { status: 415 });
+  doSomething(cachedHeight);
 }
 </code></pre>
-<p>The web standard APIs are fully supported, which means your route code is portable—it would work in any runtime that supports the Fetch API. That&#39;s a bigger deal than it sounds: you can reuse logic in edge functions, service workers, or even other frameworks.</p>
-<h3>Dynamic route segments</h3>
-<p>Dynamic route segments become parameters you access from the function arguments.</p>
-<pre><code class="language-javascript">export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
-  const user = await db.user.findUnique({
-    where: { id: params.id },
-  });
-
-  if (!user) {
-    return Response.json({ error: &#39;User not found&#39; }, { status: 404 });
-  }
-
-  return Response.json(user);
-}
-</code></pre>
-<p>TypeScript infers the types if you define them, giving you autocomplete and catching typos. Small detail, but it makes development smoother.</p>
-<h3>Calling an external API from a Next.js API route</h3>
-<p>This is a pattern that comes up constantly, especially with third-party services that require secret keys you don&#39;t want exposed to the browser.</p>
-<pre><code class="language-javascript">// app/api/weather/route.ts
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const city = searchParams.get(&#39;city&#39;);
-
-  const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&amp;appid=${process.env.WEATHER_API_KEY}`,
-    { next: { revalidate: 600 } }
-  );
-
-  if (!response.ok) {
-    return Response.json(
-      { error: &#39;Failed to fetch weather&#39; },
-      { status: response.status }
-    );
-  }
-
-  const data = await response.json();
-  return Response.json({ city, temp: data.main.temp });
-}
-</code></pre>
-<p>The API key stays server-side. The client hits your endpoint, your endpoint hits the external service. No key exposure, no CORS issues, and you can add caching with a single option.</p>
-<h2>Error handling that doesn&#39;t crash your endpoint</h2>
-<p>API routes need error handling. An unhandled rejection crashes the function—Next.js catches it and returns a 500 status, but you lose control over the response. Adding structured error handling gives you consistent responses and better debugging.</p>
-<pre><code class="language-javascript">export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const user = await db.user.create({ data: body });
-    return Response.json(user, { status: 201 });
-  } catch (error) {
-    console.error(&#39;Failed to create user:&#39;, error);
-
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      return Response.json(
-        { error: &#39;A user with that email already exists&#39; },
-        { status: 409 }
-      );
-    }
-
-    return Response.json(
-      { error: &#39;Internal server error&#39; },
-      { status: 500 }
-    );
-  }
-}
-</code></pre>
-<p>For a cleaner approach across many routes, extract the error handling into a reusable wrapper.</p>
-<pre><code class="language-javascript">function withErrorHandler(handler: Function) {
-  return async (request: Request, context: any) =&gt; {
-    try {
-      return await handler(request, context);
-    } catch (error) {
-      console.error(error);
-      return Response.json(
-        { error: &#39;Internal server error&#39; },
-        { status: 500 }
-      );
-    }
-  };
+<p>If the container&#39;s size can change, invalidate the cache when appropriate. But for many cases, the size is stable during a single interaction, and caching eliminates the forced reflow.</p>
+<h3>Fixing layout thrashing</h3>
+<p>Layout thrashing requires restructuring the code. The fix is to separate reads from writes—do all the reads first, then all the writes.</p>
+<pre><code class="language-javascript">// Before: thrashing
+const elements = document.querySelectorAll(&quot;.item&quot;);
+for (const el of elements) {
+  const width = el.offsetWidth; // Read
+  el.style.width = `${width + 10}px`; // Write
 }
 
-export const GET = withErrorHandler(async (request: Request) =&gt; {
-  const users = await db.user.findMany();
-  return Response.json(users);
+// After: batched reads and writes
+const elements = document.querySelectorAll(&quot;.item&quot;);
+const widths = Array.from(elements).map((el) =&gt; el.offsetWidth); // All reads
+
+elements.forEach((el, i) =&gt; {
+  el.style.width = `${widths[i] + 10}px`; // All writes
 });
 </code></pre>
-<p>If you&#39;ve read our deep dive on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling in try catch blocks</a>, you know the <code>unknown</code> type in catch clauses forces you to handle the possibility that errors aren&#39;t always <code>Error</code> instances. Same principle here. Your API routes can throw anything—validation errors, database errors, network errors—and a generic handler gives you a safety net.</p>
-<h2>Middleware that runs before your route handler</h2>
-<p>API routes support middleware—code that runs before your handler and can modify the request, add headers, or short-circuit with a response. In the App Router, you can use the root <code>middleware.ts</code> file, which runs for both pages and API routes. For API-specific middleware like authentication or rate limiting, wrapper functions on individual handlers give you more control.</p>
-<pre><code class="language-javascript">function withAuth(handler: Function) {
-  return async (request: Request, context: any) =&gt; {
-    const token = request.headers.get(&#39;authorization&#39;)?.replace(&#39;Bearer &#39;, &#39;&#39;);
+<p>Now the browser reads all the layout properties in one batch—causing a single forced reflow—and then applies all the writes in another batch. The result is one reflow instead of N reflows.</p>
+<p>For more complex cases, use <code>requestAnimationFrame</code> to batch writes to the next frame:</p>
+<pre><code class="language-javascript">const elements = document.querySelectorAll(&quot;.item&quot;);
+const widths = Array.from(elements).map((el) =&gt; el.offsetWidth);
 
-    if (!token) {
-      return Response.json({ error: &#39;Unauthorized&#39; }, { status: 401 });
-    }
-
-    const user = await verifyToken(token);
-    if (!user) {
-      return Response.json({ error: &#39;Invalid token&#39; }, { status: 401 });
-    }
-
-    const authenticatedRequest = Object.assign(request, { user });
-    return handler(authenticatedRequest, context);
-  };
-}
-
-export const GET = withAuth(async (request: Request) =&gt; {
-  const user = request.user;
-  const data = await db.post.findMany({ where: { authorId: user.id } });
-  return Response.json(data);
-});
-</code></pre>
-<p>This composable approach lets you build a toolkit of reusable middleware. Authentication, rate limiting, request validation, logging—each is a function that wraps a handler. You combine them as needed per route. The result is consistent, testable, and easy to reason about.</p>
-<h2>Edge vs Node.js runtimes</h2>
-<p>Next.js API routes can run in two different runtimes: the default Node.js runtime or the Edge runtime. The choice affects available APIs, deployment, and where your code runs geographically.</p>
-<p><strong>Node.js runtime</strong> is the default. Full Node.js API available—filesystem, native modules, any npm package. Cold starts typically a few hundred milliseconds. This is the right choice for most API routes, especially ones that use database libraries like Prisma.</p>
-<p><strong>Edge runtime</strong> runs on Vercel&#39;s Edge Network, close to users. It uses a subset of the Web API—no filesystem, no native modules. Cold starts are nearly instant. Ideal for lightweight middleware, A/B testing, geolocation redirects, and API routes that need minimal latency.</p>
-<pre><code class="language-javascript">export const runtime = &#39;edge&#39;;
-
-export async function GET(request: Request) {
-  const country = request.headers.get(&#39;x-vercel-ip-country&#39;) || &#39;US&#39;;
-  const localizedGreeting = country === &#39;FR&#39; ? &#39;Bonjour&#39; : &#39;Hello&#39;;
-  return Response.json({ greeting: localizedGreeting });
-}
-</code></pre>
-<p>The <code>runtime</code> export tells Next.js where to run the route. If you don&#39;t specify, it defaults to Node.js. Edge routes have limits—no Prisma, no <code>fs</code>, no long-running connections—but for simple logic that benefits from global distribution, they&#39;re a powerful option.</p>
-<h2>Testing Next.js API routes</h2>
-<p>This is the piece most tutorials skip, and it&#39;s the one that saves you the most debugging time. <code>next-test-api-route-handler</code> (NTAH) is the go-to library for testing App Router and Pages Router handlers directly, without spinning up a server or making real HTTP calls.</p>
-<pre><code class="language-javascript">import { testApiHandler } from &quot;next-test-api-route-handler&quot;;
-import * as appHandler from &quot;@/app/api/users/route&quot;;
-
-it(&quot;returns a list of users&quot;, async () =&gt; {
-  await testApiHandler({
-    appHandler,
-    test: async ({ fetch }) =&gt; {
-      const response = await fetch({ method: &quot;GET&quot; });
-      expect(response.status).toBe(200);
-      const data = await response.json();
-      expect(Array.isArray(data)).toBe(true);
-    },
+requestAnimationFrame(() =&gt; {
+  elements.forEach((el, i) =&gt; {
+    el.style.width = `${widths[i] + 10}px`;
   });
 });
 </code></pre>
-<p>The handler runs in-process. No server startup, no network flakiness, no test database juggling. You get the full request lifecycle—headers, body parsing, dynamic route params—with plain Jest or Vitest.</p>
-<p>Write tests for the three things that break most often: request validation (does the endpoint reject bad input?), authentication (does it return 401 without a token?), and error paths (does a database failure return a clean 500?). Those three cover the majority of real-world bugs.</p>
-<h2>Streaming responses for real-time data</h2>
-<p>API routes can stream responses using the Web Streams API. Instead of waiting for all data to be available and sending one large JSON response, you send data as it arrives.</p>
-<p>This pattern works well for AI responses, real-time dashboards, and any situation where the response is generated over time.</p>
-<pre><code class="language-javascript">export async function POST(request: Request) {
-  const { prompt } = await request.json();
-
-  const stream = new ReadableStream({
-    async start(controller) {
-      const encoder = new TextEncoder();
-      const words = prompt.split(&#39; &#39;);
-      for (const word of words) {
-        controller.enqueue(encoder.encode(JSON.stringify({ word }) + &#39;\n&#39;));
-        await new Promise(resolve =&gt; setTimeout(resolve, 100));
-      }
-      controller.close();
-    },
-  });
-
-  return new Response(stream, {
-    headers: {
-      &#39;Content-Type&#39;: &#39;text/event-stream&#39;,
-      &#39;Cache-Control&#39;: &#39;no-cache&#39;,
-    },
-  });
-}
-</code></pre>
-<p>The client uses <code>fetch</code> and reads the response body as a stream, processing each chunk as it arrives. This is the same pattern that powers ChatGPT-style interfaces. The user sees the response build in real time rather than waiting for the entire thing to complete.</p>
-<h2>Caching API responses</h2>
-<p>API routes that perform expensive computations or query external services benefit from caching. Next.js provides built-in cache headers, but for fine-grained control, integrate a caching layer like Redis.</p>
-<pre><code class="language-javascript">import { Redis } from &#39;@upstash/redis&#39;;
-
-const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_URL!,
-  token: process.env.UPSTASH_REDIS_TOKEN!,
+<p>The reads happen synchronously, and the writes are deferred to the next frame. This keeps the reads and writes separate and prevents thrashing.</p>
+<p>If you&#39;re using event handlers that trigger layout, consider throttling or debouncing them, as we covered in our <a href="/blog/javascript-debounce-vs-throttle">JavaScript debounce vs throttle</a> guide. A scroll handler that runs 60 times per second and triggers thrashing is a disaster. A debounced handler that runs once every 100ms is manageable.</p>
+<h3>Fixing reflow (when it&#39;s actually a problem)</h3>
+<p>If reflow itself is a problem—because the page has thousands of elements or a deeply nested DOM—the fixes are structural. Reduce the complexity of the DOM. Use CSS properties that don&#39;t trigger reflow when possible (<code>transform</code> and <code>opacity</code> are the classic examples). Avoid changing layout-affecting properties in tight loops.</p>
+<p>The Performance panel will show you when reflow is taking too long. If you see a &quot;Recalculate Style&quot; block that takes more than a few milliseconds, investigate the DOM structure and the CSS involved.</p>
+<h2>A Real Story: Debugging a Sluggish Table</h2>
+<p>A few months ago, I worked on a dashboard that displayed a table with 200 rows. Users reported that filtering the table felt sluggish—a noticeable delay of several hundred milliseconds after typing in the search box.</p>
+<p>The search box had a handler that filtered the visible rows. The filtering logic was fast—it just toggled a CSS class on each row. But the browser was slow to reflect the changes.</p>
+<p>I recorded a performance profile and found the problem immediately. The handler was doing this:</p>
+<pre><code class="language-javascript">rows.forEach((row) =&gt; {
+  const isMatch = row.textContent.includes(query);
+  row.style.display = isMatch ? &quot;&quot; : &quot;none&quot;; // Write
+  const height = row.offsetHeight; // Read (forces reflow)
+  updateRowHighlight(row, height); // Uses the height
 });
-
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const query = searchParams.get(&#39;q&#39;);
-  const cacheKey = `search:${query}`;
-
-  const cached = await redis.get(cacheKey);
-  if (cached) {
-    return Response.json(cached);
-  }
-
-  const results = await performExpensiveSearch(query);
-  await redis.set(cacheKey, results, { ex: 3600 });
-
-  return Response.json(results);
-}
 </code></pre>
-<p>If you&#39;ve read our guide on <a href="/blog/redis-cache-design-patterns">Redis cache design patterns</a>, you&#39;ll recognize this as the cache-aside pattern. The API route checks the cache first, falls back to the expensive operation, and stores the result for subsequent requests. For public endpoints serving the same data to many users, this can dramatically reduce response times and external API costs.</p>
-<h2>Concurrency in API routes</h2>
-<p>API routes often need to fetch from multiple sources. A dashboard endpoint might query a database, call an analytics service, and fetch feature flags—all in a single request. Sequential calls add latency. <code>Promise.all</code> and <code>Promise.allSettled</code> run them concurrently.</p>
-<pre><code class="language-javascript">export async function GET(request: Request) {
-  const [userCount, revenue, recentActivity] = await Promise.all([
-    db.user.count(),
-    fetchRevenueData(),
-    db.activity.findMany({ take: 10 }),
-  ]);
-
-  return Response.json({ userCount, revenue, recentActivity });
-}
+<p>Each iteration wrote to <code>style.display</code> and then read <code>offsetHeight</code>. That&#39;s textbook layout thrashing. With 200 rows, the browser was doing 200 forced reflows.</p>
+<p>The fix was straightforward. I split the reads from the writes:</p>
+<pre><code class="language-javascript">const visibility = rows.map((row) =&gt; row.textContent.includes(query));
+const heights = rows.map((row, i) =&gt; {
+  row.style.display = visibility[i] ? &quot;&quot; : &quot;none&quot;;
+  return row.offsetHeight;
+});
+// Then use heights for the highlight logic
 </code></pre>
-<p>If one call fails, should the whole request fail? Depends on the data. If analytics is down, you might still want user counts and activity. <code>Promise.allSettled</code> handles that gracefully, as we covered in our comparison of <a href="/blog/promise-all-vs-promise-allsettled">Promise.all vs Promise.allSettled</a>.</p>
-<pre><code class="language-javascript">const results = await Promise.allSettled([
-  db.user.count(),
-  fetchRevenueData(),
-  db.activity.findMany({ take: 10 }),
-]);
+<p>Wait—that still reads after writing. Let me redo that properly:</p>
+<pre><code class="language-javascript">// Read phase: get all the heights first
+const heights = rows.map((row) =&gt; row.offsetHeight);
 
-const userCount = results[0].status === &quot;fulfilled&quot; ? results[0].value : null;
-const revenue = results[1].status === &quot;fulfilled&quot; ? results[1].value : null;
-const recentActivity =
-  results[2].status === &quot;fulfilled&quot; ? results[2].value : [];
+// Write phase: apply all the changes
+rows.forEach((row, i) =&gt; {
+  const isMatch = row.textContent.includes(query);
+  row.style.display = isMatch ? &quot;&quot; : &quot;none&quot;;
+  updateRowHighlight(row, heights[i]);
+});
 </code></pre>
-<p>The endpoint degrades gracefully. Partial data beats a full error. This is the kind of resilience production applications need.</p>
-<h2>Next.js 15 changes to watch for</h2>
-<p>If you&#39;re upgrading from Next.js 14, a few things about API routes shifted in 15:</p>
-<ul>
-<li><strong><code>cookies()</code>, <code>headers()</code>, and <code>draftMode()</code> are now async.</strong> You need to <code>await</code> them, which breaks any code that assumed synchronous access. The change aligns them with the rest of the request-handling API and prevents subtle bugs from partial request context.</li>
-<li><strong>Caching defaults changed.</strong> GET route handlers are no longer cached by default. If you want caching behavior, opt in explicitly with <code>export const dynamic = &#39;force-static&#39;</code> or per-fetch cache options.</li>
-<li><strong>The <code>runtime</code> configuration is more stable.</strong> Edge runtime support for API routes has matured, and the App Router now handles the boundary between Node.js and Edge more cleanly.</li>
-</ul>
-<p>If you&#39;re still on Next.js 14 and things are working, there&#39;s no rush. But when you do upgrade, those are the three things most likely to require small fixes.</p>
-<h2>Common mistakes with Next.js API routes</h2>
-<p>After reviewing a lot of Next.js codebases, the same issues come up again and again:</p>
-<p><strong>Forgetting to return a Response object.</strong> In the App Router, every handler must return a <code>Response</code>. If you forget, the route returns a 500 with a cryptic error. Always return <code>Response.json(...)</code> or a <code>new Response(...)</code>.</p>
-<p><strong>Mixing Pages Router and App Router conventions.</strong> You can&#39;t put a Pages Router-style handler inside <code>app/api</code>. The two conventions aren&#39;t interchangeable, and mixing them silently breaks things.</p>
-<p><strong>Assuming the request body is always JSON.</strong> Real-world clients send <code>application/x-www-form-urlencoded</code>, <code>multipart/form-data</code>, and sometimes nothing at all. Check the content type or use a validation library like Zod.</p>
-<p><strong>Skipping tests.</strong> API routes are the easiest part of a Next.js app to test, and the most expensive to debug in production. Write a handful of tests for the critical endpoints and save yourself hours later.</p>
-<h2>Frequently asked questions about Next.js API routes</h2>
-<h3>What are Next.js API routes?</h3>
-<p>Next.js API routes are server-side endpoints defined inside your Next.js project. You create a file under <code>app/api</code> (App Router) or <code>pages/api</code> (Pages Router), export a function per HTTP method, and Next.js turns that file into an HTTP endpoint that returns JSON. They let you build a backend API in the same codebase and deployment as your frontend.</p>
-<h3>What&#39;s the difference between App Router and Pages Router API routes?</h3>
-<p>App Router API routes live in <code>app/api/*/route.ts</code> and export named functions per HTTP method (<code>GET</code>, <code>POST</code>, etc.) that receive Web-standard <code>Request</code> and <code>Response</code> objects. Pages Router API routes live in <code>pages/api/*.js</code> and use a single default export that receives Node.js <code>req</code> and <code>res</code> objects. The App Router is recommended for new projects.</p>
-<h3>When should I use an API route instead of a server component?</h3>
-<p>Use server components for fetching data that a page needs to render. Use API routes for form submissions, webhooks, mobile app backends, third-party integrations, and any situation where a client needs to send data to your server outside of a page navigation. Server components can&#39;t handle POST requests; API routes can.</p>
-<h3>How do I test Next.js API routes?</h3>
-<p>Use <code>next-test-api-route-handler</code> (NTAH). It runs your route handlers in-process with the full request lifecycle, so you get realistic tests without spinning up a server. Pair it with Jest or Vitest and write tests for request validation, authentication, and error paths.</p>
-<h3>Can I use Next.js API routes with an external API?</h3>
-<p>Yes, and it&#39;s one of the most common patterns. Your API route acts as a proxy—the client hits your endpoint, your endpoint calls the external service with a server-side API key, and returns the result. This keeps secrets out of the browser and avoids CORS issues.</p>
-<h3>What&#39;s the difference between Node.js and Edge runtimes in Next.js API routes?</h3>
-<p>The Node.js runtime (the default) has full Node.js APIs available, including the filesystem and native modules, with cold starts of a few hundred milliseconds. The Edge runtime runs on a global network close to users, uses a subset of the Web API, and has nearly instant cold starts—but no filesystem or native modules. Choose Edge for latency-sensitive logic; stick with Node.js for anything needing npm packages like Prisma.</p>
-<h3>How do I add authentication to Next.js API routes?</h3>
-<p>Wrap your handler in an authentication middleware function that reads the <code>authorization</code> header, verifies the token, and either returns a 401 or passes the authenticated request to the handler. You can also use NextAuth.js or Auth.js, which integrate with the App Router and expose a session helper you can call inside API routes.</p>
-<h3>Can I stream responses from a Next.js API route?</h3>
-<p>Yes. Return a <code>ReadableStream</code> wrapped in a <code>Response</code>, and set the <code>Content-Type</code> to <code>text/event-stream</code>. The client reads the body with <code>fetch</code> and processes chunks as they arrive. This is the standard pattern for AI responses and real-time dashboards.</p>
-<h2>Wrapping up</h2>
-<p>Next.js API routes collapse the frontend and backend into a single codebase. One project. One deployment. One set of TypeScript types shared between client and server. The productivity gains are real, especially for small to medium teams without the bandwidth to maintain separate backend infrastructure.</p>
-<p>They&#39;re not a replacement for a dedicated backend in every scenario. If your API has hundreds of endpoints, complex business logic, or needs to scale independently of the frontend, a separate service might make more sense. But for the vast middle ground—form handling, webhooks, simple CRUD, backend-for-frontend patterns—API routes are more than enough.</p>
-<p>The key patterns to remember: use server components for data fetching during page rendering, use API routes for mutating data and external clients. Handle errors consistently. Cache expensive responses. Test the critical paths. And don&#39;t overcomplicate things—sometimes a simple route handler that returns JSON is all you need.</p>
-<p>They&#39;re one of the quiet superpowers of the framework, and once you start using them, you&#39;ll wonder why you ever did it any other way.</p>
+<p>Now the reads all happen before any writes. The browser does one reflow during the read phase—capturing the current state—and then batches all the writes into a single reflow at the end. The filtering went from several hundred milliseconds to under 50ms. The difference was dramatic and immediately noticeable to users.</p>
+<p>The lesson: layout thrashing is often hiding in code that looks reasonable. You have to know what to look for.</p>
+<h2>Tools for Detecting These Problems</h2>
+<p>Chrome DevTools Performance panel is the primary tool. Record a session, look for &quot;Recalculate Style&quot; and &quot;Layout&quot; entries, and check the warnings for &quot;Forced reflow while executing JavaScript.&quot;</p>
+<p>Lighthouse reports &quot;Avoid large layout shifts&quot; and can flag forced reflows, though its detection is less granular than DevTools.</p>
+<p>The <code>PerformanceObserver</code> API lets you monitor long tasks programmatically and log them for analysis.</p>
+<p>Web Vitals in Chrome measures Cumulative Layout Shift (CLS), which isn&#39;t the same as layout thrashing but is related—both involve layout instability. Our guide on <a href="/blog/improve-website-page-speed-seo-nj">improving page speed for SEO</a> covers how these metrics affect search rankings.</p>
+<p>For React applications, the React DevTools Profiler can help identify components that trigger excessive re-renders, which often correlate with layout thrashing. Our guide on <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a> covers the React-specific patterns.</p>
+<h2>Wrapping Up</h2>
+<p>Reflow, forced reflow, and layout thrashing are related but distinct. Reflow is normal. Forced reflow is a read after a write. Layout thrashing is repeated forced reflows in a loop.</p>
+<p>The practical takeaway: if you see a single forced reflow, don&#39;t worry about it. If you see many forced reflows, look for loops that read and write. If you see layout thrashing, restructure your code to batch reads and writes separately.</p>
+<p>For a deeper dive into forced reflow specifically, see our <a href="/blog/2025/july/forced-reflow-guide">forced reflow guide</a>. For the broader performance context, see our posts on <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a> and <a href="/blog/improve-website-page-speed-seo-nj">improving page speed for SEO</a>.</p>
+<p>Now go find those loops.</p>
 <hr>
-<p><em>Building a Next.js application and need help designing your API layer? Red Surge Technology works with teams to architect backend patterns that scale with your frontend. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+<p><em>Need help diagnosing rendering performance issues in your web application? Red Surge Technology specializes in performance audits and optimization for modern web apps. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
 
           </div>
         </div>
@@ -812,14 +516,6 @@ const recentActivity =
         <h3 class="cs-sidebar-heading">Recent Posts</h3>
         <ul class="cs-sidebar-list">
           
-          <li class="cs-sidebar-item">
-            <a href="/blog/layout-thrashing-vs-forced-reflow-vs-reflow.html" class="cs-sidebar-link">
-              <img class="cs-sidebar-thumb"
-     src="/images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow-100.webp"
-     alt="Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?" width="80" height="60" loading="lazy" decoding="async" />
-              <span class="cs-sidebar-title">Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?</span>
-            </a>
-          </li>
           <li class="cs-sidebar-item">
             <a href="/blog/react-aria-combobox-select-tutorial.html" class="cs-sidebar-link">
               <img class="cs-sidebar-thumb"
@@ -850,6 +546,14 @@ const recentActivity =
      src="/images/blog/uploads/bitbucket-gitlab-rebase-vs-merge-100.webp"
      alt="Bitbucket & GitLab Rebase vs Merge: Platform-Specific Guide for 2026" width="80" height="60" loading="lazy" decoding="async" />
               <span class="cs-sidebar-title">Bitbucket & GitLab Rebase vs Merge: Platform-Specific Guide for 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/wordpress-jquery-document-ready.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/wordpress-jquery-document-ready-100.webp"
+     alt="WordPress jQuery Document Ready: The Right Way to Write Frontend Scripts" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">WordPress jQuery Document Ready: The Right Way to Write Frontend Scripts</span>
             </a>
           </li>
         </ul>
