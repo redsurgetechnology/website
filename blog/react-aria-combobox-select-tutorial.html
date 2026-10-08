@@ -20,7 +20,7 @@
 
     <!-- Primary Meta Tags -->
     <title>React Aria ComboBox & Select Tutorial: Accessible Dropdowns Guide</title>
-    <meta name="description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, and testing with Testing Library." />
+    <meta name="description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, async loading, and testing with Testing Library." />
     <meta name="author" content="Collin Stewart" />
     <meta name="robots" content="index, follow" />
     
@@ -33,13 +33,13 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://redsurgetechnology.com/blog/react-aria-combobox-select-tutorial" />
     <meta property="og:title" content="React Aria ComboBox & Select Tutorial: Accessible Dropdowns Guide" />
-    <meta property="og:description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, and testing with Testing Library." />
+    <meta property="og:description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, async loading, and testing with Testing Library." />
     <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-aria-combobox-select-tutorial.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Red Surge Technology" />
     <meta property="article:published_time" content="2026-10-05T10:00:00.000Z" />
-    <meta property="article:modified_time" content="2026-10-05T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-10-08T10:00:00.000Z" />
     <meta property="article:section" content="JavaScript" />
     <meta property="article:tag" content="React" />
     <meta property="article:tag" content="Accessibility" />
@@ -51,7 +51,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://redsurgetechnology.com/blog/react-aria-combobox-select-tutorial" />
     <meta name="twitter:title" content="React Aria ComboBox & Select Tutorial: Accessible Dropdowns Guide" />
-    <meta name="twitter:description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, and testing with Testing Library." />
+    <meta name="twitter:description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, async loading, and testing with Testing Library." />
     <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-aria-combobox-select-tutorial.webp" />
 
     <!-- Favicon -->
@@ -74,13 +74,13 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "React Aria ComboBox & Select Tutorial: Accessible Dropdowns Guide",
-        "description": "Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, and testing with Testing Library.",
+        "description": "Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, async loading, and testing with Testing Library.",
         "url": "https://redsurgetechnology.com/blog/react-aria-combobox-select-tutorial",
         "datePublished": "2026-10-05T10:00:00.000Z",
-        "dateModified": "2026-10-05T10:00:00.000Z",
+        "dateModified": "2026-10-08T10:00:00.000Z",
         "keywords": "React, Accessibility, React Aria, UI Components, JavaScript",
         "articleSection": "JavaScript",
-        "timeRequired": "PT15M",
+        "timeRequired": "PT17M",
         "author": {
           "@type": "Person",
           "name": "Collin Stewart"
@@ -141,6 +141,110 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What's the difference between React Aria Select and ComboBox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Select is a non-filterable dropdown — the user clicks a button, sees a list, picks an option. ComboBox is a text input combined with a dropdown, so the user can type to filter the options and optionally enter a custom value. Use Select for short, known option lists. Use ComboBox for long lists, autocomplete, or search-as-you-type patterns."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to install the underlying React Aria hooks separately?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Installing `react-aria-components` gives you the pre-composed components. The underlying hooks (`@react-aria/combobox`, `@react-aria/select`) are for building custom primitives from scratch. For most projects, React Aria Components is the right choice — it's less code and fewer opportunities to miss an accessibility detail."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I make a React Aria ComboBox filter asynchronously from an API?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Control `inputValue` and `items` yourself, pass `allowsEmptyCollection` so the popover stays open during loading, and set `defaultFilter={null}` so React Aria doesn't double-filter results the server already filtered. Debounce the input value before fetching to avoid a request on every keystroke."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does React Aria work with TypeScript?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and it's one of the library's strengths. All components ship with full TypeScript types. The `items` prop, selection keys, and render-state functions are all typed. You get autocomplete for `ListBoxItem` props and catch typos at compile time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I style React Aria components?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "React Aria is unstyled. Pass `className` (a string or a function of render state) to any component. For Tailwind users, React Aria automatically sets data attributes like `data-open`, `data-focused`, and `data-invalid` that you can target with `data-[...]:` variants. No configuration needed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use React Aria with React 19?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. React Aria Components support React 18 and React 19. The library is actively maintained by Adobe and updates quickly when new React versions ship."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does React Aria handle keyboard navigation in ComboBox?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Arrow Down and Arrow Up move the highlighted option. Enter selects the highlighted option. Escape closes the popover. Home and End jump to the first and last option. Type-ahead also works — typing letters while the list is open jumps to matching options. All of this is handled automatically."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does React Aria Select support form submission?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Set the `name` prop on `<Select>` and React Aria renders a hidden native `<select>` that mirrors the state. Submitting the form includes the selected value, and this works with `FormData` and server actions without any extra wiring."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I handle validation errors in React Aria?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Set `isInvalid` on the root component and render a `<FieldError>` child. React Aria wires up `aria-describedby` on the input, announces the error when the field is focused, and shows the error message only when invalid. No manual ARIA handling required."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use React Aria components outside of a React Spectrum application?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. React Aria Components are standalone — you don't need React Spectrum (Adobe's design system) or its theming. They're designed to be used with any styling approach: plain CSS, CSS Modules, Tailwind, styled-components, or emotion."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does React Aria compare to other headless UI libraries like Radix or Headless UI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All three are headless. Radix UI focuses on general-purpose primitives, Headless UI is smaller and simpler, and React Aria is the most comprehensive for accessibility specifically. React Aria's keyboard interactions, ARIA attributes, and screen reader announcements are more thoroughly tested across assistive technologies. If accessibility is a hard requirement, React Aria is the safest choice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I need multi-select with filtering?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "React Aria has a separate TagField pattern for that use case. The composition differs slightly — it uses `<TagGroup>` alongside the ComboBox — but the underlying accessibility principles are the same. The React Aria docs cover it in depth."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
@@ -158,7 +262,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns That Work",
+          "name": "React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns (2026)",
           "item": "https://redsurgetechnology.com/blog/react-aria-combobox-select-tutorial"
         }
       ]
@@ -222,7 +326,7 @@
     <!-- Banner -->
 <div id="banner-712">
   <div class="cs-container">
-    <h1 class="cs-int-title">React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns That Work</h1>
+    <h1 class="cs-int-title">React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns (2026)</h1>
   </div>
   <picture class="cs-background">
     <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
@@ -245,7 +349,7 @@
           <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
         </li>
         <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
-          React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns That Work
+          React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns (2026)
         </li>
       </ol>
     </nav>
@@ -265,7 +369,7 @@
       /images/blog/uploads/react-aria-combobox-select-tutorial-800.webp 800w
     "
     sizes="(max-width: 1024px) 92vw, 800px"
-    alt="React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns That Work - Red Surge Technology Blog"
+    alt="React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns (2026) - Red Surge Technology Blog"
     width="1280"
     height="720"
   />
@@ -274,7 +378,7 @@
             
         <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
           <meta itemprop="headline" content="React Aria ComboBox & Select Tutorial: Accessible Dropdowns Guide" />
-          <meta itemprop="description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, and testing with Testing Library." />
+          <meta itemprop="description" content="Build accessible React Aria ComboBox and Select components. Step-by-step tutorial covering keyboard navigation, type-ahead filtering, form integration, async loading, and testing with Testing Library." />
           <meta itemprop="url" content="https://redsurgetechnology.com/blog/react-aria-combobox-select-tutorial" />
 
           <!-- Published date -->
@@ -288,7 +392,15 @@
             <time itemprop="datePublished" datetime="2026-10-05T10:00:00.000Z">Oct 05, 2026</time>
           </div>
 
-          <meta itemprop="dateModified" content="2026-10-05T10:00:00.000Z" />
+          
+          <!-- Last updated -->
+          <div class="cs-meta-item cs-meta-updated" title="Last updated">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Updated: <time itemprop="dateModified" datetime="2026-10-08T10:00:00.000Z">Oct 08, 2026</time></span>
+          </div>
 
           <!-- Author -->
           <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
@@ -306,7 +418,7 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span><meta itemprop="timeRequired" content="PT15M" />15 min read</span>
+            <span><meta itemprop="timeRequired" content="PT17M" />17 min read</span>
           </div>
 
           
@@ -332,47 +444,99 @@
           <div class="cs-post-content">
             <p>A dropdown looks simple. A button that opens a list. Click an option. Close. How hard could it be?</p>
 <p>Then you actually build one and realize how much is missing. Arrow key navigation. Focus management. Screen reader announcements. Type-ahead selection. Escape to close. Click outside to close. Returning focus to the trigger after selection. Scroll management when the list is long. The WAI-ARIA spec for combobox and listbox patterns runs dozens of pages, and getting it right from scratch is a genuine challenge.</p>
-<p>React Aria Components handle all of this for you. They&#39;re unstyled, accessible primitives from Adobe that encode years of accessibility research into composable React components. You get the behavior and ARIA attributes. You bring the styling.</p>
-<p>This tutorial walks through building both a Select (non-filterable dropdown) and a ComboBox (type-ahead filtering) using React Aria Components. We&#39;ll cover setup, anatomy, styling, form integration, and testing. If you&#39;re new to React Aria, start with our <a href="/blog/react-aria-components">React Aria Components overview</a>, which covers the philosophy and the broader library. This post is the hands-on component tutorial.</p>
-<h2>When to Use Select vs ComboBox</h2>
-<p>React Aria provides both Select and ComboBox, and choosing the right one matters for user experience.</p>
-<p><strong>Use Select when:</strong></p>
-<ul>
-<li>The list of options is fixed and doesn&#39;t need filtering.</li>
-<li>The user needs to pick from a known set (country, category, status).</li>
-<li>The list is short enough to scan visually (under ~20 items).</li>
-<li>You don&#39;t need the user to type a custom value.</li>
-</ul>
-<p><strong>Use ComboBox when:</strong></p>
-<ul>
-<li>The list is long and benefits from filtering as the user types.</li>
-<li>You want to combine a text input with suggestions (autocomplete).</li>
-<li>The user might need to search for an option by name.</li>
-<li>You want the flexibility of typed input with guided selection.</li>
-</ul>
-<p>As the React Spectrum docs put it: &quot;Use ComboBox when users need to filter a list by typing. Use Select for a non-filterable dropdown.&quot; That&#39;s the clean distinction. ComboBox is for autocomplete and filtering. Select is for picking.</p>
-<p>If you need multi-select with filtering, React Aria has a separate pattern (TagField) that we won&#39;t cover here.</p>
-<h2>Installation and Setup</h2>
-<p>Install the React Aria Components package:</p>
+<p>I learned this the hard way a few months ago. I inherited a project with a custom dropdown component built from scratch by a previous developer. On the surface, it looked fine — clicked open, clicked an option, closed. But when I ran it through a keyboard test, everything fell apart. No arrow key navigation. No focus return after selection. Screen readers announced it as a mystery &quot;group&quot; with no interaction hints. We had thousands of users hitting this component daily, and every keyboard user was stuck.</p>
+<p>We replaced it with React Aria Select. The migration took about two hours. The component went from 180 lines of custom logic to 40 lines of composition. Every accessibility issue disappeared. The original developer&#39;s reaction said it all: &quot;I didn&#39;t know I was missing all that.&quot;</p>
+<p>React Aria Components encode years of accessibility research into composable primitives. You get the behavior, the keyboard handling, and the ARIA attributes. You bring the styling. This tutorial walks through building both a Select (non-filterable dropdown) and a ComboBox (type-ahead filtering) from scratch, including form integration, async loading, and testing.</p>
+<p>If you&#39;re new to React Aria, start with our <a href="/blog/react-aria-components">React Aria Components overview</a>, which covers the philosophy and the broader library. This post is the hands-on component tutorial.</p>
+<blockquote>
+<p><strong>Building accessible components and want an expert review?</strong> Red Surge Technology specializes in inclusive React applications. <a href="/contact">Get in touch</a> for a free consultation.</p>
+</blockquote>
+<hr>
+<h2>Table of contents</h2>
+<ol>
+<li><a href="#react-aria-combobox-vs-select-which-one-do-you-need">React Aria ComboBox vs Select: which one do you need?</a></li>
+<li><a href="#installing-react-aria-components">Installing React Aria Components</a></li>
+<li><a href="#building-a-select-component-step-by-step">Building a Select component step by step</a></li>
+<li><a href="#building-a-combobox-component-step-by-step">Building a ComboBox component step by step</a></li>
+<li><a href="#async-loading-and-remote-data">Async loading and remote data</a></li>
+<li><a href="#styling-react-aria-components">Styling React Aria Components</a></li>
+<li><a href="#form-integration-and-validation">Form integration and validation</a></li>
+<li><a href="#testing-react-aria-components">Testing React Aria components</a></li>
+<li><a href="#common-pitfalls-and-how-to-avoid-them">Common pitfalls and how to avoid them</a></li>
+<li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li><a href="#wrapping-up">Wrapping up</a></li>
+</ol>
+<hr>
+<h2>React Aria ComboBox vs Select: which one do you need?</h2>
+<p>React Aria gives you both <code>&lt;Select&gt;</code> and <code>&lt;ComboBox&gt;</code>, and they solve related but different problems. Picking the wrong one frustrates users.</p>
+<div class="cs-table-wrap cs-table-wrap--stack">
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Select</th>
+<th>ComboBox</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td data-label="Feature">User can type to filter</td>
+<td data-label="Select">No</td>
+<td data-label="ComboBox">Yes</td>
+</tr>
+<tr>
+<td data-label="Feature">Best for option count</td>
+<td data-label="Select">Under ~20 options</td>
+<td data-label="ComboBox">20+ options, or unknown</td>
+</tr>
+<tr>
+<td data-label="Feature">Has a text input</td>
+<td data-label="Select">No (button only)</td>
+<td data-label="ComboBox">Yes</td>
+</tr>
+<tr>
+<td data-label="Feature">Supports custom typed value</td>
+<td data-label="Select">No</td>
+<td data-label="ComboBox">Yes (with <code>allowsCustomValue</code>)</td>
+</tr>
+<tr>
+<td data-label="Feature">Async / remote loading</td>
+<td data-label="Select">Possible, less common</td>
+<td data-label="ComboBox">Common (search-as-you-type)</td>
+</tr>
+<tr>
+<td data-label="Feature">Use case</td>
+<td data-label="Select">Country picker, category filter, status change</td>
+<td data-label="ComboBox">User search, tag input, autocomplete</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<p>The React Spectrum docs put it cleanly: use ComboBox when users need to filter a list by typing. Use Select for a non-filterable dropdown. That&#39;s the fundamental distinction.</p>
+<p>A practical rule: if the user knows what they want and just needs to pick it, use Select. If the user knows roughly what they want and needs to search for it, use ComboBox.</p>
+<p>If you need multi-select with filtering, React Aria has a separate pattern (TagField) that we won&#39;t cover here — but the same composition principles apply.</p>
+<h2>Installing React Aria Components</h2>
+<p>Install the package:</p>
 <pre><code class="language-bash">npm install react-aria-components
 </code></pre>
-<p>That&#39;s the only dependency you need. React Aria Components ship with TypeScript types and work with React 18 and 19.</p>
-<p>Unlike the underlying React Aria hooks (<code>@react-aria/combobox</code>, <code>@react-aria/select</code>), React Aria Components give you pre-composed components that handle the props plumbing for you. You don&#39;t manage <code>useComboBox</code>, <code>useListBox</code>, <code>useButton</code>, and <code>usePopover</code> separately. You compose <code>&lt;ComboBox&gt;</code>, <code>&lt;Label&gt;</code>, <code>&lt;Input&gt;</code>, <code>&lt;Popover&gt;</code>, <code>&lt;ListBox&gt;</code>, and <code>&lt;ListBoxItem&gt;</code>.</p>
+<p>That&#39;s the only dependency you need. React Aria Components ship with TypeScript types, work with React 18 and 19, and have zero runtime dependencies beyond React itself.</p>
+<p>Unlike the lower-level React Aria hooks (<code>@react-aria/combobox</code>, <code>@react-aria/select</code>), React Aria Components give you pre-composed components that handle the props plumbing for you. You don&#39;t wire up <code>useComboBox</code>, <code>useListBox</code>, <code>useButton</code>, and <code>usePopover</code> separately. You compose <code>&lt;ComboBox&gt;</code>, <code>&lt;Label&gt;</code>, <code>&lt;Input&gt;</code>, <code>&lt;Popover&gt;</code>, <code>&lt;ListBox&gt;</code>, and <code>&lt;ListBoxItem&gt;</code>.</p>
 <p>If you&#39;ve built dropdowns with raw hooks before, you know how much ceremony is involved. React Aria Components eliminate most of it.</p>
-<h2>Building a Select Component</h2>
-<p>Let&#39;s start with the simpler of the two: a non-filterable Select.</p>
+<h2>Building a Select component step by step</h2>
+<p>Let&#39;s start with the simpler of the two.</p>
 <h3>The anatomy of a Select</h3>
 <p>A React Aria Select consists of these parts:</p>
 <ul>
 <li><strong><code>&lt;Select&gt;</code></strong> — The root component. Manages state and provides context.</li>
-<li><strong><code>&lt;Label&gt;</code></strong> — The visible label. Associated with the input via <code>aria-labelledby</code>.</li>
+<li><strong><code>&lt;Label&gt;</code></strong> — The visible label. Automatically associated with the button via <code>aria-labelledby</code>.</li>
 <li><strong><code>&lt;Button&gt;</code></strong> — The trigger that opens the dropdown.</li>
 <li><strong><code>&lt;SelectValue&gt;</code></strong> — Displays the currently selected value (or placeholder).</li>
-<li><strong><code>&lt;Popover&gt;</code></strong> — The popup container.</li>
+<li><strong><code>&lt;Popover&gt;</code></strong> — The popup container that positions itself.</li>
 <li><strong><code>&lt;ListBox&gt;</code></strong> — The list of options.</li>
-<li><strong><code>&lt;ListBoxItem&gt;</code></strong> — Individual option.</li>
+<li><strong><code>&lt;ListBoxItem&gt;</code></strong> — An individual option.</li>
 </ul>
-<p>Here&#39;s the minimal working Select:</p>
+<p>Here&#39;s a minimal working Select:</p>
 <pre><code class="language-jsx">import {
   Select,
   SelectValue,
@@ -404,20 +568,26 @@ function FavoriteAnimal() {
   );
 }
 </code></pre>
-<p>That&#39;s a complete, accessible Select. Keyboard navigation, screen reader support, focus management, escape to close, click outside to close—all handled. No ARIA attributes written by hand. No event listeners for keyboard handling.</p>
+<p>That&#39;s a complete, accessible Select. Keyboard navigation, screen reader support, focus management, escape to close, click outside to close — all handled. No ARIA attributes written by hand.</p>
 <h3>Adding a placeholder</h3>
-<p><code>&lt;SelectValue&gt;</code> accepts a <code>placeholder</code> prop for when nothing is selected:</p>
+<p><code>&lt;SelectValue&gt;</code> accepts a <code>placeholder</code> prop for the empty state:</p>
 <pre><code class="language-jsx">&lt;SelectValue placeholder=&quot;Select an animal&quot; /&gt;
 </code></pre>
+<p>The placeholder only displays when nothing is selected. Once the user picks an option, the SelectValue shows the option&#39;s text.</p>
 <h3>Controlling selection</h3>
 <p>React Aria uses <code>selectedKey</code> and <code>onSelectionChange</code> for controlled selection, or <code>defaultSelectedKey</code> for uncontrolled initial selection:</p>
 <pre><code class="language-jsx">&lt;Select defaultSelectedKey=&quot;cat&quot;&gt;
-  {/* ... */}
-  &lt;ListBox&gt;
-    &lt;ListBoxItem id=&quot;aardvark&quot;&gt;Aardvark&lt;/ListBoxItem&gt;
-    &lt;ListBoxItem id=&quot;cat&quot;&gt;Cat&lt;/ListBoxItem&gt;
-    &lt;ListBoxItem id=&quot;dog&quot;&gt;Dog&lt;/ListBoxItem&gt;
-  &lt;/ListBox&gt;
+  &lt;Label&gt;Favorite Animal&lt;/Label&gt;
+  &lt;Button&gt;
+    &lt;SelectValue /&gt;
+  &lt;/Button&gt;
+  &lt;Popover&gt;
+    &lt;ListBox&gt;
+      &lt;ListBoxItem id=&quot;aardvark&quot;&gt;Aardvark&lt;/ListBoxItem&gt;
+      &lt;ListBoxItem id=&quot;cat&quot;&gt;Cat&lt;/ListBoxItem&gt;
+      &lt;ListBoxItem id=&quot;dog&quot;&gt;Dog&lt;/ListBoxItem&gt;
+    &lt;/ListBox&gt;
+  &lt;/Popover&gt;
 &lt;/Select&gt;
 </code></pre>
 <p>Each <code>ListBoxItem</code> needs a unique <code>id</code>. The selected key is passed to <code>onSelectionChange</code>, which receives the id of the selected item.</p>
@@ -426,7 +596,7 @@ function FavoriteAnimal() {
 &lt;/Select&gt;
 </code></pre>
 <h3>Rendering options dynamically</h3>
-<p>Hardcoding items works for demos, but real Selects render from data. React Aria Components support dynamic collections via the <code>items</code> prop:</p>
+<p>Hardcoding items works for demos. Real Selects render from data. React Aria Components support dynamic collections via the <code>items</code> prop:</p>
 <pre><code class="language-jsx">const animals = [
   { id: &quot;aardvark&quot;, name: &quot;Aardvark&quot; },
   { id: &quot;cat&quot;, name: &quot;Cat&quot; },
@@ -445,45 +615,23 @@ function FavoriteAnimal() {
   &lt;/Popover&gt;
 &lt;/Select&gt;;
 </code></pre>
-<p>The <code>items</code> prop accepts any iterable. The child function receives each item and returns the JSX for that item. React Aria handles the key extraction from the <code>id</code> field.</p>
-<h3>Styling with render props</h3>
-<p>React Aria Components support a <code>className</code> prop that accepts a function. The function receives render state, so you can style based on whether the select is open, focused, invalid, etc.</p>
-<pre><code class="language-jsx">&lt;Button
-  className={({ isOpen, isFocused }) =&gt;
-    `select-button ${isOpen ? &quot;open&quot; : &quot;&quot;} ${isFocused ? &quot;focused&quot; : &quot;&quot;}`
-  }
-&gt;
-  &lt;SelectValue /&gt;
-&lt;/Button&gt;
+<p>The <code>items</code> prop accepts any iterable. The child function receives each item and returns the JSX. React Aria handles key extraction from the <code>id</code> field automatically.</p>
+<h3>Rendering rich option content</h3>
+<p>ListBoxItems can contain any JSX. Use <code>&lt;Text&gt;</code> for the accessible name and put extra markup (avatars, badges, descriptions) alongside:</p>
+<pre><code class="language-jsx">&lt;ListBoxItem id={item.id} textValue={item.name}&gt;
+  &lt;img src={item.avatar} alt=&quot;&quot; /&gt;
+  &lt;Text slot=&quot;label&quot;&gt;{item.name}&lt;/Text&gt;
+  &lt;Text slot=&quot;description&quot;&gt;{item.role}&lt;/Text&gt;
+&lt;/ListBoxItem&gt;
 </code></pre>
-<p>This is the same pattern used by many headless UI libraries. The difference is that React Aria exposes more state than most, including <code>isInvalid</code>, <code>isDisabled</code>, <code>isRequired</code>, and <code>isOpen</code>.</p>
-<h3>Form integration</h3>
-<p>React Aria Select integrates with native HTML forms. The selected value is submitted with the form, just like a native <code>&lt;select&gt;</code>:</p>
-<pre><code class="language-jsx">&lt;form&gt;
-  &lt;Select name=&quot;animal&quot;&gt;
-    &lt;Label&gt;Favorite Animal&lt;/Label&gt;
-    &lt;Button&gt;
-      &lt;SelectValue /&gt;
-    &lt;/Button&gt;
-    &lt;Popover&gt;
-      &lt;ListBox&gt;
-        &lt;ListBoxItem id=&quot;cat&quot;&gt;Cat&lt;/ListBoxItem&gt;
-        &lt;ListBoxItem id=&quot;dog&quot;&gt;Dog&lt;/ListBoxItem&gt;
-      &lt;/ListBox&gt;
-    &lt;/Popover&gt;
-  &lt;/Select&gt;
-  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
-&lt;/form&gt;
-</code></pre>
-<p>The <code>name</code> prop on <code>&lt;Select&gt;</code> sets the form field name. React Aria renders a hidden <code>&lt;select&gt;</code> element that mirrors the state, so form submission works out of the box. This is one of those details that saves hours of debugging.</p>
-<p>If you&#39;re working with controlled and uncontrolled form patterns, our <a href="/blog/react-controlled-vs-uncontrolled">React controlled vs uncontrolled components</a> guide covers the broader concepts.</p>
-<h2>Building a ComboBox Component</h2>
-<p>ComboBox is Select plus a text input. The user can type to filter the list, and the input&#39;s value is separate from the selected item.</p>
+<p>The <code>textValue</code> prop is critical here. It&#39;s what screen readers announce and what the type-ahead filtering matches against. Without it, React Aria would try to derive the text from the JSX, which usually produces something messy like &quot;PhotoJane DoeSoftware Engineer.&quot;</p>
+<h2>Building a ComboBox component step by step</h2>
+<p>ComboBox is Select plus a text input. The user can type to filter, and the input value stays separate from the selected item.</p>
 <h3>The anatomy of a ComboBox</h3>
 <ul>
 <li><strong><code>&lt;ComboBox&gt;</code></strong> — Root component.</li>
 <li><strong><code>&lt;Label&gt;</code></strong> — Visible label.</li>
-<li><strong><code>&lt;Group&gt;</code></strong> — Wraps the input and optional button.</li>
+<li><strong><code>&lt;Group&gt;</code></strong> — Wraps the input and optional button. Required for layout.</li>
 <li><strong><code>&lt;Input&gt;</code></strong> — The text input.</li>
 <li><strong><code>&lt;Button&gt;</code></strong> — Optional dropdown trigger.</li>
 <li><strong><code>&lt;Popover&gt;</code></strong> — Popup container.</li>
@@ -532,9 +680,9 @@ function AnimalPicker() {
   {/* ... */}
 &lt;/ComboBox&gt;
 </code></pre>
-<p>This separation matters for scenarios like autocomplete where you want to trigger a search on input change but only commit a value when the user selects an option.</p>
+<p>This separation matters for autocomplete scenarios where you want to trigger a search on input change but only commit a value when the user selects an option.</p>
 <h3>Filtering behavior</h3>
-<p>By default, React Aria uses <code>useFilter</code> for filtering. It does case-insensitive substring matching on the text value of each item. The text value is derived from the item&#39;s content, but you can override it with the <code>textValue</code> prop:</p>
+<p>By default, React Aria uses case-insensitive substring matching on the text value of each item. The text value is derived from the item&#39;s content, but you can override it with the <code>textValue</code> prop:</p>
 <pre><code class="language-jsx">&lt;ListBoxItem textValue=&quot;Cat (Felis catus)&quot;&gt;Cat&lt;/ListBoxItem&gt;
 </code></pre>
 <p>This is useful when the visible label contains extra information (like a scientific name) that shouldn&#39;t participate in filtering.</p>
@@ -553,10 +701,138 @@ function AnimalPicker() {
   &lt;/ListBoxSection&gt;
 &lt;/ListBox&gt;
 </code></pre>
-<p>Screen readers announce the section headers when navigating, which helps users understand the structure of the list.</p>
-<h2>Testing React Aria Components</h2>
-<p>One of React Aria&#39;s strengths is testability. The components expose the same accessible queries that screen readers use, so you can write tests that mirror real user behavior.</p>
-<p>With <code>@testing-library/react</code> and <code>@testing-library/user-event</code>, you can test keyboard interactions:</p>
+<p>Screen readers announce the section headers when navigating, which helps users understand the structure.</p>
+<h2>Async loading and remote data</h2>
+<p>The most common real-world ComboBox use case is search-as-you-type against a remote API. React Aria supports this via controlled <code>items</code> and <code>onInputChange</code>:</p>
+<pre><code class="language-jsx">function UserSearch() {
+  const [query, setQuery] = useState(&quot;&quot;);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() =&gt; {
+    if (!query) {
+      setUsers([]);
+      return;
+    }
+
+    let cancelled = false;
+    setIsLoading(true);
+
+    const timeout = setTimeout(async () =&gt; {
+      try {
+        const response = await fetch(
+          `/api/users?q=${encodeURIComponent(query)}`,
+        );
+        const data = await response.json();
+        if (!cancelled) setUsers(data);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    }, 300);
+
+    return () =&gt; {
+      cancelled = true;
+      clearTimeout(timeout);
+    };
+  }, [query]);
+
+  return (
+    &lt;ComboBox
+      items={users}
+      inputValue={query}
+      onInputChange={setQuery}
+      allowsEmptyCollection
+    &gt;
+      &lt;Label&gt;Find a user&lt;/Label&gt;
+      &lt;Input /&gt;
+      &lt;Popover&gt;
+        {isLoading ? (
+          &lt;p&gt;Loading...&lt;/p&gt;
+        ) : (
+          &lt;ListBox&gt;
+            {(user) =&gt; (
+              &lt;ListBoxItem id={user.id} textValue={user.name}&gt;
+                {user.name}
+              &lt;/ListBoxItem&gt;
+            )}
+          &lt;/ListBox&gt;
+        )}
+      &lt;/Popover&gt;
+    &lt;/ComboBox&gt;
+  );
+}
+</code></pre>
+<p>Two important flags here. <code>allowsEmptyCollection</code> prevents React Aria from closing the popover when the list is empty (which would happen before the fetch resolves). And notice the debounce on <code>setTimeout</code> — 300ms — which prevents a fetch on every keystroke. If you want to go deeper on debouncing, our guide on <a href="/blog/javascript-debounce-vs-throttle">JavaScript debounce vs throttle</a> covers the techniques.</p>
+<p>For async loading, you&#39;ll also want to skip React Aria&#39;s client-side filtering, since the server already did the filtering. Set <code>defaultFilter={null}</code> on the ComboBox when <code>items</code> are already filtered remotely.</p>
+<h2>Styling React Aria Components</h2>
+<p>React Aria Components support a <code>className</code> prop that accepts a function. The function receives render state, so you can style based on whether the select is open, focused, invalid, and so on.</p>
+<pre><code class="language-jsx">&lt;Button
+  className={({ isOpen, isFocused, isDisabled }) =&gt;
+    `select-button ${isOpen ? &quot;open&quot; : &quot;&quot;} ${
+      isFocused ? &quot;focused&quot; : &quot;&quot;
+    } ${isDisabled ? &quot;disabled&quot; : &quot;&quot;}`
+  }
+&gt;
+  &lt;SelectValue /&gt;
+&lt;/Button&gt;
+</code></pre>
+<p>This is the same pattern used by many headless UI libraries. The difference is that React Aria exposes more state than most: <code>isInvalid</code>, <code>isDisabled</code>, <code>isRequired</code>, <code>isOpen</code>, <code>isFocused</code>, <code>isFocusVisible</code>, <code>isHovered</code>, and more.</p>
+<p>You can also use data attributes instead of class functions, which works beautifully with Tailwind:</p>
+<pre><code class="language-jsx">&lt;Button className=&quot;rounded border px-3 py-2 data-[open]:border-blue-500 data-[focused]:ring-2&quot;&gt;
+  &lt;SelectValue /&gt;
+&lt;/Button&gt;
+</code></pre>
+<p>React Aria sets <code>data-open</code>, <code>data-focused</code>, <code>data-invalid</code>, and similar attributes automatically. Tailwind&#39;s <code>data-[...]</code> syntax picks them up without any extra configuration.</p>
+<h3>Styling the Popover</h3>
+<p>The Popover is absolutely positioned and manages its own z-index. Don&#39;t try to style it like a static container. Use <code>className</code> and render state:</p>
+<pre><code class="language-jsx">&lt;Popover
+  className={({ isEntering, isExiting }) =&gt;
+    `popover ${isEntering ? &quot;entering&quot; : &quot;&quot;} ${isExiting ? &quot;exiting&quot; : &quot;&quot;}`
+  }
+  offset={4}
+&gt;
+  &lt;ListBox&gt;{/* ... */}&lt;/ListBox&gt;
+&lt;/Popover&gt;
+</code></pre>
+<p>The <code>offset</code> prop controls the gap between the trigger and the popover. React Aria also handles collision detection — if the popover would overflow the viewport, it flips to the other side automatically.</p>
+<p>If you&#39;re using Tailwind and want a deeper look at how utility-first CSS fits with headless components, our <a href="/blog/css-modules-vs-tailwind">CSS Modules vs Tailwind</a> comparison covers the tradeoffs.</p>
+<h2>Form integration and validation</h2>
+<p>React Aria Select and ComboBox integrate with native HTML forms out of the box. The selected value is submitted with the form, just like a native <code>&lt;select&gt;</code>:</p>
+<pre><code class="language-jsx">&lt;form&gt;
+  &lt;Select name=&quot;animal&quot; isRequired&gt;
+    &lt;Label&gt;Favorite Animal&lt;/Label&gt;
+    &lt;Button&gt;
+      &lt;SelectValue /&gt;
+    &lt;/Button&gt;
+    &lt;Popover&gt;
+      &lt;ListBox&gt;
+        &lt;ListBoxItem id=&quot;cat&quot;&gt;Cat&lt;/ListBoxItem&gt;
+        &lt;ListBoxItem id=&quot;dog&quot;&gt;Dog&lt;/ListBoxItem&gt;
+      &lt;/ListBox&gt;
+    &lt;/Popover&gt;
+  &lt;/Select&gt;
+  &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p>The <code>name</code> prop sets the form field name. React Aria renders a hidden <code>&lt;select&gt;</code> element that mirrors the state, so form submission works exactly like a native select. This is one of those details that saves hours of debugging.</p>
+<h3>Validation states</h3>
+<p>Set <code>isInvalid</code> and render a <code>&lt;FieldError&gt;</code> to display error messages that are properly announced by screen readers:</p>
+<pre><code class="language-jsx">&lt;Select name=&quot;animal&quot; isRequired isInvalid={!value &amp;&amp; submitted}&gt;
+  &lt;Label&gt;Favorite Animal&lt;/Label&gt;
+  &lt;Button&gt;
+    &lt;SelectValue /&gt;
+  &lt;/Button&gt;
+  &lt;FieldError&gt;Please select an animal.&lt;/FieldError&gt;
+  &lt;Popover&gt;
+    &lt;ListBox&gt;{/* ... */}&lt;/ListBox&gt;
+  &lt;/Popover&gt;
+&lt;/Select&gt;
+</code></pre>
+<p>The <code>&lt;FieldError&gt;</code> component is only rendered when the field is invalid, and it&#39;s announced by screen readers via <code>aria-describedby</code> on the trigger. No manual ARIA attributes required.</p>
+<p>If you&#39;re building broader form patterns, our guide on <a href="/blog/react-controlled-vs-uncontrolled">React controlled vs uncontrolled components</a> covers the state management tradeoffs.</p>
+<h2>Testing React Aria components</h2>
+<p>One of React Aria&#39;s strengths is testability. The components expose the same accessible queries screen readers use, so your tests mirror real user behavior.</p>
+<p>With <code>@testing-library/react</code> and <code>@testing-library/user-event</code>:</p>
 <pre><code class="language-jsx">import { render, screen } from &quot;@testing-library/react&quot;;
 import userEvent from &quot;@testing-library/user-event&quot;;
 import {
@@ -587,22 +863,56 @@ test(&quot;filters options as user types&quot;, async () =&gt; {
 });
 </code></pre>
 <p>The <code>getByLabelText</code> query works because React Aria properly associates the label with the input. The filtering works because React Aria handles the filter logic. You&#39;re testing behavior, not implementation details.</p>
+<p>For testing keyboard interactions specifically:</p>
+<pre><code class="language-jsx">test(&quot;arrow keys navigate options&quot;, async () =&gt; {
+  const user = userEvent.setup();
+  render(&lt;FavoriteAnimal /&gt;);
+
+  await user.click(screen.getByLabelText(&quot;Favorite Animal&quot;));
+  await user.keyboard(&quot;{ArrowDown}{ArrowDown}{Enter}&quot;);
+
+  expect(screen.getByLabelText(&quot;Favorite Animal&quot;)).toHaveTextContent(&quot;Cat&quot;);
+});
+</code></pre>
 <p>For a deeper dive into testing accessibility with Testing Library, see our <a href="/blog/accessibility-checklist-for-developers">Accessibility checklist for developers</a>, which covers CI enforcement and testing workflows.</p>
-<h2>Common Pitfalls and How to Avoid Them</h2>
-<p><strong>Forgetting the <code>id</code> on ListBoxItem.</strong> Every item needs a unique <code>id</code>. Without it, selection won&#39;t work correctly and React will warn about missing keys.</p>
-<p><strong>Not wrapping in <code>&lt;Group&gt;</code> for ComboBox.</strong> The Group component is required for ComboBox to style the input and button together. Without it, the layout breaks.</p>
-<p><strong>Missing the <code>name</code> prop for form submission.</strong> If you want the selected value to be submitted with a form, set the <code>name</code> prop on <code>&lt;Select&gt;</code>. Without it, the form submission won&#39;t include the value.</p>
-<p><strong>Styling the Popover like a normal div.</strong> The Popover is positioned absolutely and manages its own z-index and overflow. Don&#39;t try to style it like a static container. Use the <code>className</code> render prop to access state.</p>
-<p><strong>Forgetting <code>aria-label</code> for icon-only triggers.</strong> If your trigger button has no visible text, add <code>aria-label</code> to the Button component. React Aria Components will forward it correctly.</p>
-<p>If you&#39;ve been working through our <a href="/blog/wai-aria-authoring-practices">WAI-ARIA authoring practices</a> guide, you know that combobox and listbox are among the most complex ARIA patterns. React Aria Components encode those patterns so you don&#39;t have to memorize the spec.</p>
-<h2>A Real Story: Replacing a Custom Dropdown</h2>
-<p>A few months ago, I inherited a project with a custom dropdown component built from scratch. It had been written by a previous developer who understood the basics but missed several accessibility requirements.</p>
-<p>The dropdown worked for mouse users. Click the trigger, click an option, done. But keyboard users couldn&#39;t navigate the options with arrow keys. Screen readers announced the dropdown as a &quot;group&quot; with no indication that it was interactive. Focus was lost when the dropdown closed, leaving keyboard users stranded at the top of the page.</p>
-<p>We replaced it with React Aria Select. The migration took about two hours. The component went from 180 lines of custom logic to 40 lines of composition. The accessibility issues disappeared entirely. Keyboard navigation worked. Screen readers announced the component correctly. Focus returned to the trigger after selection.</p>
-<p>The developer who had written the original dropdown was surprised by how much React Aria handled. &quot;I didn&#39;t know I was missing all that,&quot; he said. That&#39;s the common reaction. React Aria makes the invisible requirements visible.</p>
-<h2>Wrapping Up</h2>
+<h2>Common pitfalls and how to avoid them</h2>
+<p><strong>Forgetting the <code>id</code> on ListBoxItem.</strong> Every item needs a unique <code>id</code>. Without it, selection breaks and React warns about missing keys. If you&#39;re rendering from data, use <code>items</code> and let React Aria extract keys.</p>
+<p><strong>Not wrapping the ComboBox input in <code>&lt;Group&gt;</code>.</strong> The Group component is required for ComboBox to lay out the input and button together. Without it, the layout breaks in subtle, hard-to-debug ways.</p>
+<p><strong>Missing the <code>name</code> prop for form submission.</strong> If you want the selected value to submit with the form, set the <code>name</code> prop. Without it, the form submission silently excludes the value.</p>
+<p><strong>Styling the Popover like a normal div.</strong> The Popover is positioned absolutely with computed collision handling. Don&#39;t apply <code>position: static</code> or manipulate its z-index manually.</p>
+<p><strong>Forgetting <code>textValue</code> on rich items.</strong> If a ListBoxItem contains JSX beyond plain text, always set <code>textValue</code>. Otherwise screen readers and filtering get garbage.</p>
+<p><strong>Missing <code>aria-label</code> for icon-only triggers.</strong> If your trigger button has no visible text, add <code>aria-label</code> to the Button component. React Aria forwards it correctly to the accessibility tree.</p>
+<p><strong>Skipping <code>allowsEmptyCollection</code> for async search.</strong> Without it, the popover closes when the list is empty — including during the loading phase before your fetch resolves.</p>
+<p>If you&#39;ve been working through our <a href="/blog/wai-aria-authoring-practices">WAI-ARIA authoring practices</a> guide, you know combobox and listbox are among the most complex ARIA patterns. React Aria Components encode those patterns so you don&#39;t have to memorize the spec.</p>
+<h2>Frequently Asked Questions</h2>
+<h3>What&#39;s the difference between React Aria Select and ComboBox?</h3>
+<p>Select is a non-filterable dropdown — the user clicks a button, sees a list, picks an option. ComboBox is a text input combined with a dropdown, so the user can type to filter the options and optionally enter a custom value. Use Select for short, known option lists. Use ComboBox for long lists, autocomplete, or search-as-you-type patterns.</p>
+<h3>Do I need to install the underlying React Aria hooks separately?</h3>
+<p>No. Installing <code>react-aria-components</code> gives you the pre-composed components. The underlying hooks (<code>@react-aria/combobox</code>, <code>@react-aria/select</code>) are for building custom primitives from scratch. For most projects, React Aria Components is the right choice — it&#39;s less code and fewer opportunities to miss an accessibility detail.</p>
+<h3>How do I make a React Aria ComboBox filter asynchronously from an API?</h3>
+<p>Control <code>inputValue</code> and <code>items</code> yourself, pass <code>allowsEmptyCollection</code> so the popover stays open during loading, and set <code>defaultFilter={null}</code> so React Aria doesn&#39;t double-filter results the server already filtered. Debounce the input value before fetching to avoid a request on every keystroke.</p>
+<h3>Does React Aria work with TypeScript?</h3>
+<p>Yes, and it&#39;s one of the library&#39;s strengths. All components ship with full TypeScript types. The <code>items</code> prop, selection keys, and render-state functions are all typed. You get autocomplete for <code>ListBoxItem</code> props and catch typos at compile time.</p>
+<h3>How do I style React Aria components?</h3>
+<p>React Aria is unstyled. Pass <code>className</code> (a string or a function of render state) to any component. For Tailwind users, React Aria automatically sets data attributes like <code>data-open</code>, <code>data-focused</code>, and <code>data-invalid</code> that you can target with <code>data-[...]:</code> variants. No configuration needed.</p>
+<h3>Can I use React Aria with React 19?</h3>
+<p>Yes. React Aria Components support React 18 and React 19. The library is actively maintained by Adobe and updates quickly when new React versions ship.</p>
+<h3>How does React Aria handle keyboard navigation in ComboBox?</h3>
+<p>Arrow Down and Arrow Up move the highlighted option. Enter selects the highlighted option. Escape closes the popover. Home and End jump to the first and last option. Type-ahead also works — typing letters while the list is open jumps to matching options. All of this is handled automatically.</p>
+<h3>Does React Aria Select support form submission?</h3>
+<p>Yes. Set the <code>name</code> prop on <code>&lt;Select&gt;</code> and React Aria renders a hidden native <code>&lt;select&gt;</code> that mirrors the state. Submitting the form includes the selected value, and this works with <code>FormData</code> and server actions without any extra wiring.</p>
+<h3>How do I handle validation errors in React Aria?</h3>
+<p>Set <code>isInvalid</code> on the root component and render a <code>&lt;FieldError&gt;</code> child. React Aria wires up <code>aria-describedby</code> on the input, announces the error when the field is focused, and shows the error message only when invalid. No manual ARIA handling required.</p>
+<h3>Can I use React Aria components outside of a React Spectrum application?</h3>
+<p>Yes. React Aria Components are standalone — you don&#39;t need React Spectrum (Adobe&#39;s design system) or its theming. They&#39;re designed to be used with any styling approach: plain CSS, CSS Modules, Tailwind, styled-components, or emotion.</p>
+<h3>How does React Aria compare to other headless UI libraries like Radix or Headless UI?</h3>
+<p>All three are headless. Radix UI focuses on general-purpose primitives, Headless UI is smaller and simpler, and React Aria is the most comprehensive for accessibility specifically. React Aria&#39;s keyboard interactions, ARIA attributes, and screen reader announcements are more thoroughly tested across assistive technologies. If accessibility is a hard requirement, React Aria is the safest choice.</p>
+<h3>What if I need multi-select with filtering?</h3>
+<p>React Aria has a separate TagField pattern for that use case. The composition differs slightly — it uses <code>&lt;TagGroup&gt;</code> alongside the ComboBox — but the underlying accessibility principles are the same. The React Aria docs cover it in depth.</p>
+<h2>Wrapping up</h2>
 <p>React Aria Components give you accessible Select and ComboBox components without the burden of implementing the ARIA patterns yourself. The composition model is clean, the TypeScript support is excellent, and the accessibility behavior is thoroughly tested across browsers and assistive technologies.</p>
 <p>For Select: compose <code>&lt;Select&gt;</code>, <code>&lt;Label&gt;</code>, <code>&lt;Button&gt;</code>, <code>&lt;SelectValue&gt;</code>, <code>&lt;Popover&gt;</code>, <code>&lt;ListBox&gt;</code>, and <code>&lt;ListBoxItem&gt;</code>. For ComboBox: swap <code>&lt;Select&gt;</code> for <code>&lt;ComboBox&gt;</code>, add <code>&lt;Input&gt;</code>, and wrap the input and button in <code>&lt;Group&gt;</code>.</p>
+<p>Once you&#39;ve built one, the pattern repeats. Country pickers, category filters, user search, tag inputs — they all use the same primitives with different data. The accessibility comes free.</p>
 <p>For deeper dives, see our <a href="/blog/react-aria-components">React Aria Components overview</a> for the broader library, our <a href="/blog/wai-aria-authoring-practices">WAI-ARIA authoring practices</a> guide for the underlying patterns, and our <a href="/blog/wcag-2-2-checklist">WCAG 2.2 checklist</a> for the compliance requirements these components help you meet.</p>
 <p>Now go build dropdowns that work for everyone.</p>
 <hr>
