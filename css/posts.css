@@ -1673,3 +1673,146 @@ html {
     overflow-wrap: anywhere;
   }
 }
+
+/* ============================================================
+   TABLES — inside blog post content
+   ============================================================ */
+
+/* Wrapper so tables scroll horizontally on small screens
+   instead of forcing the whole page wider.
+   Wrap tables in <div class="cs-table-wrap"> in your HTML. */
+.cs-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.75rem 0;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+}
+
+/* Optional: subtle scrollbar styling on the wrapper */
+.cs-table-wrap::-webkit-scrollbar {
+  height: 8px;
+}
+
+.cs-table-wrap::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 0 0 8px 8px;
+}
+
+.cs-table-wrap::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.cs-table-wrap::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ── Base table ─────────────────────────────────────────── */
+#content-page-714 .cs-post-content table,
+#content-page-714 .cs-table-wrap table {
+  width: 100%;
+  min-width: 520px; /* forces horizontal scroll on narrow screens */
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--bodyTextColor);
+  background-color: #fff;
+}
+
+/* ── Header row ─────────────────────────────────────────── */
+#content-page-714 .cs-post-content thead,
+#content-page-714 .cs-table-wrap thead {
+  background-color: #fef2f2;
+  border-bottom: 2px solid var(--primary);
+}
+
+#content-page-714 .cs-post-content thead th,
+#content-page-714 .cs-table-wrap thead th {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--headerColor);
+  padding: 0.875rem 1rem;
+  border-bottom: 2px solid var(--primary);
+  white-space: nowrap;
+  vertical-align: bottom;
+}
+
+/* ── Body cells ─────────────────────────────────────────── */
+#content-page-714 .cs-post-content tbody td,
+#content-page-714 .cs-table-wrap tbody td {
+  padding: 0.8125rem 1rem;
+  border-bottom: 1px solid #eef0f3;
+  vertical-align: top;
+  text-align: left;
+}
+
+/* ── Zebra striping ─────────────────────────────────────── */
+#content-page-714 .cs-post-content tbody tr:nth-child(even),
+#content-page-714 .cs-table-wrap tbody tr:nth-child(even) {
+  background-color: #fafbfc;
+}
+
+/* ── Row hover ──────────────────────────────────────────── */
+#content-page-714 .cs-post-content tbody tr:hover,
+#content-page-714 .cs-table-wrap tbody tr:hover {
+  background-color: #fef9f9;
+  transition: background-color 0.15s ease;
+}
+
+/* ── Last row: no border (looks cleaner against the wrapper) */
+#content-page-714 .cs-post-content tbody tr:last-child td,
+#content-page-714 .cs-table-wrap tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── Inline code inside tables ──────────────────────────── */
+#content-page-714 .cs-post-content td code,
+#content-page-714 .cs-post-content th code,
+#content-page-714 .cs-table-wrap td code,
+#content-page-714 .cs-table-wrap th code {
+  font-size: 0.85em;
+  background: #f0f0f0;
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+/* ── Links inside tables ────────────────────────────────── */
+#content-page-714 .cs-post-content td a,
+#content-page-714 .cs-table-wrap td a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#content-page-714 .cs-post-content td a:hover,
+#content-page-714 .cs-table-wrap td a:hover {
+  text-decoration: none;
+}
+
+/* ── Responsive type size on smaller screens ────────────── */
+@media (max-width: 767px) {
+  #content-page-714 .cs-post-content table,
+  #content-page-714 .cs-table-wrap table {
+    font-size: 0.875rem;
+  }
+
+  #content-page-714 .cs-post-content thead th,
+  #content-page-714 .cs-table-wrap thead th {
+    font-size: 0.75rem;
+    padding: 0.75rem 0.875rem;
+  }
+
+  #content-page-714 .cs-post-content tbody td,
+  #content-page-714 .cs-table-wrap tbody td {
+    padding: 0.6875rem 0.875rem;
+  }
+}
