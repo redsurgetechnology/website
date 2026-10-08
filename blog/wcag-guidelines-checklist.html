@@ -1,757 +1,259 @@
 <!doctype html>
 <html lang="en-US">
   <head>
-    <!-- Critical CSS -->
-    <style>
-      :root {
-        --primary: #d90700;
-        --primaryLight: #ff4d4d;
-        --secondary: #00d2d9;
-        --secondaryLight: #66e5e8;
-        --headerColor: #1a1a1a;
-        --bodyTextColor: #4e4b66;
-        --bodyTextColorWhite: #fafbfc;
-        --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
-        --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
-        --bodyFontSize: 1rem;
-        --sectionPadding: clamp(3.75rem, 7.82vw, 4.25rem) 1rem;
-      }
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      *,
-      :after,
-      :before {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      @media only screen and (max-width: 1023px) {
-        #cs-navigation .cs-line1,
-        #cs-navigation .cs-line2 {
-          animation-duration: 0.7s;
-          animation-timing-function: ease;
-          animation-fill-mode: forwards;
-          animation-direction: normal;
-        }
-        #cs-navigation {
-          width: 100%;
-          box-sizing: border-box;
-          background-color: #fff;
-          box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-          position: fixed;
-          z-index: 10000;
-        }
-        #cs-navigation:before {
-          content: "";
-          width: 100%;
-          height: 0;
-          background: rgba(0, 0, 0, 0.6);
-          -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
-          position: absolute;
-          display: block;
-          top: 100%;
-          right: 0;
-          z-index: -1100;
-          opacity: 0;
-        }
-        #cs-navigation .cs-top-bar {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        #cs-navigation .cs-top-container {
-          width: 100%;
-          padding: 1rem 1.5rem;
-          box-sizing: border-box;
-          background-color: #f7f7f7;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 1rem;
-        }
-        #cs-navigation .cs-top-contact {
-          width: auto;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: clamp(1rem, 2vw, 1.5rem);
-        }
-        #cs-navigation .cs-top-link {
-          font-size: 0.875rem;
-          line-height: 1.5em;
-          text-decoration: none;
-          margin: 0;
-          color: var(--bodyTextColor);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          gap: 0.5rem;
-          position: relative;
-        }
-        #cs-navigation .cs-button-solid,
-        #cs-navigation .cs-top-link:nth-of-type(2) {
-          display: none;
-        }
-        #cs-navigation .cs-link-icon {
-          width: 1rem;
-          height: auto;
-          display: block;
-        }
-        #cs-navigation .cs-top-social {
-          visibility: visible;
-          opacity: 1;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 0.5rem;
-        }
-        #cs-navigation .cs-social-link {
-          text-decoration: none;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 1rem;
-        }
-        #cs-navigation .cs-social-icon {
-          width: 1.25rem;
-          height: auto;
-          display: block;
-        }
-        #cs-navigation .cs-container {
-          width: 100%;
-          padding: 1.25rem 1rem;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          position: relative;
-        }
-        #cs-navigation .cs-logo {
-          width: auto;
-          height: 2.5rem;
-          margin: 0 auto 0 0;
-          padding: 0;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          order: 1;
-          z-index: 10;
-        }
-        #cs-navigation .cs-logo img {
-          width: 175px;
-          height: 70px;
-          object-fit: contain;
-        }
-        #cs-navigation .cs-nav {
-          order: 2;
-        }
-        #cs-navigation .cs-toggle {
-          width: 2.875rem;
-          height: 2.875rem;
-          margin: 0 0 0 auto;
-          background-color: var(--primary);
-          border: none;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        #cs-navigation .cs-box {
-          width: clamp(1.5rem, 2vw, 1.75rem);
-          height: 1rem;
-          position: relative;
-        }
-        #cs-navigation .cs-line {
-          width: 100%;
-          height: 2px;
-          border-radius: 2px;
-          background-color: #fafbfc;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-        #cs-navigation .cs-line1 {
-          top: 0;
-          transform-origin: center;
-        }
-        #cs-navigation .cs-line2 {
-          top: 50%;
-          transform: translateX(-50%) translateY(-50%);
-        }
-        #cs-navigation .cs-line3 {
-          bottom: 0;
-        }
-        #cs-navigation .cs-ul-wrapper {
-          width: 100%;
-          height: auto;
-          padding-bottom: 3rem;
-          opacity: 0;
-          background-color: #fff;
-          box-shadow: inset rgba(0, 0, 0, 0.2) 0 8px 24px;
-          overflow: hidden;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          z-index: -1;
-          transform: scaleY(0);
-          transform-origin: top;
-        }
-        #cs-navigation .cs-ul {
-          margin: 0;
-          padding: 3rem 0 0;
-          width: 100%;
-          height: auto;
-          max-height: 65vh;
-          overflow: scroll;
-          display: flex;
-          justify-content: flex-start;
-          flex-direction: column;
-          align-items: center;
-          gap: 1.25rem;
-        }
-        #cs-navigation .cs-li-link {
-          font-size: clamp(1rem, 2.5vw, 1.5rem);
-          line-height: 1.2em;
-          text-decoration: none;
-          margin: 0;
-          color: var(--headerColor);
-          display: inline-block;
-          position: relative;
-        }
-        #cs-navigation .cs-li {
-          list-style: none;
-          margin-right: 0;
-          transform: translateY(-4.375rem);
-          opacity: 0;
-          text-align: center;
-          width: 100%;
-          display: block;
-        }
-      }
-      @media only screen and (min-width: 64rem) {
-        #cs-navigation .cs-toggle {
-          display: none;
-        }
-        #cs-navigation {
-          width: 100%;
-          padding: 0;
-          box-sizing: border-box;
-          background-color: #fff;
-          box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
-          position: fixed;
-          z-index: 10000;
-        }
-        #cs-navigation .cs-top-bar {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        #cs-navigation .cs-top-container {
-          width: 100%;
-          max-width: 80rem;
-          padding: 1rem;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          gap: 3.125rem;
-          position: relative;
-          z-index: 1;
-        }
-        #cs-navigation .cs-top-container:before {
-          content: "";
-          width: 100vw;
-          height: 100%;
-          background: #f5f5f5;
-          opacity: 1;
-          position: absolute;
-          display: block;
-          top: 0;
-          left: 50%;
-          z-index: -1;
-          transform: translateX(-50%);
-        }
-        #cs-navigation .cs-top-contact {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          gap: 1.5rem;
-        }
-        #cs-navigation .cs-top-link {
-          font-size: 0.875rem;
-          line-height: 1.5em;
-          text-decoration: none;
-          margin: 0;
-          color: var(--bodyTextColor);
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          gap: 0.5rem;
-          position: relative;
-        }
-        #cs-navigation .cs-link-icon {
-          width: 1rem;
-          height: auto;
-          display: block;
-        }
-        #cs-navigation .cs-top-social {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 1rem;
-        }
-        #cs-navigation .cs-social-link {
-          text-decoration: none;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        #cs-navigation .cs-button-solid,
-        #cs-navigation .cs-li-link {
-          text-decoration: none;
-          position: relative;
-        }
-        #cs-navigation .cs-social-icon {
-          width: 1.25rem;
-          height: auto;
-          display: block;
-        }
-        #cs-navigation .cs-container {
-          width: 100%;
-          max-width: 80rem;
-          margin: auto;
-          padding: 0 1rem;
-          box-sizing: border-box;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          gap: 1.5rem;
-          position: relative;
-        }
-        #cs-navigation .cs-logo {
-          height: clamp(2.5rem, 4vw, 2.75rem);
-          margin: 0 auto 0 0;
-          padding: 0;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 100;
-        }
-        #cs-navigation .cs-logo img {
-          width: 175px;
-          height: 70px;
-          object-fit: contain;
-        }
-        #cs-navigation .cs-ul {
-          width: 100%;
-          margin: 0;
-          padding: 0;
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-          gap: 3rem;
-        }
-        #cs-navigation .cs-li {
-          list-style: none;
-          padding: 1.9375rem 0;
-          flex: none;
-        }
-        #cs-navigation .cs-li-link {
-          font-size: clamp(0.875rem, 1.3vw, 1rem);
-          line-height: 1.5em;
-          margin: 0;
-          color: var(--headerColor);
-          display: block;
-        }
-        #cs-navigation .cs-button-solid {
-          font-size: 1rem;
-          line-height: clamp(2.875em, 5.5vw, 3.5em);
-          font-weight: 700;
-          text-align: center;
-          margin: 0;
-          color: #fff;
-          padding: 0 2rem;
-          background-color: var(--primary);
-          overflow: hidden;
-          display: inline-block;
-          z-index: 1;
-          box-sizing: border-box;
-        }
-        #cs-navigation .cs-button-solid:before {
-          content: "";
-          position: absolute;
-          height: 100%;
-          width: 0%;
-          background: #1a1a1a;
-          opacity: 1;
-          top: 0;
-          left: 0;
-          z-index: -1;
-        }
-        #cs-navigation .cs-nav-button {
-          line-height: 2.875rem;
-          margin-left: 1.5rem;
-        }
-      }
-      @media only screen and (min-width: 0rem) {
-        #banner-712 .cs-background {
-          display: block;
-          z-index: -1;
-        }
-        #banner-712 .cs-background img {
-          object-fit: cover;
-        }
-        #banner-712 {
-          padding: clamp(12.9375rem, 12vw, 14rem) 1rem 5.25rem;
-          position: relative;
-          z-index: 1;
-        }
-        #banner-712 .cs-container {
-          text-align: center;
-          width: 100%;
-          max-width: 80rem;
-          margin: auto;
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        #banner-712 .cs-int-title {
-          font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
-          font-weight: 900;
-          line-height: 1.2em;
-          text-align: inherit;
-          margin: 0;
-          color: var(--bodyTextColorWhite);
-          position: relative;
-        }
-        #banner-712 .cs-background,
-        #banner-712 .cs-background img,
-        #banner-712 .cs-background:before {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-        }
-        #banner-712 .cs-background:before {
-          content: "";
-          display: block;
-          background: #000;
-          opacity: 0.75;
-          z-index: 1;
-        }
-        #content-page-714 {
-          padding: var(--sectionPadding);
-          background-color: #fff;
-          overflow: hidden;
-          position: relative;
-          z-index: 1;
-          max-width: 80rem;
-          margin: 0 auto;
-        }
-        #content-page-714 .main-img-container {
-          margin-bottom: 1.5rem;
-          width: 100%;
-        }
-        #content-page-714 .main-img-container img {
-          width: 100%;
-          height: auto;
-          margin: 1rem 0;
-          display: block;
-        }
-        #content-page-714 h2 {
-          font-weight: 700;
-          text-align: inherit;
-          margin: 2rem 0 1rem;
-          color: var(--headerColor);
-          font-size: 1.8rem;
-          padding-bottom: 0.5rem;
-          border-bottom: 2px solid var(--primary);
-        }
-        #content-page-714 h3 {
-          font-size: 1.4rem;
-          color: var(--headerColor);
-          margin: 1.5rem 0 0.75rem;
-        }
-        #content-page-714 p {
-          font-size: var(--bodyFontSize);
-          line-height: 1.5em;
-          text-align: inherit;
-          width: 100%;
-          margin: 0 0 1rem;
-          color: var(--bodyTextColor);
-        }
-        #content-page-714 ul {
-          padding-left: 1.5rem;
-          margin: 0 0 2rem;
-          color: var(--bodyTextColor);
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-        #content-page-714 ul li {
-          list-style: none;
-          color: inherit;
-          position: relative;
-        }
-        #content-page-714 ul li:before {
-          content: "";
-          width: 3px;
-          height: 3px;
-          background: currentColor;
-          opacity: 1;
-          border-radius: 50%;
-          position: absolute;
-          display: block;
-          top: 0.625rem;
-          left: -0.75rem;
-        }
-        #content-page-714 pre {
-          background: #f4f4f4;
-          border-left: 4px solid var(--primary);
-          padding: 1rem;
-          overflow-x: auto;
-          margin: 1rem 0;
-          font-size: 0.9rem;
-          line-height: 1.4;
-        }
-        #content-page-714 code {
-          background: #f0f0f0;
-          padding: 0.2rem 0.4rem;
-          border-radius: 3px;
-          font-size: 0.9em;
-        }
-        #content-page-714 pre code {
-          background: none;
-          padding: 0;
-        }
-        #content-page-714 .tip-box {
-          background: #e8f4fd;
-          border-left: 4px solid #0066cc;
-          padding: 1rem;
-          margin: 1.5rem 0;
-          border-radius: 0 4px 4px 0;
-        }
-        #content-page-714 .warning-box {
-          background: #fff3e0;
-          border-left: 4px solid #ff9800;
-          padding: 1rem;
-          margin: 1.5rem 0;
-          border-radius: 0 4px 4px 0;
-        }
-        #content-page-714 .checklist-item {
-          background: #fafafa;
-          border: 1px solid #e0e0e0;
-          border-left: 4px solid var(--primary);
-          padding: 1.25rem;
-          margin: 1.25rem 0;
-          border-radius: 0 6px 6px 0;
-        }
-        #content-page-714 .checklist-item strong {
-          display: block;
-          font-size: 1.1rem;
-          margin-bottom: 0.5rem;
-          color: var(--headerColor);
-        }
-      }
-      @media only screen and (min-width: 48rem) {
-        #cs-navigation .cs-top-link:nth-of-type(2) {
-          display: flex;
-        }
-        #banner-712 .cs-background:before {
-          opacity: 1;
-          background: linear-gradient(
-            90.01deg,
-            rgba(0, 0, 0, 0.85) 16.86%,
-            rgba(0, 0, 0, 0) 100%
-          );
-        }
-      }
-    </style>
-
-    <!-- Preconnect for performance -->
-    <link
-      rel="preconnect"
-      href="https://www.googletagmanager.com"
-      crossorigin
-    />
-    <link
-      rel="preconnect"
-      href="https://www.google-analytics.com"
-      crossorigin
-    />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-    <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-
-    <!-- Meta Data -->
     <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Language" content="en-US" />
     <meta name="format-detection" content="telephone=no" />
 
     <!-- Primary Meta Tags -->
-    <title>
-      WCAG Guidelines Checklist: Your Complete Path to an Accessible Website
-    </title>
-    <meta
-      name="description"
-      content="WCAG 2.2 checklist for Level A & AA success criteria. Learn what to test and how to build accessibility into your workflow for UX, compliance, and SEO."
-    />
-
-    <meta name="author" content="Red Surge Technology" />
-
-    <!-- Canonical URL -->
-    <link
-      rel="canonical"
-      href="https://redsurgetechnology.com/blog/wcag-guidelines-checklist"
-    />
-
-    <!-- Robots -->
+    <title>WCAG Guidelines Checklist: Complete A & AA Guide (2026)</title>
+    <meta name="description" content="The complete WCAG 2.2 guidelines checklist for Level A and AA. Learn every success criterion, how to test it, plus tools, workflow tips, and a downloadable reference." />
+    <meta name="author" content="Collin Stewart" />
     <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="accessibility, wcag, wcag checklist, web standards, compliance, a11y" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/wcag-guidelines-checklist" />
+
+    <!-- Open Graph -->
     <meta property="og:type" content="article" />
-    <meta
-      property="og:url"
-      content="https://redsurgetechnology.com/blog/wcag-guidelines-checklist"
-    />
-    <meta
-      property="og:title"
-      content="WCAG Guidelines Checklist: Your Complete Path to an Accessible Website"
-    />
-    <meta
-      property="og:description"
-      content="Ensure your site welcomes every visitor with this detailed WCAG guidelines checklist covering all Level A and AA criteria. Improve UX, stay compliant, and boost your SEO."
-    />
-    <meta
-      property="og:image"
-      content="https://redsurgetechnology.com/images/og-image.jpg"
-    />
-    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/wcag-guidelines-checklist" />
+    <meta property="og:title" content="WCAG Guidelines Checklist: Complete A & AA Guide (2026)" />
+    <meta property="og:description" content="The complete WCAG 2.2 guidelines checklist for Level A and AA. Learn every success criterion, how to test it, plus tools, workflow tips, and a downloadable reference." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-blogindex.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2025-06-09T13:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-10-08T13:00:00.000Z" />
+    <meta property="article:section" content="Accessibility" />
+    <meta property="article:tag" content="accessibility" />
+    <meta property="article:tag" content="wcag" />
+    <meta property="article:tag" content="wcag checklist" />
+    <meta property="article:tag" content="web standards" />
+    <meta property="article:tag" content="compliance" />
+    <meta property="article:tag" content="a11y" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:url"
-      content="https://redsurgetechnology.com/blog/wcag-guidelines-checklist"
-    />
-    <meta
-      name="twitter:title"
-      content="WCAG Guidelines Checklist: Your Complete Path to an Accessible Website"
-    />
-    <meta
-      name="twitter:description"
-      content="Make your website accessible to all. Use this comprehensive WCAG checklist to cover every Level A and AA criterion, avoid legal risks, and enhance SEO."
-    />
-    <meta
-      name="twitter:image"
-      content="https://redsurgetechnology.com/images/og-image.jpg"
-    />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/wcag-guidelines-checklist" />
+    <meta name="twitter:title" content="WCAG Guidelines Checklist: Complete A & AA Guide (2026)" />
+    <meta name="twitter:description" content="The complete WCAG 2.2 guidelines checklist for Level A and AA. Learn every success criterion, how to test it, plus tools, workflow tips, and a downloadable reference." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-blogindex.webp" />
 
-    <!-- Favicon & Touch Icons -->
-    <link rel="icon" href="../favicon.ico" type="image/x-icon" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="../images/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../images/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../images/favicon-16x16.png"
-    />
-    <link rel="manifest" href="../site.webmanifest" />
-
-    <!-- Theme Color for Mobile Browsers -->
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#d90700" />
 
-    <!-- Preload CSS (non‑blocking) -->
-    <link
-      rel="preload"
-      href="../css/main.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link rel="stylesheet" href="../css/main.css" />
-    </noscript>
+    <!-- CSS: inlined to eliminate render-blocking and prevent FOUC/CLS -->
+    <style>.cs-title,.cs-topper{line-height:1.2em;text-align:inherit}.cs-text,.cs-title,.cs-topper{text-align:inherit}:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}.cs-topper{font-size:var(--topperFontSize);text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--primary);margin-bottom:.25rem;display:block}.cs-title{font-size:var(--headerFontSize);font-weight:900;max-width:43.75rem;margin:0 0 1rem;color:var(--headerColor);position:relative}.cs-text{font-size:var(--bodyFontSize);line-height:1.5em;width:100%;max-width:40.625rem;margin:0;color:var(--bodyTextColor)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+    <style>html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}body.cs-open{overflow:hidden}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation:before{content:"";width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0;transition:height .5s,opacity .5s}#cs-navigation.cs-active:before{height:150vh;opacity:1}#cs-navigation.cs-active .cs-ul-wrapper{opacity:1;transform:scaleY(1);transition-delay:0.15s}#cs-navigation.cs-active .cs-li{transform:translateY(0);opacity:1}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem;transition:opacity .3s,visibility .3s,height .3s}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center;transition:transform .6s}#cs-navigation .cs-toggle.cs-active{transform:rotate(180deg)}#cs-navigation .cs-active .cs-line1{top:50%;transform:translate(-50%,-50%) rotate(225deg)}#cs-navigation .cs-active .cs-line2{top:50%;transform-origin:center;transform:translate(-50%,-50%) translateY(0) rotate(-225deg)}#cs-navigation .cs-active .cs-line3{bottom:100%;opacity:0}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%);transition:top .3s,left .3s,transform .5s}#cs-navigation .cs-line3{bottom:0;transition:bottom .3s,opacity .3s}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top;transition:transform .4s,opacity .3s}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link{font-size:clamp(1rem, 2.5vw, 1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li-link.cs-active,#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;transition:transform .6s,opacity .9s;text-align:center;width:100%;display:block}#cs-navigation .cs-dropdown{position:relative;color:var(--bodyTextColorWhite)}#cs-navigation .cs-dropdown.cs-active .cs-drop-ul{height:auto;opacity:1;visibility:visible;margin:.75rem 0 0;padding:.75rem 0}#cs-navigation .cs-dropdown.cs-active .cs-drop-link{opacity:1}#cs-navigation .cs-dropdown .cs-li-link{position:relative;transition:opacity .3s}#cs-navigation .cs-drop-icon{width:.9375rem;height:auto;position:absolute;top:50%;right:-1.25rem;transform:translateY(-50%)}#cs-navigation .cs-drop-ul{width:100%;height:0;margin:0;padding:0;background-color:var(--primary);overflow:hidden;opacity:0;visibility:hidden;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:.75rem;transition:padding .3s,margin .3s,height .3s,opacity .3s,visibility .3s}#cs-navigation .cs-drop-li{list-style:none}#cs-navigation .cs-li-link.cs-drop-link{font-size:clamp(.875rem, 2vw, 1.25rem);color:#fff}}@media only screen and (min-width:0rem){#cta-1185,#cta-1185 .cs-content{flex-direction:column;display:flex;width:100%}#cta-1185,#cta-1185 .cs-button-solid{position:relative;z-index:1;box-sizing:border-box}#cta-1185{max-width:80rem;margin:var(--sectionPadding);margin-left:auto;margin-right:auto;margin-top:0;padding:3.75rem clamp(1rem,7vw,3.75rem);border:1px solid #484848;align-items:center;justify-content:center}#cta-1185 .cs-content{text-align:center;max-width:25rem;align-items:center;gap:1.5rem}#cta-1185 .cs-title{width:100%;font-size:1.9375rem;margin:0;color:var(--bodyTextColorWhite)}#cta-1185 .cs-form{width:100%;max-width:45.3125rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;flex:none}#cta-1185 .cs-input{font-size:1rem;width:100%;height:clamp(2.875rem,5.5vw,3.5rem);margin:0;padding:0 0 0 1.25rem;border:none;box-sizing:border-box;display:block}#cta-1185 .cs-input::placeholder{color:#767676}#cta-1185 .cs-button-solid{font-size:1rem;line-height:clamp(2.875rem, 5.5vw, 3.5rem);text-decoration:none;font-weight:700;text-align:center;margin:0;color:#fff;min-width:9.375rem;padding:0 1.5rem;background-color:var(--primary);display:inline-block}#cta-1185 .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#000;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-nav-link:hover:before,#cta-1185 .cs-button-solid:hover:before{width:100%}#cta-1185 .cs-submit{width:100%;border:none;transition:color .3s}#cta-1185 .cs-submit:before{background-color:#fff}#cta-1185 .cs-submit:hover{cursor:pointer;color:var(--primary)}#cs-footer-1185 .cs-copyright-link,#cs-footer-1185 .cs-nav-link{text-decoration:none;transition:color .3s}#cs-footer-1185{padding:var(--sectionPadding);padding-top:clamp(7.5rem,15vw,12.5rem);position:relative}#cs-footer-1185 .cs-container{width:100%;max-width:43.75rem;margin:auto;display:flex;justify-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:2.5rem}#cs-footer-1185 .cs-logo-group{width:100%;position:relative}#cs-footer-1185 .cs-logo{width:12.3125rem;height:auto;display:block;margin-bottom:1.5rem}#cs-footer-1185 .cs-logo-img{width:100%;height:auto}#cs-footer-1185 .cs-logo-img.dark{display:none}#cs-footer-1185 .cs-text{font-size:clamp(.875rem, 2.5vw, 1rem);line-height:1.5em;margin:0;width:78%;max-width:26.25rem;color:var(--bodyTextColorWhite)}#cs-footer-1185 .cs-nav{width:100%;padding:0;margin:0;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:.75rem}#cs-footer-1185 .cs-nav-li{list-style:none;display:flex;justify-content:flex-start;align-items:flex-start}#cs-footer-1185 .cs-header{font-size:1rem;line-height:1.2em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;color:var(--bodyTextColorWhite);position:relative;display:block}#cs-footer-1185 .cs-nav-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite);position:relative;display:inline-block}#cs-footer-1185 .cs-nav-link:before{content:"";width:0%;height:.125rem;background:currentColor;opacity:1;position:absolute;display:block;bottom:-.125rem;left:0;transition:width .3s}#cs-footer-1185 .cs-copyright-link:hover,#cs-footer-1185 .cs-nav-link:hover{color:var(--secondary)}#cs-footer-1185 .cs-icon{width:1.5rem;height:auto;margin-right:.75rem}#cs-footer-1185 .cs-background,#cs-footer-1185 .cs-background img,#cs-footer-1185 .cs-background:before{height:100%;width:100%;position:absolute;top:0;left:0}#cs-footer-1185 .cs-bottom{max-width:80rem;margin:2rem auto auto;padding-top:1.5rem;border-top:1px solid #484848;display:flex;justify-content:space-between;align-items:center;color:#fff;flex-direction:column}#cs-footer-1185 .cs-copyright,#cs-footer-1185 .cs-copyright-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite)}#banner-712 .cs-background,#cs-footer-1185 .cs-background{display:block;z-index:-1}#cs-footer-1185 .cs-background:before{content:"";display:block;background:-moz-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:-webkit-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:linear-gradient(to right,rgba(26,26,26,.94) 0,#1a1a1a 100%);opacity:.97;z-index:1}#banner-712 .cs-background img,#cs-footer-1185 .cs-background img{object-fit:cover}#cs-footer-1185 .cs-graphic{width:100%;height:auto;position:absolute;top:0;left:0}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem, 6.4vw, 3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{box-sizing:border-box;width:100%;max-width:80rem;margin:0 auto;background-color:#fff;position:relative;z-index:1}#content-page-714 .cs-container{width:100%;max-width:80rem;margin:auto;display:flex;flex-direction:column;align-items:center;gap:clamp(3rem,6vw,4rem);position:relative}#content-page-714 .cs-content{text-align:left;width:100%;display:flex;flex-direction:column;align-items:flex-start}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 .cs-title{font-size:var(--headerFontSize);font-weight:900;line-height:1.2em;text-align:inherit;width:100%;max-width:100%;margin:0 0 1rem;color:var(--headerColor);position:relative}#content-page-714 h2,#content-page-714 h3,#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-weight:700;text-align:inherit;margin:0 0 1rem;color:var(--headerColor)}#content-page-714 .cs-color,#content-page-714 h3{color:var(--primary)}#content-page-714 h2{font-size:2rem;margin-top:2rem}#content-page-714 h3{font-size:1.5rem}#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-size:1.25rem}#content-page-714 .cs-button-solid,#content-page-714 p:last-of-type{margin-bottom:2rem}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 p a{font-size:inherit;line-height:inherit;text-decoration:underline;color:var(--primary)}#content-page-714 ol,#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}#content-page-714 .cs-image-group{font-size:min(1vw, 1em);width:33.875em;height:48.3125em;display:none;flex:none;position:relative;z-index:1}#content-page-714 .cs-picture{width:33.875em;height:40.4375em;border-radius:17.8125em;border:.75em solid #fff;background-color:#f7f7f7;box-sizing:border-box;overflow:hidden;display:block;position:absolute;top:0;left:0}#content-page-714 .cs-picture img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}#content-page-714 .cs-flower{width:22.625em;height:auto;display:block;position:absolute;bottom:-2.375em;right:-3em;z-index:-1;transform:rotate(142deg)}#content-page-714 .cs-sense{width:5em;height:auto;position:absolute;top:-.25em;left:.625em;transform:rotate(90deg)}#content-page-714 .cs-background{display:none}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#cta-1185 .cs-container{padding-left:3.75rem;padding-right:3.75rem}#cta-1185 .cs-content{max-width:100%}#cs-footer-1185 .cs-bottom,#cta-1185 .cs-form{flex-direction:row}#cta-1185 .cs-input{width:100%;max-width:32.8125rem}#cta-1185 .cs-submit{width:auto;min-width:11.875rem;flex:none}#cs-footer-1185 .cs-container{row-gap:0;flex-direction:row;justify-content:space-between;row-gap:2.5rem}#cs-footer-1185 .cs-nav{width:auto}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}#content-page-714 .cs-container{flex-direction:column;align-items:flex-start}#content-page-714 .cs-image-group{display:block;order:-1}#content-page-714 .cs-content{margin-left:auto}#content-page-714 .cs-background{width:20%;height:100%;background-color:#f7f7f7;display:block;position:absolute;left:0;top:0;z-index:-1}#content-page-714 .cs-background img{width:100%;height:100%;opacity:.2;object-fit:cover;position:absolute;top:0;left:0;z-index:1}}@media only screen and (min-width:64rem){#cs-navigation .cs-dropdown{position:relative}#cs-navigation .cs-dropdown:hover{cursor:pointer}#cs-navigation .cs-dropdown:hover .cs-drop-ul{transform:scaleY(1);opacity:1;visibility:visible}#cs-navigation .cs-dropdown:hover .cs-drop-li{opacity:1;transform:translateY(0)}#cs-navigation .cs-drop-icon{width:.75rem;height:auto;margin-left:.25rem;display:inline-block}#cs-navigation .cs-drop-ul{min-width:12.5rem;margin:0;padding:0;background-color:#fff;overflow:hidden;opacity:0;visibility:hidden;box-shadow:rgba(149,157,165,.2) 0 10px 16px;border-bottom:5px solid var(--primary);position:absolute;top:100%;z-index:-100;transform:scaleY(0);transform-origin:top;transition:transform .3s,visibility .3s,opacity .3s}#cs-navigation .cs-drop-li{list-style:none;font-size:1rem;text-decoration:none;opacity:0;width:100%;height:auto;display:block;transform:translateY(-.625rem);transition:opacity .6s,transform .6s}#cs-navigation .cs-drop-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-drop-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-drop-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-drop-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-drop-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-drop-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-drop-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-drop-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-drop-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-drop-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-drop-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-drop-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-drop-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link.cs-drop-link{font-size:1rem;white-space:nowrap;line-height:1.5em;text-decoration:none;width:100%;padding:.75rem;box-sizing:border-box;color:var(--bodyTextColor);display:block;transition:color .3s,background-color .3s}#cs-navigation .cs-li-link.cs-drop-link:hover{color:var(--primary);background-color:#f7f7f7}#cs-navigation .cs-li-link.cs-drop-link:before,#cs-navigation .cs-toggle{display:none}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:"";width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-top-link:hover{text-decoration:underline}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;transition:transform .3s}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative;transition:color .3s}#cs-navigation .cs-social-link:hover{transform:scale(1.1)}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem, 1.3vw, 1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li-link.cs-active{font-weight:700;color:var(--headerColor)}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em, 5.5vw, 3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-text,#cs-navigation .cs-button-solid:hover:before{width:100%}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}#cs-footer-1185 .cs-container{max-width:80rem;flex-wrap:nowrap;justify-content:flex-end;column-gap:5.25rem}#cs-footer-1185 .cs-logo-group{width:30%;max-width:24.1875rem;margin-right:auto}}@media only screen and (min-width:81.25rem){#cta-1185 .cs-content{flex-direction:row}#cta-1185 .cs-form{width:60%}#content-page-714 .cs-image-group{font-size:inherit;position:absolute;top:0;left:-6.25rem}#content-page-714 .cs-background{width:50%;margin-right:20.9375rem;left:auto;right:50%}}@media only screen and (min-width:112.5rem){#cs-footer-1185{padding-top:12vw}}.cs-breadcrumb{max-width:80rem;margin:0 auto;padding:.75rem 1rem}.cs-breadcrumb-list{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0;font-size:.8125rem;color:#6b7280}.cs-breadcrumb-link{color:#d90700;text-decoration:none;transition:opacity .2s}.cs-breadcrumb-link:hover{opacity:.75;text-decoration:underline}.cs-breadcrumb-sep{color:#9ca3af;margin:0 .15rem}.cs-breadcrumb-current{color:#374151;font-weight:500;max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cs-post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem;padding:.875rem 1rem;margin-bottom:1.5rem;background:#f9fafb;border-left:3px solid #d90700;border-radius:0 6px 6px 0;font-size:.8125rem;color:#4b5563}.cs-meta-item{display:flex;align-items:center;gap:.375rem;line-height:1}.cs-meta-icon{flex-shrink:0;color:#d90700;opacity:.85}.cs-meta-date time{font-weight:600;color:#1f2937}.cs-meta-updated span{font-style:italic;color:#6b7280}.cs-meta-updated time{font-style:normal;font-weight:500;color:#374151}.cs-meta-author [itemprop=name]{font-weight:600;color:#1f2937}.cs-meta-readtime span{font-weight:500}.cs-meta-category span{display:inline-block;background:#d90700;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.2em .65em;border-radius:999px;line-height:1.6}@media (min-width:640px){.cs-meta-item+.cs-meta-item::before{content:"";display:inline-block;width:1px;height:1rem;background:#d1d5db;margin-right:.75rem}}.cs-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-bottom:2rem}.cs-tags-icon{color:#9ca3af;flex-shrink:0;margin-right:.1rem}.cs-tag{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;font-size:.75rem;font-weight:500;padding:.25em .7em;border-radius:999px;line-height:1.6;transition:background .15s,border-color .15s,color .15s;cursor:default}.cs-tag:hover{background:#fef2f2;border-color:#fca5a5;color:#d90700}.cs-card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem;margin-bottom:.75rem}.cs-card-tags .cs-tag{font-size:.7rem}.cs-date,.cs-reading-time{display:inline-flex;align-items:center;gap:.25rem}.cs-date svg,.cs-reading-time svg{color:#d90700;opacity:.8;flex-shrink:0}.cs-pagination{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;margin-top:2.5rem}@media (max-width:479px){.cs-post-meta{gap:.5rem .75rem;font-size:.75rem}.cs-breadcrumb-current{max-width:24ch}}.cs-post-layout{display:flex;align-items:flex-start;gap:40px;max-width:1280px;margin:0 auto}.cs-post-sidebar{flex:0 0 280px;position:sticky;top:20px}.cs-post-main{flex:1;min-width:0}@media (max-width:900px){.cs-post-layout{flex-direction:column}.cs-post-sidebar{flex:1 1 auto;width:100%;position:static}}.cs-ad-slot{margin:24px 0;text-align:center}.cs-ad-label{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#999;margin-bottom:6px}.cs-ad-top{margin:0 0 16px;padding:12px 0}.cs-ad-sidebar{margin:0 0 24px}.cs-sidebar-recent{border:1px solid #eee;border-radius:8px;padding:16px}.cs-sidebar-heading{font-size:16px;margin:0 0 12px}.cs-sidebar-list{list-style:none;margin:0;padding:0}.cs-sidebar-item+.cs-sidebar-item{margin-top:12px}.cs-sidebar-link{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}.cs-sidebar-thumb{width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0}.cs-sidebar-title{font-size:13px;line-height:1.35}#content-page-714{box-sizing:border-box;width:100%}#content-page-714 .cs-post-layout{width:100%;max-width:100%;box-sizing:border-box}#content-page-714 .cs-post-content,#content-page-714 .cs-post-main{width:100%;max-width:100%;min-width:0;box-sizing:border-box}#content-page-714 .cs-post-content iframe,#content-page-714 .cs-post-content img,#content-page-714 .cs-post-content video{max-width:100%;height:auto}#content-page-714 .cs-post-content pre{max-width:100%;overflow-x:auto;box-sizing:border-box}#content-page-714 .cs-post-content table{max-width:100%}#content-page-714 .cs-post-content,#content-page-714 .cs-post-content a,#content-page-714 .cs-post-content li,#content-page-714 .cs-post-content p{overflow-wrap:anywhere;word-break:normal}.cs-table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:1.75rem 0;border-radius:8px;border:1px solid #e5e7eb;background:#fff;position:relative;background:linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right center/24px 100% no-repeat local,linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left center/24px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) right center/12px 100% no-repeat,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) left center/12px 100% no-repeat,#fff}.cs-table-wrap::-webkit-scrollbar{height:6px}.cs-table-wrap::-webkit-scrollbar-track{background:#f3f4f6;border-radius:0 0 8px 8px}.cs-table-wrap::-webkit-scrollbar-thumb{background:#cbd2d9;border-radius:4px}.cs-table-wrap::-webkit-scrollbar-thumb:hover{background:#9ca3af}#content-page-714 .cs-post-content table,#content-page-714 .cs-table-wrap table{width:100%;border-collapse:collapse;border-spacing:0;font-size:.9375rem;line-height:1.5;color:var(--bodyTextColor);background-color:transparent}#content-page-714 .cs-table-wrap--wide table{min-width:640px}#content-page-714 .cs-post-content thead,#content-page-714 .cs-table-wrap thead{background-color:#fef2f2;border-bottom:2px solid var(--primary)}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.875rem;font-weight:700;text-align:left;text-transform:uppercase;letter-spacing:.03em;color:var(--headerColor);padding:.875rem 1rem;border-bottom:2px solid var(--primary);vertical-align:bottom;white-space:nowrap}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.8125rem 1rem;border-bottom:1px solid #eef0f3;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:normal}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#fafbfc}@media (hover:hover) and (pointer:fine){#content-page-714 .cs-post-content tbody tr:hover,#content-page-714 .cs-table-wrap tbody tr:hover{background-color:#fef9f9;transition:background-color .15s}}#content-page-714 .cs-post-content tbody tr:last-child td,#content-page-714 .cs-table-wrap tbody tr:last-child td{border-bottom:none}#content-page-714 .cs-post-content td code,#content-page-714 .cs-post-content th code,#content-page-714 .cs-table-wrap td code,#content-page-714 .cs-table-wrap th code{font-size:.85em;background:#f0f0f0;padding:.15em .4em;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}#content-page-714 .cs-post-content td a,#content-page-714 .cs-table-wrap td a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}#content-page-714 .cs-post-content td a:hover,#content-page-714 .cs-table-wrap td a:hover{text-decoration:none}@media (max-width:767px){#content-page-714{padding-left:1rem;padding-right:1rem}#content-page-714 .cs-post-layout{gap:2rem}#content-page-714 .cs-post-main{width:100%}#content-page-714 .cs-post-content h1,#content-page-714 .cs-post-content h2,#content-page-714 .cs-post-content h3,#content-page-714 .cs-post-content h4{max-width:100%;overflow-wrap:anywhere}#content-page-714 .cs-table-wrap{width:calc(100% + 2rem);border-radius:0;border-left:none;border-right:none;margin:1.5rem -1rem}#content-page-714 .cs-table-wrap table{font-size:.875rem}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.75rem;padding:.75rem .875rem;letter-spacing:.02em}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.75rem .875rem;font-size:.875rem}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#f8f9fa}#content-page-714 .cs-post-content td code,#content-page-714 .cs-table-wrap td code{font-size:.8em;padding:.1em .35em}}@media (max-width:600px){#content-page-714 .cs-table-wrap--stack table,#content-page-714 .cs-table-wrap--stack tbody,#content-page-714 .cs-table-wrap--stack td,#content-page-714 .cs-table-wrap--stack th,#content-page-714 .cs-table-wrap--stack thead,#content-page-714 .cs-table-wrap--stack tr{display:block;width:100%}#content-page-714 .cs-table-wrap--stack thead{display:none}#content-page-714 .cs-table-wrap--stack tbody tr{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:1rem;padding:.5rem 0;background:#fff}#content-page-714 .cs-table-wrap--stack tbody tr:nth-child(2n){background:#fff}#content-page-714 .cs-table-wrap--stack tbody td{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:.625rem 1rem;border-bottom:1px solid #f0f2f5;text-align:right}#content-page-714 .cs-table-wrap--stack tbody tr td:last-child{border-bottom:none}#content-page-714 .cs-table-wrap--stack tbody td::before{content:attr(data-label);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;color:var(--primary);text-align:left;flex-shrink:0;max-width:45%;line-height:1.4}}</style>
 
-    <link
-      rel="preload"
-      href="../css/posts.css"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link rel="stylesheet" href="../css/posts.css" />
-    </noscript>
-
-    <!-- JSON-LD: WebSite Schema -->
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "url": "https://redsurgetechnology.com/",
-        "name": "Red Surge Technology Blog"
-      }
-    </script>
-
-    <!-- JSON-LD: BlogPosting Schema -->
-    <script type="application/ld+json">
+    [
       {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": "WCAG Guidelines Checklist: Your Complete Path to an Accessible Website",
-        "description": "A comprehensive WCAG 2.2 guidelines checklist covering all Level A and AA success criteria. Learn what to check, how to test it, and how to build accessibility into your workflow.",
+        "headline": "WCAG Guidelines Checklist: Complete A & AA Guide (2026)",
+        "description": "The complete WCAG 2.2 guidelines checklist for Level A and AA. Learn every success criterion, how to test it, plus tools, workflow tips, and a downloadable reference.",
         "url": "https://redsurgetechnology.com/blog/wcag-guidelines-checklist",
+        "datePublished": "2025-06-09T13:00:00.000Z",
+        "dateModified": "2026-10-08T13:00:00.000Z",
+        "keywords": "accessibility, wcag, wcag checklist, web standards, compliance, a11y",
+        "articleSection": "Accessibility",
+        "timeRequired": "PT22M",
         "author": {
-          "@type": "Organization",
-          "name": "Red Surge Technology"
+          "@type": "Person",
+          "name": "Collin Stewart"
         },
         "publisher": {
           "@type": "Organization",
           "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
           "logo": {
             "@type": "ImageObject",
             "url": "https://redsurgetechnology.com/images/logo_black.png"
           }
         },
-        "datePublished": "2025-06-09",
-        "dateModified": "2025-06-09",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-blogindex.webp",
+          "width": 1200,
+          "height": 630
+        },
         "mainEntityOfPage": {
           "@type": "WebPage",
           "@id": "https://redsurgetechnology.com/blog/wcag-guidelines-checklist"
-        },
-        "image": {
-          "@type": "ImageObject",
-          "url": "https://redsurgetechnology.com/images/og-image.jpg",
-          "width": 1200,
-          "height": 630
         }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
       }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+  <!-- JSON-LD: FAQ (only if post has FAQ section) -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a WCAG guidelines checklist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A WCAG guidelines checklist is a structured list of the success criteria defined in the Web Content Accessibility Guidelines, organized so you can systematically verify each one against your website. It typically covers the four POUR principles (Perceivable, Operable, Understandable, Robust) and is filtered by conformance level — usually Level A and AA, since AA is the standard most laws reference."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between WCAG A, AA, and AAA?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Level A is the minimum bar — without these criteria, some users literally cannot use your website. Level AA is the standard most laws and regulations reference, and it's what most organizations target. Level AAA is the gold standard — aspirational, sometimes impractical for all content types, and rarely required. Most teams should target AA and selectively implement AAA where feasible."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to meet every single WCAG criterion?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For Level AA conformance, yes — all Level A and Level AA criteria must be met. That said, WCAG includes exceptions for some criteria (essential exceptions, decorative content, logos), and perfect compliance is genuinely difficult. What matters most is documented, good-faith effort: regular audits, clear processes, and a roadmap for addressing known issues."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does a WCAG audit take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A thorough WCAG 2.2 AA audit typically takes 10 to 40 hours depending on the size and complexity of your site. A small marketing site with 5–10 pages can be audited in about 10 hours. A large application with complex interactive components and authentication flows can take 40+ hours. Automated scans take minutes; manual keyboard and screen reader testing is where most of the time goes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between WCAG 2.1 and WCAG 2.2?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "WCAG 2.2, published in October 2023, builds on WCAG 2.1 by adding nine new success criteria and removing one (4.1.1 Parsing, which became redundant as modern browsers handle malformed HTML gracefully). The new criteria in 2.2 primarily improve accessibility for users with cognitive disabilities, low vision, and motor impairments. If your site already meets WCAG 2.1 AA, upgrading to 2.2 AA requires addressing the new criteria."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between WebAIM's checklist and the W3C's checklist?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The W3C's WCAG specification is the authoritative standard — dense, comprehensive, and organized by success criterion. WebAIM (Web Accessibility In Mind) provides a more approachable, plain-language version that translates each criterion into practical terms with real-world examples. Many teams use both: W3C for authoritative reference and WebAIM for practical implementation guidance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is WCAG compliance required by law?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In the US, the ADA has been increasingly applied to websites by courts, and Section 508 applies directly to federal agencies and their contractors. The EU's European Accessibility Act (EAA) came into force in June 2025. Enforcement varies, but the trend is clear: accessibility requirements are expanding, not shrinking. If you have specific legal questions about your obligations, consult an attorney familiar with digital accessibility law."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often should I run an accessibility audit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "At minimum, annually. For active products with frequent releases, quarterly or continuous automated testing is better. Run a manual audit after any significant redesign, new feature launch, or major dependency upgrade. Automated scans should run on every commit as part of your CI pipeline."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does WCAG compliance improve SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, significantly. Many accessibility best practices directly overlap with SEO: descriptive alt text helps Google understand images, semantic HTML helps search engines parse structure, descriptive link text provides contextual signals, and fast, clean markup improves Core Web Vitals. Building for accessibility and building for SEO are largely the same work."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the most commonly failed WCAG criteria?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Based on WebAIM's annual analysis of the top one million homepages, the most common failures are low color contrast, missing image alt text, missing form labels, empty links, missing document language, and missing or duplicate page titles. Together, these account for the vast majority of detected issues — and most are straightforward to fix."
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "WCAG Guidelines Checklist: The Complete A & AA Guide for 2026",
+          "item": "https://redsurgetechnology.com/blog/wcag-guidelines-checklist"
+        }
+      ]
+    }
     </script>
   </head>
-
   <body>
     <!-- Header -->
     <header id="cs-navigation">
@@ -759,92 +261,30 @@
         <div class="cs-top-container">
           <div class="cs-top-contact">
             <a href="tel:7325203386" class="cs-top-link">
-              <img
-                class="cs-link-icon"
-                src="../images/phone-grey.svg"
-                alt="grey phone icon"
-                width="16"
-                height="16"
-                aria-hidden="true"
-                decoding="async"
-              />
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
               Call us: (732) 520-3386
             </a>
             <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
-              <img
-                class="cs-link-icon"
-                src="../images/email-grey.svg"
-                alt="grey email icon"
-                width="16"
-                height="16"
-                aria-hidden="true"
-                decoding="async"
-              />
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
               Email us: info@redsurgetechnology.com
             </a>
           </div>
           <div class="cs-top-social">
-            <a
-              href="https://www.linkedin.com/company/red-surge-technology/"
-              class="cs-social-link"
-              target="_blank"
-              aria-label="LinkedIn"
-            >
-              <img
-                class="cs-social-icon"
-                src="../images/linkedin-grey.svg"
-                alt="grey linkedin icon"
-                width="12"
-                height="12"
-                aria-hidden="true"
-                decoding="async"
-              />
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
-            <a
-              href="https://www.instagram.com/redsurgetechnology/"
-              class="cs-social-link"
-              target="_blank"
-              aria-label="Instagram"
-            >
-              <img
-                class="cs-social-icon"
-                src="../images/insta-grey.svg"
-                alt="grey instagram icon"
-                width="12"
-                height="12"
-                aria-hidden="true"
-                decoding="async"
-              />
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
-            <a
-              href="https://www.facebook.com/redsurgetech"
-              class="cs-social-link"
-              target="_blank"
-              aria-label="Facebook"
-            >
-              <img
-                class="cs-social-icon"
-                src="../images/face-grey.svg"
-                alt="grey facebook icon"
-                width="12"
-                height="12"
-                aria-hidden="true"
-                decoding="async"
-              />
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
             </a>
           </div>
         </div>
       </div>
       <div class="cs-container">
-        <a href="../" class="cs-logo" aria-label="back to home">
-          <img
-            src="../images/new_redsurgetech_logo.svg"
-            alt="logo"
-            width="175"
-            height="63"
-            aria-hidden="true"
-            decoding="async"
-          />
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
         </a>
         <nav class="cs-nav" role="navigation">
           <button class="cs-toggle" aria-label="mobile menu toggle">
@@ -856,1582 +296,593 @@
           </button>
           <div class="cs-ul-wrapper">
             <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
-              <li class="cs-li">
-                <a href="../" class="cs-li-link"> Home </a>
-              </li>
-              <li class="cs-li">
-                <a href="../about" class="cs-li-link"> About </a>
-              </li>
-              <li class="cs-li">
-                <a href="../portfolio" class="cs-li-link"> Portfolio </a>
-              </li>
-              <li class="cs-li">
-                <a href="../blog" class="cs-li-link"> Blog </a>
-              </li>
-              <li class="cs-li">
-                <a href="../contact" class="cs-li-link"> Contact </a>
-              </li>
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
             </ul>
           </div>
         </nav>
-        <a href="../contact" class="cs-button-solid cs-nav-button"
-          >Get in Touch</a
-        >
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
       </div>
     </header>
 
     <!-- Banner -->
-    <div id="banner-712">
-      <div class="cs-container">
-        <h1 class="cs-int-title">
-          WCAG Guidelines Checklist: Your Complete Path to an Accessible Website
-        </h1>
-      </div>
-      <picture class="cs-background">
-        <source
-          media="(max-width: 600px)"
-          srcset="../images/banner_bg_red-360w.webp"
-          type="image/webp"
-        />
-        <source
-          media="(min-width: 601px) and (max-width: 1024px)"
-          srcset="../images/banner_bg_red-720w.webp"
-          type="image/webp"
-        />
-        <source
-          media="(min-width: 1025px)"
-          srcset="../images/banner_bg_red-1280w.webp"
-          type="image/webp"
-        />
-        <img
-          decoding="async"
-          src="../images/banner_bg_red-1280w.webp"
-          alt="red technology banner background"
-          width="1280"
-          height="320"
-          aria-hidden="true"
-        />
-      </picture>
-    </div>
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">WCAG Guidelines Checklist: The Complete A & AA Guide for 2026</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          WCAG Guidelines Checklist: The Complete A & AA Guide for 2026
+        </li>
+      </ol>
+    </nav>
 
     <!-- Content -->
-    <section id="content-page-714">
-      <div class="main-img-container">
-        <picture>
-          <source
-            media="(max-width: 600px)"
-            srcset="
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-360w.webp   360w,
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-720w.webp   720w,
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-1280w.webp 1280w
-            "
-            sizes="(max-width: 600px) 360px"
-            type="image/webp"
-          />
-          <source
-            media="(min-width: 601px) and (max-width: 1024px)"
-            srcset="
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-360w.webp   360w,
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-720w.webp   720w,
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-1280w.webp 1280w
-            "
-            sizes="(min-width: 601px) and (max-width: 1024px) 720px"
-            type="image/webp"
-          />
-          <source
-            media="(min-width: 1025px)"
-            srcset="
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-360w.webp   360w,
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-720w.webp   720w,
-              ../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-1280w.webp 1280w
-            "
-            sizes="1280px"
-            type="image/webp"
-          />
-          <img
-            fetchpriority="high"
-            decoding="sync"
-            src="../images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-main-1280w.webp"
-            alt="WCAG Guidelines Checklist - Your Path to an Accessible Web - Red Surge Technology"
-            width="1280"
-            height="720"
-            aria-hidden="true"
-          />
-        </picture>
+    <main id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <img
+    fetchpriority="high"
+    decoding="async"
+    src="/images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-blogindex.webp"
+    srcset="
+      /images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-blogindex-400.webp 400w,
+      /images/blog/wcag-guidelines-checklist/wcag-guidelines-checklist-blogindex-800.webp 800w
+    "
+    sizes="(max-width: 1024px) 92vw, 800px"
+    alt="WCAG Guidelines Checklist: The Complete A & AA Guide for 2026 - Red Surge Technology Blog"
+    width="1280"
+    height="720"
+  />
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="WCAG Guidelines Checklist: Complete A & AA Guide (2026)" />
+          <meta itemprop="description" content="The complete WCAG 2.2 guidelines checklist for Level A and AA. Learn every success criterion, how to test it, plus tools, workflow tips, and a downloadable reference." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/wcag-guidelines-checklist" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2025-06-09T13:00:00.000Z">Jun 09, 2025</time>
+          </div>
+
+          
+          <!-- Last updated -->
+          <div class="cs-meta-item cs-meta-updated" title="Last updated">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Updated: <time itemprop="dateModified" datetime="2026-10-08T13:00:00.000Z">Oct 08, 2026</time></span>
+          </div>
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT22M" />22 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Accessibility</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">accessibility</span><span class="cs-tag" itemprop="keywords">wcag</span><span class="cs-tag" itemprop="keywords">wcag checklist</span><span class="cs-tag" itemprop="keywords">web standards</span><span class="cs-tag" itemprop="keywords">compliance</span><span class="cs-tag" itemprop="keywords">a11y</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>We put so much effort into making our designs look sleek and modern. We agonize over type scales, hover states, animation curves. And then we forget the most fundamental thing: making sure everyone can actually use what we built.</p>
+<p>A few years back, I watched someone try to use one of my projects with a screen reader. They hit a form I&#39;d been proud of — clean layout, subtle focus states, nice validation messages. But the labels weren&#39;t programmatically associated with the inputs. The error messages appeared visually but weren&#39;t announced. From my side, everything looked perfect. From theirs, the form was a wall of unlabeled text boxes that made no sense.</p>
+<p>I&#39;ve never forgotten that. It wasn&#39;t a bug I could see. It was a bug I could only see by using the product the way I hadn&#39;t been.</p>
+<p>That&#39;s what a WCAG guidelines checklist is for. Not to satisfy a compliance audit. Not to avoid a lawsuit. To make sure the site you built actually works for the people who show up to use it — all of them.</p>
+<p>This guide walks through the complete WCAG 2.2 Level A and AA checklist, why it matters, and how to weave accessibility into every phase of your workflow so it becomes a habit instead of a scramble before launch.</p>
+<blockquote>
+<p><strong>Want a fresh pair of eyes on your accessibility?</strong> Red Surge Technology audits and rebuilds websites for small businesses across New Jersey. <a href="/contact">Get in touch</a> for a free consultation.</p>
+</blockquote>
+<hr>
+<h2>Table of contents</h2>
+<ol>
+<li><a href="#what-wcag-actually-is-in-plain-english">What WCAG actually is (in plain English)</a></li>
+<li><a href="#understanding-wcag-levels-a-aa-and-aaa">Understanding WCAG levels: A, AA, and AAA</a></li>
+<li><a href="#why-a-wcag-checklist-belongs-in-your-workflow">Why a WCAG checklist belongs in your workflow</a></li>
+<li><a href="#the-complete-wcag-22-level-a-and-aa-checklist">The complete WCAG 2.2 Level A and AA checklist</a></li>
+<li><a href="#a-story-about-what-happens-when-accessibility-slips">A story about what happens when accessibility slips</a></li>
+<li><a href="#building-accessibility-into-every-phase-of-your-workflow">Building accessibility into every phase of your workflow</a></li>
+<li><a href="#essential-tools-for-wcag-testing-and-auditing">Essential tools for WCAG testing and auditing</a></li>
+<li><a href="#keeping-your-checklist-current-as-standards-evolve">Keeping your checklist current as standards evolve</a></li>
+<li><a href="#frequently-asked-questions-about-wcag-guidelines">Frequently asked questions about WCAG guidelines</a></li>
+<li><a href="#making-accessibility-a-habit-not-a-hurdle">Making accessibility a habit, not a hurdle</a></li>
+</ol>
+<hr>
+<h2>What WCAG actually is (in plain English)</h2>
+<p>WCAG — the <strong>Web Content Accessibility Guidelines</strong> — is the internationally recognized standard for digital accessibility, published by the World Wide Web Consortium (W3C). It defines what &quot;accessible&quot; means in concrete, testable terms.</p>
+<p>The current version is <strong>WCAG 2.2</strong>, published in October 2023. It builds on WCAG 2.1 by adding nine new success criteria focused on cognitive accessibility, low vision, and motor impairments. WCAG 3.0 is in active development but won&#39;t replace 2.2 for years.</p>
+<p>When someone says a website &quot;meets WCAG standards,&quot; they almost always mean <strong>WCAG 2.2 Level AA</strong>. That&#39;s the level most laws, procurement requirements, and auditors reference.</p>
+<p>The guidelines are organized around four principles — often abbreviated <strong>POUR</strong>:</p>
+<ul>
+<li><strong>Perceivable</strong> — content must be available to the senses (sight, hearing, touch)</li>
+<li><strong>Operable</strong> — interface elements must work with keyboard, mouse, touch, or assistive tech</li>
+<li><strong>Understandable</strong> — content and behavior must be predictable and clear</li>
+<li><strong>Robust</strong> — content must work reliably with current and future assistive technologies</li>
+</ul>
+<p>Every success criterion in WCAG fits under one of those four principles. That framework is useful because it gives you a mental model for accessibility that doesn&#39;t require memorizing the entire spec.</p>
+<h2>Understanding WCAG levels: A, AA, and AAA</h2>
+<p>WCAG is organized into three conformance levels. Think of them like building code requirements for a physical space: Level A is the fire exit — non-negotiable and life-saving. Level AA is the wheelchair ramp — expected and widely referenced. Level AAA is the heated sidewalk — admirable, but not always practical.</p>
+<h3>Level A — the essential foundation</h3>
+<p>Level A criteria are the minimum bar for accessibility. Without these, people with certain disabilities literally cannot use your website. These aren&#39;t &quot;nice to have&quot; — they&#39;re &quot;the door is locked&quot; issues.</p>
+<p>At Level A, you must:</p>
+<ul>
+<li>Provide text alternatives for all non-text content</li>
+<li>Ensure all functionality is available through a keyboard</li>
+<li>Never use content that flashes more than three times per second</li>
+<li>Provide labels for form inputs</li>
+<li>Give each page a meaningful title</li>
+</ul>
+<p>Miss any Level A criterion and you&#39;re actively excluding users.</p>
+<h3>Level AA — the standard you should target</h3>
+<p>Level AA is the conformance level referenced by most accessibility laws. When a website says it&#39;s &quot;WCAG compliant,&quot; it almost always means Level AA.</p>
+<p>Level AA builds on Level A by adding requirements that address the most common and impactful barriers:</p>
+<ul>
+<li>Minimum color contrast of 4.5:1 for normal text</li>
+<li>Captions for live audio content</li>
+<li>Consistent navigation across pages</li>
+<li>Error messages that identify the problem and suggest a fix</li>
+<li>A visible focus indicator for keyboard users</li>
+</ul>
+<blockquote>
+<p><strong>Practical target:</strong> If you&#39;re building or renovating a website today, aim for WCAG 2.2 Level AA. It&#39;s the standard that legal requirements reference, accessibility auditors check against, and users actually need. Level AAA is aspirational — focus your energy on nailing AA first.</p>
+</blockquote>
+<h3>Level AAA — the highest standard</h3>
+<p>Level AAA criteria represent the gold standard: sign language interpretation for prerecorded audio, lower secondary reading level for all text, extended audio descriptions. While admirable, many AAA criteria are impractical for all content in all contexts. Most organizations target AA compliance and selectively implement AAA where feasible.</p>
+<h2>Why a WCAG checklist belongs in your workflow</h2>
+<p>When you&#39;re juggling stakeholder meetings, design revisions, development sprints, and that surprise &quot;Can we launch a week early?&quot; email, accessibility requirements slip through the cracks. A checklist isn&#39;t just helpful — it&#39;s a safety net.</p>
+<h3>The human impact</h3>
+<p>Behind every guideline is a real person trying to accomplish something. Someone using a screen reader and hitting a button that wasn&#39;t coded for keyboard focus. Someone with low vision squinting at light grey text. Someone who can&#39;t use a mouse struggling with a dropdown that only responds to hover. Every checklist item you verify is a barrier removed for a real person.</p>
+<h3>Legal protection</h3>
+<p>ADA lawsuits related to website accessibility have increased dramatically in recent years, and courts have consistently ruled that websites qualify as places of public accommodation. Thousands of demand letters and lawsuits are filed annually in the US alone. The <strong>European Accessibility Act</strong> came into force in June 2025, expanding requirements across the EU. A documented checklist process demonstrates good-faith effort and provides real legal protection.</p>
+<h3>SEO benefits</h3>
+<p>Many accessibility best practices directly overlap with search engine optimization:</p>
+<ul>
+<li>Descriptive <strong>alt text</strong> helps Google understand your images</li>
+<li>Proper <strong>heading hierarchy</strong> helps search engines parse content structure</li>
+<li>Descriptive <strong>link text</strong> provides contextual relevance signals</li>
+<li>Fast, clean, <strong>semantic HTML</strong> is exactly what search engines reward</li>
+</ul>
+<p>Building for accessibility and building for SEO are largely the same work. If you want to go deeper on the performance side, our guide on <a href="/blog/improve-website-page-speed-seo-nj">improving website page speed for SEO</a> covers the Core Web Vitals angle.</p>
+<h2>The complete WCAG 2.2 Level A and AA checklist</h2>
+<p>Below is a comprehensive breakdown of every criterion you need to meet for WCAG 2.2 Level AA compliance, organized by POUR category. Each item includes the WCAG success criterion reference, what it requires, and how to test for it.</p>
+<h3>Perceivable: making content available to the senses</h3>
+<h4>1.1.1 Non-text Content (Level A)</h4>
+<p>All images, icons, charts, and other non-text content must have a text alternative conveying the same purpose. For decorative images, use an empty alt attribute (<code>alt=&quot;&quot;</code>) so screen readers skip them. For complex images like charts, provide a longer description nearby or linked.</p>
+<p><strong>How to test:</strong> Run an automated scan with WAVE or axe. Then manually review every image on key pages. Ask: if I couldn&#39;t see this image, would the alt text give me the same information?</p>
+<h4>1.2.1 Audio-only and Video-only (Level A)</h4>
+<p>For audio-only content (podcasts, audio clips), provide a text transcript. For video-only content, provide either a text transcript or an audio track describing the visual content.</p>
+<p><strong>How to test:</strong> Check that every audio and video asset has an associated transcript or audio description.</p>
+<h4>1.2.2 Captions (Prerecorded) (Level A)</h4>
+<p>All prerecorded video with audio must have synchronized captions. Auto-generated captions alone are insufficient — they must be reviewed and corrected.</p>
+<p><strong>How to test:</strong> Enable captions on every video and verify they match spoken content, identify speakers, and include relevant non-speech sounds.</p>
+<h4>1.2.3 Audio Description or Media Alternative (Level A)</h4>
+<p>For prerecorded video, provide either an audio description track narrating important visual information, or a text alternative combining the transcript with descriptions of visual content.</p>
+<p><strong>How to test:</strong> Watch each video without looking at the screen. Can you understand everything important from the audio description or transcript alone?</p>
+<h4>1.2.4 Captions (Live) (Level AA)</h4>
+<p>Live video broadcasts with audio must have real-time captions. This is particularly relevant for webinars, live streams, and virtual events.</p>
+<p><strong>How to test:</strong> Schedule a live test broadcast with your captioning service and verify captions appear in real time with acceptable accuracy.</p>
+<h4>1.2.5 Audio Description (Prerecorded) (Level AA)</h4>
+<p>All prerecorded video content must include an audio description track narrating important visual details during natural pauses in the audio.</p>
+<p><strong>How to test:</strong> Play the video with the audio description track enabled. Verify that scene changes, on-screen text, facial expressions, and key actions are described.</p>
+<h4>1.3.1 Info and Relationships (Level A)</h4>
+<p>Information, structure, and relationships conveyed through visual presentation must be programmatically available. This covers heading hierarchy, list markup, table headers, form label associations, and semantic HTML.</p>
+<p><strong>How to test:</strong> Inspect your HTML. Are headings using <code>h1</code>–<code>h6</code> correctly? Are lists in <code>ul</code> or <code>ol</code> elements? Do form inputs have properly associated <code>label</code> elements?</p>
+<h4>1.3.2 Meaningful Sequence (Level A)</h4>
+<p>When the reading sequence affects meaning, the correct reading order must be programmatically determinable. DOM order should match visual reading order.</p>
+<p><strong>How to test:</strong> Disable CSS and read the raw content. Does it flow logically? Screen readers follow DOM order, not visual position.</p>
+<h4>1.3.3 Sensory Characteristics (Level A)</h4>
+<p>Instructions must not rely solely on sensory characteristics like shape, color, size, visual location, orientation, or sound. &quot;Click the round button&quot; or &quot;Press the red button&quot; fails this criterion.</p>
+<p><strong>How to test:</strong> Review all instructional text. If any instruction references only visual or auditory cues, add text labels.</p>
+<h4>1.3.4 Orientation (Level AA)</h4>
+<p>Content must not restrict its view and operation to a single display orientation unless a specific orientation is essential.</p>
+<p><strong>How to test:</strong> Rotate your device between portrait and landscape. Does content reflow correctly? Are all functions still available?</p>
+<h4>1.3.5 Identify Input Purpose (Level AA)</h4>
+<p>For input fields that collect common user information, the purpose of each field must be programmatically identifiable using HTML autocomplete attributes.</p>
+<p><strong>How to test:</strong> Inspect form inputs and verify that appropriate <code>autocomplete</code> attributes are present for common fields.</p>
+<h4>1.4.1 Use of Color (Level A)</h4>
+<p>Color must not be the only visual means of conveying information or distinguishing an element. Error states, required fields, and links must have additional indicators beyond color.</p>
+<p><strong>How to test:</strong> View your page in grayscale. Can you still identify links, error messages, and required fields?</p>
+<h4>1.4.2 Audio Control (Level A)</h4>
+<p>If audio plays automatically for more than three seconds, there must be a mechanism to pause, stop, or control the volume independently from the system volume.</p>
+<p><strong>How to test:</strong> Check any page with auto-playing audio. Is there a visible, accessible control to stop or adjust it?</p>
+<h4>1.4.3 Contrast (Minimum) (Level AA)</h4>
+<p>Text and images of text must have a contrast ratio of at least 4.5:1 against their background, except for large text (18pt+ or 14pt+ bold), which requires 3:1. Logos and decorative text are exempt.</p>
+<p><strong>How to test:</strong> Use the WebAIM Contrast Checker or axe DevTools to test every text/background combination in your design system. Pay special attention to grey text on light backgrounds — the most common failure.</p>
+<h4>1.4.4 Resize Text (Level AA)</h4>
+<p>Users must be able to resize text up to 200% without loss of content or functionality, and without horizontal scrolling.</p>
+<p><strong>How to test:</strong> Set your browser zoom to 200%. Does all content remain readable and functional? Use relative units (rem, em, %) rather than fixed pixels.</p>
+<h4>1.4.5 Images of Text (Level AA)</h4>
+<p>Text should not be embedded in images unless the visual presentation is essential (like a logo) or the text is purely decorative. Use styled HTML text instead.</p>
+<p><strong>How to test:</strong> Scan your site for images containing text. Can any be replaced with styled HTML text?</p>
+<h4>1.4.10 Reflow (Level AA)</h4>
+<p>Content must be viewable at 320px width without horizontal scrolling, and without requiring two-dimensional scrolling for vertical content.</p>
+<p><strong>How to test:</strong> Resize your browser to 320px wide or test on a small mobile device. Can you read and interact with everything?</p>
+<h4>1.4.11 Non-text Contrast (Level AA)</h4>
+<p>UI components (buttons, form fields, icons) and graphical objects must have a contrast ratio of at least 3:1 against adjacent colors. This includes focus indicators, input borders, and chart elements.</p>
+<p><strong>How to test:</strong> Check button borders, input field boundaries, and icon colors against their backgrounds.</p>
+<h4>1.4.12 Text Spacing (Level AA)</h4>
+<p>Users must be able to override text spacing. When line height is 1.5, paragraph spacing is 2em, letter spacing is 0.12em, and word spacing is 0.16em, no content or functionality should be lost.</p>
+<p><strong>How to test:</strong> Use a browser extension to apply text spacing overrides. Verify all text remains visible and no elements overlap or clip.</p>
+<h4>1.4.13 Content on Hover or Focus (Level AA)</h4>
+<p>Content that appears on hover or focus (tooltips, dropdowns, popovers) must be dismissible, hoverable, and persistent until dismissed.</p>
+<p><strong>How to test:</strong> Trigger every hover/focus-revealed element. Can you dismiss it with Escape? Can you move your mouse to the revealed content without it disappearing?</p>
+<h3>Operable: making the interface work for everyone</h3>
+<h4>2.1.1 Keyboard (Level A)</h4>
+<p>All functionality must be operable through a keyboard interface without requiring specific timings for individual keystrokes.</p>
+<p><strong>How to test:</strong> Put your mouse aside. Use only Tab, Shift+Tab, Enter, Space, and arrow keys to navigate and operate every interactive element. Can you do everything?</p>
+<h4>2.1.2 No Keyboard Trap (Level A)</h4>
+<p>Keyboard focus must never become trapped in a component. If focus can move into a component, it must be movable away using only the keyboard.</p>
+<p><strong>How to test:</strong> Tab into every modal, dropdown, autocomplete, and rich text editor. Can you always Tab out? Test the Escape key as a common escape mechanism.</p>
+<h4>2.1.4 Character Key Shortcuts (Level A)</h4>
+<p>Single-character keyboard shortcuts must be remappable, able to be turned off, or only active when the relevant component has focus.</p>
+<p><strong>How to test:</strong> Identify any single-key shortcuts. Verify they can be disabled, remapped, or are scoped to focused components.</p>
+<h4>2.2.1 Timing Adjustable (Level A)</h4>
+<p>For any time limit set by the content, users must be able to turn it off, adjust it to at least ten times the default, or be warned and given at least 20 seconds to extend.</p>
+<p><strong>How to test:</strong> Identify any session timeouts, quiz timers, or auto-advancing carousels. Can the user control or disable them?</p>
+<h4>2.2.2 Pause, Stop, Hide (Level A)</h4>
+<p>For any moving, blinking, scrolling, or auto-updating content that starts automatically and lasts more than five seconds, there must be a mechanism to pause, stop, or hide it.</p>
+<p><strong>How to test:</strong> Identify auto-playing carousels, animated backgrounds, live chat widgets, and auto-refreshing content. Can each be paused or hidden?</p>
+<h4>2.3.1 Three Flashes or Below Threshold (Level A)</h4>
+<p>No page content may flash more than three times in any one-second period.</p>
+<p><strong>How to test:</strong> Review animated or video content. Use a flash analysis tool if uncertain.</p>
+<h4>2.4.1 Bypass Blocks (Level A)</h4>
+<p>Users must be able to bypass repeated blocks of content (like navigation menus). Provide a &quot;Skip to main content&quot; link at the top of each page.</p>
+<p><strong>How to test:</strong> Tab to the first focusable element on the page. Is there a visible skip link? Does it work correctly?</p>
+<h4>2.4.2 Page Titled (Level A)</h4>
+<p>Each page must have a descriptive, unique <code>&lt;title&gt;</code> element that identifies its topic or purpose.</p>
+<p><strong>How to test:</strong> Check every page&#39;s browser tab title. Is it descriptive and unique?</p>
+<h4>2.4.3 Focus Order (Level A)</h4>
+<p>Focusable components must receive focus in an order that preserves meaning and operability. The tab order should follow visual reading order.</p>
+<p><strong>How to test:</strong> Tab through every interactive element. Does the focus order follow logical reading order?</p>
+<h4>2.4.4 Link Purpose (In Context) (Level A)</h4>
+<p>The purpose of each link must be determinable from the link text alone or with its programmatically determined context. Avoid &quot;click here&quot; and &quot;read more&quot; links.</p>
+<p><strong>How to test:</strong> Review all links. If you read each link text out of context, would you know where it leads?</p>
+<h4>2.4.5 Multiple Ways (Level AA)</h4>
+<p>Users must be able to locate pages in more than one way, unless the page is a step in a process.</p>
+<p><strong>How to test:</strong> Can users reach any page through at least two different methods (search + navigation, for example)?</p>
+<h4>2.4.6 Headings and Labels (Level AA)</h4>
+<p>Headings and labels must describe the topic or purpose of the content they introduce.</p>
+<p><strong>How to test:</strong> Read every heading and form label. Does each one clearly describe what follows?</p>
+<h4>2.4.7 Focus Visible (Level AA)</h4>
+<p>Any keyboard-operable user interface must have a visible focus indicator.</p>
+<p><strong>How to test:</strong> Tab through the entire page. Is the focus indicator clearly visible at every step? Never use <code>outline: none</code> without a visible alternative.</p>
+<h4>2.4.11 Focus Not Obscured (Level AA)</h4>
+<p>When a component receives keyboard focus, it must not be entirely hidden by other content.</p>
+<p><strong>How to test:</strong> Tab through your page, especially through sticky headers, fixed footers, and modals. Is the focused element always visible?</p>
+<h4>2.5.1 Pointer Gestures (Level A)</h4>
+<p>Any functionality using multipoint or path-based gestures must also be operable with a single pointer without a path-based gesture, unless the multipoint gesture is essential.</p>
+<p><strong>How to test:</strong> Identify gesture-dependent interactions (carousels, maps, sliders). Can they be operated with simple taps and clicks instead?</p>
+<h4>2.5.2 Pointer Cancellation (Level A)</h4>
+<p>Functions operated by a single pointer must use the up-event for execution, provide an abort or undo mechanism, or ensure the down-event is not used for execution.</p>
+<p><strong>How to test:</strong> Click and hold on buttons, then drag away before releasing. Does the action cancel rather than execute?</p>
+<h4>2.5.3 Label in Name (Level A)</h4>
+<p>For UI components with visible text labels, the accessible name must include the visible label text.</p>
+<p><strong>How to test:</strong> Inspect the accessible name of every labeled component. Does it contain the visible label text?</p>
+<h4>2.5.4 Motion Actuation (Level A)</h4>
+<p>Functions operated by device motion must also be operable through conventional UI controls, and users must be able to disable motion actuation.</p>
+<p><strong>How to test:</strong> Identify any motion-triggered features. Is there an alternative control method and a way to disable motion?</p>
+<h4>2.5.7 Dragging Movements (Level AA)</h4>
+<p>Any functionality that requires dragging must also be achievable by single-pointer actions without dragging.</p>
+<p><strong>How to test:</strong> For every drag-and-drop interface, can the same action be completed with simple clicks?</p>
+<h4>2.5.8 Target Size (Minimum) (Level AA)</h4>
+<p>Interactive elements must have a target size of at least 24 by 24 CSS pixels, with some exceptions.</p>
+<p><strong>How to test:</strong> Measure the clickable area of every button, icon, and interactive element. Is it at least 24x24px?</p>
+<h3>Understandable: making content clear and predictable</h3>
+<h4>3.1.1 Language of Page (Level A)</h4>
+<p>The default human language of each page must be programmatically determinable using the <code>lang</code> attribute on the <code>&lt;html&gt;</code> element.</p>
+<p><strong>How to test:</strong> Inspect the <code>html</code> element. Is <code>lang</code> set to the correct language code (e.g., <code>lang=&quot;en&quot;</code>)?</p>
+<h4>3.1.2 Language of Parts (Level AA)</h4>
+<p>If a page contains content in a language different from the default, that content must have its language programmatically identified.</p>
+<p><strong>How to test:</strong> Search for passages in a different language. Do they have a <code>lang</code> attribute?</p>
+<h4>3.2.1 On Focus (Level A)</h4>
+<p>When a component receives focus, it must not initiate a change of context.</p>
+<p><strong>How to test:</strong> Tab through every element. Does anything unexpected happen when an element receives focus?</p>
+<h4>3.2.2 On Input (Level A)</h4>
+<p>Changing a form control&#39;s setting must not automatically cause a change of context unless the user has been advised in advance.</p>
+<p><strong>How to test:</strong> Interact with every form control and filter. Does changing a value trigger an unexpected page change?</p>
+<h4>3.2.3 Consistent Navigation (Level AA)</h4>
+<p>Navigation mechanisms repeated across multiple pages must appear in the same relative order each time.</p>
+<p><strong>How to test:</strong> Compare navigation across different pages. Is the order and structure consistent?</p>
+<h4>3.2.4 Consistent Identification (Level AA)</h4>
+<p>Components with the same functionality across pages must be identified consistently.</p>
+<p><strong>How to test:</strong> Compare icons, button labels, and form field names across pages. Are functionally identical elements labeled consistently?</p>
+<h4>3.2.6 Consistent Help (Level A)</h4>
+<p>If help mechanisms are repeated on multiple pages, they must appear in the same relative order.</p>
+<p><strong>How to test:</strong> Identify all help mechanisms. Do they appear in a consistent location?</p>
+<h4>3.3.1 Error Identification (Level A)</h4>
+<p>When an input error is automatically detected, the error must be described in text and the item in error must be identified.</p>
+<p><strong>How to test:</strong> Submit every form with invalid data. Is each error clearly described? Does the user know which field has the error and how to fix it?</p>
+<h4>3.3.2 Labels or Instructions (Level A)</h4>
+<p>All content requiring user input must have labels or instructions.</p>
+<p><strong>How to test:</strong> Review every form. Does every field have a visible, persistent label? Are required fields clearly marked?</p>
+<h4>3.3.3 Error Suggestion (Level AA)</h4>
+<p>When an input error is detected and correction suggestions are known, the suggestions must be provided to the user.</p>
+<p><strong>How to test:</strong> For every validation error, is there a helpful suggestion? &quot;Invalid email&quot; should be &quot;Please enter an email with an @ symbol, like <a href="mailto:name@example.com">name@example.com</a>.&quot;</p>
+<h4>3.3.4 Error Prevention (Legal, Financial, Data) (Level AA)</h4>
+<p>For forms that submit legal commitments, financial transactions, or modify user data, submissions must be reversible, checked for errors, or confirmed before finalizing.</p>
+<p><strong>How to test:</strong> Identify forms that commit users to legal or financial actions. Is there a review/confirm/cancel step before final submission?</p>
+<h4>3.3.7 Accessible Authentication (Level AA)</h4>
+<p>Authentication processes must not rely on cognitive function tests unless an alternative is provided. Password managers and &quot;forgot password&quot; flows should be supported.</p>
+<p><strong>How to test:</strong> Test your login flow. Can users paste passwords? Do password managers work? Is there a password recovery option?</p>
+<h3>Robust: ensuring compatibility with assistive technology</h3>
+<h4>4.1.2 Name, Role, Value (Level A)</h4>
+<p>For all UI components, the name, role, and value must be programmatically determinable. Custom widgets must expose proper semantics through native HTML or ARIA.</p>
+<p><strong>How to test:</strong> Use a screen reader or browser accessibility inspector to verify every interactive element has a proper accessible name, role, and current state.</p>
+<h4>4.1.3 Status Messages (Level AA)</h4>
+<p>Status messages that don&#39;t receive focus must be announced to screen reader users without interrupting their current task. Use <code>role=&quot;status&quot;</code>, <code>role=&quot;alert&quot;</code>, or <code>aria-live</code> regions appropriately.</p>
+<p><strong>How to test:</strong> Trigger status messages (form submission confirmation, &quot;item added to cart,&quot; search results count). Are they announced without requiring focus movement?</p>
+<h2>A story about what happens when accessibility slips</h2>
+<p>Last November, I was helping a small arts nonprofit set up a virtual holiday craft fair — cozy tutorials, live music performances, a global audience tuning in from different time zones. We prepped everything meticulously: promotional emails, social media posts, downloadable ornament templates, and what I thought was a solid captioning setup for the live segments.</p>
+<p>The event launched smoothly. The first performer strummed their guitar, the chat filled with holiday emojis, everything looked great — until the live craft demonstration began. The captioning feed, which was supposed to switch to identify the new speaker and describe the step-by-step folding technique, instead stubbornly displayed the previous performer&#39;s name and lyrics throughout the entire 25-minute craft segment. Viewers wrote in the chat: &quot;I can&#39;t follow along.&quot; &quot;The captions are from the last session.&quot; &quot;Is there a transcript somewhere?&quot;</p>
+<p>I felt a wave of embarrassment — but also clarity. The automated captioning service we relied on was technically functional, but nobody had tested it with a live handoff between segments. The tool was fine. Our process was the failure point. We&#39;d checked the box for &quot;captions provided&quot; without verifying that they were accurate, timely, and appropriate for each segment.</p>
+<p>From that day forward, every live event I&#39;m involved with includes a 15-minute dry run with a volunteer reading at different speeds and switching between speakers. We test the caption handoff, verify speaker identification, and confirm that non-verbal sounds appear correctly. That small investment of time has caught issues before they affected real viewers at every event since.</p>
+<p>The lesson: <strong>testing under real conditions matters more than checking boxes on a list.</strong> Accessibility is an ongoing conversation with your users — not a certification you earn once and frame on the wall.</p>
+<h2>Building accessibility into every phase of your workflow</h2>
+<p>The most effective accessibility programs don&#39;t treat compliance as a separate phase or a pre-launch audit. They weave accessibility thinking into every stage of the project lifecycle.</p>
+<h3>Planning phase</h3>
+<p>Kick off every project by explicitly defining which WCAG level you&#39;re targeting. Write it into your project brief, acceptance criteria, and definition of done. When stakeholders ask &quot;Why does this cost more?&quot; or &quot;Why is this taking longer?&quot;, having a documented accessibility standard provides a clear, defensible answer. It also ensures designers, developers, content creators, and QA testers are all working toward the same goal.</p>
+<h3>Design phase</h3>
+<p>Accessibility decisions made during design prevent exponentially more rework than fixes made during development. Sketch high-contrast wireframes from the start. Annotate mockups with alt text descriptions for key images. Define a color palette that meets AA contrast requirements before a single line of CSS is written. Document heading hierarchy in your wireframes. Specify focus indicator styles alongside hover and active states. Design the keyboard interaction pattern for every custom component before a developer starts building it.</p>
+<p>A practical habit: run every new color combination through a contrast checker before adding it to your design system. The five minutes this takes saves hours of CSS fixes later.</p>
+<h3>Development phase</h3>
+<p>Run automated accessibility scans at the end of every sprint — not just before launch. Tools like axe DevTools, Lighthouse, and Pa11y can be integrated into your CI/CD pipeline to catch regressions automatically. But automated tools catch only 30–40% of issues. Manual testing is irreplaceable: tab through every new feature with a keyboard, test custom components with a screen reader (VoiceOver on Mac, NVDA on Windows — both free), and verify that error messages and status updates are announced correctly.</p>
+<p>Write semantic HTML from the start. Use <code>&lt;button&gt;</code> elements for buttons, not <code>&lt;div&gt;</code> elements with click handlers. Associate every form input with a label. Structure pages with landmark elements like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>. Most accessibility issues that make it to production trace back to basic HTML choices made early in development.</p>
+<h3>Launch and beyond</h3>
+<p>Before pressing &quot;Go live,&quot; perform a final manual pass against your WCAG checklist. Document any remaining issues, assign owners, and set deadlines for resolution. Schedule a follow-up audit one week post-launch to catch issues that only surface under real traffic. Accessibility isn&#39;t a launch-day checkbox — it&#39;s a commitment to continuous improvement.</p>
+<blockquote>
+<p><strong>Pro tip:</strong> Create an accessibility statement page on your site. List your target conformance level, known issues, and contact information for users who encounter barriers. This demonstrates good faith, provides a feedback channel, and is referenced in some accessibility regulations.</p>
+</blockquote>
+<h2>Essential tools for WCAG testing and auditing</h2>
+<p>You don&#39;t need an expensive enterprise suite to test for accessibility. Here are the tools I use regularly — all with free tiers sufficient for most projects.</p>
+<ul>
+<li><strong><a href="https://www.deque.com/axe/">axe DevTools</a></strong> — Browser extension and CI integration from Deque Systems. Catches roughly 30–40% of WCAG issues automatically, integrates into Chrome DevTools, and provides clear explanations and fix suggestions.</li>
+<li><strong><a href="https://wave.webaim.org/">WAVE Evaluation Tool</a></strong> — From WebAIM. Provides visual overlays directly on your page showing errors, alerts, features, structural elements, and contrast issues. Excellent for quick visual audits and for explaining issues to non-technical stakeholders.</li>
+<li><strong>Lighthouse</strong> — Built into Chrome DevTools. Runs an accessibility audit alongside performance, SEO, and best-practices checks.</li>
+<li><strong>Colour Contrast Analyzer</strong> — A desktop application (from TPGi) that lets you sample colors from anywhere on screen and instantly checks AA and AAA contrast ratios. Invaluable during design reviews.</li>
+<li><strong>NVDA (Windows) and VoiceOver (Mac)</strong> — Free screen readers for real-world testing. You don&#39;t need to become an expert user — just learn basic navigation and verify your pages make sense non-visually.</li>
+<li><strong>Pa11y</strong> — Command-line tool that can be integrated into build processes and CI/CD pipelines for automated regression testing.</li>
+</ul>
+<p>The key insight: <strong>no single tool catches everything.</strong> Automated tools find the objective, programmatically detectable issues. Manual keyboard and screen reader testing catches the subjective, experience-level issues. Use both. If you want to see how this fits into a broader performance and UX strategy, our guide on <a href="/blog/mobile-first-web-design-guide-2026">mobile-first web design</a> covers the overlap between usability and accessibility.</p>
+<h2>Keeping your checklist current as standards evolve</h2>
+<p>Accessibility standards aren&#39;t frozen in time. WCAG 2.2 was published in October 2023, adding nine new success criteria. WCAG 3.0 is under active development and will represent a significant restructuring when finalized.</p>
+<p>To stay current without constant fire drills:</p>
+<ul>
+<li><strong>Subscribe to W3C WAI announcements.</strong> The Web Accessibility Initiative mailing list provides early notice of draft guidelines, public comment periods, and finalized standards.</li>
+<li><strong>Schedule quarterly mini-audits</strong> rather than waiting for an annual comprehensive review. A 90-minute quarterly check catches regressions and keeps the team engaged with accessibility thinking.</li>
+<li><strong>Host short, focused training sessions.</strong> A 30-minute &quot;Keyboard Testing 101&quot; brown bag lunch or a &quot;Captioning Quick Tips&quot; coffee hour keeps accessibility skills fresh.</li>
+<li><strong>Review your checklist against the latest WCAG version annually.</strong> When new criteria are added, assess which apply to your site and add them with testing procedures.</li>
+</ul>
+<p>If you want a broader primer on the fundamentals, our post on <a href="/blog/web-accessibility-for-beginners">web accessibility for beginners</a> walks through the concepts from the ground up.</p>
+<h2>Frequently Asked Questions</h2>
+<h3>What is a WCAG guidelines checklist?</h3>
+<p>A WCAG guidelines checklist is a structured list of the success criteria defined in the Web Content Accessibility Guidelines, organized so you can systematically verify each one against your website. It typically covers the four POUR principles (Perceivable, Operable, Understandable, Robust) and is filtered by conformance level — usually Level A and AA, since AA is the standard most laws reference.</p>
+<h3>What&#39;s the difference between WCAG A, AA, and AAA?</h3>
+<p>Level A is the minimum bar — without these criteria, some users literally cannot use your website. Level AA is the standard most laws and regulations reference, and it&#39;s what most organizations target. Level AAA is the gold standard — aspirational, sometimes impractical for all content types, and rarely required. Most teams should target AA and selectively implement AAA where feasible.</p>
+<h3>Do I need to meet every single WCAG criterion?</h3>
+<p>For Level AA conformance, yes — all Level A and Level AA criteria must be met. That said, WCAG includes exceptions for some criteria (essential exceptions, decorative content, logos), and perfect compliance is genuinely difficult. What matters most is documented, good-faith effort: regular audits, clear processes, and a roadmap for addressing known issues.</p>
+<h3>How long does a WCAG audit take?</h3>
+<p>A thorough WCAG 2.2 AA audit typically takes 10 to 40 hours depending on the size and complexity of your site. A small marketing site with 5–10 pages can be audited in about 10 hours. A large application with complex interactive components and authentication flows can take 40+ hours. Automated scans take minutes; manual keyboard and screen reader testing is where most of the time goes.</p>
+<h3>What&#39;s the difference between WCAG 2.1 and WCAG 2.2?</h3>
+<p>WCAG 2.2, published in October 2023, builds on WCAG 2.1 by adding nine new success criteria and removing one (4.1.1 Parsing, which became redundant as modern browsers handle malformed HTML gracefully). The new criteria in 2.2 primarily improve accessibility for users with cognitive disabilities, low vision, and motor impairments. If your site already meets WCAG 2.1 AA, upgrading to 2.2 AA requires addressing the new criteria.</p>
+<h3>What&#39;s the difference between WebAIM&#39;s checklist and the W3C&#39;s checklist?</h3>
+<p>The W3C&#39;s WCAG specification is the authoritative standard — dense, comprehensive, and organized by success criterion. WebAIM (Web Accessibility In Mind) provides a more approachable, plain-language version that translates each criterion into practical terms with real-world examples. Many teams use both: W3C for authoritative reference and WebAIM for practical implementation guidance.</p>
+<h3>Is WCAG compliance required by law?</h3>
+<p>In the US, the ADA has been increasingly applied to websites by courts, and Section 508 applies directly to federal agencies and their contractors. The EU&#39;s European Accessibility Act (EAA) came into force in June 2025. Enforcement varies, but the trend is clear: accessibility requirements are expanding, not shrinking. If you have specific legal questions about your obligations, consult an attorney familiar with digital accessibility law.</p>
+<h3>How often should I run an accessibility audit?</h3>
+<p>At minimum, annually. For active products with frequent releases, quarterly or continuous automated testing is better. Run a manual audit after any significant redesign, new feature launch, or major dependency upgrade. Automated scans should run on every commit as part of your CI pipeline.</p>
+<h3>Does WCAG compliance improve SEO?</h3>
+<p>Yes, significantly. Many accessibility best practices directly overlap with SEO: descriptive alt text helps Google understand images, semantic HTML helps search engines parse structure, descriptive link text provides contextual signals, and fast, clean markup improves Core Web Vitals. Building for accessibility and building for SEO are largely the same work.</p>
+<h3>What are the most commonly failed WCAG criteria?</h3>
+<p>Based on WebAIM&#39;s annual analysis of the top one million homepages, the most common failures are low color contrast, missing image alt text, missing form labels, empty links, missing document language, and missing or duplicate page titles. Together, these account for the vast majority of detected issues — and most are straightforward to fix.</p>
+<h2>Making accessibility a habit, not a hurdle</h2>
+<p>Accessibility isn&#39;t a trend, a marketing checkbox, or a legal liability to manage. It&#39;s a commitment to building digital spaces that work for everyone who arrives at them — regardless of how they perceive, navigate, or interact with the web.</p>
+<p>A robust WCAG guidelines checklist, used consistently throughout your workflow, transforms accessibility from an overwhelming abstract requirement into a concrete set of achievable practices. It builds empathy into your process by reminding you that behind every criterion is a real person trying to accomplish something on your site. It shields you from legal exposure by documenting good-faith effort. And it sweetens your SEO by producing cleaner, more semantic, more usable code.</p>
+<p>Take this checklist. Tuck it into your next project charter. Set a recurring calendar reminder for your quarterly accessibility review. And the next time you&#39;re about to launch, run through that keyboard test one more time.</p>
+<p>If you found this useful, our guides on <a href="/blog/web-accessibility-for-beginners">web accessibility for beginners</a>, <a href="/blog/mobile-first-web-design-guide-2026">mobile-first web design</a>, and <a href="/blog/css-grid-layout-responsive-web-design">CSS Grid for responsive layouts</a> are natural next reads. And if you&#39;d like help auditing or improving your site&#39;s accessibility, <a href="/contact">get in touch</a> — we&#39;re happy to help.</p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/nextjs-api-routes-vs-route-handlers-vs-server-actions.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/nextjs-api-routes-vs-route-handlers-vs-server-actions-100.webp"
+     alt="Next.js API Routes vs Route Handlers vs Server Actions: Which Should You Use in 2026?" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Next.js API Routes vs Route Handlers vs Server Actions: Which Should You Use in 2026?</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/layout-thrashing-vs-forced-reflow-vs-reflow.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/layout-thrashing-vs-forced-reflow-vs-reflow-100.webp"
+     alt="Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Layout Thrashing vs Forced Reflow vs Reflow: What's the Difference?</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-aria-combobox-select-tutorial.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-aria-combobox-select-tutorial-100.webp"
+     alt="React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns That Work" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Aria ComboBox & Select Tutorial: Build Accessible Dropdowns That Work</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-native-html-email.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-native-html-email-100.webp"
+     alt="React Native HTML Email: How to Render Email Content in Mobile Apps" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Native HTML Email: How to Render Email Content in Mobile Apps</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/nginx-rtmp-low-latency.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/nginx-rtmp-low-latency-100.webp"
+     alt="Nginx RTMP Low Latency: Configuration Guide for Sub-Second Streaming" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Nginx RTMP Low Latency: Configuration Guide for Sub-Second Streaming</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <div>
-        <h2>Table of Contents</h2>
-        <ul>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-1'); return false;"
-              >Understanding WCAG Levels: A, AA, and AAA</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-2'); return false;"
-              >Why a WCAG Checklist Is Essential for Your Workflow</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-3'); return false;"
-              >The Complete WCAG 2.2 Level A and AA Checklist</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-4'); return false;"
-              >Lessons from the Field: What Happens When Accessibility Slips</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-5'); return false;"
-              >Building Accessibility into Every Phase of Your Workflow</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-6'); return false;"
-              >Essential Tools for WCAG Testing and Auditing</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-7'); return false;"
-              >Keeping Your Checklist Current as Standards Evolve</a
-            >
-          </li>
-          <li>
-            <a href="#" onclick="scrollToTargetAdjusted('h2-8'); return false;"
-              >Conclusion: Making Accessibility a Habit, Not a Hurdle</a
-            >
-          </li>
-        </ul>
-
-        <p>
-          You know what's wild? We pour countless hours into making our designs
-          look sleek, our animations feel polished, and our user flows feel
-          intuitive — yet sometimes we overlook the most fundamental thing:
-          making sure everyone can actually use the site we built. That's where
-          a solid WCAG guidelines checklist comes in, practically tapping you on
-          the shoulder to say, "Hey, don't leave anyone behind."
-        </p>
-
-        <p>
-          The Web Content Accessibility Guidelines (WCAG), published by the
-          World Wide Web Consortium (W3C), provide the internationally
-          recognized standard for digital accessibility. Following these
-          guidelines isn't just about avoiding lawsuits — though that's a
-          legitimate concern for many businesses. It's about creating
-          experiences that work for the roughly 16% of the global population
-          living with some form of disability. That includes people who are
-          blind or have low vision, people who are deaf or hard of hearing,
-          people with motor impairments who can't use a mouse, and people with
-          cognitive disabilities who benefit from clear, consistent interfaces.
-        </p>
-
-        <p>
-          This guide walks you through everything you need: what the different
-          WCAG conformance levels actually mean, why a checklist approach saves
-          time and reduces risk, a detailed breakdown of every Level A and AA
-          criterion you need to meet, a real-world story of what happens when
-          accessibility testing falls short, and practical strategies for
-          weaving accessibility into your design and development workflow. Let's
-          get into it.
-        </p>
-
-        <h2 id="h2-1">Understanding WCAG Levels: A, AA, and AAA</h2>
-
-        <p>
-          WCAG is organized into three conformance levels, each building on the
-          one before it. Think of them like building code requirements for a
-          physical space: Level A is the fire exit — non-negotiable and
-          life-saving. Level AA is the wheelchair ramp — expected and widely
-          referenced in regulations. Level AAA is the heated sidewalk that melts
-          snow automatically — admirable, but not always practical.
-        </p>
-
-        <h3>Level A — The Essential Foundation</h3>
-
-        <p>
-          Level A criteria are the minimum bar for accessibility. Without these,
-          people with certain disabilities literally cannot use your website.
-          These are not "nice to have" — they're "the door is locked" issues.
-        </p>
-
-        <p>
-          At Level A, you must provide text alternatives for all non-text
-          content (like alt text on images), ensure all functionality is
-          available through a keyboard interface, never use content that flashes
-          more than three times per second (a seizure risk), provide clear
-          labels for form inputs, and ensure the page has a meaningful title. If
-          you miss any Level A criterion, you're not just failing an audit —
-          you're actively excluding users.
-        </p>
-
-        <h3>Level AA — The Standard You Should Target</h3>
-
-        <p>
-          Level AA is the conformance level referenced by most accessibility
-          laws, regulations, and procurement requirements. When someone says a
-          website "meets WCAG standards," they almost always mean Level AA. This
-          is the target for the vast majority of websites and applications.
-        </p>
-
-        <p>
-          Level AA builds on Level A by adding requirements that address the
-          most common and impactful barriers. You need to maintain a minimum
-          color contrast ratio of 4.5:1 for normal text, provide captions for
-          all live audio content in synchronized media, ensure consistent
-          navigation and identification across pages, make sure error messages
-          clearly identify the problem and suggest a fix, and maintain a visible
-          focus indicator for keyboard users.
-        </p>
-
-        <div class="tip-box">
-          <strong>Practical Target:</strong> If you're building or renovating a
-          website today, aim for WCAG 2.2 Level AA. It's the standard that legal
-          requirements reference, accessibility auditors check against, and
-          users actually need. Level AAA is aspirational — focus your energy on
-          nailing AA first.
-        </div>
-
-        <h3>Level AAA — The Highest Standard</h3>
-
-        <p>
-          Level AAA criteria represent the gold standard of accessibility. They
-          include things like providing sign language interpretation for all
-          prerecorded audio, ensuring reading level doesn't exceed lower
-          secondary education, and offering extended audio descriptions for
-          video content. While admirable, many AAA criteria are impractical for
-          all content types and all contexts. Most organizations target AA
-          compliance and selectively implement AAA criteria where feasible.
-        </p>
-
-        <h2 id="h2-2">Why a WCAG Checklist Is Essential for Your Workflow</h2>
-
-        <p>
-          Here's the reality: when you're juggling stakeholder meetings, design
-          revisions, development sprints, and that surprise "Can we launch a
-          week early?" email, accessibility requirements can slip through the
-          cracks. A checklist doesn't just help — it's your safety net.
-        </p>
-
-        <h3>The Human Impact</h3>
-
-        <p>
-          Behind every accessibility guideline is a real person trying to
-          accomplish something. Someone using a screen reader to navigate your
-          site and hitting a button that wasn't coded for keyboard focus.
-          Someone with low vision squinting at light grey text on a white
-          background. Someone who can't use a mouse struggling with a dropdown
-          menu that only responds to hover events. Each checklist item you
-          verify is a barrier you've removed for a real person.
-        </p>
-
-        <h3>Legal Protection</h3>
-
-        <p>
-          ADA lawsuits related to website accessibility have increased
-          dramatically in recent years, and courts have consistently ruled that
-          websites qualify as places of public accommodation. In the United
-          States, thousands of demand letters and lawsuits are filed annually.
-          Beyond US law, the European Accessibility Act came into force in June
-          2026, expanding requirements across the EU. A documented checklist
-          review process demonstrates good-faith effort and can provide
-          significant legal protection.
-        </p>
-
-        <h3>SEO Benefits</h3>
-
-        <p>
-          Many accessibility best practices directly overlap with search engine
-          optimization. Descriptive alt text helps Google understand your
-          images. Proper heading hierarchy helps search engines parse your
-          content structure. Descriptive link text provides contextual relevance
-          signals. Fast, clean, semantic HTML — which accessibility demands — is
-          exactly what search engines reward. Building for accessibility and
-          building for SEO are largely the same work.
-        </p>
-
-        <h2 id="h2-3">The Complete WCAG 2.2 Level A and AA Checklist</h2>
-
-        <p>
-          Below is a comprehensive breakdown of the criteria you need to meet
-          for WCAG 2.2 Level AA compliance, organized by category. Each item
-          includes the specific WCAG success criterion reference, what it
-          requires, and how to test for it.
-        </p>
-
-        <h3>Perceivable: Making Content Available to the Senses</h3>
-
-        <div class="checklist-item">
-          <strong>1.1.1 Non-text Content (Level A)</strong>
-          <p>
-            All images, icons, charts, and other non-text content must have a
-            text alternative that conveys the same purpose. For decorative
-            images, use an empty alt attribute (<code>alt=""</code>) so screen
-            readers skip them. For complex images like charts, provide a longer
-            description nearby or linked.
-          </p>
-          <p>
-            <strong>How to test:</strong> Run an automated scan with WAVE or
-            axe. Then manually review every image on key pages. Ask yourself: if
-            I couldn't see this image, would the alt text give me the same
-            information?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.2.1 Audio-only and Video-only (Level A)</strong>
-          <p>
-            For audio-only content (podcasts, audio clips), provide a text
-            transcript. For video-only content (no audio track), provide either
-            a text transcript or an audio track describing the visual content.
-          </p>
-          <p>
-            <strong>How to test:</strong> Check that every audio and video asset
-            on your site has an associated transcript or audio description.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.2.2 Captions (Prerecorded) (Level A)</strong>
-          <p>
-            All prerecorded video with audio must have synchronized captions.
-            Auto-generated captions alone are insufficient — they must be
-            reviewed and corrected for accuracy.
-          </p>
-          <p>
-            <strong>How to test:</strong> Enable captions on every video and
-            verify they match the spoken content, identify speakers, and include
-            relevant non-speech sounds.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong
-            >1.2.3 Audio Description or Media Alternative (Level A)</strong
-          >
-          <p>
-            For prerecorded video, provide either an audio description track
-            that narrates important visual information, or a text alternative
-            that combines the transcript with descriptions of visual content.
-          </p>
-          <p>
-            <strong>How to test:</strong> Watch each video without looking at
-            the screen. Can you understand everything important from the audio
-            description or transcript alone?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.2.4 Captions (Live) (Level AA)</strong>
-          <p>
-            Live video broadcasts with audio must have real-time captions. This
-            is particularly relevant for webinars, live streams, and virtual
-            events.
-          </p>
-          <p>
-            <strong>How to test:</strong> Schedule a live test broadcast with
-            your captioning service and verify captions appear in real-time with
-            acceptable accuracy.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.2.5 Audio Description (Prerecorded) (Level AA)</strong>
-          <p>
-            All prerecorded video content must include an audio description
-            track that narrates important visual details during natural pauses
-            in the audio.
-          </p>
-          <p>
-            <strong>How to test:</strong> Play the video with the audio
-            description track enabled. Verify that scene changes, on-screen
-            text, facial expressions, and key actions are described.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.3.1 Info and Relationships (Level A)</strong>
-          <p>
-            Information, structure, and relationships conveyed through visual
-            presentation must be programmatically available or available in
-            text. This covers heading hierarchy, list markup, table headers,
-            form label associations, and semantic HTML usage.
-          </p>
-          <p>
-            <strong>How to test:</strong> Inspect your HTML. Are headings using
-            <code>h1</code>-<code>h6</code> elements correctly? Are lists in
-            <code>ul</code> or <code>ol</code> elements? Do form inputs have
-            properly associated <code>label</code> elements?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.3.2 Meaningful Sequence (Level A)</strong>
-          <p>
-            When the reading sequence affects meaning, the correct reading order
-            must be programmatically determinable. The DOM order should match
-            the visual reading order.
-          </p>
-          <p>
-            <strong>How to test:</strong> Disable CSS and read the raw content.
-            Does it still flow in a logical order? Screen readers follow DOM
-            order, not visual position.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.3.3 Sensory Characteristics (Level A)</strong>
-          <p>
-            Instructions must not rely solely on sensory characteristics like
-            shape, color, size, visual location, orientation, or sound. For
-            example, "Click the round button" or "Press the red button" fails
-            this criterion.
-          </p>
-          <p>
-            <strong>How to test:</strong> Review all instructional text. If any
-            instruction references only visual or auditory cues, add text
-            labels.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.3.4 Orientation (Level AA)</strong>
-          <p>
-            Content must not restrict its view and operation to a single display
-            orientation, such as portrait or landscape, unless a specific
-            orientation is essential.
-          </p>
-          <p>
-            <strong>How to test:</strong> Rotate your device between portrait
-            and landscape. Does the content reflow correctly? Are all functions
-            still available?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.3.5 Identify Input Purpose (Level AA)</strong>
-          <p>
-            For input fields that collect common user information, the purpose
-            of each field must be programmatically identifiable. Use HTML
-            autocomplete attributes to identify fields like name, email,
-            address, and phone number.
-          </p>
-          <p>
-            <strong>How to test:</strong> Inspect form inputs and verify that
-            appropriate <code>autocomplete</code> attributes are present for
-            common fields.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.1 Use of Color (Level A)</strong>
-          <p>
-            Color must not be used as the only visual means of conveying
-            information, indicating an action, prompting a response, or
-            distinguishing a visual element. Error states, required fields, and
-            links must have additional indicators beyond color.
-          </p>
-          <p>
-            <strong>How to test:</strong> View your page in grayscale. Can you
-            still identify links, error messages, and required fields?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.2 Audio Control (Level A)</strong>
-          <p>
-            If audio plays automatically for more than three seconds, there must
-            be a mechanism to pause, stop, or control the volume independently
-            from the system volume.
-          </p>
-          <p>
-            <strong>How to test:</strong> Check any page with auto-playing
-            audio. Is there a visible, accessible control to stop or adjust it?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.3 Contrast (Minimum) (Level AA)</strong>
-          <p>
-            Text and images of text must have a contrast ratio of at least 4.5:1
-            against their background, except for large text (18pt+ or 14pt+
-            bold), which requires 3:1. Logos and decorative text are exempt.
-          </p>
-          <p>
-            <strong>How to test:</strong> Use the WebAIM Contrast Checker or axe
-            DevTools to test every text/background color combination in your
-            design system. Pay special attention to grey text on light
-            backgrounds — this is the most common failure.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.4 Resize Text (Level AA)</strong>
-          <p>
-            Users must be able to resize text up to 200% without loss of content
-            or functionality, and without requiring horizontal scrolling (except
-            for content that inherently requires two-dimensional layout, like
-            data tables or maps).
-          </p>
-          <p>
-            <strong>How to test:</strong> Set your browser zoom to 200%. Does
-            all content remain readable and functional? Use relative units (rem,
-            em, %) in your CSS rather than fixed pixel values to support this.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.5 Images of Text (Level AA)</strong>
-          <p>
-            Text should not be embedded in images unless the visual presentation
-            is essential (like a logo), or the text is purely decorative. Use
-            styled HTML text instead of images containing text whenever
-            possible.
-          </p>
-          <p>
-            <strong>How to test:</strong> Scan your site for images that contain
-            text. Can any of them be replaced with styled HTML text?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.10 Reflow (Level AA)</strong>
-          <p>
-            Content must be viewable at 320px width without horizontal
-            scrolling, and without requiring two-dimensional scrolling for
-            vertical content. This ensures usability on mobile devices and at
-            high zoom levels.
-          </p>
-          <p>
-            <strong>How to test:</strong> Resize your browser to 320px wide or
-            test on a small mobile device. Can you read and interact with
-            everything without horizontal scrolling?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.11 Non-text Contrast (Level AA)</strong>
-          <p>
-            User interface components (buttons, form fields, icons) and
-            graphical objects must have a contrast ratio of at least 3:1 against
-            adjacent colors. This includes focus indicators, input borders, and
-            chart elements.
-          </p>
-          <p>
-            <strong>How to test:</strong> Check button borders, input field
-            boundaries, and icon colors against their backgrounds. The axe
-            DevTools contrast checker includes non-text contrast checks.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.12 Text Spacing (Level AA)</strong>
-          <p>
-            Users must be able to override text spacing to improve readability.
-            When line height is set to 1.5, paragraph spacing to 2em, letter
-            spacing to 0.12em, and word spacing to 0.16em, no content or
-            functionality should be lost.
-          </p>
-          <p>
-            <strong>How to test:</strong> Use a browser extension or bookmarklet
-            to apply text spacing overrides. Verify that all text remains
-            visible and no elements overlap or clip.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>1.4.13 Content on Hover or Focus (Level AA)</strong>
-          <p>
-            Content that appears on hover or focus (tooltips, dropdowns,
-            popovers) must be dismissible without moving the pointer or focus,
-            hoverable so the user can move their pointer to the new content, and
-            persistent until dismissed.
-          </p>
-          <p>
-            <strong>How to test:</strong> Trigger every hover/focus-revealed
-            element. Can you dismiss it with the Escape key? Can you move your
-            mouse to the revealed content without it disappearing? Does it
-            remain visible until you move away?
-          </p>
-        </div>
-
-        <h3>Operable: Making the Interface Work for Everyone</h3>
-
-        <div class="checklist-item">
-          <strong>2.1.1 Keyboard (Level A)</strong>
-          <p>
-            All functionality must be operable through a keyboard interface
-            without requiring specific timings for individual keystrokes. Every
-            link, button, form control, and custom widget must be reachable and
-            usable via keyboard alone.
-          </p>
-          <p>
-            <strong>How to test:</strong> Put your mouse aside. Use only Tab,
-            Shift+Tab, Enter, Space, and arrow keys to navigate and operate
-            every interactive element on the page. Can you do everything?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.1.2 No Keyboard Trap (Level A)</strong>
-          <p>
-            Keyboard focus must never become trapped in a component. If focus
-            can be moved to a component using the keyboard, it must be movable
-            away from that component using only the keyboard.
-          </p>
-          <p>
-            <strong>How to test:</strong> Tab into every modal, dropdown,
-            autocomplete, and rich text editor. Can you always Tab out? Test the
-            Escape key as a common escape mechanism.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.1.4 Character Key Shortcuts (Level A)</strong>
-          <p>
-            Single-character keyboard shortcuts must be either remappable, able
-            to be turned off, or only active when the relevant component has
-            focus. This prevents accidental activation for speech input users.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify any single-key shortcuts in
-            your application. Verify they can be disabled, remapped, or are
-            scoped to focused components.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.2.1 Timing Adjustable (Level A)</strong>
-          <p>
-            For any time limit set by the content, at least one must be true:
-            the user can turn off the limit, the user can adjust the limit to at
-            least ten times the default, or the user is warned before time
-            expires and given at least 20 seconds to extend.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify any session timeouts, quiz
-            timers, or auto-advancing carousels. Can the user control or disable
-            them?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.2.2 Pause, Stop, Hide (Level A)</strong>
-          <p>
-            For any moving, blinking, scrolling, or auto-updating content that
-            starts automatically, lasts more than five seconds, and is presented
-            in parallel with other content, there must be a mechanism to pause,
-            stop, or hide it.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify auto-playing carousels,
-            animated backgrounds, live chat widgets, and auto-refreshing
-            content. Can each be paused or hidden?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.3.1 Three Flashes or Below Threshold (Level A)</strong>
-          <p>
-            No page content may flash more than three times in any one-second
-            period. This prevents triggering photosensitive seizures.
-          </p>
-          <p>
-            <strong>How to test:</strong> Review any animated or video content.
-            Use a flash analysis tool if you're uncertain about a specific
-            animation.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.1 Bypass Blocks (Level A)</strong>
-          <p>
-            Users must be able to bypass repeated blocks of content (like
-            navigation menus). Provide a "Skip to main content" link at the top
-            of each page.
-          </p>
-          <p>
-            <strong>How to test:</strong> Tab to the first focusable element on
-            the page. Is there a visible skip link? Does it work correctly?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.2 Page Titled (Level A)</strong>
-          <p>
-            Each page must have a descriptive, unique <code>title</code> element
-            that identifies the page's topic or purpose.
-          </p>
-          <p>
-            <strong>How to test:</strong> Check every page's browser tab title.
-            Is it descriptive and unique? Does it help users understand where
-            they are?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.3 Focus Order (Level A)</strong>
-          <p>
-            When users navigate sequentially through content, focusable
-            components must receive focus in an order that preserves meaning and
-            operability. The tab order should follow the visual reading order.
-          </p>
-          <p>
-            <strong>How to test:</strong> Tab through every interactive element.
-            Does the focus order follow the logical reading order? Does anything
-            jump unexpectedly?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.4 Link Purpose (In Context) (Level A)</strong>
-          <p>
-            The purpose of each link must be determinable from the link text
-            alone, or from the link text together with its programmatically
-            determined context. Avoid "click here" and "read more" links.
-          </p>
-          <p>
-            <strong>How to test:</strong> Review all links on each page. If you
-            read each link text out of context, would you know where it leads?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.5 Multiple Ways (Level AA)</strong>
-          <p>
-            Users must be able to locate pages in more than one way, unless the
-            page is a step in a process. Provide at least two of: navigation
-            menus, site search, site map, table of contents, or links between
-            related pages.
-          </p>
-          <p>
-            <strong>How to test:</strong> Can users reach any page through at
-            least two different methods (search + navigation, for example)?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.6 Headings and Labels (Level AA)</strong>
-          <p>
-            Headings and labels must describe the topic or purpose of the
-            content they introduce. They should be clear, descriptive, and
-            informative — not clever or cryptic.
-          </p>
-          <p>
-            <strong>How to test:</strong> Read every heading and form label.
-            Does each one clearly describe what follows? Would a new user
-            understand the structure?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.7 Focus Visible (Level AA)</strong>
-          <p>
-            Any keyboard-operable user interface must have a visible focus
-            indicator. Users navigating by keyboard must always be able to see
-            which element currently has focus.
-          </p>
-          <p>
-            <strong>How to test:</strong> Tab through the entire page. Is the
-            focus indicator clearly visible at every step? Never use
-            <code>outline: none</code> without providing a visible alternative.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.4.11 Focus Not Obscured (Level AA)</strong>
-          <p>
-            When a user interface component receives keyboard focus, it must not
-            be entirely hidden by other content. The focused element must be at
-            least partially visible.
-          </p>
-          <p>
-            <strong>How to test:</strong> Tab through your page, especially
-            through sticky headers, fixed footers, and modals. Is the focused
-            element always visible, or does it disappear behind other elements?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.5.1 Pointer Gestures (Level A)</strong>
-          <p>
-            Any functionality that uses multipoint or path-based gestures (pinch
-            zoom, swiping, dragging) must also be operable with a single pointer
-            without a path-based gesture, unless the multipoint gesture is
-            essential.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify any gesture-dependent
-            interactions (carousels, maps, sliders). Can they be operated with
-            simple taps and clicks instead?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.5.2 Pointer Cancellation (Level A)</strong>
-          <p>
-            Functions operated by a single pointer must use the up-event for
-            execution, provide an abort or undo mechanism, or ensure the
-            down-event is not used for execution. This prevents accidental
-            activation.
-          </p>
-          <p>
-            <strong>How to test:</strong> Click and hold on every button and
-            interactive element, then drag away before releasing. Does the
-            action cancel rather than execute?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.5.3 Label in Name (Level A)</strong>
-          <p>
-            For UI components with visible text labels, the accessible name must
-            include the visible label text, ideally at the beginning. This
-            ensures speech recognition users can speak the visible label to
-            activate the control.
-          </p>
-          <p>
-            <strong>How to test:</strong> Inspect the accessible name of every
-            labeled component. Does it contain the visible label text?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.5.4 Motion Actuation (Level A)</strong>
-          <p>
-            Functions operated by device motion (shaking, tilting) must also be
-            operable through conventional UI controls, and users must be able to
-            disable motion actuation.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify any motion-triggered
-            features. Is there an alternative control method and a way to
-            disable motion?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.5.7 Dragging Movements (Level AA)</strong>
-          <p>
-            Any functionality that requires a dragging movement must also be
-            achievable by single-pointer actions without dragging, unless
-            dragging is essential or the functionality is determined by the user
-            agent.
-          </p>
-          <p>
-            <strong>How to test:</strong> For every drag-and-drop interface, can
-            the same action be completed with simple clicks (select source,
-            select destination)?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>2.5.8 Target Size (Minimum) (Level AA)</strong>
-          <p>
-            Interactive elements must have a target size of at least 24 by 24
-            CSS pixels, with some exceptions (inline links, spacing provided by
-            adjacent elements, essential small targets).
-          </p>
-          <p>
-            <strong>How to test:</strong> Measure the clickable area of every
-            button, icon, and interactive element. Is it at least 24x24px?
-          </p>
-        </div>
-
-        <h3>Understandable: Making Content Clear and Predictable</h3>
-
-        <div class="checklist-item">
-          <strong>3.1.1 Language of Page (Level A)</strong>
-          <p>
-            The default human language of each page must be programmatically
-            determinable. Set the <code>lang</code> attribute on the
-            <code>html</code> element.
-          </p>
-          <p>
-            <strong>How to test:</strong> Inspect the <code>html</code> element.
-            Is <code>lang</code> set to the correct language code (e.g.,
-            <code>lang="en"</code>)?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.1.2 Language of Parts (Level AA)</strong>
-          <p>
-            If a page contains content in a language different from the default,
-            that content must have its language programmatically identified
-            using the <code>lang</code> attribute on the containing element.
-          </p>
-          <p>
-            <strong>How to test:</strong> Search for any passages in a language
-            different from the page default. Do they have a
-            <code>lang</code> attribute?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.2.1 On Focus (Level A)</strong>
-          <p>
-            When a component receives focus, it must not initiate a change of
-            context — no automatic page redirects, no form submissions, no new
-            windows opening.
-          </p>
-          <p>
-            <strong>How to test:</strong> Tab through every element. Does
-            anything unexpected happen when an element receives focus?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.2.2 On Input (Level A)</strong>
-          <p>
-            Changing a form control's setting must not automatically cause a
-            change of context unless the user has been advised of the behavior
-            in advance. Don't auto-submit forms or redirect on selection
-            changes.
-          </p>
-          <p>
-            <strong>How to test:</strong> Interact with every form control and
-            filter. Does changing a value trigger an unexpected page change?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.2.3 Consistent Navigation (Level AA)</strong>
-          <p>
-            Navigation mechanisms repeated across multiple pages must appear in
-            the same relative order each time, unless a change is initiated by
-            the user.
-          </p>
-          <p>
-            <strong>How to test:</strong> Compare your navigation across
-            different pages. Is the order and structure consistent?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.2.4 Consistent Identification (Level AA)</strong>
-          <p>
-            Components with the same functionality across pages must be
-            identified consistently. If a search icon means "search" on one
-            page, the same icon shouldn't mean "filter" on another.
-          </p>
-          <p>
-            <strong>How to test:</strong> Compare icons, button labels, and form
-            field names across pages. Are functionally identical elements
-            labeled consistently?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.2.6 Consistent Help (Level A)</strong>
-          <p>
-            If help mechanisms (contact information, FAQ, chat, self-help
-            options) are repeated on multiple pages, they must appear in the
-            same relative order.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify all help mechanisms on your
-            site. Do they appear in a consistent location?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.3.1 Error Identification (Level A)</strong>
-          <p>
-            When an input error is automatically detected, the error must be
-            described in text and the item in error must be identified. Error
-            messages should be clear, specific, and helpful.
-          </p>
-          <p>
-            <strong>How to test:</strong> Submit every form with invalid data.
-            Is each error clearly described? Does the user know which field has
-            the error and how to fix it?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.3.2 Labels or Instructions (Level A)</strong>
-          <p>
-            All content requiring user input must have labels or instructions.
-            Form fields need visible labels. Required fields need indicators.
-            Expected formats need to be specified.
-          </p>
-          <p>
-            <strong>How to test:</strong> Review every form. Does every field
-            have a visible, persistent label? Are required fields clearly
-            marked? Are format expectations communicated?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.3.3 Error Suggestion (Level AA)</strong>
-          <p>
-            When an input error is detected and correction suggestions are
-            known, the suggestions must be provided to the user, unless doing so
-            would compromise security or purpose.
-          </p>
-          <p>
-            <strong>How to test:</strong> For every form validation error, is
-            there a helpful suggestion? "Invalid email" should be "Please enter
-            an email with an @ symbol, like name@example.com."
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong
-            >3.3.4 Error Prevention (Legal, Financial, Data) (Level AA)</strong
-          >
-          <p>
-            For forms that submit legal commitments, financial transactions, or
-            modify/delete user data, submissions must be reversible, checked for
-            errors, or confirmed before finalizing.
-          </p>
-          <p>
-            <strong>How to test:</strong> Identify any forms that commit users
-            to legal or financial actions. Is there a review/confirm/cancel step
-            before final submission?
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>3.3.7 Accessible Authentication (Level AA)</strong>
-          <p>
-            Authentication processes must not rely on cognitive function tests
-            (like memorizing a password or solving a puzzle) unless an
-            alternative is provided. Password managers and "forgot password"
-            flows should be supported.
-          </p>
-          <p>
-            <strong>How to test:</strong> Test your login flow. Can users paste
-            passwords? Do password managers work? Is there a password recovery
-            option?
-          </p>
-        </div>
-
-        <h3>Robust: Ensuring Compatibility with Assistive Technology</h3>
-
-        <div class="checklist-item">
-          <strong>4.1.2 Name, Role, Value (Level A)</strong>
-          <p>
-            For all user interface components, the name, role, and value must be
-            programmatically determinable. States, properties, and values must
-            be programmatically settable. Custom widgets must expose proper
-            semantics through native HTML or ARIA.
-          </p>
-          <p>
-            <strong>How to test:</strong> Use a screen reader or browser
-            accessibility inspector to verify that every interactive element has
-            a proper accessible name, role, and current state.
-          </p>
-        </div>
-
-        <div class="checklist-item">
-          <strong>4.1.3 Status Messages (Level AA)</strong>
-          <p>
-            Status messages that don't receive focus must be announced to screen
-            reader users without interrupting their current task. Use
-            <code>role="status"</code>, <code>role="alert"</code>, or
-            <code>aria-live</code> regions appropriately.
-          </p>
-          <p>
-            <strong>How to test:</strong> Trigger status messages (form
-            submission confirmation, "item added to cart," search results
-            count). Are they announced by screen readers without requiring focus
-            movement?
-          </p>
-        </div>
-
-        <h2 id="h2-4">
-          Lessons from the Field: What Happens When Accessibility Slips
-        </h2>
-
-        <p>
-          Last November, I was helping a small arts nonprofit set up a virtual
-          holiday craft fair — think cozy tutorials, live music performances,
-          and a global audience tuning in from different time zones. We prepped
-          everything meticulously: promotional emails, social media posts,
-          downloadable ornament templates, and what I thought was a solid
-          captioning setup for the live segments.
-        </p>
-
-        <p>
-          The event launched smoothly. The first performer strummed their
-          guitar, the chat filled with holiday emojis, and everything looked
-          great — until the live craft demonstration began. The captioning feed,
-          which was supposed to switch to identify the new speaker and describe
-          the step-by-step folding technique, instead stubbornly displayed the
-          previous performer's name and lyrics throughout the entire 25-minute
-          craft segment. Viewers wrote in the chat: "I can't follow along," "The
-          captions are from the last session," and "Is there a transcript
-          somewhere?"
-        </p>
-
-        <p>
-          I felt a wave of embarrassment — but also clarity. The automated
-          captioning service we'd relied on was technically functional, but
-          nobody had tested it with a live handoff between segments. The tool
-          was fine; our process was the failure point. We'd checked the box for
-          "captions provided" without verifying that they were accurate, timely,
-          and appropriate for each specific segment of the event.
-        </p>
-
-        <p>
-          From that day forward, every live event I'm involved with includes a
-          15-minute dry run with a volunteer reading at different speeds and
-          switching between speakers. We test the caption handoff, verify
-          speaker identification, and confirm that non-verbal sounds (like
-          clapping, laughter, or a doorbell ringing) appear correctly. That
-          small investment of time has caught issues before they affected real
-          viewers at every event since.
-        </p>
-
-        <p>
-          The lesson:
-          <a href="./free-leetcode-alternatives"
-            >testing under real conditions</a
-          >
-          matters more than checking boxes on a list. Accessibility is an
-          ongoing conversation with your users — not a certification you earn
-          once and frame on the wall.
-        </p>
-
-        <h2 id="h2-5">
-          Building Accessibility into Every Phase of Your Workflow
-        </h2>
-
-        <p>
-          The most effective accessibility programs don't treat compliance as a
-          separate phase or a pre-launch audit. They weave accessibility
-          thinking into every stage of the project lifecycle. Here's what that
-          looks like in practice.
-        </p>
-
-        <h3>Planning Phase</h3>
-
-        <p>
-          Kick off every project by explicitly defining which WCAG level you're
-          targeting. Write it into your project brief, your acceptance criteria,
-          and your definition of done. When stakeholders ask "Why does this
-          feature cost more?" or "Why is this taking longer?", having a
-          documented accessibility standard provides a clear, defensible answer.
-          It also ensures that designers, developers, content creators, and QA
-          testers are all working toward the same goal.
-        </p>
-
-        <h3>Design Phase</h3>
-
-        <p>
-          Accessibility decisions made during design prevent exponentially more
-          rework than fixes made during development. Sketch high-contrast
-          wireframes from the start. Annotate your mockups with alt text
-          descriptions for key images. Define a color palette that meets AA
-          contrast requirements before a single line of CSS is written. Document
-          heading hierarchy in your wireframes. Specify focus indicator styles
-          alongside hover and active states. Design the keyboard interaction
-          pattern for every custom component before a developer starts building
-          it.
-        </p>
-
-        <p>
-          A practical habit: run every new color combination through a contrast
-          checker before adding it to your design system. The five minutes this
-          takes saves hours of CSS fixes later.
-        </p>
-
-        <h3>Development Phase</h3>
-
-        <p>
-          Run automated accessibility scans at the end of every sprint — not
-          just before launch. Tools like axe DevTools, Lighthouse, and Pa11y can
-          be integrated into your CI/CD pipeline to catch regressions
-          automatically. But automated tools catch only 30-40% of issues. Manual
-          testing is irreplaceable: tab through every new feature with a
-          keyboard, test custom components with a screen reader (VoiceOver on
-          Mac, NVDA on Windows are both free), and verify that error messages
-          and status updates are announced correctly.
-        </p>
-
-        <p>
-          Write semantic HTML from the start. Use <code>button</code> elements
-          for buttons, not <code>div</code> elements with click handlers.
-          Associate every form input with a label. Structure pages with landmark
-          elements like <code>header</code>, <code>nav</code>,
-          <code>main</code>, and <code>footer</code>. Most accessibility issues
-          that make it to production trace back to basic HTML choices made early
-          in development.
-        </p>
-
-        <h3>Launch and Beyond</h3>
-
-        <p>
-          Before pressing "Go live," perform a final manual pass against your
-          WCAG checklist. Document any remaining issues, assign owners, and set
-          deadlines for resolution. Schedule a follow-up audit one week
-          post-launch to catch issues that only surface under real traffic.
-          Accessibility isn't a launch-day checkbox — it's a commitment to
-          continuous improvement.
-        </p>
-
-        <div class="tip-box">
-          <strong>Pro Tip:</strong> Create an accessibility statement page on
-          your site. List your target conformance level, known issues, and
-          contact information for users who encounter barriers. This
-          demonstrates good faith, provides a feedback channel, and is itself
-          referenced in some accessibility regulations.
-        </div>
-
-        <h2 id="h2-6">Essential Tools for WCAG Testing and Auditing</h2>
-
-        <p>
-          You don't need an expensive enterprise suite to test for
-          accessibility. Here are the tools I use regularly — all of which have
-          free tiers sufficient for most projects.
-        </p>
-
-        <ul>
-          <li>
-            <strong
-              ><a href="https://www.deque.com/axe/" target="_blank"
-                >Axe DevTools</a
-              ></strong
-            >
-            — Browser extension and CI integration from Deque Systems. Catches
-            roughly 30-40% of WCAG issues automatically, integrates directly
-            into Chrome DevTools, and provides clear explanations and fix
-            suggestions for each violation.
-          </li>
-          <li>
-            <strong
-              ><a href="https://wave.webaim.org/" target="_blank"
-                >WAVE Evaluation Tool</a
-              ></strong
-            >
-            — From WebAIM, provides visual overlays directly on your page
-            showing errors, alerts, features, structural elements, and contrast
-            issues. Excellent for quick visual audits and for explaining issues
-            to non-technical stakeholders.
-          </li>
-          <li>
-            <strong>Lighthouse</strong> — Built into Chrome DevTools. Runs an
-            accessibility audit alongside performance, SEO, and best practices
-            checks. Great for quick, holistic page assessments. Can be run
-            programmatically in CI pipelines.
-          </li>
-          <li>
-            <strong>Colour Contrast Analyzer</strong> — A desktop application
-            (from TPGi) that lets you sample colors from anywhere on your screen
-            and instantly checks AA and AAA contrast ratios. Invaluable during
-            design reviews.
-          </li>
-          <li>
-            <strong>NVDA (Windows) and VoiceOver (Mac)</strong> — Free screen
-            readers for real-world testing. You don't need to become an expert
-            user. Just learn basic navigation and verify that your pages make
-            sense when consumed non-visually.
-          </li>
-          <li>
-            <strong>Pa11y</strong> — Command-line accessibility testing tool
-            that can be integrated into build processes and CI/CD pipelines for
-            automated regression testing.
-          </li>
-        </ul>
-
-        <p>
-          The key insight: no single tool catches everything. Automated tools
-          find the objective, programmatically detectable issues. Manual
-          keyboard and screen reader testing catches the subjective,
-          experience-level issues. Use both.
-        </p>
-
-        <h2 id="h2-7">Keeping Your Checklist Current as Standards Evolve</h2>
-
-        <p>
-          Accessibility standards aren't frozen in time. WCAG 2.2 was published
-          in October 2023, adding nine new success criteria focused on cognitive
-          accessibility, low vision, and motor impairments. WCAG 3.0 is under
-          active development and will represent a significant restructuring of
-          the guidelines when it's finalized.
-        </p>
-
-        <p>To stay current without constant fire drills:</p>
-
-        <ul>
-          <li>
-            <strong>Subscribe to W3C WAI announcements.</strong> The Web
-            Accessibility Initiative mailing list provides early notice of draft
-            guidelines, public comment periods, and finalized standards.
-          </li>
-          <li>
-            <strong>Schedule quarterly mini-audits</strong> rather than waiting
-            for an annual comprehensive review. A 90-minute quarterly check
-            catches regressions and keeps the team engaged with accessibility
-            thinking.
-          </li>
-          <li>
-            <strong>Host short, focused training sessions.</strong> A 30-minute
-            "Keyboard Testing 101" brown bag lunch or a "Captioning Quick Tips"
-            coffee hour keeps accessibility skills fresh across your team
-            without requiring major time investments.
-          </li>
-          <li>
-            <strong
-              >Review your checklist against the latest WCAG version at least
-              annually.</strong
-            >
-            When new criteria are added, assess which apply to your site and add
-            them to your checklist with testing procedures.
-          </li>
-        </ul>
-
-        <h2 id="h2-8">
-          Conclusion: Making Accessibility a Habit, Not a Hurdle
-        </h2>
-
-        <p>
-          Accessibility isn't a trend, a marketing checkbox, or a legal
-          liability to manage. It's a commitment to building digital spaces that
-          work for everyone who arrives at them — regardless of how they
-          perceive, navigate, or interact with the web.
-        </p>
-
-        <p>
-          A robust WCAG guidelines checklist, used consistently throughout your
-          workflow, transforms accessibility from an overwhelming, abstract
-          requirement into a concrete, achievable set of practices. It builds
-          empathy into your process by reminding you that behind every criterion
-          is a real person trying to accomplish something on your site. It
-          shields you from legal exposure by documenting your good-faith
-          efforts. And it sweetens your SEO by producing cleaner, more semantic,
-          more usable code.
-        </p>
-
-        <p>
-          Take this checklist. Tuck it into your next project charter. Set a
-          recurring calendar reminder for your quarterly accessibility review.
-          And the next time you're about to launch, run through that keyboard
-          test one more time. There's nothing quite like an accessible site to
-          bring a warm glow to your users' faces — and, honestly, to yours too.
-        </p>
-
-        <p>
-          If you enjoyed this article, check out our guide on
-          <a href="./web-accessibility-for-beginners"
-            >web accessibility for beginners</a
-          >
-          or our post on
-          <a href="./understanding-laravel-guards"
-            >understanding Laravel guards</a
-          >. As always, if you have any questions or comments, feel free to
-          <a href="../contact">contact us</a>.
-        </p>
+    </aside>
       </div>
-    </section>
+    </main>
 
     <!-- Footer -->
     <footer id="cs-footer-1185">
-      <img
-        class="cs-graphic"
-        aria-hidden="true"
-        loading="lazy"
-        decoding="async"
-        src="../images/footer-v.svg"
-        alt="logo"
-        width="1920"
-        height="163"
-      />
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
       <div id="cta-1185">
         <div class="cs-content">
           <h2 class="cs-title">Stay in the Loop</h2>
-          <form
-            class="cs-form"
-            name="Contact Form"
-            method="post"
-            id="subscribe-form"
-          >
-            <label for="cs-email-1185" class="visually-hidden"
-              >Email Address</label
-            >
-            <input
-              class="cs-input"
-              type="email"
-              id="cs-email-1185"
-              name="find-us"
-              placeholder="Email Address"
-            />
-            <button class="cs-button-solid cs-submit" type="submit">
-              Subscribe Now
-            </button>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
           </form>
         </div>
       </div>
       <div class="cs-container">
         <div class="cs-logo-group">
-          <a aria-label="go back to home" class="cs-logo" href="../">
-            <img
-              class="cs-logo-img"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="../images/new_redsurgetech_logo_white.svg"
-              alt="red surge technology white logo"
-              width="197"
-              height="71"
-            />
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
           </a>
-          <p class="cs-text">
-            A professional website design and development company working with
-            small businesses around the world to create a strong presence on the
-            web.
-          </p>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
         </div>
         <ul class="cs-nav">
-          <li class="cs-nav-li">
-            <span class="cs-header">Quick Links</span>
-          </li>
-          <li class="cs-nav-li">
-            <a class="cs-nav-link" href="../">Home</a>
-          </li>
-          <li class="cs-nav-li">
-            <a class="cs-nav-link" href="../about">About</a>
-          </li>
-          <li class="cs-nav-li">
-            <a class="cs-nav-link" href="../portfolio">Portfolio</a>
-          </li>
-          <li class="cs-nav-li">
-            <a class="cs-nav-link" href="../contact">Contact</a>
-          </li>
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
         </ul>
         <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
           <li class="cs-nav-li">
-            <span class="cs-header">Contact</span>
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
           </li>
           <li class="cs-nav-li">
-            <img
-              class="cs-icon"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="../images/phone-stroke-footer.svg"
-              alt="phone icon white"
-              width="24"
-              height="24"
-            />
-            <a class="cs-nav-link cs-phone" href="tel:+17325203386"
-              >(732) 520-3386
-            </a>
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
           </li>
           <li class="cs-nav-li">
-            <img
-              class="cs-icon"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="../images/email-stroke-footer.svg"
-              alt="email icon white"
-              width="24"
-              height="24"
-            />
-            <a
-              class="cs-nav-link cs-email"
-              href="mailto:info@redsurgetechnology.com"
-              >info@redsurgetechnology.com</a
-            >
-          </li>
-          <li class="cs-nav-li">
-            <img
-              class="cs-icon"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="../images/pin-stroke-footer.svg"
-              alt="pin icon white"
-              width="24"
-              height="24"
-            />
-            <a
-              class="cs-nav-link cs-address"
-              href="https://www.google.com/maps/place/Wall+Township,+NJ/@40.1747215,-74.1679435,12z/data=!3m1!4b1!4m6!3m5!1s0x89c1877d4d2f27d1:0xeeaae07536262ec1!8m2!3d40.1703777!4d-74.0928666!16zL20vMHhxazc?entry=ttu&g_ep=EgoyMDI1MDUxMi4wIKXMDSoASAFQAw%3D%3D"
-              target="_blank"
-              rel="noopener"
-            >
-              Monmouth County<br />
-              Wall Township, NJ 07753
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
             </a>
           </li>
         </ul>
       </div>
       <div class="cs-bottom">
         <div>
-          <p>
-            © Copyright 2026 &mdash;
-            <a href="https://redsurgetechnology.com/" class="cs-nav-link"
-              >Red Surge Technology</a
-            >
-          </p>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
         </div>
         <div>
-          <a href="../privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
           <span>|</span>
-          <a href="../terms-of-use" class="cs-nav-link">Terms of Use</a>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
         </div>
       </div>
       <picture class="cs-background">
-        <source
-          media="(max-width: 600px)"
-          srcset="../images/footer_bg-360w.webp"
-          type="image/webp"
-        />
-        <source
-          media="(min-width: 601px) and (max-width: 1024px)"
-          srcset="../images/footer_bg-720w.webp"
-          type="image/webp"
-        />
-        <source
-          media="(min-width: 1025px)"
-          srcset="../images/footer_bg-1280w.webp"
-          type="image/webp"
-        />
-        <img
-          loading="lazy"
-          decoding="async"
-          src="../images/footer_bg-1280w.webp"
-          alt="code being edited"
-          width="1280"
-          height="586"
-        />
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
       </picture>
     </footer>
 
-    <script src="../js/main.js" defer></script>
-    <script src="../js/posts.js" defer></script>
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
     <script>
-      document
-        .getElementById("subscribe-form")
-        .addEventListener("submit", async function (e) {
-          e.preventDefault();
-          const email = document.getElementById("cs-email-1185").value;
-          const data = {
-            email: email,
-            listIds: [11],
-            updateEnabled: true,
-          };
-          try {
-            const response = await fetch("/.netlify/functions/subscribe", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data),
-            });
-            if (response.ok) {
-              alert("Thanks for subscribing!");
-            } else {
-              const errorData = await response.json();
-              alert("Error: " + errorData.message);
-            }
-          } catch (error) {
-            console.error("Error:", error);
-            alert("An error occurred.");
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
           }
-        });
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
     </script>
   </body>
 </html>
