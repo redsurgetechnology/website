@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Building a React Analytics Dashboard: Grids, Charts, and Filters Together</title>
+    <meta name="description" content="A practical guide to building React analytics dashboards. Learn how to wire data grids and charts to shared filters, handle large datasets, and use TypeScript throughout." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, Dashboard, Data Grid, Charts, TypeScript" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/building-react-analytics-dashboard" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/building-react-analytics-dashboard" />
+    <meta property="og:title" content="Building a React Analytics Dashboard: Grids, Charts, and Filters Together" />
+    <meta property="og:description" content="A practical guide to building React analytics dashboards. Learn how to wire data grids and charts to shared filters, handle large datasets, and use TypeScript throughout." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/react-analytics-dashboard-grids-charts-filters.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-10-23T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-10-23T10:00:00.000Z" />
+    <meta property="article:section" content="Web Development" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="Dashboard" />
+    <meta property="article:tag" content="Data Grid" />
+    <meta property="article:tag" content="Charts" />
+    <meta property="article:tag" content="TypeScript" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/building-react-analytics-dashboard" />
+    <meta name="twitter:title" content="Building a React Analytics Dashboard: Grids, Charts, and Filters Together" />
+    <meta name="twitter:description" content="A practical guide to building React analytics dashboards. Learn how to wire data grids and charts to shared filters, handle large datasets, and use TypeScript throughout." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/react-analytics-dashboard-grids-charts-filters.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: inlined to eliminate render-blocking and prevent FOUC/CLS -->
+    <style>.cs-title,.cs-topper{line-height:1.2em;text-align:inherit}.cs-text,.cs-title,.cs-topper{text-align:inherit}:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}.cs-topper{font-size:var(--topperFontSize);text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--primary);margin-bottom:.25rem;display:block}.cs-title{font-size:var(--headerFontSize);font-weight:900;max-width:43.75rem;margin:0 0 1rem;color:var(--headerColor);position:relative}.cs-text{font-size:var(--bodyFontSize);line-height:1.5em;width:100%;max-width:40.625rem;margin:0;color:var(--bodyTextColor)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+    <style>html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}body.cs-open{overflow:hidden}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation:before{content:"";width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0;transition:height .5s,opacity .5s}#cs-navigation.cs-active:before{height:150vh;opacity:1}#cs-navigation.cs-active .cs-ul-wrapper{opacity:1;transform:scaleY(1);transition-delay:0.15s}#cs-navigation.cs-active .cs-li{transform:translateY(0);opacity:1}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem;transition:opacity .3s,visibility .3s,height .3s}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center;transition:transform .6s}#cs-navigation .cs-toggle.cs-active{transform:rotate(180deg)}#cs-navigation .cs-active .cs-line1{top:50%;transform:translate(-50%,-50%) rotate(225deg)}#cs-navigation .cs-active .cs-line2{top:50%;transform-origin:center;transform:translate(-50%,-50%) translateY(0) rotate(-225deg)}#cs-navigation .cs-active .cs-line3{bottom:100%;opacity:0}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%);transition:top .3s,left .3s,transform .5s}#cs-navigation .cs-line3{bottom:0;transition:bottom .3s,opacity .3s}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top;transition:transform .4s,opacity .3s}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link{font-size:clamp(1rem, 2.5vw, 1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li-link.cs-active,#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;transition:transform .6s,opacity .9s;text-align:center;width:100%;display:block}#cs-navigation .cs-dropdown{position:relative;color:var(--bodyTextColorWhite)}#cs-navigation .cs-dropdown.cs-active .cs-drop-ul{height:auto;opacity:1;visibility:visible;margin:.75rem 0 0;padding:.75rem 0}#cs-navigation .cs-dropdown.cs-active .cs-drop-link{opacity:1}#cs-navigation .cs-dropdown .cs-li-link{position:relative;transition:opacity .3s}#cs-navigation .cs-drop-icon{width:.9375rem;height:auto;position:absolute;top:50%;right:-1.25rem;transform:translateY(-50%)}#cs-navigation .cs-drop-ul{width:100%;height:0;margin:0;padding:0;background-color:var(--primary);overflow:hidden;opacity:0;visibility:hidden;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:.75rem;transition:padding .3s,margin .3s,height .3s,opacity .3s,visibility .3s}#cs-navigation .cs-drop-li{list-style:none}#cs-navigation .cs-li-link.cs-drop-link{font-size:clamp(.875rem, 2vw, 1.25rem);color:#fff}}@media only screen and (min-width:0rem){#cta-1185,#cta-1185 .cs-content{flex-direction:column;display:flex;width:100%}#cta-1185,#cta-1185 .cs-button-solid{position:relative;z-index:1;box-sizing:border-box}#cta-1185{max-width:80rem;margin:var(--sectionPadding);margin-left:auto;margin-right:auto;margin-top:0;padding:3.75rem clamp(1rem,7vw,3.75rem);border:1px solid #484848;align-items:center;justify-content:center}#cta-1185 .cs-content{text-align:center;max-width:25rem;align-items:center;gap:1.5rem}#cta-1185 .cs-title{width:100%;font-size:1.9375rem;margin:0;color:var(--bodyTextColorWhite)}#cta-1185 .cs-form{width:100%;max-width:45.3125rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;flex:none}#cta-1185 .cs-input{font-size:1rem;width:100%;height:clamp(2.875rem,5.5vw,3.5rem);margin:0;padding:0 0 0 1.25rem;border:none;box-sizing:border-box;display:block}#cta-1185 .cs-input::placeholder{color:#767676}#cta-1185 .cs-button-solid{font-size:1rem;line-height:clamp(2.875rem, 5.5vw, 3.5rem);text-decoration:none;font-weight:700;text-align:center;margin:0;color:#fff;min-width:9.375rem;padding:0 1.5rem;background-color:var(--primary);display:inline-block}#cta-1185 .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#000;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-nav-link:hover:before,#cta-1185 .cs-button-solid:hover:before{width:100%}#cta-1185 .cs-submit{width:100%;border:none;transition:color .3s}#cta-1185 .cs-submit:before{background-color:#fff}#cta-1185 .cs-submit:hover{cursor:pointer;color:var(--primary)}#cs-footer-1185 .cs-copyright-link,#cs-footer-1185 .cs-nav-link{text-decoration:none;transition:color .3s}#cs-footer-1185{padding:var(--sectionPadding);padding-top:clamp(7.5rem,15vw,12.5rem);position:relative}#cs-footer-1185 .cs-container{width:100%;max-width:43.75rem;margin:auto;display:flex;justify-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:2.5rem}#cs-footer-1185 .cs-logo-group{width:100%;position:relative}#cs-footer-1185 .cs-logo{width:12.3125rem;height:auto;display:block;margin-bottom:1.5rem}#cs-footer-1185 .cs-logo-img{width:100%;height:auto}#cs-footer-1185 .cs-logo-img.dark{display:none}#cs-footer-1185 .cs-text{font-size:clamp(.875rem, 2.5vw, 1rem);line-height:1.5em;margin:0;width:78%;max-width:26.25rem;color:var(--bodyTextColorWhite)}#cs-footer-1185 .cs-nav{width:100%;padding:0;margin:0;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:.75rem}#cs-footer-1185 .cs-nav-li{list-style:none;display:flex;justify-content:flex-start;align-items:flex-start}#cs-footer-1185 .cs-header{font-size:1rem;line-height:1.2em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;color:var(--bodyTextColorWhite);position:relative;display:block}#cs-footer-1185 .cs-nav-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite);position:relative;display:inline-block}#cs-footer-1185 .cs-nav-link:before{content:"";width:0%;height:.125rem;background:currentColor;opacity:1;position:absolute;display:block;bottom:-.125rem;left:0;transition:width .3s}#cs-footer-1185 .cs-copyright-link:hover,#cs-footer-1185 .cs-nav-link:hover{color:var(--secondary)}#cs-footer-1185 .cs-icon{width:1.5rem;height:auto;margin-right:.75rem}#cs-footer-1185 .cs-background,#cs-footer-1185 .cs-background img,#cs-footer-1185 .cs-background:before{height:100%;width:100%;position:absolute;top:0;left:0}#cs-footer-1185 .cs-bottom{max-width:80rem;margin:2rem auto auto;padding-top:1.5rem;border-top:1px solid #484848;display:flex;justify-content:space-between;align-items:center;color:#fff;flex-direction:column}#cs-footer-1185 .cs-copyright,#cs-footer-1185 .cs-copyright-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite)}#banner-712 .cs-background,#cs-footer-1185 .cs-background{display:block;z-index:-1}#cs-footer-1185 .cs-background:before{content:"";display:block;background:-moz-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:-webkit-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:linear-gradient(to right,rgba(26,26,26,.94) 0,#1a1a1a 100%);opacity:.97;z-index:1}#banner-712 .cs-background img,#cs-footer-1185 .cs-background img{object-fit:cover}#cs-footer-1185 .cs-graphic{width:100%;height:auto;position:absolute;top:0;left:0}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem, 6.4vw, 3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{box-sizing:border-box;width:100%;max-width:80rem;margin:0 auto;background-color:#fff;position:relative;z-index:1}#content-page-714 .cs-container{width:100%;max-width:80rem;margin:auto;display:flex;flex-direction:column;align-items:center;gap:clamp(3rem,6vw,4rem);position:relative}#content-page-714 .cs-content{text-align:left;width:100%;display:flex;flex-direction:column;align-items:flex-start}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 .cs-title{font-size:var(--headerFontSize);font-weight:900;line-height:1.2em;text-align:inherit;width:100%;max-width:100%;margin:0 0 1rem;color:var(--headerColor);position:relative}#content-page-714 h2,#content-page-714 h3,#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-weight:700;text-align:inherit;margin:0 0 1rem;color:var(--headerColor)}#content-page-714 .cs-color,#content-page-714 h3{color:var(--primary)}#content-page-714 h2{font-size:2rem;margin-top:2rem}#content-page-714 h3{font-size:1.5rem}#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-size:1.25rem}#content-page-714 .cs-button-solid,#content-page-714 p:last-of-type{margin-bottom:2rem}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 p a{font-size:inherit;line-height:inherit;text-decoration:underline;color:var(--primary)}#content-page-714 ol,#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}#content-page-714 .cs-image-group{font-size:min(1vw, 1em);width:33.875em;height:48.3125em;display:none;flex:none;position:relative;z-index:1}#content-page-714 .cs-picture{width:33.875em;height:40.4375em;border-radius:17.8125em;border:.75em solid #fff;background-color:#f7f7f7;box-sizing:border-box;overflow:hidden;display:block;position:absolute;top:0;left:0}#content-page-714 .cs-picture img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}#content-page-714 .cs-flower{width:22.625em;height:auto;display:block;position:absolute;bottom:-2.375em;right:-3em;z-index:-1;transform:rotate(142deg)}#content-page-714 .cs-sense{width:5em;height:auto;position:absolute;top:-.25em;left:.625em;transform:rotate(90deg)}#content-page-714 .cs-background{display:none}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#cta-1185 .cs-container{padding-left:3.75rem;padding-right:3.75rem}#cta-1185 .cs-content{max-width:100%}#cs-footer-1185 .cs-bottom,#cta-1185 .cs-form{flex-direction:row}#cta-1185 .cs-input{width:100%;max-width:32.8125rem}#cta-1185 .cs-submit{width:auto;min-width:11.875rem;flex:none}#cs-footer-1185 .cs-container{row-gap:0;flex-direction:row;justify-content:space-between;row-gap:2.5rem}#cs-footer-1185 .cs-nav{width:auto}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}#content-page-714 .cs-container{flex-direction:column;align-items:flex-start}#content-page-714 .cs-image-group{display:block;order:-1}#content-page-714 .cs-content{margin-left:auto}#content-page-714 .cs-background{width:20%;height:100%;background-color:#f7f7f7;display:block;position:absolute;left:0;top:0;z-index:-1}#content-page-714 .cs-background img{width:100%;height:100%;opacity:.2;object-fit:cover;position:absolute;top:0;left:0;z-index:1}}@media only screen and (min-width:64rem){#cs-navigation .cs-dropdown{position:relative}#cs-navigation .cs-dropdown:hover{cursor:pointer}#cs-navigation .cs-dropdown:hover .cs-drop-ul{transform:scaleY(1);opacity:1;visibility:visible}#cs-navigation .cs-dropdown:hover .cs-drop-li{opacity:1;transform:translateY(0)}#cs-navigation .cs-drop-icon{width:.75rem;height:auto;margin-left:.25rem;display:inline-block}#cs-navigation .cs-drop-ul{min-width:12.5rem;margin:0;padding:0;background-color:#fff;overflow:hidden;opacity:0;visibility:hidden;box-shadow:rgba(149,157,165,.2) 0 10px 16px;border-bottom:5px solid var(--primary);position:absolute;top:100%;z-index:-100;transform:scaleY(0);transform-origin:top;transition:transform .3s,visibility .3s,opacity .3s}#cs-navigation .cs-drop-li{list-style:none;font-size:1rem;text-decoration:none;opacity:0;width:100%;height:auto;display:block;transform:translateY(-.625rem);transition:opacity .6s,transform .6s}#cs-navigation .cs-drop-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-drop-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-drop-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-drop-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-drop-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-drop-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-drop-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-drop-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-drop-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-drop-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-drop-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-drop-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-drop-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link.cs-drop-link{font-size:1rem;white-space:nowrap;line-height:1.5em;text-decoration:none;width:100%;padding:.75rem;box-sizing:border-box;color:var(--bodyTextColor);display:block;transition:color .3s,background-color .3s}#cs-navigation .cs-li-link.cs-drop-link:hover{color:var(--primary);background-color:#f7f7f7}#cs-navigation .cs-li-link.cs-drop-link:before,#cs-navigation .cs-toggle{display:none}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:"";width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-top-link:hover{text-decoration:underline}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;transition:transform .3s}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative;transition:color .3s}#cs-navigation .cs-social-link:hover{transform:scale(1.1)}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem, 1.3vw, 1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li-link.cs-active{font-weight:700;color:var(--headerColor)}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em, 5.5vw, 3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-text,#cs-navigation .cs-button-solid:hover:before{width:100%}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}#cs-footer-1185 .cs-container{max-width:80rem;flex-wrap:nowrap;justify-content:flex-end;column-gap:5.25rem}#cs-footer-1185 .cs-logo-group{width:30%;max-width:24.1875rem;margin-right:auto}}@media only screen and (min-width:81.25rem){#cta-1185 .cs-content{flex-direction:row}#cta-1185 .cs-form{width:60%}#content-page-714 .cs-image-group{font-size:inherit;position:absolute;top:0;left:-6.25rem}#content-page-714 .cs-background{width:50%;margin-right:20.9375rem;left:auto;right:50%}}@media only screen and (min-width:112.5rem){#cs-footer-1185{padding-top:12vw}}.cs-breadcrumb{max-width:80rem;margin:0 auto;padding:.75rem 1rem}.cs-breadcrumb-list{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0;font-size:.8125rem;color:#6b7280}.cs-breadcrumb-link{color:#d90700;text-decoration:none;transition:opacity .2s}.cs-breadcrumb-link:hover{opacity:.75;text-decoration:underline}.cs-breadcrumb-sep{color:#9ca3af;margin:0 .15rem}.cs-breadcrumb-current{color:#374151;font-weight:500;max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cs-post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem;padding:.875rem 1rem;margin-bottom:1.5rem;background:#f9fafb;border-left:3px solid #d90700;border-radius:0 6px 6px 0;font-size:.8125rem;color:#4b5563}.cs-meta-item{display:flex;align-items:center;gap:.375rem;line-height:1}.cs-meta-icon{flex-shrink:0;color:#d90700;opacity:.85}.cs-meta-date time{font-weight:600;color:#1f2937}.cs-meta-updated span{font-style:italic;color:#6b7280}.cs-meta-updated time{font-style:normal;font-weight:500;color:#374151}.cs-meta-author [itemprop=name]{font-weight:600;color:#1f2937}.cs-meta-readtime span{font-weight:500}.cs-meta-category span{display:inline-block;background:#d90700;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.2em .65em;border-radius:999px;line-height:1.6}@media (min-width:640px){.cs-meta-item+.cs-meta-item::before{content:"";display:inline-block;width:1px;height:1rem;background:#d1d5db;margin-right:.75rem}}.cs-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-bottom:2rem}.cs-tags-icon{color:#9ca3af;flex-shrink:0;margin-right:.1rem}.cs-tag{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;font-size:.75rem;font-weight:500;padding:.25em .7em;border-radius:999px;line-height:1.6;transition:background .15s,border-color .15s,color .15s;cursor:default}.cs-tag:hover{background:#fef2f2;border-color:#fca5a5;color:#d90700}.cs-card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem;margin-bottom:.75rem}.cs-card-tags .cs-tag{font-size:.7rem}.cs-date,.cs-reading-time{display:inline-flex;align-items:center;gap:.25rem}.cs-date svg,.cs-reading-time svg{color:#d90700;opacity:.8;flex-shrink:0}.cs-pagination{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;margin-top:2.5rem}@media (max-width:479px){.cs-post-meta{gap:.5rem .75rem;font-size:.75rem}.cs-breadcrumb-current{max-width:24ch}}.cs-post-layout{display:flex;align-items:flex-start;gap:40px;max-width:1280px;margin:0 auto}.cs-post-sidebar{flex:0 0 280px;position:sticky;top:20px}.cs-post-main{flex:1;min-width:0}@media (max-width:900px){.cs-post-layout{flex-direction:column}.cs-post-sidebar{flex:1 1 auto;width:100%;position:static}}.cs-ad-slot{margin:24px 0;text-align:center}.cs-ad-label{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#999;margin-bottom:6px}.cs-ad-top{margin:0 0 16px;padding:12px 0}.cs-ad-sidebar{margin:0 0 24px}.cs-sidebar-recent{border:1px solid #eee;border-radius:8px;padding:16px}.cs-sidebar-heading{font-size:16px;margin:0 0 12px}.cs-sidebar-list{list-style:none;margin:0;padding:0}.cs-sidebar-item+.cs-sidebar-item{margin-top:12px}.cs-sidebar-link{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}.cs-sidebar-thumb{width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0}.cs-sidebar-title{font-size:13px;line-height:1.35}#content-page-714{box-sizing:border-box;width:100%}#content-page-714 .cs-post-layout{width:100%;max-width:100%;box-sizing:border-box}#content-page-714 .cs-post-content,#content-page-714 .cs-post-main{width:100%;max-width:100%;min-width:0;box-sizing:border-box}#content-page-714 .cs-post-content iframe,#content-page-714 .cs-post-content img,#content-page-714 .cs-post-content video{max-width:100%;height:auto}#content-page-714 .cs-post-content pre{max-width:100%;overflow-x:auto;box-sizing:border-box}#content-page-714 .cs-post-content table{max-width:100%}#content-page-714 .cs-post-content,#content-page-714 .cs-post-content a,#content-page-714 .cs-post-content li,#content-page-714 .cs-post-content p{overflow-wrap:anywhere;word-break:normal}.cs-table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:1.75rem 0;border-radius:8px;border:1px solid #e5e7eb;background:#fff;position:relative;background:linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right center/24px 100% no-repeat local,linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left center/24px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) right center/12px 100% no-repeat,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) left center/12px 100% no-repeat,#fff}.cs-table-wrap::-webkit-scrollbar{height:6px}.cs-table-wrap::-webkit-scrollbar-track{background:#f3f4f6;border-radius:0 0 8px 8px}.cs-table-wrap::-webkit-scrollbar-thumb{background:#cbd2d9;border-radius:4px}.cs-table-wrap::-webkit-scrollbar-thumb:hover{background:#9ca3af}#content-page-714 .cs-post-content table,#content-page-714 .cs-table-wrap table{width:100%;border-collapse:collapse;border-spacing:0;font-size:.9375rem;line-height:1.5;color:var(--bodyTextColor);background-color:transparent}#content-page-714 .cs-table-wrap--wide table{min-width:640px}#content-page-714 .cs-post-content thead,#content-page-714 .cs-table-wrap thead{background-color:#fef2f2;border-bottom:2px solid var(--primary)}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.875rem;font-weight:700;text-align:left;text-transform:uppercase;letter-spacing:.03em;color:var(--headerColor);padding:.875rem 1rem;border-bottom:2px solid var(--primary);vertical-align:bottom;white-space:nowrap}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.8125rem 1rem;border-bottom:1px solid #eef0f3;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:normal}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#fafbfc}@media (hover:hover) and (pointer:fine){#content-page-714 .cs-post-content tbody tr:hover,#content-page-714 .cs-table-wrap tbody tr:hover{background-color:#fef9f9;transition:background-color .15s}}#content-page-714 .cs-post-content tbody tr:last-child td,#content-page-714 .cs-table-wrap tbody tr:last-child td{border-bottom:none}#content-page-714 .cs-post-content td code,#content-page-714 .cs-post-content th code,#content-page-714 .cs-table-wrap td code,#content-page-714 .cs-table-wrap th code{font-size:.85em;background:#f0f0f0;padding:.15em .4em;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}#content-page-714 .cs-post-content td a,#content-page-714 .cs-table-wrap td a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}#content-page-714 .cs-post-content td a:hover,#content-page-714 .cs-table-wrap td a:hover{text-decoration:none}@media (max-width:767px){#content-page-714{padding-left:1rem;padding-right:1rem}#content-page-714 .cs-post-layout{gap:2rem}#content-page-714 .cs-post-main{width:100%}#content-page-714 .cs-post-content h1,#content-page-714 .cs-post-content h2,#content-page-714 .cs-post-content h3,#content-page-714 .cs-post-content h4{max-width:100%;overflow-wrap:anywhere}#content-page-714 .cs-table-wrap{width:calc(100% + 2rem);border-radius:0;border-left:none;border-right:none;margin:1.5rem -1rem}#content-page-714 .cs-table-wrap table{font-size:.875rem}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.75rem;padding:.75rem .875rem;letter-spacing:.02em}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.75rem .875rem;font-size:.875rem}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#f8f9fa}#content-page-714 .cs-post-content td code,#content-page-714 .cs-table-wrap td code{font-size:.8em;padding:.1em .35em}}@media (max-width:600px){#content-page-714 .cs-table-wrap--stack table,#content-page-714 .cs-table-wrap--stack tbody,#content-page-714 .cs-table-wrap--stack td,#content-page-714 .cs-table-wrap--stack th,#content-page-714 .cs-table-wrap--stack thead,#content-page-714 .cs-table-wrap--stack tr{display:block;width:100%}#content-page-714 .cs-table-wrap--stack thead{display:none}#content-page-714 .cs-table-wrap--stack tbody tr{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:1rem;padding:.5rem 0;background:#fff}#content-page-714 .cs-table-wrap--stack tbody tr:nth-child(2n){background:#fff}#content-page-714 .cs-table-wrap--stack tbody td{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:.625rem 1rem;border-bottom:1px solid #f0f2f5;text-align:right}#content-page-714 .cs-table-wrap--stack tbody tr td:last-child{border-bottom:none}#content-page-714 .cs-table-wrap--stack tbody td::before{content:attr(data-label);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;color:var(--primary);text-align:left;flex-shrink:0;max-width:45%;line-height:1.4}}</style>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Building a React Analytics Dashboard: Grids, Charts, and Filters Together",
+        "description": "A practical guide to building React analytics dashboards. Learn how to wire data grids and charts to shared filters, handle large datasets, and use TypeScript throughout.",
+        "url": "https://redsurgetechnology.com/blog/building-react-analytics-dashboard",
+        "datePublished": "2026-10-23T10:00:00.000Z",
+        "dateModified": "2026-10-23T10:00:00.000Z",
+        "keywords": "React, Dashboard, Data Grid, Charts, TypeScript",
+        "articleSection": "Web Development",
+        "timeRequired": "PT15M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/react-analytics-dashboard-grids-charts-filters.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/building-react-analytics-dashboard"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+  <!-- JSON-LD: FAQ (only if post has FAQ section) -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Building a React Analytics Dashboard: Combining Data Grids, Charts, and Filters",
+          "item": "https://redsurgetechnology.com/blog/building-react-analytics-dashboard"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">Building a React Analytics Dashboard: Combining Data Grids, Charts, and Filters</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Building a React Analytics Dashboard: Combining Data Grids, Charts, and Filters
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <main id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <img
+    fetchpriority="high"
+    decoding="async"
+    src="/images/blog/uploads/react-analytics-dashboard-grids-charts-filters.webp"
+    srcset="
+      /images/blog/uploads/react-analytics-dashboard-grids-charts-filters-400.webp 400w,
+      /images/blog/uploads/react-analytics-dashboard-grids-charts-filters-800.webp 800w
+    "
+    sizes="(max-width: 1024px) 92vw, 800px"
+    alt="Building a React Analytics Dashboard: Combining Data Grids, Charts, and Filters - Red Surge Technology Blog"
+    width="1280"
+    height="720"
+  />
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Building a React Analytics Dashboard: Grids, Charts, and Filters Together" />
+          <meta itemprop="description" content="A practical guide to building React analytics dashboards. Learn how to wire data grids and charts to shared filters, handle large datasets, and use TypeScript throughout." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/building-react-analytics-dashboard" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-10-23T10:00:00.000Z">Oct 23, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-10-23T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT15M" />15 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Web Development</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">Dashboard</span><span class="cs-tag" itemprop="keywords">Data Grid</span><span class="cs-tag" itemprop="keywords">Charts</span><span class="cs-tag" itemprop="keywords">TypeScript</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>An analytics dashboard is more than a page with charts on it. The value comes from the connections between components. When a user selects a date range, the chart updates. When they filter the grid, the summary metrics recalculate. When they click a row, the detail chart shows that specific entity. The whole dashboard responds to the user&#39;s exploration as a single, coordinated system.</p>
+<p>The problem is that most React tutorials show you how to build each piece separately. Here&#39;s how to render a chart. Here&#39;s how to render a table. Here&#39;s how to add a filter. They don&#39;t show you how to wire them together. That&#39;s where the real complexity lives—the shared state, the data flow, the performance implications of updating multiple components on every filter change.</p>
+<p>I&#39;ve built enough dashboards to know that the wiring is where projects either succeed or grind to a halt. If you&#39;ve been following our series—the <a href="/blog/best-react-chart-library-for-dashboards-2026">best React chart library for dashboards</a>, the <a href="/blog/best-react-data-grid-libraries-2026">React data grid libraries comparison</a>, and the <a href="/blog/react-chart-library-performance-benchmarks">performance benchmarks</a>—you have the individual pieces. This post is about connecting them.</p>
+<h2>The Architecture: One Source of Truth</h2>
+<p>The single most important decision in a React analytics dashboard is where the state lives. Get this wrong, and you&#39;ll spend weeks debugging &quot;why didn&#39;t that update?&quot; issues.</p>
+<p>The pattern that works is simple: <strong>one source of truth for the filter state, one source of truth for the data, and derived values for everything else.</strong> The grid doesn&#39;t own its data. The chart doesn&#39;t own its data. They both derive from the same filtered dataset, which derives from the same filter state.</p>
+<p>Here&#39;s the mental model:</p>
+<ul>
+<li><strong>Filter state</strong> — the date range, selected categories, search query, and any other user-controlled filters.</li>
+<li><strong>Raw data</strong> — the full dataset, fetched once or streamed from your backend.</li>
+<li><strong>Filtered data</strong> — the result of applying the filter state to the raw data. This is derived, not stored.</li>
+<li><strong>Grid data</strong> — the filtered data, possibly further sorted or paginated.</li>
+<li><strong>Chart data</strong> — the filtered data, aggregated or transformed for visualization.</li>
+</ul>
+<p>Every component reads from the derived values. No component owns data that another component needs. Updates flow in one direction: filter changes → derived data recomputes → components re-render.</p>
+<p>This is the same pattern that makes <a href="/blog/react-server-components-nextjs">React&#39;s server components</a> work well—one source of truth, computed values downstream. In a client-side dashboard, you implement it with <code>useState</code>, <code>useMemo</code>, and context or a state management library.</p>
+<h2>Setting Up the Shared Filter State</h2>
+<p>Let&#39;s start with the filter state. For a typical analytics dashboard, the filters are a date range, a set of selected categories, and a search query.</p>
+<pre><code class="language-tsx">// types.ts
+export interface Filters {
+  dateRange: { start: Date; end: Date };
+  categories: string[];
+  search: string;
+}
+
+export interface DataRow {
+  id: string;
+  date: Date;
+  category: string;
+  revenue: number;
+  orders: number;
+  customer: string;
+}
+</code></pre>
+<p>The filter state lives in a parent component, and it&#39;s passed to both the grid and the chart. To avoid prop drilling, use React context if the component tree is deep.</p>
+<pre><code class="language-tsx">// DashboardContext.tsx
+import { createContext, useContext } from &quot;react&quot;;
+
+interface DashboardContextValue {
+  filters: Filters;
+  setFilters: (filters: Filters) =&gt; void;
+  rawData: DataRow[];
+  filteredData: DataRow[];
+}
+
+const DashboardContext = createContext&lt;DashboardContextValue | null&gt;(null);
+
+export function useDashboard() {
+  const ctx = useContext(DashboardContext);
+  if (!ctx)
+    throw new Error(&quot;useDashboard must be used within DashboardProvider&quot;);
+  return ctx;
+}
+</code></pre>
+<p>The provider computes the filtered data with <code>useMemo</code>, so it only recomputes when the filter state or the raw data changes.</p>
+<pre><code class="language-tsx">// DashboardProvider.tsx
+import { useMemo, useState } from &quot;react&quot;;
+
+export function DashboardProvider({
+  children,
+  rawData,
+}: {
+  children: React.ReactNode;
+  rawData: DataRow[];
+}) {
+  const [filters, setFilters] = useState&lt;Filters&gt;({
+    dateRange: { start: new Date(2026, 0, 1), end: new Date(2026, 11, 31) },
+    categories: [],
+    search: &quot;&quot;,
+  });
+
+  const filteredData = useMemo(() =&gt; {
+    return rawData.filter((row) =&gt; {
+      if (
+        row.date &lt; filters.dateRange.start ||
+        row.date &gt; filters.dateRange.end
+      )
+        return false;
+      if (
+        filters.categories.length &gt; 0 &amp;&amp;
+        !filters.categories.includes(row.category)
+      )
+        return false;
+      if (
+        filters.search &amp;&amp;
+        !row.customer.toLowerCase().includes(filters.search.toLowerCase())
+      )
+        return false;
+      return true;
+    });
+  }, [rawData, filters]);
+
+  return (
+    &lt;DashboardContext.Provider
+      value={{ filters, setFilters, rawData, filteredData }}
+    &gt;
+      {children}
+    &lt;/DashboardContext.Provider&gt;
+  );
+}
+</code></pre>
+<p>Now any component in the tree can call <code>useDashboard()</code> and get the current filters and filtered data. The filter state changes only when the user interacts with the filter controls; everything else is derived.</p>
+<h2>Wiring the Data Grid</h2>
+<p>For the grid, we&#39;ll use TanStack Table. It&#39;s headless, so we render our own markup and styles, but it handles the sorting, filtering, and pagination logic. If you&#39;re using AG Grid or MUI DataGrid, the integration is similar—you pass the filtered data as the <code>rowData</code> or <code>rows</code> prop.</p>
+<pre><code class="language-tsx">// DataGrid.tsx
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  flexRender,
+} from &quot;@tanstack/react-table&quot;;
+import { useDashboard } from &quot;./DashboardContext&quot;;
+
+export function DataGrid() {
+  const { filteredData } = useDashboard();
+  const columns = [/* column definitions */];
+
+  const table = useReactTable({
+    data: filteredData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
+
+  return (
+    &lt;table&gt;
+      &lt;thead&gt;
+        {table.getHeaderGroups().map((headerGroup) =&gt; (
+          &lt;tr key={headerGroup.id}&gt;
+            {headerGroup.headers.map((header) =&gt; (
+              &lt;th key={header.id}&gt;
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext(),
+                )}
+              &lt;/th&gt;
+            ))}
+          &lt;/tr&gt;
+        ))}
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        {table.getRowModel().rows.map((row) =&gt; (
+          &lt;tr key={row.id}&gt;
+            {row.getVisibleCells().map((cell) =&gt; (
+              &lt;td key={cell.id}&gt;
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              &lt;/td&gt;
+            ))}
+          &lt;/tr&gt;
+        ))}
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  );
+}
+</code></pre>
+<p>The grid gets its data from the shared context, so it automatically updates when the filters change. No manual syncing required.</p>
+<h2>Wiring the Charts</h2>
+<p>For the chart, we&#39;ll use Recharts (or your chart library of choice). The chart receives the filtered data, but it usually needs to aggregate it first. For example, a revenue-over-time line chart needs the data grouped by day or month.</p>
+<pre><code class="language-tsx">// RevenueChart.tsx
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from &quot;recharts&quot;;
+import { useDashboard } from &quot;./DashboardContext&quot;;
+import { useMemo } from &quot;react&quot;;
+
+export function RevenueChart() {
+  const { filteredData } = useDashboard();
+
+  const chartData = useMemo(() =&gt; {
+    const grouped = new Map&lt;string, number&gt;();
+    for (const row of filteredData) {
+      const key = row.date.toISOString().slice(0, 10);
+      grouped.set(key, (grouped.get(key) ?? 0) + row.revenue);
+    }
+    return Array.from(grouped, ([date, revenue]) =&gt; ({ date, revenue })).sort(
+      (a, b) =&gt; a.date.localeCompare(b.date),
+    );
+  }, [filteredData]);
+
+  return (
+    &lt;ResponsiveContainer width=&quot;100%&quot; height={300}&gt;
+      &lt;LineChart data={chartData}&gt;
+        &lt;XAxis dataKey=&quot;date&quot; /&gt;
+        &lt;YAxis /&gt;
+        &lt;Tooltip /&gt;
+        &lt;Line type=&quot;monotone&quot; dataKey=&quot;revenue&quot; stroke=&quot;#3b82f6&quot; /&gt;
+      &lt;/LineChart&gt;
+    &lt;/ResponsiveContainer&gt;
+  );
+}
+</code></pre>
+<p>The chart does its own aggregation with <code>useMemo</code>, so it only recomputes when <code>filteredData</code> changes. The grid and the chart both read from <code>filteredData</code>—one source of truth, two different views.</p>
+<h2>Cross-Filtering: When the Grid Drives the Chart</h2>
+<p>The pattern above handles the case where the filters drive both the grid and the chart. But dashboards often need the reverse: clicking a row in the grid drills down the chart, or selecting a range in the chart filters the grid.</p>
+<p>The cleanest way to implement this is to store the cross-filter state alongside the main filters. When the user selects a grid row, update a <code>selectedRowId</code> in the context. The chart reads <code>selectedRowId</code> and filters its data accordingly.</p>
+<pre><code class="language-tsx">// Add to DashboardContext
+interface DashboardContextValue {
+  filters: Filters;
+  setFilters: (filters: Filters) =&gt; void;
+  selectedRowId: string | null;
+  setSelectedRowId: (id: string | null) =&gt; void;
+  rawData: DataRow[];
+  filteredData: DataRow[];
+  selectedRowData: DataRow | null;
+}
+</code></pre>
+<p>The chart can then use <code>selectedRowData</code> to show a drill-down, or highlight the corresponding data point. This is the same pattern used in our <a href="/blog/best-react-data-grid-libraries-2026">React data grid libraries comparison</a> for grid-plus-chart integration.</p>
+<p>The key insight: cross-filtering isn&#39;t a special case. It&#39;s just more filter state. Store the selection in the same context, and every component that cares about it derives from it.</p>
+<h2>Performance: Where Dashboards Go Wrong</h2>
+<p>A dashboard with a grid, a chart, and filters can easily become a performance disaster if you&#39;re not careful. Here are the patterns that matter.</p>
+<p><strong>Memoize the filtered data.</strong> The filtering operation runs on every render unless you memoize it. <code>useMemo</code> with <code>[rawData, filters]</code> as dependencies is the minimum. For large datasets, consider computing filters on the server or in a web worker.</p>
+<p><strong>Memoize the chart data.</strong> The chart aggregation is often more expensive than the filtering. Use <code>useMemo</code> with <code>[filteredData]</code> as the dependency. If you&#39;re aggregating by date, cache the aggregation result.</p>
+<p><strong>Virtualize the grid.</strong> If the grid shows hundreds or thousands of rows, virtualization is non-negotiable. TanStack Table pairs with TanStack Virtual; AG Grid and MUI DataGrid have virtualization built in. Our <a href="/blog/react-charting-library-for-large-datasets">React charting library for large datasets</a> guide covers the broader strategies for large data.</p>
+<p><strong>Debounce filter changes.</strong> A search input that re-filters on every keystroke causes hundreds of re-computations per second. Debounce the filter update by 200–300ms, as we covered in our <a href="/blog/javascript-debounce-vs-throttle">JavaScript debounce vs throttle</a> guide. The user types smoothly, and the expensive re-computation happens once when they pause.</p>
+<p><strong>Avoid re-rendering everything on every filter change.</strong> If the filter context value is a new object on every render, every consumer re-renders. Wrap the context value in <code>useMemo</code>, and split the context if different components need different slices of state. The pattern from our <a href="/blog/prevent-unnecessary-rerenders-react">preventing unnecessary re-renders in React</a> guide applies directly.</p>
+<p><strong>Use a stable callback.</strong> The <code>setFilters</code> function should be stable. <code>useState</code>&#39;s setter is stable, but if you wrap it in a custom function that closes over other state, wrap it in <code>useCallback</code>.</p>
+<pre><code class="language-tsx">const setFilters = useCallback((newFilters: Filters) =&gt; {
+  setState((prev) =&gt; ({ ...prev, filters: newFilters }));
+}, []);
+</code></pre>
+<h2>TypeScript Patterns for Dashboards</h2>
+<p>A dashboard has a lot of moving parts, and TypeScript is what keeps them from drifting out of sync. Here are the patterns I use.</p>
+<p><strong>Define the data model once.</strong> <code>DataRow</code>, <code>Filters</code>, and <code>ChartData</code> should be defined in one place and imported everywhere. If the shape changes, the compiler catches every usage.</p>
+<p><strong>Use discriminated unions for chart states.</strong> Loading, error, success, empty—each state has different data. A discriminated union forces you to handle all of them.</p>
+<pre><code class="language-tsx">type ChartState =
+  | { status: &quot;loading&quot; }
+  | { status: &quot;error&quot;; message: string }
+  | { status: &quot;success&quot;; data: ChartData[] }
+  | { status: &quot;empty&quot; };
+</code></pre>
+<p><strong>Type the context value explicitly.</strong> <code>createContext&lt;DashboardContextValue | null&gt;(null)</code> forces consumers to handle the null case, which catches the &quot;forgot to wrap in provider&quot; error at compile time instead of runtime.</p>
+<p><strong>Type the column definitions.</strong> TanStack Table&#39;s <code>ColumnDef&lt;DataRow&gt;</code> type ensures your cell renderers and accessors match the data model.</p>
+<p>If you&#39;ve been working through our <a href="/blog/typescript-error-handling-best-practices">TypeScript error handling best practices</a>, you know that typed state and typed callbacks catch entire categories of bugs before they reach production. Dashboards are exactly where this discipline pays off.</p>
+<h2>A Real Story: The Dashboard That Fell Apart</h2>
+<p>A few months ago, I inherited an analytics dashboard that had been built by a team that was new to React. Every component fetched its own data. The grid fetched from <code>/api/orders</code>, the chart fetched from <code>/api/revenue</code>, and the filters fetched from <code>/api/filters</code>. Each component had its own loading state, its own error state, and its own filter state.</p>
+<p>The result was chaos. Changing the date range in the filter triggered three separate requests that arrived at different times, so the grid and chart were briefly out of sync. Clicking a row in the grid didn&#39;t affect the chart because the grid and chart had separate data. The whole dashboard felt sluggish because every filter change caused four re-renders, each triggering its own request.</p>
+<p>The fix was a full rewrite of the state architecture. We moved the filter state to a context at the top of the tree. We fetched the raw data once and derived everything else from it. The grid and chart read from the same <code>filteredData</code> context value. The performance improved immediately, and the sync issues disappeared.</p>
+<p>The lesson: in a dashboard, one source of truth is not optional. It&#39;s the difference between a dashboard that feels like a cohesive tool and one that feels like four independent widgets that happen to be on the same page.</p>
+<h2>Wrapping Up</h2>
+<p>Building a React analytics dashboard that combines grids, charts, and filters comes down to architecture. One source of truth for filter state. One source of truth for data. Derived values for everything else. Memoize the derived values, debounce the expensive operations, and virtualize the long lists.</p>
+<p>The individual components—grids, charts, filters—are well-served by mature libraries. The integration is where the engineering lives. Get the state architecture right, and the rest is implementation.</p>
+<p>For the individual pieces, see our <a href="/blog/best-react-chart-library-for-dashboards-2026">best React chart library for dashboards</a> guide and our <a href="/blog/best-react-data-grid-libraries-2026">React data grid libraries comparison</a>. For the broader visualization landscape, our <a href="/blog/react-data-visualization-libraries">React data visualization libraries</a> guide covers the full ecosystem. And for performance under load, our <a href="/blog/react-chart-library-performance-benchmarks">React charting library performance benchmarks</a> and <a href="/blog/react-charting-library-for-large-datasets">large datasets guide</a> have you covered.</p>
+<p>Now go build a dashboard that actually works together.</p>
+<hr>
+<p><em>Need help architecting or building a React analytics dashboard? Red Surge Technology specializes in data-rich, high-performance interfaces for analytics and enterprise applications. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/best-react-data-grid-libraries-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/best-react-data-grid-libraries-2026-100.webp"
+     alt="Best React Data Grid Libraries in 2026: AG Grid vs TanStack Table vs MUI DataGrid" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Best React Data Grid Libraries in 2026: AG Grid vs TanStack Table vs MUI DataGrid</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/why-vendor-prefixes-still-exist-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/why-vendor-prefixes-still-exist-2026-100.webp"
+     alt="Why You Still See -moz- and -webkit- in 2026 (And When to Remove Them)" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Why You Still See -moz- and -webkit- in 2026 (And When to Remove Them)</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-drag-drop-tutorial.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-drag-drop-tutorial-100.webp"
+     alt="React Gantt Chart with Drag and Drop: Complete Tutorial for 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart with Drag and Drop: Complete Tutorial for 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/nextjs-cms-visual-editor.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/nextjs-cms-visual-editor-100.webp"
+     alt="Next.js CMS with Visual Editor: Best Options in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Next.js CMS with Visual Editor: Best Options in 2026</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/wcag-2-2-vs-wcag-2-1-what-changed.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/wcag-2-2-vs-2-1-what-changed-100.webp"
+     alt="WCAG 2.2 vs WCAG 2.1: What Changed and Why It Matters" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">WCAG 2.2 vs WCAG 2.1: What Changed and Why It Matters</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>
