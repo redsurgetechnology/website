@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?</title>
+    <meta name="description" content="Compare AWS S3, Supabase Storage, and Firebase Storage on pricing, security, upload feedback, and portability. Includes code examples and a decision framework for 2026." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Supabase, Firebase, AWS S3, Storage, Backend" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage" />
+    <meta property="og:title" content="S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?" />
+    <meta property="og:description" content="Compare AWS S3, Supabase Storage, and Firebase Storage on pricing, security, upload feedback, and portability. Includes code examples and a decision framework for 2026." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/s3-vs-supabase-vs-firebase-storage.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-11-03T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-11-03T10:00:00.000Z" />
+    <meta property="article:section" content="Web Development" />
+    <meta property="article:tag" content="Supabase" />
+    <meta property="article:tag" content="Firebase" />
+    <meta property="article:tag" content="AWS S3" />
+    <meta property="article:tag" content="Storage" />
+    <meta property="article:tag" content="Backend" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage" />
+    <meta name="twitter:title" content="S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?" />
+    <meta name="twitter:description" content="Compare AWS S3, Supabase Storage, and Firebase Storage on pricing, security, upload feedback, and portability. Includes code examples and a decision framework for 2026." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/s3-vs-supabase-vs-firebase-storage.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: inlined to eliminate render-blocking and prevent FOUC/CLS -->
+    <style>.cs-title,.cs-topper{line-height:1.2em;text-align:inherit}.cs-text,.cs-title,.cs-topper{text-align:inherit}:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}.cs-topper{font-size:var(--topperFontSize);text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--primary);margin-bottom:.25rem;display:block}.cs-title{font-size:var(--headerFontSize);font-weight:900;max-width:43.75rem;margin:0 0 1rem;color:var(--headerColor);position:relative}.cs-text{font-size:var(--bodyFontSize);line-height:1.5em;width:100%;max-width:40.625rem;margin:0;color:var(--bodyTextColor)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+    <style>html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}body.cs-open{overflow:hidden}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation:before{content:"";width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0;transition:height .5s,opacity .5s}#cs-navigation.cs-active:before{height:150vh;opacity:1}#cs-navigation.cs-active .cs-ul-wrapper{opacity:1;transform:scaleY(1);transition-delay:0.15s}#cs-navigation.cs-active .cs-li{transform:translateY(0);opacity:1}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem;transition:opacity .3s,visibility .3s,height .3s}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center;transition:transform .6s}#cs-navigation .cs-toggle.cs-active{transform:rotate(180deg)}#cs-navigation .cs-active .cs-line1{top:50%;transform:translate(-50%,-50%) rotate(225deg)}#cs-navigation .cs-active .cs-line2{top:50%;transform-origin:center;transform:translate(-50%,-50%) translateY(0) rotate(-225deg)}#cs-navigation .cs-active .cs-line3{bottom:100%;opacity:0}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%);transition:top .3s,left .3s,transform .5s}#cs-navigation .cs-line3{bottom:0;transition:bottom .3s,opacity .3s}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top;transition:transform .4s,opacity .3s}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link{font-size:clamp(1rem, 2.5vw, 1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li-link.cs-active,#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;transition:transform .6s,opacity .9s;text-align:center;width:100%;display:block}#cs-navigation .cs-dropdown{position:relative;color:var(--bodyTextColorWhite)}#cs-navigation .cs-dropdown.cs-active .cs-drop-ul{height:auto;opacity:1;visibility:visible;margin:.75rem 0 0;padding:.75rem 0}#cs-navigation .cs-dropdown.cs-active .cs-drop-link{opacity:1}#cs-navigation .cs-dropdown .cs-li-link{position:relative;transition:opacity .3s}#cs-navigation .cs-drop-icon{width:.9375rem;height:auto;position:absolute;top:50%;right:-1.25rem;transform:translateY(-50%)}#cs-navigation .cs-drop-ul{width:100%;height:0;margin:0;padding:0;background-color:var(--primary);overflow:hidden;opacity:0;visibility:hidden;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:.75rem;transition:padding .3s,margin .3s,height .3s,opacity .3s,visibility .3s}#cs-navigation .cs-drop-li{list-style:none}#cs-navigation .cs-li-link.cs-drop-link{font-size:clamp(.875rem, 2vw, 1.25rem);color:#fff}}@media only screen and (min-width:0rem){#cta-1185,#cta-1185 .cs-content{flex-direction:column;display:flex;width:100%}#cta-1185,#cta-1185 .cs-button-solid{position:relative;z-index:1;box-sizing:border-box}#cta-1185{max-width:80rem;margin:var(--sectionPadding);margin-left:auto;margin-right:auto;margin-top:0;padding:3.75rem clamp(1rem,7vw,3.75rem);border:1px solid #484848;align-items:center;justify-content:center}#cta-1185 .cs-content{text-align:center;max-width:25rem;align-items:center;gap:1.5rem}#cta-1185 .cs-title{width:100%;font-size:1.9375rem;margin:0;color:var(--bodyTextColorWhite)}#cta-1185 .cs-form{width:100%;max-width:45.3125rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;flex:none}#cta-1185 .cs-input{font-size:1rem;width:100%;height:clamp(2.875rem,5.5vw,3.5rem);margin:0;padding:0 0 0 1.25rem;border:none;box-sizing:border-box;display:block}#cta-1185 .cs-input::placeholder{color:#767676}#cta-1185 .cs-button-solid{font-size:1rem;line-height:clamp(2.875rem, 5.5vw, 3.5rem);text-decoration:none;font-weight:700;text-align:center;margin:0;color:#fff;min-width:9.375rem;padding:0 1.5rem;background-color:var(--primary);display:inline-block}#cta-1185 .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#000;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-nav-link:hover:before,#cta-1185 .cs-button-solid:hover:before{width:100%}#cta-1185 .cs-submit{width:100%;border:none;transition:color .3s}#cta-1185 .cs-submit:before{background-color:#fff}#cta-1185 .cs-submit:hover{cursor:pointer;color:var(--primary)}#cs-footer-1185 .cs-copyright-link,#cs-footer-1185 .cs-nav-link{text-decoration:none;transition:color .3s}#cs-footer-1185{padding:var(--sectionPadding);padding-top:clamp(7.5rem,15vw,12.5rem);position:relative}#cs-footer-1185 .cs-container{width:100%;max-width:43.75rem;margin:auto;display:flex;justify-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:2.5rem}#cs-footer-1185 .cs-logo-group{width:100%;position:relative}#cs-footer-1185 .cs-logo{width:12.3125rem;height:auto;display:block;margin-bottom:1.5rem}#cs-footer-1185 .cs-logo-img{width:100%;height:auto}#cs-footer-1185 .cs-logo-img.dark{display:none}#cs-footer-1185 .cs-text{font-size:clamp(.875rem, 2.5vw, 1rem);line-height:1.5em;margin:0;width:78%;max-width:26.25rem;color:var(--bodyTextColorWhite)}#cs-footer-1185 .cs-nav{width:100%;padding:0;margin:0;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:.75rem}#cs-footer-1185 .cs-nav-li{list-style:none;display:flex;justify-content:flex-start;align-items:flex-start}#cs-footer-1185 .cs-header{font-size:1rem;line-height:1.2em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;color:var(--bodyTextColorWhite);position:relative;display:block}#cs-footer-1185 .cs-nav-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite);position:relative;display:inline-block}#cs-footer-1185 .cs-nav-link:before{content:"";width:0%;height:.125rem;background:currentColor;opacity:1;position:absolute;display:block;bottom:-.125rem;left:0;transition:width .3s}#cs-footer-1185 .cs-copyright-link:hover,#cs-footer-1185 .cs-nav-link:hover{color:var(--secondary)}#cs-footer-1185 .cs-icon{width:1.5rem;height:auto;margin-right:.75rem}#cs-footer-1185 .cs-background,#cs-footer-1185 .cs-background img,#cs-footer-1185 .cs-background:before{height:100%;width:100%;position:absolute;top:0;left:0}#cs-footer-1185 .cs-bottom{max-width:80rem;margin:2rem auto auto;padding-top:1.5rem;border-top:1px solid #484848;display:flex;justify-content:space-between;align-items:center;color:#fff;flex-direction:column}#cs-footer-1185 .cs-copyright,#cs-footer-1185 .cs-copyright-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite)}#banner-712 .cs-background,#cs-footer-1185 .cs-background{display:block;z-index:-1}#cs-footer-1185 .cs-background:before{content:"";display:block;background:-moz-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:-webkit-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:linear-gradient(to right,rgba(26,26,26,.94) 0,#1a1a1a 100%);opacity:.97;z-index:1}#banner-712 .cs-background img,#cs-footer-1185 .cs-background img{object-fit:cover}#cs-footer-1185 .cs-graphic{width:100%;height:auto;position:absolute;top:0;left:0}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem, 6.4vw, 3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{box-sizing:border-box;width:100%;max-width:80rem;margin:0 auto;background-color:#fff;position:relative;z-index:1}#content-page-714 .cs-container{width:100%;max-width:80rem;margin:auto;display:flex;flex-direction:column;align-items:center;gap:clamp(3rem,6vw,4rem);position:relative}#content-page-714 .cs-content{text-align:left;width:100%;display:flex;flex-direction:column;align-items:flex-start}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 .cs-title{font-size:var(--headerFontSize);font-weight:900;line-height:1.2em;text-align:inherit;width:100%;max-width:100%;margin:0 0 1rem;color:var(--headerColor);position:relative}#content-page-714 h2,#content-page-714 h3,#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-weight:700;text-align:inherit;margin:0 0 1rem;color:var(--headerColor)}#content-page-714 .cs-color,#content-page-714 h3{color:var(--primary)}#content-page-714 h2{font-size:2rem;margin-top:2rem}#content-page-714 h3{font-size:1.5rem}#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-size:1.25rem}#content-page-714 .cs-button-solid,#content-page-714 p:last-of-type{margin-bottom:2rem}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 p a{font-size:inherit;line-height:inherit;text-decoration:underline;color:var(--primary)}#content-page-714 ol,#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}#content-page-714 .cs-image-group{font-size:min(1vw, 1em);width:33.875em;height:48.3125em;display:none;flex:none;position:relative;z-index:1}#content-page-714 .cs-picture{width:33.875em;height:40.4375em;border-radius:17.8125em;border:.75em solid #fff;background-color:#f7f7f7;box-sizing:border-box;overflow:hidden;display:block;position:absolute;top:0;left:0}#content-page-714 .cs-picture img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}#content-page-714 .cs-flower{width:22.625em;height:auto;display:block;position:absolute;bottom:-2.375em;right:-3em;z-index:-1;transform:rotate(142deg)}#content-page-714 .cs-sense{width:5em;height:auto;position:absolute;top:-.25em;left:.625em;transform:rotate(90deg)}#content-page-714 .cs-background{display:none}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#cta-1185 .cs-container{padding-left:3.75rem;padding-right:3.75rem}#cta-1185 .cs-content{max-width:100%}#cs-footer-1185 .cs-bottom,#cta-1185 .cs-form{flex-direction:row}#cta-1185 .cs-input{width:100%;max-width:32.8125rem}#cta-1185 .cs-submit{width:auto;min-width:11.875rem;flex:none}#cs-footer-1185 .cs-container{row-gap:0;flex-direction:row;justify-content:space-between;row-gap:2.5rem}#cs-footer-1185 .cs-nav{width:auto}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}#content-page-714 .cs-container{flex-direction:column;align-items:flex-start}#content-page-714 .cs-image-group{display:block;order:-1}#content-page-714 .cs-content{margin-left:auto}#content-page-714 .cs-background{width:20%;height:100%;background-color:#f7f7f7;display:block;position:absolute;left:0;top:0;z-index:-1}#content-page-714 .cs-background img{width:100%;height:100%;opacity:.2;object-fit:cover;position:absolute;top:0;left:0;z-index:1}}@media only screen and (min-width:64rem){#cs-navigation .cs-dropdown{position:relative}#cs-navigation .cs-dropdown:hover{cursor:pointer}#cs-navigation .cs-dropdown:hover .cs-drop-ul{transform:scaleY(1);opacity:1;visibility:visible}#cs-navigation .cs-dropdown:hover .cs-drop-li{opacity:1;transform:translateY(0)}#cs-navigation .cs-drop-icon{width:.75rem;height:auto;margin-left:.25rem;display:inline-block}#cs-navigation .cs-drop-ul{min-width:12.5rem;margin:0;padding:0;background-color:#fff;overflow:hidden;opacity:0;visibility:hidden;box-shadow:rgba(149,157,165,.2) 0 10px 16px;border-bottom:5px solid var(--primary);position:absolute;top:100%;z-index:-100;transform:scaleY(0);transform-origin:top;transition:transform .3s,visibility .3s,opacity .3s}#cs-navigation .cs-drop-li{list-style:none;font-size:1rem;text-decoration:none;opacity:0;width:100%;height:auto;display:block;transform:translateY(-.625rem);transition:opacity .6s,transform .6s}#cs-navigation .cs-drop-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-drop-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-drop-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-drop-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-drop-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-drop-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-drop-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-drop-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-drop-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-drop-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-drop-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-drop-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-drop-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link.cs-drop-link{font-size:1rem;white-space:nowrap;line-height:1.5em;text-decoration:none;width:100%;padding:.75rem;box-sizing:border-box;color:var(--bodyTextColor);display:block;transition:color .3s,background-color .3s}#cs-navigation .cs-li-link.cs-drop-link:hover{color:var(--primary);background-color:#f7f7f7}#cs-navigation .cs-li-link.cs-drop-link:before,#cs-navigation .cs-toggle{display:none}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:"";width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-top-link:hover{text-decoration:underline}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;transition:transform .3s}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative;transition:color .3s}#cs-navigation .cs-social-link:hover{transform:scale(1.1)}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem, 1.3vw, 1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li-link.cs-active{font-weight:700;color:var(--headerColor)}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em, 5.5vw, 3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-text,#cs-navigation .cs-button-solid:hover:before{width:100%}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}#cs-footer-1185 .cs-container{max-width:80rem;flex-wrap:nowrap;justify-content:flex-end;column-gap:5.25rem}#cs-footer-1185 .cs-logo-group{width:30%;max-width:24.1875rem;margin-right:auto}}@media only screen and (min-width:81.25rem){#cta-1185 .cs-content{flex-direction:row}#cta-1185 .cs-form{width:60%}#content-page-714 .cs-image-group{font-size:inherit;position:absolute;top:0;left:-6.25rem}#content-page-714 .cs-background{width:50%;margin-right:20.9375rem;left:auto;right:50%}}@media only screen and (min-width:112.5rem){#cs-footer-1185{padding-top:12vw}}.cs-breadcrumb{max-width:80rem;margin:0 auto;padding:.75rem 1rem}.cs-breadcrumb-list{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0;font-size:.8125rem;color:#6b7280}.cs-breadcrumb-link{color:#d90700;text-decoration:none;transition:opacity .2s}.cs-breadcrumb-link:hover{opacity:.75;text-decoration:underline}.cs-breadcrumb-sep{color:#9ca3af;margin:0 .15rem}.cs-breadcrumb-current{color:#374151;font-weight:500;max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cs-post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem;padding:.875rem 1rem;margin-bottom:1.5rem;background:#f9fafb;border-left:3px solid #d90700;border-radius:0 6px 6px 0;font-size:.8125rem;color:#4b5563}.cs-meta-item{display:flex;align-items:center;gap:.375rem;line-height:1}.cs-meta-icon{flex-shrink:0;color:#d90700;opacity:.85}.cs-meta-date time{font-weight:600;color:#1f2937}.cs-meta-updated span{font-style:italic;color:#6b7280}.cs-meta-updated time{font-style:normal;font-weight:500;color:#374151}.cs-meta-author [itemprop=name]{font-weight:600;color:#1f2937}.cs-meta-readtime span{font-weight:500}.cs-meta-category span{display:inline-block;background:#d90700;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.2em .65em;border-radius:999px;line-height:1.6}@media (min-width:640px){.cs-meta-item+.cs-meta-item::before{content:"";display:inline-block;width:1px;height:1rem;background:#d1d5db;margin-right:.75rem}}.cs-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-bottom:2rem}.cs-tags-icon{color:#9ca3af;flex-shrink:0;margin-right:.1rem}.cs-tag{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;font-size:.75rem;font-weight:500;padding:.25em .7em;border-radius:999px;line-height:1.6;transition:background .15s,border-color .15s,color .15s;cursor:default}.cs-tag:hover{background:#fef2f2;border-color:#fca5a5;color:#d90700}.cs-card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem;margin-bottom:.75rem}.cs-card-tags .cs-tag{font-size:.7rem}.cs-date,.cs-reading-time{display:inline-flex;align-items:center;gap:.25rem}.cs-date svg,.cs-reading-time svg{color:#d90700;opacity:.8;flex-shrink:0}.cs-pagination{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;margin-top:2.5rem}@media (max-width:479px){.cs-post-meta{gap:.5rem .75rem;font-size:.75rem}.cs-breadcrumb-current{max-width:24ch}}.cs-post-layout{display:flex;align-items:flex-start;gap:40px;max-width:1280px;margin:0 auto}.cs-post-sidebar{flex:0 0 280px;position:sticky;top:20px}.cs-post-main{flex:1;min-width:0}@media (max-width:900px){.cs-post-layout{flex-direction:column}.cs-post-sidebar{flex:1 1 auto;width:100%;position:static}}.cs-ad-slot{margin:24px 0;text-align:center}.cs-ad-label{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#999;margin-bottom:6px}.cs-ad-top{margin:0 0 16px;padding:12px 0}.cs-ad-sidebar{margin:0 0 24px}.cs-sidebar-recent{border:1px solid #eee;border-radius:8px;padding:16px}.cs-sidebar-heading{font-size:16px;margin:0 0 12px}.cs-sidebar-list{list-style:none;margin:0;padding:0}.cs-sidebar-item+.cs-sidebar-item{margin-top:12px}.cs-sidebar-link{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}.cs-sidebar-thumb{width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0}.cs-sidebar-title{font-size:13px;line-height:1.35}#content-page-714{box-sizing:border-box;width:100%}#content-page-714 .cs-post-layout{width:100%;max-width:100%;box-sizing:border-box}#content-page-714 .cs-post-content,#content-page-714 .cs-post-main{width:100%;max-width:100%;min-width:0;box-sizing:border-box}#content-page-714 .cs-post-content iframe,#content-page-714 .cs-post-content img,#content-page-714 .cs-post-content video{max-width:100%;height:auto}#content-page-714 .cs-post-content pre{max-width:100%;overflow-x:auto;box-sizing:border-box}#content-page-714 .cs-post-content table{max-width:100%}#content-page-714 .cs-post-content,#content-page-714 .cs-post-content a,#content-page-714 .cs-post-content li,#content-page-714 .cs-post-content p{overflow-wrap:anywhere;word-break:normal}.cs-table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:1.75rem 0;border-radius:8px;border:1px solid #e5e7eb;background:#fff;position:relative;background:linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right center/24px 100% no-repeat local,linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left center/24px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) right center/12px 100% no-repeat,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) left center/12px 100% no-repeat,#fff}.cs-table-wrap::-webkit-scrollbar{height:6px}.cs-table-wrap::-webkit-scrollbar-track{background:#f3f4f6;border-radius:0 0 8px 8px}.cs-table-wrap::-webkit-scrollbar-thumb{background:#cbd2d9;border-radius:4px}.cs-table-wrap::-webkit-scrollbar-thumb:hover{background:#9ca3af}#content-page-714 .cs-post-content table,#content-page-714 .cs-table-wrap table{width:100%;border-collapse:collapse;border-spacing:0;font-size:.9375rem;line-height:1.5;color:var(--bodyTextColor);background-color:transparent}#content-page-714 .cs-table-wrap--wide table{min-width:640px}#content-page-714 .cs-post-content thead,#content-page-714 .cs-table-wrap thead{background-color:#fef2f2;border-bottom:2px solid var(--primary)}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.875rem;font-weight:700;text-align:left;text-transform:uppercase;letter-spacing:.03em;color:var(--headerColor);padding:.875rem 1rem;border-bottom:2px solid var(--primary);vertical-align:bottom;white-space:nowrap}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.8125rem 1rem;border-bottom:1px solid #eef0f3;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:normal}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#fafbfc}@media (hover:hover) and (pointer:fine){#content-page-714 .cs-post-content tbody tr:hover,#content-page-714 .cs-table-wrap tbody tr:hover{background-color:#fef9f9;transition:background-color .15s}}#content-page-714 .cs-post-content tbody tr:last-child td,#content-page-714 .cs-table-wrap tbody tr:last-child td{border-bottom:none}#content-page-714 .cs-post-content td code,#content-page-714 .cs-post-content th code,#content-page-714 .cs-table-wrap td code,#content-page-714 .cs-table-wrap th code{font-size:.85em;background:#f0f0f0;padding:.15em .4em;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}#content-page-714 .cs-post-content td a,#content-page-714 .cs-table-wrap td a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}#content-page-714 .cs-post-content td a:hover,#content-page-714 .cs-table-wrap td a:hover{text-decoration:none}@media (max-width:767px){#content-page-714{padding-left:1rem;padding-right:1rem}#content-page-714 .cs-post-layout{gap:2rem}#content-page-714 .cs-post-main{width:100%}#content-page-714 .cs-post-content h1,#content-page-714 .cs-post-content h2,#content-page-714 .cs-post-content h3,#content-page-714 .cs-post-content h4{max-width:100%;overflow-wrap:anywhere}#content-page-714 .cs-table-wrap{width:calc(100% + 2rem);border-radius:0;border-left:none;border-right:none;margin:1.5rem -1rem}#content-page-714 .cs-table-wrap table{font-size:.875rem}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.75rem;padding:.75rem .875rem;letter-spacing:.02em}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.75rem .875rem;font-size:.875rem}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#f8f9fa}#content-page-714 .cs-post-content td code,#content-page-714 .cs-table-wrap td code{font-size:.8em;padding:.1em .35em}}@media (max-width:600px){#content-page-714 .cs-table-wrap--stack table,#content-page-714 .cs-table-wrap--stack tbody,#content-page-714 .cs-table-wrap--stack td,#content-page-714 .cs-table-wrap--stack th,#content-page-714 .cs-table-wrap--stack thead,#content-page-714 .cs-table-wrap--stack tr{display:block;width:100%}#content-page-714 .cs-table-wrap--stack thead{display:none}#content-page-714 .cs-table-wrap--stack tbody tr{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:1rem;padding:.5rem 0;background:#fff}#content-page-714 .cs-table-wrap--stack tbody tr:nth-child(2n){background:#fff}#content-page-714 .cs-table-wrap--stack tbody td{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:.625rem 1rem;border-bottom:1px solid #f0f2f5;text-align:right}#content-page-714 .cs-table-wrap--stack tbody tr td:last-child{border-bottom:none}#content-page-714 .cs-table-wrap--stack tbody td::before{content:attr(data-label);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;color:var(--primary);text-align:left;flex-shrink:0;max-width:45%;line-height:1.4}}</style>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?",
+        "description": "Compare AWS S3, Supabase Storage, and Firebase Storage on pricing, security, upload feedback, and portability. Includes code examples and a decision framework for 2026.",
+        "url": "https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage",
+        "datePublished": "2026-11-03T10:00:00.000Z",
+        "dateModified": "2026-11-03T10:00:00.000Z",
+        "keywords": "Supabase, Firebase, AWS S3, Storage, Backend",
+        "articleSection": "Web Development",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/s3-vs-supabase-vs-firebase-storage.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+  <!-- JSON-LD: FAQ (only if post has FAQ section) -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?",
+          "item": "https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <main id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <img
+    fetchpriority="high"
+    decoding="async"
+    src="/images/blog/uploads/s3-vs-supabase-vs-firebase-storage.webp"
+    srcset="
+      /images/blog/uploads/s3-vs-supabase-vs-firebase-storage-400.webp 400w,
+      /images/blog/uploads/s3-vs-supabase-vs-firebase-storage-800.webp 800w
+    "
+    sizes="(max-width: 1024px) 92vw, 800px"
+    alt="S3 vs Supabase Storage vs Firebase Storage: Which Should You Use? - Red Surge Technology Blog"
+    width="1280"
+    height="720"
+  />
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="S3 vs Supabase Storage vs Firebase Storage: Which Should You Use?" />
+          <meta itemprop="description" content="Compare AWS S3, Supabase Storage, and Firebase Storage on pricing, security, upload feedback, and portability. Includes code examples and a decision framework for 2026." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/s3-vs-supabase-vs-firebase-storage" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-11-03T10:00:00.000Z">Nov 03, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-11-03T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">Web Development</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Supabase</span><span class="cs-tag" itemprop="keywords">Firebase</span><span class="cs-tag" itemprop="keywords">AWS S3</span><span class="cs-tag" itemprop="keywords">Storage</span><span class="cs-tag" itemprop="keywords">Backend</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Object storage is one of those decisions that feels minor until it isn&#39;t. You add a file upload button, pick the storage service that&#39;s already in your stack, and move on. Six months later you&#39;re looking at an egress bill that costs more than your database, or you&#39;re trying to implement per-user file permissions and realizing the storage layer has no idea who your users are.</p>
+<p>AWS S3, Supabase Storage, and Firebase Storage sit at three different points on the spectrum between &quot;infrastructure primitive&quot; and &quot;integrated application service.&quot; S3 is the raw storage layer that powers a huge portion of the internet. Supabase and Firebase are opinionated platforms that bundle storage with authentication, databases, and client SDKs.</p>
+<p>This guide compares them on the dimensions that actually drive the decision: pricing, security models, upload behavior, and portability. If you&#39;re already comparing Supabase and Firebase for the database, our <a href="/blog/supabase-vs-firebase-rls-realtime">Supabase vs Firebase RLS and real-time comparison</a> covers that side. This post is specifically about file storage. And if you&#39;re optimizing asset delivery, our <a href="/blog/cache-control-http-header">Cache-Control HTTP header guide</a> covers the caching layer that sits in front of all three.</p>
+<h2>The Core Architectural Difference</h2>
+<p>S3 is a storage primitive. It stores objects in buckets and exposes an HTTP API. It doesn&#39;t know about your users. It doesn&#39;t have a concept of a &quot;logged-in session.&quot; Authorization is handled by IAM policies, bucket policies, and presigned URLs. You build the application layer that decides who can upload and download what.</p>
+<p>Supabase Storage is an S3-compatible storage layer built into the Supabase platform. It stores objects in buckets, but it uses Postgres Row-Level Security to control access. Because Supabase also owns authentication and the database, you can write storage policies that reference your application&#39;s user data directly. It&#39;s an integrated service, not a raw primitive.</p>
+<p>Firebase Storage is Google Cloud Storage wrapped with Firebase SDKs and Security Rules. It&#39;s designed for client-side uploads from mobile and web apps, with built-in resumable uploads and progress monitoring. Access control is handled by Firebase Security Rules, which evaluate against the authenticated Firebase user.</p>
+<p>The practical consequence: S3 gives you maximum control and portability at the cost of integration work. Supabase and Firebase give you a faster path to working uploads at the cost of coupling to their platforms.</p>
+<h2>Pricing: The Real Cost of Storing and Serving Files</h2>
+<p>Storage pricing is where the differences are most visible, and where the marketing pages are most misleading. The per-gigabyte storage cost is only part of the story. Egress—the cost of serving files to users—is often the dominant line item.</p>
+<p>Here&#39;s the comparison based on published rates for standard storage tiers.</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Storage ($/GB/month)</th>
+<th>1TB stored</th>
+<th>Egress ($/GB)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AWS S3</strong></td>
+<td>$0.023</td>
+<td>$23.00</td>
+<td>$0.09</td>
+</tr>
+<tr>
+<td><strong>Supabase Storage</strong></td>
+<td>$0.0213</td>
+<td>$25.00</td>
+<td>$0.09 (uncached) / $0.03 (cached)</td>
+</tr>
+<tr>
+<td><strong>Firebase Storage</strong></td>
+<td>$0.026</td>
+<td>$100.00*</td>
+<td>$0.12</td>
+</tr>
+</tbody></table>
+<p>*Firebase&#39;s 1TB estimate includes egress and operation costs under typical usage, not storage alone. Storage itself is around $0.026/GB/month.</p>
+<p>A few things stand out.</p>
+<p><strong>S3 is the cheapest on raw storage</strong> but the most expensive on egress if you serve files directly from S3. AWS&#39;s own guidance is explicit: serving 1TB per month directly from S3 costs about $92, while serving it through CloudFront costs about $8.50. The fix is to put a CDN in front of S3, which is standard practice but adds configuration and cost.</p>
+<p><strong>Supabase Storage is priced almost identically to S3</strong> for storage and uncached egress, but it includes a CDN and charges less for cached egress. Its Smart CDN synchronizes asset metadata to the edge and automatically revalidates when files change. If your files are served through the CDN—which they should be—the effective egress cost is lower than S3&#39;s default.</p>
+<p><strong>Firebase Storage is the most expensive on egress</strong>, at $0.12/GB. It also now requires the Blaze pay-as-you-go plan for Cloud Storage, even at minimal volumes, since February 2026. The free tier still applies on Blaze, but you need a billing account. For read-heavy applications, this is the most expensive of the three.</p>
+<p>The cost picture changes entirely at scale. If you&#39;re serving terabytes of media per month, Cloudflare R2&#39;s free egress makes it worth considering alongside these three. But within this comparison, S3 plus CloudFront is the cheapest at high volume, Supabase is competitive and simpler, and Firebase is the most expensive for egress-heavy workloads.</p>
+<h2>Security: RLS vs Security Rules vs IAM</h2>
+<p>Storage security is where the three platforms diverge most sharply. Each has a different model for answering the question: <em>can this user access this file?</em></p>
+<h3>Supabase Storage: Postgres RLS on <code>storage.objects</code></h3>
+<p>Supabase Storage uses the same Row-Level Security system as the rest of the platform. Policies are SQL expressions attached to the <code>storage.objects</code> table. By default, Storage doesn&#39;t allow any uploads without RLS policies—you have to explicitly grant access.</p>
+<pre><code class="language-sql">-- Allow authenticated users to upload to their own folder
+create policy &quot;Users can upload to own folder&quot;
+on storage.objects
+for insert
+to authenticated
+with check (
+  bucket_id = &#39;documents&#39;
+  and (storage.foldername(name))[1] = (select auth.jwt()-&gt;&gt;&#39;sub&#39;)
+);
+</code></pre>
+<pre><code class="language-sql">-- Allow users to read their own files
+create policy &quot;Users can read own files&quot;
+on storage.objects
+for select
+to authenticated
+using (
+  bucket_id = &#39;documents&#39;
+  and owner_id = (select auth.jwt()-&gt;&gt;&#39;sub&#39;)
+);
+</code></pre>
+<p>The power here is that storage policies are SQL. You can reference other tables, check roles, validate file types, and enforce size limits—all in the same language you use for the rest of your data. The helper functions like <code>storage.foldername(name)</code> make path-based policies straightforward.</p>
+<p>The risk is the same as RLS on any table: a missing policy or a misconfigured <code>with check</code> can expose files. The service key bypasses RLS entirely, so it must never be exposed to clients. Our <a href="/blog/supabase-vs-firebase-rls-realtime">Supabase vs Firebase RLS comparison</a> covers the failure modes in more depth.</p>
+<h3>Firebase Storage: Security Rules</h3>
+<p>Firebase Storage uses Security Rules, a declarative DSL evaluated before every read and write. Rules have access to <code>request.auth</code>, which contains the authenticated Firebase user.</p>
+<pre><code class="language-javascript">rules_version = &#39;2&#39;;
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /users/{userId}/{allPaths=**} {
+      allow read: if request.auth != null &amp;&amp; request.auth.uid == userId;
+      allow write: if request.auth != null &amp;&amp; request.auth.uid == userId;
+    }
+  }
+}
+</code></pre>
+<p>Firebase Rules are simpler for straightforward user-scoped paths, but less expressive than SQL for complex authorization logic. Cross-document checks in Storage Rules are limited—rules evaluate against the request and the object metadata, not arbitrary database queries.</p>
+<p>The bigger structural difference is that Firebase Rules are a separate configuration artifact. They live in a different syntax, they&#39;re deployed separately, and they don&#39;t share a language with your application&#39;s data model. That&#39;s fine for simple cases; it creates friction when authorization logic spans storage and database.</p>
+<h3>AWS S3: IAM and Presigned URLs</h3>
+<p>S3 has the most flexible and the most complex security model. Authorization is handled by IAM policies (attached to users and roles) and bucket policies (attached to buckets). S3 doesn&#39;t know about your application&#39;s users, so the standard pattern is to generate a presigned URL on your server after checking permissions in your own database.</p>
+<pre><code class="language-javascript">import { S3Client, GetObjectCommand } from &quot;@aws-sdk/client-s3&quot;;
+import { getSignedUrl } from &quot;@aws-sdk/s3-request-presigner&quot;;
+
+const s3 = new S3Client({ region: &quot;us-east-1&quot; });
+
+async function getDownloadUrl(key, userId) {
+  // Check your database first
+  const file = await db.files.findUnique({ where: { key } });
+  if (file.ownerId !== userId) {
+    throw new Error(&quot;Forbidden&quot;);
+  }
+
+  const command = new GetObjectCommand({
+    Bucket: &quot;my-bucket&quot;,
+    Key: key,
+  });
+
+  return getSignedUrl(s3, command, { expiresIn: 3600 }); // 1 hour
+}
+</code></pre>
+<p>Presigned URLs expire. The console allows 1 minute to 12 hours; the SDK allows up to 7 days. They&#39;re a delivery mechanism, not an access-control policy—the database remains the place where you decide who can download what. The risk is that a leaked presigned URL grants access until it expires, so short expiration times are essential.</p>
+<p>S3&#39;s model is the most powerful because it&#39;s the most general. It&#39;s also the most work, because you&#39;re building the authorization layer yourself.</p>
+<h2>Real-Time Upload Feedback and Resumable Uploads</h2>
+<p>If you&#39;re building a mobile app, upload feedback matters. Users on unreliable networks need to see progress, pause, and resume. The three platforms handle this differently.</p>
+<p><strong>Firebase Storage</strong> has the strongest client-side upload story. The <code>uploadBytesResumable()</code> method provides progress events, pause/resume, and cancel. Resumable uploads retry transparently on mobile, and the SDK surfaces state changes through a task snapshot. For a mobile app where upload experience is part of the product, this is the most mature implementation.</p>
+<pre><code class="language-javascript">const task = uploadBytesResumable(storageRef, file);
+
+task.on(
+  &quot;state_changed&quot;,
+  (snapshot) =&gt; {
+    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    console.log(`Upload is ${progress}% done`);
+  },
+  (error) =&gt; {
+    console.error(error);
+  },
+  () =&gt; {
+    console.log(&quot;Upload complete&quot;);
+  },
+);
+</code></pre>
+<p><strong>Supabase Storage</strong> supports resumable uploads through its S3-compatible protocol, and the JavaScript SDK handles standard uploads. The real-time feedback story isn&#39;t as polished as Firebase&#39;s—there&#39;s no built-in progress event stream in the same way—but for most web applications, standard upload with a loading state is sufficient.</p>
+<p><strong>S3</strong> supports multipart uploads and resumable uploads via the SDK, but you implement the progress tracking and resume logic yourself. The AWS SDKs provide the primitives, but the client-side experience is your responsibility.</p>
+<p>The practical takeaway: if rich, real-time upload monitoring on mobile is a core product requirement, Firebase Storage has the advantage. If your uploads are standard web uploads—a profile photo, a document, a CSV—all three are capable, and the integration cost favors Supabase.</p>
+<h2>Image Transformations and CDN Behavior</h2>
+<p>Serving images at the right size is one of the highest-leverage performance optimizations you can make. The three platforms differ here too.</p>
+<p><strong>Supabase Storage</strong> includes on-the-fly image transformations on Pro plans and above. You append <code>width</code>, <code>height</code>, <code>resize</code>, and <code>quality</code> parameters to the URL, and Supabase returns a transformed image. It also automatically serves WebP to browsers that support it, which reduces egress and speeds up delivery. The free tier serves original files without transformation.</p>
+<pre><code class="language-javascript">const { data } = supabase.storage.from(&quot;images&quot;).getPublicUrl(&quot;photo.jpg&quot;, {
+  transform: { width: 500, height: 600 },
+});
+</code></pre>
+<p><strong>Firebase Storage</strong> does not include built-in image transformations. You use the Firebase Resize Image extension, which uses Cloud Functions to generate resized versions on upload. It works, but it&#39;s an add-on with additional cost and complexity.</p>
+<p><strong>S3</strong> has no built-in image transformations. You either pre-generate resized versions, use a service like Cloudinary or Imgix, or run transformations through Lambda@Edge. The flexibility is high; the integration work is significant.</p>
+<p>Supabase&#39;s built-in transformations are a meaningful advantage for applications that serve user-uploaded images. It&#39;s one less service to integrate, and the WebP optimization directly reduces bandwidth costs.</p>
+<h2>Portability and Lock-In</h2>
+<p>This is where S3&#39;s position as a primitive becomes a strength.</p>
+<p><strong>S3 is the de facto standard for object storage.</strong> Its API is so widely adopted that almost every alternative is S3-compatible: Cloudflare R2, Backblaze B2, DigitalOcean Spaces, Wasabi, Supabase Storage itself. If you build on S3, you can migrate to a cheaper S3-compatible provider without rewriting your upload logic. You can use the same SDK, the same CLI, and the same mental model.</p>
+<p><strong>Supabase Storage is S3-compatible.</strong> That means you can migrate away from Supabase to any S3 provider later without changing your client code. The RLS policies are Postgres-specific, so authorization logic doesn&#39;t port cleanly, but the object storage layer does. This is a meaningful form of portability that Firebase doesn&#39;t offer.</p>
+<p><strong>Firebase Storage is Google Cloud Storage under the hood</strong>, but the client SDKs and Security Rules are Firebase-specific. Migrating off Firebase means rewriting upload logic, authorization rules, and download URL generation. It&#39;s not impossible, but it&#39;s a larger effort than moving between S3-compatible providers.</p>
+<p>If long-term flexibility matters—and for infrastructure decisions, it usually should—S3 and Supabase Storage are the more portable choices.</p>
+<h2>A Decision Framework</h2>
+<p>Here&#39;s how I choose between the three.</p>
+<p><strong>Choose AWS S3 when:</strong></p>
+<ul>
+<li>You need the broadest ecosystem and tooling support.</li>
+<li>You&#39;re already on AWS and using IAM, CloudFront, and the rest of the stack.</li>
+<li>You need to store very large files (multi-gigabyte) and want the mature multipart upload tooling.</li>
+<li>Long-term portability between S3-compatible providers is a priority.</li>
+<li>You&#39;re comfortable building the authorization layer yourself.</li>
+</ul>
+<p><strong>Choose Supabase Storage when:</strong></p>
+<ul>
+<li>Your application already uses Supabase for database and auth.</li>
+<li>You want storage permissions to live alongside your relational data in Postgres RLS.</li>
+<li>You want built-in image transformations and a CDN without additional integration.</li>
+<li>You want S3 compatibility without managing S3 infrastructure.</li>
+<li>Your uploads are standard web uploads, not mobile-first with rich progress UI.</li>
+</ul>
+<p><strong>Choose Firebase Storage when:</strong></p>
+<ul>
+<li>Your app is mobile-first and needs resumable uploads with progress monitoring.</li>
+<li>You&#39;re already using Firebase Authentication and Security Rules.</li>
+<li>You want the most integrated client-side upload experience.</li>
+<li>Your files are document-shaped and don&#39;t require relational authorization.</li>
+<li>Egress cost is not the dominant concern.</li>
+</ul>
+<p>If you&#39;re building a server-side marketplace or SaaS application with relational ownership data, <strong>Supabase Storage</strong> is usually the simplest fit. If you&#39;re building a mobile app where upload experience is central, <strong>Firebase Storage</strong> has the edge. If you&#39;re building infrastructure that needs to outlive the current application framework, <strong>S3</strong> is the baseline.</p>
+<h2>A Real Story: The Egress Bill That Surprised Everyone</h2>
+<p>A team I worked with built a media-sharing feature on S3. They stored user-uploaded images and served them directly from the bucket. The storage cost was negligible—a few dollars a month. Then the feature went viral, and their egress bill went from $20 to $1,400 in a single month.</p>
+<p>The fix was straightforward: put CloudFront in front of the bucket, set long cache TTLs, and serve transformed images at the right sizes. The egress cost dropped by roughly 90%. But it took a billing surprise to make the team prioritize the CDN layer.</p>
+<p>The lesson: with S3, storage is cheap but delivery is not. You have to design the delivery path deliberately. Supabase Storage includes the CDN and the transformations by default, which is why it&#39;s often cheaper in practice despite similar headline storage rates. Firebase&#39;s egress pricing makes the delivery path expensive by default.</p>
+<p>If you&#39;ve been optimizing asset delivery, our <a href="/blog/cache-control-http-header">Cache-Control HTTP header guide</a> covers the caching directives that make the biggest difference, and our <a href="/blog/redis-cache-design-patterns">Redis cache design patterns</a> guide covers server-side caching for the metadata around your files.</p>
+<h2>Wrapping Up</h2>
+<p>S3, Supabase Storage, and Firebase Storage aren&#39;t interchangeable. S3 is a primitive that gives you control and portability at the cost of integration work. Supabase Storage is an integrated service that ties storage permissions to your relational data. Firebase Storage is a mobile-first storage layer with the best client-side upload experience.</p>
+<p>The pricing is similar on paper, but delivery costs diverge sharply. S3 needs a CDN to be cost-effective at scale. Supabase includes one. Firebase charges the most for egress. Security models follow the same pattern: S3 is the most flexible and the most work, Supabase is the most relational, Firebase is the simplest for user-scoped paths.</p>
+<p>For most teams building a SaaS or marketplace on Supabase, Supabase Storage is the natural choice. For mobile-first apps on Firebase, Firebase Storage is the path of least resistance. For everything else—especially infrastructure that needs to last—S3 plus a CDN is the durable baseline.</p>
+<p>For the broader platform comparison, see our <a href="/blog/supabase-vs-firebase-rls-realtime">Supabase vs Firebase RLS and real-time guide</a>. For caching strategies that reduce egress across all three, our <a href="/blog/redis-cache-design-patterns">Redis cache design patterns</a> and <a href="/blog/cache-control-http-header">Cache-Control HTTP header guide</a> have you covered.</p>
+<p>Now go put a CDN in front of that bucket before the bill arrives.</p>
+<hr>
+<p><em>Need help choosing or architecting your file storage layer? Red Surge Technology builds secure, cost-efficient storage pipelines for modern applications. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/supabase-vs-firebase-rls-realtime.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/supabase-vs-firebase-rls-realtime-100.webp"
+     alt="Supabase vs Firebase: Row-Level Security and Real-Time Compared" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Supabase vs Firebase: Row-Level Security and Real-Time Compared</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/laravel-token-guard-sanctum-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/laravel-token-guard-sanctum-guide-100.webp"
+     alt="Laravel Token Guard & Sanctum: Complete API Authentication Guide" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Laravel Token Guard & Sanctum: Complete API Authentication Guide</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/webgl-network-graph-visualization-react.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/webgl-network-graph-react-large-scale-100.webp"
+     alt="WebGL Network Graph Visualization in React: Scaling Beyond the DOM" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">WebGL Network Graph Visualization in React: Scaling Beyond the DOM</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-native-send-email-guide.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-native-send-email-guide-100.webp"
+     alt="Sending Emails in React Native: Complete Guide (Expo, Linking, IMAP)" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Sending Emails in React Native: Complete Guide (Expo, Linking, IMAP)</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/best-javascript-financial-charting-libraries-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/best-javascript-financial-charting-libraries-2026-100.webp"
+     alt="Best JavaScript Charting Libraries for Financial Data in 2026" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Best JavaScript Charting Libraries for Financial Data in 2026</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>
