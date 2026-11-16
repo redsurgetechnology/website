@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>Is Tailwind CSS a Build Tool? Clearing Up the Stack Confusion</title>
+    <meta name="description" content="No, Tailwind CSS is not a build tool. Learn where Tailwind fits in the modern frontend stack, why people confuse it with pnpm, webpack, and PowerShell, and what to search for instead." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="Tailwind, CSS, Web Development, Frontend, Tooling" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool" />
+    <meta property="og:title" content="Is Tailwind CSS a Build Tool? Clearing Up the Stack Confusion" />
+    <meta property="og:description" content="No, Tailwind CSS is not a build tool. Learn where Tailwind fits in the modern frontend stack, why people confuse it with pnpm, webpack, and PowerShell, and what to search for instead." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/is-tailwind-css-a-build-tool.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-11-18T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-11-18T10:00:00.000Z" />
+    <meta property="article:section" content="CSS" />
+    <meta property="article:tag" content="Tailwind" />
+    <meta property="article:tag" content="CSS" />
+    <meta property="article:tag" content="Web Development" />
+    <meta property="article:tag" content="Frontend" />
+    <meta property="article:tag" content="Tooling" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool" />
+    <meta name="twitter:title" content="Is Tailwind CSS a Build Tool? Clearing Up the Stack Confusion" />
+    <meta name="twitter:description" content="No, Tailwind CSS is not a build tool. Learn where Tailwind fits in the modern frontend stack, why people confuse it with pnpm, webpack, and PowerShell, and what to search for instead." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/is-tailwind-css-a-build-tool.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: inlined to eliminate render-blocking and prevent FOUC/CLS -->
+    <style>.cs-title,.cs-topper{line-height:1.2em;text-align:inherit}.cs-text,.cs-title,.cs-topper{text-align:inherit}:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}.cs-topper{font-size:var(--topperFontSize);text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--primary);margin-bottom:.25rem;display:block}.cs-title{font-size:var(--headerFontSize);font-weight:900;max-width:43.75rem;margin:0 0 1rem;color:var(--headerColor);position:relative}.cs-text{font-size:var(--bodyFontSize);line-height:1.5em;width:100%;max-width:40.625rem;margin:0;color:var(--bodyTextColor)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+    <style>html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}body.cs-open{overflow:hidden}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation:before{content:"";width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0;transition:height .5s,opacity .5s}#cs-navigation.cs-active:before{height:150vh;opacity:1}#cs-navigation.cs-active .cs-ul-wrapper{opacity:1;transform:scaleY(1);transition-delay:0.15s}#cs-navigation.cs-active .cs-li{transform:translateY(0);opacity:1}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem;transition:opacity .3s,visibility .3s,height .3s}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center;transition:transform .6s}#cs-navigation .cs-toggle.cs-active{transform:rotate(180deg)}#cs-navigation .cs-active .cs-line1{top:50%;transform:translate(-50%,-50%) rotate(225deg)}#cs-navigation .cs-active .cs-line2{top:50%;transform-origin:center;transform:translate(-50%,-50%) translateY(0) rotate(-225deg)}#cs-navigation .cs-active .cs-line3{bottom:100%;opacity:0}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%);transition:top .3s,left .3s,transform .5s}#cs-navigation .cs-line3{bottom:0;transition:bottom .3s,opacity .3s}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top;transition:transform .4s,opacity .3s}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link{font-size:clamp(1rem, 2.5vw, 1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li-link.cs-active,#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;transition:transform .6s,opacity .9s;text-align:center;width:100%;display:block}#cs-navigation .cs-dropdown{position:relative;color:var(--bodyTextColorWhite)}#cs-navigation .cs-dropdown.cs-active .cs-drop-ul{height:auto;opacity:1;visibility:visible;margin:.75rem 0 0;padding:.75rem 0}#cs-navigation .cs-dropdown.cs-active .cs-drop-link{opacity:1}#cs-navigation .cs-dropdown .cs-li-link{position:relative;transition:opacity .3s}#cs-navigation .cs-drop-icon{width:.9375rem;height:auto;position:absolute;top:50%;right:-1.25rem;transform:translateY(-50%)}#cs-navigation .cs-drop-ul{width:100%;height:0;margin:0;padding:0;background-color:var(--primary);overflow:hidden;opacity:0;visibility:hidden;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:.75rem;transition:padding .3s,margin .3s,height .3s,opacity .3s,visibility .3s}#cs-navigation .cs-drop-li{list-style:none}#cs-navigation .cs-li-link.cs-drop-link{font-size:clamp(.875rem, 2vw, 1.25rem);color:#fff}}@media only screen and (min-width:0rem){#cta-1185,#cta-1185 .cs-content{flex-direction:column;display:flex;width:100%}#cta-1185,#cta-1185 .cs-button-solid{position:relative;z-index:1;box-sizing:border-box}#cta-1185{max-width:80rem;margin:var(--sectionPadding);margin-left:auto;margin-right:auto;margin-top:0;padding:3.75rem clamp(1rem,7vw,3.75rem);border:1px solid #484848;align-items:center;justify-content:center}#cta-1185 .cs-content{text-align:center;max-width:25rem;align-items:center;gap:1.5rem}#cta-1185 .cs-title{width:100%;font-size:1.9375rem;margin:0;color:var(--bodyTextColorWhite)}#cta-1185 .cs-form{width:100%;max-width:45.3125rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;flex:none}#cta-1185 .cs-input{font-size:1rem;width:100%;height:clamp(2.875rem,5.5vw,3.5rem);margin:0;padding:0 0 0 1.25rem;border:none;box-sizing:border-box;display:block}#cta-1185 .cs-input::placeholder{color:#767676}#cta-1185 .cs-button-solid{font-size:1rem;line-height:clamp(2.875rem, 5.5vw, 3.5rem);text-decoration:none;font-weight:700;text-align:center;margin:0;color:#fff;min-width:9.375rem;padding:0 1.5rem;background-color:var(--primary);display:inline-block}#cta-1185 .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#000;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-nav-link:hover:before,#cta-1185 .cs-button-solid:hover:before{width:100%}#cta-1185 .cs-submit{width:100%;border:none;transition:color .3s}#cta-1185 .cs-submit:before{background-color:#fff}#cta-1185 .cs-submit:hover{cursor:pointer;color:var(--primary)}#cs-footer-1185 .cs-copyright-link,#cs-footer-1185 .cs-nav-link{text-decoration:none;transition:color .3s}#cs-footer-1185{padding:var(--sectionPadding);padding-top:clamp(7.5rem,15vw,12.5rem);position:relative}#cs-footer-1185 .cs-container{width:100%;max-width:43.75rem;margin:auto;display:flex;justify-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:2.5rem}#cs-footer-1185 .cs-logo-group{width:100%;position:relative}#cs-footer-1185 .cs-logo{width:12.3125rem;height:auto;display:block;margin-bottom:1.5rem}#cs-footer-1185 .cs-logo-img{width:100%;height:auto}#cs-footer-1185 .cs-logo-img.dark{display:none}#cs-footer-1185 .cs-text{font-size:clamp(.875rem, 2.5vw, 1rem);line-height:1.5em;margin:0;width:78%;max-width:26.25rem;color:var(--bodyTextColorWhite)}#cs-footer-1185 .cs-nav{width:100%;padding:0;margin:0;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:.75rem}#cs-footer-1185 .cs-nav-li{list-style:none;display:flex;justify-content:flex-start;align-items:flex-start}#cs-footer-1185 .cs-header{font-size:1rem;line-height:1.2em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;color:var(--bodyTextColorWhite);position:relative;display:block}#cs-footer-1185 .cs-nav-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite);position:relative;display:inline-block}#cs-footer-1185 .cs-nav-link:before{content:"";width:0%;height:.125rem;background:currentColor;opacity:1;position:absolute;display:block;bottom:-.125rem;left:0;transition:width .3s}#cs-footer-1185 .cs-copyright-link:hover,#cs-footer-1185 .cs-nav-link:hover{color:var(--secondary)}#cs-footer-1185 .cs-icon{width:1.5rem;height:auto;margin-right:.75rem}#cs-footer-1185 .cs-background,#cs-footer-1185 .cs-background img,#cs-footer-1185 .cs-background:before{height:100%;width:100%;position:absolute;top:0;left:0}#cs-footer-1185 .cs-bottom{max-width:80rem;margin:2rem auto auto;padding-top:1.5rem;border-top:1px solid #484848;display:flex;justify-content:space-between;align-items:center;color:#fff;flex-direction:column}#cs-footer-1185 .cs-copyright,#cs-footer-1185 .cs-copyright-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite)}#banner-712 .cs-background,#cs-footer-1185 .cs-background{display:block;z-index:-1}#cs-footer-1185 .cs-background:before{content:"";display:block;background:-moz-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:-webkit-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:linear-gradient(to right,rgba(26,26,26,.94) 0,#1a1a1a 100%);opacity:.97;z-index:1}#banner-712 .cs-background img,#cs-footer-1185 .cs-background img{object-fit:cover}#cs-footer-1185 .cs-graphic{width:100%;height:auto;position:absolute;top:0;left:0}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem, 6.4vw, 3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{box-sizing:border-box;width:100%;max-width:80rem;margin:0 auto;background-color:#fff;position:relative;z-index:1}#content-page-714 .cs-container{width:100%;max-width:80rem;margin:auto;display:flex;flex-direction:column;align-items:center;gap:clamp(3rem,6vw,4rem);position:relative}#content-page-714 .cs-content{text-align:left;width:100%;display:flex;flex-direction:column;align-items:flex-start}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 .cs-title{font-size:var(--headerFontSize);font-weight:900;line-height:1.2em;text-align:inherit;width:100%;max-width:100%;margin:0 0 1rem;color:var(--headerColor);position:relative}#content-page-714 h2,#content-page-714 h3,#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-weight:700;text-align:inherit;margin:0 0 1rem;color:var(--headerColor)}#content-page-714 .cs-color,#content-page-714 h3{color:var(--primary)}#content-page-714 h2{font-size:2rem;margin-top:2rem}#content-page-714 h3{font-size:1.5rem}#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-size:1.25rem}#content-page-714 .cs-button-solid,#content-page-714 p:last-of-type{margin-bottom:2rem}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 p a{font-size:inherit;line-height:inherit;text-decoration:underline;color:var(--primary)}#content-page-714 ol,#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}#content-page-714 .cs-image-group{font-size:min(1vw, 1em);width:33.875em;height:48.3125em;display:none;flex:none;position:relative;z-index:1}#content-page-714 .cs-picture{width:33.875em;height:40.4375em;border-radius:17.8125em;border:.75em solid #fff;background-color:#f7f7f7;box-sizing:border-box;overflow:hidden;display:block;position:absolute;top:0;left:0}#content-page-714 .cs-picture img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}#content-page-714 .cs-flower{width:22.625em;height:auto;display:block;position:absolute;bottom:-2.375em;right:-3em;z-index:-1;transform:rotate(142deg)}#content-page-714 .cs-sense{width:5em;height:auto;position:absolute;top:-.25em;left:.625em;transform:rotate(90deg)}#content-page-714 .cs-background{display:none}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#cta-1185 .cs-container{padding-left:3.75rem;padding-right:3.75rem}#cta-1185 .cs-content{max-width:100%}#cs-footer-1185 .cs-bottom,#cta-1185 .cs-form{flex-direction:row}#cta-1185 .cs-input{width:100%;max-width:32.8125rem}#cta-1185 .cs-submit{width:auto;min-width:11.875rem;flex:none}#cs-footer-1185 .cs-container{row-gap:0;flex-direction:row;justify-content:space-between;row-gap:2.5rem}#cs-footer-1185 .cs-nav{width:auto}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}#content-page-714 .cs-container{flex-direction:column;align-items:flex-start}#content-page-714 .cs-image-group{display:block;order:-1}#content-page-714 .cs-content{margin-left:auto}#content-page-714 .cs-background{width:20%;height:100%;background-color:#f7f7f7;display:block;position:absolute;left:0;top:0;z-index:-1}#content-page-714 .cs-background img{width:100%;height:100%;opacity:.2;object-fit:cover;position:absolute;top:0;left:0;z-index:1}}@media only screen and (min-width:64rem){#cs-navigation .cs-dropdown{position:relative}#cs-navigation .cs-dropdown:hover{cursor:pointer}#cs-navigation .cs-dropdown:hover .cs-drop-ul{transform:scaleY(1);opacity:1;visibility:visible}#cs-navigation .cs-dropdown:hover .cs-drop-li{opacity:1;transform:translateY(0)}#cs-navigation .cs-drop-icon{width:.75rem;height:auto;margin-left:.25rem;display:inline-block}#cs-navigation .cs-drop-ul{min-width:12.5rem;margin:0;padding:0;background-color:#fff;overflow:hidden;opacity:0;visibility:hidden;box-shadow:rgba(149,157,165,.2) 0 10px 16px;border-bottom:5px solid var(--primary);position:absolute;top:100%;z-index:-100;transform:scaleY(0);transform-origin:top;transition:transform .3s,visibility .3s,opacity .3s}#cs-navigation .cs-drop-li{list-style:none;font-size:1rem;text-decoration:none;opacity:0;width:100%;height:auto;display:block;transform:translateY(-.625rem);transition:opacity .6s,transform .6s}#cs-navigation .cs-drop-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-drop-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-drop-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-drop-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-drop-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-drop-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-drop-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-drop-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-drop-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-drop-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-drop-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-drop-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-drop-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link.cs-drop-link{font-size:1rem;white-space:nowrap;line-height:1.5em;text-decoration:none;width:100%;padding:.75rem;box-sizing:border-box;color:var(--bodyTextColor);display:block;transition:color .3s,background-color .3s}#cs-navigation .cs-li-link.cs-drop-link:hover{color:var(--primary);background-color:#f7f7f7}#cs-navigation .cs-li-link.cs-drop-link:before,#cs-navigation .cs-toggle{display:none}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:"";width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-top-link:hover{text-decoration:underline}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;transition:transform .3s}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative;transition:color .3s}#cs-navigation .cs-social-link:hover{transform:scale(1.1)}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem, 1.3vw, 1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li-link.cs-active{font-weight:700;color:var(--headerColor)}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em, 5.5vw, 3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-text,#cs-navigation .cs-button-solid:hover:before{width:100%}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}#cs-footer-1185 .cs-container{max-width:80rem;flex-wrap:nowrap;justify-content:flex-end;column-gap:5.25rem}#cs-footer-1185 .cs-logo-group{width:30%;max-width:24.1875rem;margin-right:auto}}@media only screen and (min-width:81.25rem){#cta-1185 .cs-content{flex-direction:row}#cta-1185 .cs-form{width:60%}#content-page-714 .cs-image-group{font-size:inherit;position:absolute;top:0;left:-6.25rem}#content-page-714 .cs-background{width:50%;margin-right:20.9375rem;left:auto;right:50%}}@media only screen and (min-width:112.5rem){#cs-footer-1185{padding-top:12vw}}.cs-breadcrumb{max-width:80rem;margin:0 auto;padding:.75rem 1rem}.cs-breadcrumb-list{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0;font-size:.8125rem;color:#6b7280}.cs-breadcrumb-link{color:#d90700;text-decoration:none;transition:opacity .2s}.cs-breadcrumb-link:hover{opacity:.75;text-decoration:underline}.cs-breadcrumb-sep{color:#9ca3af;margin:0 .15rem}.cs-breadcrumb-current{color:#374151;font-weight:500;max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cs-post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem;padding:.875rem 1rem;margin-bottom:1.5rem;background:#f9fafb;border-left:3px solid #d90700;border-radius:0 6px 6px 0;font-size:.8125rem;color:#4b5563}.cs-meta-item{display:flex;align-items:center;gap:.375rem;line-height:1}.cs-meta-icon{flex-shrink:0;color:#d90700;opacity:.85}.cs-meta-date time{font-weight:600;color:#1f2937}.cs-meta-updated span{font-style:italic;color:#6b7280}.cs-meta-updated time{font-style:normal;font-weight:500;color:#374151}.cs-meta-author [itemprop=name]{font-weight:600;color:#1f2937}.cs-meta-readtime span{font-weight:500}.cs-meta-category span{display:inline-block;background:#d90700;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.2em .65em;border-radius:999px;line-height:1.6}@media (min-width:640px){.cs-meta-item+.cs-meta-item::before{content:"";display:inline-block;width:1px;height:1rem;background:#d1d5db;margin-right:.75rem}}.cs-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-bottom:2rem}.cs-tags-icon{color:#9ca3af;flex-shrink:0;margin-right:.1rem}.cs-tag{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;font-size:.75rem;font-weight:500;padding:.25em .7em;border-radius:999px;line-height:1.6;transition:background .15s,border-color .15s,color .15s;cursor:default}.cs-tag:hover{background:#fef2f2;border-color:#fca5a5;color:#d90700}.cs-card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem;margin-bottom:.75rem}.cs-card-tags .cs-tag{font-size:.7rem}.cs-date,.cs-reading-time{display:inline-flex;align-items:center;gap:.25rem}.cs-date svg,.cs-reading-time svg{color:#d90700;opacity:.8;flex-shrink:0}.cs-pagination{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;margin-top:2.5rem}@media (max-width:479px){.cs-post-meta{gap:.5rem .75rem;font-size:.75rem}.cs-breadcrumb-current{max-width:24ch}}.cs-post-layout{display:flex;align-items:flex-start;gap:40px;max-width:1280px;margin:0 auto}.cs-post-sidebar{flex:0 0 280px;position:sticky;top:20px}.cs-post-main{flex:1;min-width:0}@media (max-width:900px){.cs-post-layout{flex-direction:column}.cs-post-sidebar{flex:1 1 auto;width:100%;position:static}}.cs-ad-slot{margin:24px 0;text-align:center}.cs-ad-label{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#999;margin-bottom:6px}.cs-ad-top{margin:0 0 16px;padding:12px 0}.cs-ad-sidebar{margin:0 0 24px}.cs-sidebar-recent{border:1px solid #eee;border-radius:8px;padding:16px}.cs-sidebar-heading{font-size:16px;margin:0 0 12px}.cs-sidebar-list{list-style:none;margin:0;padding:0}.cs-sidebar-item+.cs-sidebar-item{margin-top:12px}.cs-sidebar-link{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}.cs-sidebar-thumb{width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0}.cs-sidebar-title{font-size:13px;line-height:1.35}#content-page-714{box-sizing:border-box;width:100%}#content-page-714 .cs-post-layout{width:100%;max-width:100%;box-sizing:border-box}#content-page-714 .cs-post-content,#content-page-714 .cs-post-main{width:100%;max-width:100%;min-width:0;box-sizing:border-box}#content-page-714 .cs-post-content iframe,#content-page-714 .cs-post-content img,#content-page-714 .cs-post-content video{max-width:100%;height:auto}#content-page-714 .cs-post-content pre{max-width:100%;overflow-x:auto;box-sizing:border-box}#content-page-714 .cs-post-content table{max-width:100%}#content-page-714 .cs-post-content,#content-page-714 .cs-post-content a,#content-page-714 .cs-post-content li,#content-page-714 .cs-post-content p{overflow-wrap:anywhere;word-break:normal}.cs-table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:1.75rem 0;border-radius:8px;border:1px solid #e5e7eb;background:#fff;position:relative;background:linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right center/24px 100% no-repeat local,linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left center/24px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) right center/12px 100% no-repeat,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) left center/12px 100% no-repeat,#fff}.cs-table-wrap::-webkit-scrollbar{height:6px}.cs-table-wrap::-webkit-scrollbar-track{background:#f3f4f6;border-radius:0 0 8px 8px}.cs-table-wrap::-webkit-scrollbar-thumb{background:#cbd2d9;border-radius:4px}.cs-table-wrap::-webkit-scrollbar-thumb:hover{background:#9ca3af}#content-page-714 .cs-post-content table,#content-page-714 .cs-table-wrap table{width:100%;border-collapse:collapse;border-spacing:0;font-size:.9375rem;line-height:1.5;color:var(--bodyTextColor);background-color:transparent}#content-page-714 .cs-table-wrap--wide table{min-width:640px}#content-page-714 .cs-post-content thead,#content-page-714 .cs-table-wrap thead{background-color:#fef2f2;border-bottom:2px solid var(--primary)}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.875rem;font-weight:700;text-align:left;text-transform:uppercase;letter-spacing:.03em;color:var(--headerColor);padding:.875rem 1rem;border-bottom:2px solid var(--primary);vertical-align:bottom;white-space:nowrap}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.8125rem 1rem;border-bottom:1px solid #eef0f3;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:normal}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#fafbfc}@media (hover:hover) and (pointer:fine){#content-page-714 .cs-post-content tbody tr:hover,#content-page-714 .cs-table-wrap tbody tr:hover{background-color:#fef9f9;transition:background-color .15s}}#content-page-714 .cs-post-content tbody tr:last-child td,#content-page-714 .cs-table-wrap tbody tr:last-child td{border-bottom:none}#content-page-714 .cs-post-content td code,#content-page-714 .cs-post-content th code,#content-page-714 .cs-table-wrap td code,#content-page-714 .cs-table-wrap th code{font-size:.85em;background:#f0f0f0;padding:.15em .4em;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}#content-page-714 .cs-post-content td a,#content-page-714 .cs-table-wrap td a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}#content-page-714 .cs-post-content td a:hover,#content-page-714 .cs-table-wrap td a:hover{text-decoration:none}@media (max-width:767px){#content-page-714{padding-left:1rem;padding-right:1rem}#content-page-714 .cs-post-layout{gap:2rem}#content-page-714 .cs-post-main{width:100%}#content-page-714 .cs-post-content h1,#content-page-714 .cs-post-content h2,#content-page-714 .cs-post-content h3,#content-page-714 .cs-post-content h4{max-width:100%;overflow-wrap:anywhere}#content-page-714 .cs-table-wrap{width:calc(100% + 2rem);border-radius:0;border-left:none;border-right:none;margin:1.5rem -1rem}#content-page-714 .cs-table-wrap table{font-size:.875rem}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.75rem;padding:.75rem .875rem;letter-spacing:.02em}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.75rem .875rem;font-size:.875rem}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#f8f9fa}#content-page-714 .cs-post-content td code,#content-page-714 .cs-table-wrap td code{font-size:.8em;padding:.1em .35em}}@media (max-width:600px){#content-page-714 .cs-table-wrap--stack table,#content-page-714 .cs-table-wrap--stack tbody,#content-page-714 .cs-table-wrap--stack td,#content-page-714 .cs-table-wrap--stack th,#content-page-714 .cs-table-wrap--stack thead,#content-page-714 .cs-table-wrap--stack tr{display:block;width:100%}#content-page-714 .cs-table-wrap--stack thead{display:none}#content-page-714 .cs-table-wrap--stack tbody tr{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:1rem;padding:.5rem 0;background:#fff}#content-page-714 .cs-table-wrap--stack tbody tr:nth-child(2n){background:#fff}#content-page-714 .cs-table-wrap--stack tbody td{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:.625rem 1rem;border-bottom:1px solid #f0f2f5;text-align:right}#content-page-714 .cs-table-wrap--stack tbody tr td:last-child{border-bottom:none}#content-page-714 .cs-table-wrap--stack tbody td::before{content:attr(data-label);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;color:var(--primary);text-align:left;flex-shrink:0;max-width:45%;line-height:1.4}}</style>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Is Tailwind CSS a Build Tool? Clearing Up the Stack Confusion",
+        "description": "No, Tailwind CSS is not a build tool. Learn where Tailwind fits in the modern frontend stack, why people confuse it with pnpm, webpack, and PowerShell, and what to search for instead.",
+        "url": "https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool",
+        "datePublished": "2026-11-18T10:00:00.000Z",
+        "dateModified": "2026-11-18T10:00:00.000Z",
+        "keywords": "Tailwind, CSS, Web Development, Frontend, Tooling",
+        "articleSection": "CSS",
+        "timeRequired": "PT11M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/is-tailwind-css-a-build-tool.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+  <!-- JSON-LD: FAQ (only if post has FAQ section) -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Is Tailwind CSS a Build Tool? Clearing Up the Most Common Stack Confusion",
+          "item": "https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">Is Tailwind CSS a Build Tool? Clearing Up the Most Common Stack Confusion</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          Is Tailwind CSS a Build Tool? Clearing Up the Most Common Stack Confusion
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <main id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <img
+    fetchpriority="high"
+    decoding="async"
+    src="/images/blog/uploads/is-tailwind-css-a-build-tool.webp"
+    srcset="
+      /images/blog/uploads/is-tailwind-css-a-build-tool-400.webp 400w,
+      /images/blog/uploads/is-tailwind-css-a-build-tool-800.webp 800w
+    "
+    sizes="(max-width: 1024px) 92vw, 800px"
+    alt="Is Tailwind CSS a Build Tool? Clearing Up the Most Common Stack Confusion - Red Surge Technology Blog"
+    width="1280"
+    height="720"
+  />
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="Is Tailwind CSS a Build Tool? Clearing Up the Stack Confusion" />
+          <meta itemprop="description" content="No, Tailwind CSS is not a build tool. Learn where Tailwind fits in the modern frontend stack, why people confuse it with pnpm, webpack, and PowerShell, and what to search for instead." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/is-tailwind-css-a-build-tool" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-11-18T10:00:00.000Z">Nov 18, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-11-18T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT11M" />11 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">CSS</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">Tailwind</span><span class="cs-tag" itemprop="keywords">CSS</span><span class="cs-tag" itemprop="keywords">Web Development</span><span class="cs-tag" itemprop="keywords">Frontend</span><span class="cs-tag" itemprop="keywords">Tooling</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>The search queries are strange. &quot;PowerShell vs Tailwind CSS.&quot; &quot;pnpm vs Tailwind CSS.&quot; &quot;Cargo vs Tailwind CSS.&quot; &quot;Curl vs Tailwind CSS.&quot; &quot;Webpack vs Tailwind CSS.&quot;</p>
+<p>These aren&#39;t comparisons. They&#39;re category errors. PowerShell is a shell. pnpm is a package manager. Cargo is Rust&#39;s build tool. curl is an HTTP client. Tailwind CSS is a CSS framework. They don&#39;t compete. They don&#39;t overlap. Asking which one to use is like asking whether you should use a hammer or a spreadsheet.</p>
+<p>But the confusion is real, and it isn&#39;t stupid. If you&#39;re new to frontend development, the modern toolchain is a pile of tools with overlapping-sounding names and setup guides that list them all in the same <code>npm install</code> command. It&#39;s genuinely hard to tell which tool does what.</p>
+<p>This post is for anyone who has ever searched &quot;[tool] vs Tailwind CSS&quot; and felt like the results didn&#39;t answer the question. It&#39;s a map of the stack—what each layer does, where Tailwind fits, and why the confusion keeps happening.</p>
+<h2>The Layers of the Modern Frontend Stack</h2>
+<p>A typical React or Next.js project runs on five or six distinct layers. Each layer solves a different problem, and each one has its own set of tools.</p>
+<p><strong>The runtime.</strong> Node.js or Bun executes JavaScript outside the browser. It&#39;s what runs your dev server, your build scripts, and your test suite. You install it once, system-wide.</p>
+<p><strong>The package manager.</strong> npm, pnpm, yarn, or bun install. It downloads dependencies from a registry and manages your <code>node_modules</code>. It&#39;s how you get React, Vite, and Tailwind onto your machine.</p>
+<p><strong>The build tool.</strong> Vite, Webpack, Rollup, or Parcel. It bundles your source files, transforms them, and produces the assets that ship to the browser. It&#39;s what makes <code>import</code> statements resolve and JSX compile.</p>
+<p><strong>The framework.</strong> React, Vue, Svelte, or Astro. It&#39;s the component model and rendering strategy you build your UI with.</p>
+<p><strong>The CSS layer.</strong> Tailwind, CSS Modules, styled-components, or plain CSS. It&#39;s how your components get styled.</p>
+<p><strong>The shell.</strong> PowerShell, bash, zsh, or fish. It&#39;s the terminal you type commands into.</p>
+<p>None of these replace each other. You use all of them, stacked, in a single project.</p>
+<h2>What Tailwind CSS Actually Is</h2>
+<p>Tailwind is a <strong>utility-first CSS framework</strong>. You write class names like <code>flex items-center px-4 py-2 bg-blue-500</code> directly in your HTML or JSX, and Tailwind generates the corresponding CSS at build time.</p>
+<p>That&#39;s it. It produces a stylesheet. It doesn&#39;t run your code, manage your dependencies, or bundle your JavaScript. It&#39;s a library of pre-written CSS rules that you opt into by using their class names.</p>
+<p>A minimal Tailwind setup involves three things: installing the package via your package manager, adding a plugin to your build tool (PostCSS, Vite, or the Tailwind CLI), and pointing Tailwind at your source files so it knows which classes you&#39;re using. The build tool then generates a CSS file containing only the utilities you referenced.</p>
+<p>So Tailwind <em>has</em> a build step. But it&#39;s not a build tool. The build tool is Vite or Webpack. Tailwind is a plugin that runs inside it, the same way a Babel plugin or a PostCSS autoprefixer plugin runs inside it.</p>
+<h2>What Each &quot;vs Tailwind&quot; Tool Actually Does</h2>
+<p>Here&#39;s the honest answer to each of the queries that are landing on your site.</p>
+<p><strong>PowerShell vs Tailwind CSS.</strong> PowerShell is a command-line shell and scripting language from Microsoft. It&#39;s what you type commands into on Windows. Tailwind is a CSS framework. They interact in exactly one way: you might type <code>npm install tailwindcss</code> into a PowerShell window. That&#39;s the entire relationship.</p>
+<p><strong>pnpm vs Tailwind CSS.</strong> pnpm is a package manager. It downloads and installs dependencies faster than npm by using a content-addressable store. Tailwind is one of those dependencies. You&#39;d run <code>pnpm add tailwindcss</code> to install Tailwind. pnpm doesn&#39;t care what it&#39;s installing.</p>
+<p><strong>Cargo vs Tailwind CSS.</strong> Cargo is Rust&#39;s build tool and package manager. It has nothing to do with frontend CSS. Unless you&#39;re building a Rust-based frontend (like with Yew or Leptos), Cargo and Tailwind occupy entirely different universes.</p>
+<p><strong>curl vs Tailwind CSS.</strong> curl is a command-line HTTP client. It fetches URLs and prints the response. You might use it to test an API endpoint or download a file. It doesn&#39;t style anything.</p>
+<p><strong>Webpack vs Tailwind CSS.</strong> This one is slightly closer to a real comparison, but still a category error. Webpack is a module bundler. Tailwind is a CSS framework that runs as a PostCSS plugin during the bundling process. You don&#39;t choose between them; Webpack bundles your code and Tailwind generates your CSS inside that pipeline.</p>
+<p><strong>Rollup, Parcel, Vite vs Tailwind CSS.</strong> Same pattern. These are build tools. Tailwind is a plugin that runs inside them.</p>
+<p><strong>NestJS, Fastify vs Tailwind CSS.</strong> These are backend frameworks for Node.js. They handle API routing and server logic. Tailwind handles the visual layer on the client. A full-stack app might use both, but they never interact directly.</p>
+<p><strong>Airflow vs Tailwind CSS.</strong> Airflow is a workflow orchestration platform for data pipelines. It has nothing to do with frontend development.</p>
+<p><strong>Insomnia vs Tailwind CSS.</strong> Insomnia is an API client, similar to Postman. It&#39;s for testing HTTP requests. It&#39;s not a styling tool.</p>
+<h2>Why the Confusion Happens</h2>
+<p>Three things drive this confusion, and each one is reasonable.</p>
+<p><strong>Setup guides list all the tools together.</strong> A typical &quot;getting started with Next.js&quot; tutorial tells you to install Node, then pnpm, then create a Next.js app, then add Tailwind. From a beginner&#39;s perspective, all five commands look like &quot;installing tools&quot; and it&#39;s not clear which tool does what.</p>
+<p><strong>&quot;Install Tailwind&quot; looks like installing a program.</strong> When you run <code>pnpm add tailwindcss</code>, it feels like you&#39;re installing a piece of software that will then do something. But Tailwind is a library. It sits in <code>node_modules</code>, waiting for your build tool to ask it for CSS.</p>
+<p><strong>Tailwind has a build configuration step.</strong> You have to add a PostCSS plugin, create a <code>tailwind.config.js</code>, and point it at your source files. That config step feels like setting up a build tool. It&#39;s actually configuring a plugin inside your build tool.</p>
+<p>The pattern is: people see Tailwind mentioned alongside actual build tools in setup instructions, and they assume it&#39;s in the same category.</p>
+<h2>How They Actually Fit Together</h2>
+<p>Here&#39;s what a single <code>npm install tailwindcss</code> in a typical Next.js project actually does to your stack.</p>
+<ol>
+<li>You type the command in <strong>PowerShell</strong> or <strong>bash</strong>.</li>
+<li><strong>pnpm</strong> downloads <code>tailwindcss</code> and its dependencies into <code>node_modules</code>.</li>
+<li><strong>Next.js</strong> (which uses <strong>Turbopack</strong> or <strong>Webpack</strong> internally) reads your <code>postcss.config.js</code>, sees the Tailwind PostCSS plugin, and runs it on every CSS file in your project.</li>
+<li><strong>Tailwind</strong> scans your source files, finds which utility classes you&#39;ve used, and generates the corresponding CSS.</li>
+<li><strong>PostCSS</strong> combines that CSS with the rest of your stylesheets.</li>
+<li><strong>Next.js</strong> bundles everything and serves it.</li>
+</ol>
+<p>Six layers, one pipeline. None of them compete with each other.</p>
+<h2>The Real Comparisons You Might Want</h2>
+<p>If you searched &quot;X vs Tailwind CSS,&quot; here&#39;s what you probably meant.</p>
+<p><strong>If you&#39;re choosing a styling approach:</strong> you want <a href="/blog/css-modules-vs-tailwind">CSS Modules vs Tailwind</a>. That&#39;s the actual comparison between two ways to style React components.</p>
+<p><strong>If you&#39;re choosing a build tool:</strong> you want <a href="/blog/webpack-vs-vite">Webpack vs Vite</a>. That&#39;s the comparison between two tools that bundle your code and run plugins like Tailwind&#39;s.</p>
+<p><strong>If you&#39;re choosing a runtime:</strong> you want <a href="/blog/bun-vs-node-performance">Bun vs Node</a>. That&#39;s the comparison between two JavaScript runtimes.</p>
+<p><strong>If you&#39;re choosing a backend framework:</strong> you want <a href="/blog/django-vs-fastapi">Django vs FastAPI</a> or something similar. That&#39;s the comparison between server-side tools.</p>
+<p><strong>If you&#39;re choosing an ORM:</strong> you want <a href="/blog/prisma-vs-drizzle-orm-2026">Prisma vs Drizzle</a>. That&#39;s the comparison between two database layers.</p>
+<p>None of those are comparisons against Tailwind. They&#39;re comparisons against the actual tools that Tailwind is adjacent to in the stack.</p>
+<h2>A Real Story: The New Developer Who Tried to &quot;Install Tailwind Instead of npm&quot;</h2>
+<p>A few years ago, I was mentoring a bootcamp graduate who had just started their first role. They had been asked to set up a project and had spent two hours trying to install Tailwind &quot;as a replacement&quot; for npm, because the setup guide they were following had listed them in adjacent sentences.</p>
+<p>They called me confused. &quot;The tutorial says to install Tailwind, but I already have npm installed. Do I remove npm first?&quot;</p>
+<p>That question sounds absurd to anyone who&#39;s been doing this for a while, but it was genuinely reasonable from their perspective. They had no mental model of what each tool did. Both had been described as &quot;installing&quot; something. Both were mentioned in the same setup flow. The distinction between a package manager and a CSS framework wasn&#39;t obvious because nobody had told them.</p>
+<p>The fix was ten minutes of explaining the layers—runtime, package manager, build tool, framework, CSS—and then a successful setup. The confusion was entirely a naming-and-tutorial problem, not a skill problem.</p>
+<h2>A Reference Table</h2>
+<p>If you want a single thing to bookmark, here&#39;s the map.</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it does</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Shell</td>
+<td>Runs commands</td>
+<td>PowerShell, bash, zsh</td>
+</tr>
+<tr>
+<td>Runtime</td>
+<td>Executes JavaScript</td>
+<td>Node.js, Bun, Deno</td>
+</tr>
+<tr>
+<td>Package manager</td>
+<td>Installs dependencies</td>
+<td>npm, pnpm, yarn, bun install</td>
+</tr>
+<tr>
+<td>Build tool</td>
+<td>Bundles and transforms code</td>
+<td>Vite, Webpack, Rollup, Parcel, Turbopack</td>
+</tr>
+<tr>
+<td>Framework</td>
+<td>Component model and rendering</td>
+<td>React, Vue, Svelte, Astro, Next.js</td>
+</tr>
+<tr>
+<td>CSS framework</td>
+<td>Generates stylesheets</td>
+<td>Tailwind, Bootstrap, Bulma</td>
+</tr>
+<tr>
+<td>CSS approach</td>
+<td>How components get styled</td>
+<td>CSS Modules, styled-components, plain CSS</td>
+</tr>
+</tbody></table>
+<p>Each row is a distinct concern. You use every row in a single project. None of them replace each other.</p>
+<h2>Wrapping Up</h2>
+<p>Tailwind CSS is not a build tool. It&#39;s not a package manager. It&#39;s not a runtime. It&#39;s not a shell. It&#39;s a CSS framework that runs as a plugin inside your build tool, generating the CSS your components reference via utility classes.</p>
+<p>The confusion is real and reasonable. Setup guides list everything together, &quot;installing Tailwind&quot; looks like installing a program, and the config step feels like setting up a build tool. But once you see the stack as layers—shell, runtime, package manager, build tool, framework, CSS framework—the confusion evaporates.</p>
+<p>If you searched &quot;[tool] vs Tailwind CSS&quot; and ended up here, the question you actually meant is probably in the links above. Start with <a href="/blog/css-modules-vs-tailwind">CSS Modules vs Tailwind</a> if you&#39;re choosing a styling approach, or <a href="/blog/webpack-vs-vite">Webpack vs Vite</a> if you&#39;re choosing a build tool.</p>
+<p>Now go install Tailwind alongside npm, not instead of it.</p>
+<hr>
+<p><em>Need help untangling your frontend stack or setting up a build pipeline that actually makes sense? Red Surge Technology builds clean, maintainable frontend architectures. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/prisma-vs-drizzle-orm-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/prisma-vs-drizzle-orm-2026-100.webp"
+     alt="Prisma vs Drizzle ORM: Which TypeScript ORM Should You Choose in 2026?" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Prisma vs Drizzle ORM: Which TypeScript ORM Should You Choose in 2026?</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/nextjs-cms-visual-editor-comparison-sanity-payload-strapi-contentful.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/nextjs-cms-visual-editor-comparison-100.webp"
+     alt="Next.js CMS Visual Editor Comparison: Sanity vs Payload vs Strapi vs Contentful" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Next.js CMS Visual Editor Comparison: Sanity vs Payload vs Strapi vs Contentful</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-gantt-chart-performance-virtualization-baselines-realtime.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-gantt-performance-virtualization-baselines-realtime-100.webp"
+     alt="React Gantt Chart Performance: Virtualization, Baselines, and Real-Time Collaboration" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Gantt Chart Performance: Virtualization, Baselines, and Real-Time Collaboration</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/high-frequency-trading-charts-webgl-canvas-benchmarks.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/high-frequency-trading-charts-webgl-canvas-benchmarks-100.webp"
+     alt="High-Frequency Trading Charts in JavaScript: WebGL vs Canvas Benchmarks for Real-Time Financial Data" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">High-Frequency Trading Charts in JavaScript: WebGL vs Canvas Benchmarks for Real-Time Financial Data</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-flow-vs-sigma-vs-reagraph.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-flow-vs-sigma-vs-reagraph-100.webp"
+     alt="React Flow vs Sigma.js vs Reagraph: WebGL Network Graph Libraries for Large React Apps" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Flow vs Sigma.js vs Reagraph: WebGL Network Graph Libraries for Large React Apps</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>
