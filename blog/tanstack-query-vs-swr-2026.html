@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="preconnect" href="https://www.google-analytics.com" />
+    <!-- Preload LCP banner image -->
+    <link rel="preload" as="image"
+      href="/images/banner_bg_red-1280w.webp"
+      imagesrcset="/images/banner_bg_red-360w.webp 360w,
+                   /images/banner_bg_red-720w.webp 720w,
+                   /images/banner_bg_red-1280w.webp 1280w"
+      imagesizes="100vw"
+      type="image/webp"
+      fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Language" content="en-US" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Primary Meta Tags -->
+    <title>TanStack Query vs SWR 2026: Which React Data Library to Choose</title>
+    <meta name="description" content="TanStack Query vs SWR compared for 2026. Covers caching, mutations, optimistic updates, bundle size (13KB vs 5KB), TypeScript, and how React Server Components change the decision." />
+    <meta name="author" content="Collin Stewart" />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="keywords" content="React, TanStack Query, SWR, Data Fetching, JavaScript" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026" />
+    <meta property="og:title" content="TanStack Query vs SWR 2026: Which React Data Library to Choose" />
+    <meta property="og:description" content="TanStack Query vs SWR compared for 2026. Covers caching, mutations, optimistic updates, bundle size (13KB vs 5KB), TypeScript, and how React Server Components change the decision." />
+    <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/tanstack-query-vs-swr-2026.webp" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Red Surge Technology" />
+    <meta property="article:published_time" content="2026-11-23T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-11-23T10:00:00.000Z" />
+    <meta property="article:section" content="JavaScript" />
+    <meta property="article:tag" content="React" />
+    <meta property="article:tag" content="TanStack Query" />
+    <meta property="article:tag" content="SWR" />
+    <meta property="article:tag" content="Data Fetching" />
+    <meta property="article:tag" content="JavaScript" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026" />
+    <meta name="twitter:title" content="TanStack Query vs SWR 2026: Which React Data Library to Choose" />
+    <meta name="twitter:description" content="TanStack Query vs SWR compared for 2026. Covers caching, mutations, optimistic updates, bundle size (13KB vs 5KB), TypeScript, and how React Server Components change the decision." />
+    <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/tanstack-query-vs-swr-2026.webp" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#d90700" />
+
+    <!-- CSS: inlined to eliminate render-blocking and prevent FOUC/CLS -->
+    <style>.cs-title,.cs-topper{line-height:1.2em;text-align:inherit}.cs-text,.cs-title,.cs-topper{text-align:inherit}:root{--primary:#d90700;--primaryLight:#ff4d4d;--secondary:#00D2D9;--secondaryLight:#66E5E8;--headerColor:#1a1a1a;--bodyTextColor:#4e4b66;--bodyTextColorWhite:#fafbfc;--topperFontSize:clamp(0.8125rem, 1.6vw, 1rem);--headerFontSize:clamp(1.9375rem, 3.9vw, 3.0625rem);--bodyFontSize:1rem;--sectionPadding:clamp(3.75rem, 7.82vw, 4.25rem) 1rem}body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif}*,:after,:before{box-sizing:border-box}.cs-topper{font-size:var(--topperFontSize);text-transform:uppercase;letter-spacing:.1em;font-weight:700;color:var(--primary);margin-bottom:.25rem;display:block}.cs-title{font-size:var(--headerFontSize);font-weight:900;max-width:43.75rem;margin:0 0 1rem;color:var(--headerColor);position:relative}.cs-text{font-size:var(--bodyFontSize);line-height:1.5em;width:100%;max-width:40.625rem;margin:0;color:var(--bodyTextColor)}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+    <style>html{scroll-behavior:smooth}@media only screen and (max-width:1023px){#cs-navigation .cs-line1,#cs-navigation .cs-line2{animation-duration:.7s;animation-timing-function:ease;animation-fill-mode:forwards;animation-direction:normal}body.cs-open{overflow:hidden}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation:before{content:"";width:100%;height:0;background:rgba(0,0,0,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);position:absolute;display:block;top:100%;right:0;z-index:-1100;opacity:0;transition:height .5s,opacity .5s}#cs-navigation.cs-active:before{height:150vh;opacity:1}#cs-navigation.cs-active .cs-ul-wrapper{opacity:1;transform:scaleY(1);transition-delay:0.15s}#cs-navigation.cs-active .cs-li{transform:translateY(0);opacity:1}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;padding:1rem 1.5rem;box-sizing:border-box;background-color:#f7f7f7;display:flex;justify-content:space-between;align-items:center;gap:1rem}#cs-navigation .cs-top-contact{width:auto;box-sizing:border-box;display:flex;justify-content:center;align-items:center;gap:clamp(1rem,2vw,1.5rem)}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-button-solid,#cs-navigation .cs-top-link:nth-of-type(2){display:none}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{visibility:visible;opacity:1;display:flex;justify-content:center;align-items:center;gap:.5rem;transition:opacity .3s,visibility .3s,height .3s}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;padding:1.25rem 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;position:relative}#cs-navigation .cs-logo{width:auto;height:2.5rem;margin:0 auto 0 0;padding:0;box-sizing:border-box;display:flex;justify-content:center;align-items:center;order:1;z-index:10}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-nav{order:2}#cs-navigation .cs-toggle{width:2.875rem;height:2.875rem;margin:0 0 0 auto;background-color:var(--primary);border:none;display:flex;justify-content:center;align-items:center;transition:transform .6s}#cs-navigation .cs-toggle.cs-active{transform:rotate(180deg)}#cs-navigation .cs-active .cs-line1{top:50%;transform:translate(-50%,-50%) rotate(225deg)}#cs-navigation .cs-active .cs-line2{top:50%;transform-origin:center;transform:translate(-50%,-50%) translateY(0) rotate(-225deg)}#cs-navigation .cs-active .cs-line3{bottom:100%;opacity:0}#cs-navigation .cs-box{width:clamp(1.5rem,2vw,1.75rem);height:1rem;position:relative}#cs-navigation .cs-line{width:100%;height:2px;border-radius:2px;background-color:#fafbfc;position:absolute;left:50%;transform:translateX(-50%)}#cs-navigation .cs-line1{top:0;transform-origin:center}#cs-navigation .cs-line2{top:50%;transform:translateX(-50%) translateY(-50%);transition:top .3s,left .3s,transform .5s}#cs-navigation .cs-line3{bottom:0;transition:bottom .3s,opacity .3s}#cs-navigation .cs-ul-wrapper{width:100%;height:auto;padding-bottom:3rem;opacity:0;background-color:#fff;box-shadow:inset rgba(0,0,0,.2) 0 8px 24px;overflow:hidden;position:absolute;top:100%;left:0;z-index:-1;transform:scaleY(0);transform-origin:top;transition:transform .4s,opacity .3s}#cs-navigation .cs-ul{margin:0;padding:3rem 0 0;width:100%;height:auto;max-height:65vh;overflow:scroll;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:1.25rem}#cs-navigation .cs-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link{font-size:clamp(1rem, 2.5vw, 1.5rem);line-height:1.2em;text-decoration:none;margin:0;color:var(--headerColor);display:inline-block;position:relative}#cs-navigation .cs-li-link.cs-active,#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li{list-style:none;margin-right:0;transform:translateY(-4.375rem);opacity:0;transition:transform .6s,opacity .9s;text-align:center;width:100%;display:block}#cs-navigation .cs-dropdown{position:relative;color:var(--bodyTextColorWhite)}#cs-navigation .cs-dropdown.cs-active .cs-drop-ul{height:auto;opacity:1;visibility:visible;margin:.75rem 0 0;padding:.75rem 0}#cs-navigation .cs-dropdown.cs-active .cs-drop-link{opacity:1}#cs-navigation .cs-dropdown .cs-li-link{position:relative;transition:opacity .3s}#cs-navigation .cs-drop-icon{width:.9375rem;height:auto;position:absolute;top:50%;right:-1.25rem;transform:translateY(-50%)}#cs-navigation .cs-drop-ul{width:100%;height:0;margin:0;padding:0;background-color:var(--primary);overflow:hidden;opacity:0;visibility:hidden;display:flex;justify-content:flex-start;flex-direction:column;align-items:center;gap:.75rem;transition:padding .3s,margin .3s,height .3s,opacity .3s,visibility .3s}#cs-navigation .cs-drop-li{list-style:none}#cs-navigation .cs-li-link.cs-drop-link{font-size:clamp(.875rem, 2vw, 1.25rem);color:#fff}}@media only screen and (min-width:0rem){#cta-1185,#cta-1185 .cs-content{flex-direction:column;display:flex;width:100%}#cta-1185,#cta-1185 .cs-button-solid{position:relative;z-index:1;box-sizing:border-box}#cta-1185{max-width:80rem;margin:var(--sectionPadding);margin-left:auto;margin-right:auto;margin-top:0;padding:3.75rem clamp(1rem,7vw,3.75rem);border:1px solid #484848;align-items:center;justify-content:center}#cta-1185 .cs-content{text-align:center;max-width:25rem;align-items:center;gap:1.5rem}#cta-1185 .cs-title{width:100%;font-size:1.9375rem;margin:0;color:var(--bodyTextColorWhite)}#cta-1185 .cs-form{width:100%;max-width:45.3125rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;flex:none}#cta-1185 .cs-input{font-size:1rem;width:100%;height:clamp(2.875rem,5.5vw,3.5rem);margin:0;padding:0 0 0 1.25rem;border:none;box-sizing:border-box;display:block}#cta-1185 .cs-input::placeholder{color:#767676}#cta-1185 .cs-button-solid{font-size:1rem;line-height:clamp(2.875rem, 5.5vw, 3.5rem);text-decoration:none;font-weight:700;text-align:center;margin:0;color:#fff;min-width:9.375rem;padding:0 1.5rem;background-color:var(--primary);display:inline-block}#cta-1185 .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#000;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-nav-link:hover:before,#cta-1185 .cs-button-solid:hover:before{width:100%}#cta-1185 .cs-submit{width:100%;border:none;transition:color .3s}#cta-1185 .cs-submit:before{background-color:#fff}#cta-1185 .cs-submit:hover{cursor:pointer;color:var(--primary)}#cs-footer-1185 .cs-copyright-link,#cs-footer-1185 .cs-nav-link{text-decoration:none;transition:color .3s}#cs-footer-1185{padding:var(--sectionPadding);padding-top:clamp(7.5rem,15vw,12.5rem);position:relative}#cs-footer-1185 .cs-container{width:100%;max-width:43.75rem;margin:auto;display:flex;justify-content:flex-start;align-items:flex-start;flex-wrap:wrap;gap:2.5rem}#cs-footer-1185 .cs-logo-group{width:100%;position:relative}#cs-footer-1185 .cs-logo{width:12.3125rem;height:auto;display:block;margin-bottom:1.5rem}#cs-footer-1185 .cs-logo-img{width:100%;height:auto}#cs-footer-1185 .cs-logo-img.dark{display:none}#cs-footer-1185 .cs-text{font-size:clamp(.875rem, 2.5vw, 1rem);line-height:1.5em;margin:0;width:78%;max-width:26.25rem;color:var(--bodyTextColorWhite)}#cs-footer-1185 .cs-nav{width:100%;padding:0;margin:0;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:.75rem}#cs-footer-1185 .cs-nav-li{list-style:none;display:flex;justify-content:flex-start;align-items:flex-start}#cs-footer-1185 .cs-header{font-size:1rem;line-height:1.2em;text-transform:uppercase;font-weight:700;margin-bottom:.75rem;color:var(--bodyTextColorWhite);position:relative;display:block}#cs-footer-1185 .cs-nav-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite);position:relative;display:inline-block}#cs-footer-1185 .cs-nav-link:before{content:"";width:0%;height:.125rem;background:currentColor;opacity:1;position:absolute;display:block;bottom:-.125rem;left:0;transition:width .3s}#cs-footer-1185 .cs-copyright-link:hover,#cs-footer-1185 .cs-nav-link:hover{color:var(--secondary)}#cs-footer-1185 .cs-icon{width:1.5rem;height:auto;margin-right:.75rem}#cs-footer-1185 .cs-background,#cs-footer-1185 .cs-background img,#cs-footer-1185 .cs-background:before{height:100%;width:100%;position:absolute;top:0;left:0}#cs-footer-1185 .cs-bottom{max-width:80rem;margin:2rem auto auto;padding-top:1.5rem;border-top:1px solid #484848;display:flex;justify-content:space-between;align-items:center;color:#fff;flex-direction:column}#cs-footer-1185 .cs-copyright,#cs-footer-1185 .cs-copyright-link{font-size:1rem;line-height:1.5em;color:var(--bodyTextColorWhite)}#banner-712 .cs-background,#cs-footer-1185 .cs-background{display:block;z-index:-1}#cs-footer-1185 .cs-background:before{content:"";display:block;background:-moz-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:-webkit-linear-gradient(left,rgba(26,26,26,.94) 0,#1a1a1a 100%);background:linear-gradient(to right,rgba(26,26,26,.94) 0,#1a1a1a 100%);opacity:.97;z-index:1}#banner-712 .cs-background img,#cs-footer-1185 .cs-background img{object-fit:cover}#cs-footer-1185 .cs-graphic{width:100%;height:auto;position:absolute;top:0;left:0}#banner-712{padding:clamp(12.9375rem,12vw,14rem) 1rem 5.25rem;position:relative;z-index:1}#banner-712 .cs-container{text-align:center;width:100%;max-width:80rem;margin:auto;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;gap:1rem}#banner-712 .cs-int-title{font-size:clamp(2.4375rem, 6.4vw, 3.8125rem);font-weight:900;line-height:1.2em;text-align:inherit;margin:0;color:var(--bodyTextColorWhite);position:relative}#banner-712 .cs-background,#banner-712 .cs-background img,#banner-712 .cs-background:before{position:absolute;top:0;left:0;height:100%;width:100%}#banner-712 .cs-background:before{content:"";display:block;background:#000;opacity:.75;z-index:1}#content-page-714{box-sizing:border-box;width:100%;max-width:80rem;margin:0 auto;background-color:#fff;position:relative;z-index:1}#content-page-714 .cs-container{width:100%;max-width:80rem;margin:auto;display:flex;flex-direction:column;align-items:center;gap:clamp(3rem,6vw,4rem);position:relative}#content-page-714 .cs-content{text-align:left;width:100%;display:flex;flex-direction:column;align-items:flex-start}#content-page-714 .main-img-container{margin-bottom:1.5rem;width:100%}#content-page-714 .main-img-container img{width:100%;height:auto;margin:1rem 0;display:block}#content-page-714 .cs-title{font-size:var(--headerFontSize);font-weight:900;line-height:1.2em;text-align:inherit;width:100%;max-width:100%;margin:0 0 1rem;color:var(--headerColor);position:relative}#content-page-714 h2,#content-page-714 h3,#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-weight:700;text-align:inherit;margin:0 0 1rem;color:var(--headerColor)}#content-page-714 .cs-color,#content-page-714 h3{color:var(--primary)}#content-page-714 h2{font-size:2rem;margin-top:2rem}#content-page-714 h3{font-size:1.5rem}#content-page-714 h4,#content-page-714 h5,#content-page-714 h6{font-size:1.25rem}#content-page-714 .cs-button-solid,#content-page-714 p:last-of-type{margin-bottom:2rem}#content-page-714 p{font-size:var(--bodyFontSize);line-height:1.5em;text-align:inherit;width:100%;margin:0 0 1rem;color:var(--bodyTextColor)}#content-page-714 p a{font-size:inherit;line-height:inherit;text-decoration:underline;color:var(--primary)}#content-page-714 ol,#content-page-714 ul{padding-left:1.5rem;margin:0 0 2rem;color:var(--bodyTextColor);display:flex;flex-direction:column;gap:1rem}#content-page-714 ul li{list-style:none;color:inherit;position:relative}#content-page-714 ul li:before{content:"";width:3px;height:3px;background:currentColor;opacity:1;border-radius:50%;position:absolute;display:block;top:.625rem;left:-.75rem}#content-page-714 .cs-image-group{font-size:min(1vw, 1em);width:33.875em;height:48.3125em;display:none;flex:none;position:relative;z-index:1}#content-page-714 .cs-picture{width:33.875em;height:40.4375em;border-radius:17.8125em;border:.75em solid #fff;background-color:#f7f7f7;box-sizing:border-box;overflow:hidden;display:block;position:absolute;top:0;left:0}#content-page-714 .cs-picture img{width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0}#content-page-714 .cs-flower{width:22.625em;height:auto;display:block;position:absolute;bottom:-2.375em;right:-3em;z-index:-1;transform:rotate(142deg)}#content-page-714 .cs-sense{width:5em;height:auto;position:absolute;top:-.25em;left:.625em;transform:rotate(90deg)}#content-page-714 .cs-background{display:none}}@media only screen and (min-width:48rem){#cs-navigation .cs-top-link:nth-of-type(2){display:flex}#cta-1185 .cs-container{padding-left:3.75rem;padding-right:3.75rem}#cta-1185 .cs-content{max-width:100%}#cs-footer-1185 .cs-bottom,#cta-1185 .cs-form{flex-direction:row}#cta-1185 .cs-input{width:100%;max-width:32.8125rem}#cta-1185 .cs-submit{width:auto;min-width:11.875rem;flex:none}#cs-footer-1185 .cs-container{row-gap:0;flex-direction:row;justify-content:space-between;row-gap:2.5rem}#cs-footer-1185 .cs-nav{width:auto}#banner-712 .cs-background:before{opacity:1;background:linear-gradient(90.01deg,rgba(0,0,0,.85) 16.86%,rgba(0,0,0,0) 100%)}#content-page-714 .cs-container{flex-direction:column;align-items:flex-start}#content-page-714 .cs-image-group{display:block;order:-1}#content-page-714 .cs-content{margin-left:auto}#content-page-714 .cs-background{width:20%;height:100%;background-color:#f7f7f7;display:block;position:absolute;left:0;top:0;z-index:-1}#content-page-714 .cs-background img{width:100%;height:100%;opacity:.2;object-fit:cover;position:absolute;top:0;left:0;z-index:1}}@media only screen and (min-width:64rem){#cs-navigation .cs-dropdown{position:relative}#cs-navigation .cs-dropdown:hover{cursor:pointer}#cs-navigation .cs-dropdown:hover .cs-drop-ul{transform:scaleY(1);opacity:1;visibility:visible}#cs-navigation .cs-dropdown:hover .cs-drop-li{opacity:1;transform:translateY(0)}#cs-navigation .cs-drop-icon{width:.75rem;height:auto;margin-left:.25rem;display:inline-block}#cs-navigation .cs-drop-ul{min-width:12.5rem;margin:0;padding:0;background-color:#fff;overflow:hidden;opacity:0;visibility:hidden;box-shadow:rgba(149,157,165,.2) 0 10px 16px;border-bottom:5px solid var(--primary);position:absolute;top:100%;z-index:-100;transform:scaleY(0);transform-origin:top;transition:transform .3s,visibility .3s,opacity .3s}#cs-navigation .cs-drop-li{list-style:none;font-size:1rem;text-decoration:none;opacity:0;width:100%;height:auto;display:block;transform:translateY(-.625rem);transition:opacity .6s,transform .6s}#cs-navigation .cs-drop-li:first-of-type{transition-delay:50ms}#cs-navigation .cs-drop-li:nth-of-type(2){transition-delay:0.1s}#cs-navigation .cs-drop-li:nth-of-type(3){transition-delay:0.15s}#cs-navigation .cs-drop-li:nth-of-type(4){transition-delay:0.2s}#cs-navigation .cs-drop-li:nth-of-type(5){transition-delay:0.25s}#cs-navigation .cs-drop-li:nth-of-type(6){transition-delay:0.3s}#cs-navigation .cs-drop-li:nth-of-type(7){transition-delay:0.35s}#cs-navigation .cs-drop-li:nth-of-type(8){transition-delay:0.4s}#cs-navigation .cs-drop-li:nth-of-type(9){transition-delay:0.45s}#cs-navigation .cs-drop-li:nth-of-type(10){transition-delay:0.5s}#cs-navigation .cs-drop-li:nth-of-type(11){transition-delay:0.55s}#cs-navigation .cs-drop-li:nth-of-type(12){transition-delay:0.6s}#cs-navigation .cs-drop-li:nth-of-type(13){transition-delay:0.65s}#cs-navigation .cs-li-link.cs-drop-link{font-size:1rem;white-space:nowrap;line-height:1.5em;text-decoration:none;width:100%;padding:.75rem;box-sizing:border-box;color:var(--bodyTextColor);display:block;transition:color .3s,background-color .3s}#cs-navigation .cs-li-link.cs-drop-link:hover{color:var(--primary);background-color:#f7f7f7}#cs-navigation .cs-li-link.cs-drop-link:before,#cs-navigation .cs-toggle{display:none}body.scroll #cs-navigation{transform:translateY(-3.3125rem)}#cs-navigation{width:100%;padding:0;box-sizing:border-box;background-color:#fff;box-shadow:rgba(149,157,165,.2) 0 8px 24px;position:fixed;z-index:10000;transition:transform .3s}#cs-navigation .cs-top-bar{width:100%;display:flex;justify-content:center;align-items:center}#cs-navigation .cs-top-container{width:100%;max-width:80rem;padding:1rem;box-sizing:border-box;display:flex;justify-content:space-between;align-items:center;gap:3.125rem;position:relative;z-index:1}#cs-navigation .cs-top-container:before{content:"";width:100vw;height:100%;background:#f5f5f5;opacity:1;position:absolute;display:block;top:0;left:50%;z-index:-1;transform:translateX(-50%)}#cs-navigation .cs-top-contact{display:flex;justify-content:flex-start;align-items:center;gap:1.5rem}#cs-navigation .cs-top-link{font-size:.875rem;line-height:1.5em;text-decoration:none;margin:0;color:var(--bodyTextColor);display:flex;justify-content:flex-start;align-items:center;gap:.5rem;position:relative}#cs-navigation .cs-top-link:hover{text-decoration:underline}#cs-navigation .cs-link-icon{width:1rem;height:auto;display:block}#cs-navigation .cs-top-social{display:flex;justify-content:center;align-items:center;gap:1rem}#cs-navigation .cs-social-link{text-decoration:none;display:flex;justify-content:center;align-items:center;transition:transform .3s}#cs-navigation .cs-button-solid,#cs-navigation .cs-li-link{text-decoration:none;position:relative;transition:color .3s}#cs-navigation .cs-social-link:hover{transform:scale(1.1)}#cs-navigation .cs-social-icon{width:1.25rem;height:auto;display:block}#cs-navigation .cs-container{width:100%;max-width:80rem;margin:auto;padding:0 1rem;box-sizing:border-box;display:flex;justify-content:flex-end;align-items:center;gap:1.5rem;position:relative}#cs-navigation .cs-logo{height:clamp(2.5rem,4vw,2.75rem);margin:0 auto 0 0;padding:0;display:flex;justify-content:center;align-items:center;z-index:100}#cs-navigation .cs-logo img{width:175px;height:70px;object-fit:contain}#cs-navigation .cs-ul{width:100%;margin:0;padding:0;display:flex;justify-content:flex-start;align-items:center;gap:3rem}#cs-navigation .cs-li{list-style:none;padding:1.9375rem 0;flex:none}#cs-navigation .cs-li-link{font-size:clamp(.875rem, 1.3vw, 1rem);line-height:1.5em;margin:0;color:var(--headerColor);display:block}#cs-navigation .cs-li-link:hover{color:var(--primary)}#cs-navigation .cs-li-link.cs-active{font-weight:700;color:var(--headerColor)}#cs-navigation .cs-button-solid{font-size:1rem;line-height:clamp(2.875em, 5.5vw, 3.5em);font-weight:700;text-align:center;margin:0;color:#fff;padding:0 2rem;background-color:var(--primary);overflow:hidden;display:inline-block;z-index:1;box-sizing:border-box}#cs-navigation .cs-button-solid:before{content:"";position:absolute;height:100%;width:0%;background:#1a1a1a;opacity:1;top:0;left:0;z-index:-1;transition:width .3s}#cs-footer-1185 .cs-text,#cs-navigation .cs-button-solid:hover:before{width:100%}#cs-navigation .cs-nav-button{line-height:2.875rem;margin-left:1.5rem}#cs-footer-1185 .cs-container{max-width:80rem;flex-wrap:nowrap;justify-content:flex-end;column-gap:5.25rem}#cs-footer-1185 .cs-logo-group{width:30%;max-width:24.1875rem;margin-right:auto}}@media only screen and (min-width:81.25rem){#cta-1185 .cs-content{flex-direction:row}#cta-1185 .cs-form{width:60%}#content-page-714 .cs-image-group{font-size:inherit;position:absolute;top:0;left:-6.25rem}#content-page-714 .cs-background{width:50%;margin-right:20.9375rem;left:auto;right:50%}}@media only screen and (min-width:112.5rem){#cs-footer-1185{padding-top:12vw}}.cs-breadcrumb{max-width:80rem;margin:0 auto;padding:.75rem 1rem}.cs-breadcrumb-list{display:flex;flex-wrap:wrap;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0;font-size:.8125rem;color:#6b7280}.cs-breadcrumb-link{color:#d90700;text-decoration:none;transition:opacity .2s}.cs-breadcrumb-link:hover{opacity:.75;text-decoration:underline}.cs-breadcrumb-sep{color:#9ca3af;margin:0 .15rem}.cs-breadcrumb-current{color:#374151;font-weight:500;max-width:40ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cs-post-meta{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.25rem;padding:.875rem 1rem;margin-bottom:1.5rem;background:#f9fafb;border-left:3px solid #d90700;border-radius:0 6px 6px 0;font-size:.8125rem;color:#4b5563}.cs-meta-item{display:flex;align-items:center;gap:.375rem;line-height:1}.cs-meta-icon{flex-shrink:0;color:#d90700;opacity:.85}.cs-meta-date time{font-weight:600;color:#1f2937}.cs-meta-updated span{font-style:italic;color:#6b7280}.cs-meta-updated time{font-style:normal;font-weight:500;color:#374151}.cs-meta-author [itemprop=name]{font-weight:600;color:#1f2937}.cs-meta-readtime span{font-weight:500}.cs-meta-category span{display:inline-block;background:#d90700;color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:.2em .65em;border-radius:999px;line-height:1.6}@media (min-width:640px){.cs-meta-item+.cs-meta-item::before{content:"";display:inline-block;width:1px;height:1rem;background:#d1d5db;margin-right:.75rem}}.cs-tags{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-bottom:2rem}.cs-tags-icon{color:#9ca3af;flex-shrink:0;margin-right:.1rem}.cs-tag{display:inline-block;background:#f3f4f6;color:#374151;border:1px solid #e5e7eb;font-size:.75rem;font-weight:500;padding:.25em .7em;border-radius:999px;line-height:1.6;transition:background .15s,border-color .15s,color .15s;cursor:default}.cs-tag:hover{background:#fef2f2;border-color:#fca5a5;color:#d90700}.cs-card-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.5rem;margin-bottom:.75rem}.cs-card-tags .cs-tag{font-size:.7rem}.cs-date,.cs-reading-time{display:inline-flex;align-items:center;gap:.25rem}.cs-date svg,.cs-reading-time svg{color:#d90700;opacity:.8;flex-shrink:0}.cs-pagination{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:center;margin-top:2.5rem}@media (max-width:479px){.cs-post-meta{gap:.5rem .75rem;font-size:.75rem}.cs-breadcrumb-current{max-width:24ch}}.cs-post-layout{display:flex;align-items:flex-start;gap:40px;max-width:1280px;margin:0 auto}.cs-post-sidebar{flex:0 0 280px;position:sticky;top:20px}.cs-post-main{flex:1;min-width:0}@media (max-width:900px){.cs-post-layout{flex-direction:column}.cs-post-sidebar{flex:1 1 auto;width:100%;position:static}}.cs-ad-slot{margin:24px 0;text-align:center}.cs-ad-label{display:block;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#999;margin-bottom:6px}.cs-ad-top{margin:0 0 16px;padding:12px 0}.cs-ad-sidebar{margin:0 0 24px}.cs-sidebar-recent{border:1px solid #eee;border-radius:8px;padding:16px}.cs-sidebar-heading{font-size:16px;margin:0 0 12px}.cs-sidebar-list{list-style:none;margin:0;padding:0}.cs-sidebar-item+.cs-sidebar-item{margin-top:12px}.cs-sidebar-link{display:flex;gap:10px;align-items:center;text-decoration:none;color:inherit}.cs-sidebar-thumb{width:80px;height:60px;object-fit:cover;border-radius:4px;flex-shrink:0}.cs-sidebar-title{font-size:13px;line-height:1.35}#content-page-714{box-sizing:border-box;width:100%}#content-page-714 .cs-post-layout{width:100%;max-width:100%;box-sizing:border-box}#content-page-714 .cs-post-content,#content-page-714 .cs-post-main{width:100%;max-width:100%;min-width:0;box-sizing:border-box}#content-page-714 .cs-post-content iframe,#content-page-714 .cs-post-content img,#content-page-714 .cs-post-content video{max-width:100%;height:auto}#content-page-714 .cs-post-content pre{max-width:100%;overflow-x:auto;box-sizing:border-box}#content-page-714 .cs-post-content table{max-width:100%}#content-page-714 .cs-post-content,#content-page-714 .cs-post-content a,#content-page-714 .cs-post-content li,#content-page-714 .cs-post-content p{overflow-wrap:anywhere;word-break:normal}.cs-table-wrap{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;margin:1.75rem 0;border-radius:8px;border:1px solid #e5e7eb;background:#fff;position:relative;background:linear-gradient(to left,#fff 30%,rgba(255,255,255,0)) right center/24px 100% no-repeat local,linear-gradient(to right,#fff 30%,rgba(255,255,255,0)) left center/24px 100% no-repeat local,radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) right center/12px 100% no-repeat,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.15),rgba(0,0,0,0)) left center/12px 100% no-repeat,#fff}.cs-table-wrap::-webkit-scrollbar{height:6px}.cs-table-wrap::-webkit-scrollbar-track{background:#f3f4f6;border-radius:0 0 8px 8px}.cs-table-wrap::-webkit-scrollbar-thumb{background:#cbd2d9;border-radius:4px}.cs-table-wrap::-webkit-scrollbar-thumb:hover{background:#9ca3af}#content-page-714 .cs-post-content table,#content-page-714 .cs-table-wrap table{width:100%;border-collapse:collapse;border-spacing:0;font-size:.9375rem;line-height:1.5;color:var(--bodyTextColor);background-color:transparent}#content-page-714 .cs-table-wrap--wide table{min-width:640px}#content-page-714 .cs-post-content thead,#content-page-714 .cs-table-wrap thead{background-color:#fef2f2;border-bottom:2px solid var(--primary)}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.875rem;font-weight:700;text-align:left;text-transform:uppercase;letter-spacing:.03em;color:var(--headerColor);padding:.875rem 1rem;border-bottom:2px solid var(--primary);vertical-align:bottom;white-space:nowrap}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.8125rem 1rem;border-bottom:1px solid #eef0f3;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:normal}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#fafbfc}@media (hover:hover) and (pointer:fine){#content-page-714 .cs-post-content tbody tr:hover,#content-page-714 .cs-table-wrap tbody tr:hover{background-color:#fef9f9;transition:background-color .15s}}#content-page-714 .cs-post-content tbody tr:last-child td,#content-page-714 .cs-table-wrap tbody tr:last-child td{border-bottom:none}#content-page-714 .cs-post-content td code,#content-page-714 .cs-post-content th code,#content-page-714 .cs-table-wrap td code,#content-page-714 .cs-table-wrap th code{font-size:.85em;background:#f0f0f0;padding:.15em .4em;border-radius:3px;overflow-wrap:anywhere;word-break:break-word}#content-page-714 .cs-post-content td a,#content-page-714 .cs-table-wrap td a{color:var(--primary);text-decoration:underline;text-underline-offset:2px}#content-page-714 .cs-post-content td a:hover,#content-page-714 .cs-table-wrap td a:hover{text-decoration:none}@media (max-width:767px){#content-page-714{padding-left:1rem;padding-right:1rem}#content-page-714 .cs-post-layout{gap:2rem}#content-page-714 .cs-post-main{width:100%}#content-page-714 .cs-post-content h1,#content-page-714 .cs-post-content h2,#content-page-714 .cs-post-content h3,#content-page-714 .cs-post-content h4{max-width:100%;overflow-wrap:anywhere}#content-page-714 .cs-table-wrap{width:calc(100% + 2rem);border-radius:0;border-left:none;border-right:none;margin:1.5rem -1rem}#content-page-714 .cs-table-wrap table{font-size:.875rem}#content-page-714 .cs-post-content thead th,#content-page-714 .cs-table-wrap thead th{font-size:.75rem;padding:.75rem .875rem;letter-spacing:.02em}#content-page-714 .cs-post-content tbody td,#content-page-714 .cs-table-wrap tbody td{padding:.75rem .875rem;font-size:.875rem}#content-page-714 .cs-post-content tbody tr:nth-child(2n),#content-page-714 .cs-table-wrap tbody tr:nth-child(2n){background-color:#f8f9fa}#content-page-714 .cs-post-content td code,#content-page-714 .cs-table-wrap td code{font-size:.8em;padding:.1em .35em}}@media (max-width:600px){#content-page-714 .cs-table-wrap--stack table,#content-page-714 .cs-table-wrap--stack tbody,#content-page-714 .cs-table-wrap--stack td,#content-page-714 .cs-table-wrap--stack th,#content-page-714 .cs-table-wrap--stack thead,#content-page-714 .cs-table-wrap--stack tr{display:block;width:100%}#content-page-714 .cs-table-wrap--stack thead{display:none}#content-page-714 .cs-table-wrap--stack tbody tr{border:1px solid #e5e7eb;border-radius:8px;margin-bottom:1rem;padding:.5rem 0;background:#fff}#content-page-714 .cs-table-wrap--stack tbody tr:nth-child(2n){background:#fff}#content-page-714 .cs-table-wrap--stack tbody td{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;padding:.625rem 1rem;border-bottom:1px solid #f0f2f5;text-align:right}#content-page-714 .cs-table-wrap--stack tbody tr td:last-child{border-bottom:none}#content-page-714 .cs-table-wrap--stack tbody td::before{content:attr(data-label);font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.03em;color:var(--primary);text-align:left;flex-shrink:0;max-width:45%;line-height:1.4}}</style>
+
+    <!-- JSON-LD: BlogPosting + LocalBusiness -->
+    
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "TanStack Query vs SWR 2026: Which React Data Library to Choose",
+        "description": "TanStack Query vs SWR compared for 2026. Covers caching, mutations, optimistic updates, bundle size (13KB vs 5KB), TypeScript, and how React Server Components change the decision.",
+        "url": "https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026",
+        "datePublished": "2026-11-23T10:00:00.000Z",
+        "dateModified": "2026-11-23T10:00:00.000Z",
+        "keywords": "React, TanStack Query, SWR, Data Fetching, JavaScript",
+        "articleSection": "JavaScript",
+        "timeRequired": "PT14M",
+        "author": {
+          "@type": "Person",
+          "name": "Collin Stewart"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Red Surge Technology",
+          "url": "https://redsurgetechnology.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://redsurgetechnology.com/images/logo_black.png"
+          }
+        },
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://redsurgetechnology.com/images/blog/uploads/tanstack-query-vs-swr-2026.webp",
+          "width": 1200,
+          "height": 630
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Red Surge Technology",
+        "url": "https://redsurgetechnology.com",
+        "telephone": "+17325203386",
+        "email": "info@redsurgetechnology.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Wall Township",
+          "addressRegion": "NJ",
+          "postalCode": "07753",
+          "addressCountry": "US"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Ocean County", "containedInPlace": { "@type": "State", "name": "New Jersey" } },
+          { "@type": "AdministrativeArea", "name": "Monmouth County", "containedInPlace": { "@type": "State", "name": "New Jersey" } }
+        ],
+        "priceRange": "$$",
+        "image": "https://redsurgetechnology.com/images/new_redsurgetech_logo.svg",
+        "sameAs": [
+          "https://www.linkedin.com/company/red-surge-technology/",
+          "https://www.instagram.com/redsurgetechnology/",
+          "https://www.facebook.com/redsurgetech"
+        ]
+      }
+    ]
+    </script>
+
+    <!-- JSON-LD: Breadcrumb -->
+    
+  <!-- JSON-LD: FAQ (only if post has FAQ section) -->
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is TanStack Query better than SWR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most new React projects in 2026, yes—more features, better DevTools, better optimistic updates. But \"better\" depends on your needs. For simple data-fetching, SWR's smaller bundle and simpler API are advantages."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is SWR still maintained in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. SWR is maintained by Vercel and continues to receive updates. It's not the default choice for new projects, but it's actively developed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between TanStack Query and React Query?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They're the same library. React Query was renamed TanStack Query when the library became framework-agnostic (working with Vue, Svelte, Solid, etc.). React Query is the React-specific package inside TanStack Query."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use TanStack Query with Next.js Server Components?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, for client-side data flows. Server Components handle data that can be fetched on the server. TanStack Query handles mutations, polling, and client-dependent data. They complement each other; they don't compete."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use both TanStack Query and SWR in the same app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Technically yes, but it's not recommended. Mixing two data-fetching libraries creates confusion about which cache holds what data. Pick one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the bundle size difference?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SWR is about 5KB gzipped. TanStack Query is about 13KB gzipped. The difference matters for small apps but is negligible for larger ones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need a data-fetching library at all?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depends on the complexity. If you're just fetching data for a page and don't need caching, mutations, polling, or optimistic updates, plain `fetch` in a Server Component might be enough. See our [JavaScript Fetch API guide](/blog/how-to-use-the-javascript-fetch-api-with-async-await). Data-fetching libraries earn their weight when you need caching, deduplication, and mutation handling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between SWR and React Query for mutations?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "TanStack Query has a dedicated `useMutation` hook with full lifecycle (onMutate, onError, onSettled) and built-in rollback for optimistic updates. SWR's `useSWRMutation` is simpler and requires more manual handling for complex cases. --- _Need help choosing a data-fetching architecture or migrating between TanStack Query and SWR? Red Surge Technology builds maintainable React applications with clean data flows. [Get in touch](/contact) to discuss your project._"
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://redsurgetechnology.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://redsurgetechnology.com/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TanStack Query vs SWR in 2026: Which React Data-Fetching Library Wins?",
+          "item": "https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026"
+        }
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="cs-navigation">
+      <div class="cs-top-bar">
+        <div class="cs-top-container">
+          <div class="cs-top-contact">
+            <a href="tel:7325203386" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/phone-grey.svg" alt="grey phone icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Call us: (732) 520-3386
+            </a>
+            <a href="mailto:info@redsurgetechnology.com" class="cs-top-link">
+              <img class="cs-link-icon" src="/images/email-grey.svg" alt="grey email icon" width="16" height="16" aria-hidden="true" decoding="async" />
+              Email us: info@redsurgetechnology.com
+            </a>
+          </div>
+          <div class="cs-top-social">
+            <a href="https://www.linkedin.com/company/red-surge-technology/" class="cs-social-link" target="_blank" aria-label="LinkedIn">
+              <img class="cs-social-icon" src="/images/linkedin-grey.svg" alt="grey linkedin icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.instagram.com/redsurgetechnology/" class="cs-social-link" target="_blank" aria-label="Instagram">
+              <img class="cs-social-icon" src="/images/insta-grey.svg" alt="grey instagram icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+            <a href="https://www.facebook.com/redsurgetech" class="cs-social-link" target="_blank" aria-label="Facebook">
+              <img class="cs-social-icon" src="/images/face-grey.svg" alt="grey facebook icon" width="12" height="12" aria-hidden="true" decoding="async" />
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="cs-container">
+        <a href="/" class="cs-logo" aria-label="back to home">
+          <img src="/images/new_redsurgetech_logo.svg" alt="logo" width="175" height="63" aria-hidden="true" decoding="async" />
+        </a>
+        <nav class="cs-nav" role="navigation">
+          <button class="cs-toggle" aria-label="mobile menu toggle">
+            <div class="cs-box" aria-hidden="true">
+              <span class="cs-line cs-line1" aria-hidden="true"></span>
+              <span class="cs-line cs-line2" aria-hidden="true"></span>
+              <span class="cs-line cs-line3" aria-hidden="true"></span>
+            </div>
+          </button>
+          <div class="cs-ul-wrapper">
+            <ul id="cs-expanded" class="cs-ul" aria-expanded="false">
+              <li class="cs-li"><a href="/" class="cs-li-link">Home</a></li>
+              <li class="cs-li"><a href="/about" class="cs-li-link">About</a></li>
+              <li class="cs-li"><a href="/portfolio" class="cs-li-link">Portfolio</a></li>
+              <li class="cs-li"><a href="/blog" class="cs-li-link cs-active">Blog</a></li>
+              <li class="cs-li"><a href="/contact" class="cs-li-link">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+        <a href="/contact" class="cs-button-solid cs-nav-button">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- Banner -->
+<div id="banner-712">
+  <div class="cs-container">
+    <h1 class="cs-int-title">TanStack Query vs SWR in 2026: Which React Data-Fetching Library Wins?</h1>
+  </div>
+  <picture class="cs-background">
+    <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/banner_bg_red-720w.webp" type="image/webp" fetchpriority="high" />
+    <source media="(min-width: 1025px)" srcset="/images/banner_bg_red-1280w.webp" type="image/webp" fetchpriority="high" />
+    <img fetchpriority="high" src="/images/banner_bg_red-1280w.webp" alt="red technology banner background" width="1280" height="320" aria-hidden="true" />
+  </picture>
+</div>
+
+    <!-- Breadcrumb -->
+    
+    <nav class="cs-breadcrumb" aria-label="Breadcrumb">
+      <ol class="cs-breadcrumb-list">
+        <li class="cs-breadcrumb-item">
+          <a href="/" class="cs-breadcrumb-link">Home</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item">
+          <a href="/blog" class="cs-breadcrumb-link">Blog</a>
+          <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
+        </li>
+        <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
+          TanStack Query vs SWR in 2026: Which React Data-Fetching Library Wins?
+        </li>
+      </ol>
+    </nav>
+
+    <!-- Content -->
+    <main id="content-page-714">
+      <div class="cs-post-layout">
+        <div class="cs-post-main">
+          
+          <div class="main-img-container">
+  <img
+    fetchpriority="high"
+    decoding="async"
+    src="/images/blog/uploads/tanstack-query-vs-swr-2026.webp"
+    srcset="
+      /images/blog/uploads/tanstack-query-vs-swr-2026-400.webp 400w,
+      /images/blog/uploads/tanstack-query-vs-swr-2026-800.webp 800w
+    "
+    sizes="(max-width: 1024px) 92vw, 800px"
+    alt="TanStack Query vs SWR in 2026: Which React Data-Fetching Library Wins? - Red Surge Technology Blog"
+    width="1280"
+    height="720"
+  />
+</div>
+          <div>
+            
+        <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
+          <meta itemprop="headline" content="TanStack Query vs SWR 2026: Which React Data Library to Choose" />
+          <meta itemprop="description" content="TanStack Query vs SWR compared for 2026. Covers caching, mutations, optimistic updates, bundle size (13KB vs 5KB), TypeScript, and how React Server Components change the decision." />
+          <meta itemprop="url" content="https://redsurgetechnology.com/blog/tanstack-query-vs-swr-2026" />
+
+          <!-- Published date -->
+          <div class="cs-meta-item cs-meta-date" title="Published date">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <time itemprop="datePublished" datetime="2026-11-23T10:00:00.000Z">Nov 23, 2026</time>
+          </div>
+
+          <meta itemprop="dateModified" content="2026-11-23T10:00:00.000Z" />
+
+          <!-- Author -->
+          <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span itemprop="name">Collin Stewart</span>
+          </div>
+
+          
+          <!-- Reading time -->
+          <div class="cs-meta-item cs-meta-readtime" title="Estimated reading time">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span><meta itemprop="timeRequired" content="PT14M" />14 min read</span>
+          </div>
+
+          
+          <!-- Category -->
+          <div class="cs-meta-item cs-meta-category" title="Category">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span itemprop="articleSection">JavaScript</span>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        
+        <div class="cs-tags" aria-label="Post tags">
+          <svg class="cs-tags-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="15" height="15">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+            <line x1="7" y1="7" x2="7.01" y2="7"></line>
+          </svg>
+          <span class="cs-tag" itemprop="keywords">React</span><span class="cs-tag" itemprop="keywords">TanStack Query</span><span class="cs-tag" itemprop="keywords">SWR</span><span class="cs-tag" itemprop="keywords">Data Fetching</span><span class="cs-tag" itemprop="keywords">JavaScript</span>
+        </div>
+          </div>
+          <div class="cs-post-content">
+            <p>Before React Server Components, &quot;how do I fetch data in React&quot; had a clear answer: you don&#39;t do it in the component, you use a library. TanStack Query (formerly React Query) and SWR were the two dominant choices, and the comparison came down to features versus simplicity.</p>
+<p>RSC changed the picture. Server Components fetch data on the server, so client-side data fetching is no longer the default. But it didn&#39;t eliminate the need for these libraries—it clarified it. Client-side data fetching is now specifically for the things the server can&#39;t do: mutations with optimistic updates, polling, infinite scroll, and data that depends on client-only state.</p>
+<p>Given that, the comparison between TanStack Query and SWR is more focused than it was in 2023. This post covers what each library does well, where they differ, and how to choose in 2026.</p>
+<h2>Quick answer: which should you use?</h2>
+<table>
+<thead>
+<tr>
+<th>Your situation</th>
+<th>Use this</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Most new React projects</strong></td>
+<td><strong>TanStack Query</strong></td>
+</tr>
+<tr>
+<td><strong>Simple use cases (a few fetches, no mutations)</strong></td>
+<td><strong>SWR</strong></td>
+</tr>
+<tr>
+<td><strong>Complex async flows, optimistic updates, infinite scroll</strong></td>
+<td><strong>TanStack Query</strong></td>
+</tr>
+<tr>
+<td><strong>Already on Vercel/Next.js and want minimal deps</strong></td>
+<td><strong>SWR</strong></td>
+</tr>
+<tr>
+<td><strong>Team already uses TanStack Table/Router/Form</strong></td>
+<td><strong>TanStack Query</strong></td>
+</tr>
+<tr>
+<td><strong>You need DevTools for data fetching</strong></td>
+<td><strong>TanStack Query</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Default recommendation: TanStack Query.</strong> It has more features, better DevTools, a larger ecosystem, and it handles complex async flows without breaking a sweat. <strong>Choose SWR if your data needs are simple</strong> and you want the smallest possible bundle with a Vercel-native feel.</p>
+<h2>The mental model</h2>
+<p>Both libraries solve the same core problem: <strong>server state is different from client state, and React doesn&#39;t manage it well on its own.</strong></p>
+<p>Client state (modal open, form values, selected tab) lives in the component tree. Server state (fetched data, user profiles, posts) lives on a server, can go stale, needs to be refetched when data changes, and needs to handle loading/error states. React doesn&#39;t give you good primitives for server state, so you use a library.</p>
+<p>Both libraries give you:</p>
+<ul>
+<li><strong>Caching</strong> — fetch once, reuse the data</li>
+<li><strong>Revalidation</strong> — refetch when data is stale</li>
+<li><strong>Deduplication</strong> — avoid duplicate requests for the same data</li>
+<li><strong>Background updates</strong> — refresh without blocking the UI</li>
+<li><strong>Mutation helpers</strong> — write data and invalidate the cache</li>
+</ul>
+<p>They differ in how much they offer beyond that baseline.</p>
+<h2>Feature comparison</h2>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>TanStack Query</th>
+<th>SWR</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Basic fetching</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Caching</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Revalidation</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Deduping</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><strong>Optimistic updates</strong></td>
+<td>Yes (full rollback)</td>
+<td>Yes (simpler)</td>
+</tr>
+<tr>
+<td><strong>Infinite queries</strong></td>
+<td>Yes (<code>useInfiniteQuery</code>)</td>
+<td>Yes (<code>useSWRInfinite</code>)</td>
+</tr>
+<tr>
+<td><strong>Parallel queries</strong></td>
+<td>Yes</td>
+<td>Manual</td>
+</tr>
+<tr>
+<td><strong>Dependent queries</strong></td>
+<td>Yes (<code>enabled</code> option)</td>
+<td>Yes (conditional)</td>
+</tr>
+<tr>
+<td><strong>Prefetching</strong></td>
+<td>Yes (<code>prefetchQuery</code>)</td>
+<td>Yes (<code>preload</code>)</td>
+</tr>
+<tr>
+<td><strong>DevTools</strong></td>
+<td>First-party, excellent</td>
+<td>Third-party, limited</td>
+</tr>
+<tr>
+<td><strong>Pagination helpers</strong></td>
+<td>Yes</td>
+<td>Basic</td>
+</tr>
+<tr>
+<td><strong>Mutation library</strong></td>
+<td>Full (<code>useMutation</code>)</td>
+<td><code>useSWRMutation</code></td>
+</tr>
+<tr>
+<td><strong>Suspense support</strong></td>
+<td>Yes</td>
+<td>Yes (default)</td>
+</tr>
+<tr>
+<td><strong>Framework agnostic</strong></td>
+<td>Yes (Vue, Svelte, Solid)</td>
+<td>React only</td>
+</tr>
+<tr>
+<td><strong>Bundle size</strong></td>
+<td>~13KB gzipped</td>
+<td>~5KB gzipped</td>
+</tr>
+<tr>
+<td><strong>TypeScript</strong></td>
+<td>Excellent</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td><strong>Weekly downloads</strong></td>
+<td>~9.5M</td>
+<td>~2M</td>
+</tr>
+</tbody></table>
+<p>The three rows that drive most decisions are <strong>DevTools</strong>, <strong>optimistic updates with rollback</strong>, and <strong>bundle size</strong>.</p>
+<h3>DevTools</h3>
+<p>TanStack Query&#39;s DevTools are genuinely useful. You get a floating panel showing every query in your app: its state (loading, success, error), its cache data, when it was last fetched, when it will refetch, and whether it&#39;s stale. You can manually invalidate queries from the DevTools, which is invaluable for debugging.</p>
+<p>SWR doesn&#39;t have first-party DevTools. There&#39;s a third-party extension, but it&#39;s less capable.</p>
+<p>If you&#39;re debugging a complex data flow, TanStack Query&#39;s DevTools save hours.</p>
+<h3>Optimistic updates with rollback</h3>
+<p>Both libraries support optimistic updates, but TanStack Query&#39;s implementation is more complete. When a mutation fails, TanStack Query can roll back the optimistic change cleanly. SWR&#39;s approach is simpler and requires more manual handling for complex cases.</p>
+<p>For simple optimistic updates (like/love button), both work. For complex ones (optimistically adding a comment that might fail), TanStack Query handles the rollback with less code.</p>
+<h3>Bundle size</h3>
+<p>SWR is roughly <strong>5KB gzipped</strong>. TanStack Query is roughly <strong>13KB gzipped</strong>. That&#39;s a real difference—about 8KB of JavaScript that your users download.</p>
+<p>Does 8KB matter? On its own, not much. But it&#39;s the kind of difference that matters if you&#39;re optimizing for <a href="/blog/reduce-javascript-bundle-size-react">reducing JavaScript bundle size</a>. For a small app with simple data needs, SWR&#39;s smaller footprint is a genuine advantage.</p>
+<h2>What changed with React Server Components</h2>
+<p>If you&#39;re using <a href="/blog/react-server-components-nextjs">React Server Components</a> in Next.js, most of your data fetching happens on the server. Server Components <code>await</code> data directly. The client only needs data-fetching libraries for:</p>
+<ul>
+<li>Mutations with optimistic updates</li>
+<li>Polling</li>
+<li>Infinite scroll</li>
+<li>Data that depends on client-only state (user interactions, form inputs)</li>
+<li>Third-party API calls that must happen client-side</li>
+</ul>
+<p>This narrows the scope where either library applies, but it also clarifies the choice. For the remaining client-side data flows, TanStack Query&#39;s feature set is more valuable because it handles the complex cases better.</p>
+<p>If you&#39;re not using RSC, both libraries remain broadly applicable.</p>
+<h2>When to use TanStack Query</h2>
+<p><strong>Choose TanStack Query if:</strong></p>
+<ul>
+<li>You have complex async flows (multiple dependent queries, conditional fetching)</li>
+<li>You need robust optimistic updates with rollback</li>
+<li>You want first-party DevTools for debugging data flows</li>
+<li>You&#39;re building a large app where the extra features earn their weight</li>
+<li>Your team already uses other TanStack libraries (Table, Router, Form)</li>
+<li>You want the larger ecosystem (more examples, plugins, integrations)</li>
+</ul>
+<p>TanStack Query is the default for most new React projects in 2026. It&#39;s more feature-complete, the DevTools are excellent, and the ecosystem is larger.</p>
+<h2>When to use SWR</h2>
+<p><strong>Choose SWR if:</strong></p>
+<ul>
+<li>Your data needs are simple (a few fetches, basic cache invalidation)</li>
+<li>You want the smallest bundle size</li>
+<li>You&#39;re on Next.js/Vercel and want the minimal-dependency path</li>
+<li>You prefer a &quot;do less, do it well&quot; API</li>
+<li>You already know SWR and it&#39;s working</li>
+</ul>
+<p>SWR is built by Vercel and integrated closely with the Next.js ecosystem. It&#39;s a simpler library that solves the core problem well. For apps that don&#39;t need TanStack Query&#39;s advanced features, SWR is a valid choice.</p>
+<h2>A real story: when SWR was the right pick</h2>
+<p>A team I worked with built a small internal dashboard—maybe six pages, a handful of API endpoints, no complex mutations. They chose SWR because it was what the team already knew, and the requirements didn&#39;t justify more.</p>
+<p>The app worked. It was fast, the bundle stayed small, and nobody ever complained about missing features. When a new developer joined and suggested migrating to TanStack Query, the team correctly said no. The migration would have cost a week of work for zero user-facing benefit.</p>
+<p>The lesson: for simple apps, SWR&#39;s simplicity is a feature, not a limitation. Don&#39;t pick TanStack Query just because it&#39;s more powerful.</p>
+<h2>Frequently asked questions</h2>
+<h3>Is TanStack Query better than SWR?</h3>
+<p>For most new React projects in 2026, yes—more features, better DevTools, better optimistic updates. But &quot;better&quot; depends on your needs. For simple data-fetching, SWR&#39;s smaller bundle and simpler API are advantages.</p>
+<h3>Is SWR still maintained in 2026?</h3>
+<p>Yes. SWR is maintained by Vercel and continues to receive updates. It&#39;s not the default choice for new projects, but it&#39;s actively developed.</p>
+<h3>What&#39;s the difference between TanStack Query and React Query?</h3>
+<p>They&#39;re the same library. React Query was renamed TanStack Query when the library became framework-agnostic (working with Vue, Svelte, Solid, etc.). React Query is the React-specific package inside TanStack Query.</p>
+<h3>Should I use TanStack Query with Next.js Server Components?</h3>
+<p>Yes, for client-side data flows. Server Components handle data that can be fetched on the server. TanStack Query handles mutations, polling, and client-dependent data. They complement each other; they don&#39;t compete.</p>
+<h3>Can I use both TanStack Query and SWR in the same app?</h3>
+<p>Technically yes, but it&#39;s not recommended. Mixing two data-fetching libraries creates confusion about which cache holds what data. Pick one.</p>
+<h3>What&#39;s the bundle size difference?</h3>
+<p>SWR is about 5KB gzipped. TanStack Query is about 13KB gzipped. The difference matters for small apps but is negligible for larger ones.</p>
+<h3>Do I need a data-fetching library at all?</h3>
+<p>Depends on the complexity. If you&#39;re just fetching data for a page and don&#39;t need caching, mutations, polling, or optimistic updates, plain <code>fetch</code> in a Server Component might be enough. See our <a href="/blog/how-to-use-the-javascript-fetch-api-with-async-await">JavaScript Fetch API guide</a>. Data-fetching libraries earn their weight when you need caching, deduplication, and mutation handling.</p>
+<h3>What&#39;s the difference between SWR and React Query for mutations?</h3>
+<p>TanStack Query has a dedicated <code>useMutation</code> hook with full lifecycle (onMutate, onError, onSettled) and built-in rollback for optimistic updates. SWR&#39;s <code>useSWRMutation</code> is simpler and requires more manual handling for complex cases.</p>
+<hr>
+<p><em>Need help choosing a data-fetching architecture or migrating between TanStack Query and SWR? Red Surge Technology builds maintainable React applications with clean data flows. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+
+          </div>
+        </div>
+        
+    <aside class="cs-post-sidebar">
+      
+      <div class="cs-sidebar-recent">
+        <h3 class="cs-sidebar-heading">Recent Posts</h3>
+        <ul class="cs-sidebar-list">
+          
+          <li class="cs-sidebar-item">
+            <a href="/blog/react-hook-form-vs-formik-vs-tanstack-form.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/react-hook-form-vs-formik-vs-tanstack-form-100.webp"
+     alt="React Hook Form vs Formik vs TanStack Form: Which Form Library in 2026?" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">React Hook Form vs Formik vs TanStack Form: Which Form Library in 2026?</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/vitest-vs-jest-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/vitest-vs-jest-2026-100.webp"
+     alt="Vitest vs Jest in 2026: The Test Runner Race Is Over (Almost)" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Vitest vs Jest in 2026: The Test Runner Race Is Over (Almost)</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/zustand-vs-redux-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/zustand-vs-redux-2026-100.webp"
+     alt="Zustand vs Redux in 2026: Which State Manager Should You Actually Use?" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Zustand vs Redux in 2026: Which State Manager Should You Actually Use?</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/is-tailwind-css-a-build-tool.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/is-tailwind-css-a-build-tool-100.webp"
+     alt="Is Tailwind CSS a Build Tool? Clearing Up the Most Common Stack Confusion" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Is Tailwind CSS a Build Tool? Clearing Up the Most Common Stack Confusion</span>
+            </a>
+          </li>
+          <li class="cs-sidebar-item">
+            <a href="/blog/prisma-vs-drizzle-orm-2026.html" class="cs-sidebar-link">
+              <img class="cs-sidebar-thumb"
+     src="/images/blog/uploads/prisma-vs-drizzle-orm-2026-100.webp"
+     alt="Prisma vs Drizzle ORM: Which TypeScript ORM Should You Choose in 2026?" width="80" height="60" loading="lazy" decoding="async" />
+              <span class="cs-sidebar-title">Prisma vs Drizzle ORM: Which TypeScript ORM Should You Choose in 2026?</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </aside>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer id="cs-footer-1185">
+      <img class="cs-graphic" aria-hidden="true" loading="lazy" decoding="async" src="/images/footer-v.svg" alt="logo" width="1920" height="163" />
+      <div id="cta-1185">
+        <div class="cs-content">
+          <h2 class="cs-title">Stay in the Loop</h2>
+          <form class="cs-form" name="Contact Form" method="post" id="subscribe-form">
+            <label for="cs-email-1185" class="visually-hidden">Email Address</label>
+            <input class="cs-input" type="email" id="cs-email-1185" name="find-us" placeholder="Email Address" />
+            <button class="cs-button-solid cs-submit" type="submit">Subscribe Now</button>
+          </form>
+        </div>
+      </div>
+      <div class="cs-container">
+        <div class="cs-logo-group">
+          <a aria-label="go back to home" class="cs-logo" href="/">
+            <img class="cs-logo-img" aria-hidden="true" loading="lazy" decoding="async" src="/images/new_redsurgetech_logo_white.svg" alt="red surge technology white logo" width="197" height="71" />
+          </a>
+          <p class="cs-text">A professional website design and development company working with small businesses around the world to create a strong presence on the web.</p>
+        </div>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Quick Links</span></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/">Home</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/about">About</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/portfolio">Portfolio</a></li>
+          <li class="cs-nav-li"><a class="cs-nav-link" href="/contact">Contact</a></li>
+        </ul>
+        <ul class="cs-nav">
+          <li class="cs-nav-li"><span class="cs-header">Contact</span></li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/phone-stroke-footer.svg" alt="phone icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-phone" href="tel:+17325203386">(732) 520-3386</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/email-stroke-footer.svg" alt="email icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-email" href="mailto:info@redsurgetechnology.com">info@redsurgetechnology.com</a>
+          </li>
+          <li class="cs-nav-li">
+            <img class="cs-icon" aria-hidden="true" loading="lazy" decoding="async" src="/images/pin-stroke-footer.svg" alt="pin icon white" width="24" height="24" />
+            <a class="cs-nav-link cs-address" href="https://www.google.com/maps/place/Wall+Township,+NJ/" target="_blank" rel="noopener">
+              Monmouth County<br />Wall Township, NJ 07753
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="cs-bottom">
+        <div>
+          <p>© Copyright 2026 &mdash; <a href="https://redsurgetechnology.com/" class="cs-nav-link">Red Surge Technology</a></p>
+        </div>
+        <div>
+          <a href="/privacy-policy" class="cs-nav-link">Privacy Policy</a>
+          <span>|</span>
+          <a href="/terms-of-use" class="cs-nav-link">Terms of Use</a>
+        </div>
+      </div>
+      <picture class="cs-background">
+        <source media="(max-width: 600px)" srcset="/images/footer_bg-360w.webp" type="image/webp" />
+        <source media="(min-width: 601px) and (max-width: 1024px)" srcset="/images/footer_bg-720w.webp" type="image/webp" />
+        <source media="(min-width: 1025px)" srcset="/images/footer_bg-1280w.webp" type="image/webp" />
+        <img loading="lazy" decoding="async" src="/images/footer_bg-1280w.webp" alt="code being edited" width="1280" height="586" />
+      </picture>
+    </footer>
+
+    <script src="/js/main.js" defer></script>
+    <script src="/js/posts.js" defer></script>
+    <script>
+      document.getElementById('subscribe-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('cs-email-1185').value;
+        try {
+          const response = await fetch('/.netlify/functions/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, listIds: [11], updateEnabled: true })
+          });
+          if (response.ok) {
+            alert('Thanks for subscribing!');
+          } else {
+            const errorData = await response.json();
+            alert('Error: ' + errorData.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('An error occurred.');
+        }
+      });
+    </script>
+  </body>
+</html>
