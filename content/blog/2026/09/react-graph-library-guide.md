@@ -1,11 +1,12 @@
 ---
-title: "React Graph Library Guide: Network Visualization and Plotting in 2026"
+title: "React Graph Library: Best Network Visualization Options in 2026"
 date: "2026-09-11T10:00:00.000Z"
-excerpt: "Looking for a React graph library? We compare the best options for network graphs, force-directed layouts, and relational data—plus how they differ from charting libraries."
+excerpt: "Which React graph library should you use? Compare reagraph, Sigma.js, react-force-graph, Cytoscape.js, and React Flow by node capacity, rendering model, and built-in features."
 cover_image: "/images/blog/uploads/react-graph-library-guide.webp"
-seo_title: "React Graph Library: Best Options for Network Visualization in 2026"
-seo_description: "Compare the best React graph libraries for network visualization, force-directed graphs, and relational data. Includes reagraph, react-force-graph, Cytoscape.js, and more."
+seo_title: "React Graph Library: Best Network Visualization Options (2026)"
+seo_description: "Compare the best React graph libraries for network visualization. Includes reagraph, Sigma.js, react-force-graph, and Cytoscape.js with node capacity, rendering model, and when to use each."
 author_name: "Collin Stewart"
+last_modified: "2026-11-23T10:00:00.000Z"
 tags:
   - React
   - Data Visualization
@@ -18,184 +19,201 @@ featured: false
 no_index: false
 ---
 
-Searching for a “React graph library” is an exercise in ambiguity. Half the results are charting libraries—Recharts, Victory, Nivo—which draw line charts, bar charts, and pie charts. The other half are true graph libraries: tools for visualizing networks, relationships, and connected data as node-link diagrams. Force-directed layouts, hierarchical trees, clustered networks.
+A "React graph library" is ambiguous. Half the results on Google are charting libraries—Recharts, Victory, Nivo—which draw line charts, bar charts, and pie charts. The other half are true graph libraries for network visualization, relationships, and node-link diagrams. This post is about the second category: libraries for rendering entities and the connections between them.
 
-If you've spent any time with our [React chart library comparison](/blog/react-chart-library-comparison), you know the charting landscape well. But graphs are a different beast. A line chart plots a series of values against an axis. A graph plots entities and the relationships between them. The rendering models, layout algorithms, and interaction patterns are distinct enough that you need a different tool.
+If you're looking for charts (numbers on axes), see our [React chart library comparison](/blog/react-chart-library-comparison) instead. If you need to visualize networks, relationships, dependency maps, org charts, or knowledge graphs, keep reading.
 
-I've built network visualizations for knowledge graphs, organizational charts, and dependency maps. The libraries I reach for are not the ones I'd use for a dashboard line chart. Here's what I've learned about the React graph library landscape in 2026.
+## Quick answer: which React graph library should you use?
 
-## Graphs vs. Charts: Why the Distinction Matters
+| Your situation                                   | Use this                                      |
+| ------------------------------------------------ | --------------------------------------------- |
+| **Largest node capacity (50,000+)**              | **Sigma.js + Graphology**                     |
+| **Best React-native API with built-in layouts**  | **reagraph**                                  |
+| **Simplest declarative force-directed graph**    | **react-force-graph**                         |
+| **Graph analysis algorithms**                    | **Cytoscape.js**                              |
+| **Under 500 nodes with rich node UIs**           | **React Flow** (different category—see below) |
+| **Millions of points with GPU force simulation** | **Cosmograph**                                |
+| **Enterprise with SLA support**                  | **ReGraph** or **Ogma**                       |
 
-Before we dive into specific libraries, let's clarify the terminology, because it shapes every recommendation.
+**Default recommendation for most React teams: reagraph** if your graph is under ~10,000 nodes and you want a React-native API with built-in layouts. **Sigma.js** if you need to push past 50,000 nodes and are comfortable with Graphology.
+
+## What makes a graph library different from a chart library
 
 A **chart** visualizes quantitative data. A line chart shows revenue over time. A bar chart compares categories. The x and y axes represent variables, and the data points are values.
 
-A **graph** (in the network sense) visualizes entities and their relationships. Nodes represent things—people, servers, documents, proteins. Edges represent connections—friendships, network links, citations, interactions. The layout is often determined by the relationships themselves, not by a fixed coordinate system.
+A **graph** (in the network sense) visualizes entities and their relationships. Nodes represent things—people, servers, documents. Edges represent connections—friendships, dependencies, citations. The layout is often determined by the relationships themselves, not a fixed coordinate system.
 
-The confusion arises because "graph" can also mean "chart" in common usage. But when a developer searches for a "React graph library," they usually mean the network visualization kind. If you're looking for charts, our [best React chart library for dashboards](/blog/best-react-chart-library-for-dashboards-2026) guide is the better starting point. This post is about nodes and edges.
+The rendering requirements are different:
 
-## The Contenders: React Graph Libraries in 2026
+- **Layout algorithms** (force-directed, hierarchical, radial) are expensive and central to the visual
+- **Node capacity** is far higher—tens of thousands, not hundreds
+- **Edge density** dominates rendering cost
+- **Interaction patterns** (selection, lasso, expand/collapse) differ from chart tooltips
 
-The React graph ecosystem is smaller than the charting ecosystem, but it has mature, well-maintained options. Here are the libraries I've used or evaluated in production.
+For a deeper dive on the architecture, see our [WebGL network graph visualization guide](/blog/webgl-network-graph-visualization-react). For a direct comparison of the top three WebGL options, see our [React Flow vs Sigma.js vs Reagraph](/blog/react-flow-vs-sigma-vs-reagraph) guide.
 
-### reagraph: WebGL Performance for Network Graphs
+## The libraries, in detail
 
-Reagraph is a high-performance network graph visualization built in WebGL for React. It's part of the Reaflow/Reablocks ecosystem and focuses specifically on graph rendering at scale.
+### Sigma.js + Graphology (highest node capacity)
 
-**What it does well:**
+Sigma.js is the most widely used WebGL graph renderer in the JavaScript ecosystem. It renders 2D graphs using WebGL, pairs with Graphology for the graph data structure and layout algorithms, and has a React wrapper (`@react-sigma/core` or `nx-react-sigma`).
 
-- WebGL rendering handles thousands of nodes without breaking a sweat.
-- Built-in layouts include force-directed 2D and 3D, circular, tree, radial, hierarchical, and concentric layouts.
-- Features like path finding, expand/collapse nodes, lasso selection, clustering, and edge bundling are included out of the box.
-- Light and dark mode with custom theming.
-- Node sizing based on attributes, page rank, or centrality.
+**Node capacity:** 50,000+ nodes with default settings. Handles hundreds of thousands of edges if the layout is precomputed.
 
-```javascript
+**Strengths:** WebGL rendering, mature Graphology ecosystem for layouts and graph algorithms, MIT licensed, large community.
+
+**Watch for:** 2D only. Lower-level API than reagraph—you build the graph instance and pass it to the renderer. ForceAtlas2 layout should run in a Web Worker for large graphs.
+
+**When to choose it:** Your graph is large (10,000+ nodes) and you want the highest capacity in a React-compatible library.
+
+```jsx
+import { SigmaContainer, useLoadGraph } from "@react-sigma/core";
+import Graph from "graphology";
+
+function LoadGraph() {
+  const loadGraph = useLoadGraph();
+
+  useEffect(() => {
+    const graph = new Graph();
+    graph.addNode("n1", { x: 0, y: 0, label: "A", size: 10 });
+    graph.addNode("n2", { x: 100, y: 100, label: "B", size: 10 });
+    graph.addEdge("n1", "n2");
+    loadGraph(graph);
+  }, [loadGraph]);
+
+  return null;
+}
+
+export function Graph() {
+  return (
+    <SigmaContainer style={{ height: 500 }}>
+      <LoadGraph />
+    </SigmaContainer>
+  );
+}
+```
+
+### reagraph (best React API, built-in layouts)
+
+reagraph is a WebGL network graph visualization built specifically for React. It's part of the Reaflow/Reablocks ecosystem.
+
+**Node capacity:** Around 10,000 nodes for smooth interaction.
+
+**Strengths:** React-native component API (feels like React Flow, not a wrapper). Built-in layouts (force-directed, circular, tree, radial, hierarchical). Features like path finding, lasso selection, expand/collapse, and edge bundling.
+
+**Watch for:** Lower node capacity than Sigma.js. Smaller community.
+
+**When to choose it:** Your graph is in the 1,000–10,000 range and you want built-in layouts with a React-native API. This is the easiest migration target if you're outgrowing React Flow.
+
+```jsx
 import { GraphCanvas } from "reagraph";
 
-export default function NetworkGraph() {
+export function NetworkGraph() {
   return (
     <GraphCanvas
       nodes={[
-        { id: "n-1", label: "Server A" },
-        { id: "n-2", label: "Server B" },
+        { id: "n1", label: "Server A" },
+        { id: "n2", label: "Server B" },
       ]}
-      edges={[
-        { id: "1->2", source: "n-1", target: "n-2", label: "Connection" },
-      ]}
+      edges={[{ id: "e1", source: "n1", target: "n2" }]}
+      layoutType="forceDirected2d"
     />
   );
 }
 ```
 
-The API is clean and declarative, which is rare for graph libraries. Most of them require imperative setup and ref gymnastics. Reagraph feels like a React component, not a wrapper around a JavaScript library.
+### react-force-graph (simplest declarative option)
 
-**When to choose it:** You need to visualize large networks (thousands of nodes) with rich interactions and built-in layouts. It's my go-to for production network graphs.
+react-force-graph provides React components for 2D, 3D, VR, and AR force-directed graphs. It wraps the `force-graph` library from the same author.
 
-### react-force-graph: The Versatile Force-Directed Choice
+**Node capacity:** ~500–2,000 nodes in 2D Canvas; ~10,000–15,000 in 3D WebGL.
 
-react-force-graph is a set of React components for 2D, 3D, VR, and AR force-directed graphs. It wraps the popular `force-graph` library from the same author.
+**Strengths:** Declarative React API, multiple rendering targets, zoom/pan/drag/click out of the box, ~60KB bundle.
 
-**What it does well:**
+**Watch for:** Canvas-based 2D degrades past ~500 nodes. Limited graph algorithms.
 
-- Multiple rendering targets: `ForceGraph2D`, `ForceGraph3D`, `ForceGraphVR`, `ForceGraphAR`.
-- Canvas-backed 2D rendering handles ~500 nodes smoothly and ~2000 with degradation.
-- Takes `graphData={nodes, links}` as a prop and re-renders declaratively.
-- Zoom, pan, drag, and click handlers work out of the box.
-- Bundle size is reasonable at ~60KB gzipped, including the d3-force simulation.
+**When to choose it:** You need force-directed layouts and want a declarative React component. Good for knowledge graphs and personal-scale networks.
 
-**When to choose it:** You need force-directed layouts and want a declarative React component. It's especially good for knowledge graphs and personal-scale networks. If you outgrow 2D, you can upgrade to 3D or VR with a component swap. Our [React charting library for large datasets](/blog/react-charting-library-for-large-datasets) post covers the performance considerations for canvas rendering at scale.
+### Cytoscape.js (graph analysis)
 
-### Cytoscape.js (with react-cytoscapejs)
+Cytoscape.js is a mature graph theory library originally built for bioinformatics. It's not React-specific, but there's a React wrapper (`react-cytoscapejs`).
 
-Cytoscape.js is a mature graph theory library originally built for bioinformatics. It's powerful but heavier than the React-native options.
+**Node capacity:** ~5,000 nodes with Canvas rendering (SVG mode caps lower).
 
-**What it does well:**
+**Strengths:** Extensive graph algorithms (shortest path, centrality, clustering), rich styling API, wide range of layouts via extensions, battle-tested in scientific applications.
 
-- Extensive graph algorithms (shortest path, centrality, clustering, etc.).
-- Rich styling API for nodes and edges.
-- Wide range of layouts via extensions.
-- Battle-tested in scientific and enterprise applications.
+**Watch for:** The React wrapper is less idiomatic. Bundle size ~150KB. Licensing can be a concern for commercial use (LGPL).
 
-**What to watch out for:**
+**When to choose it:** You need graph algorithms and analysis, not just visualization.
 
-- The React wrapper is less idiomatic than reagraph or react-force-graph.
-- Bundle size is ~150KB, which is significant.
-- Licensing can be a concern for commercial use (LGPL).
+### React Flow (different category)
 
-**When to choose it:** You need graph algorithms and analysis, not just visualization. It's the right choice for scientific or analytical applications where the graph structure matters as much as the visual.
+React Flow is often searched alongside graph libraries but serves a different purpose. It renders DOM nodes and SVG edges—excellent for flowcharts, node editors, and workflow builders, but not for large network graphs.
 
-### vis-network (with react-graph-vis)
+**Node capacity:** ~500 nodes at 60fps, up to ~2,000 with aggressive optimization.
 
-vis-network is part of the vis.js family and offers polished defaults for network graphs.
+**When to choose it:** Your use case is a flowchart, node editor, mind map, or any diagram where nodes are UI elements and users interact with each one individually. Not for network graphs with thousands of entities.
 
-**What it does well:**
+For a direct comparison, see our [React Flow vs Sigma.js vs Reagraph](/blog/react-flow-vs-sigma-vs-reagraph) guide.
 
-- Best-looking defaults of the canvas-based options—rounded nodes, smooth edges, nice animations.
-- Simple API for basic network graphs.
-- Good documentation and examples.
+### Cosmograph (millions of nodes)
 
-**What to watch out for:**
+Cosmograph is the fastest web-based network visualization, using GPU-accelerated force simulation. It handles >50,000 points with GPU simulation and >1,000,000 points and links for rendering.
 
-- The React wrapper (react-graph-vis) is less maintained than the others.
-- Bundle size is around 180KB.
-- Less flexible for advanced layouts than reagraph or Cytoscape.
+**When to choose it:** You need to render millions of nodes with live force simulation. It's the performance ceiling for React graph libraries.
 
-**When to choose it:** You want a quick, good-looking network graph without extensive customization. It's ideal for internal tools and demos.
+### Commercial options
 
-### Sigma.js (with react-sigma)
+**ReGraph** (Cambridge Intelligence) is a commercial React graph SDK used by 250+ organizations for mission-critical apps. **Ogma** (Linkurious) handles millions of nodes and edges with enterprise support. Both are worth evaluating if you need SLA-backed support and advanced analysis features.
 
-Sigma.js is a WebGL renderer for graphs, known for its performance with large networks.
+## Comparison table
 
-**What it does well:**
+| Library               | Rendering            | Max nodes                  | Layouts               | React API   | License |
+| --------------------- | -------------------- | -------------------------- | --------------------- | ----------- | ------- |
+| **Sigma.js**          | WebGL 2D             | 50,000+                    | Graphology (external) | Wrapper     | MIT     |
+| **reagraph**          | WebGL 2D/3D          | ~10,000                    | Built-in              | Native      | MIT     |
+| **react-force-graph** | Canvas 2D / WebGL 3D | ~2,000 (2D) / ~15,000 (3D) | Force-directed        | Declarative | MIT     |
+| **Cytoscape.js**      | Canvas               | ~5,000                     | Many (extensions)     | Wrapper     | LGPL    |
+| **React Flow**        | DOM + SVG            | ~500                       | External (Dagre/ELK)  | Native      | MIT     |
+| **Cosmograph**        | WebGL                | 1,000,000+                 | GPU force             | Component   | MIT     |
 
-- WebGL rendering handles very large graphs.
-- Clean, minimal API.
-- Good for static or semi-static network visualizations.
+## Decision framework
 
-**What to watch out for:**
+**If your graph is under 500 nodes and needs rich node UIs:** React Flow.
 
-- Less React-friendly than reagraph or react-force-graph.
-- Smaller ecosystem of React examples.
-- Bundle size around 90KB, which is reasonable.
+**If your graph is 500–10,000 nodes:** reagraph. Native React API, built-in layouts, easiest migration from React Flow.
 
-**When to choose it:** You need WebGL performance and don't mind a slightly less polished React integration.
+**If your graph is 10,000–50,000+ nodes:** Sigma.js + Graphology. Highest capacity, mature ecosystem.
 
-### ReGraph: The Enterprise SDK
+**If you need graph algorithms (shortest path, centrality):** Cytoscape.js.
 
-ReGraph from Cambridge Intelligence is a commercial React graph visualization SDK. It's not open-source, but it's used by 250+ organizations for mission-critical applications.
+**If you need millions of nodes with live simulation:** Cosmograph.
 
-**What it does well:**
+**If you need enterprise support and advanced features:** ReGraph or Ogma.
 
-- State-driven architecture that fits React's mental model.
-- GPU-based rendering, incremental updates, and automatic layouts for large graphs.
-- Enterprise features: combos, decluttering, social network analysis metrics, geospatial and temporal integration.
-- Professional support and ISO 27001 certification.
+## Performance considerations
 
-**When to choose it:** You're building a commercial application where reliability, support, and advanced analysis features justify the licensing cost. It's overkill for personal projects or internal tools.
+Graph rendering is heavier than chart rendering because layout algorithms add complexity. Here's what to keep in mind:
 
-## Plotting Libraries: When “Graph” Means Something Else
+**Layout computation is expensive.** Force-directed layouts require iterative simulation. For large graphs, precompute layouts on the server or run ForceAtlas2 in a Web Worker.
 
-Not every search for a "React graph library" is about networks. Some developers mean plotting libraries—tools for mathematical functions, scatter plots, and scientific visualization. These overlap with charting libraries but have a different focus.
+**SVG is almost always the wrong choice for graphs.** With hundreds of nodes and edges, the DOM node count explodes. Canvas or WebGL is necessary beyond a few hundred nodes.
 
-**Plotly.js** (with react-plotly.js) is the heavyweight. It supports WebGL rendering for millions of points, 3D plots, and scientific chart types. The bundle is massive (~3MB), but for scientific applications, it's the standard. Our [React charting library performance benchmarks](/blog/react-chart-library-performance-benchmarks) cover Plotly's performance profile.
+**Edges dominate rendering cost.** A 10,000-node graph with average degree 20 has 200,000 edges. Use `EdgeLineProgram` (1px lines) in Sigma.js for the fastest edge rendering. Edge transparency at scale tanks performance.
 
-**D3.js** is the low-level foundation. It's not a React library, but React developers frequently use D3 for scales, shapes, and layouts while rendering with React. Libraries like visx wrap D3 primitives into React components. If you need complete control over plotting, D3 + React is the most flexible approach, at the cost of more code.
+**Limit animations.** Graph layouts animate naturally as nodes settle. Adding hover animations or transitions on top can tank performance. Our guide on [preventing unnecessary re-renders in React](/blog/prevent-unnecessary-rerenders-react) applies here—isolate the graph component and avoid re-rendering it unnecessarily.
 
-## A Comparison Table for Decision-Making
+**Cull at zoom.** At zoomed-out levels, hide labels and edges entirely. A density heatmap communicates more than a hairball.
 
-| Library               | Rendering                  | Bundle Size | Layouts                                  | Best For                              |
-| --------------------- | -------------------------- | ----------- | ---------------------------------------- | ------------------------------------- |
-| **reagraph**          | WebGL                      | Moderate    | Many (force, tree, radial, hierarchical) | Large networks with rich interactions |
-| **react-force-graph** | Canvas (2D), WebGL (3D/VR) | ~60KB       | Force-directed                           | Knowledge graphs, declarative React   |
-| **Cytoscape.js**      | Canvas                     | ~150KB      | Many (via extensions)                    | Graph analysis, algorithms            |
-| **vis-network**       | Canvas                     | ~180KB      | Force-directed, hierarchical             | Quick, good-looking network graphs    |
-| **Sigma.js**          | WebGL                      | ~90KB       | Force-directed                           | Very large static graphs              |
-| **ReGraph**           | GPU                        | Commercial  | Many (enterprise)                        | Mission-critical commercial apps      |
+If you've been following our performance series, from [React charting library benchmarks](/blog/react-chart-library-performance-benchmarks) to [large dataset strategies](/blog/react-charting-library-for-large-datasets), you know that rendering model is the primary determinant of performance. For graphs, this is even more critical.
 
-## How to Choose: A Decision Framework
-
-Here's the flow I use when picking a graph library:
-
-1. **Do you need network visualization (nodes and edges) or plotting (functions, scatter)?** If plotting, look at Plotly or visx. If network, continue.
-
-2. **How large is your graph?** Under 500 nodes: react-force-graph or vis-network. 500–5,000 nodes: reagraph or Sigma.js. 5,000+: reagraph (WebGL) or ReGraph (commercial).
-
-3. **Do you need advanced graph algorithms?** Yes: Cytoscape.js. No: reagraph or react-force-graph.
-
-4. **Is React ergonomics your top priority?** Yes: reagraph or react-force-graph. They feel like React components, not wrappers.
-
-5. **Do you have a budget for enterprise support?** Yes: ReGraph. No: open-source options.
-
-For most projects, I start with **reagraph** if performance matters and **react-force-graph** if simplicity and declarative React matter more. They cover the majority of network graph use cases.
-
-## A Real Story: Visualizing a Microservices Dependency Graph
+## A real story: visualizing a microservices dependency graph
 
 I once worked on a developer tool that visualized dependencies between microservices. The graph had about 200 services and 800 connections. The initial prototype used D3 directly—it worked, but the code was imperative and difficult to maintain. Every interaction required manual DOM manipulation.
 
-We migrated to react-force-graph. The change was dramatic. The graph became a single component:
+We migrated to react-force-graph. The graph became a single component:
 
-```javascript
+```jsx
 <ForceGraph2D
   graphData={data}
   nodeLabel="name"
@@ -204,41 +222,44 @@ We migrated to react-force-graph. The change was dramatic. The graph became a si
 />
 ```
 
-The declarative API meant we could add features without rewriting the rendering logic. The canvas rendering handled the graph smoothly, even when we doubled the number of connections. And because it's a React component, it fit naturally into our state management.
+The declarative API meant we could add features without rewriting the rendering logic. The canvas rendering handled the graph smoothly even when we doubled the connections. And because it's a React component, it fit naturally into our state management.
 
 The lesson: for network graphs, choose a library that embraces React's declarative model. You'll spend less time fighting imperative APIs and more time building features.
 
-## Performance Considerations for Graph Rendering
+## Frequently asked questions
 
-Graph rendering is heavier than chart rendering because layout algorithms add complexity. Here's what to keep in mind:
+### What's the best React graph library in 2026?
 
-- **Layout computation is expensive.** Force-directed layouts require iterative simulation. For large graphs, pre-compute layouts on the server or use Web Workers.
-- **SVG is almost always the wrong choice for graphs.** With hundreds of nodes and edges, the DOM node count explodes. Canvas or WebGL is necessary for anything beyond a few hundred nodes.
-- **Limit animations.** Graph layouts animate naturally as nodes settle. Adding hover animations or transitions on top of that can tank performance. Our guide on [preventing unnecessary re-renders in React](/blog/prevent-unnecessary-rerenders-react) applies here—isolate the graph component and avoid re-rendering it unnecessarily.
-- **Downsample if possible.** If you're visualizing a subset of a larger graph, filter before rendering. Showing 1,000 representative nodes is better than showing 10,000 nodes that freeze the browser.
+For most React teams, reagraph is the best default—native React API, built-in layouts, WebGL rendering, MIT licensed. For very large graphs (50,000+ nodes), Sigma.js + Graphology is the stronger choice. React Flow remains excellent for flowcharts and node editors but is a different category.
 
-If you've been following our performance series, from [React charting library benchmarks](/blog/react-chart-library-performance-benchmarks) to [large dataset strategies](/blog/react-charting-library-for-large-datasets), you know that rendering model is the primary determinant of performance. For graphs, this is even more critical.
+### What's the difference between a graph library and a chart library?
 
-## Community Resources and Further Learning
+A chart visualizes quantitative data on axes (line, bar, pie). A graph visualizes entities and relationships as nodes and edges (network diagrams). The rendering requirements, layout algorithms, and interaction patterns are different. For charts, see our [React chart library comparison](/blog/react-chart-library-comparison).
 
-The React graph visualization community is active but smaller than the charting community. Here are the resources I've found most valuable:
+### Can React Flow handle large network graphs?
 
-- **GitHub – awesome-react** (https://github.com/enaqx/awesome-react) — A curated list of React resources, including visualization libraries. It's not graph-specific, but it's a good starting point.
-- **r/reactjs on Reddit** (https://www.reddit.com/r/reactjs/) — Discussions about graph libraries and visualization challenges appear regularly.
-- **Stack Overflow** (https://stackoverflow.com/questions/tagged/react-force-graph) — The `react-force-graph` and `reagraph` tags are monitored by maintainers.
-- **Hacker News** (https://news.ycombinator.com/) — Posts about graph visualization libraries often surface here, with insightful comments from library authors.
-- **dev.to** (https://dev.to/t/react) — Tutorials and case studies on React graph visualization.
+Not practically. React Flow renders each node as a DOM element, which caps it around 500 nodes at 60fps. For network graphs with thousands of nodes, use a WebGL library like reagraph or Sigma.js. See our [React Flow vs Sigma.js vs Reagraph](/blog/react-flow-vs-sigma-vs-reagraph) comparison for the full breakdown.
 
-For deeper dives into specific libraries, their official documentation and GitHub repositories are the best sources. reagraph has an excellent docs site at reagraph.dev. react-force-graph maintains thorough examples on its GitHub repository.
+### What's the difference between react-force-graph 2D and 3D?
 
-## Wrapping Up
+The 2D version uses Canvas rendering and handles ~500 nodes smoothly. The 3D version uses WebGL and handles ~10,000–15,000 nodes. Counterintuitively, the 3D version scales higher because WebGL is faster than Canvas.
 
-The React graph library landscape is diverse enough that the “best” choice depends entirely on your data and interaction needs. For network graphs at scale, reagraph's WebGL rendering and built-in layouts are hard to beat. For declarative React ergonomics and force-directed layouts, react-force-graph is the pragmatic choice. For graph analysis, Cytoscape.js remains the most powerful. And for enterprise applications, ReGraph offers a level of support and polish that open-source libraries can't match.
+### How do I render 50,000+ nodes in React?
 
-Don't confuse graph libraries with charting libraries. They solve different problems. If you need charts, our [React chart library comparison](/blog/react-chart-library-comparison) is the right guide. If you need network visualization, start here.
+Use Sigma.js with Graphology, run ForceAtlas2 in a Web Worker, use `EdgeLineProgram` for edges, and consider precomputing the layout on the server. See our [WebGL network graph visualization guide](/blog/webgl-network-graph-visualization-react) for the full architecture.
 
-And whatever you choose, test with your real data. A graph library that looks great with 50 nodes might crumble at 5,000. The only way to know is to benchmark.
+### What's the best graph library for a knowledge graph?
+
+react-force-graph is a good fit for knowledge graphs in the 500–10,000 node range. For larger knowledge graphs, use reagraph or Sigma.js. If you need graph algorithms (recommendation, path finding), Cytoscape.js or Graphology are stronger.
+
+### What's the best React diagram library?
+
+For diagrams where nodes are UI elements (flowcharts, org charts, mind maps), React Flow is the best choice. For network graphs where nodes are data points (thousands of entities), reagraph or Sigma.js are better. The distinction is whether users interact with individual nodes or observe aggregate structure.
+
+### Can I use a graph library with React Server Components?
+
+The graph libraries in this post are client-side libraries. They work inside Client Components (`'use client'`). For the architecture, see our guide on [what the Next.js server actually is](/blog/what-is-the-nextjs-server-rsc-architecture).
 
 ---
 
-_Need help building network visualizations or graph-based interfaces? Red Surge Technology builds high-performance data visualizations for complex domains. [Get in touch](/contact) to discuss your project._
+_Need help building a network graph visualization or choosing the right library for your data? Red Surge Technology specializes in high-performance data visualization for complex domains. [Get in touch](/contact) to discuss your project._

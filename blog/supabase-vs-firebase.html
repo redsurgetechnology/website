@@ -19,8 +19,8 @@
     <meta name="format-detection" content="telephone=no" />
 
     <!-- Primary Meta Tags -->
-    <title>Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?</title>
-    <meta name="description" content="Supabase vs Firebase compared: pricing, database architecture, real-time features, authentication, and vendor lock-in. Find your backend." />
+    <title>Supabase vs Firebase: Complete Comparison 2026</title>
+    <meta name="description" content="Supabase vs Firebase compared. Covers pricing, Postgres vs Firestore, RLS, real-time, and vendor lock-in — plus what Supabase actually is (hint: not a protocol or proxy)." />
     <meta name="author" content="Collin Stewart" />
     <meta name="robots" content="index, follow" />
     
@@ -32,14 +32,14 @@
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://redsurgetechnology.com/blog/supabase-vs-firebase" />
-    <meta property="og:title" content="Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?" />
-    <meta property="og:description" content="Supabase vs Firebase compared: pricing, database architecture, real-time features, authentication, and vendor lock-in. Find your backend." />
+    <meta property="og:title" content="Supabase vs Firebase: Complete Comparison 2026" />
+    <meta property="og:description" content="Supabase vs Firebase compared. Covers pricing, Postgres vs Firestore, RLS, real-time, and vendor lock-in — plus what Supabase actually is (hint: not a protocol or proxy)." />
     <meta property="og:image" content="https://redsurgetechnology.com/images/blog/uploads/supabase-vs-firebase-2026.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Red Surge Technology" />
     <meta property="article:published_time" content="2026-07-10T10:00:00.000Z" />
-    <meta property="article:modified_time" content="2026-07-10T10:00:00.000Z" />
+    <meta property="article:modified_time" content="2026-11-23T10:00:00.000Z" />
     <meta property="article:section" content="Web Development" />
     <meta property="article:tag" content="Supabase" />
     <meta property="article:tag" content="Firebase" />
@@ -50,8 +50,8 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://redsurgetechnology.com/blog/supabase-vs-firebase" />
-    <meta name="twitter:title" content="Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?" />
-    <meta name="twitter:description" content="Supabase vs Firebase compared: pricing, database architecture, real-time features, authentication, and vendor lock-in. Find your backend." />
+    <meta name="twitter:title" content="Supabase vs Firebase: Complete Comparison 2026" />
+    <meta name="twitter:description" content="Supabase vs Firebase compared. Covers pricing, Postgres vs Firestore, RLS, real-time, and vendor lock-in — plus what Supabase actually is (hint: not a protocol or proxy)." />
     <meta name="twitter:image" content="https://redsurgetechnology.com/images/blog/uploads/supabase-vs-firebase-2026.webp" />
 
     <!-- Favicon -->
@@ -73,14 +73,14 @@
       {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        "headline": "Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?",
-        "description": "Supabase vs Firebase compared: pricing, database architecture, real-time features, authentication, and vendor lock-in. Find your backend.",
+        "headline": "Supabase vs Firebase: Complete Comparison 2026",
+        "description": "Supabase vs Firebase compared. Covers pricing, Postgres vs Firestore, RLS, real-time, and vendor lock-in — plus what Supabase actually is (hint: not a protocol or proxy).",
         "url": "https://redsurgetechnology.com/blog/supabase-vs-firebase",
         "datePublished": "2026-07-10T10:00:00.000Z",
-        "dateModified": "2026-07-10T10:00:00.000Z",
+        "dateModified": "2026-11-23T10:00:00.000Z",
         "keywords": "Supabase, Firebase, Backend, Web Development, Database",
         "articleSection": "Web Development",
-        "timeRequired": "PT13M",
+        "timeRequired": "PT15M",
         "author": {
           "@type": "Person",
           "name": "Collin Stewart"
@@ -141,6 +141,86 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Supabase in one sentence?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Supabase is a backend-as-a-service platform built on PostgreSQL that bundles database, authentication, file storage, real-time subscriptions, and edge functions into one product."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Supabase a database?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes and no. Supabase _includes_ a PostgreSQL database, but it's more than a database. It's a full BaaS platform. Think of it as Postgres plus auth plus storage plus real-time plus functions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is gRPC vs Supabase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They aren't comparable. gRPC is a remote procedure call protocol. Supabase is a backend platform. You could use gRPC to talk to an API backed by Supabase, but the two aren't alternatives."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Traefik vs Supabase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They aren't comparable. Traefik is a reverse proxy and ingress controller. Supabase is a backend platform. They occupy different layers of the stack and can be used together."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Supabase vs Snap?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "They aren't comparable. Snap is a build tool for Node.js (similar to Vite or Webpack). Supabase is a backend platform."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Supabase faster than Firebase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depends on the query. Firestore is faster for simple document lookups because it's optimized for that. Postgres is faster for complex relational queries because SQL can express them efficiently. For most applications, both are fast enough, and the difference is dwarfed by network latency."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I migrate from Firebase to Supabase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but it's a real project. You export your Firestore data, restructure it as relational tables, rewrite your client code to use SQL, and migrate authentication users. Budget weeks for a small app, months for a large one. The upside is that once you're on Postgres, future migrations are dramatically easier."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I self-host Supabase?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It's open source, and you can run it on your own infrastructure (Docker, Kubernetes, bare metal). This matters for data residency requirements, compliance, and cost control at scale. Firebase cannot be self-hosted."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is cheaper?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For most small-to-medium apps, Supabase's $25/month Pro plan is more predictable than Firebase's pay-as-you-go. For apps with very low traffic, both free tiers suffice. For read-heavy apps at scale, Supabase's infrastructure pricing is usually cheaper. For write-heavy apps with little read traffic, Firebase can be competitive. --- _Need help choosing between Supabase and Firebase, or architecting a migration off either one? Red Surge Technology builds secure, scalable backends. [Get in touch](/contact) to discuss your project._"
+          }
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
@@ -158,7 +238,7 @@
         {
           "@type": "ListItem",
           "position": 3,
-          "name": "Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?",
+          "name": "Supabase vs Firebase: Complete Comparison (And What Supabase Actually Is)",
           "item": "https://redsurgetechnology.com/blog/supabase-vs-firebase"
         }
       ]
@@ -222,7 +302,7 @@
     <!-- Banner -->
 <div id="banner-712">
   <div class="cs-container">
-    <h1 class="cs-int-title">Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?</h1>
+    <h1 class="cs-int-title">Supabase vs Firebase: Complete Comparison (And What Supabase Actually Is)</h1>
   </div>
   <picture class="cs-background">
     <source media="(max-width: 600px)" srcset="/images/banner_bg_red-360w.webp" type="image/webp" fetchpriority="high" />
@@ -245,7 +325,7 @@
           <span class="cs-breadcrumb-sep" aria-hidden="true">/</span>
         </li>
         <li class="cs-breadcrumb-item cs-breadcrumb-current" aria-current="page">
-          Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?
+          Supabase vs Firebase: Complete Comparison (And What Supabase Actually Is)
         </li>
       </ol>
     </nav>
@@ -265,7 +345,7 @@
       /images/blog/uploads/supabase-vs-firebase-2026-800.webp 800w
     "
     sizes="(max-width: 1024px) 92vw, 800px"
-    alt="Supabase vs Firebase in 2026: Which Backend Platform Should You Choose? - Red Surge Technology Blog"
+    alt="Supabase vs Firebase: Complete Comparison (And What Supabase Actually Is) - Red Surge Technology Blog"
     width="1280"
     height="720"
   />
@@ -273,8 +353,8 @@
           <div>
             
         <div class="cs-post-meta" itemscope itemtype="https://schema.org/BlogPosting">
-          <meta itemprop="headline" content="Supabase vs Firebase in 2026: Which Backend Platform Should You Choose?" />
-          <meta itemprop="description" content="Supabase vs Firebase compared: pricing, database architecture, real-time features, authentication, and vendor lock-in. Find your backend." />
+          <meta itemprop="headline" content="Supabase vs Firebase: Complete Comparison 2026" />
+          <meta itemprop="description" content="Supabase vs Firebase compared. Covers pricing, Postgres vs Firestore, RLS, real-time, and vendor lock-in — plus what Supabase actually is (hint: not a protocol or proxy)." />
           <meta itemprop="url" content="https://redsurgetechnology.com/blog/supabase-vs-firebase" />
 
           <!-- Published date -->
@@ -288,7 +368,15 @@
             <time itemprop="datePublished" datetime="2026-07-10T10:00:00.000Z">Jul 10, 2026</time>
           </div>
 
-          <meta itemprop="dateModified" content="2026-07-10T10:00:00.000Z" />
+          
+          <!-- Last updated -->
+          <div class="cs-meta-item cs-meta-updated" title="Last updated">
+            <svg class="cs-meta-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="16" height="16">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+            </svg>
+            <span>Updated: <time itemprop="dateModified" datetime="2026-11-23T10:00:00.000Z">Nov 23, 2026</time></span>
+          </div>
 
           <!-- Author -->
           <div class="cs-meta-item cs-meta-author" itemprop="author" itemscope itemtype="https://schema.org/Person" title="Author">
@@ -306,7 +394,7 @@
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <span><meta itemprop="timeRequired" content="PT13M" />13 min read</span>
+            <span><meta itemprop="timeRequired" content="PT15M" />15 min read</span>
           </div>
 
           
@@ -330,134 +418,213 @@
         </div>
           </div>
           <div class="cs-post-content">
-            <p>There was a time when the answer was obvious. If you needed a backend for your side project — or honestly, even for production — you reached for Firebase. Google&#39;s platform had the mindshare, the documentation, the community. It was the safe choice. The default choice.</p>
-<p>That&#39;s not really true anymore.</p>
-<p>Supabase has grown from a plucky open-source alternative into a legitimate competitor. The pitch is compelling: a PostgreSQL database, real-time subscriptions, authentication, storage, and edge functions — all built on open-source tools you can run yourself if you ever need to. No proprietary query language. No black-box pricing. No waking up to a $30,000 bill because a recursive function went wild.</p>
-<p>But Firebase hasn&#39;t been sitting still either. The platform has matured, added new features, and remains deeply integrated with Google Cloud. For certain use cases, it&#39;s still the better option. The question is which platform fits your project, your team, and your tolerance for lock-in.</p>
-<p>Let me walk through the comparison as someone who&#39;s built real things on both platforms and has the scars to prove it.</p>
-<h2>The fundamental architecture difference</h2>
-<p>The most important difference between Supabase and Firebase sits at the database layer. It shapes everything else about how you build, query, and scale your application.</p>
-<p>Firebase runs on Firestore, Google&#39;s proprietary NoSQL document database. Data lives in collections and documents. Queries are fast but limited. You can&#39;t do joins. You can&#39;t run aggregate queries like sums or averages without extra work. Complex filtering across multiple fields requires composite indexes that you have to define manually, often after hitting a cryptic error message telling you to create one.</p>
-<p>Supabase runs on PostgreSQL. Full relational database. Tables, rows, joins, views, functions, triggers. If you can write it in SQL, you can do it. The query builder and client libraries give you a nice API, but underneath it&#39;s just Postgres. You can even connect to it directly with any Postgres-compatible tool.</p>
-<p>This difference matters more than you might think at first. Document databases are great for simple data models — user profiles, chat messages, documents that look the same every time you fetch them. Relational databases handle complexity better. When your data has relationships, when you need to query across those relationships, when reporting and analytics become important, SQL is hard to beat.</p>
-<p>I&#39;ve watched teams start on Firebase, build happily for months, and then hit a wall when the product evolved and the data model got more relational. Suddenly they&#39;re denormalizing data everywhere, maintaining multiple copies of the same information, and writing client-side joins that should have been database queries. Migrating off Firebase at that point is painful. Starting with Postgres from day one avoids that whole class of problems.</p>
-<h2>The query experience day to day</h2>
-<p>Firebase&#39;s query system is functional but constrained. You chain <code>.where()</code> calls, add ordering, and optionally limit results. The syntax looks familiar if you&#39;ve used MongoDB.</p>
-<pre><code class="language-javascript">// Firebase query
-const recentPosts = await firestore
-  .collection(&#39;posts&#39;)
-  .where(&#39;published&#39;, &#39;==&#39;, true)
-  .where(&#39;category&#39;, &#39;==&#39;, &#39;technology&#39;)
-  .orderBy(&#39;createdAt&#39;, &#39;desc&#39;)
+            <p>There was a time when the answer to &quot;how do I add a backend to my side project&quot; was obvious. Firebase. Google&#39;s platform had the mindshare, the documentation, the community. It was the default.</p>
+<p>That&#39;s no longer true. Supabase has grown from a plucky open-source alternative into a legitimate competitor, and in 2026 the choice is genuinely close. But here&#39;s the problem I keep running into: <strong>a lot of people don&#39;t know what Supabase actually is.</strong> They search &quot;grpc vs supabase,&quot; &quot;traefik vs supabase,&quot; &quot;supabase vs snap&quot; — queries that treat Supabase as a protocol, a reverse proxy, or a database engine. It&#39;s none of those.</p>
+<p>So this page does two things. First, it explains what Supabase is and clears up the most common comparison confusions. Second, it compares Supabase and Firebase on the dimensions that actually matter: pricing, database architecture, security, real-time, and vendor lock-in.</p>
+<h2>What Supabase actually is (short version)</h2>
+<p>Supabase is a <strong>backend-as-a-service platform built on top of PostgreSQL</strong>. It bundles five things:</p>
+<ol>
+<li>A <strong>PostgreSQL database</strong> (real Postgres, not a proprietary database)</li>
+<li><strong>Authentication</strong> (email, OAuth, magic links, integrated with row-level security)</li>
+<li><strong>Object storage</strong> (S3-compatible file storage with RLS policies)</li>
+<li><strong>Real-time subscriptions</strong> (Postgres logical replication over WebSockets)</li>
+<li><strong>Edge Functions</strong> (Deno-based serverless functions)</li>
+</ol>
+<p>It is <strong>not</strong>:</p>
+<ul>
+<li>A protocol or transport layer (so &quot;gRPC vs Supabase&quot; isn&#39;t a comparison)</li>
+<li>A reverse proxy or ingress controller (so &quot;Traefik vs Supabase&quot; isn&#39;t a comparison)</li>
+<li>A database engine (so &quot;Supabase vs Snap&quot; isn&#39;t a comparison — Snap is a build tool)</li>
+<li>A bundler or rollup tool (so &quot;Rollup vs Supabase&quot; isn&#39;t a comparison)</li>
+<li>An observability platform (so &quot;Datadog vs Supabase&quot; isn&#39;t a comparison)</li>
+</ul>
+<p>If you&#39;re comparing Supabase to gRPC, Traefik, Snap, Rollup, or Datadog, you&#39;re comparing apples to a kitchen. Those tools occupy different layers of a stack. Supabase sits at the database-plus-backend-services layer. Traefik sits at the ingress layer. gRPC is an RPC protocol. Snap is a build tool. They can all coexist with Supabase; none of them compete with it.</p>
+<p>The comparison that actually matters is <strong>Supabase vs Firebase</strong>, because both are BaaS platforms that bundle database, auth, storage, and real-time into one product.</p>
+<h2>Quick answer: which should you choose?</h2>
+<table>
+<thead>
+<tr>
+<th>Your situation</th>
+<th>Use this</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Relational data (users, orgs, orders, permissions)</strong></td>
+<td><strong>Supabase</strong></td>
+</tr>
+<tr>
+<td><strong>Mobile-first app needing offline persistence</strong></td>
+<td><strong>Firebase</strong></td>
+</tr>
+<tr>
+<td><strong>Predictable monthly billing</strong></td>
+<td><strong>Supabase</strong></td>
+</tr>
+<tr>
+<td><strong>Document-shaped data, no joins needed</strong></td>
+<td><strong>Firebase</strong></td>
+</tr>
+<tr>
+<td><strong>Want to self-host or migrate to standard Postgres later</strong></td>
+<td><strong>Supabase</strong></td>
+</tr>
+<tr>
+<td><strong>Already deep in the Google Cloud ecosystem</strong></td>
+<td><strong>Firebase</strong></td>
+</tr>
+</tbody></table>
+<p><strong>Default recommendation: Supabase</strong> for most new projects. The relational model will save you months of denormalization as your app grows, and the predictable pricing means no billing surprises. <strong>Choose Firebase if you&#39;re building a mobile app that needs offline-first sync</strong>, or if your data is genuinely document-shaped.</p>
+<h2>Why this comparison matters</h2>
+<p>Both Supabase and Firebase answer the same question: &quot;how do I build a backend without building a backend?&quot; Both give you a database, authentication, and file storage that a browser or mobile client can talk to directly. Both are designed so that you don&#39;t need to write and deploy a separate server.</p>
+<p>The difference is that they take opposite approaches to almost everything else.</p>
+<p><strong>Firebase</strong> runs on <strong>Firestore</strong>, Google&#39;s proprietary NoSQL document database. It&#39;s fast, globally distributed, has built-in offline support for mobile, and has been battle-tested at scale for over a decade.</p>
+<p><strong>Supabase</strong> runs on <strong>PostgreSQL</strong>. It&#39;s a real relational database with SQL, joins, transactions, and 30+ years of ecosystem. If Supabase disappeared tomorrow, you could export your database and run it on any Postgres host.</p>
+<p>That single architectural difference shapes everything downstream.</p>
+<h2>Database: Postgres vs Firestore</h2>
+<p>The most consequential difference is the database.</p>
+<p><strong>Firestore</strong> is a NoSQL document store. Data lives in collections and documents. Queries are fast but limited: you can&#39;t join across collections, and complex filtering requires composite indexes you define manually. For simple data models—user profiles, chat messages, documents that look the same every time—it&#39;s excellent. For relational data—users, organizations, memberships, permissions, orders, line items—it forces you to denormalize aggressively. That works until it doesn&#39;t. Teams routinely reach a point where their product needs relational queries that Firestore can&#39;t express.</p>
+<p><strong>Supabase</strong> is PostgreSQL. Full relational model, joins, foreign keys, transactions, window functions, CTEs, views, materialized views. If you can write it in SQL, you can do it. The client SDK gives you a clean API, but underneath it&#39;s real Postgres, and you can connect with any Postgres tool.</p>
+<p>The practical difference: with Supabase, a query that joins users, organizations, and memberships is one SQL query. With Firestore, it&#39;s either multiple round trips from the client or a denormalized copy of the data that you have to keep in sync.</p>
+<h3>The query experience side by side</h3>
+<p>Firestore queries are chainable and familiar if you&#39;ve used MongoDB:</p>
+<pre><code class="language-javascript">const recentPosts = await firestore
+  .collection(&quot;posts&quot;)
+  .where(&quot;published&quot;, &quot;==&quot;, true)
+  .where(&quot;category&quot;, &quot;==&quot;, &quot;technology&quot;)
+  .orderBy(&quot;createdAt&quot;, &quot;desc&quot;)
   .limit(20)
   .get();
 </code></pre>
-<p>This works until you need to filter on three fields and Firebase tells you to create a composite index. Or until you need posts along with their authors and comment counts, and you realize you&#39;re making multiple round trips to stitch the data together client-side.</p>
-<p>Supabase&#39;s query builder feels more like a lightweight ORM. It generates SQL under the hood but gives you a JavaScript-friendly interface.</p>
-<pre><code class="language-javascript">// Supabase query
-const { data: posts } = await supabase
-  .from(&#39;posts&#39;)
-  .select(`
+<p>This works until you need three filter conditions (composite index required) or you need posts along with their authors and comment counts (multiple round trips).</p>
+<p>Supabase&#39;s query builder handles relationships in a single query:</p>
+<pre><code class="language-javascript">const { data: posts } = await supabase
+  .from(&quot;posts&quot;)
+  .select(
+    `
     id,
     title,
     created_at,
     author:profiles(name, avatar_url),
     comment_count:comments(count)
-  `)
-  .eq(&#39;published&#39;, true)
-  .eq(&#39;category&#39;, &#39;technology&#39;)
-  .order(&#39;created_at&#39;, { ascending: false })
+  `,
+  )
+  .eq(&quot;published&quot;, true)
+  .eq(&quot;category&quot;, &quot;technology&quot;)
+  .order(&quot;created_at&quot;, { ascending: false })
   .limit(20);
 </code></pre>
-<p>The nested <code>select</code> syntax handles relationships in a single query. You get the posts, their authors, and their comment counts in one round trip. The database does the heavy lifting. If you&#39;ve spent any time fighting Firebase&#39;s query limitations, this feels like a superpower.</p>
-<h2>Real-time: both do it, but differently</h2>
-<p>Real-time subscriptions are table stakes for modern backends. Both platforms support them. The developer experience differs enough to matter.</p>
-<p>Firebase uses <code>onSnapshot</code> listeners. You attach a callback to a query, and Firebase pushes updates whenever documents in that query change. It&#39;s simple, reliable, and well-documented. The downside is that you&#39;re listening to entire documents. If a single field changes on a large document, you get the whole thing pushed to every listener.</p>
-<pre><code class="language-javascript">// Firebase real-time
-const unsubscribe = firestore
-  .collection(&#39;chat_messages&#39;)
-  .where(&#39;roomId&#39;, &#39;==&#39;, roomId)
-  .orderBy(&#39;createdAt&#39;, &#39;desc&#39;)
-  .limit(50)
-  .onSnapshot((snapshot) =&gt; {
-    const messages = snapshot.docs.map(doc =&gt; ({ id: doc.id, ...doc.data() }));
-    setMessages(messages);
-  });
-</code></pre>
-<p>Supabase uses PostgreSQL&#39;s replication system under the hood. You subscribe to specific tables and optionally filter by column values. The API is channel-based, which gives you more control over connection management.</p>
-<pre><code class="language-javascript">// Supabase real-time
-const channel = supabase
-  .channel(&#39;room-messages&#39;)
-  .on(
-    &#39;postgres_changes&#39;,
-    {
-      event: &#39;INSERT&#39;,
-      schema: &#39;public&#39;,
-      table: &#39;chat_messages&#39;,
-      filter: `room_id=eq.${roomId}`,
-    },
-    (payload) =&gt; {
-      setMessages(prev =&gt; [...prev, payload.new]);
-    }
+<p>Posts, authors, and comment counts in one round trip. The database does the heavy lifting.</p>
+<h2>Security: RLS vs Security Rules</h2>
+<p>Both platforms let a browser talk directly to the database. That&#39;s only safe if the database enforces who can read and write what.</p>
+<p><strong>Supabase</strong> uses <strong>Postgres Row-Level Security</strong>. A policy is a SQL expression attached to a table. When a query runs, Postgres evaluates the policy per row and only returns rows the user is allowed to see. Because it&#39;s SQL, you can reference other tables, use subqueries, and express authorization logic that spans multiple entities.</p>
+<pre><code class="language-sql">-- Users can read todos for orgs they belong to
+create policy &quot;Users see own org todos&quot;
+on todos
+for select
+to authenticated
+using (
+  org_id in (
+    select org_id from memberships
+    where user_id = auth.uid()
   )
-  .subscribe();
+);
 </code></pre>
-<p>Supabase also supports broadcast channels for sending ephemeral messages between clients — think typing indicators or cursor positions — which Firebase doesn&#39;t have a direct equivalent for outside of the Realtime Database, which is a separate product from Firestore.</p>
-<p>One practical note: Firebase&#39;s real-time feels more polished for simple use cases. Supabase&#39;s real-time is more powerful but has more configuration surface area. If you&#39;re building a chat app with straightforward requirements, either one works. If you need fine-grained control over what gets synced and when, Supabase gives you more knobs.</p>
+<p><strong>Firebase</strong> uses <strong>Security Rules</strong>, a declarative DSL evaluated before reads and writes. Rules have access to the authenticated Firebase user and the document being accessed. Cross-document checks are limited—rules can only <code>get()</code> a limited number of documents. Firestore also evaluates queries against their <em>potential</em> result set, not the actual documents. That means your rules and your query constraints must match exactly, or the entire query fails.</p>
+<p>The tradeoff: RLS is more powerful for relational authorization but easier to forget. A table with RLS disabled exposes everything. Security Rules are simpler for document-level access but harder to express complex relational logic.</p>
+<h2>Real-time: two very different architectures</h2>
+<p><strong>Firebase</strong> has been doing real-time sync since 2012. You attach a listener to a query, and Firestore pushes updates when documents change. Latency is low (typically milliseconds), offline persistence is mature, and the sync engine handles conflicts automatically. For mobile apps used in unreliable network conditions, this is a real advantage.</p>
+<p><strong>Supabase</strong> has three real-time primitives:</p>
+<ol>
+<li><strong>Postgres Changes</strong> — listen to database changes via logical replication</li>
+<li><strong>Broadcast</strong> — ephemeral pub/sub for typing indicators, cursor positions</li>
+<li><strong>Presence</strong> — who&#39;s online, with metadata</li>
+</ol>
+<p>The flexibility is a strength and a source of complexity. Postgres Changes is the closest equivalent to Firestore listeners, but it&#39;s slightly higher latency because it goes through Postgres replication. Broadcast and Presence solve problems Firestore doesn&#39;t have direct equivalents for.</p>
+<p>If your real-time needs are simple (chat, notifications, live dashboards), both work. If you need true offline-first mobile sync, Firebase is the better choice—Supabase has no built-in sync engine.</p>
 <h2>Authentication: surprisingly similar</h2>
-<p>Authentication is one area where the platforms feel remarkably alike. Both support email/password, magic links, OAuth providers, and phone authentication. Both handle session management and token refresh automatically. Both give you React hooks and client libraries that make auth integration straightforward.</p>
-<p>Firebase Authentication has been around longer and supports a few more providers out of the box. The integration with Google Sign-In is seamless in a way that feels almost unfair — one click and your users are authenticated across Google services.</p>
-<p>Supabase Auth is newer but catching up fast. The magic link experience is particularly good. Row-level security policies in Postgres integrate directly with the authenticated user, which means your authorization logic lives in the database rather than scattered across API routes.</p>
-<pre><code class="language-sql">-- Supabase Row Level Security
-CREATE POLICY &quot;Users can read their own profile&quot;
-  ON profiles
-  FOR SELECT
-  USING (auth.uid() = user_id);
-
-CREATE POLICY &quot;Users can update their own profile&quot;
-  ON profiles
-  FOR UPDATE
-  USING (auth.uid() = user_id);
-</code></pre>
-<p>This is a genuinely elegant approach. The security rules are declarative, database-native, and impossible to bypass from the client — assuming you&#39;ve configured them correctly. Firebase has security rules too, but they&#39;re written in a custom DSL that doesn&#39;t feel like anything else in your stack. If you&#39;ve gone deep on <a href="/blog/typescript-error-handling-in-try-catch-blocks-guide">TypeScript error handling</a>, you&#39;ll appreciate that Supabase&#39;s approach keeps authorization logic in a familiar SQL syntax that&#39;s easier to test and reason about.</p>
-<h2>Pricing and the dreaded surprise bill</h2>
-<p>Let&#39;s talk about the elephant in the room. Firebase has a reputation for surprise bills. There are horror stories — some exaggerated, some not — of developers waking up to five-figure charges because a loop ran unchecked or a DDoS attack triggered millions of reads.</p>
-<p>The pricing model charges per document read, write, and delete. At small scale, this is negligible. The free tier is genuinely generous. But costs can spiral unpredictably if your usage patterns change or if you make a mistake. Google has improved the billing alerts and spending limits, but the anxiety lingers.</p>
-<p>Supabase charges based on database size, compute resources, and bandwidth. The pricing is more predictable because you&#39;re paying for infrastructure capacity rather than individual operations. A query that scans a million rows costs the same whether you run it once or a hundred times, assuming it fits within your compute limits.</p>
-<p>Supabase&#39;s free tier includes 500MB of database and 5GB of bandwidth, which is enough for side projects and early-stage applications. Paid plans start at $25 per month for the Pro tier. Firebase&#39;s Spark plan is free but has stricter limits on reads and writes.</p>
-<p>Neither platform is dramatically cheaper than the other for typical usage. The difference is predictability. Supabase bills like infrastructure. Firebase bills like a utility. If you value knowing roughly what your bill will be each month, Supabase wins on that front.</p>
-<h2>The vendor lock-in question</h2>
-<p>This is where the open-source foundation of Supabase really matters. Supabase is built on PostgreSQL, which has existed for decades and will exist for decades more. If Supabase the company disappeared tomorrow, you could export your database and run it anywhere that supports Postgres — which is everywhere.</p>
-<p>Firebase is proprietary through and through. Firestore, Authentication, Cloud Functions — they&#39;re Google Cloud products. You can export your data, but the application code that queries Firestore, listens to real-time updates, and authenticates users is tied to Firebase&#39;s SDKs. A migration off Firebase is a significant rewrite.</p>
-<p>This might not matter for a quick prototype or a hackathon project. But for anything that might grow into a real product, the exit strategy deserves consideration. I&#39;ve seen startups delay feature work for months because they had to migrate off Firebase to handle relational data that Firestore wasn&#39;t designed for. That&#39;s expensive in a way that doesn&#39;t show up on any pricing page.</p>
-<p>Supabase&#39;s open-source nature also means you can self-host. If your application has data residency requirements, compliance needs, or just a preference for owning your infrastructure, you can run Supabase on your own servers. Firebase doesn&#39;t offer this. You&#39;re on Google&#39;s infrastructure, period.</p>
-<h2>Developer experience and learning curve</h2>
-<p>Firebase wins on immediate developer experience. The documentation is extensive. The SDKs are mature. There are tutorials for every framework, every use case, every edge case. If you hit a problem, someone else has probably hit it before and written about it.</p>
-<p>Setting up Firebase feels like plugging things together. Authentication, database, storage — they&#39;re all in the same console, all using the same SDK. The integration between services is tight in a way that reduces boilerplate.</p>
-<p>Supabase has improved its documentation dramatically, but the ecosystem is younger. There are fewer tutorials, fewer Stack Overflow answers, fewer &quot;here&#39;s how I built X with Supabase&quot; blog posts. The developer experience is solid, but you&#39;ll occasionally find yourself reading Postgres documentation to understand why a query behaves a certain way — which is both a strength and a friction point.</p>
-<p>The SQL requirement is worth acknowledging. If you&#39;re building something with <a href="/blog/react-server-components-nextjs">React Server Components and Next.js</a>, you&#39;re already writing server-side code. Adding SQL queries to that isn&#39;t a huge leap. But if your team is entirely frontend-focused and has never designed a database schema, Firebase&#39;s document model will feel more approachable at first.</p>
-<h2>When I&#39;d pick Firebase</h2>
-<p>Firebase still makes sense for certain projects. Prototypes and MVPs where speed matters more than architecture. Applications with simple, document-shaped data that doesn&#39;t need complex querying. Projects where the team has Firebase experience and moving fast is the priority.</p>
-<p>It&#39;s also worth considering if you&#39;re already deep in the Google Cloud ecosystem. Firebase integrates with BigQuery, Cloud Functions, and the rest of Google&#39;s infrastructure. If your application is on Google Cloud anyway, Firebase fits naturally.</p>
-<p>Real-time collaborative apps with simple data models — think chat applications, shared whiteboards, live dashboards — are Firebase&#39;s sweet spot. The real-time sync is battle-tested and handles edge cases well.</p>
-<h2>When I&#39;d pick Supabase</h2>
-<p>Supabase wins for applications that need relational data. If your domain involves users, organizations, memberships, roles, and relationships between entities, a relational database will save you pain. The ability to write SQL queries, create views, and run migrations gives you tools that Firestore simply doesn&#39;t have.</p>
-<p>It&#39;s also the better choice if you care about vendor independence. The open-source foundation means you can self-host if needed. Your database is portable. Your skills are transferable. If you&#39;ve been reading about <a href="/blog/why-modern-websites-feel-slower">why modern websites feel slower</a>, you know that backend architecture decisions ripple through the entire user experience. Choosing Postgres gives you options that proprietary platforms don&#39;t.</p>
-<p>Teams with database experience will appreciate Supabase. If you know SQL, you already know most of what you need. The learning curve is learning the Supabase client API, not learning a new data model.</p>
-<h2>The edge function comparison</h2>
-<p>Both platforms offer serverless functions. Firebase Cloud Functions run on Google Cloud. Supabase Edge Functions run on Deno, deployed globally at the edge.</p>
-<p>Firebase&#39;s functions are more mature. More runtime options, better logging, tighter integration with the rest of Google Cloud. If you need functions that interact with BigQuery, Cloud Storage, or other Google services, Firebase is the natural choice.</p>
-<p>Supabase Edge Functions are newer and lighter weight. They&#39;re good for simple transformations, webhooks, and API proxies. The Deno runtime means native TypeScript support and a modern standard library. Deployment is quick and the cold start times are low.</p>
-<p>Neither platform&#39;s functions are a dealbreaker. Both handle the basics well. Firebase&#39;s are more capable for complex backend logic. Supabase&#39;s are simpler and faster for edge deployments.</p>
-<h2>Making the decision</h2>
-<p>The factors that actually matter boil down to a few questions.</p>
-<p>Does your data have relationships? If yes, lean toward Supabase. Postgres handles joins, foreign keys, and complex queries natively. Firestore makes you do this work in application code, which gets old fast.</p>
-<p>Do you care about vendor lock-in? If yes, Supabase is the clearer choice. The open-source foundation and Postgres compatibility mean you have exit options.</p>
-<p>Is your team more comfortable with SQL or with document databases? This is a legitimate consideration. A team that knows SQL will be productive on Supabase immediately. A team that prefers document models will move faster on Firebase initially, though they may hit limitations later.</p>
-<p>What&#39;s your tolerance for billing surprises? Supabase&#39;s infrastructure pricing is more predictable. Firebase&#39;s usage-based pricing can spike if something goes wrong.</p>
-<p>Neither platform is universally better. The right choice depends on your context. But the gap has narrowed significantly. Supabase is no longer the scrappy underdog. It&#39;s a legitimate first choice for new projects, especially those built on relational data.</p>
+<p>Authentication is one area where the platforms feel remarkably alike. Both support email/password, magic links, OAuth providers, and phone authentication. Both handle session management and token refresh automatically.</p>
+<p>Firebase Authentication has been around longer and supports a few more providers. The Google Sign-In integration is seamless in a way that feels almost unfair.</p>
+<p>Supabase Auth is newer but catching up. The magic link experience is particularly good, and RLS integration means your authorization logic lives in the database rather than scattered across API routes.</p>
+<h2>Pricing: two very different models</h2>
+<p><strong>Firebase</strong> charges per operation: reads, writes, deletes, and egress. Storage is cheap; operations and egress add up. A dashboard with 50 items that updates every 3 seconds can burn millions of reads per month. Costs are predictable <em>if</em> you model them carefully, but they can spike unexpectedly.</p>
+<p><strong>Supabase</strong> charges for infrastructure: database size, compute, bandwidth, and storage. A query that scans 1M rows costs the same whether you run it once or a thousand times (assuming it fits within your compute limits). This makes budgeting predictable, especially for read-heavy applications.</p>
+<table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Supabase</th>
+<th>Firebase</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Free tier</strong></td>
+<td>500MB DB, 5GB bandwidth, 50k MAU</td>
+<td>1GB storage, 50k reads/day, 20k writes/day</td>
+</tr>
+<tr>
+<td><strong>Paid entry</strong></td>
+<td>$25/month (Pro)</td>
+<td>Pay-as-you-go (Blaze)</td>
+</tr>
+<tr>
+<td><strong>Read pricing</strong></td>
+<td>Included in compute</td>
+<td>~$0.06 per 100k reads</td>
+</tr>
+<tr>
+<td><strong>Write pricing</strong></td>
+<td>Included in compute</td>
+<td>~$0.18 per 100k writes</td>
+</tr>
+</tbody></table>
+<p>The practical difference: Supabase&#39;s bill is roughly constant per month. Firebase&#39;s bill scales with traffic and can surprise you.</p>
+<h2>Vendor lock-in</h2>
+<p><strong>Supabase</strong> is built on PostgreSQL, which has existed for decades and will exist for decades more. If Supabase the company disappeared tomorrow, you could export your database and run it anywhere that supports Postgres. The client SDK and RLS policies are Supabase-specific, but the data layer is portable.</p>
+<p><strong>Firebase</strong> is proprietary through and through. Firestore, Authentication, Cloud Functions — they&#39;re Google Cloud products. You can export your data, but the application code that queries Firestore, listens to real-time updates, and authenticates users is tied to Firebase&#39;s SDKs. A migration off Firebase is a significant rewrite.</p>
+<p>This might not matter for a hackathon. It matters a lot for anything that might grow into a real product. I&#39;ve seen startups delay feature work for months because they had to migrate off Firebase to handle relational data that Firestore wasn&#39;t designed for.</p>
+<h2>When to use Supabase</h2>
+<ul>
+<li>Your data is relational (users, organizations, orders, permissions)</li>
+<li>You want authorization enforced in the database with SQL policies</li>
+<li>You need complex queries with joins and aggregations</li>
+<li>You want the option to self-host or migrate to standard Postgres later</li>
+<li>You want predictable monthly pricing</li>
+<li>Your team knows SQL or is willing to learn</li>
+</ul>
+<h2>When to use Firebase</h2>
+<ul>
+<li>Your app is mobile-first and needs offline persistence</li>
+<li>Your data is document-shaped and doesn&#39;t require joins</li>
+<li>You&#39;re already in the Google Cloud ecosystem</li>
+<li>Your team is comfortable with Security Rules and Firestore&#39;s query constraints</li>
+<li>Real-time sync is the core of the product</li>
+<li>You want the most mature real-time sync engine on the market</li>
+</ul>
+<h2>A real story: the Firebase migration that took four months</h2>
+<p>A team I worked with built a logistics SaaS on Firebase. Simple at first: users, shipments, delivery events. Document-shaped, worked great. Then the product grew. Customers wanted reports that joined shipments to customers, carriers, and invoices. Firestore couldn&#39;t express those queries. The team started denormalizing aggressively—duplicating carrier data on every shipment, caching customer names on every invoice, writing client-side joins that should have been SQL.</p>
+<p>Eighteen months in, they decided to migrate to Supabase. The migration took four months. Every query had to be rewritten, every real-time listener had to be replaced, and the denormalized data had to be normalized. The team estimated they could have avoided the whole migration if they had started on Postgres.</p>
+<p>The lesson isn&#39;t that Firebase is bad. It&#39;s that the data model decision compounds. Document databases are excellent until they aren&#39;t, and by then the migration is expensive.</p>
+<h2>Frequently asked questions</h2>
+<h3>What is Supabase in one sentence?</h3>
+<p>Supabase is a backend-as-a-service platform built on PostgreSQL that bundles database, authentication, file storage, real-time subscriptions, and edge functions into one product.</p>
+<h3>Is Supabase a database?</h3>
+<p>Yes and no. Supabase <em>includes</em> a PostgreSQL database, but it&#39;s more than a database. It&#39;s a full BaaS platform. Think of it as Postgres plus auth plus storage plus real-time plus functions.</p>
+<h3>What is gRPC vs Supabase?</h3>
+<p>They aren&#39;t comparable. gRPC is a remote procedure call protocol. Supabase is a backend platform. You could use gRPC to talk to an API backed by Supabase, but the two aren&#39;t alternatives.</p>
+<h3>What is Traefik vs Supabase?</h3>
+<p>They aren&#39;t comparable. Traefik is a reverse proxy and ingress controller. Supabase is a backend platform. They occupy different layers of the stack and can be used together.</p>
+<h3>What is Supabase vs Snap?</h3>
+<p>They aren&#39;t comparable. Snap is a build tool for Node.js (similar to Vite or Webpack). Supabase is a backend platform.</p>
+<h3>Is Supabase faster than Firebase?</h3>
+<p>Depends on the query. Firestore is faster for simple document lookups because it&#39;s optimized for that. Postgres is faster for complex relational queries because SQL can express them efficiently. For most applications, both are fast enough, and the difference is dwarfed by network latency.</p>
+<h3>Can I migrate from Firebase to Supabase?</h3>
+<p>Yes, but it&#39;s a real project. You export your Firestore data, restructure it as relational tables, rewrite your client code to use SQL, and migrate authentication users. Budget weeks for a small app, months for a large one. The upside is that once you&#39;re on Postgres, future migrations are dramatically easier.</p>
+<h3>Can I self-host Supabase?</h3>
+<p>Yes. It&#39;s open source, and you can run it on your own infrastructure (Docker, Kubernetes, bare metal). This matters for data residency requirements, compliance, and cost control at scale. Firebase cannot be self-hosted.</p>
+<h3>Which is cheaper?</h3>
+<p>For most small-to-medium apps, Supabase&#39;s $25/month Pro plan is more predictable than Firebase&#39;s pay-as-you-go. For apps with very low traffic, both free tiers suffice. For read-heavy apps at scale, Supabase&#39;s infrastructure pricing is usually cheaper. For write-heavy apps with little read traffic, Firebase can be competitive.</p>
 <hr>
-<p><em>Choosing a backend platform for your next project and want to talk through the tradeoffs? Red Surge Technology helps teams evaluate architecture decisions and build on the right foundation. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
+<p><em>Need help choosing between Supabase and Firebase, or architecting a migration off either one? Red Surge Technology builds secure, scalable backends. <a href="/contact">Get in touch</a> to discuss your project.</em></p>
 
           </div>
         </div>

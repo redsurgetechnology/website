@@ -1,11 +1,12 @@
 ---
-title: "Next.js API Routes vs Route Handlers vs Server Actions: Which Should You Use in 2026?"
+title: "Next.js API Routes vs REST API vs Route Handlers vs Server Actions"
 date: "2026-10-08T10:00:00.000Z"
-excerpt: "Confused about API Routes, Route Handlers, and Server Actions in Next.js? Learn the differences, when to use each, and how to migrate from legacy patterns."
+excerpt: "Should you use Next.js built-in API routes, a separate REST API, or Server Actions? A complete comparison of all four patterns with a decision framework for 2026."
 cover_image: "/images/blog/uploads/nextjs-api-routes-vs-route-handlers-vs-server-actions.webp"
-seo_title: "Next.js API Routes vs Route Handlers vs Server Actions: Complete Guide 2026"
-seo_description: "Compare Next.js API Routes, Route Handlers, and Server Actions. Learn when to use each, how they differ, migration paths, and best practices for modern Next.js applications."
+seo_title: "Next.js API Routes vs REST API vs Route Handlers vs Server Actions"
+seo_description: "Compare Next.js API Routes, a separate REST API, Route Handlers, and Server Actions. Includes when to skip Next.js for your API entirely, plus a decision framework."
 author_name: "Collin Stewart"
+last_modified: "2026-11-23T10:00:00.000Z"
 tags:
   - Next.js
   - API
@@ -13,23 +14,79 @@ tags:
   - Web Development
   - JavaScript
 category: "JavaScript"
-reading_time: 14
+reading_time: 15
 featured: false
 no_index: false
 ---
 
-Next.js has three different ways to handle server-side logic, and the naming doesn't make it easy to keep them straight. API Routes are the old way—the Pages Router way. Route Handlers are the new way—the App Router equivalent. And Server Actions are something else entirely: a React-native mechanism for mutations that doesn't look like an API at all.
+There are two questions developers ask when they start thinking about APIs in Next.js. The first is "should I use Next.js at all or build a separate REST API?" The second is "within Next.js, which pattern should I use—API Routes, Route Handlers, or Server Actions?"
 
-If you've been building with Next.js for a while, you've probably used at least one of these. If you're newer to the framework, the overlapping terminology can be paralyzing. When should you reach for a Route Handler? When is a Server Action the right choice? Do you still need API Routes in 2026?
+Most articles answer the second question. This post answers both, in that order.
 
-The short answer: API Routes are legacy, Route Handlers are the modern HTTP primitive, and Server Actions are for mutations from your own UI. The longer answer involves understanding why each exists and what problems it solves. This guide walks through all three, compares them head-to-head, and gives you a decision framework for your next project.
+## First: should you use Next.js for your API at all?
 
-## The Evolution: From API Routes to Route Handlers
+Before choosing between Next.js API Routes, Route Handlers, and Server Actions, you need to decide whether Next.js should be your API layer at all. There are three options:
 
-Next.js started with Pages Router API Routes in `pages/api`. They were simple: export a default function that receives `req` and `res` objects, and Next.js handles the routing. That model is familiar to anyone who's worked with Express or Node.js HTTP servers.
+1. **Use Next.js built-in routes** (API Routes or Route Handlers) — one codebase, one deployment
+2. **Build a separate REST API** (Express, Fastify, NestJS, Django, Laravel) — two codebases, two deployments
+3. **Use a BaaS platform** (Supabase, Firebase) and talk to it directly from the client — no custom API
+
+Here's the tradeoff.
+
+**Use Next.js built-in routes when:**
+
+- Your API is primarily for your own frontend
+- Your team is small enough to benefit from a single codebase
+- You don't need independent scaling for the API
+- You want to share TypeScript types between client and server
+- You're already deploying on Vercel or a similar platform
+
+**Use a separate REST API when:**
+
+- Your API serves multiple clients (web, iOS, Android, third-party integrations)
+- You need to scale the API independently from the frontend
+- You have a team that specializes in backend (Node, Python, Go, Rust)
+- You need a language other than JavaScript for the backend
+- You need to deploy the API on infrastructure that Next.js can't run on
+
+**Use a BaaS (Supabase, Firebase) when:**
+
+- Your data model is simple enough for a direct client-to-database connection
+- You want to avoid writing API code entirely
+- Row-level security (Supabase) or Security Rules (Firebase) are sufficient for authorization
+- You don't need complex business logic on the server
+
+The most common mistake I see is teams building a separate REST API when Next.js routes would have been fine. The second most common is building everything in Next.js when a separate backend would have been the right call.
+
+The decision comes down to: **how many clients, how much backend logic, and how specialized is your backend team?**
+
+If your answer is "one client, modest backend logic, JS team" → Next.js routes.
+
+If your answer is "multiple clients, complex backend logic, specialized team" → separate REST API.
+
+If your answer is "one client, minimal backend logic, want to skip the backend" → BaaS.
+
+## Second: which Next.js pattern to use?
+
+If you've decided to use Next.js for your API, you have three patterns.
+
+### Quick answer table
+
+| Question                                                                      | If yes →          |
+| ----------------------------------------------------------------------------- | ----------------- |
+| Do external clients (mobile apps, third parties, webhooks) need to call this? | **Route Handler** |
+| Do you need caching, custom HTTP methods, or streaming?                       | **Route Handler** |
+| Is this a form submission or mutation from your own UI?                       | **Server Action** |
+| Are you on the Pages Router and it's working?                                 | **API Route**     |
+
+The rule most teams land on: **Route Handlers for anything that looks like an API. Server Actions for anything that looks like a form.**
+
+### API Routes (Pages Router)
+
+The original Next.js API pattern. Files in `pages/api/*.ts` become endpoints. Each file exports a single default handler that receives Node's `req` and `res` objects.
 
 ```javascript
-// pages/api/users.js (Pages Router - legacy)
+// pages/api/users.js
 export default function handler(req, res) {
   if (req.method === "GET") {
     res.status(200).json({ users: [] });
@@ -39,10 +96,16 @@ export default function handler(req, res) {
 }
 ```
 
-When Next.js 13 introduced the App Router, it introduced Route Handlers as the replacement. Route Handlers live in `app/api/*/route.ts` and use the Web Platform `Request` and `Response` APIs instead of Node.js-specific objects.
+**Status:** Legacy. Still works. Won't get new features. Only available in the Pages Router.
+
+**When to use:** You're maintaining a Pages Router project and it's working.
+
+### Route Handlers (App Router)
+
+The App Router equivalent, and the modern HTTP primitive. Files in `app/api/*/route.ts` export named functions per HTTP method, using Web Platform `Request` and `Response`.
 
 ```javascript
-// app/api/users/route.ts (App Router - current)
+// app/api/users/route.ts
 export async function GET() {
   return Response.json({ users: [] });
 }
@@ -53,76 +116,11 @@ export async function POST(request) {
 }
 ```
 
-The key differences: Route Handlers use standard web APIs, export named functions per HTTP method instead of a single default export, and are only available in the App Router. API Routes still work in the Pages Router, but they're considered legacy and won't receive new features. If you're starting fresh, use Route Handlers. If you're maintaining a Pages Router project, you can keep your API Routes or migrate incrementally.
+**Status:** Current. Recommended for all new projects.
 
-For a deeper dive into Route Handlers specifically, our [Next.js API Routes guide](/blog/next-js-api-routes) covers the fundamentals. This post is about how they compare to Server Actions and when to choose each.
+**When to use:** You need a real HTTP endpoint—webhooks, public APIs, streaming responses, anything external clients need to call.
 
-## What Server Actions Are (And What They Aren't)
-
-Server Actions are not API endpoints. They're functions that run on the server and can be called directly from React components—no fetch call, no JSON serialization, no manual endpoint creation. You mark a function with `'use server'`, and Next.js handles the plumbing.
-
-```javascript
-// app/actions.ts
-'use server';
-
-export async function createUser(formData: FormData) {
-  const name = formData.get('name');
-  const email = formData.get('email');
-
-  // Validate and save to database
-  await db.users.create({ data: { name, email } });
-
-  // Revalidate the users page
-  revalidatePath('/users');
-}
-```
-
-From a client component, you import the action and pass it to a form:
-
-```jsx
-"use client";
-
-import { createUser } from "./actions";
-
-export function UserForm() {
-  return (
-    <form action={createUser}>
-      <input name="name" required />
-      <input name="email" type="email" required />
-      <button type="submit">Create User</button>
-    </form>
-  );
-}
-```
-
-That's it. No `fetch('/api/users')`, no `headers: { 'Content-Type': 'application/json' }`, no `await response.json()`. The action runs on the server, receives the form data, does its work, and the page revalidates automatically. The boilerplate that API Routes require—serializing the request, handling the response, managing loading states—is handled for you.
-
-Server Actions use POST under the hood, so they're not cacheable and shouldn't be used for data fetching. They're designed for mutations: creating, updating, and deleting data. The Next.js team is explicit about this. Server Actions are for writes, not reads.
-
-## The Head-to-Head Comparison
-
-Here's how the three approaches compare across the dimensions that matter.
-
-| Dimension                   | API Routes (Pages Router) | Route Handlers (App Router)    | Server Actions               |
-| --------------------------- | ------------------------- | ------------------------------ | ---------------------------- |
-| **Location**                | `pages/api/*.ts`          | `app/api/*/route.ts`           | Anywhere with `'use server'` |
-| **API Style**               | Node.js `req`/`res`       | Web `Request`/`Response`       | Function call                |
-| **HTTP Methods**            | Single default export     | Named exports per method       | POST only                    |
-| **External Access**         | Yes (public URL)          | Yes (public URL)               | No (internal only)           |
-| **Caching**                 | Manual                    | GET can be cached              | Not cacheable                |
-| **Type Safety**             | Manual                    | Manual                         | End-to-end with TS           |
-| **Progressive Enhancement** | No                        | No                             | Yes (works without JS)       |
-| **Best For**                | Legacy Pages Router apps  | REST APIs, webhooks, streaming | Form submissions, mutations  |
-
-The most important row is **External Access**. API Routes and Route Handlers expose a URL that any client can call—a mobile app, a third-party service, a webhook sender. Server Actions do not. They're internal to your Next.js application, invoked from your own components.
-
-That single difference drives most of the decision-making.
-
-## When to Use Route Handlers
-
-Route Handlers are the right choice when you need a stable HTTP endpoint. That means:
-
-**Webhooks.** When a payment provider (Stripe), CMS (Sanity), or third-party service needs to send events to your application, it needs a URL to POST to. Server Actions can't provide that. Route Handlers can.
+A canonical Route Handler for a Stripe webhook:
 
 ```javascript
 // app/api/webhooks/stripe/route.ts
@@ -138,123 +136,120 @@ export async function POST(request) {
 }
 ```
 
-**Public APIs.** If your application exposes data for external consumption—a mobile app backend, a partner integration, a public developer API—Route Handlers are the HTTP interface.
+### Server Actions
 
-**Cacheable reads.** Route Handlers support GET requests with proper cache headers. Server Actions always use POST and are never cached. For endpoints that serve data to many users, Route Handlers are more efficient.
-
-**Streaming responses.** Server-Sent Events (SSE), AI streaming, and long-lived connections require Route Handlers. Server Actions don't support streaming.
-
-**Custom HTTP methods and headers.** If you need PUT, PATCH, DELETE, or custom headers and status codes, Route Handlers give you full control over the HTTP contract.
-
-If you've been working through our [Next.js CMS integration guide](/blog/nextjs-cms-integration-guide), you've seen how Route Handlers receive webhooks from headless CMS platforms and trigger on-demand ISR. That's the canonical Route Handler use case.
-
-## When to Use Server Actions
-
-Server Actions are the right choice when the caller is your own UI and the job is a mutation. That means:
-
-**Form submissions.** A contact form, a checkout form, a settings form—anything where the user submits data and expects the page to update. Server Actions eliminate the boilerplate of creating an endpoint, calling fetch, handling the response, and managing loading state.
-
-**Button-triggered mutations.** Like, follow, delete, archive—any action triggered by a button click that changes server-side state. Server Actions handle these cleanly.
-
-**Optimistic updates.** React's `useOptimistic` hook works seamlessly with Server Actions. You can update the UI immediately, run the action, and reconcile if something goes wrong.
-
-**Progressive enhancement.** Server Actions work without JavaScript. If your form uses `<form action={serverAction}>`, it submits via a standard HTTP POST and the action runs, even if JavaScript fails to load. This is a genuine advantage over API Routes, which require client-side JavaScript.
-
-```jsx
-// app/components/LikeButton.tsx
-"use client";
-
-import { toggleLike } from "@/app/actions";
-import { useOptimistic } from "react";
-
-export function LikeButton({ postId, initialLikes, isLiked }) {
-  const [optimisticLikes, addOptimisticLike] = useOptimistic(
-    initialLikes,
-    (state, newLike) => state + newLike,
-  );
-
-  async function handleLike() {
-    addOptimisticLike(isLiked ? -1 : 1);
-    await toggleLike(postId);
-  }
-
-  return (
-    <button onClick={handleLike}>
-      {isLiked ? "❤️" : "🤍"} {optimisticLikes}
-    </button>
-  );
-}
-```
-
-The optimistic update shows immediately, the action runs on the server, and if it fails, React rolls back the optimistic state. This is significantly simpler than implementing the same behavior with Route Handlers.
-
-If you've been working with [React controlled vs uncontrolled components](/blog/react-controlled-vs-uncontrolled), you know the tradeoffs of form state management. Server Actions simplify many of those patterns by moving the mutation logic to the server and reducing the client-side state you need to manage.
-
-## The Decision Framework
-
-When you're staring at a new feature and trying to decide between Route Handlers and Server Actions, ask these questions:
-
-**1. Does anything outside my Next.js app need to call this?** If yes, use a Route Handler. Server Actions aren't accessible externally.
-
-**2. Is this a read or a write?** Reads should use Server Components (for page data) or Route Handlers (for API endpoints). Writes from your own UI should use Server Actions.
-
-**3. Do I need HTTP caching?** If you want the response cached by CDNs or browsers, use a Route Handler with GET. Server Actions are never cached.
-
-**4. Am I streaming data?** SSE, AI responses, and long-lived connections require Route Handlers.
-
-**5. Is this a simple form submission?** Server Actions cut the boilerplate. Use them unless one of the questions above pushes you toward Route Handlers.
-
-**6. Am I on the Pages Router?** You're using API Routes. Consider migrating to the App Router and Route Handlers incrementally. Our [React Server Components guide](/blog/react-server-components-nextjs) covers the App Router architecture in more depth.
-
-## A Real Story: Rewriting an API-First Form with Server Actions
-
-A few months ago, I worked on a Next.js application that had been built with the Pages Router. Every form submission followed the same pattern: a client-side fetch to an API Route, a handler that validated and saved the data, and a client-side state update to show the result. The boilerplate was substantial—each form had a custom hook for loading and error states, and each API Route had manual request parsing and response construction.
-
-We migrated to the App Router and replaced the API Routes with Server Actions. The change was dramatic. A form that had been 120 lines across two files became 40 lines in one file. The loading state was handled by React's `useFormStatus`. The error handling was handled by the action's return value. The optimistic update was handled by `useOptimistic`.
-
-The part that surprised me most: progressive enhancement worked out of the box. With the old API Route approach, if JavaScript failed to load, the form did nothing. With Server Actions, the form submitted and the action ran. That's a genuine accessibility and reliability improvement that we got for free.
-
-We didn't eliminate Route Handlers entirely. The webhook endpoint from our payment provider stayed as a Route Handler. The public API for our mobile app stayed as Route Handlers. But the internal mutations—the forms, the buttons, the actions that only our own UI triggered—moved to Server Actions. The codebase got smaller, and the developer experience got better.
-
-The lesson: Route Handlers and Server Actions aren't competing. They serve different purposes. Use each for what it's good at.
-
-## Common Pitfalls to Avoid
-
-**Using Server Actions for data fetching.** Server Actions are for mutations. For reads, use Server Components or Route Handlers. Server Actions always use POST and aren't cached, so they're inefficient for data that doesn't change often.
-
-**Exposing Server Actions as public APIs.** Server Actions have internal endpoints, but they're not designed for external consumption. Don't try to call them from a mobile app or a third-party service. Use Route Handlers for that.
-
-**Forgetting `revalidatePath` or `revalidateTag` after mutations.** Server Actions don't automatically refresh cached data. If your mutation changes data that's displayed on a cached page, you need to revalidate it explicitly.
+Not API routes at all. Functions marked with `'use server'` that run on the server and are called directly from React components. No fetch, no URL, no JSON.
 
 ```javascript
+// app/actions.ts
 "use server";
 
-import { revalidatePath } from "next/cache";
-
-export async function updateUser(formData) {
-  await db.users.update(/* ... */);
-  revalidatePath("/profile"); // Refresh the cached profile page
+export async function createUser(formData) {
+  const name = formData.get("name");
+  await db.users.create({ data: { name } });
+  revalidatePath("/users");
 }
 ```
 
-**Mixing Server Action calls with client-side fetch.** If you're already using a Server Action for a mutation, don't also write a client-side fetch to an API Route that does the same thing. Pick one pattern per operation.
+```jsx
+// app/components/UserForm.tsx
+"use client";
+import { createUser } from "./actions";
 
-**Not validating input in Server Actions.** Server Actions receive `FormData` from the client. Never trust it. Validate everything on the server using a schema library like Zod.
+export function UserForm() {
+  return (
+    <form action={createUser}>
+      <input name="name" required />
+      <button type="submit">Create</button>
+    </form>
+  );
+}
+```
 
-If you're working with error handling in these patterns, our [TypeScript error handling best practices](/blog/typescript-error-handling-best-practices) guide covers the patterns that keep mutations safe.
+**Status:** Current. Recommended for mutations from your own UI.
 
-## Wrapping Up
+**When to use:** Form submissions, button-triggered mutations, and optimistic updates—anything called from your own React components that isn't an HTTP endpoint.
 
-Next.js gives you three ways to handle server-side logic, and they're not interchangeable. API Routes are legacy—they work, but they're Pages Router only. Route Handlers are the modern HTTP primitive for REST APIs, webhooks, streaming, and any endpoint that external clients need to call. Server Actions are for mutations from your own UI—form submissions, button clicks, and optimistic updates that don't need a public URL.
+## The full comparison
 
-The decision comes down to one question: does anything outside my Next.js application need to call this? If yes, Route Handler. If no, and it's a mutation, Server Action. If no, and it's a read, Server Component (or Route Handler for API-shaped data).
+| Dimension                   | API Routes (Pages)    | Route Handlers (App)           | Server Actions               |
+| --------------------------- | --------------------- | ------------------------------ | ---------------------------- |
+| **Location**                | `pages/api/*.ts`      | `app/api/*/route.ts`           | Anywhere with `'use server'` |
+| **API Style**               | Node.js `req`/`res`   | Web `Request`/`Response`       | Function call                |
+| **HTTP Methods**            | Single default export | Named per method               | POST only                    |
+| **External Access**         | Yes                   | Yes                            | No                           |
+| **Caching**                 | Manual                | GET can be cached              | Not cacheable                |
+| **Progressive Enhancement** | No                    | No                             | Yes (works without JS)       |
+| **Best For**                | Legacy Pages Router   | REST APIs, webhooks, streaming | Forms, mutations             |
 
-Most real applications use all three. Webhooks hit Route Handlers. Forms submit via Server Actions. Page data fetches in Server Components. That's the intended architecture. Use each tool for what it's designed to do.
+The row that drives most decisions is **External Access**. Route Handlers expose a URL any client can call. Server Actions don't. That single difference drives 90% of the decision-making.
 
-For deeper dives, see our [Next.js API Routes guide](/blog/next-js-api-routes) for Route Handler fundamentals, our [React Server Components guide](/blog/react-server-components-nextjs) for the App Router architecture, and our [Next.js CMS integration guide](/blog/nextjs-cms-integration-guide) for a real-world example of Route Handlers receiving webhooks.
+## Why Server Actions work without JavaScript
 
-Now go build something that doesn't make you write fetch calls for form submissions.
+One of the underrated advantages of Server Actions is progressive enhancement. A form using `<form action={serverAction}>` submits via standard HTTP POST if JavaScript fails to load. The action still runs.
+
+Route Handlers and API Routes require client-side JavaScript. If JS fails, the form does nothing.
+
+This matters for accessibility, for unreliable networks, and for users on older devices. It's a free improvement that most teams don't think about until they need it.
+
+## Common mistakes
+
+**Using Server Actions for data fetching.** Server Actions are always POST and never cached. Use Server Components for reads and Route Handlers for cached GETs.
+
+**Using API Routes on the App Router.** API Routes only work in Pages Router. Use Route Handlers.
+
+**Trying to call Server Actions from a mobile app.** Server Actions don't expose a stable public URL. External clients need Route Handlers.
+
+**Forgetting to revalidate after mutations.** Server Actions don't automatically invalidate cached pages. Call `revalidatePath` or `revalidateTag` after mutations.
+
+**Building a separate REST API for a single Next.js frontend.** You're paying for infrastructure and deployment complexity you don't need. Start with Next.js routes; extract later if you have a reason.
+
+**Not validating input in Server Actions.** Server Actions receive `FormData` from the client. Never trust it. Validate everything server-side with Zod or Valibot.
+
+## A real story: rewriting an API-first form with Server Actions
+
+A few months ago, I worked on a Next.js app that had been built with the Pages Router. Every form submission followed the same pattern: client-side fetch to an API Route, a handler that validated and saved the data, and a client-side state update to show the result. Each form had a custom loading hook, each API Route had manual request parsing.
+
+We migrated to the App Router and replaced the API Routes with Server Actions. A form that had been 120 lines across two files became 40 lines in one. Loading state was handled by `useFormStatus`. Error handling was the action's return value. Optimistic updates came free with `useOptimistic`.
+
+The part that surprised me most: progressive enhancement worked out of the box. With the old API Route approach, if JavaScript failed to load, the form did nothing. With Server Actions, the form submitted and the action ran.
+
+We didn't eliminate Route Handlers entirely. The Stripe webhook stayed a Route Handler. The public API for our mobile app stayed Route Handlers. But the internal mutations—the forms, the buttons—moved to Server Actions. The codebase got smaller and the developer experience got better.
+
+## Frequently asked questions
+
+### Is Next.js API Routes the same as REST API?
+
+No. "Next.js API Routes" is a specific pattern for defining API endpoints inside a Next.js project (files in `pages/api` or `app/api`). "REST API" is a general architectural style. You can build a REST API _using_ Next.js API Routes, but you can also build a REST API in Express, Fastify, NestJS, Django, or Laravel. The question "Next.js API Routes vs REST API" usually means "should I use Next.js built-in routes or a separate REST API service?"—which is the question answered at the top of this post.
+
+### Can I use Next.js as a REST API?
+
+Yes. Next.js Route Handlers (App Router) and API Routes (Pages Router) can serve standard REST endpoints over HTTP. Many teams use Next.js as their entire backend.
+
+### When should I use a separate REST API instead of Next.js?
+
+When your API serves multiple clients (web + iOS + Android + third-party integrations), when you need independent scaling, when you need a non-JavaScript backend, or when your backend team is specialized enough to warrant its own codebase.
+
+### What's the difference between API Routes and Route Handlers?
+
+API Routes live in `pages/api/*.ts` (Pages Router) and use Node's `req`/`res` objects. Route Handlers live in `app/api/*/route.ts` (App Router) and use Web Platform `Request`/`Response`. Route Handlers are the modern pattern.
+
+### Can I use Route Handlers and Server Actions together?
+
+Yes, and you should. Route Handlers serve external clients and webhooks; Server Actions serve your own React components. They coexist naturally in the App Router.
+
+### Is Server Actions replacing API Routes?
+
+No. Server Actions replace the boilerplate around form submissions and mutations from your own UI. Route Handlers are still the right choice for webhooks, public APIs, and any endpoint external clients call.
+
+### Can I use GitHub Actions with Next.js?
+
+Yes, but "GitHub Actions" is a CI/CD platform, not an API pattern. GitHub Actions runs your tests and deploys your Next.js app. It doesn't replace or compete with any of the Next.js API patterns.
+
+### Which is faster: Next.js API Routes or a separate REST API?
+
+Depends on the deployment. On Vercel, Route Handlers run in serverless functions that cold-start in ~100–200ms. A dedicated Express/Fastify server with a warm container typically responds in 5–20ms. For low-traffic apps, cold starts dominate. For high-traffic apps, a dedicated server is meaningfully faster. See our [Bun vs Node performance](/blog/bun-vs-node-performance) guide for runtime benchmarks.
 
 ---
 
-_Need help migrating your Next.js application from API Routes to Route Handlers and Server Actions? Red Surge Technology specializes in modern Next.js architecture. [Get in touch](/contact) to discuss your migration._
+_Need help choosing between Next.js built-in routes and a separate REST API, or migrating a legacy API to Route Handlers? Red Surge Technology builds modern Next.js architectures that scale. [Get in touch](/contact) to discuss your project._
